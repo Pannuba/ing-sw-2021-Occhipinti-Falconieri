@@ -1,0 +1,102 @@
+public class Dashboard
+{
+	private String nickname;
+	private Box[]track = new Box[25];
+	private Resource[]vault = new Resource[4];
+	private Storage storage;
+	private LeaderCard leaderCardOne;
+	private LeaderCard leaderCardTwo;
+	private LeaderCard leaderCardThree;
+	private DevCardArea devCard;
+	private PopeToken popeToken;
+
+	public String getNickname()
+	{
+		return nickname;
+	}
+
+	public void setNickname(String nickname)
+	{
+		this.nickname = nickname;
+	}
+
+	public Box[] getTrack()
+	{
+		return track;
+	}
+
+	public void setTrack(Box[] track)
+	{
+		this.track = track;
+	}
+
+	public Resource[] getVault()
+	{
+		return vault;
+	}
+
+	public void setVault(Resource[] vault)
+	{
+		this.vault = vault;
+	}
+
+	public Storage getStorage()
+	{
+		return storage;
+	}
+
+	public void setStorage(Storage storage)
+	{
+		this.storage = storage;
+	}
+
+	public LeaderCard getLeaderCardOne()
+	{
+		return leaderCardOne;
+	}
+
+	public void setLeaderCardOne(LeaderCard leaderCardOne)
+	{
+		this.leaderCardOne = leaderCardOne;
+	}
+
+	public LeaderCard getLeaderCardTwo()
+	{
+		return leaderCardTwo;
+	}
+
+	public void setLeaderCardTwo(LeaderCard leaderCardTwo)
+	{
+		this.leaderCardTwo = leaderCardTwo;
+	}
+
+	public LeaderCard getLeaderCardThree()
+	{
+		return leaderCardThree;
+	}
+
+	public void setLeaderCardThree(LeaderCard leaderCardThree)
+	{
+		this.leaderCardThree = leaderCardThree;
+	}
+
+	public DevCardArea getDevCard()
+	{
+		return devCard;
+	}
+
+	public void setDevCard(DevCardArea devCard)
+	{
+		this.devCard = devCard;
+	}
+
+	public PopeToken getPopeToken()
+	{
+		return popeToken;
+	}
+
+	public void setPopeToken(PopeToken popeToken)
+	{
+		this.popeToken = popeToken;
+	}
+}

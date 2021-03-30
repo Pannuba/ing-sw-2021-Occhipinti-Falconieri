@@ -1,0 +1,7 @@
+public enum Skills
+{
+	SKILLONE,
+	SKILLTWO,
+	SKILLTHREE,
+	SKILLFOUR,
+}
