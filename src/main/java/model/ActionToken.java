@@ -1,3 +1,5 @@
+package model;
+
 public enum ActionToken
 {
 	TOKEN_CROSS_1,

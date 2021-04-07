@@ -1,3 +1,5 @@
+package model;
+
 public class Storage
 {
 	private Resource shelfOne;

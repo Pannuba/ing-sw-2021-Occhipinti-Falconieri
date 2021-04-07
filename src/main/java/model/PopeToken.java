@@ -1,3 +1,5 @@
+package model;
+
 public class PopeToken
 {
 	private boolean isActive;

@@ -1,3 +1,5 @@
+package model;
+
 public class MarblesMarket
 {
 	private Resource[][]marblesBoard = new Resource[3][4];

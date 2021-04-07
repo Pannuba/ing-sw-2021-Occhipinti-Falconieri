@@ -1,7 +1,9 @@
+package model;
+
 public enum Skills
 {
-	SKILLONE,
-	SKILLTWO,
-	SKILLTHREE,
-	SKILLFOUR,
+	SKILLONE,		/* Discount */
+	SKILLTWO,		/* Additional storage */
+	SKILLTHREE,		/* White marble */
+	SKILLFOUR,		/* Additional production */
 }

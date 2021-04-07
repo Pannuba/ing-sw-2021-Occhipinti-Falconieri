@@ -1,3 +1,5 @@
+package model;
+
 public class DevCardsMarket
 {
 	private DevCard[]devCards = new DevCard[48];

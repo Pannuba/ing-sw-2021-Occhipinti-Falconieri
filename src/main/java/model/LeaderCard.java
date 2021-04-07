@@ -1,3 +1,5 @@
+package model;
+
 public class LeaderCard
 {
 	private int points;

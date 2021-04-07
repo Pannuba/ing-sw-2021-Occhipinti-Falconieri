@@ -1,3 +1,5 @@
+package model;
+
 public class DevCardArea extends DevCard
 {
 	private DevCard devCard;
