@@ -2,6 +2,8 @@ public class Dashboard
 {
 	private String nickname;
 	private Box[]track = new Box[25];
+	private int redPawn;
+	private int blackPawn;
 	private Resource[]vault = new Resource[4];
 	private Storage storage;
 	private LeaderCard leaderCardOne;
@@ -28,6 +30,26 @@ public class Dashboard
 	public void setTrack(Box[] track)
 	{
 		this.track = track;
+	}
+
+	public int getRedPawn()
+	{
+		return redPawn;
+	}
+
+	public void setRedPawn(int redPawn)
+	{
+		this.redPawn = redPawn;
+	}
+
+	public int getBlackPawn()
+	{
+		return blackPawn;
+	}
+
+	public void setBlackPawn(int blackPawn)
+	{
+		this.blackPawn = blackPawn;
 	}
 
 	public Resource[] getVault()
