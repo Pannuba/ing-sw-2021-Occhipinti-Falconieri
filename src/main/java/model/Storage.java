@@ -6,6 +6,8 @@ public class Storage
 	private Resource shelfTwo;
 	private Resource shelfThree;
 
+	/* Logic methods to check resources in shelf here? Or in controller?? */
+
 	public Resource getShelfOne()
 	{
 		return shelfOne;

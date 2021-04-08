@@ -2,9 +2,10 @@
 	It is used to set the parameters of every DevCard, LeaderCard and ActionToken without hardcoding them.
 */
 
+package tools;
+
 import model.LeaderCard;
 import model.Resource;
-
 import java.beans.ExceptionListener;
 import java.beans.XMLEncoder;
 import java.beans.XMLDecoder;

@@ -1,6 +1,6 @@
 package model;
 
-public class DevCard
+public class DevCard extends DevCardArea
 {
 	private String color;
 	private int points;

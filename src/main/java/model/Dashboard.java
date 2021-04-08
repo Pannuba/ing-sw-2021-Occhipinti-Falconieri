@@ -1,6 +1,6 @@
 package model;
 
-// Import XML_Serialization??
+import tools.XML_Serialization;
 
 public class Dashboard
 {
@@ -10,19 +10,16 @@ public class Dashboard
 	private int blackPawn;
 	private Resource[]vault = new Resource[4];		/* 4 resources with an amount [0, inf] */
 	private Storage storage;
-	private LeaderCard leaderCardOne;
-	private LeaderCard leaderCardTwo;
-	private LeaderCard leaderCardThree;
-	private DevCardArea devCard;
-	private PopeToken popeToken;
+	private LeaderCard[]leaderCards = new LeaderCard[4];
+	private DevCardArea[]devCardAreas = new DevCardArea[3];
+	private PopeToken[]popeToken = new PopeToken[3];
 
 	public Dashboard()
 	{
 		/* Server tells us what leader cards we get, we get four integers from which the user picks two */
-		leaderCardOne = new LeaderCard();
-		leaderCardTwo = new LeaderCard();
-
-
+		leaderCards[0] = new LeaderCard();
+		leaderCards[1] = new LeaderCard();
+		XML_Serialization xmlDecode = new XML_Serialization();		/* Initialize leader/dev cards getting values from the respective XML files */
 	}
 
 	public String getNickname()
@@ -85,52 +82,32 @@ public class Dashboard
 		this.storage = storage;
 	}
 
-	public LeaderCard getLeaderCardOne()
+	public LeaderCard[] getLeaderCards()
 	{
-		return leaderCardOne;
+		return leaderCards;
 	}
 
-	public void setLeaderCardOne(LeaderCard leaderCardOne)
+	public void setLeaderCards(LeaderCard[] leaderCards)
 	{
-		this.leaderCardOne = leaderCardOne;
+		this.leaderCards = leaderCards;
 	}
 
-	public LeaderCard getLeaderCardTwo()
+	public DevCardArea[] getDevCardAreas()
 	{
-		return leaderCardTwo;
+		return devCardAreas;
 	}
 
-	public void setLeaderCardTwo(LeaderCard leaderCardTwo)
+	public void setDevCardAreas(DevCardArea[] devCardAreas)
 	{
-		this.leaderCardTwo = leaderCardTwo;
+		this.devCardAreas = devCardAreas;
 	}
 
-	public LeaderCard getLeaderCardThree()
-	{
-		return leaderCardThree;
-	}
-
-	public void setLeaderCardThree(LeaderCard leaderCardThree)
-	{
-		this.leaderCardThree = leaderCardThree;
-	}
-
-	public DevCardArea getDevCard()
-	{
-		return devCard;
-	}
-
-	public void setDevCard(DevCardArea devCard)
-	{
-		this.devCard = devCard;
-	}
-
-	public PopeToken getPopeToken()
+	public PopeToken[] getPopeToken()
 	{
 		return popeToken;
 	}
 
-	public void setPopeToken(PopeToken popeToken)
+	public void setPopeToken(PopeToken[] popeToken)
 	{
 		this.popeToken = popeToken;
 	}

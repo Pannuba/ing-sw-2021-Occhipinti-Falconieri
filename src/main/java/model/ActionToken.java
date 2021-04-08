@@ -18,4 +18,13 @@ public enum ActionToken
 
 	}
 
+	public String getNum()
+	{
+		return num;
+	}
+
+	public String getType()
+	{
+		return type;
+	}
 }

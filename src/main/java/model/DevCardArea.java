@@ -1,6 +1,6 @@
 package model;
 
-public class DevCardArea extends DevCard
+public class DevCardArea
 {
 	private DevCard devCard;
 	private int layer;
@@ -15,13 +15,11 @@ public class DevCardArea extends DevCard
 		this.devCard = devCard;
 	}
 
-	@Override
 	public int getLayer()
 	{
 		return layer;
 	}
 
-	@Override
 	public void setLayer(int layer)
 	{
 		this.layer = layer;
