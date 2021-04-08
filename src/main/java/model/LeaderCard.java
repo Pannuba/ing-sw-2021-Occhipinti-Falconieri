@@ -6,17 +6,29 @@ public class LeaderCard
 	private String requirements;
 	private Skill skill;
 
-	public LeaderCard()			/* Is this where we put the difference between skills? Where else? */
+	public LeaderCard()				/* For some reason, XML_Serialization throws exceptions without this */
+	{
+
+	}
+
+	public LeaderCard(Skill skill)			/* Is this where we put the difference between skills? Where else? */
 	{
 		switch (skill)
 		{
 			case SKILL_ONE:
+				break;
 
 			case SKILL_TWO:
+				break;
 
 			case SKILL_THREE:
+				break;
 
 			case SKILL_FOUR:
+				break;
+
+			default:
+				break;
 
 		}
 	}

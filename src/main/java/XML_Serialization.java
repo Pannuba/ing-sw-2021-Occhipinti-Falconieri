@@ -48,14 +48,37 @@ public class XML_Serialization
 					leaderCardPoints = Integer.parseInt(input.nextLine());		/* Convert input string to int */
 					System.out.printf("Requirements: ");
 					leaderCardRequirements = input.nextLine();
+					System.out.printf("Skill (1 = discount, 2 = additional storage, 3 = white marble, 4 = additional production): ");
+					choice = input.nextLine();
+					switch (choice)
+					{
+						case "1":
+							leaderCardSkill = Skill.SKILL_ONE;
+							break;
+
+						case "2":
+							leaderCardSkill = Skill.SKILL_TWO;
+							break;
+
+						case "3":
+							leaderCardSkill = Skill.SKILL_THREE;
+							break;
+
+						case "4":
+							leaderCardSkill = Skill.SKILL_FOUR;
+							break;
+
+						default:
+							leaderCardSkill = null;
+					}
 
 					System.out.printf("Filename (don't add \".xml\"): ");
 					filename = "resources/leadercards/" + input.nextLine() + ".xml";
 
-					LeaderCard leaderCard1 = new LeaderCard();
+					LeaderCard leaderCard1 = new LeaderCard(leaderCardSkill);	/* Not too sure about this but we'll give it a try */
 					leaderCard1.setPoints(leaderCardPoints);
 					leaderCard1.setRequirements(leaderCardRequirements);
-					//leaderCard1.setSkill(Skills.SKILL_ONE);					/* Need to develop each skill
+					//leaderCard1.setSkill(Skills.SKILL_ONE);
 					serialize(leaderCard1, filename);
 					break;
 
@@ -79,6 +102,7 @@ public class XML_Serialization
 		myfile.createNewFile();
 		FileOutputStream fos = new FileOutputStream(myfile);
 		XMLEncoder encoder = new XMLEncoder(fos);
+
 		encoder.setExceptionListener(new ExceptionListener()
 		{
 			public void exceptionThrown(Exception e)
@@ -86,7 +110,8 @@ public class XML_Serialization
 				System.out.println("Exception: " + e.toString());
 			}
 		});
-		encoder.writeObject(leadercard);
+
+		encoder.writeObject(leadercard);		/* Throws exceptions */
 		encoder.close();
 		fos.close();
 	}
