@@ -1,6 +1,6 @@
 package model;
 
-public enum Skills
+public enum Skill
 {
 	SKILL_ONE,			/* Discount */
 	SKILL_TWO,			/* Additional storage */

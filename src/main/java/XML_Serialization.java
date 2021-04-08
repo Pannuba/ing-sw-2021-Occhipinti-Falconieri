@@ -4,6 +4,8 @@
 
 import model.LeaderCard;
 import model.DevCardsMarket;
+import model.Skill;
+
 import java.beans.ExceptionListener;
 import java.beans.XMLEncoder;
 import java.io.File;
@@ -22,7 +24,7 @@ public class XML_Serialization
 		//leaderCard1.setSkill(Skills.SKILL_ONE);					/* Need to develop each skill
 		serialize(leaderCard1, "resources/leadercards/leadercard1.xml");
 
-		/*And so on with all leadercards, devcards... */
+		/* And so on with all leadercards, devcards... */
 
 
 		/* Interactive system to generate XML without having to hardcode every card like above */
@@ -31,6 +33,7 @@ public class XML_Serialization
 		String choice, filename, path;
 		int leaderCardPoints;			// ...
 		String leaderCardRequirements;	// ...
+		Skill leaderCardSkill;
 
 		while (true)
 		{
@@ -39,12 +42,13 @@ public class XML_Serialization
 
 			switch (choice) {
 
-				case "1":
+				case "1":		/* LeaderCard to XML */
 
 					System.out.printf("Points: ");
 					leaderCardPoints = Integer.parseInt(input.nextLine());		/* Convert input string to int */
 					System.out.printf("Requirements: ");
 					leaderCardRequirements = input.nextLine();
+
 					System.out.printf("Filename (don't add \".xml\"): ");
 					filename = "resources/leadercards/" + input.nextLine() + ".xml";
 
@@ -55,7 +59,7 @@ public class XML_Serialization
 					serialize(leaderCard1, filename);
 					break;
 
-				case "2":
+				case "2":		/* DevCard to XML */
 
 					break;
 
@@ -64,6 +68,7 @@ public class XML_Serialization
 
 				default:
 					System.out.printf("Insert 1, 2 or 3%n");
+					break;
 			}
 		}
 	}

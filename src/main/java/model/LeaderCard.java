@@ -4,7 +4,22 @@ public class LeaderCard
 {
 	private int points;
 	private String requirements;
-	private Skills skill;
+	private Skill skill;
+
+	public LeaderCard()			/* Is this where we put the difference between skills? Where else? */
+	{
+		switch (skill)
+		{
+			case SKILL_ONE:
+
+			case SKILL_TWO:
+
+			case SKILL_THREE:
+
+			case SKILL_FOUR:
+
+		}
+	}
 
 	public int getPoints()
 	{
@@ -26,12 +41,12 @@ public class LeaderCard
 		this.requirements = requirements;
 	}
 
-	public Skills getSkill()
+	public Skill getSkill()
 	{
 		return skill;
 	}
 
-	public void setSkill(Skills skill)
+	public void setSkill(Skill skill)
 	{
 		this.skill = skill;
 	}
