@@ -2,7 +2,7 @@ package model;
 
 public class MarblesMarket
 {
-	private Resource[][]marblesBoard = new Resource[3][4];
+	private Resource[][]marblesBoard = new Resource[3][4];		/* Why not string? */
 	private Resource spareMarble;
 
 	public Resource[][] getMarblesBoard()

@@ -3,8 +3,7 @@
 */
 
 import model.LeaderCard;
-import model.DevCardsMarket;
-import model.Skill;
+import model.Resource;
 
 import java.beans.ExceptionListener;
 import java.beans.XMLEncoder;
@@ -33,7 +32,6 @@ public class XML_Serialization
 		String choice, filename, path;
 		int leaderCardPoints;			// ...
 		String leaderCardRequirements;	// ...
-		Skill leaderCardSkill;
 
 		while (true)
 		{
@@ -44,42 +42,52 @@ public class XML_Serialization
 
 				case "1":		/* LeaderCard to XML */
 
+					System.out.printf("Filename (don't add \".xml\"): ");
+					filename = "resources/leadercards/" + input.nextLine() + ".xml";
+
 					System.out.printf("Points: ");
 					leaderCardPoints = Integer.parseInt(input.nextLine());		/* Convert input string to int */
+
 					System.out.printf("Requirements: ");
 					leaderCardRequirements = input.nextLine();
+
 					System.out.printf("Skill (1 = discount, 2 = additional storage, 3 = white marble, 4 = additional production): ");
 					choice = input.nextLine();
 					switch (choice)
 					{
-						case "1":
-							leaderCardSkill = Skill.SKILL_ONE;
+						case "1":		/* Get discount */
+							LeaderCard.SkillOne leaderCardOne = new LeaderCard.SkillOne();	/* Not too sure about this but we'll give it a try */
+							leaderCardOne.setPoints(leaderCardPoints);
+							leaderCardOne.setRequirements(leaderCardRequirements);
+							System.out.printf("Discount: ");
+							leaderCardOne.setDiscount(input.nextLine());
+							serialize(leaderCardOne, filename);
 							break;
 
 						case "2":
-							leaderCardSkill = Skill.SKILL_TWO;
+							LeaderCard.SkillTwo leaderCardTwo = new LeaderCard.SkillTwo();	/* Not too sure about this but we'll give it a try */
+							leaderCardTwo.setPoints(leaderCardPoints);
+							leaderCardTwo.setRequirements(leaderCardRequirements);
+							Resource additionalStorage = null;
+							System.out.printf("Additional storage category: ");
+							additionalStorage.setCategory(input.nextLine());
+							additionalStorage.setQuantity(2);
+							leaderCardTwo.setAdditionalStorage(additionalStorage);
+							serialize(leaderCardTwo, filename);
 							break;
 
 						case "3":
-							leaderCardSkill = Skill.SKILL_THREE;
+
 							break;
 
 						case "4":
-							leaderCardSkill = Skill.SKILL_FOUR;
+
 							break;
 
 						default:
-							leaderCardSkill = null;
+
 					}
 
-					System.out.printf("Filename (don't add \".xml\"): ");
-					filename = "resources/leadercards/" + input.nextLine() + ".xml";
-
-					LeaderCard leaderCard1 = new LeaderCard(leaderCardSkill);	/* Not too sure about this but we'll give it a try */
-					leaderCard1.setPoints(leaderCardPoints);
-					leaderCard1.setRequirements(leaderCardRequirements);
-					//leaderCard1.setSkill(Skills.SKILL_ONE);
-					serialize(leaderCard1, filename);
 					break;
 
 				case "2":		/* DevCard to XML */

@@ -4,33 +4,10 @@ public class LeaderCard
 {
 	private int points;
 	private String requirements;
-	private Skill skill;
 
 	public LeaderCard()				/* For some reason, XML_Serialization throws exceptions without this */
 	{
 
-	}
-
-	public LeaderCard(Skill skill)			/* Is this where we put the difference between skills? Where else? */
-	{
-		switch (skill)
-		{
-			case SKILL_ONE:
-				break;
-
-			case SKILL_TWO:
-				break;
-
-			case SKILL_THREE:
-				break;
-
-			case SKILL_FOUR:
-				break;
-
-			default:
-				break;
-
-		}
 	}
 
 	public int getPoints()
@@ -53,13 +30,74 @@ public class LeaderCard
 		this.requirements = requirements;
 	}
 
-	public Skill getSkill()
+	public static class SkillOne extends LeaderCard
 	{
-		return skill;
+		private String discount;									/* SKILL_ONE */
+
+		public String getDiscount()
+		{
+			return discount;
+		}
+
+		public void setDiscount(String discount)
+		{
+			this.discount = discount;
+		}
 	}
 
-	public void setSkill(Skill skill)
+	public static class SkillTwo extends LeaderCard
 	{
-		this.skill = skill;
+		private Resource additionalStorage;		/* SKILL_TWO (specify type see cards) */
+
+		public Resource getAdditionalStorage()
+		{
+			return additionalStorage;
+		}
+
+		public void setAdditionalStorage(Resource additionalStorage)
+		{
+			this.additionalStorage = additionalStorage;
+		}
+	}
+
+	public static class SkillThree extends LeaderCard
+	{
+		private String whiteMarble;									/* SKILL_THREE, not sure about type */
+
+		public String getWhiteMarble()
+		{
+			return whiteMarble;
+		}
+
+		public void setWhiteMarble(String whiteMarble)
+		{
+			this.whiteMarble = whiteMarble;
+		}
+	}
+
+	public static class SkillFour extends LeaderCard
+	{
+		private Resource cost;										/* SKILL_FOUR */
+		private Resource[]product = new Resource[2];
+
+		public Resource getCost()
+		{
+			return cost;
+		}
+
+		public void setCost(Resource cost)
+		{
+			this.cost = cost;
+		}
+
+		public Resource[] getProduct()
+		{
+			return product;
+		}
+
+		public void setProduct(Resource[] product)
+		{
+			this.product = product;
+		}
 	}
 }
