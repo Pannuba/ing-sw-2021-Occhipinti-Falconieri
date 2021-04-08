@@ -1,18 +1,29 @@
 package model;
 
+// Import XML_Serialization??
+
 public class Dashboard
 {
 	private String nickname;
 	private Box[]track = new Box[25];
 	private int redPawn;
 	private int blackPawn;
-	private Resource[]vault = new Resource[4];
+	private Resource[]vault = new Resource[4];		/* 4 resources with an amount [0, inf] */
 	private Storage storage;
 	private LeaderCard leaderCardOne;
 	private LeaderCard leaderCardTwo;
 	private LeaderCard leaderCardThree;
 	private DevCardArea devCard;
 	private PopeToken popeToken;
+
+	public Dashboard()
+	{
+		/* Server tells us what leader cards we get, we get four integers from which the user picks two */
+		leaderCardOne = new LeaderCard();
+		leaderCardTwo = new LeaderCard();
+
+
+	}
 
 	public String getNickname()
 	{

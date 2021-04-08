@@ -1,6 +1,6 @@
 package model;
 
-public class LeaderCard
+public class LeaderCard		/* abstract? interface? enum????? */
 {
 	private int points;
 	private String requirements;
@@ -32,16 +32,27 @@ public class LeaderCard
 
 	public static class SkillOne extends LeaderCard
 	{
-		private String discount;									/* SKILL_ONE */
+		private int discount;									/* SKILL_ONE */
+		private Resource discountedResource;
 
-		public String getDiscount()
+		public int getDiscount()
 		{
 			return discount;
 		}
 
-		public void setDiscount(String discount)
+		public void setDiscount(int discount)
 		{
 			this.discount = discount;
+		}
+
+		public Resource getDiscountedResource()
+		{
+			return discountedResource;
+		}
+
+		public void setDiscountedResource(Resource discountedResource)
+		{
+			this.discountedResource = discountedResource;
 		}
 	}
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="14.0.2" class="java.beans.XMLDecoder">
+ <object class="model.LeaderCard$SkillOne">
+  <void property="discount">
+   <int>-1</int>
+  </void>
+  <void property="discountedResource">
+   <object class="model.Resource">
+    <void property="category">
+     <string>P</string>
+    </void>
+   </object>
+  </void>
+  <void property="points">
+   <int>2</int>
+  </void>
+  <void property="requirements">
+   <string>1Y1G</string>
+  </void>
+ </object>
+</java>

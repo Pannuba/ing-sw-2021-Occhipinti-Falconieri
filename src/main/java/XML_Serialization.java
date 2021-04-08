@@ -7,8 +7,10 @@ import model.Resource;
 
 import java.beans.ExceptionListener;
 import java.beans.XMLEncoder;
+import java.beans.XMLDecoder;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -59,19 +61,23 @@ public class XML_Serialization
 							LeaderCard.SkillOne leaderCardOne = new LeaderCard.SkillOne();	/* Not too sure about this but we'll give it a try */
 							leaderCardOne.setPoints(leaderCardPoints);
 							leaderCardOne.setRequirements(leaderCardRequirements);
-							System.out.printf("Discount: ");
-							leaderCardOne.setDiscount(input.nextLine());
+							Resource discountedResource = new Resource();
+							System.out.printf("Resource: ");
+							discountedResource.setCategory(input.nextLine());
+							discountedResource.setQuantity(0);							/* We just need the resource type, we don't *own* any more resources */
+							leaderCardOne.setDiscountedResource(discountedResource);
+							leaderCardOne.setDiscount(-1);								/* All cards have a discount of 1 resource less */
 							serialize(leaderCardOne, filename);
 							break;
 
 						case "2":
-							LeaderCard.SkillTwo leaderCardTwo = new LeaderCard.SkillTwo();	/* Not too sure about this but we'll give it a try */
+							LeaderCard.SkillTwo leaderCardTwo = new LeaderCard.SkillTwo();
 							leaderCardTwo.setPoints(leaderCardPoints);
 							leaderCardTwo.setRequirements(leaderCardRequirements);
-							Resource additionalStorage = null;
+							Resource additionalStorage = new Resource();
 							System.out.printf("Additional storage category: ");
 							additionalStorage.setCategory(input.nextLine());
-							additionalStorage.setQuantity(2);
+							additionalStorage.setQuantity(2);								/* Can only hold one type of resource, amount is always 2 */
 							leaderCardTwo.setAdditionalStorage(additionalStorage);
 							serialize(leaderCardTwo, filename);
 							break;
@@ -104,7 +110,7 @@ public class XML_Serialization
 		}
 	}
 
-	public static void serialize(LeaderCard leadercard, String filename) throws IOException
+	public static void serialize(Object toSerialize, String filename) throws IOException
 	{
 		File myfile = new File(filename);
 		myfile.createNewFile();
@@ -119,8 +125,19 @@ public class XML_Serialization
 			}
 		});
 
-		encoder.writeObject(leadercard);		/* Throws exceptions */
+		encoder.writeObject(toSerialize);		/* Throws exceptions */
 		encoder.close();
 		fos.close();
 	}
+
+	public static Object deserialize(String filename) throws IOException
+	{
+		FileInputStream fis = new FileInputStream(filename);
+		XMLDecoder decoder = new XMLDecoder(fis);
+		Object decodedObject = (Object) decoder.readObject();
+		decoder.close();
+		fis.close();
+		return decodedObject;
+	}
+
 }
