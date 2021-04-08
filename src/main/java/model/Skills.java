@@ -2,8 +2,8 @@ package model;
 
 public enum Skills
 {
-	SKILLONE,		/* Discount */
-	SKILLTWO,		/* Additional storage */
-	SKILLTHREE,		/* White marble */
-	SKILLFOUR,		/* Additional production */
+	SKILL_ONE,			/* Discount */
+	SKILL_TWO,			/* Additional storage */
+	SKILL_THREE,		/* White marble */
+	SKILL_FOUR,			/* Additional production */
 }
