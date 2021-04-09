@@ -1,14 +1,14 @@
 package model;
 
-public enum ActionToken
+public enum ActionToken				/* Only used in singleplayer */
 {
-	TOKEN_CROSS_1("-2", "Y"),
-	TOKEN_CROSS_2("-2", "P");
-	/*TOKEN_DISCARD_BLU,
-	TOKEN_DISCARD_GREEN,
-	TOKEN_DISCARD_YELLOW,
-	TOKEN_DISCARD_PURPLE,
-	TOKEN_CHANGE,*/
+	TOKEN_CROSS_1("+1", "X"),
+	TOKEN_CROSS_2("+2", "X"),
+	TOKEN_CROSS_3("+2", "X"),
+	TOKEN_DISCARD_BLU("-2", "B"),
+	TOKEN_DISCARD_GREEN("-2", "G"),
+	TOKEN_DISCARD_YELLOW("-2", "Y"),
+	TOKEN_DISCARD_PURPLE("-2", "P");
 
 	private final String num = new String();
 	private final String type = new String();
