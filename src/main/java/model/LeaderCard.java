@@ -32,7 +32,7 @@ public class LeaderCard		/* abstract? interface? enum????? */
 
 	public static class SkillOne extends LeaderCard
 	{
-		private int discount;									/* SKILL_ONE */
+		private int discount;
 		private Resource discountedResource;
 
 		public int getDiscount()
@@ -58,7 +58,7 @@ public class LeaderCard		/* abstract? interface? enum????? */
 
 	public static class SkillTwo extends LeaderCard
 	{
-		private Resource additionalStorage;		/* SKILL_TWO (specify type see cards) */
+		private Resource additionalStorage;
 
 		public Resource getAdditionalStorage()
 		{
@@ -73,7 +73,7 @@ public class LeaderCard		/* abstract? interface? enum????? */
 
 	public static class SkillThree extends LeaderCard
 	{
-		private String whiteMarble;									/* SKILL_THREE, not sure about type */
+		private String whiteMarble;									/* Not sure about type */
 
 		public String getWhiteMarble()
 		{
@@ -88,27 +88,39 @@ public class LeaderCard		/* abstract? interface? enum????? */
 
 	public static class SkillFour extends LeaderCard
 	{
-		private Resource cost;										/* SKILL_FOUR */
-		private Resource[]product = new Resource[2];
+		private Resource productionCost;
+		//private Resource[]product = new Resource[2];		/* Every card gives one RedCross and one product that can be chosen */
+		private Resource chosenProduction;
+		private Resource faithPoints;
 
-		public Resource getCost()
+		public Resource getProductionCost()
 		{
-			return cost;
+			return productionCost;
 		}
 
-		public void setCost(Resource cost)
+		public void setProductionCost(Resource productionCost)
 		{
-			this.cost = cost;
+			this.productionCost = productionCost;
 		}
 
-		public Resource[] getProduct()
+		public Resource getChosenProduction()
 		{
-			return product;
+			return chosenProduction;
 		}
 
-		public void setProduct(Resource[] product)
+		public void setChosenProduction(Resource chosenProduction)
 		{
-			this.product = product;
+			this.chosenProduction = chosenProduction;
+		}
+
+		public Resource getFaithPoints()
+		{
+			return faithPoints;
+		}
+
+		public void setFaithPoints(Resource faithPoints)
+		{
+			this.faithPoints = faithPoints;
 		}
 	}
 }

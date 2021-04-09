@@ -1,5 +1,12 @@
 package model;
 
+/*	Stone --> grey ---> "G"
+	Coin --> yellow --> "Y"
+	Shield --> blue --> "B"
+	Slave --> purple -> "P"
+	Cross --> red ----> "R"  (faith points)
+ */
+
 public class Resource
 {
 	private String category;

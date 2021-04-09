@@ -7,7 +7,7 @@
   <void property="discountedResource">
    <object class="model.Resource">
     <void property="category">
-     <string>P</string>
+     <string>G</string>
     </void>
    </object>
   </void>
@@ -15,7 +15,7 @@
    <int>2</int>
   </void>
   <void property="requirements">
-   <string>DEV_LV1_1Y1G</string>
+   <string>DEV_LV1_1G1B</string>
   </void>
  </object>
 </java>

@@ -15,7 +15,7 @@
    <int>2</int>
   </void>
   <void property="requirements">
-   <string>1B1P</string>
+   <string>DEV_LV1_1B1P</string>
   </void>
  </object>
 </java>
