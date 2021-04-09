@@ -17,9 +17,10 @@ public class Dashboard
 	public Dashboard()
 	{
 		/* Server tells us what leader cards we get, we get four integers from which the user picks two */
-		leaderCards[0] = new LeaderCard();
-		leaderCards[1] = new LeaderCard();
+
 		XML_Serialization xmlDecode = new XML_Serialization();		/* Initialize leader/dev cards getting values from the respective XML files */
+		leaderCards[0] = xmlDecode.deserialize("resources/leadercards/leadercard1.xml");
+		leaderCards[1] = new LeaderCard();						/* Should this go in LeaderCard constructor? */
 	}
 
 	public String getNickname()

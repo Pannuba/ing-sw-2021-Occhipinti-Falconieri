@@ -169,7 +169,7 @@ public class XML_Serialization
 		fos.close();
 	}
 
-	public static Object deserialize(String filename) throws IOException
+	public static Object deserialize(String filename) throws IOException	/* Works! println output is the same before and after serialization */
 	{
 		FileInputStream fis = new FileInputStream(filename);
 		XMLDecoder decoder = new XMLDecoder(fis);
