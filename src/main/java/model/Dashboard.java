@@ -1,7 +1,6 @@
 package model;
 
 import tools.XML_Serialization;
-
 import java.io.IOException;
 
 public class Dashboard
@@ -19,9 +18,15 @@ public class Dashboard
 	public Dashboard() throws IOException
 	{
 		/* Server tells us what leader cards we get, we get four integers from which the user picks two */
+
 		XML_Serialization xmlDecode = new XML_Serialization();		/* Initialize leader/dev cards getting values from the respective XML files */
 		leaderCards[0] = (LeaderCard) xmlDecode.deserialize("resources/leadercards/leadercard1.xml");
-		leaderCards[1] = new LeaderCard();						/* Should this go in LeaderCard constructor? */
+		/* ... */
+
+		redPawn = 0;
+		blackPawn = 0;
+
+
 	}
 
 	public String getNickname()

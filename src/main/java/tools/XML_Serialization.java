@@ -4,6 +4,7 @@
 
 package tools;
 
+import model.DevCard;
 import model.LeaderCard;
 import model.Resource;
 import java.beans.ExceptionListener;
@@ -22,9 +23,7 @@ public class XML_Serialization
 		/* Interactive system to generate XML without having to hardcode every card */
 
 		Scanner input = new Scanner(System.in);
-		String choice, filename, path;
-		int leaderCardPoints;			// ...
-		String leaderCardRequirements = null;	// ...
+		String filename;
 
 		while (true)
 		{
@@ -32,7 +31,9 @@ public class XML_Serialization
 
 			switch (input.nextLine()) {
 
-				case "1":		/* LeaderCard to XML */
+				case "1":															/* LeaderCard to XML */
+					int leaderCardPoints;
+					String leaderCardRequirements = null;
 
 					System.out.printf("Filename (don't add \".xml\"): ");
 					filename = "resources/leadercards/" + input.nextLine() + ".xml";
@@ -88,7 +89,7 @@ public class XML_Serialization
 							leaderCardOne.setPoints(leaderCardPoints);
 							leaderCardOne.setRequirements(leaderCardRequirements);
 							Resource discountedResource = new Resource();
-							System.out.printf("Resource: ");
+							System.out.printf("Resource (G/Y/B/P): ");
 							discountedResource.setCategory(input.nextLine());
 							discountedResource.setQuantity(0);							/* We just need the resource type, we don't *own* any more resources */
 							leaderCardOne.setDiscountedResource(discountedResource);
@@ -130,13 +131,65 @@ public class XML_Serialization
 							break;
 
 						default:
-
+							break;
 					}
 
 					break;
 
-				case "2":		/* DevCard to XML */
+				case "2":															/* DevCard to XML */
+					DevCard devCard = new DevCard();
+					Resource[]requirements = new Resource[2];
+					Resource[]cost = new Resource[3];
+					Resource[]product = new Resource[3];
+					int i = 0;
 
+					System.out.printf("Filename (don't add \".xml\"): ");
+					filename = "resources/devcards/" + input.nextLine() + ".xml";
+
+					System.out.printf("Points: ");
+					devCard.setPoints(Integer.parseInt(input.nextLine()));
+
+					System.out.printf("Level (1/2/3): ");
+					devCard.setLevel(Integer.parseInt(input.nextLine()));
+
+					System.out.printf("Color (G/Y/B/P): ");
+					devCard.setColor(input.nextLine());
+
+					for (i = 0; i < 2; i++)
+					{
+						requirements[i] = new Resource();
+						System.out.printf("Quantity of requirement resource #" + (i+1) + " (0 if doesn't exist): ");
+						requirements[i].setQuantity(Integer.parseInt(input.nextLine()));
+
+						System.out.printf("Category of requirement resource #" + (i+1) + " (G/Y/B/P, null if doesn't exist): ");
+						requirements[i].setCategory(input.nextLine());
+					}
+
+					for (i = 0; i < 3; i++)
+					{
+						cost[i] = new Resource();
+						System.out.printf("Quantity of cost resource #" + (i+1) + ": ");
+						cost[i].setQuantity(Integer.parseInt(input.nextLine()));
+
+						System.out.printf("Category of cost resource #" + (i+1) + " (G/Y/B/P/null): ");
+						cost[i].setCategory(input.nextLine());
+					}
+
+					for (i = 0; i < 3; i++)
+					{
+						product[i] = new Resource();
+						System.out.printf("Quantity of product resource #" + (i+1) + ": ");
+						product[i].setQuantity(Integer.parseInt(input.nextLine()));
+
+						System.out.printf("Category of product resource #" + (i+1) + " (G/Y/B/P/R/null): ");
+						product[i].setCategory(input.nextLine());
+					}
+
+					devCard.setRequirements(requirements);
+					devCard.setCost(cost);
+					devCard.setProduct(product);
+
+					serialize(devCard, filename);
 					break;
 
 				case "3":

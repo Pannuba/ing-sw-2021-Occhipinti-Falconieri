@@ -3,7 +3,7 @@ package model;
 public class LeaderCard		/* abstract? interface? enum????? */
 {
 	private int points;
-	private String requirements;
+	private String requirements;		/* Can be devcards or resources, so it's a string that will be decoded elsewhere */
 
 	public LeaderCard()				/* For some reason, XML_Serialization throws exceptions without this */
 	{
