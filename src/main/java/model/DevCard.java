@@ -5,8 +5,8 @@ public class DevCard extends DevCardArea
 	private String color;		/* B(lue), Y(ellow), P(urple), G(reen). Be careful, G is also Grey in resources! */
 	private int points;
 	private int level;
-	private Resource[]requirements = new Resource[2];		/* At the top of each card */
-	private Resource[]cost = new Resource[3];				/* Left side */
+	private Resource[]cost = new Resource[3];				/* At the top of each card */
+	private Resource[]requirements = new Resource[2];		/* Left side */
 	private Resource[]product = new Resource[3];			/* Right side */
 
 	public String getColor()
@@ -39,16 +39,6 @@ public class DevCard extends DevCardArea
 		this.level = level;
 	}
 
-	public Resource[] getRequirements()
-	{
-		return requirements;
-	}
-
-	public void setRequirements(Resource[] requirements)
-	{
-		this.requirements = requirements;
-	}
-
 	public Resource[] getCost()
 	{
 		return cost;
@@ -57,6 +47,16 @@ public class DevCard extends DevCardArea
 	public void setCost(Resource[] cost)
 	{
 		this.cost = cost;
+	}
+
+	public Resource[] getRequirements()
+	{
+		return requirements;
+	}
+
+	public void setRequirements(Resource[] requirements)
+	{
+		this.requirements = requirements;
 	}
 
 	public Resource[] getProduct()
