@@ -2,13 +2,13 @@
 <java version="15.0.2" class="java.beans.XMLDecoder">
  <object class="model.DevCard" id="DevCard0">
   <void property="color">
-   <string>G</string>
+   <string>P</string>
   </void>
   <void property="cost">
    <void index="0">
     <object class="model.Resource">
      <void property="category">
-      <string>B</string>
+      <string>P</string>
      </void>
      <void property="quantity">
       <int>2</int>
@@ -66,7 +66,7 @@
    <void index="0">
     <object class="model.Resource">
      <void property="category">
-      <string>Y</string>
+      <string>G</string>
      </void>
      <void property="quantity">
       <int>1</int>
