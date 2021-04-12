@@ -29,7 +29,8 @@ public class XML_Serialization
 		{
 			System.out.printf("LeaderCard: 1    DevCard: 2    Quit: 3%nInput: ");
 
-			switch (input.nextLine()) {
+			switch (input.nextLine())
+			{
 
 				case "1":															/* LeaderCard to XML */
 					int leaderCardPoints;
