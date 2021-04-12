@@ -2,7 +2,7 @@ package model.cards;
 
 import model.Resource;
 
-public abstract class LeaderCard
+public abstract class LeaderCard		/* Can't do new LeaderCard(); because it's abstract */
 {
 	private int points;
 	private String requirements;		/* Can be devcards or resources, so it's a string that will be decoded elsewhere */

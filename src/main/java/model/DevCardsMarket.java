@@ -1,7 +1,7 @@
 package model;
 
 import model.cards.DevCard;
-
+import tools.XML_Serialization;
 import java.io.IOException;
 
 public class DevCardsMarket
@@ -10,10 +10,13 @@ public class DevCardsMarket
 
 	public DevCardsMarket() throws IOException
 	{
-		devCards[0] = new DevCard();
-		devCards[0].setColor("lol");
+		XML_Serialization xmlDecode = new XML_Serialization();
 
-
+		for (int i = 0; i < 48; i++)
+		{
+			devCards[i] = new DevCard();		/* NullPointerException without this */
+			devCards[i] = (DevCard) xmlDecode.deserialize("resources/xml/devcards/leadercard" + (i+1) + ".xml");
+		}
 	}
 
 	public DevCard[] getDevCards()
