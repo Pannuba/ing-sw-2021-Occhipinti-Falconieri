@@ -1,24 +1,24 @@
 package model;
 
-/*	Stone --> grey ---> "G"
-	Coin --> yellow --> "Y"
-	Shield --> blue --> "B"
-	Slave --> purple -> "P"
-	Cross --> red ----> "R"  (faith points)
+/*	Stone --> grey ---> 0
+	Coin --> yellow --> 1
+	Shield --> blue --> 2
+	Slave --> purple -> 3
+	Cross --> red ----> 4  (faith points)
  */
 
 public class Resource
 {
-	private String category;				/* enum!! */
+	private ResourceType category;				/* Rename category to type? */
 	private int quantity;
 	private boolean isInVault;
 
-	public String getCategory()
+	public ResourceType getCategory()
 	{
 		return category;
 	}
 
-	public void setCategory(String category)
+	public void setResourceType(ResourceType category)
 	{
 		this.category = category;
 	}
