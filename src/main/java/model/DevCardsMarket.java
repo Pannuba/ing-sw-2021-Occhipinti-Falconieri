@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class DevCardsMarket
 {
-	private DevCard[]devCards = new DevCard[48];
+	private DevCard devCards[] = new DevCard[48];
 
 	public DevCardsMarket() throws IOException
 	{

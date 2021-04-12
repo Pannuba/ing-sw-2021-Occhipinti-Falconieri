@@ -139,9 +139,9 @@ public class XML_Serialization
 
 				case "2":															/* DevCard to XML */
 					DevCard devCard = new DevCard();
-					Resource[]cost = new Resource[3];
-					Resource[]requirements = new Resource[2];
-					Resource[]product = new Resource[3];
+					Resource cost[] = new Resource[3];
+					Resource requirements[] = new Resource[2];
+					Resource product[] = new Resource[3];
 					int i = 0;
 
 					System.out.printf("Filename (don't add \".xml\"): ");

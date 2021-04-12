@@ -9,14 +9,14 @@ import java.io.IOException;
 public class Dashboard
 {
 	private String nickname;
-	private Box[]track = new Box[25];
+	private Box track[] = new Box[25];
 	private int redPawn;
 	private int blackPawn;
 	private Vault vault;
 	private Storage storage;
-	private LeaderCard[]leaderCards = new LeaderCard[4];
-	private DevCardArea[]devCardAreas = new DevCardArea[3];
-	private PopeToken[]popeToken = new PopeToken[3];
+	private LeaderCard leaderCards[] = new LeaderCard[4];
+	private DevCardArea devCardAreas[] = new DevCardArea[3];
+	private PopeToken popeToken[] = new PopeToken[3];
 
 	public Dashboard() throws IOException
 	{
