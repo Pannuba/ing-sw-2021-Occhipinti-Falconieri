@@ -11,6 +11,7 @@ public class Resource
 {
 	private String category;				/* enum!! */
 	private int quantity;
+	private boolean isInVault;
 
 	public String getCategory()
 	{
@@ -30,5 +31,15 @@ public class Resource
 	public void setQuantity(int quantity)
 	{
 		this.quantity = quantity;
+	}
+
+	public boolean isInVault()
+	{
+		return isInVault;
+	}
+
+	public void setInVault(boolean inVault)
+	{
+		isInVault = inVault;
 	}
 }

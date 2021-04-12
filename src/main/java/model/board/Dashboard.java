@@ -12,7 +12,7 @@ public class Dashboard
 	private Box[]track = new Box[25];
 	private int redPawn;
 	private int blackPawn;
-	private Resource[]vault = new Resource[4];		/* 4 resources with an amount [0, inf] */
+	private Vault vault;
 	private Storage storage;
 	private LeaderCard[]leaderCards = new LeaderCard[4];
 	private DevCardArea[]devCardAreas = new DevCardArea[3];
@@ -70,16 +70,6 @@ public class Dashboard
 	public void setBlackPawn(int blackPawn)
 	{
 		this.blackPawn = blackPawn;
-	}
-
-	public Resource[] getVault()
-	{
-		return vault;
-	}
-
-	public void setVault(Resource[] vault)
-	{
-		this.vault = vault;
 	}
 
 	public Storage getStorage()
