@@ -1,5 +1,7 @@
 package model;
 
+import model.cards.LeaderCard;
+import model.cards.PopeToken;
 import tools.XML_Serialization;
 import java.io.IOException;
 

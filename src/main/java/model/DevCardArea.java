@@ -1,5 +1,7 @@
 package model;
 
+import model.cards.DevCard;
+
 public class DevCardArea	/* extends DevCard? */
 {
 	private DevCard devCard;

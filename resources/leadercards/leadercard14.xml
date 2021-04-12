@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="14.0.2" class="java.beans.XMLDecoder">
- <object class="model.LeaderCard$SkillFour">
+ <object class="model.cards.LeaderCard$SkillFour">
   <void property="points">
    <int>4</int>
   </void>

@@ -4,9 +4,9 @@
 
 package tools;
 
-import model.DevCard;
-import model.LeaderCard;
+import model.cards.*;
 import model.Resource;
+
 import java.beans.ExceptionListener;
 import java.beans.XMLEncoder;
 import java.beans.XMLDecoder;
@@ -85,7 +85,7 @@ public class XML_Serialization
 					switch (input.nextLine())
 					{
 						case "1":		/* Get discount */
-							LeaderCard.SkillOne leaderCardOne = new LeaderCard.SkillOne();	/* Not too sure about this but we'll give it a try */
+							SkillDiscount leaderCardOne = new SkillDiscount();	/* Not too sure about this but we'll give it a try */
 							leaderCardOne.setPoints(leaderCardPoints);
 							leaderCardOne.setRequirements(leaderCardRequirements);
 							Resource discountedResource = new Resource();
@@ -98,7 +98,7 @@ public class XML_Serialization
 							break;
 
 						case "2":		/* Additional storage */
-							LeaderCard.SkillTwo leaderCardTwo = new LeaderCard.SkillTwo();
+							SkillStorage leaderCardTwo = new SkillStorage();
 							leaderCardTwo.setPoints(leaderCardPoints);
 							leaderCardTwo.setRequirements(leaderCardRequirements);
 							Resource additionalStorage = new Resource();
@@ -110,7 +110,7 @@ public class XML_Serialization
 							break;
 
 						case "3":		/* White marble */
-							LeaderCard.SkillThree leaderCardThree = new LeaderCard.SkillThree();
+							SkillMarble leaderCardThree = new SkillMarble();
 							leaderCardThree.setPoints(leaderCardPoints);
 							leaderCardThree.setRequirements(leaderCardRequirements);
 							System.out.printf("White marble resource: ");
@@ -119,7 +119,7 @@ public class XML_Serialization
 							break;
 
 						case "4":		/* Additional production */
-							LeaderCard.SkillFour leaderCardFour = new LeaderCard.SkillFour();
+							SkillProduction leaderCardFour = new SkillProduction();
 							leaderCardFour.setPoints(leaderCardPoints);
 							leaderCardFour.setRequirements(leaderCardRequirements);
 							Resource productionCost = new Resource();

@@ -1,6 +1,7 @@
 package model;
 
-import tools.XML_Serialization;
+import model.cards.DevCard;
+
 import java.io.IOException;
 
 public class DevCardsMarket

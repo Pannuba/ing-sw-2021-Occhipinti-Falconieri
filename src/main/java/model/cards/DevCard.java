@@ -1,4 +1,7 @@
-package model;
+package model.cards;
+
+import model.DevCardArea;
+import model.Resource;
 
 public class DevCard extends DevCardArea
 {

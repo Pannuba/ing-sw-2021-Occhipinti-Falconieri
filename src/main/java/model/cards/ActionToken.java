@@ -1,4 +1,4 @@
-package model;
+package model.cards;
 
 public enum ActionToken				/* Only used in singleplayer */
 {
