@@ -18,6 +18,9 @@ public class DevCardArea	/* extends DevCard? */
 		{
 			return false;	// Error
 		}
+
+		else
+			return true;
 	}
 
 	public void addDevCard(DevCard cardToAdd)
