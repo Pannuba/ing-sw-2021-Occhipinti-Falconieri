@@ -6,5 +6,5 @@ public enum ResourceType
 	YELLOW,
 	BLUE,
 	PURPLE,
-	RED,
+	RED;
 }

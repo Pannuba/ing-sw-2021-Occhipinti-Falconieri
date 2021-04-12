@@ -3,21 +3,21 @@ package model.cards;
 import model.board.DevCardArea;
 import model.Resource;
 
-public class DevCard extends DevCardArea
+public class DevCard // extends DevCardArea
 {
-	private String color;		/* B(lue), Y(ellow), P(urple), G(reen). Be careful, G is also Grey in resources! */
+	private DevCardColor color;			/* Blue = 0, Yellow = 1, Purple = 2, Green = 3. */
 	private int points;
 	private int level;
-	private Resource cost[] = new Resource[3];				/* At the top of each card */
-	private Resource requirements[] = new Resource[2];		/* Left side */
-	private Resource product[] = new Resource[3];			/* Right side */
+	private Resource[] cost = new Resource[3];				/* At the top of each card */
+	private Resource[] requirements = new Resource[2];		/* Left side */
+	private Resource[] product = new Resource[3];			/* Right side */
 
-	public String getColor()
+	public DevCardColor getColor()
 	{
 		return color;
 	}
 
-	public void setColor(String color)
+	public void setColor(DevCardColor color)
 	{
 		this.color = color;
 	}

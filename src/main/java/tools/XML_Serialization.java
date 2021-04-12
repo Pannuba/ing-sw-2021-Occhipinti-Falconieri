@@ -154,7 +154,7 @@ public class XML_Serialization
 					devCard.setLevel(Integer.parseInt(input.nextLine()));
 
 					System.out.printf("Color (G/Y/B/P): ");
-					devCard.setColor(input.nextLine());
+					devCard.setColor(input.nextLine());		/* TODO: if/else to pass enum to setColor instead of input.nextLine() */
 
 					for (i = 0; i < 3; i++)
 					{
