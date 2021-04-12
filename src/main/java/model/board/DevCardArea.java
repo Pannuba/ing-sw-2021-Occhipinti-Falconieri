@@ -7,6 +7,34 @@ public class DevCardArea	/* extends DevCard? */
 	private DevCard devCard;
 	private int layer;
 
+	public DevCardArea()
+	{
+		layer = 0;
+	}
+
+	public boolean checkDevCardArea()
+	{
+		if (layer < 0 || layer > 3)
+		{
+			return false;	// Error
+		}
+	}
+
+	public void addDevCard(DevCard cardToAdd)
+	{
+		if (layer == 3)
+		{
+			System.out.println("Error: there are already three cards");		/* Need to use logger (or do we?) */
+			return;
+		}
+
+		if (cardToAdd.getLevel() == layer + 1)		/* if layer is 0 and we add a card of level 1 (0 + 1), it's ok */
+		{
+			devCard = cardToAdd;
+			layer++;
+		}
+	}
+
 	public DevCard getDevCard()
 	{
 		return devCard;

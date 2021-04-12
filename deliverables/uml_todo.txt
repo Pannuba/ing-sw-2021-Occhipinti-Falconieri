@@ -2,8 +2,12 @@
 
 * Remove Marble class, change marblesBoard and spareMarble type to Resource
 
-* Add ActionToken class
+* Add ActionToken classes and enum
 
 * Add redPawn and blackPawn in Dashboard
 
-* Remove Skill enum
+* Remove Skill enum, add skill classes
+
+* Add Track class(?)
+
+* Add various methods, see code

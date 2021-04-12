@@ -5,7 +5,7 @@ import model.Resource;
 
 public class DevCard // extends DevCardArea
 {
-	private DevCardColor color;			/* Blue = 0, Yellow = 1, Purple = 2, Green = 3. */
+	private DevCardColor color;
 	private int points;
 	private int level;
 	private Resource[] cost = new Resource[3];				/* At the top of each card */

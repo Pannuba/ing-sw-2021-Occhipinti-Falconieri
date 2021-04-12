@@ -4,8 +4,9 @@ import java.io.IOException;
 
 public class ActionBlack2 extends ActionToken
 {
-	public void moveBlackPawn() throws IOException
+	public void moveBlackPawn(int blackPawn) throws IOException
 	{
 			/* Where do we initialize the dashboard? */
+		blackPawn += 2;
 	}
 }
