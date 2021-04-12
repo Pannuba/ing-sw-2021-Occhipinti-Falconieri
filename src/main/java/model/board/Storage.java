@@ -1,4 +1,6 @@
-package model;
+package model.board;
+
+import model.Resource;
 
 public class Storage
 {

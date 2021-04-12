@@ -1,6 +1,6 @@
 package model.cards;
 
-import model.DevCardArea;
+import model.board.DevCardArea;
 import model.Resource;
 
 public class DevCard extends DevCardArea

@@ -1,7 +1,5 @@
 package model.cards;
 
-import model.Dashboard;
-
 import java.io.IOException;
 
 public class ActionBlack2 extends ActionToken

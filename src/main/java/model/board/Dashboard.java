@@ -1,5 +1,6 @@
-package model;
+package model.board;
 
+import model.Resource;
 import model.cards.LeaderCard;
 import model.cards.PopeToken;
 import tools.XML_Serialization;

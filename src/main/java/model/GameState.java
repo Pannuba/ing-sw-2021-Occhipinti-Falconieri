@@ -1,5 +1,7 @@
 package model;
 
+import model.board.Dashboard;
+
 public class GameState
 {
 	private int numPlayer;
