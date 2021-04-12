@@ -9,7 +9,7 @@ package model;
 
 public class Resource
 {
-	private String category;
+	private String category;				/* enum!! */
 	private int quantity;
 
 	public String getCategory()

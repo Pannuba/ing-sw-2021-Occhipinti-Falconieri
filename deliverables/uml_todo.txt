@@ -1,0 +1,9 @@
+* In GameState, the Dashboard array should have a set size of numPlayer
+
+* Remove Marble class, change marblesBoard and spareMarble type to Resource
+
+* Add ActionToken class
+
+* Add redPawn and blackPawn in Dashboard
+
+* Remove Skill enum
