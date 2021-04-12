@@ -4,48 +4,15 @@ import model.Resource;
 
 public class Vault
 {
-	private int greyAmount;				/* Array? */
-	private int yellowAmount;
-	private int blueAmount;
-	private int purpleAbout;
+	private int resourceAmounts[] = new int[4];		/* 0: grey, 1: yellow, 2: blue, 3: purple */
 
-	public int getGreyAmount()
+	public int[] getResourceAmounts()
 	{
-		return greyAmount;
+		return resourceAmounts;
 	}
 
-	public void setGreyAmount(int greyAmount)
+	public void setResourceAmounts(int[] resourceAmounts)
 	{
-		this.greyAmount = greyAmount;
-	}
-
-	public int getYellowAmount()
-	{
-		return yellowAmount;
-	}
-
-	public void setYellowAmount(int yellowAmount)
-	{
-		this.yellowAmount = yellowAmount;
-	}
-
-	public int getBlueAmount()
-	{
-		return blueAmount;
-	}
-
-	public void setBlueAmount(int blueAmount)
-	{
-		this.blueAmount = blueAmount;
-	}
-
-	public int getPurpleAbout()
-	{
-		return purpleAbout;
-	}
-
-	public void setPurpleAbout(int purpleAbout)
-	{
-		this.purpleAbout = purpleAbout;
+		this.resourceAmounts = resourceAmounts;
 	}
 }
