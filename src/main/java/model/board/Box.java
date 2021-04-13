@@ -2,16 +2,16 @@ package model.board;
 
 public class Box
 {
-	private String category;
+	private BoxType category;
 	private int position;
 	private int victoryPoints;
 
-	public String getCategory()
+	public BoxType getCategory()
 	{
 		return category;
 	}
 
-	public void setCategory(String category)
+	public void setCategory(BoxType category)
 	{
 		this.category = category;
 	}

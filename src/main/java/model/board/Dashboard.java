@@ -9,14 +9,11 @@ import java.io.IOException;
 public class Dashboard
 {
 	private String nickname;
-	private Box[] track = new Box[25];
-	private int redPawn;
-	private int blackPawn;
+	private Track track;
 	private Vault vault;
 	private Storage storage;
 	private LeaderCard[] leaderCards = new LeaderCard[4];
 	private DevCardArea[] devCardAreas = new DevCardArea[3];
-	private PopeToken[] popeToken = new PopeToken[3];
 
 	public Dashboard() throws IOException
 	{
@@ -25,10 +22,6 @@ public class Dashboard
 		XML_Serialization xmlDecode = new XML_Serialization();		/* Initialize leader/dev cards getting values from the respective XML files */
 		leaderCards[0] = (LeaderCard) xmlDecode.deserialize("resources/leadercards/leadercard1.xml");
 		/* ... */
-
-		redPawn = 0;
-		blackPawn = 0;
-
 
 	}
 
@@ -42,34 +35,24 @@ public class Dashboard
 		this.nickname = nickname;
 	}
 
-	public Box[] getTrack()
+	public Track getTrack()
 	{
 		return track;
 	}
 
-	public void setTrack(Box[] track)
+	public void setTrack(Track track)
 	{
 		this.track = track;
 	}
 
-	public int getRedPawn()
+	public Vault getVault()
 	{
-		return redPawn;
+		return vault;
 	}
 
-	public void setRedPawn(int redPawn)
+	public void setVault(Vault vault)
 	{
-		this.redPawn = redPawn;
-	}
-
-	public int getBlackPawn()
-	{
-		return blackPawn;
-	}
-
-	public void setBlackPawn(int blackPawn)
-	{
-		this.blackPawn = blackPawn;
+		this.vault = vault;
 	}
 
 	public Storage getStorage()
@@ -100,15 +83,5 @@ public class Dashboard
 	public void setDevCardAreas(DevCardArea[] devCardAreas)
 	{
 		this.devCardAreas = devCardAreas;
-	}
-
-	public PopeToken[] getPopeToken()
-	{
-		return popeToken;
-	}
-
-	public void setPopeToken(PopeToken[] popeToken)
-	{
-		this.popeToken = popeToken;
 	}
 }

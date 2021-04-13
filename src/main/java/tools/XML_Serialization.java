@@ -2,6 +2,8 @@
 	It is used to set the parameters of every DevCard, LeaderCard and ActionToken without hardcoding them.
 */
 
+/* TODO: fix new enum types input */
+
 package tools;
 
 import model.cards.*;
