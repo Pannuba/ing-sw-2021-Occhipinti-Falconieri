@@ -1,9 +1,10 @@
 package model;
 
-public enum ResourceType
+public enum MarbleType
 {
 	GREY,
 	YELLOW,
 	BLUE,
-	PURPLE;
+	PURPLE,
+	RED;
 }

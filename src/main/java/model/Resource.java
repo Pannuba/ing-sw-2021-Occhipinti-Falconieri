@@ -4,7 +4,6 @@ package model;
 	Coin --> yellow --> 1
 	Shield --> blue --> 2
 	Slave --> purple -> 3
-	Cross --> red ----> 4  (faith points)
  */
 
 public class Resource
@@ -13,7 +12,7 @@ public class Resource
 	private int quantity;
 	private boolean isInVault;
 
-	public ResourceType getCategory()
+	public ResourceType getResourceType()
 	{
 		return category;
 	}

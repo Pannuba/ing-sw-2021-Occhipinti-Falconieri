@@ -25,13 +25,13 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MarblesMarket
 {
-	private Resource[][] marblesBoard = new Resource[3][4];
-	private Resource spareMarble;
+	private Marble[][] marblesBoard = new Marble[3][4];
+	private Marble spareMarble;
 
 	public MarblesMarket()		/* TODO: tests */
 	{
 		int[] marblesToAssign = {4, 2, 2, 2, 2, 1};
-		ResourceType[] resourcesToAssign = new ResourceType[13];
+		MarbleType[] resourcesToAssign = new MarbleType[13];
 
 		for (int i = 0; i < 13; i++)
 		{
@@ -57,7 +57,7 @@ public class MarblesMarket
 						break;
 					}
 					marblesToAssign[1]--;
-					resourcesToAssign[i] = ResourceType.BLUE;
+					resourcesToAssign[i] = MarbleType.BLUE;
 					break;
 
 				case 2:
@@ -68,7 +68,7 @@ public class MarblesMarket
 						break;
 					}
 					marblesToAssign[2]--;
-					resourcesToAssign[i] = ResourceType.GREY;
+					resourcesToAssign[i] = MarbleType.GREY;
 					break;
 
 				case 3:
@@ -79,7 +79,7 @@ public class MarblesMarket
 						break;
 					}
 					marblesToAssign[3]--;
-					resourcesToAssign[i] = ResourceType.PURPLE;
+					resourcesToAssign[i] = MarbleType.PURPLE;
 					break;
 
 				case 4:
@@ -90,7 +90,7 @@ public class MarblesMarket
 						break;
 					}
 					marblesToAssign[4]--;
-					resourcesToAssign[i] = ResourceType.YELLOW;
+					resourcesToAssign[i] = MarbleType.YELLOW;
 					break;
 
 				case 5:
@@ -101,7 +101,7 @@ public class MarblesMarket
 						break;
 					}
 					marblesToAssign[5]--;
-					resourcesToAssign[i] = ResourceType.RED;
+					resourcesToAssign[i] = MarbleType.RED;
 					break;
 
 				default:
@@ -113,7 +113,7 @@ public class MarblesMarket
 		{
 			if (i == 12)		/* TODO: test this in a separate program , should exit all for loops because the last marble to assign is the spare one */
 			{
-				spareMarble.setResourceType(resourcesToAssign[i]);
+				spareMarble.setMarbleType(resourcesToAssign[i]);
 				break;
 			}
 
@@ -121,8 +121,8 @@ public class MarblesMarket
 			{
 				for (int k = 0; k < 4; k++)
 				{
-					marblesBoard[j][k] = new Resource();
-					marblesBoard[j][k].setResourceType(resourcesToAssign[i]);        /* Need to use MarbleType enum and Marble class */
+					marblesBoard[j][k] = new Marble();
+					marblesBoard[j][k].setMarbleType(resourcesToAssign[i]);        /* Need to use MarbleType enum and Marble class */
 					i++;
 				}
 			}
@@ -132,7 +132,7 @@ public class MarblesMarket
 
 	public void pushSpareMarbleRow(int row)			/* Not tested yet, also Col */
 	{
-		Resource oldSpareMarble = spareMarble;
+		Marble oldSpareMarble = spareMarble;
 		spareMarble = marblesBoard[row][0];
 
 		for (int i = 0; i < 3; i++)
@@ -144,7 +144,7 @@ public class MarblesMarket
 
 	public void pushSpareMarbleCol(int col)
 	{
-		Resource oldSpareMarble = spareMarble;
+		Marble oldSpareMarble = spareMarble;
 		spareMarble = marblesBoard[0][col];
 
 		for (int i = 0; i < 2; i++)
@@ -153,22 +153,22 @@ public class MarblesMarket
 		marblesBoard[2][col] = oldSpareMarble;
 	}
 
-	public Resource[][] getMarblesBoard()
+	public Marble[][] getMarblesBoard()
 	{
 		return marblesBoard;
 	}
 
-	public void setMarblesBoard(Resource[][] marblesBoard)
+	public void setMarblesBoard(Marble[][] marblesBoard)
 	{
 		this.marblesBoard = marblesBoard;
 	}
 
-	public Resource getSpareMarble()
+	public Marble getSpareMarble()
 	{
 		return spareMarble;
 	}
 
-	public void setSpareMarble(Resource spareMarble)
+	public void setSpareMarble(Marble spareMarble)
 	{
 		this.spareMarble = spareMarble;
 	}
