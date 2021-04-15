@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="14.0.2" class="java.beans.XMLDecoder">
- <object class="model.cards.LeaderCard$SkillOne">
+ <object class="model.cards.SkillDiscount">
   <void property="discount">
    <int>-1</int>
   </void>
   <void property="discountedResource">
    <object class="model.Resource">
-    <void property="category">
-     <string>P</string>
+    <void property="resourceType">
+     <object class="java.lang.Enum" method="valueOf">
+      <class>model.ResourceType</class>
+      <string>PURPLE</string>
+     </object>
     </void>
    </object>
   </void>

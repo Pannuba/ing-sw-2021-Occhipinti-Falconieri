@@ -39,8 +39,8 @@ public class XML_Serialization
 					int leaderCardPoints;
 					String leaderCardRequirements = null;
 
-					System.out.printf("Filename (don't add \".xml\"): ");
-					filename = "resources/leadercards/" + input.nextLine() + ".xml";
+					System.out.printf("LeaderCard number [1, 16]: ");
+					filename = "resources/xml/leadercards/leadercard" + input.nextLine() + ".xml";
 
 					System.out.printf("Points: ");
 					leaderCardPoints = Integer.parseInt(input.nextLine());		/* Convert input string to int */
@@ -147,8 +147,8 @@ public class XML_Serialization
 					Resource product[] = new Resource[3];
 					int i = 0;
 
-					System.out.printf("Filename (don't add \".xml\"): ");
-					filename = "resources/devcards/" + input.nextLine() + ".xml";
+					System.out.printf("DevCard number [1, 48]: ");
+					filename = "resources/xml/devcards/devcard" + input.nextLine() + ".xml";
 
 					System.out.printf("Points: ");
 					devCard.setPoints(Integer.parseInt(input.nextLine()));
