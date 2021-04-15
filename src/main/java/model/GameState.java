@@ -4,21 +4,27 @@ import model.board.Dashboard;
 
 public class GameState
 {
-	private int numPlayer;
-	private Dashboard currPlayer;
-	private Dashboard[] players = new Dashboard[numPlayer];
+	private int numPlayers;
+	//private Dashboard currPlayer;		/* ??? */
+	//private Dashboard[] players = new Dashboard[numPlayers];
+	private Player[] players;		/* array size is decided later, so don't put = new Player[numPlayers] */
+
+	public void calculatePoints()		/* Should this go in controller? */
+	{
+
+	}
 
 	public int getNumPlayer()
 	{
-		return numPlayer;
+		return numPlayers;
 	}
 
-	public void setNumPlayer(int numPlayer)
+	public void setNumPlayers(int numPlayers)
 	{
-		this.numPlayer = numPlayer;
+		this.numPlayers = numPlayers;
 	}
 
-	public Dashboard getCurrPlayer()
+	/*public Dashboard getCurrPlayer()
 	{
 		return currPlayer;
 	}
@@ -36,5 +42,5 @@ public class GameState
 	public void setPlayers(Dashboard[] players)
 	{
 		this.players = players;
-	}
+	}*/
 }
