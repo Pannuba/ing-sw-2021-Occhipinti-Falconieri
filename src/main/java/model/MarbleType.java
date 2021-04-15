@@ -2,9 +2,10 @@ package model;
 
 public enum MarbleType
 {
+	WHITE,
+	BLUE,
 	GREY,
 	YELLOW,
-	BLUE,
 	PURPLE,
 	RED;
 }

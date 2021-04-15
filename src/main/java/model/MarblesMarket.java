@@ -46,7 +46,7 @@ public class MarblesMarket
 					}
 
 					marblesToAssign[0]--;
-					//resourceToAssign[i] = ResourceType.WHITE;
+					resourcesToAssign[i] = MarbleType.WHITE;
 					break;
 
 				case 1:
