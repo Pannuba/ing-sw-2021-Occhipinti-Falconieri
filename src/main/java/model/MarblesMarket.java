@@ -8,6 +8,19 @@ package model;
 
 /* TODO: Marble class. If we use Resource the quantity field is pointless, and there's no clean way to add the white marble */
 
+/*	O O O O <		Spare marble is pushed from the end of rows and columns
+	O O O O <
+	O O O O	<		[row][col]
+	^ ^ ^ ^
+
+	[0][0]	[0][1]	[0][2]	[0][3]
+
+	[1][0]	[1][1]	[1][2]	[1][3]
+
+	[2][0]	[2][1]	[2][2]	[2][3]
+
+ */
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MarblesMarket
@@ -115,6 +128,29 @@ public class MarblesMarket
 			}
 		}
 
+	}
+
+	public void pushSpareMarbleRow(int row)			/* Not tested yet, also Col */
+	{
+		Resource oldSpareMarble = spareMarble;
+		spareMarble = marblesBoard[row][0];
+
+		for (int i = 0; i < 3; i++)
+			marblesBoard[row][i] = marblesBoard[row][i+1];
+
+		marblesBoard[row][3] = oldSpareMarble;
+
+	}
+
+	public void pushSpareMarbleCol(int col)
+	{
+		Resource oldSpareMarble = spareMarble;
+		spareMarble = marblesBoard[0][col];
+
+		for (int i = 0; i < 2; i++)
+			marblesBoard[i][col] = marblesBoard[i][col];
+
+		marblesBoard[2][col] = oldSpareMarble;
 	}
 
 	public Resource[][] getMarblesBoard()
