@@ -8,13 +8,11 @@ public class Track
 {
 	private Box[] faithTrack = new Box[25];        /* new Box[25] goes here or in constructor? */
 	private PopeToken[] popeTokens = new PopeToken[3];
-	private int redPawn;
-	private int blackPawn;
+	private int pawn;		/* There's only one pawn, no need to separate black and red pawns */
 
 	public Track()
 	{
-		redPawn = 0;
-		blackPawn = 0;
+		pawn = 0;
 
 		/* Initialize track here, hardcoded (at least for now) because 1 xml for each box is too much */
 
@@ -52,9 +50,9 @@ public class Track
 
 	public void vaticanReport(Box popeBox)
 	{
-		if (popeBox.getPosition() == 8)		/* First pope box has been reached */
+		if (popeBox.getPosition() == 8)				/* First pope box has been reached */
 		{
-			if (redPawn >= 5 && redPawn <= 8)
+			if (pawn >= 5 && pawn <= 8)
 			{
 				/* Turn first popeToken, get points */
 			}
@@ -67,9 +65,9 @@ public class Track
 			return;
 		}
 
-		else if (popeBox.getPosition() == 16)
+		else if (popeBox.getPosition() == 16)		/* Second pope box */
 		{
-			if (redPawn >= 12 && redPawn <= 16)
+			if (pawn >= 12 && pawn <= 16)
 			{
 
 			}
@@ -82,16 +80,16 @@ public class Track
 			return;
 		}
 
-		else if (popeBox.getPosition() == 24)
+		else if (popeBox.getPosition() == 24)		/* Third pope box */
 		{
-			if (redPawn >= 19 && redPawn <= 24)
+			if (pawn >= 19 && pawn <= 24)
 			{
 
 			}
 
 			else
 			{
-				
+
 			}
 
 			return;
@@ -114,24 +112,14 @@ public class Track
 		this.faithTrack = faithTrack;
 	}
 
-	public int getRedPawn()
+	public int getPawn()
 	{
-		return redPawn;
+		return pawn;
 	}
 
-	public void setRedPawn(int redPawn)
+	public void setPawn(int pawn)
 	{
-		this.redPawn = redPawn;
-	}
-
-	public int getBlackPawn()
-	{
-		return blackPawn;
-	}
-
-	public void setBlackPawn(int blackPawn)
-	{
-		this.blackPawn = blackPawn;
+		this.pawn = pawn;
 	}
 }
 
