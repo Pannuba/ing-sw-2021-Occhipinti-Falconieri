@@ -2,7 +2,7 @@ package model.board;
 
 import model.cards.DevCard;
 
-public class DevCardArea	/* extends DevCard? */
+public class DevCardArea
 {
 	private DevCard devCard;
 	private int layer;

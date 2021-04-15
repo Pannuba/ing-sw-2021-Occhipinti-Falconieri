@@ -1,6 +1,6 @@
 * In GameState, the Dashboard array should have a set size of numPlayer
 
-* Remove Marble class, change marblesBoard and spareMarble type to Resource
+* Add MarbleType enum
 
 * Add ActionToken classes and enum
 

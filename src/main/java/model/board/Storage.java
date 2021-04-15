@@ -14,9 +14,16 @@ public class Storage
 
 	/* Logic methods to check resources in shelf here? Or in controller?? */
 
+	public Storage()
+	{
+		shelfOne.setQuantity(0);
+		shelfTwo.setQuantity(0);
+		shelfThree.setQuantity(0);
+	}
+
 	public boolean checkShelves() throws IOException
 	{
-		if (shelfOne.getQuantity() != 1 || shelfTwo.getQuantity() != 2 || shelfThree.getQuantity() != 3)
+		if (shelfOne.getQuantity() > 1 || shelfTwo.getQuantity() > 2 || shelfThree.getQuantity() > 3)
 		{
 			logger.log("Shelf has incorrect amount of resources");
 			return false;
@@ -31,6 +38,13 @@ public class Storage
 		else
 			return true;
 	}
+
+	public void moveResources()
+	{
+
+	}
+
+
 
 	public Resource getShelfOne()
 	{
