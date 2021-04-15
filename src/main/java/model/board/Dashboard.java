@@ -8,8 +8,7 @@ import java.io.IOException;
 
 public class Dashboard
 {
-	private String nickname;
-	private Track track;
+	/* private Track track;			Track is shared among all players */
 	private Vault vault;
 	private Storage storage;
 	private LeaderCard[] leaderCards = new LeaderCard[4];
@@ -23,26 +22,6 @@ public class Dashboard
 		leaderCards[0] = (LeaderCard) xmlDecode.deserialize("resources/leadercards/leadercard1.xml");
 		/* ... */
 
-	}
-
-	public String getNickname()
-	{
-		return nickname;
-	}
-
-	public void setNickname(String nickname)
-	{
-		this.nickname = nickname;
-	}
-
-	public Track getTrack()
-	{
-		return track;
-	}
-
-	public void setTrack(Track track)
-	{
-		this.track = track;
 	}
 
 	public Vault getVault()

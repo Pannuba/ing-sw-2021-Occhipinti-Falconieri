@@ -1,6 +1,8 @@
 package model.board;
 
 import model.cards.PopeToken;
+import model.Player;
+import model.GameState;
 
 /* One track shared among all players */
 
@@ -8,12 +10,16 @@ public class Track
 {
 	private Box[] faithTrack = new Box[25];        /* new Box[25] goes here or in constructor? */
 	private PopeToken[] popeTokens = new PopeToken[3];
-	private int redPawn;
+	private int[] redPawns;
 	private int blackPawn;
 
 	public Track()
 	{
-		redPawn = 0;
+		redPawns = new int[4];			/* numPlayers */
+
+		for (int i = 0; i < 4; i++)			/* Need to get numPlayers, but where should GameState be initialized? */
+			redPawns[i] = 0;
+
 		blackPawn = 0;
 
 		popeTokens[0] = new PopeToken(2, false);
@@ -49,59 +55,69 @@ public class Track
 		faithTrack[24] = new Box(BoxType.POPE,   24, 20);
 	}
 
-	public boolean checkVaticanReport()		/* This is for only one pawn, need to take into account all pawns */
+	public boolean checkVaticanReport()
 	{
-		if (redPawn >= 8  && popeTokens[0].isUsed() == false ||
-			redPawn >= 16 && popeTokens[1].isUsed() == false ||
-			redPawn == 24 && popeTokens[2].isUsed() == false )
-			return true;
 
-		else
-			return false;
+		for (int i = 0; i < 4; i++)			/* Need numPlayers, 4 is temporary */
+		{
+
+			if (redPawns[i] >= 8  && popeTokens[0].isUsed() == false ||
+				redPawns[i] >= 16 && popeTokens[1].isUsed() == false ||
+				redPawns[i] == 24 && popeTokens[2].isUsed() == false )
+				return true;
+
+			else
+				return false;
+		}
 	}
 
 	public void vaticanReport(Box popeBox)
 	{
-		if (popeBox.getPosition() == 8)				/* First pope box has been reached */
-		{
-			popeTokens[0].setUsed(true);
 
-			if (redPawn >= 5 && redPawn <= 8)
+		for (int i = 0; i < 4; i++)		/* Need numPlayers */
+		{
+			if (popeBox.getPosition() == 8)                /* First pope box has been reached */
 			{
-						/* Get points of first pope token */
+				popeTokens[0].setUsed(true);
+
+				if (redPawns[i] >= 5 && redPawns[i] <= 8)
+				{
+					// player[i].setVictoryPoints(player[i].getVictoryPoints() + popeTokens[0].getPoints());
+				}
+
+				return;
 			}
 
-			return;
-		}
-
-		else if (popeBox.getPosition() == 16)		/* Second pope box */
-		{
-			popeTokens[1].setUsed(true);
-
-			if (redPawn >= 12 && redPawn <= 16)
+			else if (popeBox.getPosition() == 16)        /* Second pope box */
 			{
+				popeTokens[1].setUsed(true);
 
-			}
+				if (redPawns[i] >= 12 && redPawns[i] <= 16)
+				{
+					// player[i].setVictoryPoints(player[i].getVictoryPoints() + popeTokens[1].getPoints());
+				}
 
-			return;
-		}
-
-		else if (popeBox.getPosition() == 24)		/* Third pope box */
-		{
-			popeTokens[2].setUsed(true);
-
-			if (redPawn >= 19 && redPawn <= 24)
-			{
+				return;
 
 			}
 
-			return;
-		}
+			else if (popeBox.getPosition() == 24)        /* Third pope box */
+			{
+				popeTokens[2].setUsed(true);
 
-		else
-		{
-			System.out.println("Error");
-			return;
+				if (redPawns[i] >= 19 && redPawns[i] <= 24)
+				{
+					// player[i].setVictoryPoints(player[i].getVictoryPoints() + popeTokens[2].getPoints());
+				}
+
+				return;
+			}
+
+			else
+			{
+				System.out.println("Error");
+				return;
+			}
 		}
 	}
 
@@ -115,14 +131,14 @@ public class Track
 		this.faithTrack = faithTrack;
 	}
 
-	public int getRedPawn()
+	public int[] getRedPawns()
 	{
-		return redPawn;
+		return redPawns;
 	}
 
-	public void setRedPawn(int redPawn)
+	public void setRedPawns(int[] redPawns)
 	{
-		this.redPawn = redPawn;
+		this.redPawns = redPawns;
 	}
 
 	public int getBlackPawn()
