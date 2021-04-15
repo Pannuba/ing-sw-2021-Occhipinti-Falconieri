@@ -6,6 +6,7 @@
 
 package tools;
 
+import model.ResourceType;
 import model.cards.*;
 import model.Resource;
 
@@ -93,7 +94,7 @@ public class XML_Serialization
 							leaderCardOne.setRequirements(leaderCardRequirements);
 							Resource discountedResource = new Resource();
 							System.out.printf("Resource (G/Y/B/P): ");
-							discountedResource.setCategory(input.nextLine());
+							discountedResource.setResourceType(convertStringToResType(input.nextLine()));
 							discountedResource.setQuantity(0);							/* We just need the resource type, we don't *own* any more resources */
 							leaderCardOne.setDiscountedResource(discountedResource);
 							leaderCardOne.setDiscount(-1);								/* All cards have a discount of 1 resource less */
@@ -106,7 +107,7 @@ public class XML_Serialization
 							leaderCardTwo.setRequirements(leaderCardRequirements);
 							Resource additionalStorage = new Resource();
 							System.out.printf("Additional storage resource: ");
-							additionalStorage.setCategory(input.nextLine());
+							additionalStorage.setResourceType(convertStringToResType(input.nextLine()));
 							additionalStorage.setQuantity(2);								/* Can only hold one type of resource, amount is always 2 */
 							leaderCardTwo.setAdditionalStorage(additionalStorage);
 							serialize(leaderCardTwo, filename);
@@ -127,7 +128,7 @@ public class XML_Serialization
 							leaderCardFour.setRequirements(leaderCardRequirements);
 							Resource productionCost = new Resource();
 							System.out.printf("Resource needed for production: ");
-							productionCost.setCategory(input.nextLine());
+							productionCost.setResourceType(convertStringToResType(input.nextLine()));
 							productionCost.setQuantity(1);								/* Always 1 */
 							leaderCardFour.setProductionCost(productionCost);
 							serialize(leaderCardFour, filename);
@@ -156,7 +157,7 @@ public class XML_Serialization
 					devCard.setLevel(Integer.parseInt(input.nextLine()));
 
 					System.out.printf("Color (G/Y/B/P): ");
-					devCard.setColor(input.nextLine());		/* TODO: if/else to pass enum to setColor instead of input.nextLine() */
+					devCard.setColor(convertStringToColorType(input.nextLine()));		/* TODO: if/else to pass enum to setColor instead of input.nextLine() */
 
 					for (i = 0; i < 3; i++)
 					{
@@ -165,7 +166,7 @@ public class XML_Serialization
 						cost[i].setQuantity(Integer.parseInt(input.nextLine()));
 
 						System.out.printf("Category of cost resource #" + (i+1) + " (G/Y/B/P/null): ");
-						cost[i].setCategory(input.nextLine());
+						cost[i].setResourceType(convertStringToResType(input.nextLine()));
 					}
 
 					for (i = 0; i < 2; i++)
@@ -175,7 +176,7 @@ public class XML_Serialization
 						requirements[i].setQuantity(Integer.parseInt(input.nextLine()));
 
 						System.out.printf("Category of requirement resource #" + (i+1) + " (G/Y/B/P/null): ");
-						requirements[i].setCategory(input.nextLine());
+						requirements[i].setResourceType(convertStringToResType(input.nextLine()));
 					}
 
 					for (i = 0; i < 3; i++)
@@ -185,7 +186,7 @@ public class XML_Serialization
 						product[i].setQuantity(Integer.parseInt(input.nextLine()));
 
 						System.out.printf("Category of product resource #" + (i+1) + " (G/Y/B/P/R/null): ");
-						product[i].setCategory(input.nextLine());
+						product[i].setResourceType(convertStringToResType(input.nextLine()));
 					}
 
 					devCard.setRequirements(requirements);
@@ -202,6 +203,55 @@ public class XML_Serialization
 					System.out.printf("Insert 1, 2 or 3%n");
 					break;
 			}
+		}
+	}
+
+	public static ResourceType convertStringToResType(String str)
+	{
+		if (str == null)
+		{
+			return null;
+		}
+
+		switch(str)
+		{
+			case "G":
+				return ResourceType.GREY;
+
+			case "Y":
+				return ResourceType.YELLOW;
+
+			case "B":
+				return ResourceType.BLUE;
+
+			case "P":
+				return ResourceType.PURPLE;
+
+			default:
+				System.out.printf("Error");
+				return null;
+		}
+	}
+
+	public static DevCardColor convertStringToColorType(String str)
+	{
+		switch(str)
+		{
+			case "G":
+				return DevCardColor.GREEN;
+
+			case "Y":
+				return DevCardColor.YELLOW;
+
+			case "B":
+				return DevCardColor.BLUE;
+
+			case "P":
+				return DevCardColor.PURPLE;
+
+			default:
+				System.out.printf("Error");
+				return null;
 		}
 	}
 

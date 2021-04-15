@@ -8,7 +8,7 @@ package model;
 
 public class Resource
 {
-	private ResourceType category;				/* Rename category to type? */
+	private ResourceType category;				/* Can be null, see DevCard serialization */
 	private int quantity;
 	private boolean isInVault;
 

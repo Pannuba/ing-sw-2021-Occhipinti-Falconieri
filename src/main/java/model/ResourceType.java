@@ -2,8 +2,8 @@ package model;
 
 public enum ResourceType
 {
+	BLUE,
 	GREY,
 	YELLOW,
-	BLUE,
 	PURPLE;
 }

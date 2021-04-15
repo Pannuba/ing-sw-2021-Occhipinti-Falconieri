@@ -6,8 +6,6 @@ package model;
 	Hardcode or xml file for marble amounts? Need to change grid size if so
 */
 
-/* TODO: Marble class. If we use Resource the quantity field is pointless, and there's no clean way to add the white marble */
-
 /*	O O O O <		Spare marble is pushed from the end of rows and columns
 	O O O O <
 	O O O O	<		[row][col]
