@@ -6,6 +6,15 @@ public class Box
 	private int position;
 	private int victoryPoints;
 
+	public Box(BoxType category, int position, int victoryPoints)
+	{
+		this.category = category;
+		this.position = position;
+		this.victoryPoints = victoryPoints;
+	}
+
+	/* Set methods are pretty much useless, but I'll leave them anyway */
+
 	public BoxType getCategory()
 	{
 		return category;
