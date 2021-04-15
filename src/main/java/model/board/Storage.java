@@ -22,7 +22,7 @@ public class Storage
 			return false;
 		}
 
-		if (shelfOne.getCategory() == shelfTwo.getCategory() || shelfTwo.getCategory() == shelfThree.getCategory() || shelfOne.getCategory() == shelfThree.getCategory())
+		if (shelfOne.getResourceType() == shelfTwo.getResourceType() || shelfTwo.getResourceType() == shelfThree.getResourceType() || shelfOne.getResourceType() == shelfThree.getResourceType())
 		{
 			logger.log("Shelf has the same type of resource of another shelf");
 			return false;
