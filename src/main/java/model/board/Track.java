@@ -2,13 +2,14 @@ package model.board;
 
 import model.cards.PopeToken;
 
-/* One track shared among all players? */
+/* One track shared among all players */
 
 public class Track
 {
 	private Box[] faithTrack = new Box[25];        /* new Box[25] goes here or in constructor? */
 	private PopeToken[] popeTokens = new PopeToken[3];
-	private int redPawn, blackPawn;
+	private int redPawn;
+	private int blackPawn;
 
 	public Track()
 	{
