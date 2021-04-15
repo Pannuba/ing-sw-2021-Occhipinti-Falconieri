@@ -2,17 +2,18 @@ package model.board;
 
 import model.cards.PopeToken;
 
-/* One Track shared among all players? */
+/* One track shared among all players? */
 
 public class Track
 {
 	private Box[] faithTrack = new Box[25];        /* new Box[25] goes here or in constructor? */
 	private PopeToken[] popeTokens = new PopeToken[3];
-	private int pawn;		/* There's only one pawn, no need to separate black and red pawns */
+	private int redPawn, blackPawn;
 
 	public Track()
 	{
-		pawn = 0;
+		redPawn = 0;
+		blackPawn = 0;
 
 		popeTokens[0] = new PopeToken(2, false);
 		popeTokens[1] = new PopeToken(3, false);
@@ -47,23 +48,26 @@ public class Track
 		faithTrack[24] = new Box(BoxType.POPE,   24, 20);
 	}
 
-	public boolean checkVaticanReport()
+	public boolean checkVaticanReport()		/* This is for only one pawn, need to take into account all pawns */
 	{
-		return false;
+		if (redPawn >= 8  && popeTokens[0].isUsed() == false ||
+			redPawn >= 16 && popeTokens[1].isUsed() == false ||
+			redPawn == 24 && popeTokens[2].isUsed() == false )
+			return true;
+
+		else
+			return false;
 	}
 
 	public void vaticanReport(Box popeBox)
 	{
 		if (popeBox.getPosition() == 8)				/* First pope box has been reached */
 		{
-			if (pawn >= 5 && pawn <= 8)
-			{
-				/* Turn first popeToken, get points */
-			}
+			popeTokens[0].setUsed(true);
 
-			else
+			if (redPawn >= 5 && redPawn <= 8)
 			{
-				/* Discard first popeToken, don't get points */
+						/* Get points of first pope token */
 			}
 
 			return;
@@ -71,12 +75,9 @@ public class Track
 
 		else if (popeBox.getPosition() == 16)		/* Second pope box */
 		{
-			if (pawn >= 12 && pawn <= 16)
-			{
+			popeTokens[1].setUsed(true);
 
-			}
-
-			else
+			if (redPawn >= 12 && redPawn <= 16)
 			{
 
 			}
@@ -86,12 +87,9 @@ public class Track
 
 		else if (popeBox.getPosition() == 24)		/* Third pope box */
 		{
-			if (pawn >= 19 && pawn <= 24)
-			{
+			popeTokens[2].setUsed(true);
 
-			}
-
-			else
+			if (redPawn >= 19 && redPawn <= 24)
 			{
 
 			}
@@ -116,14 +114,24 @@ public class Track
 		this.faithTrack = faithTrack;
 	}
 
-	public int getPawn()
+	public int getRedPawn()
 	{
-		return pawn;
+		return redPawn;
 	}
 
-	public void setPawn(int pawn)
+	public void setRedPawn(int redPawn)
 	{
-		this.pawn = pawn;
+		this.redPawn = redPawn;
+	}
+
+	public int getBlackPawn()
+	{
+		return blackPawn;
+	}
+
+	public void setBlackPawn(int blackPawn)
+	{
+		this.blackPawn = blackPawn;
 	}
 }
 
