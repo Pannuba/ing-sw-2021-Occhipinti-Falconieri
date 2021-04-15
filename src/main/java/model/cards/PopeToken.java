@@ -2,17 +2,13 @@ package model.cards;
 
 public class PopeToken
 {
-	private boolean isActive;
 	private int points;
+	private boolean isUsed;
 
-	public boolean isActive()
+	public PopeToken(int points, boolean isUsed)
 	{
-		return isActive;
-	}
-
-	public void setActive(boolean isActive)
-	{
-		this.isActive = isActive;
+		this.points = points;		/* Check in separate program if this.x works in constructor, but it should */
+		this.isUsed = isUsed;
 	}
 
 	public int getPoints()
@@ -23,5 +19,15 @@ public class PopeToken
 	public void setPoints(int points)
 	{
 		this.points = points;
+	}
+
+	public boolean isUsed()
+	{
+		return isUsed;
+	}
+
+	public void setUsed(boolean isUsed)
+	{
+		this.isUsed = isUsed;
 	}
 }

@@ -14,6 +14,10 @@ public class Track
 	{
 		pawn = 0;
 
+		popeTokens[0] = new PopeToken(2, false);
+		popeTokens[1] = new PopeToken(3, false);
+		popeTokens[2] = new PopeToken(4, false);
+
 		/* Initialize track here, hardcoded (at least for now) because 1 xml for each box is too much */
 
 		faithTrack[0]  = new Box(BoxType.NORMAL, 0,  0);
