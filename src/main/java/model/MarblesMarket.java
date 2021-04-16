@@ -146,7 +146,7 @@ public class MarblesMarket
 		spareMarble = marblesBoard[0][col];
 
 		for (int i = 0; i < 2; i++)
-			marblesBoard[i][col] = marblesBoard[i][col];
+			marblesBoard[i][col] = marblesBoard[i+1][col];
 
 		marblesBoard[2][col] = oldSpareMarble;
 	}
