@@ -1,10 +1,12 @@
 package server.model;
 
-public class Model        /* Remove GameState? main function in GameState? */
+import server.model.board.Dashboard;
+
+public class Model
 {
 	private int numPlayers;
-	//private Dashboard currPlayer;		/* ??? */
-	//private Dashboard[] players = new Dashboard[numPlayers];
+	private int round;
+	//private Dashboard[] boards = new Dashboard[numPlayers];
 	private Player[] players;		/* array size is decided later, so don't put = new Player[numPlayers] */
 
 	/* What if GameState has no instance variables, just a main methods that creates the different players? */
