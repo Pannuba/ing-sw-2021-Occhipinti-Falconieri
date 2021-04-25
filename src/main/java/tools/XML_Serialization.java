@@ -6,9 +6,9 @@
 
 package tools;
 
-import model.ResourceType;
-import model.cards.*;
-import model.Resource;
+import server.model.ResourceType;
+import server.model.Resource;
+import server.model.cards.*;
 
 import java.beans.ExceptionListener;
 import java.beans.XMLEncoder;

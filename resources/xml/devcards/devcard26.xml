@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="15.0.2" class="java.beans.XMLDecoder">
- <object class="model.cards.DevCard" id="DevCard0">
+ <object class="server.model.cards.DevCard" id="DevCard0">
   <void property="color">
    <string>P</string>
   </void>
   <void property="cost">
    <void index="0">
-    <object class="model.Resource">
+    <object class="server.model.Resource">
      <void property="category">
       <string>P</string>
      </void>
@@ -16,14 +16,14 @@
     </object>
    </void>
    <void index="1">
-    <object class="model.Resource">
+    <object class="server.model.Resource">
      <void property="category">
       <string>null</string>
      </void>
     </object>
    </void>
    <void index="2">
-    <object class="model.Resource">
+    <object class="server.model.Resource">
      <void property="category">
       <string>null</string>
      </void>
@@ -38,7 +38,7 @@
   </void>
   <void property="product">
    <void index="0">
-    <object class="model.Resource">
+    <object class="server.model.Resource">
      <void property="category">
       <string>Y</string>
      </void>
@@ -48,7 +48,7 @@
     </object>
    </void>
    <void index="1">
-    <object class="model.Resource">
+    <object class="server.model.Resource">
      <void property="category">
       <string>R</string>
      </void>
@@ -58,7 +58,7 @@
     </object>
    </void>
    <void index="2">
-    <object class="model.Resource">
+    <object class="server.model.Resource">
      <void property="category">
       <string>null</string>
      </void>
@@ -67,7 +67,7 @@
   </void>
   <void property="requirements">
    <void index="0">
-    <object class="model.Resource">
+    <object class="server.model.Resource">
      <void property="category">
       <string>G</string>
      </void>
@@ -77,7 +77,7 @@
     </object>
    </void>
    <void index="1">
-    <object class="model.Resource">
+    <object class="server.model.Resource">
      <void property="category">
       <string>null</string>
      </void>
