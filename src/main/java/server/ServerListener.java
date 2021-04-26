@@ -22,33 +22,43 @@ public class ServerListener implements Runnable		/* Thread running listening for
 
 	public void run()
 	{
-		while(true)
+		Socket socket = null;
+		DataInputStream dis = null;
+		DataOutputStream dos = null;
+
+		while (true)
 		{
-			Socket socket = null;
-			try {
+			String username = null, choice = null;
+
+			try
+			{
 				socket = serverSocket.accept();
-				DataInputStream dis = new DataInputStream(socket.getInputStream());
-				DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+				dis = new DataInputStream(socket.getInputStream());
+				dos = new DataOutputStream(socket.getOutputStream());
 				System.out.println("INCOMING CONNECTION: " + socket);
-				String username = (String)dis.readUTF();
-				String choice = (String)dis.readUTF();
-				System.out.println("username: " + username + "\nchoice: " + choice);		/* Works */
-
-				if (choice == "NEW_GAME")		/* Will have to divide games in threads for advanced functionality */
-				{
-					// Ask for player number
-					// Give user game code, who then shares it to the other players
-				}
-
-				if (choice == "JOIN_GAME")
-				{
-					// Ask for password/game code
-				}
-
-			} catch (IOException e) {
+				username = (String) dis.readUTF();
+				choice = (String) dis.readUTF();
+			}
+			catch (IOException e)
+			{
 				e.printStackTrace();
 			}
 
-		}
+			System.out.println("username: " + username + "\nchoice: " + choice);        /* Works */
 
+			if (choice == "NEW_GAME")        /* Will have to divide games in threads for advanced functionality */ {
+				// Ask for player number
+				// Give user game code, who then shares it to the other players
+			}
+
+			if (choice == "JOIN_GAME") {
+				// Ask for password/game code
+				// Pass socket and game code to ClientHandler?
+			}
+
+			Runnable r = new ClientHandler(socket);
+			new Thread(r).start();
+
+		}
 	}
+}

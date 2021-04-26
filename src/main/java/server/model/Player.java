@@ -1,6 +1,11 @@
 package server.model;
 
 import server.model.board.Dashboard;
+import server.model.cards.DevCard;
+import server.model.cards.LeaderCard;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player
 {
@@ -9,8 +14,8 @@ public class Player
 	private String password;
 	private Dashboard dashboard;
 	private int victoryPoints;
-
-	/* TODO: add cards array */
+	private List<DevCard> devCards = new ArrayList<DevCard>();		/* TODO: migrate nearly everything to ArrayList */
+	private List<LeaderCard> leaderCards = new ArrayList<LeaderCard>();
 
 	public Player()
 	{
@@ -65,5 +70,25 @@ public class Player
 	public void setVictoryPoints(int victoryPoints)
 	{
 		this.victoryPoints = victoryPoints;
+	}
+
+	public List<DevCard> getDevCards()
+	{
+		return devCards;
+	}
+
+	public void setDevCards(List<DevCard> devCards)
+	{
+		this.devCards = devCards;
+	}
+
+	public List<LeaderCard> getLeaderCards()
+	{
+		return leaderCards;
+	}
+
+	public void setLeaderCards(List<LeaderCard> leaderCards)
+	{
+		this.leaderCards = leaderCards;
 	}
 }
