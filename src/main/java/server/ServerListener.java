@@ -46,7 +46,8 @@ public class ServerListener implements Runnable		/* Thread running listening for
 
 			System.out.println("username: " + username + "\nchoice: " + choice);        /* Works */
 
-			if (choice == "NEW_GAME")        /* Will have to divide games in threads for advanced functionality */ {
+			if (choice == "NEW_GAME")        /* Will have to divide games in threads for advanced functionality */
+			{
 				// Ask for player number
 				// Give user game code, who then shares it to the other players
 			}
