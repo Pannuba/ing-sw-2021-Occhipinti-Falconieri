@@ -42,6 +42,16 @@ public class Vault
 		return;
 	}
 
+	public int getTotalResources()
+	{
+		int totalResources = 0;
+
+		for (int i = 0; i < 4; i++)
+			totalResources += resourceAmounts[i];
+
+		return totalResources;
+	}
+
 	public int[] getResourceAmounts()
 	{
 		return resourceAmounts;

@@ -10,12 +10,15 @@ public class Storage
 	private Resource shelfOne;
 	private Resource shelfTwo;
 	private Resource shelfThree;
-	private Logger logger;
 
 	/* Logic methods to check resources in shelf here? Or in controller?? */
 
 	public Storage()
 	{
+		shelfOne = new Resource();
+		shelfTwo = new Resource();
+		shelfThree = new Resource();
+
 		shelfOne.setQuantity(0);
 		shelfTwo.setQuantity(0);
 		shelfThree.setQuantity(0);
@@ -25,13 +28,13 @@ public class Storage
 	{
 		if (shelfOne.getQuantity() > 1 || shelfTwo.getQuantity() > 2 || shelfThree.getQuantity() > 3)
 		{
-			logger.log("Shelf has incorrect amount of resources");
+			System.out.println("Shelf has incorrect amount of resources");
 			return false;
 		}
 
 		if (shelfOne.getResourceType() == shelfTwo.getResourceType() || shelfTwo.getResourceType() == shelfThree.getResourceType() || shelfOne.getResourceType() == shelfThree.getResourceType())
 		{
-			logger.log("Shelf has the same type of resource of another shelf");
+			System.out.println("Shelf has the same type of resource of another shelf");
 			return false;
 		}
 
@@ -44,7 +47,16 @@ public class Storage
 
 	}
 
+	public int getTotalResources()
+	{
+		int totalResources = 0;
 
+		totalResources += shelfOne.getQuantity();
+		totalResources += shelfTwo.getQuantity();
+		totalResources += shelfThree.getQuantity();
+
+		return totalResources;
+	}
 
 	public Resource getShelfOne()
 	{

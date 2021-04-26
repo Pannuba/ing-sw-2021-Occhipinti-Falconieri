@@ -4,10 +4,11 @@ public abstract class LeaderCard		/* Can't do new LeaderCard(); because it's abs
 {
 	private int points;
 	private String requirements;		/* Can be devcards or resources, so it's a string that will be decoded elsewhere */
+	private boolean isDiscarded;		/* Not included in cards .xmls, is set when the player discards a leadercard */
 
 	public LeaderCard()				/* For some reason, XML_Serialization throws exceptions without this */
 	{
-
+		isDiscarded = false;
 	}
 
 	public int getPoints()
@@ -28,5 +29,15 @@ public abstract class LeaderCard		/* Can't do new LeaderCard(); because it's abs
 	public void setRequirements(String requirements)
 	{
 		this.requirements = requirements;
+	}
+
+	public boolean isDiscarded()
+	{
+		return isDiscarded;
+	}
+
+	public void setDiscarded(boolean discarded)
+	{
+		isDiscarded = discarded;
 	}
 }

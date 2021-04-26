@@ -5,10 +5,10 @@ public class PopeToken
 	private int points;
 	private boolean isUsed;
 
-	public PopeToken(int points, boolean isUsed)
+	public PopeToken(int points)
 	{
-		this.points = points;		/* Check in separate program if this.x works in constructor, but it should */
-		this.isUsed = isUsed;
+		isUsed = false;
+		this.points = points;
 	}
 
 	public int getPoints()

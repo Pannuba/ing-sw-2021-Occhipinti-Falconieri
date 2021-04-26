@@ -2,6 +2,7 @@ package it.polimi.ingsw.server.model;
 
 import it.polimi.ingsw.server.model.board.Dashboard;
 import it.polimi.ingsw.server.model.board.Track;
+import it.polimi.ingsw.server.model.cards.DevCard;
 import it.polimi.ingsw.server.model.cards.LeaderCard;
 import it.polimi.ingsw.tools.XML_Serialization;
 
@@ -73,12 +74,34 @@ public class Model
 		return listOfLists;
 	}
 
-	public void calculatePoints()		/* Should this go in controller? No */
-	{
+	public int calculatePoints(Player player)		/* Gets total points for a player and sets them */
+	{												/* Should this method go here? */
+		int points = 0;
 
+		List<DevCard> devcards = player.getDevCards();
+		List<LeaderCard> leadercards = player.getLeaderCards();
+		int totalResources = 0;
+
+		for (int i = 0; i < devcards.size(); i++)		/* Points from devcards */
+			points += devcards.get(i).getPoints();
+
+		for (int i = 0; i < leadercards.size(); i++)		/* Points from leadercards */
+		{
+			if (leadercards.get(i).isDiscarded() == false)
+				points += leadercards.get(i).getPoints();
+		}
+
+		totalResources += player.getDashboard().getVault().getTotalResources();		/* Points from resources */
+		totalResources += player.getDashboard().getStorage().getTotalResources();
+
+		points += totalResources / 5;	/* 1 point every 5 resources, dividing integers only keeps the whole part of the number */
+
+
+
+		return points;
 	}
 
-	public int getNumPlayer()
+	public int getNumPlayers()
 	{
 		return numPlayers;
 	}
@@ -87,24 +110,4 @@ public class Model
 	{
 		this.numPlayers = numPlayers;
 	}
-
-	/*public Dashboard getCurrPlayer()
-	{
-		return currPlayer;
-	}
-
-	public void setCurrPlayer(Dashboard currPlayer)
-	{
-		this.currPlayer = currPlayer;
-	}
-
-	public Dashboard[] getPlayers()
-	{
-		return players;
-	}
-
-	public void setPlayers(Dashboard[] players)
-	{
-		this.players = players;
-	}*/
 }

@@ -12,9 +12,8 @@ public class Dashboard
 
 	public Dashboard() throws IOException
 	{
-		/* Server tells us what leader cards we get, we get four integers from which the user picks two */
-
-		/* ... */
+		vault = new Vault();
+		storage = new Storage();
 
 	}
 
