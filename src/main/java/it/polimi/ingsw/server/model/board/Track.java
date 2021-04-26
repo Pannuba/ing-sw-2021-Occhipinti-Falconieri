@@ -11,11 +11,11 @@ public class Track
 	private int[] redPawns;
 	private int blackPawn;
 
-	public Track()
+	public Track(int numPlayers)
 	{
-		redPawns = new int[4];			/* numPlayers */
+		redPawns = new int[numPlayers];
 
-		for (int i = 0; i < 4; i++)			/* Need to get numPlayers, but where should GameState be initialized? */
+		for (int i = 0; i < numPlayers; i++)
 			redPawns[i] = 0;
 
 		blackPawn = 0;
@@ -71,10 +71,10 @@ public class Track
 		return false;
 	}
 
-	public void vaticanReport(Box popeBox)
+	public void vaticanReport(Box popeBox, int numPlayers)		/* Called when a player reaches a pope box. But where? */
 	{
 
-		for (int i = 0; i < 4; i++)		/* Need numPlayers */
+		for (int i = 0; i < numPlayers; i++)		/* Need numPlayers */
 		{
 			if (popeBox.getPosition() == 8)                /* First pope box has been reached */
 			{
@@ -83,6 +83,7 @@ public class Track
 				if (redPawns[i] >= 5 && redPawns[i] <= 8)
 				{
 					// player[i].setVictoryPoints(player[i].getVictoryPoints() + popeTokens[0].getPoints());
+					// player.get(i).setPopeTokenPoints(player.get(i).getPopeTokenPoints() + popeTokens[0].getPoints());
 				}
 
 				return;
@@ -95,6 +96,7 @@ public class Track
 				if (redPawns[i] >= 12 && redPawns[i] <= 16)
 				{
 					// player[i].setVictoryPoints(player[i].getVictoryPoints() + popeTokens[1].getPoints());
+
 				}
 
 				return;

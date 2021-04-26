@@ -37,7 +37,7 @@ public class Model
 			allLeaderCards.add(cardToAdd);
 		}
 
-		track = new Track();
+		track = new Track(numPlayers);
 		marblesMarket = new MarblesMarket();
 		devCardsMarket = new DevCardsMarket();
 		//pickLeaderCards();
@@ -75,7 +75,7 @@ public class Model
 	}
 
 	public int calculatePoints(Player player)		/* Gets total points for a player and sets them */
-	{												/* Should this method go here? */
+	{												/* Should this method go here? in Player? */
 		int points = 0;
 
 		List<DevCard> devcards = player.getDevCards();

@@ -12,7 +12,6 @@ public class Player
 {
 	private int id;				/* 0, 1, 2, 3 to manage turns, pawns and so on */
 	private String username;
-	private String password;
 	private Dashboard dashboard;
 	private int victoryPoints;
 	private List<DevCard> devCards = new ArrayList<DevCard>();		/* TODO: migrate nearly everything to ArrayList */
@@ -42,16 +41,6 @@ public class Player
 	public void setUsername(String username)
 	{
 		this.username = username;
-	}
-
-	public String getPassword()
-	{
-		return password;
-	}
-
-	public void setPassword(String password)
-	{
-		this.password = password;
 	}
 
 	public Dashboard getDashboard()
