@@ -2,9 +2,9 @@ package it.polimi.ingsw.server.model.cards;
 
 import it.polimi.ingsw.server.model.Resource;
 
-public class DevCard // extends DevCardArea
+public class DevCard
 {
-	private int cardNumber;
+	private int cardNumber;			/* To identify cards. If a devcard is bought from the market, the list size changes so it's impossible to order cards based on their index */
 	private DevCardColor color;
 	private int points;
 	private int level;

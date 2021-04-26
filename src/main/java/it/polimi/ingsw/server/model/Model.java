@@ -17,7 +17,6 @@ public class Model
 	private Track track;
 	private MarblesMarket marblesMarket;
 	private DevCardsMarket devCardsMarket;
-	//private Dashboard[] boards = new Dashboard[numPlayers];
 	private List<Player> players = new ArrayList<Player>();
 	private List<LeaderCard> allLeaderCards = new ArrayList<LeaderCard>();		/* All 16 leadercards, each player picks 2 out of 4 */
 
@@ -33,7 +32,8 @@ public class Model
 
 		for (int i = 0; i < 16; i++)
 		{
-			cardToAdd = (LeaderCard)decoder.deserialize("resources/xml/leadercards/leadercard" + (i+1) + ".xml");
+			cardToAdd = (LeaderCard)decoder.deserialize("resources/xml/leadercards/leadercard" + (i + 1) + ".xml");
+			cardToAdd.setCardNumber(i + 1);
 			allLeaderCards.add(cardToAdd);
 		}
 

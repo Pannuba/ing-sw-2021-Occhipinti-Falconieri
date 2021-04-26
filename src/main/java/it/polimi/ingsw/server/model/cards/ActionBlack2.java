@@ -1,12 +1,11 @@
 package it.polimi.ingsw.server.model.cards;
 
-import java.io.IOException;
+import it.polimi.ingsw.server.model.board.Track;
 
 public class ActionBlack2 extends ActionToken
 {
-	public void moveBlackPawn(int blackPawn) throws IOException
+	public void moveBlackPawn(Track track)		/* Where is this function called? */
 	{
-			/* Where do we initialize the dashboard? */
-		blackPawn += 2;
+		track.setBlackPawn(track.getBlackPawn() + 2);
 	}
 }

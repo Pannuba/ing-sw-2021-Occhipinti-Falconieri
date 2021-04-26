@@ -1,10 +1,12 @@
 package it.polimi.ingsw.server.model.cards;
 
+import it.polimi.ingsw.server.model.board.Track;
+
 public class ActionBlack1 extends ActionToken
 {
-	public void moveBlackPawn(int blackPawn)
+	public void moveBlackPawn(Track track)
 	{
-		blackPawn++;
+		track.setBlackPawn(track.getBlackPawn() + 1);
 	}
 
 	public void shuffleTokens()

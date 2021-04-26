@@ -162,30 +162,30 @@ public class XML_Serialization
 					for (i = 0; i < 3; i++)
 					{
 						cost[i] = new Resource();
-						System.out.printf("Quantity of cost resource #" + (i+1) + ": ");
+						System.out.printf("Quantity of cost resource #" + (i + 1) + ": ");
 						cost[i].setQuantity(Integer.parseInt(input.nextLine()));
 
-						System.out.printf("Category of cost resource #" + (i+1) + " (G/Y/B/P/null): ");
+						System.out.printf("Category of cost resource #" + (i + 1) + " (G/Y/B/P/null): ");
 						cost[i].setResourceType(convertStringToResType(input.nextLine()));
 					}
 
 					for (i = 0; i < 2; i++)
 					{
 						requirements[i] = new Resource();
-						System.out.printf("Quantity of requirement resource #" + (i+1) + " (0 if doesn't exist): ");
+						System.out.printf("Quantity of requirement resource #" + (i + 1) + " (0 if doesn't exist): ");
 						requirements[i].setQuantity(Integer.parseInt(input.nextLine()));
 
-						System.out.printf("Category of requirement resource #" + (i+1) + " (G/Y/B/P/null): ");
+						System.out.printf("Category of requirement resource #" + (i + 1) + " (G/Y/B/P/null): ");
 						requirements[i].setResourceType(convertStringToResType(input.nextLine()));
 					}
 
 					for (i = 0; i < 3; i++)
 					{
 						product[i] = new Resource();
-						System.out.printf("Quantity of product resource #" + (i+1) + ": ");
+						System.out.printf("Quantity of product resource #" + (i + 1) + ": ");
 						product[i].setQuantity(Integer.parseInt(input.nextLine()));
 
-						System.out.printf("Category of product resource #" + (i+1) + " (G/Y/B/P/R/null): ");
+						System.out.printf("Category of product resource #" + (i + 1) + " (G/Y/B/P/R/null): ");
 						product[i].setResourceType(convertStringToResType(input.nextLine()));
 					}
 

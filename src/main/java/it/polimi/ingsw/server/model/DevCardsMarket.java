@@ -15,12 +15,21 @@ public class DevCardsMarket
 		XML_Serialization xmlDecode = new XML_Serialization();
 
 		for (int i = 0; i < 48; i++)
-			devCards.add((DevCard) xmlDecode.deserialize("resources/xml/devcards/leadercard" + (i+1) + ".xml"));
+		{
+			devCards.add((DevCard) xmlDecode.deserialize("resources/xml/devcards/leadercard" + (i + 1) + ".xml"));
+			devCards.get(i).setCardNumber(i + 1);
+		}
 	}
 
 	public DevCard getDevCard(int cardNumber)		/* Set method useless */
 	{
-		return devCards.get(cardNumber - 1);		/* - 1 because lists are 0-indexed, so cards go from 0 to 47 */
+		for (int i = 0; i < 48; i++)
+		{
+			if (devCards.get(i).getCardNumber() == cardNumber)
+				return devCards.get(i);
+		}
+
+		return null;
 	}
 
 	public List<DevCard> getDevCards()
