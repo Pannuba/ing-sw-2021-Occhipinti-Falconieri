@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.model;
 
 import it.polimi.ingsw.server.model.board.Dashboard;
+import it.polimi.ingsw.server.model.board.Track;
 import it.polimi.ingsw.server.model.cards.LeaderCard;
 import it.polimi.ingsw.tools.XML_Serialization;
 
@@ -12,7 +13,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Model
 {
 	private int numPlayers;
-	private int round;
+	private Track track;
+	private MarblesMarket marblesMarket;
 	//private Dashboard[] boards = new Dashboard[numPlayers];
 	private List<Player> players = new ArrayList<Player>();
 	private List<LeaderCard> leaderCards = new ArrayList<LeaderCard>();

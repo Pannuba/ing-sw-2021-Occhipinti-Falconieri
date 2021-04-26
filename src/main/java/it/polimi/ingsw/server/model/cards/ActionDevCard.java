@@ -2,24 +2,31 @@ package it.polimi.ingsw.server.model.cards;
 
 import it.polimi.ingsw.server.model.DevCardsMarket;
 
+import java.util.List;
+
 public class ActionDevCard extends ActionToken
 {
 	private DevCardColor color;
 
-	public void removeDevCards(DevCardsMarket devCardsMarket)
+	public void removeDevCards(DevCardsMarket devCardsMarket)			/* Remove 2 devcards of color from market starting from the lowest level */
 	{
-		DevCard[] oldCardArray = devCardsMarket.getDevCards();			/* Put this here or outside removeDevCards? */
-		DevCard[] newCardArray = oldCardArray;
+		List<DevCard> devCards = devCardsMarket.getDevCards();		/* Put this here or outside removeDevCards? */
+		int cardsToRemove = 2;
 
 		/* Scan all cards looking for the ones with the color we want, then delete them (set them as null) */
 
-		for (int i = 0; i < oldCardArray.length; i++)		/* Could be i < 48 but it's better this way */
+		for (int i = 0; i < 3; i++)		/* Check all 3 levels starting from 1 */
 		{
-			if (oldCardArray[i].getColor() == color)
-				oldCardArray[i] = null;
+			for (int j = 0; j < devCards.size(); j++)
+			{
+				if (devCards.get(j).getColor() == color && devCards.get(j).getLevel() == i+1 && cardsToRemove != 0)
+				{
+					devCards.remove(j);
+					cardsToRemove--;
+				}
+			}
 		}
-
-		devCardsMarket.setDevCards(newCardArray);
+		devCardsMarket.setDevCards(devCards);
 	}
 
 	public DevCardColor getColor()
