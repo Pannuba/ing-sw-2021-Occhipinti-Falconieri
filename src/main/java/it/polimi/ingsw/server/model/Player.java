@@ -4,6 +4,7 @@ import it.polimi.ingsw.server.model.board.Dashboard;
 import it.polimi.ingsw.server.model.cards.DevCard;
 import it.polimi.ingsw.server.model.cards.LeaderCard;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +18,10 @@ public class Player
 	private List<DevCard> devCards = new ArrayList<DevCard>();		/* TODO: migrate nearly everything to ArrayList */
 	private List<LeaderCard> leaderCards = new ArrayList<LeaderCard>();
 
-	public Player()
+	public Player() throws IOException
 	{
 		victoryPoints = 0;
+		dashboard = new Dashboard();
 	}
 
 	public int getId()

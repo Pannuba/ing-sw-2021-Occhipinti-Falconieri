@@ -4,6 +4,7 @@ import it.polimi.ingsw.server.model.board.Dashboard;
 import it.polimi.ingsw.server.model.board.Track;
 import it.polimi.ingsw.server.model.cards.LeaderCard;
 import it.polimi.ingsw.tools.XML_Serialization;
+import org.w3c.dom.ls.LSOutput;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,36 +16,37 @@ public class Model
 	private int numPlayers;
 	private Track track;
 	private MarblesMarket marblesMarket;
+	private DevCardsMarket devCardsMarket;
 	//private Dashboard[] boards = new Dashboard[numPlayers];
 	private List<Player> players = new ArrayList<Player>();
-	private List<LeaderCard> leaderCards = new ArrayList<LeaderCard>();
-
-	/* What if GameState has no instance variables, just a main methods that creates the different players? */
+	private List<LeaderCard> allLeaderCards = new ArrayList<LeaderCard>();		/* All 16 leadercards, each player picks 2 out of 4 */
 
 	public Model(int numPlayers) throws IOException    /* Pass usernames? */
 	{
 		this.numPlayers = numPlayers;
 		/*players = new Player[numPlayers];*/
+		XML_Serialization decoder = new XML_Serialization();
+		LeaderCard cardToAdd = null;
 
 		for(int i = 0; i < numPlayers; i++)
 			players.add(new Player());		/* Array of object, need "new" keyword for each array element */
-
-		pickLeaderCards();
-
-	}
-
-	private void pickLeaderCards() throws IOException        /* Creates the 16 leadercards and randomly picks 4 */
-	{
-		XML_Serialization decoder = new XML_Serialization();
-		LeaderCard cardToAdd = null;
-		List<LeaderCard> allLeaderCards = new ArrayList<LeaderCard>();
-		int cardsToAssign[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
 		for (int i = 0; i < 16; i++)
 		{
 			cardToAdd = (LeaderCard)decoder.deserialize("resources/xml/leadercards/leadercard" + (i+1) + ".xml");
 			allLeaderCards.add(cardToAdd);
 		}
+
+		track = new Track();
+		marblesMarket = new MarblesMarket();
+		devCardsMarket = new DevCardsMarket();
+		//pickLeaderCards();
+
+	}
+
+	private void pickLeaderCards() throws IOException        /* Randomly picks 4 leadercards to send each player */
+	{
+		int cardsToAssign[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 
 		for (int i = 0; i < 4; i++)			/* TODO: test!!! */
 		{
@@ -61,7 +63,7 @@ public class Model
 		}
 	}
 
-	public void calculatePoints()		/* Should this go in controller? */
+	public void calculatePoints()		/* Should this go in controller? No */
 	{
 
 	}

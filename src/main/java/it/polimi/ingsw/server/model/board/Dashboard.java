@@ -38,16 +38,6 @@ public class Dashboard
 		this.storage = storage;
 	}
 
-	public LeaderCard[] getLeaderCards()
-	{
-		return leaderCards;
-	}
-
-	public void setLeaderCards(LeaderCard[] leaderCards)
-	{
-		this.leaderCards = leaderCards;
-	}
-
 	public DevCardArea[] getDevCardAreas()
 	{
 		return devCardAreas;
