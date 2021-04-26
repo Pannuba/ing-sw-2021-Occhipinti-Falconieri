@@ -77,7 +77,7 @@ public class ServerListener implements Runnable		/* Thread running listening for
 				{
 					e.printStackTrace();
 				}
-				
+
 				// Pass socket and game code to ClientHandler?
 			}
 

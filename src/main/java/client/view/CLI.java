@@ -21,7 +21,7 @@ public class CLI		/* Is this the view? Controller? Both? */
 		/* Client directly asks for code, numPlayers... No reason to make the server ask because it's a standard process */
 		/* ALWAYS use writeUTF(), never writeInt() or anything else */
 
-		switch(input.nextLine())
+		switch(input.nextLine())		/* For now there's only one match, no game thread in server */
 		{
 			case "1":
 				dos.writeUTF("NEW_GAME");
@@ -42,9 +42,41 @@ public class CLI		/* Is this the view? Controller? Both? */
 				break;
 		}
 
-		System.out.println("incoming from server: " + (String)dis.readUTF());
+		System.out.println("Insert username: ");
+		dos.writeUTF(input.nextLine());
+		/* Server tells clients info about the two leadercards */
+		System.out.println("Choose leader card 1, 2, 3 or 4: ");
+		dos.writeUTF(input.nextLine());
+
+
 		dos.flush();
 		dos.close();
 		socket.close();
 	}
+
+	public void printBoard()
+	{
+		System.out.println("[ | | | | | | | | | | | | | | | | | | | | | | | | | ]");		/* wow */
+	}
+
+	public void printPlayerLeaderCard()
+	{
+
+	}
+	
+	public void printPlayerDevCards() 		/* Model should be in client in order to decode the DevCard objects, unless the server decodes them before sending them */
+	{
+
+	}
+
+	public void printDevCardsMarket()
+	{
+
+	}
+
+	public void printMarblesMarket()
+	{
+
+	}
+
 }
