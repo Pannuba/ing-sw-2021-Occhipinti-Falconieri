@@ -1,24 +1,62 @@
 package server.model;
 
 import server.model.board.Dashboard;
+import server.model.cards.LeaderCard;
+import tools.XML_Serialization;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Model
 {
 	private int numPlayers;
 	private int round;
 	//private Dashboard[] boards = new Dashboard[numPlayers];
-	private Player[] players;		/* array size is decided later, so don't put = new Player[numPlayers] */
+	private List<Player> players = new ArrayList<Player>();
+	private List<LeaderCard> leaderCards = new ArrayList<LeaderCard>();
 
 	/* What if GameState has no instance variables, just a main methods that creates the different players? */
 
-	public Model(int numPlayers)
+	public Model(int numPlayers) throws IOException    /* Pass usernames? */
 	{
 		this.numPlayers = numPlayers;
-		players = new Player[numPlayers];
+		/*players = new Player[numPlayers];*/
 
 		for(int i = 0; i < numPlayers; i++)
-			players[i] = new Player();		/* Array of object, need "new" keyword for each array element */
+			players.add(new Player());		/* Array of object, need "new" keyword for each array element */
 
+		pickLeaderCards();
+
+	}
+
+	private void pickLeaderCards() throws IOException        /* Creates the 16 leadercards and randomly picks 4 */
+	{
+		XML_Serialization decoder = new XML_Serialization();
+		LeaderCard cardToAdd = null;
+		List<LeaderCard> allLeaderCards = new ArrayList<LeaderCard>();
+		int cardsToAssign[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+
+		for (int i = 0; i < 16; i++)
+		{
+			cardToAdd = (LeaderCard)decoder.deserialize("resources/xml/leadercards/leadercard" + (i+1) + ".xml");
+			allLeaderCards.add(cardToAdd);
+		}
+
+		for (int i = 0; i < 4; i++)			/* TODO: test!!! */
+		{
+			int randNum = ThreadLocalRandom.current().nextInt(0, 15+1);
+
+			if (cardsToAssign[randNum] != 1)	/* If the leaderCard has already been picked, skip the loop and reset the counter (i) */
+				i--;
+
+			else
+			{
+				leaderCards.add(allLeaderCards.get(randNum));
+				cardsToAssign[randNum]--;
+			}
+		}
 	}
 
 	public void calculatePoints()		/* Should this go in controller? */
