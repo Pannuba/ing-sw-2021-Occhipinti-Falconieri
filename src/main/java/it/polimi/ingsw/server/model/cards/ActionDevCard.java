@@ -1,6 +1,6 @@
-package server.model.cards;
+package it.polimi.ingsw.server.model.cards;
 
-import server.model.DevCardsMarket;
+import it.polimi.ingsw.server.model.DevCardsMarket;
 
 public class ActionDevCard extends ActionToken
 {

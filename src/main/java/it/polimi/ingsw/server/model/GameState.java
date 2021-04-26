@@ -1,7 +1,7 @@
-package server.model;
+package it.polimi.ingsw.server.model;
 
-import server.model.board.Dashboard;
-import server.model.board.Track;
+import it.polimi.ingsw.server.model.board.Dashboard;
+import it.polimi.ingsw.server.model.board.Track;
 
 /*	Every turn, the server sends a GameState object to all clients
 	So the client view reads it and updates everything

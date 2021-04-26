@@ -1,6 +1,6 @@
-package server.controller;
+package it.polimi.ingsw.server.controller;
 
-import server.model.Model;
+import it.polimi.ingsw.server.model.Model;
 
 /*	InputParser class that converts messages from client to methods calls in controller */
 

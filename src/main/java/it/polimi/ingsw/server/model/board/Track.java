@@ -1,6 +1,6 @@
-package server.model.board;
+package it.polimi.ingsw.server.model.board;
 
-import server.model.cards.PopeToken;
+import it.polimi.ingsw.server.model.cards.PopeToken;
 
 /* One track shared among all players */
 

@@ -1,4 +1,4 @@
-package server.model.cards;
+package it.polimi.ingsw.server.model.cards;
 
 public class PopeToken
 {

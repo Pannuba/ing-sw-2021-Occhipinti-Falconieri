@@ -1,4 +1,4 @@
-package server;
+package it.polimi.ingsw.server;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

@@ -4,11 +4,11 @@
 
 /* TODO: fix new enum types input */
 
-package tools;
+package it.polimi.ingsw.tools;
 
-import server.model.ResourceType;
-import server.model.Resource;
-import server.model.cards.*;
+import it.polimi.ingsw.server.model.ResourceType;
+import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.cards.*;
 
 import java.beans.ExceptionListener;
 import java.beans.XMLEncoder;

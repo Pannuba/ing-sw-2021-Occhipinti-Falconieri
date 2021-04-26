@@ -1,6 +1,6 @@
-package server.model.board;
+package it.polimi.ingsw.server.model.board;
 
-import server.model.Resource;
+import it.polimi.ingsw.server.model.Resource;
 import tools.Logger;
 
 import java.io.IOException;

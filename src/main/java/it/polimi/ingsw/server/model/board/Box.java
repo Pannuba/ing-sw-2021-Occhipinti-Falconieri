@@ -1,4 +1,4 @@
-package server.model.board;
+package it.polimi.ingsw.server.model.board;
 
 public class Box
 {

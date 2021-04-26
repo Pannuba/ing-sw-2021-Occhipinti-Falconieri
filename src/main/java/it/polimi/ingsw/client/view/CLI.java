@@ -1,4 +1,4 @@
-package client.view;
+package it.polimi.ingsw.client.view;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

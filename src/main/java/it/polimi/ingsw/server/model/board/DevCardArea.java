@@ -1,6 +1,6 @@
-package server.model.board;
+package it.polimi.ingsw.server.model.board;
 
-import server.model.cards.DevCard;
+import it.polimi.ingsw.server.model.cards.DevCard;
 
 public class DevCardArea
 {

@@ -1,7 +1,7 @@
-package server.model.board;
+package it.polimi.ingsw.server.model.board;
 
-import server.model.cards.LeaderCard;
-import tools.XML_Serialization;
+import it.polimi.ingsw.server.model.cards.LeaderCard;
+import it.polimi.ingsw.tools.XML_Serialization;
 import java.io.IOException;
 
 public class Dashboard

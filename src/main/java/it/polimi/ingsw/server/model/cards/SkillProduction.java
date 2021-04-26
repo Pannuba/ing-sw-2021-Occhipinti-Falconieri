@@ -1,6 +1,6 @@
-package server.model.cards;
+package it.polimi.ingsw.server.model.cards;
 
-import server.model.Resource;
+import it.polimi.ingsw.server.model.Resource;
 
 public class SkillProduction extends LeaderCard
 {

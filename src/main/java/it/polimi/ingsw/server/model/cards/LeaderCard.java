@@ -1,4 +1,4 @@
-package server.model.cards;
+package it.polimi.ingsw.server.model.cards;
 
 public abstract class LeaderCard		/* Can't do new LeaderCard(); because it's abstract */
 {

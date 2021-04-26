@@ -1,6 +1,6 @@
-package server.model.board;
+package it.polimi.ingsw.server.model.board;
 
-import server.model.ResourceType;
+import it.polimi.ingsw.server.model.ResourceType;
 
 public class Vault
 {

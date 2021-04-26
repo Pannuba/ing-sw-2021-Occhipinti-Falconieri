@@ -1,4 +1,4 @@
-package server.model;
+package it.polimi.ingsw.server.model;
 
 /*	Stone --> grey ---> 0
 	Coin --> yellow --> 1

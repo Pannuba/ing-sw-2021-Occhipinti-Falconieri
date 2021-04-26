@@ -1,7 +1,7 @@
-package server.model;
+package it.polimi.ingsw.server.model;
 
-import server.model.cards.DevCard;
-import tools.XML_Serialization;
+import it.polimi.ingsw.server.model.cards.DevCard;
+import it.polimi.ingsw.tools.XML_Serialization;
 import java.io.IOException;
 
 public class DevCardsMarket
