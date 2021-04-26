@@ -18,6 +18,11 @@ public class DevCardsMarket
 			devCards.add((DevCard) xmlDecode.deserialize("resources/xml/devcards/leadercard" + (i+1) + ".xml"));
 	}
 
+	public DevCard getDevCard(int cardNumber)		/* Set method useless */
+	{
+		return devCards.get(cardNumber - 1);		/* - 1 because lists are 0-indexed, so cards go from 0 to 47 */
+	}
+
 	public List<DevCard> getDevCards()
 	{
 		return devCards;

@@ -4,12 +4,23 @@ import it.polimi.ingsw.server.model.Resource;
 
 public class DevCard // extends DevCardArea
 {
+	private int cardNumber;
 	private DevCardColor color;
 	private int points;
 	private int level;
 	private Resource[] cost = new Resource[3];				/* At the top of each card */
 	private Resource[] requirements = new Resource[2];		/* Left side */
 	private Resource[] product = new Resource[3];			/* Right side */
+
+	public int getCardNumber()
+	{
+		return cardNumber;
+	}
+
+	public void setCardNumber(int cardNumber)
+	{
+		this.cardNumber = cardNumber;
+	}
 
 	public DevCardColor getColor()
 	{

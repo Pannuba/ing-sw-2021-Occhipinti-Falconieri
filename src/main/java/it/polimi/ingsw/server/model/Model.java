@@ -4,7 +4,6 @@ import it.polimi.ingsw.server.model.board.Dashboard;
 import it.polimi.ingsw.server.model.board.Track;
 import it.polimi.ingsw.server.model.cards.LeaderCard;
 import it.polimi.ingsw.tools.XML_Serialization;
-import org.w3c.dom.ls.LSOutput;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,23 +43,34 @@ public class Model
 
 	}
 
-	private void pickLeaderCards() throws IOException        /* Randomly picks 4 leadercards to send each player */
+	private List<List<LeaderCard>> createLeaderCardsLists() throws IOException		/* Returns a list of lists of leadercards, 1 for each player, each list has 4 leadercards to choose from */
 	{
 		int cardsToAssign[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+		List<List<LeaderCard>> listOfLists = new ArrayList<List<LeaderCard>>();
+		List<LeaderCard> tempList;
 
-		for (int i = 0; i < 4; i++)			/* TODO: test!!! */
+		for (int i = 0; i < numPlayers; i++)
 		{
-			int randNum = ThreadLocalRandom.current().nextInt(0, 15+1);
+			tempList = new ArrayList<LeaderCard>();		/* Resets the temp list so we don't end up with a 16-element list */
 
-			if (cardsToAssign[randNum] != 1)	/* If the leaderCard has already been picked, skip the loop and reset the counter (i) */
-				i--;
-
-			else
+			for (int j = 0; j < 4; j++)            /* TODO: test!!! */
 			{
-				leaderCards.add(allLeaderCards.get(randNum));
-				cardsToAssign[randNum]--;
+				int randNum = ThreadLocalRandom.current().nextInt(0, 15 + 1);
+
+				if (cardsToAssign[randNum] != 1)    /* If the leaderCard has already been picked, skip the loop and reset the counter (i) */
+					j--;
+
+				else
+				{
+					tempList.add(allLeaderCards.get(randNum));
+					cardsToAssign[randNum]--;
+				}
 			}
+
+			listOfLists.add(tempList);
 		}
+
+		return listOfLists;
 	}
 
 	public void calculatePoints()		/* Should this go in controller? No */
