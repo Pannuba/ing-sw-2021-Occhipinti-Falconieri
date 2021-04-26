@@ -63,7 +63,7 @@ public class CLI		/* Is this the view? Controller? Both? */
 	{
 
 	}
-	
+
 	public void printPlayerDevCards() 		/* Model should be in client in order to decode the DevCard objects, unless the server decodes them before sending them */
 	{
 
