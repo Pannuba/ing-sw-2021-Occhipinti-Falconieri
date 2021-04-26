@@ -228,7 +228,7 @@ public class XML_Serialization
 				return ResourceType.PURPLE;
 
 			default:
-				System.out.printf("Error");
+				System.out.print("Error");
 				return null;
 		}
 	}
@@ -250,7 +250,7 @@ public class XML_Serialization
 				return DevCardColor.PURPLE;
 
 			default:
-				System.out.printf("Error");
+				System.out.print("Error");
 				return null;
 		}
 	}
