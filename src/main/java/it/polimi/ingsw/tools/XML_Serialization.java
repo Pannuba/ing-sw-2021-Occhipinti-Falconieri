@@ -6,10 +6,10 @@
 
 package it.polimi.ingsw.tools;
 
-import it.polimi.ingsw.server.model.ResourceType;
-import it.polimi.ingsw.server.model.Resource;
-import it.polimi.ingsw.server.model.Shelf;
-import it.polimi.ingsw.server.model.cards.*;
+import it.polimi.ingsw.model.ResourceType;
+import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.Shelf;
+import it.polimi.ingsw.model.cards.*;
 
 import java.beans.ExceptionListener;
 import java.beans.XMLEncoder;
