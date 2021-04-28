@@ -17,7 +17,7 @@ public class Player
 	private List<DevCard> devCards = new ArrayList<DevCard>();		/* TODO: migrate nearly everything to ArrayList */
 	private List<LeaderCard> leaderCards = new ArrayList<LeaderCard>();
 
-	public Player() throws IOException
+	public Player()
 	{
 		victoryPoints = 0;
 		dashboard = new Dashboard();

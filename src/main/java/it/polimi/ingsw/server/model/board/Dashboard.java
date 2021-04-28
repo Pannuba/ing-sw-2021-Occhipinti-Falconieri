@@ -10,7 +10,7 @@ public class Dashboard
 	private Storage storage;
 	private DevCardArea[] devCardAreas = new DevCardArea[3];
 
-	public Dashboard() throws IOException
+	public Dashboard()
 	{
 		vault = new Vault();
 		storage = new Storage();

@@ -111,4 +111,54 @@ public class Model
 	{
 		this.numPlayers = numPlayers;
 	}
+
+	public Track getTrack()
+	{
+		return track;
+	}
+
+	public void setTrack(Track track)
+	{
+		this.track = track;
+	}
+
+	public MarblesMarket getMarblesMarket()
+	{
+		return marblesMarket;
+	}
+
+	public void setMarblesMarket(MarblesMarket marblesMarket)
+	{
+		this.marblesMarket = marblesMarket;
+	}
+
+	public DevCardsMarket getDevCardsMarket()
+	{
+		return devCardsMarket;
+	}
+
+	public void setDevCardsMarket(DevCardsMarket devCardsMarket)
+	{
+		this.devCardsMarket = devCardsMarket;
+	}
+
+	public List<Player> getPlayers()
+	{
+		return players;
+	}
+
+	public void setPlayers(List<Player> players)
+	{
+		this.players = players;
+	}
+
+	public List<LeaderCard> getAllLeaderCards()
+	{
+		return allLeaderCards;
+	}
+
+	public void setAllLeaderCards(List<LeaderCard> allLeaderCards)
+	{
+		this.allLeaderCards = allLeaderCards;
+	}
 }

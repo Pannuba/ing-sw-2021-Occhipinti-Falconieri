@@ -29,7 +29,7 @@ public class MarblesMarket
 	public MarblesMarket()		/* TODO: tests */
 	{
 		int[] marblesToAssign = {4, 2, 2, 2, 2, 1};
-		MarbleType[] resourcesToAssign = new MarbleType[13];
+		MarbleType[] resourcesToAssign = new MarbleType[13];z
 
 		for (int i = 0; i < 13; i++)
 		{

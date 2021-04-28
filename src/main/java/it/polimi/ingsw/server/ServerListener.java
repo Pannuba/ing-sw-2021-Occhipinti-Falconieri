@@ -16,6 +16,8 @@ public class ServerListener implements Runnable		/* Thread running listening for
 {
 	private ServerSocket serverSocket;
 
+	/* Static method to get name/choice from client? So Match can use them */
+
 	public ServerListener(ServerSocket serverSocket)
 	{
 		this.serverSocket = serverSocket;
@@ -36,53 +38,50 @@ public class ServerListener implements Runnable		/* Thread running listening for
 				socket = serverSocket.accept();
 				dis = new DataInputStream(socket.getInputStream());
 				dos = new DataOutputStream(socket.getOutputStream());
-				System.out.println("INCOMING CONNECTION: " + socket);
-				username = (String) dis.readUTF();
-				choice = (String) dis.readUTF();
+				System.out.println("Incoming connection: " + socket);
+				username = dis.readUTF();
+				choice = dis.readUTF();
 			}
 			catch (IOException e)
 			{
 				e.printStackTrace();		/* Better than println as it tells filename and line number where the exception happened */
 			}
 
-			System.out.println("username: " + username + "\nchoice: " + choice);        /* Works */
+			System.out.println("Username: " + username + "\nChoice: " + choice);        /* Works */
 
-			if (choice == "NEW_GAME")        /* Will have to divide games in threads for advanced functionality */
+			if (choice == "NEW_GAME")        /* Sends game code to client, creates new match thread */
 			{
-				String gameCode = generateGameCode();	/* gameCodes list? class member? */
+				String gameCode = generateGameCode();    /* gameCodes list? class member? */
+				int numPlayers = 0;
 
 				try
 				{
 					dos.writeUTF(gameCode);
-					int numPlayers = Integer.parseInt(dis.readUTF());		/* Need to create model somewhere and pass numPlayers and other vars we get here */
+					numPlayers = Integer.parseInt(dis.readUTF());        /* Need to create model somewhere and pass numPlayers and other vars we get here */
 				}
 				catch (IOException e)
 				{
 					e.printStackTrace();
 				}
 
-
-				/* Where to put generateGameCode? Here? */
-				// Ask for player number
-				// Give user game code, who then shares it to the other players
+				/* Match thread waits for all players to join, then when everyone is connected ServerListener keeps going */
+				/* TODO: use locks, synchronized() to pause this thread until Match has all players connected */
+				Runnable r = new Match(numPlayers, gameCode, username, socket, serverSocket);
+				new Thread(r).start();
 			}
 
-			if (choice == "JOIN_GAME")
+			/*if (choice == "JOIN_GAME")
 			{
 				try
 				{
 					String gameCode = dis.readUTF();
-				}
-				catch (IOException e)
+				} catch (IOException e)
 				{
 					e.printStackTrace();
 				}
 
 				// Pass socket and game code to ClientHandler?
-			}
-
-			Runnable r = new ClientHandler(socket);
-			new Thread(r).start();
+			}*/
 
 		}
 	}
