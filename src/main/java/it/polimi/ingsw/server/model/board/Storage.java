@@ -4,40 +4,38 @@ import it.polimi.ingsw.server.model.Shelf;
 
 import java.io.IOException;
 
-/*	   O
+/*	   O			shelves[0]
 	_______
-	 O   O
+	 O   O			shelves[1]
 	_______
-	O  O  O
+	O  O  O			shelves[2]
 	_______
 */
 
 public class Storage
 {
-	private Shelf shelfOne;
-	private Shelf shelfTwo;
-	private Shelf shelfThree;
-
-	/* Logic methods to check resources in shelf here? Or in controller?? */
+	private Shelf[] shelves = new Shelf[3];		/* Static array because there are always 3 shelves, no more no less */
 
 	public Storage()
 	{
-		shelfOne = new Shelf(1);
-		shelfTwo = new Shelf(2);
-		shelfThree = new Shelf(3);
+		for (int i = 0; i < 3; i++)
+			shelves[i] = new Shelf(i + 1);		/* Initialize shelves passing i+1 as shelf size */
 	}
 
 	public boolean checkShelves() throws IOException
 	{
-		if (shelfOne.getShelfResource().getQuantity() > 1 || shelfTwo.getShelfResource().getQuantity() > 2 || shelfThree.getShelfResource().getQuantity() > 3)
+		for (int i = 0; i < shelves.length; i++)		/* shelves.length is always 3 */
 		{
-			System.out.println("Shelf has incorrect amount of resources");
-			return false;
+			if (shelves[i].getShelfResource().getQuantity() > shelves[i].getShelfSize())
+			{
+				System.out.println("Shelf " + (i + 1) + " has incorrect amount of resources");
+				return false;
+			}
 		}
 
-		if (shelfOne.getShelfResource().getResourceType() == shelfTwo.getShelfResource().getResourceType()   ||
-			shelfTwo.getShelfResource().getResourceType() == shelfThree.getShelfResource().getResourceType() ||
-			shelfOne.getShelfResource().getResourceType() == shelfThree.getShelfResource().getResourceType()  )
+		if (shelves[0].getShelfResource().getResourceType() == shelves[1].getShelfResource().getResourceType()   ||
+			shelves[1].getShelfResource().getResourceType() == shelves[2].getShelfResource().getResourceType()   ||
+			shelves[0].getShelfResource().getResourceType() == shelves[2].getShelfResource().getResourceType())
 		{
 			System.out.println("Shelf has the same type of resource of another shelf");
 			return false;
@@ -54,52 +52,26 @@ public class Storage
 																/* If the destination shelf is not empty, the two resource types have to be the same */
 			if (shelfTo.getShelfResource().getQuantity() == 0 || shelfFrom.getShelfResource().getResourceType() != shelfTo.getShelfResource().getResourceType())
 			{
-				shelfFrom.getShelfResource().setQuantity(shelfFrom.getShelfResource().getQuantity() - amount);
-				shelfTo.getShelfResource().setQuantity(shelfTo.getShelfResource().getQuantity() + amount);
-
 				if (shelfTo.getShelfResource().getQuantity() == 0)		/* If the destination shelf was empty, set the new resource type */
 					shelfTo.getShelfResource().setResourceType(shelfFrom.getShelfResource().getResourceType());
+
+				shelfFrom.getShelfResource().setQuantity(shelfFrom.getShelfResource().getQuantity() - amount);
+				shelfTo.getShelfResource().setQuantity(shelfTo.getShelfResource().getQuantity() + amount);
 
 				if (shelfFrom.getShelfResource().getQuantity() == 0)	/* If the source shelf is now empty, set the resource type to null */
 					shelfFrom.getShelfResource().setResourceType(null);
 			}
 
-			switch(shelfFrom.getShelfSize())
+			for (int i = 0; i < shelfFrom.getShelfSize(); i++)
 			{
-				case 1:
-					shelfOne = shelfFrom;
-					break;
-
-				case 2:
-					shelfTwo = shelfFrom;
-					break;
-
-				case 3:
-					shelfThree = shelfFrom;
-					break;
-
-				default:
-					System.out.println("Error");
-					break;
+				if (shelves[i].getShelfSize() == shelfFrom.getShelfSize())
+					shelves[i] = shelfFrom;
 			}
 
-			switch(shelfTo.getShelfSize())
+			for (int i = 0; i < shelfTo.getShelfSize(); i++)
 			{
-				case 1:
-					shelfOne = shelfTo;
-					break;
-
-				case 2:
-					shelfTwo = shelfTo;
-					break;
-
-				case 3:
-					shelfThree = shelfTo;
-					break;
-
-				default:
-					System.out.println("Error");
-					break;
+				if (shelves[i].getShelfSize() == shelfTo.getShelfSize())
+					shelves[i] = shelfTo;
 			}
 		}
 	}
@@ -108,40 +80,19 @@ public class Storage
 	{
 		int totalResources = 0;
 
-		totalResources += shelfOne.getShelfResource().getQuantity();
-		totalResources += shelfTwo.getShelfResource().getQuantity();
-		totalResources += shelfThree.getShelfResource().getQuantity();
+		for (int i = 0; i < shelves.length; i++)
+			totalResources += shelves[i].getShelfResource().getQuantity();
 
 		return totalResources;
 	}
 
-	public Shelf getShelfOne()
+	public Shelf[] getShelves()
 	{
-		return shelfOne;
+		return shelves;
 	}
 
-	public void setShelfOne(Shelf shelfOne)
+	public void setShelves(Shelf[] shelves)
 	{
-		this.shelfOne = shelfOne;
-	}
-
-	public Shelf getShelfTwo()
-	{
-		return shelfTwo;
-	}
-
-	public void setShelfTwo(Shelf shelfTwo)
-	{
-		this.shelfTwo = shelfTwo;
-	}
-
-	public Shelf getShelfThree()
-	{
-		return shelfThree;
-	}
-
-	public void setShelfThree(Shelf shelfThree)
-	{
-		this.shelfThree = shelfThree;
+		this.shelves = shelves;
 	}
 }
