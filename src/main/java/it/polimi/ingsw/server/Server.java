@@ -1,6 +1,6 @@
 package it.polimi.ingsw.server;
 
-import server.controller.Controller; //!!!!!!!!!!!!!!
+import it.polimi.ingsw.server.controller.Controller; //!!!!!!!!!!!!!!
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

@@ -6,6 +6,7 @@ import it.polimi.ingsw.server.model.cards.DevCard;
 import it.polimi.ingsw.server.model.cards.LeaderCard;
 import it.polimi.ingsw.tools.XML_Serialization;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +97,7 @@ public class Model
 
 		points += totalResources / 5;	/* 1 point every 5 resources, dividing integers only keeps the whole part of the number */
 
-
+		/* Need to calculate popetokens points, but where should vaticanReport be called? */
 
 		return points;
 	}
