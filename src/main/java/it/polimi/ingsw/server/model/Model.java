@@ -24,7 +24,6 @@ public class Model
 	public Model(int numPlayers) throws IOException    /* Pass usernames? */
 	{
 		this.numPlayers = numPlayers;
-		/*players = new Player[numPlayers];*/
 		XML_Serialization decoder = new XML_Serialization();
 		LeaderCard cardToAdd = null;
 

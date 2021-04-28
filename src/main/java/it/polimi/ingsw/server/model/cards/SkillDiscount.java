@@ -1,11 +1,11 @@
 package it.polimi.ingsw.server.model.cards;
 
-import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.ResourceType;
 
 public class SkillDiscount extends LeaderCard
 {
-	private int discount;
-	private Resource discountedResource;
+	private int discount;		/* Always -1 */
+	private ResourceType discountedResource;
 
 	public int getDiscount()
 	{
@@ -17,12 +17,12 @@ public class SkillDiscount extends LeaderCard
 		this.discount = discount;
 	}
 
-	public Resource getDiscountedResource()
+	public ResourceType getDiscountedResource()
 	{
 		return discountedResource;
 	}
 
-	public void setDiscountedResource(Resource discountedResource)
+	public void setDiscountedResource(ResourceType discountedResource)
 	{
 		this.discountedResource = discountedResource;
 	}

@@ -8,6 +8,7 @@ package it.polimi.ingsw.tools;
 
 import it.polimi.ingsw.server.model.ResourceType;
 import it.polimi.ingsw.server.model.Resource;
+import it.polimi.ingsw.server.model.Shelf;
 import it.polimi.ingsw.server.model.cards.*;
 
 import java.beans.ExceptionListener;
@@ -92,10 +93,9 @@ public class XML_Serialization
 							SkillDiscount leaderCardOne = new SkillDiscount();	/* Not too sure about this but we'll give it a try */
 							leaderCardOne.setPoints(leaderCardPoints);
 							leaderCardOne.setRequirements(leaderCardRequirements);
-							Resource discountedResource = new Resource();
-							System.out.printf("Resource (G/Y/B/P): ");
-							discountedResource.setResourceType(convertStringToResType(input.nextLine()));
-							discountedResource.setQuantity(0);							/* We just need the resource type, we don't *own* any more resources */
+							ResourceType discountedResource = null;
+	/* TODO: switch/case for ResourceType */ System.out.printf("Resource (G/Y/B/P): ");
+							discountedResource = convertStringToResType(input.nextLine());
 							leaderCardOne.setDiscountedResource(discountedResource);
 							leaderCardOne.setDiscount(-1);								/* All cards have a discount of 1 resource less */
 							serialize(leaderCardOne, filename);
@@ -105,10 +105,10 @@ public class XML_Serialization
 							SkillStorage leaderCardTwo = new SkillStorage();
 							leaderCardTwo.setPoints(leaderCardPoints);
 							leaderCardTwo.setRequirements(leaderCardRequirements);
-							Resource additionalStorage = new Resource();
+							Shelf additionalStorage = new Shelf(2);
 							System.out.printf("Additional storage resource: ");
-							additionalStorage.setResourceType(convertStringToResType(input.nextLine()));
-							additionalStorage.setQuantity(2);								/* Can only hold one type of resource, amount is always 2 */
+							additionalStorage.getShelfResource().setResourceType(convertStringToResType(input.nextLine()));
+							additionalStorage.getShelfResource().setQuantity(2);								/* Can only hold one type of resource, amount is always 2 */
 							leaderCardTwo.setAdditionalStorage(additionalStorage);
 							serialize(leaderCardTwo, filename);
 							break;
@@ -117,7 +117,7 @@ public class XML_Serialization
 							SkillMarble leaderCardThree = new SkillMarble();
 							leaderCardThree.setPoints(leaderCardPoints);
 							leaderCardThree.setRequirements(leaderCardRequirements);
-							System.out.printf("White marble resource: ");
+							System.out.printf("White marble resource: ");				/* TODO: switch/case for ResourceType */
 							leaderCardThree.setWhiteMarble(input.nextLine());
 							serialize(leaderCardThree, filename);
 							break;
@@ -284,5 +284,4 @@ public class XML_Serialization
 		fis.close();
 		return decodedObject;
 	}
-
 }

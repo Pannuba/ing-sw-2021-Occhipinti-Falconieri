@@ -9,7 +9,7 @@ public class DevCard
 	private int points;
 	private int level;
 	private Resource[] cost = new Resource[3];				/* At the top of each card */
-	private Resource[] requirements = new Resource[2];		/* Left side */
+	private Resource[] requirements = new Resource[2];		/* Left side		TODO: switch to List */
 	private Resource[] product = new Resource[3];			/* Right side */
 
 	public int getCardNumber()
