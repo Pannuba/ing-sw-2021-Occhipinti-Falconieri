@@ -1,7 +1,7 @@
-package it.polimi.ingsw.client.view;
+package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.controller.Controller;
-import it.polimi.ingsw.server.model.cards.LeaderCard;
+import it.polimi.ingsw.model.cards.LeaderCard;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
