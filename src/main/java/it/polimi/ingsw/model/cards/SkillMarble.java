@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.ResourceType;
 
 public class SkillMarble extends LeaderCard
 {
-	private ResourceType whiteMarble;									/* Not sure about type */
+	private ResourceType whiteMarble;
 
 	public ResourceType getWhiteMarble()
 	{

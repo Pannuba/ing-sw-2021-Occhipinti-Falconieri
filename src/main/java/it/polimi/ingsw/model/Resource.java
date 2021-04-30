@@ -14,7 +14,9 @@ public class Resource
 
 	public Resource()
 	{
+		category = null;
 		quantity = 0;
+		isInVault = false;
 	}
 
 	public ResourceType getResourceType()

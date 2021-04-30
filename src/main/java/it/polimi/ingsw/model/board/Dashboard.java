@@ -14,7 +14,6 @@ public class Dashboard
 	{
 		vault = new Vault();
 		storage = new Storage();
-
 	}
 
 	public Vault getVault()

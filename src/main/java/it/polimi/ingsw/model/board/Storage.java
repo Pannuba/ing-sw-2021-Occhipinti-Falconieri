@@ -47,13 +47,27 @@ public class Storage
 			return true;
 	}
 
-	public void addResource(Resource resourceToAdd, Shelf destinationShelf)
+	public void addResource(Resource resourceToAdd, Shelf destinationShelf)		/* Will be called like addResource(res, storage.getShelves()[num]. Or use shelf indexes */
 	{
+		if (checkShelves() == true && (destinationShelf.getShelfSize() - destinationShelf.getShelfResource().getQuantity()) >= resourceToAdd.getQuantity()	&&
+			resourceToAdd.getResourceType() == destinationShelf.getShelfResource().getResourceType())
+		{
+			if (destinationShelf.getShelfResource() == null)
+				destinationShelf.getShelfResource().setResourceType(resourceToAdd.getResourceType());
 
+			destinationShelf.getShelfResource().setQuantity(destinationShelf.getShelfResource().getQuantity() + resourceToAdd.getQuantity());
+		}
+
+		else
+		{
+			System.out.println("Error");
+		}
 	}
 
-	public void moveResources(Shelf shelfFrom, Shelf shelfTo, int amount)
+	public void moveResources(Shelf shelfFrom, Shelf shelfTo, int amount)	/* Java is pass-by-value, if this is called from another file the shelves will remain unchanged */
 	{
+		/* TODO: pass shelf index to function, convert indexes to respective shelf to actually change them */
+
 		if (checkShelves() == true && (shelfTo.getShelfSize() - shelfTo.getShelfResource().getQuantity()) >= amount)	/* If there's enough space to move the resource(s) */
 		{
 																/* If the destination shelf is not empty, the two resource types have to be the same */
