@@ -17,13 +17,29 @@ public class CLI		/* Is this the view? Controller? Both? */
 	private static DataInputStream dis;
 	private static DataOutputStream dos;
 
-	public static void main(String[] args) throws IOException
+	public CLI() throws IOException
 	{
 		input = new Scanner(System.in);
-		socket = new Socket("127.0.0.1", 2000);		/* Add port to config file? */
+		try
+		{
+			socket = new Socket("127.0.0.1", 2000);		/* Add port to config file? */
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
 		controller = new Controller();
-		dos = new DataOutputStream(socket.getOutputStream());
-		dis = new DataInputStream(socket.getInputStream());
+
+		try
+		{
+			dos = new DataOutputStream(socket.getOutputStream());
+			dis = new DataInputStream(socket.getInputStream());
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 
 		gameSetup();
 
@@ -34,7 +50,7 @@ public class CLI		/* Is this the view? Controller? Both? */
 
 	public static void gameSetup() throws IOException
 	{
-		System.out.println("Masters of the Renaissance!\n\nNew game: 1\tJoin Game: 2");		/* TODO: add error detection (if input is not 1 nor 2) */
+		System.out.println("New game: 1\tJoin Game: 2");		/* TODO: add error detection (if input is not 1 nor 2) */
 
 		/* Client directly asks for code, numPlayers... No reason to make the server ask because it's a standard process */
 		/* ALWAYS use writeUTF(), never writeInt() or anything else */

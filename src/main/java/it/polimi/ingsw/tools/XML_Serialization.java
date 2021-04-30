@@ -97,7 +97,7 @@ public class XML_Serialization
 	/* TODO: switch/case for ResourceType */ System.out.printf("Resource (G/Y/B/P): ");
 							discountedResource = convertStringToResType(input.nextLine());
 							leaderCardOne.setDiscountedResource(discountedResource);
-							leaderCardOne.setDiscount(-1);								/* All cards have a discount of 1 resource less */
+							//leaderCardOne.setDiscount(-1);								/* All cards have a discount of 1 resource less */
 							serialize(leaderCardOne, filename);
 							break;
 
@@ -118,7 +118,7 @@ public class XML_Serialization
 							leaderCardThree.setPoints(leaderCardPoints);
 							leaderCardThree.setRequirements(leaderCardRequirements);
 							System.out.printf("White marble resource: ");				/* TODO: switch/case for ResourceType */
-							leaderCardThree.setWhiteMarble(input.nextLine());
+							//leaderCardThree.setWhiteMarble(input.nextLine());
 							serialize(leaderCardThree, filename);
 							break;
 
@@ -130,7 +130,7 @@ public class XML_Serialization
 							System.out.printf("Resource needed for production: ");
 							productionCost.setResourceType(convertStringToResType(input.nextLine()));
 							productionCost.setQuantity(1);								/* Always 1 */
-							leaderCardFour.setProductionCost(productionCost);
+							//leaderCardFour.setProductionCost(productionCost);
 							serialize(leaderCardFour, filename);
 							break;
 
