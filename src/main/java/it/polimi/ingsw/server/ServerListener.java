@@ -88,13 +88,11 @@ public class ServerListener implements Runnable		/* Thread running listening for
 
 	private String generateGameCode()			/* Randomly generates a 5 character code */
 	{
-		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";		/* TODO: check that the generated code doesn't already exist */
 		String code = "";
 
 		for (int i = 0; i < 5; i++)
-		{
 			code += chars.charAt(ThreadLocalRandom.current().nextInt(0, chars.length() + 1));
-		}
 
 		return code;
 	}

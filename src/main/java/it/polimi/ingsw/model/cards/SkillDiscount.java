@@ -4,17 +4,12 @@ import it.polimi.ingsw.model.ResourceType;
 
 public class SkillDiscount extends LeaderCard
 {
-	private int discount;		/* Always -1 */
+	private final int discount = -1;
 	private ResourceType discountedResource;
 
 	public int getDiscount()
 	{
 		return discount;
-	}
-
-	public void setDiscount(int discount)
-	{
-		this.discount = discount;
 	}
 
 	public ResourceType getDiscountedResource()

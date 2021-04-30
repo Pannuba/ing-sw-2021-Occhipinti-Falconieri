@@ -19,6 +19,10 @@ package it.polimi.ingsw.model;
 
  */
 
+import it.polimi.ingsw.model.board.Track;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MarblesMarket
@@ -128,8 +132,15 @@ public class MarblesMarket
 
 	}
 
-	public void pushSpareMarbleRow(int row)			/* Not tested yet, also Col */
+	public void buyResourcesRow(int row)			/* Not tested yet, also Col */
 	{
+		/* for each column make a list of resources, checking for red and white marbles (if there are SkillMarble cards) */
+
+		List<Resource> resourcesToAdd = new ArrayList<Resource>();
+		/*		*/
+
+
+
 		Marble oldSpareMarble = spareMarble;
 		spareMarble = marblesBoard[row][0];
 
@@ -140,7 +151,7 @@ public class MarblesMarket
 
 	}
 
-	public void pushSpareMarbleCol(int col)
+	public void buyResourcesCol(int col)
 	{
 		Marble oldSpareMarble = spareMarble;
 		spareMarble = marblesBoard[0][col];

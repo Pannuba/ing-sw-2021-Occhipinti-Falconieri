@@ -1,14 +1,16 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.Shelf;
 
 import java.io.IOException;
+import java.util.List;
 
-/*	   O			shelves[0]
+/*	   Y			shelves[0]			If I get another Y, I have to swap X and Y so that I have 2 Y in the middle shelf
 	_______
-	 O   O			shelves[1]
+	 O   X			shelves[1]
 	_______
-	O  O  O			shelves[2]
+	Z  Z  Z			shelves[2]
 	_______
 */
 
@@ -43,6 +45,14 @@ public class Storage
 
 		else
 			return true;
+	}
+
+	public void addResource(List<Resource> resourcesToAdd)
+	{
+		for (int i = 0; i < resourcesToAdd.size(); i++)
+		{
+		
+		}
 	}
 
 	public void moveResources(Shelf shelfFrom, Shelf shelfTo, int amount) throws IOException

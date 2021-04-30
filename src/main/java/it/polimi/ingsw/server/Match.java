@@ -1,6 +1,6 @@
 package it.polimi.ingsw.server;
 
-import it.polimi.ingsw.server.model.Player;
+import it.polimi.ingsw.model.Player;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

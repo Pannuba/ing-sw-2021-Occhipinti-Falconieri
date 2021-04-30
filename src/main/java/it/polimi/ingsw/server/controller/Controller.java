@@ -4,7 +4,7 @@ package it.polimi.ingsw.server.controller;
 
 /* TODO: add possible actions the client can do */
 
-import it.polimi.ingsw.server.model.Model;
+import it.polimi.ingsw.model.Model;
 
 public class Controller
 {

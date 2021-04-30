@@ -16,7 +16,7 @@ public class Server
 	public static void main(String args[]) throws IOException
 	{
 		ServerSocket serverSocket = new ServerSocket(2000, 0, InetAddress.getByName(null));        /* Port has to be > 1024 in order to work without root permissions */
-		Runnable r = new ServerListener(serverSocket);
+		Runnable r = new ServerListener(serverSocket);			/* Does this need to be a thread? */
 		new Thread(r).start();
 
 		//serverSocket.close();
