@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="14.0.2" class="java.beans.XMLDecoder">
+ <object class="model.cards.LeaderCard$SkillThree">
+  <void property="points">
+   <int>5</int>
+  </void>
+  <void property="requirements">
+   <string>DEV_LV1_2B1Y</string>
+  </void>
+  <void property="whiteMarble">
+   <string>G</string>
+  </void>
+ </object>
+</java>

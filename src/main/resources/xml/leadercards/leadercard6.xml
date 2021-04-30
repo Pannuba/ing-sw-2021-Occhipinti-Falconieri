@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="14.0.2" class="java.beans.XMLDecoder">
+ <object class="model.cards.LeaderCard$SkillTwo">
+  <void property="additionalStorage">
+   <object class="model.Resource">
+    <void property="category">
+     <string>P</string>
+    </void>
+    <void property="quantity">
+     <int>2</int>
+    </void>
+   </object>
+  </void>
+  <void property="points">
+   <int>3</int>
+  </void>
+  <void property="requirements">
+   <string>RES_5G</string>
+  </void>
+ </object>
+</java>
