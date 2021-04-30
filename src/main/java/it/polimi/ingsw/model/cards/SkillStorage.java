@@ -8,7 +8,7 @@ public class SkillStorage extends LeaderCard
 
 	public SkillStorage()		/* Put constructor or setQuantity(0) in xml? Can LeaderCard objects be created if it's abstract? */
 	{
-		additionalStorage.getShelfResource().setQuantity(0);
+		additionalStorage = new Shelf(2);
 	}
 
 	public Shelf getAdditionalStorage()

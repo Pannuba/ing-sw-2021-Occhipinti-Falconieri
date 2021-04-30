@@ -19,8 +19,6 @@ package it.polimi.ingsw.model;
 
  */
 
-import it.polimi.ingsw.model.board.Track;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -132,16 +130,56 @@ public class MarblesMarket
 
 	}
 
-	public void buyResourcesRow(int row)			/* Not tested yet, also Col */
+	public List<Marble> buyMarblesRow(int row)			/* Returns a list of marbles to the controller, which then acts for each marble */
 	{
-		/* for each column make a list of resources, checking for red and white marbles (if there are SkillMarble cards) */
+		List<Marble> marblesToAdd = new ArrayList<Marble>();
 
-		List<Resource> resourcesToAdd = new ArrayList<Resource>();
-		/*		*/
+		for (int i = 0; i < 6; i++)		/* Create one resource for each type. 0 -> blue, 1 -> grey, 2 -> yellow, 3 -> purple */
+		{
+			marblesToAdd.add(new Marble());		/* Quantity is set to 0 in constructor */
+		}
 
+		marblesToAdd.get(0).setMarbleType(MarbleType.RED);
+		marblesToAdd.get(1).setMarbleType(MarbleType.WHITE);
+		marblesToAdd.get(2).setMarbleType(MarbleType.BLUE);
+		marblesToAdd.get(3).setMarbleType(MarbleType.GREY);
+		marblesToAdd.get(4).setMarbleType(MarbleType.YELLOW);
+		marblesToAdd.get(5).setMarbleType(MarbleType.PURPLE);
 
+		for (int i = 0; i < 3; i++)
+		{
+			switch(marblesBoard[row][i].getMarbleType())
+			{
+				case RED:
+					marblesToAdd.get(0).setQuantity(marblesToAdd.get(0).getQuantity() + 1);
+					break;
 
-		Marble oldSpareMarble = spareMarble;
+				case WHITE:
+					marblesToAdd.get(1).setQuantity(marblesToAdd.get(1).getQuantity() + 1);
+					break;
+
+				case BLUE:
+					marblesToAdd.get(2).setQuantity(marblesToAdd.get(2).getQuantity() + 1);
+					break;
+
+				case GREY:
+					marblesToAdd.get(3).setQuantity(marblesToAdd.get(3).getQuantity() + 1);
+					break;
+
+				case YELLOW:
+					marblesToAdd.get(4).setQuantity(marblesToAdd.get(4).getQuantity() + 1);
+					break;
+
+				case PURPLE:
+					marblesToAdd.get(5).setQuantity(marblesToAdd.get(5).getQuantity() + 1);
+					break;
+
+				default:
+					break;
+			}
+		}
+
+		Marble oldSpareMarble = spareMarble;					/* Changes the marbles grid pushing the spare marble in */
 		spareMarble = marblesBoard[row][0];
 
 		for (int i = 0; i < 3; i++)
@@ -149,10 +187,59 @@ public class MarblesMarket
 
 		marblesBoard[row][3] = oldSpareMarble;
 
+		return marblesToAdd;
+
 	}
 
-	public void buyResourcesCol(int col)
+	public List<Marble> buyMarblesCol(int col)
 	{
+		List<Marble> marblesToAdd = new ArrayList<Marble>();
+
+		for (int i = 0; i < 6; i++)		/* Create one resource for each type. 0 -> blue, 1 -> grey, 2 -> yellow, 3 -> purple */
+		{
+			marblesToAdd.add(new Marble());		/* Quantity is set to 0 in constructor */
+		}
+
+		marblesToAdd.get(0).setMarbleType(MarbleType.RED);
+		marblesToAdd.get(1).setMarbleType(MarbleType.WHITE);
+		marblesToAdd.get(2).setMarbleType(MarbleType.BLUE);
+		marblesToAdd.get(3).setMarbleType(MarbleType.GREY);
+		marblesToAdd.get(4).setMarbleType(MarbleType.YELLOW);
+		marblesToAdd.get(5).setMarbleType(MarbleType.PURPLE);
+
+		for (int i = 0; i < 3; i++)
+		{
+			switch(marblesBoard[i][col].getMarbleType())
+			{
+				case RED:
+					marblesToAdd.get(0).setQuantity(marblesToAdd.get(0).getQuantity() + 1);
+					break;
+
+				case WHITE:
+					marblesToAdd.get(1).setQuantity(marblesToAdd.get(1).getQuantity() + 1);
+					break;
+
+				case BLUE:
+					marblesToAdd.get(2).setQuantity(marblesToAdd.get(2).getQuantity() + 1);
+					break;
+
+				case GREY:
+					marblesToAdd.get(3).setQuantity(marblesToAdd.get(3).getQuantity() + 1);
+					break;
+
+				case YELLOW:
+					marblesToAdd.get(4).setQuantity(marblesToAdd.get(4).getQuantity() + 1);
+					break;
+
+				case PURPLE:
+					marblesToAdd.get(5).setQuantity(marblesToAdd.get(5).getQuantity() + 1);
+					break;
+
+				default:
+					break;
+			}
+		}
+
 		Marble oldSpareMarble = spareMarble;
 		spareMarble = marblesBoard[0][col];
 
@@ -160,6 +247,8 @@ public class MarblesMarket
 			marblesBoard[i][col] = marblesBoard[i+1][col];
 
 		marblesBoard[2][col] = oldSpareMarble;
+
+		return marblesToAdd;
 	}
 
 	public Marble[][] getMarblesBoard()

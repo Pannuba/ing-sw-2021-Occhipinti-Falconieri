@@ -12,6 +12,11 @@ public class Marble
 	private MarbleType category;				/* Rename category to type? */
 	private int quantity;
 
+	public Marble()
+	{
+		quantity = 0;
+	}
+
 	public MarbleType getMarbleType()
 	{
 		return category;

@@ -12,6 +12,11 @@ public class Resource
 	private int quantity;
 	private boolean isInVault;
 
+	public Resource()
+	{
+		quantity = 0;
+	}
+
 	public ResourceType getResourceType()
 	{
 		return category;

@@ -10,8 +10,7 @@ public class Shelf
 	public Shelf(int shelfSize)
 	{
 		this.shelfSize = shelfSize;
-		shelfResource = new Resource();
-		shelfResource.setQuantity(0);
+		shelfResource = new Resource();			/* Quantity is set to 0 in constructor */
 	}
 
 	public int getShelfSize()

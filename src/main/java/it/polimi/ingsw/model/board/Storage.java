@@ -24,7 +24,7 @@ public class Storage
 			shelves[i] = new Shelf(i + 1);		/* Initialize shelves passing i+1 as shelf size */
 	}
 
-	public boolean checkShelves() throws IOException
+	public boolean checkShelves()
 	{
 		for (int i = 0; i < shelves.length; i++)		/* shelves.length is always 3 */
 		{
@@ -47,15 +47,12 @@ public class Storage
 			return true;
 	}
 
-	public void addResource(List<Resource> resourcesToAdd)
+	public void addResource(Resource resourceToAdd, Shelf destinationShelf)
 	{
-		for (int i = 0; i < resourcesToAdd.size(); i++)
-		{
-		
-		}
+
 	}
 
-	public void moveResources(Shelf shelfFrom, Shelf shelfTo, int amount) throws IOException
+	public void moveResources(Shelf shelfFrom, Shelf shelfTo, int amount)
 	{
 		if (checkShelves() == true && (shelfTo.getShelfSize() - shelfTo.getShelfResource().getQuantity()) >= amount)	/* If there's enough space to move the resource(s) */
 		{
