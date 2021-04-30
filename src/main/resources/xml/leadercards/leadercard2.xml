@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="14.0.2" class="java.beans.XMLDecoder">
- <object class="model.cards.LeaderCard$SkillOne">
+ <object class="server.model.cards.LeaderCard$SkillOne">
   <void property="discount">
    <int>-1</int>
   </void>
   <void property="discountedResource">
-   <object class="model.Resource">
+   <object class="server.model.Resource">
     <void property="category">
      <string>B</string>
     </void>

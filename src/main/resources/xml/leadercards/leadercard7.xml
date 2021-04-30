@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="14.0.2" class="java.beans.XMLDecoder">
- <object class="model.cards.LeaderCard$SkillTwo">
+ <object class="server.model.cards.LeaderCard$SkillTwo">
   <void property="additionalStorage">
-   <object class="model.Resource">
+   <object class="server.model.Resource">
     <void property="category">
      <string>B</string>
     </void>
