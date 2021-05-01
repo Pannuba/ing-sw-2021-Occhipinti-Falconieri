@@ -1,6 +1,6 @@
 package it.polimi.ingsw.client.view.gui;
 
-public class GUIClient
+public class GUI
 {
 
 }

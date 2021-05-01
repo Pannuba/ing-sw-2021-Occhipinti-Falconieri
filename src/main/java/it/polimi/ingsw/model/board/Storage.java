@@ -47,15 +47,19 @@ public class Storage
 			return true;
 	}
 
-	public void addResource(Resource resourceToAdd, Shelf destinationShelf)		/* Will be called like addResource(res, storage.getShelves()[num]. Or use shelf indexes */
+	public void addResource(Resource resourceToAdd, int shelfNumber)		/* Called in controller, shelfNumber is 1 for shelves[0] and so on */
 	{
+		Shelf destinationShelf = convertIndexToShelf(shelfNumber);
+
 		if (checkShelves() == true && (destinationShelf.getShelfSize() - destinationShelf.getShelfResource().getQuantity()) >= resourceToAdd.getQuantity()	&&
 			resourceToAdd.getResourceType() == destinationShelf.getShelfResource().getResourceType())
 		{
-			if (destinationShelf.getShelfResource() == null)
+			if (destinationShelf.getShelfResource().getResourceType() == null)
 				destinationShelf.getShelfResource().setResourceType(resourceToAdd.getResourceType());
 
 			destinationShelf.getShelfResource().setQuantity(destinationShelf.getShelfResource().getQuantity() + resourceToAdd.getQuantity());
+
+			assignToLocalShelves(destinationShelf);
 		}
 
 		else
@@ -64,9 +68,10 @@ public class Storage
 		}
 	}
 
-	public void moveResources(Shelf shelfFrom, Shelf shelfTo, int amount)	/* Java is pass-by-value, if this is called from another file the shelves will remain unchanged */
+	public void moveResources(int shelfFromNum, int shelfToNum, int amount)	/* Java is pass-by-value, if this is called from another file the shelves will remain unchanged */
 	{
-		/* TODO: pass shelf index to function, convert indexes to respective shelf to actually change them */
+		Shelf shelfFrom = convertIndexToShelf(shelfFromNum);
+		Shelf shelfTo = convertIndexToShelf(shelfToNum);
 
 		if (checkShelves() == true && (shelfTo.getShelfSize() - shelfTo.getShelfResource().getQuantity()) >= amount)	/* If there's enough space to move the resource(s) */
 		{
@@ -83,17 +88,13 @@ public class Storage
 					shelfFrom.getShelfResource().setResourceType(null);
 			}
 
-			for (int i = 0; i < shelfFrom.getShelfSize(); i++)
-			{
-				if (shelves[i].getShelfSize() == shelfFrom.getShelfSize())
-					shelves[i] = shelfFrom;
-			}
+			assignToLocalShelves(shelfFrom);
+			assignToLocalShelves(shelfTo);
+		}
 
-			for (int i = 0; i < shelfTo.getShelfSize(); i++)
-			{
-				if (shelves[i].getShelfSize() == shelfTo.getShelfSize())
-					shelves[i] = shelfTo;
-			}
+		else
+		{
+			System.out.println("Can't move resources");
 		}
 	}
 
@@ -105,6 +106,34 @@ public class Storage
 			totalResources += shelves[i].getShelfResource().getQuantity();
 
 		return totalResources;
+	}
+
+	private Shelf convertIndexToShelf(int shelfNumber)
+	{
+		switch (shelfNumber)
+		{
+			case 1:
+				return shelves[0];
+
+			case 2:
+				return shelves[1];
+
+			case 3:
+				return shelves[2];
+
+			default:
+				System.out.println("Error");
+				return null;
+		}
+	}
+
+	private void assignToLocalShelves(Shelf shelf)
+	{
+		for (int i = 0; i < shelf.getShelfSize(); i++)
+		{
+			if (shelves[i].getShelfSize() == shelf.getShelfSize())
+				shelves[i] = shelf;
+		}
 	}
 
 	public Shelf[] getShelves()
