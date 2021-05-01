@@ -14,7 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class ServerListener implements Runnable		/* Thread running listening for incoming connections */
 {
-	private ServerSocket serverSocket;
+	private final ServerSocket serverSocket;
 
 	/* Static method to get name/choice from client? So Match can use them */
 
@@ -40,14 +40,14 @@ public class ServerListener implements Runnable		/* Thread running listening for
 				dos = new DataOutputStream(socket.getOutputStream());
 				System.out.println("Incoming connection: " + socket);
 				username = dis.readUTF();
+				System.out.println("Username: " + username);
+				System.out.println("Choice: " + choice);
 				choice = dis.readUTF();
 			}
 			catch (IOException e)
 			{
 				e.printStackTrace();		/* Better than println as it tells filename and line number where the exception happened */
 			}
-
-			System.out.println("Username: " + username + "\nChoice: " + choice);        /* Works */
 
 			if (choice == "NEW_GAME")        /* Sends game code to client, creates new match thread */
 			{

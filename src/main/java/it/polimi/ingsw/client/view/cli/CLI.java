@@ -1,6 +1,8 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.controller.Controller;
+import it.polimi.ingsw.model.Marble;
+import it.polimi.ingsw.model.MarblesMarket;
 import it.polimi.ingsw.model.cards.LeaderCard;
 
 import java.io.DataInputStream;
@@ -11,15 +13,16 @@ import java.util.Scanner;
 
 public class CLI		/* Is this the view? Controller? Both? */
 {
-	private static Scanner input;
-	private static Socket socket;
-	private static Controller controller;
-	private static DataInputStream dis;
-	private static DataOutputStream dos;
+	private final Scanner input;
+	private Socket socket;
+	private Controller controller;
+	private DataInputStream dis;
+	private DataOutputStream dos;
 
 	public CLI() throws IOException
 	{
 		input = new Scanner(System.in);
+		System.out.println("Masters of the Renaissance!");
 		try
 		{
 			socket = new Socket("127.0.0.1", 2000);		/* Add port to config file? */
@@ -48,14 +51,17 @@ public class CLI		/* Is this the view? Controller? Both? */
 		socket.close();
 	}
 
-	public static void gameSetup() throws IOException
+	public void gameSetup() throws IOException
 	{
-		System.out.println("New game: 1\tJoin Game: 2");		/* TODO: add error detection (if input is not 1 nor 2) */
+		System.out.println("Insert username: ");
+		dos.writeUTF(input.nextLine());
+
+		System.out.println("New game: 1\t\tJoin Game: 2");
 
 		/* Client directly asks for code, numPlayers... No reason to make the server ask because it's a standard process */
 		/* ALWAYS use writeUTF(), never writeInt() or anything else */
 
-		switch(input.nextLine())		/* For now there's only one match, no game thread in server */
+		switch(input.nextLine())
 		{
 			case "1":
 				dos.writeUTF("NEW_GAME");
@@ -75,8 +81,6 @@ public class CLI		/* Is this the view? Controller? Both? */
 				break;
 		}
 
-		System.out.println("Insert username: ");
-		dos.writeUTF(input.nextLine());
 		/* Server tells clients info about the four leadercards */
 		System.out.println("Choose leader card 1, 2, 3 or 4: ");
 		dos.writeUTF(input.nextLine());
@@ -87,8 +91,15 @@ public class CLI		/* Is this the view? Controller? Both? */
 		System.out.println("[ | | | | | | | | | | | | | | | | | | | | | | | | | ]");		/* wow */
 	}
 
-	public void printPlayerLeaderCard(LeaderCard hi)
+	public void printPlayerLeaderCard(Object card)		/* Can't access skill variables from LeaderCard because it's abstract */
 	{
+		System.out.println("Points: " + ((LeaderCard)card).getPoints());
+		System.out.println("Discarded: " + ((LeaderCard)card).isDiscarded());
+
+		if (card.getClass().getSimpleName() == "SkillDiscount")
+		{
+			// ...
+		}
 
 	}
 
@@ -102,9 +113,48 @@ public class CLI		/* Is this the view? Controller? Both? */
 
 	}
 
-	public void printMarblesMarket()
+	public void printMarblesMarket(MarblesMarket market)		/* private? */
 	{
+		Marble[][] board = market.getMarblesBoard();
 
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				System.out.print(board[i][j] + "  ");
+			}
+			System.out.print("\n");
+		}
 	}
+
+	public String convertMarbleToString(Marble marble)
+	{
+		final String marbleSymbol = "\u2B24";
+
+		switch (marble.getMarbleType())
+		{
+			case YELLOW:
+				return Color.YELLOW + marbleSymbol;
+
+			case PURPLE:
+				return Color.PURPLE + marbleSymbol;
+
+			case WHITE:
+				return Color.WHITE + marbleSymbol;
+
+			case GREY:
+				return Color.GREY + marbleSymbol;
+
+			case BLUE:
+				return Color.BLUE + marbleSymbol;
+
+			case RED:
+				return Color.RED + marbleSymbol;
+		}
+
+		return null;
+	}
+
+
 
 }

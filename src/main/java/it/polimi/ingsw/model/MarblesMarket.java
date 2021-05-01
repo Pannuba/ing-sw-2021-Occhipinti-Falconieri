@@ -17,7 +17,7 @@ package it.polimi.ingsw.model;
 
 	[2][0]	[2][1]	[2][2]	[2][3]
 
- */
+*/
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,7 +109,7 @@ public class MarblesMarket
 			}
 		}
 
-		for (int i = 0; i < 13;   )
+		for (int i = 0; i < 13;  /**/  )
 		{
 			if (i == 12)		/* TODO: test this in a separate program , should exit all for loops because the last marble to assign is the spare one */
 			{
@@ -188,7 +188,6 @@ public class MarblesMarket
 		marblesBoard[row][3] = oldSpareMarble;
 
 		return marblesToAdd;
-
 	}
 
 	public List<Marble> buyMarblesCol(int col)

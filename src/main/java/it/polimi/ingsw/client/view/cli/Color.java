@@ -1,12 +1,15 @@
 package it.polimi.ingsw.client.view.cli;
 
-public enum Color
+public enum Color		/* https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797 */
 {
-	RED("\u001B[1;31m"),
-	GREEN("\u001B[1;32m"),
-	YELLOW("\u001B[1;33m"),
-	BLUE("\u001B[1;34m"),
-	PURPLE("\u001B[1;35m");
+	RED("\u001B[31m"),
+	GREEN("\u001B[32m"),
+	YELLOW("\u001B[33m"),
+	BLUE("\u001B[34m"),
+	PURPLE("\u001B[35m"),
+	GREY("\u001B[38;5;245m"),
+	WHITE("\u001B[37m");
+
 
 	public static final String RESET = "\u001B[0m";
 
@@ -33,15 +36,19 @@ public enum Color
 		switch (this)
 		{
 			case RED:
-			return "Red";
+				return "Red";
+
 			case GREEN:
-			return "Green";
+				return "Green";
+
 			case YELLOW:
-			return "Yellow";
+				return "Yellow";
+
 			case PURPLE:
-			return "Purple";
+				return "Purple";
+
 			default:
-			return "Blue";
+				return "Blue";
 		}
 	}
 }
