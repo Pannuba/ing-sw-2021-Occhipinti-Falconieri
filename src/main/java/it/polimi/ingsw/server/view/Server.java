@@ -13,11 +13,19 @@ import java.net.ServerSocket;
 
 public class Server
 {
-	public static void main(String args[]) throws IOException		/* TODO: port number in config file */
+
+	public static void main(String[] args) throws IOException		/* TODO: port number in config file, use ConfigParser */
 	{
 		final ServerSocket serverSocket = new ServerSocket(2000, 0, InetAddress.getByName(null));        /* Port has to be > 1024 in order to work without root permissions */
-		Runnable r = new ServerListener(serverSocket);			/* Does this need to be a thread? */
-		new Thread(r).start();
+		Socket socket = serverSocket.accept();
+		DataInputStream dis = new DataInputStream(socket.getInputStream());
+		System.out.println("Incoming connection: " + socket);
+
+		if (dis.readUTF().equals("ping"))
+		{
+			Runnable r = new ServerListener(socket);
+			new Thread(r).start();
+		}
 
 		//serverSocket.close();
 	}

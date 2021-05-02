@@ -20,7 +20,7 @@ public class ClientHandler implements Runnable
 		DataOutputStream dos = null;
 		String message = null;
 
-		System.out.println("Created thread for : " + clientSocket);
+		System.out.println("Created thread for: " + clientSocket);
 
 		try
 		{

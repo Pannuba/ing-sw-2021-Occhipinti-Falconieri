@@ -15,12 +15,10 @@ public class Match implements Runnable		/* Controller?? */
 	private int numPlayers;
 	private String gameCode;
 	private List<Player> players = new ArrayList<Player>();
-	private ServerSocket serverSocket;		/* Protected? */
 
-	public Match(int numPlayers, String gameCode, String firstPlayerName, Socket firstPlayerSocket, ServerSocket serverSocket)
+	public Match(int numPlayers, String firstPlayerName, Socket firstPlayerSocket)
 	{
 		this.numPlayers = numPlayers;
-		this.gameCode = gameCode;
 
 		players.add(new Player());
 		players.get(0).setUsername(firstPlayerName);
@@ -42,7 +40,7 @@ public class Match implements Runnable		/* Controller?? */
 		{
 			try
 			{
-				socket = serverSocket.accept();
+				//socket = serverSocket.accept();
 				DataInputStream dis = new DataInputStream(socket.getInputStream());
 				DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
 
