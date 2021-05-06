@@ -29,14 +29,13 @@ public class CLI implements Observer
 		controller = new Controller();
 		input = new Scanner(System.in);
 
-		System.out.print("Insert username: ");
+		System.out.print("Username: ");
 		String username = input.nextLine();
-		System.out.print("Insert server IP: ");
+		System.out.print("Server IP: ");
 		String ip = input.nextLine();
-		System.out.print("Insert server port: ");
+		System.out.print("Server port: ");
 		int port = Integer.parseInt(input.nextLine());
 
-		System.out.println("Creating NetworkHandler");
 		NetworkHandler networkHandler = new NetworkHandler(username, ip, port);
 		networkHandler.addObserver(this);		/* CLI observes the networkHandler to get the new gamestate */
 

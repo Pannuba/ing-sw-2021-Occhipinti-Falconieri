@@ -16,7 +16,7 @@ import static java.lang.Boolean.parseBoolean;
 public class NetworkHandler extends Observable implements Runnable
 {
 	private Socket clientSocket;
-	private ObjectInputStream dis;
+	private ObjectInputStream ois;
 	private DataOutputStream dos;
 	private String username, ip;
 	private int port;
@@ -26,9 +26,6 @@ public class NetworkHandler extends Observable implements Runnable
 		this.username = username;
 		this.ip = ip;
 		this.port = port;
-		boolean isFirstPlayer;
-
-
 	}
 
 	public void run()
@@ -43,7 +40,7 @@ public class NetworkHandler extends Observable implements Runnable
 
 			try
 			{
-				gameState = (GameState) dis.readObject();			/* Send gamestate to the view? */
+				gameState = (GameState) ois.readObject();			/* Send gamestate to the view? */
 				notifyObservers(gameState);
 			}
 			catch (IOException | ClassNotFoundException e)
@@ -71,7 +68,7 @@ public class NetworkHandler extends Observable implements Runnable
 		{
 			clientSocket = new Socket(ip, port);
 			dos = new DataOutputStream(clientSocket.getOutputStream());		/* Send commands to server as strings */
-			dis = new ObjectInputStream(clientSocket.getInputStream());		/* Recieve gamestate from server (object) */
+			ois = new ObjectInputStream(clientSocket.getInputStream());		/* Receive gamestate from server (object) */
 		}
 		catch (Exception e)
 		{
@@ -87,7 +84,7 @@ public class NetworkHandler extends Observable implements Runnable
 
 		try
 		{
-			isFirstPlayer = parseBoolean(dis.readUTF());
+			isFirstPlayer = parseBoolean((String)ois.readObject());		/* Need to use readObject and then cast it */
 		}
 		catch (Exception e)
 		{
@@ -101,11 +98,11 @@ public class NetworkHandler extends Observable implements Runnable
 	{
 		String message = "";
 
-		while(true)
+		while(!clientSocket.isClosed())
 		{
 			try
 			{
-				message = dis.readUTF();
+				message = (String)ois.readObject();
 			}
 			catch (Exception e)
 			{

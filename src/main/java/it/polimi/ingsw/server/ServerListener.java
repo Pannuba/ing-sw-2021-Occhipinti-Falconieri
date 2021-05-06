@@ -56,8 +56,9 @@ public class ServerListener implements Runnable		/* Thread running listening for
 
 					if (i == 0)		/* Get numPlayers from the first player who connects */
 					{
-						oos.writeUTF("true");
+						oos.writeObject("true");
 						numPlayers = Integer.parseInt(dis.readUTF());        /* So the loop is repeated numPlayers times to get numPlayers players */
+						System.out.println("numPlayers: " + numPlayers);
 					}
 
 				}

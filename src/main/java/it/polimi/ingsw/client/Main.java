@@ -13,7 +13,7 @@ public class Main		/* Starting point from which the user chooses to start the CL
 		Scanner input = new Scanner(System.in);
 		String choice = "";
 
-		System.out.println("Start with CLI (1) or GUI (2)?");
+		System.out.print("Start with CLI (1) or GUI (2)? ");
 		choice = input.nextLine();
 
 		while(!choice.equals("1") && !choice.equals("2"))

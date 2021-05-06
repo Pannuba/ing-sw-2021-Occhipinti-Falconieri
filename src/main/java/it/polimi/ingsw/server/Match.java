@@ -33,32 +33,4 @@ public class Match implements Runnable		/* Controller?? */
 			e.printStackTrace();
 		}
 	}
-
-	/*void waitForPlayers()		This should go in a Lobby class
-	{
-		Socket socket = null;
-		String username = "";
-
-		for (int i = 1; i < numPlayers; i++)		/* Waits for numPlayers clients to connect. Starts from 1 because one player is already connected */
-		/*{
-			try
-			{
-				socket = serverSocket.accept();
-				DataInputStream dis = new DataInputStream(socket.getInputStream());
-				DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-
-				username = dis.readUTF();
-
-
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-
-			players.add(new Player());
-			players.get(i).setUsername(username);
-			Runnable r = new ClientHandler(socket);
-		}
-	}*/
 }
