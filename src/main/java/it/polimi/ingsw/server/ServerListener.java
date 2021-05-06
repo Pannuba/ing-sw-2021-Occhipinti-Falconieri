@@ -57,9 +57,9 @@ public class ServerListener implements Runnable		/* Thread running listening for
 
 					if (i == 0)		/* Get numPlayers from the first player who connects */
 					{
-						oos.writeObject("true");
-						numPlayers = Integer.parseInt(dis.readUTF());        /* So the loop is repeated numPlayers times to get numPlayers players */
-						System.out.println("numPlayers: " + numPlayers);
+							oos.writeObject("true");
+							numPlayers = Integer.parseInt(dis.readUTF());        /* So the loop is repeated numPlayers times to get numPlayers players */
+							System.out.println("numPlayers: " + numPlayers);
 					}
 
 				}
@@ -71,7 +71,7 @@ public class ServerListener implements Runnable		/* Thread running listening for
 				players.add(new Player());
 				players.get(i).setUsername(username);
 
-				ClientHandler clientHandler = new ClientHandler(socket, username);		/* Start view thread that listens for commands from client */
+				ClientHandler clientHandler = new ClientHandler(socket, username, dis, oos);		/* Start view thread that listens for commands from client */
 				views.add(clientHandler);
 				new Thread(clientHandler).start();
 			}

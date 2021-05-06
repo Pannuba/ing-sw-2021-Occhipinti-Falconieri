@@ -23,7 +23,7 @@ public class Match implements Runnable		/* Controller?? */
 		this.views = views;
 	}
 
-	public void run()		/* Start match */
+	public void run()		/* Create model and controller, send "start match" message and then start the match */
 	{
 		try
 		{

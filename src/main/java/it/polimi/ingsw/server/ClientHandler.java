@@ -15,22 +15,14 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 	private DataInputStream dis;
 	private ObjectOutputStream oos;
 
-	public ClientHandler(Socket clientSocket, String username)
+	public ClientHandler(Socket clientSocket, String username, DataInputStream dis, ObjectOutputStream oos)
 	{
 		System.out.println("Created thread for: " + clientSocket);
 
 		this.clientSocket = clientSocket;
 		this.username = username;
-
-		try
-		{
-			dis = new DataInputStream(clientSocket.getInputStream());
-			oos = new ObjectOutputStream(clientSocket.getOutputStream());
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		this.dis = dis;				/* Can't create a I/O stream for a socket that already has one (created in ServerListener) */
+		this.oos = oos;
 	}
 
 	public void run()
