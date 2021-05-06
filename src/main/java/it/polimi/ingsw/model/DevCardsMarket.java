@@ -10,14 +10,21 @@ public class DevCardsMarket
 {
 	private List<DevCard> devCards = new ArrayList<DevCard>();
 
-	public DevCardsMarket() throws IOException
+	public DevCardsMarket()
 	{
 		XML_Serialization xmlDecode = new XML_Serialization();
 
 		for (int i = 0; i < 48; i++)
 		{
-			devCards.add((DevCard) xmlDecode.deserialize("resources/xml/devcards/leadercard" + (i + 1) + ".xml"));
-			devCards.get(i).setCardNumber(i + 1);
+			try
+			{
+				devCards.add((DevCard) xmlDecode.deserialize("src/main/resources/xml/devcards/leadercard" + (i + 1) + ".xml"));
+				devCards.get(i).setCardNumber(i + 1);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 

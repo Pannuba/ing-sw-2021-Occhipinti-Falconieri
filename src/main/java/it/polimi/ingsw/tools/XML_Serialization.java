@@ -14,10 +14,7 @@ import it.polimi.ingsw.model.cards.*;
 import java.beans.ExceptionListener;
 import java.beans.XMLEncoder;
 import java.beans.XMLDecoder;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class XML_Serialization
@@ -31,7 +28,7 @@ public class XML_Serialization
 
 		while (true)
 		{
-			System.out.printf("LeaderCard: 1    DevCard: 2    Quit: 3%nInput: ");
+			System.out.printf("LeaderCard: 1    DevCard: 2    Quit: 3\nInput: ");
 
 			switch (input.nextLine())
 			{
@@ -41,7 +38,7 @@ public class XML_Serialization
 					String leaderCardRequirements = null;
 
 					System.out.printf("LeaderCard number [1, 16]: ");
-					filename = "resources/xml/leadercards/leadercard" + input.nextLine() + ".xml";
+					filename = "src/main/resources/xml/leadercards/leadercard" + input.nextLine() + ".xml";
 
 					System.out.printf("Points: ");
 					leaderCardPoints = Integer.parseInt(input.nextLine());		/* Convert input string to int */
@@ -94,10 +91,9 @@ public class XML_Serialization
 							leaderCardOne.setPoints(leaderCardPoints);
 							leaderCardOne.setRequirements(leaderCardRequirements);
 							ResourceType discountedResource = null;
-	/* TODO: switch/case for ResourceType */ System.out.printf("Resource (G/Y/B/P): ");
+							System.out.printf("Resource (G/Y/B/P): ");
 							discountedResource = convertStringToResType(input.nextLine());
-							leaderCardOne.setDiscountedResource(discountedResource);
-							//leaderCardOne.setDiscount(-1);								/* All cards have a discount of 1 resource less */
+							leaderCardOne.setDiscountedResource(discountedResource);	/* Discount amount is already set in SkillDiscount */
 							serialize(leaderCardOne, filename);
 							break;
 
@@ -105,11 +101,9 @@ public class XML_Serialization
 							SkillStorage leaderCardTwo = new SkillStorage();
 							leaderCardTwo.setPoints(leaderCardPoints);
 							leaderCardTwo.setRequirements(leaderCardRequirements);
-							Shelf additionalStorage = new Shelf(2);
-							System.out.printf("Additional storage resource: ");
-							additionalStorage.getShelfResource().setResourceType(convertStringToResType(input.nextLine()));
-							additionalStorage.getShelfResource().setQuantity(2);								/* Can only hold one type of resource, amount is always 2 */
-							leaderCardTwo.setAdditionalStorage(additionalStorage);
+							System.out.printf("Additional storage resource (G/Y/B/P): ");
+							leaderCardTwo.getAdditionalStorage().setShelfSize(2);
+							leaderCardTwo.getAdditionalStorage().getShelfResource().setResourceType(convertStringToResType(input.nextLine()));
 							serialize(leaderCardTwo, filename);
 							break;
 
@@ -117,8 +111,8 @@ public class XML_Serialization
 							SkillMarble leaderCardThree = new SkillMarble();
 							leaderCardThree.setPoints(leaderCardPoints);
 							leaderCardThree.setRequirements(leaderCardRequirements);
-							System.out.printf("White marble resource: ");				/* TODO: switch/case for ResourceType */
-							//leaderCardThree.setWhiteMarble(input.nextLine());
+							System.out.printf("White marble resource (G/Y/B/P): ");				/* TODO: switch/case for ResourceType */
+							leaderCardThree.setWhiteMarble(convertStringToResType(input.nextLine()));
 							serialize(leaderCardThree, filename);
 							break;
 
@@ -126,11 +120,10 @@ public class XML_Serialization
 							SkillProduction leaderCardFour = new SkillProduction();
 							leaderCardFour.setPoints(leaderCardPoints);
 							leaderCardFour.setRequirements(leaderCardRequirements);
-							Resource productionCost = new Resource();
-							System.out.printf("Resource needed for production: ");
-							productionCost.setResourceType(convertStringToResType(input.nextLine()));
-							productionCost.setQuantity(1);								/* Always 1 */
-							//leaderCardFour.setProductionCost(productionCost);
+							System.out.printf("Resource needed for production (G/Y/B/P): ");
+							leaderCardFour.getRequirement().setResourceType(convertStringToResType(input.nextLine()));
+							System.out.printf("Resource produced (G/Y/B/P): ");
+							leaderCardFour.getProduct().setResourceType(convertStringToResType(input.nextLine()));
 							serialize(leaderCardFour, filename);
 							break;
 
@@ -275,7 +268,7 @@ public class XML_Serialization
 		fos.close();
 	}
 
-	public static Object deserialize(String filename) throws IOException	/* Works! println output is the same before and after serialization */
+	public static Object deserialize(String filename) throws IOException    /* Works! println output is the same before and after serialization */
 	{
 		FileInputStream fis = new FileInputStream(filename);
 		XMLDecoder decoder = new XMLDecoder(fis);

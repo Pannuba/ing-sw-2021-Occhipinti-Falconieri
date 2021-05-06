@@ -5,8 +5,17 @@ import it.polimi.ingsw.model.Resource;
 public class SkillProduction extends LeaderCard		/* Every card gives one faith point and one product that can be chosen */
 {
 	private Resource requirement;			/* Always 1 requirement, 1 output resource, 1 faith point */
-	private Resource chosenProduction;
-	private int faithPoints;
+	private Resource product;
+	private final int faithPoints = 1;
+
+	public SkillProduction()
+	{
+		requirement = new Resource();
+		requirement.setQuantity(1);
+
+		product = new Resource();
+		product.setQuantity(1);
+	}
 
 	public Resource getRequirement()
 	{
@@ -18,23 +27,18 @@ public class SkillProduction extends LeaderCard		/* Every card gives one faith p
 		this.requirement = requirement;
 	}
 
-	public Resource getChosenProduction()
+	public Resource getProduct()
 	{
-		return chosenProduction;
+		return product;
 	}
 
-	public void setChosenProduction(Resource chosenProduction)
+	public void setProduct(Resource product)
 	{
-		this.chosenProduction = chosenProduction;
+		this.product = product;
 	}
 
 	public int getFaithPoints()
 	{
 		return faithPoints;
-	}
-
-	public void setFaithPoints(int faithPoints)
-	{
-		this.faithPoints = faithPoints;
 	}
 }

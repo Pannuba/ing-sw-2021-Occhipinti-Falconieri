@@ -4,6 +4,8 @@ import it.polimi.ingsw.model.board.Dashboard;
 import it.polimi.ingsw.model.board.Track;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
+import it.polimi.ingsw.model.cards.SkillDiscount;
+
 import it.polimi.ingsw.tools.XML_Serialization;
 
 import java.io.DataOutputStream;
@@ -21,7 +23,7 @@ public class Model
 	private List<Player> players = new ArrayList<Player>();
 	private List<LeaderCard> allLeaderCards = new ArrayList<LeaderCard>();		/* All 16 leadercards, each player picks 2 out of 4 */
 
-	public Model(int numPlayers) throws IOException    /* Pass usernames? */
+	public Model(int numPlayers)    /* Pass usernames? */
 	{
 		this.numPlayers = numPlayers;
 		XML_Serialization decoder = new XML_Serialization();
@@ -32,7 +34,16 @@ public class Model
 
 		for (int i = 0; i < 16; i++)
 		{
-			cardToAdd = (LeaderCard)decoder.deserialize("resources/xml/leadercards/leadercard" + (i + 1) + ".xml");
+			System.out.println("Creating leadercard " + (i + 1));		/* TODO: remake all .xmls, add debug prints */
+			try
+			{
+				cardToAdd = (LeaderCard) decoder.deserialize("src/main/resources/xml/leadercards/leadercard" + (i + 1) + ".xml");
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+
 			cardToAdd.setCardNumber(i + 1);
 			allLeaderCards.add(cardToAdd);
 		}
