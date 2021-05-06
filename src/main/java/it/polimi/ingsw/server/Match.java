@@ -11,14 +11,16 @@ import java.util.List;
 public class Match implements Runnable		/* Controller?? */
 {
 	private final int numPlayers;
-	private List<Player> players = new ArrayList<Player>();
+	private final List<Player> players;
+	private final List<ClientHandler> views;
 	private Model model;
 	private Controller controller;
 
-	public Match(int numPlayers, List<Player> players)
+	public Match(int numPlayers, List<Player> players, List<ClientHandler> views)
 	{
 		this.numPlayers = numPlayers;
 		this.players = players;
+		this.views = views;
 	}
 
 	public void run()		/* Start match */
@@ -31,6 +33,11 @@ public class Match implements Runnable		/* Controller?? */
 		catch (Exception e)
 		{
 			e.printStackTrace();
+		}
+
+		for (int i = 0; i < numPlayers; i++)
+		{
+			views.get(i).send("START");
 		}
 	}
 }

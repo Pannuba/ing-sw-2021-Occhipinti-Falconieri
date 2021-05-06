@@ -33,6 +33,7 @@ public class ServerListener implements Runnable		/* Thread running listening for
 		Socket socket = null;
 		DataInputStream dis = null;
 		ObjectOutputStream oos = null;
+		List<ClientHandler> views = new ArrayList<ClientHandler>();
 
 		while (!serverSocket.isClosed())
 		{
@@ -70,11 +71,12 @@ public class ServerListener implements Runnable		/* Thread running listening for
 				players.add(new Player());
 				players.get(i).setUsername(username);
 
-				Runnable r = new ClientHandler(socket, username);
-				new Thread(r).start();
+				ClientHandler clientHandler = new ClientHandler(socket, username);		/* Start view thread that listens for commands from client */
+				views.add(clientHandler);
+				new Thread(clientHandler).start();
 			}
 
-			Runnable r = new Match(numPlayers, players);
+			Runnable r = new Match(numPlayers, players, views);
 			new Thread(r).start();
 		}
 
