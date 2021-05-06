@@ -1,58 +1,54 @@
 package it.polimi.ingsw.server;
 
+import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.server.controller.Controller;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Match implements Runnable		/* Controller?? */
 {
-	private int numPlayers;
-	private String gameCode;
+	private final int numPlayers;
 	private List<Player> players = new ArrayList<Player>();
+	private Model model;
+	private Controller controller;
 
-	public Match(int numPlayers, String firstPlayerName, Socket firstPlayerSocket)
+	public Match(int numPlayers, List<Player> players)
 	{
 		this.numPlayers = numPlayers;
-
-		players.add(new Player());
-		players.get(0).setUsername(firstPlayerName);
-		Runnable r = new ClientHandler(firstPlayerSocket);
+		this.players = players;
 	}
-	public void run()
+
+	public void run()		/* Start match */
 	{
-		waitForPlayers();
-		/* Start match */
-
+		try
+		{
+			model = new Model(numPlayers);
+			controller = new Controller(model);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
-	void waitForPlayers()
+	/*void waitForPlayers()		This should go in a Lobby class
 	{
 		Socket socket = null;
 		String username = "";
 
 		for (int i = 1; i < numPlayers; i++)		/* Waits for numPlayers clients to connect. Starts from 1 because one player is already connected */
-		{
+		/*{
 			try
 			{
-				//socket = serverSocket.accept();
+				socket = serverSocket.accept();
 				DataInputStream dis = new DataInputStream(socket.getInputStream());
 				DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
 
 				username = dis.readUTF();
 
-				if (dis.readUTF() == "JOIN_GAME")
-				{
-					String gameCode = dis.readUTF();
-				}
-
-				else
-					System.out.println("Error, can't create new game now");
 
 			}
 			catch (IOException e)
@@ -64,5 +60,5 @@ public class Match implements Runnable		/* Controller?? */
 			players.get(i).setUsername(username);
 			Runnable r = new ClientHandler(socket);
 		}
-	}
+	}*/
 }

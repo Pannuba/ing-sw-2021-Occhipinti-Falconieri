@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view;
 
 import it.polimi.ingsw.client.view.cli.CLI;
+import it.polimi.ingsw.client.view.gui.GUI;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -28,7 +29,7 @@ public class Main		/* Starting point from which the user chooses to start the CL
 				break;
 
 			case "2":
-				//GUI gui = new GUI();
+				GUI gui = new GUI();
 				break;
 		}
 	}

@@ -7,11 +7,13 @@ import java.net.Socket;
 
 public class ClientHandler implements Runnable
 {
-	private Socket clientSocket;
+	private final Socket clientSocket;
+	private final String username;
 
-	public ClientHandler(Socket clientSocket)
+	public ClientHandler(Socket clientSocket, String username)
 	{
 		this.clientSocket = clientSocket;
+		this.username = username;
 	}
 
 	public void run()
