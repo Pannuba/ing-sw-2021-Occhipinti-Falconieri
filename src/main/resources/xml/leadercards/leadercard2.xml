@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="14.0.2" class="java.beans.XMLDecoder">
- <object class="server.model.cards.LeaderCard$SkillOne">
-  <void property="discount">
-   <int>-1</int>
-  </void>
+ <object class="it.polimi.ingsw.model.cards.SkillDiscount">
   <void property="discountedResource">
-   <object class="server.model.Resource">
-    <void property="category">
-     <string>B</string>
-    </void>
+   <object class="java.lang.Enum" method="valueOf">
+    <class>it.polimi.ingsw.model.ResourceType</class>
+    <string>BLUE</string>
    </object>
   </void>
   <void property="points">

@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="14.0.2" class="java.beans.XMLDecoder">
- <object class="server.model.cards.LeaderCard$SkillFour">
+ <object class="it.polimi.ingsw.model.cards.SkillProduction" id="SkillProduction0">
   <void property="points">
    <int>4</int>
   </void>
-  <void property="productionCost">
-   <object class="server.model.Resource">
-    <void property="category">
-     <string>P</string>
-    </void>
-    <void property="quantity">
-     <int>1</int>
-    </void>
-   </object>
+  <void property="requirement">
+   <void property="resourceType">
+    <object class="java.lang.Enum" method="valueOf">
+     <class>it.polimi.ingsw.model.ResourceType</class>
+     <string>PURPLE</string>
+    </object>
+   </void>
   </void>
   <void property="requirements">
    <string>DEV_LV2_1B</string>

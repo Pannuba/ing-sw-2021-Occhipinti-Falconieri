@@ -122,8 +122,6 @@ public class XML_Serialization
 							leaderCardFour.setRequirements(leaderCardRequirements);
 							System.out.printf("Resource needed for production (G/Y/B/P): ");
 							leaderCardFour.getRequirement().setResourceType(convertStringToResType(input.nextLine()));
-							System.out.printf("Resource produced (G/Y/B/P): ");
-							leaderCardFour.getProduct().setResourceType(convertStringToResType(input.nextLine()));
 							serialize(leaderCardFour, filename);
 							break;
 

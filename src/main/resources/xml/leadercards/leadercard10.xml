@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="14.0.2" class="java.beans.XMLDecoder">
- <object class="server.model.cards.LeaderCard$SkillThree">
+ <object class="it.polimi.ingsw.model.cards.SkillMarble">
   <void property="points">
    <int>5</int>
   </void>
   <void property="requirements">
-   <string>DEV_LV1_1G1P</string>
+   <string>DEV_LV1_2G1P</string>
   </void>
   <void property="whiteMarble">
-   <string>B</string>
+   <object class="java.lang.Enum" method="valueOf">
+    <class>it.polimi.ingsw.model.ResourceType</class>
+    <string>BLUE</string>
+   </object>
   </void>
  </object>
 </java>

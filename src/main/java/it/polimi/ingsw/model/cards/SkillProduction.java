@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.Resource;
 
 public class SkillProduction extends LeaderCard		/* Every card gives one faith point and one product that can be chosen */
 {
-	private Resource requirement;			/* Always 1 requirement, 1 output resource, 1 faith point */
+	private Resource requirement;			/* Always 1 requirement, 1 output resource (chosen by user), 1 faith point */
 	private Resource product;
 	private final int faithPoints = 1;
 

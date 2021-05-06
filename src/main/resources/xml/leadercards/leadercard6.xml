@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="14.0.2" class="java.beans.XMLDecoder">
- <object class="server.model.cards.LeaderCard$SkillTwo">
-  <void property="additionalStorage">
-   <object class="server.model.Resource">
-    <void property="category">
-     <string>P</string>
+ <object class="it.polimi.ingsw.model.cards.SkillStorage" id="SkillStorage0">
+  <void id="Shelf0" property="additionalStorage">
+   <void property="shelfResource">
+    <void property="resourceType">
+     <object class="java.lang.Enum" method="valueOf">
+      <class>it.polimi.ingsw.model.ResourceType</class>
+      <string>PURPLE</string>
+     </object>
     </void>
-    <void property="quantity">
-     <int>2</int>
-    </void>
-   </object>
+   </void>
   </void>
   <void property="points">
    <int>3</int>
