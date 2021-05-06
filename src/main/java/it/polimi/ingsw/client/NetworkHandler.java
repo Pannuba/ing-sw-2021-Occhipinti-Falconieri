@@ -1,6 +1,9 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.model.GameState;
+
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Observable;
 
 import java.io.DataInputStream;
@@ -8,38 +11,42 @@ import java.io.DataOutputStream;
 import java.net.Socket;
 import java.util.Observer;
 
-public class NetworkHandler implements Runnable, Observer
+import static java.lang.Boolean.parseBoolean;
+
+public class NetworkHandler extends Observable implements Runnable
 {
-	private final Socket clientSocket;
-	private DataInputStream dis;
+	private Socket clientSocket;
+	private ObjectInputStream dis;
 	private DataOutputStream dos;
+	private String username, ip;
+	private int port;
 
-	public NetworkHandler(Socket clientSocket)
+	public NetworkHandler(String username, String ip, int port)
 	{
-		this.clientSocket = clientSocket;
+		this.username = username;
+		this.ip = ip;
+		this.port = port;
+		boolean isFirstPlayer;
 
-		try
-		{
-			dos = new DataOutputStream(clientSocket.getOutputStream());
-			dis = new DataInputStream(clientSocket.getInputStream());
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+
 	}
 
 	public void run()
 	{
+		System.out.println("Waiting for players to connect...");
+		waitForPlayers();
+		System.out.println("Starting match");
+
 		while(!clientSocket.isClosed())
 		{
-			String message = "";
+			GameState gameState = null;
 
 			try
 			{
-				message = dis.readUTF();			/* Send gamestate to another class, which is observed by the view? */
+				gameState = (GameState) dis.readObject();			/* Send gamestate to the view? */
+				notifyObservers(gameState);
 			}
-			catch (IOException e)
+			catch (IOException | ClassNotFoundException e)
 			{
 				e.printStackTrace();
 			}
@@ -56,6 +63,60 @@ public class NetworkHandler implements Runnable, Observer
 		}
 	}
 
+	public void connect()
+	{
+		System.out.println("Connecting to server...");
+
+		try
+		{
+			clientSocket = new Socket(ip, port);
+			dos = new DataOutputStream(clientSocket.getOutputStream());		/* Send commands to server as strings */
+			dis = new ObjectInputStream(clientSocket.getInputStream());		/* Recieve gamestate from server (object) */
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			System.out.println("Connection failed to server");
+			System.exit(1);
+		}
+	}
+
+	public boolean isFirstPlayer()
+	{
+		boolean isFirstPlayer = false;		/* Server only tells true, otherwise it's false by default */
+
+		try
+		{
+			isFirstPlayer = parseBoolean(dis.readUTF());
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return isFirstPlayer;
+	}
+
+	private void waitForPlayers()
+	{
+		String message = "";
+
+		while(true)
+		{
+			try
+			{
+				message = dis.readUTF();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+
+			if (message.equals("START"))
+				break;
+		}
+	}
+
 	public void send(String message)
 	{
 		try
@@ -66,11 +127,5 @@ public class NetworkHandler implements Runnable, Observer
 		{
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public void update(Observable observable, Object o)
-	{
-
 	}
 }

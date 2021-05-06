@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.controller.Controller;
+import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Marble;
 import it.polimi.ingsw.model.MarblesMarket;
 import it.polimi.ingsw.model.cards.LeaderCard;
@@ -11,35 +12,52 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
 
-public class CLI extends Observable
+import static java.lang.Boolean.parseBoolean;
+
+public class CLI implements Observer
 {
 	private final Scanner input;
 	private NetworkHandler networkHandler;
 	private final Controller controller;
+	private GameState gameState;
 
-	public CLI() throws IOException
+	public CLI()
 	{
 		controller = new Controller();
 		input = new Scanner(System.in);
 
-		NetworkHandler networkHandler = new NetworkHandler(new Socket("127.0.0.1", 2000));
-		new Thread(networkHandler).start();
+		System.out.print("Insert username: ");
+		String username = input.nextLine();
+		System.out.print("Insert server IP: ");
+		String ip = input.nextLine();
+		System.out.print("Insert server port: ");
+		int port = Integer.parseInt(input.nextLine());
 
-		System.out.println("Masters of the Renaissance!");
+		System.out.println("Creating NetworkHandler");
+		NetworkHandler networkHandler = new NetworkHandler(username, ip, port);
+		networkHandler.addObserver(this);		/* CLI observes the networkHandler to get the new gamestate */
 
-		networkHandler.send("ping");
-		gameSetup();
+		networkHandler.connect();
+
+		System.out.println("Sending username to server...");
+		networkHandler.send(username);
+
+		if (networkHandler.isFirstPlayer())
+		{
+			System.out.print("Total players: ");
+			networkHandler.send(input.nextLine());
+		}
+
+		new Thread(networkHandler).start();		/* Start listening for gamestate updates from server */
+		//networkHandler.send("ping");
 	}
 
-	public void gameSetup() throws IOException
+	public void gameSetup()
 	{
-		System.out.println("Insert username: ");
-		networkHandler.send(input.nextLine());
-
-		/* Client directly asks for code, numPlayers... No reason to make the server ask because it's a standard process */
-		/* ALWAYS use writeUTF(), never writeInt() or anything else */
+		System.out.println("Masters of the Renaissance!");
 
 		/* Server tells clients info about the four leadercards */
 		System.out.println("Choose leader card 1, 2, 3 or 4: ");
@@ -63,7 +81,7 @@ public class CLI extends Observable
 
 	}
 
-	public void printPlayerDevCards() 		/* Model should be in client in order to decode the DevCard objects, unless the server decodes them before sending them */
+	public void printPlayerDevCards()
 	{
 
 	}
@@ -115,6 +133,9 @@ public class CLI extends Observable
 		return null;
 	}
 
-
-
+	@Override
+	public void update(Observable observable, Object o)
+	{
+		this.gameState = (GameState)o;		/* Gamestate is needed in game loop, not during setup */
+	}
 }

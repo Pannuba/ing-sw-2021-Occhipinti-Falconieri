@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.Player;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -21,16 +22,17 @@ public class ServerListener implements Runnable		/* Thread running listening for
 
 	/* Static method to get name/choice from client? So Match can use them */
 
-	public ServerListener(ServerSocket serverSocket) throws IOException
+	public ServerListener(ServerSocket serverSocket)
 	{
 		this.serverSocket = serverSocket;
 	}
 
 	public void run()
 	{
+		System.out.println("Server started");
 		Socket socket = null;
 		DataInputStream dis = null;
-		DataOutputStream dos = null;
+		ObjectOutputStream oos = null;
 
 		while (!serverSocket.isClosed())
 		{
@@ -40,15 +42,24 @@ public class ServerListener implements Runnable		/* Thread running listening for
 
 			for (int i = 0; i < numPlayers; i++)        /* Create first lobby */
 			{
+				System.out.println("Waiting for player " + (i+1) + ":");
+
 				try
 				{
 					socket = serverSocket.accept();
 					dis = new DataInputStream(socket.getInputStream());
-					dos = new DataOutputStream(socket.getOutputStream());
+					oos = new ObjectOutputStream(socket.getOutputStream());
+					//oos.writeUTF("ping");
 					System.out.println("Incoming connection: " + socket);
 					username = dis.readUTF();
 					System.out.println("Username: " + username);
-					numPlayers = Integer.parseInt(dis.readUTF());		/* So the loop is repeated numPlayers times to get numPlayers players */
+
+					if (i == 0)		/* Get numPlayers from the first player who connects */
+					{
+						oos.writeUTF("true");
+						numPlayers = Integer.parseInt(dis.readUTF());        /* So the loop is repeated numPlayers times to get numPlayers players */
+					}
+
 				}
 				catch (Exception e)
 				{

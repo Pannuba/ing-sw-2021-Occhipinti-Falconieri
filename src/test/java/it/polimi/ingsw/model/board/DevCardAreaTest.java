@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model.board;
 
-import it.polimi.ingsw.model.cards.DevCard;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
