@@ -40,7 +40,7 @@ public class ServerListener implements Runnable		/* Thread running listening for
 
 		for (int i = 0; i < numPlayers; i++)        /* Create first lobby */
 		{
-			System.out.print("Waiting for player " + (i + 1) + ":");
+			System.out.println("Waiting for player " + (i + 1) + "...");
 
 			try
 			{

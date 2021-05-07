@@ -44,7 +44,7 @@ public class Model
 				e.printStackTrace();
 			}
 
-			cardToAdd.setCardNumber(i + 1);
+			cardToAdd.setCardNumber(i + 1);		/* Here or in xmls? */
 			allLeaderCards.add(cardToAdd);
 		}
 
@@ -55,7 +55,7 @@ public class Model
 
 	}
 
-	private List<List<LeaderCard>> createLeaderCardsLists()				/* Returns a list of lists of leadercards, 1 for each player, each list has 4 leadercards to choose from */
+	public List<List<LeaderCard>> createLeaderCardsLists()				/* Returns a list of lists of leadercards, 1 for each player, each list has 4 leadercards to choose from */
 	{
 		int cardsToAssign[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 		List<List<LeaderCard>> listOfLists = new ArrayList<List<LeaderCard>>();

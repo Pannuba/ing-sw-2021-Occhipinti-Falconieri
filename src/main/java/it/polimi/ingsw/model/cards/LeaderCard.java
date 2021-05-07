@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.cards;
 
-public abstract class LeaderCard		/* Can't do new LeaderCard(); because it's abstract */
+import java.io.Serializable;
+
+public abstract class LeaderCard implements Serializable        /* Can't do new LeaderCard(); because it's abstract */
 {
 	private int cardNumber;
 	private int points;

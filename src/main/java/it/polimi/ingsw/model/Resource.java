@@ -6,7 +6,9 @@ package it.polimi.ingsw.model;
 	Slave --> purple -> 3
  */
 
-public class Resource
+import java.io.Serializable;
+
+public class Resource implements Serializable
 {
 	private ResourceType category;				/* Can be null, see DevCard serialization */
 	private int quantity;

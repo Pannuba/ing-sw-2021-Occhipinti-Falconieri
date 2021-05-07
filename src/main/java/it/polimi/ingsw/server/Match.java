@@ -2,6 +2,7 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.server.controller.Controller;
 
 import java.io.IOException;
@@ -38,19 +39,25 @@ public class Match implements Runnable		/* Controller?? */
 			e.printStackTrace();
 		}
 
-		try
-		{
-			TimeUnit.SECONDS.sleep(2);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		sendToAll("START");
+
+		List<List<LeaderCard>> leaderCardsLists = model.createLeaderCardsLists();
 
 		for (int i = 0; i < numPlayers; i++)
 		{
-			System.out.println("Sending player " + (i + 1) + " START message");
-			views.get(i).send("START");
+			System.out.println("Sending " + players.get(i).getUsername() + " " + leaderCardsLists.get(i));
+			views.get(i).send(leaderCardsLists.get(i));
+		}
+
+
+	}
+
+	private void sendToAll(Object obj)
+	{
+		for (int i = 0; i < numPlayers; i++)
+		{
+			System.out.println("Sending " + players.get(i).getUsername() + " " + obj);
+			views.get(i).send(obj);
 		}
 	}
 }

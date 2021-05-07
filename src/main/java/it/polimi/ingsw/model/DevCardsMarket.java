@@ -20,7 +20,7 @@ public class DevCardsMarket
 			try
 			{
 				devCards.add((DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard" + (i + 1) + ".xml"));
-				devCards.get(i).setCardNumber(i + 1);
+				//devCards.get(i).setCardNumber(i + 1); Already in xmls
 			}
 			catch (Exception e)
 			{

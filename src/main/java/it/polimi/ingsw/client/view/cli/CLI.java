@@ -5,19 +5,16 @@ import it.polimi.ingsw.client.controller.Controller;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Marble;
 import it.polimi.ingsw.model.MarblesMarket;
-import it.polimi.ingsw.model.cards.LeaderCard;
+import it.polimi.ingsw.model.cards.*;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.Socket;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
 import static java.lang.Boolean.parseBoolean;
 
-public class CLI implements Observer
+public class CLI extends Observable implements Observer
 {
 	private final Scanner input;
 	private NetworkHandler networkHandler;
@@ -36,9 +33,8 @@ public class CLI implements Observer
 		System.out.print("Server port: ");
 		int port = Integer.parseInt(input.nextLine());
 
-		NetworkHandler networkHandler = new NetworkHandler(username, ip, port);
+		networkHandler = new NetworkHandler(this, username, ip, port);
 		networkHandler.addObserver(this);		/* CLI observes the networkHandler to get the new gamestate */
-
 		networkHandler.connect();
 
 		System.out.println("Sending username to server...");
@@ -50,17 +46,32 @@ public class CLI implements Observer
 			networkHandler.send(input.nextLine());
 		}
 
-		new Thread(networkHandler).start();		/* Start listening for gamestate updates from server */
+		System.out.println("Created network handler");
+		networkHandler.waitForPlayers();
+		System.out.println("Starting match");
+		gameSetup();
+		//new Thread(networkHandler).start();		/* Start listening for gamestate updates from server. Put this after game setup? Yes. */
 	}
 
 	public void gameSetup()
 	{
 		System.out.println("Masters of the Renaissance!");
 
-		/* Server tells clients info about the four leadercards */
+		List<LeaderCard> fourLeaderCards = networkHandler.getFourLeadercards();		/* Server tells clients info about the four leadercards */
 		System.out.println("Choose leader card 1, 2, 3 or 4: ");
+
+		for (int i = 0; i < 4; i++)
+		{
+			System.out.println("Card " + (i + 1) + ":");
+			printPlayerLeaderCard(fourLeaderCards.get(i));
+		}
+
 		networkHandler.send(input.nextLine());
+		System.out.println("Choose the second leader card: ");
+		networkHandler.send(input.nextLine());
+
 	}
+	
 
 	public void printBoard()
 	{
@@ -69,14 +80,35 @@ public class CLI implements Observer
 
 	public void printPlayerLeaderCard(Object card)		/* Can't access skill variables from LeaderCard because it's abstract */
 	{
-		System.out.println("Points: " + ((LeaderCard)card).getPoints());
-		System.out.println("Discarded: " + ((LeaderCard)card).isDiscarded());
-
-		if (card.getClass().getSimpleName() == "SkillDiscount")
+		switch(card.getClass().getSimpleName())
 		{
-			// ...
+			case "SkillDiscount":
+				System.out.println("Leadercard skill: discount");
+				System.out.println("Discounted resource: " + ((SkillDiscount)card).getDiscountedResource());
+				break;
+
+			case "SkillMarble":
+				System.out.println("Leadercard skill: white marble");
+				System.out.println("White marble resource: " + ((SkillMarble)card).getWhiteMarble());
+				break;
+
+			case "SkillProduction":
+				System.out.println("Leadercard skill: additional production");
+				System.out.println("Requirement type: " + ((SkillProduction)card).getRequirement().getResourceType());
+				System.out.println("Requirement amount: 1");
+				System.out.println("Product type: " + ((SkillProduction)card).getProduct().getResourceType());		/* Null because it's chosen by the player */
+				System.out.println("Product amount: 1");
+				break;
+
+			case "SkillStorage":
+				System.out.println("Leadercard skill: additional storage");
+				System.out.println("Additional storage resource: " + ((SkillStorage)card).getAdditionalStorage().getShelfResource().getResourceType());
+				break;
 		}
 
+		System.out.println("Card number: " + ((LeaderCard)card).getCardNumber());
+		System.out.println("Points: " + ((LeaderCard)card).getPoints());
+		System.out.println("Discarded: " + ((LeaderCard)card).isDiscarded());
 	}
 
 	public void printPlayerDevCards()

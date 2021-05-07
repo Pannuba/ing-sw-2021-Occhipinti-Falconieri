@@ -1,8 +1,9 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Shelf
+public class Shelf implements Serializable
 {
 	private int shelfSize;
 	private Resource shelfResource;

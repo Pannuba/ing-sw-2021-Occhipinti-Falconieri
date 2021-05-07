@@ -1,9 +1,12 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.view.cli.CLI;
 import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.model.cards.LeaderCard;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.List;
 import java.util.Observable;
 
 import java.io.DataInputStream;
@@ -13,16 +16,20 @@ import java.util.Observer;
 
 import static java.lang.Boolean.parseBoolean;
 
-public class NetworkHandler extends Observable implements Runnable
+public class NetworkHandler extends Observable implements Observer, Runnable		/* Observes CLI to get input to send to server, observed by CLI to send it the newest gamestate */
 {
 	private Socket clientSocket;
 	private ObjectInputStream ois;
 	private DataOutputStream dos;
 	private String username, ip;
 	private int port;
+	private CLI cli;
 
-	public NetworkHandler(String username, String ip, int port)
+	public NetworkHandler(CLI cli, String username, String ip, int port)
 	{
+		this.cli = cli;
+		cli.addObserver(this);			/* Observe CLI */
+
 		this.username = username;
 		this.ip = ip;
 		this.port = port;
@@ -30,16 +37,13 @@ public class NetworkHandler extends Observable implements Runnable
 
 	public void run()
 	{
-		System.out.println("Created network handler");
-		waitForPlayers();
-		System.out.println("Starting match");
-
 		while(!clientSocket.isClosed())
 		{
 			GameState gameState = null;
 
 			try
 			{
+				System.out.println("Waiting for new gamestate");
 				gameState = (GameState) ois.readObject();			/* Send gamestate to the view? */
 				notifyObservers(gameState);
 			}
@@ -85,7 +89,6 @@ public class NetworkHandler extends Observable implements Runnable
 		try
 		{
 			isFirstPlayer = parseBoolean((String)ois.readObject());		/* Need to use readObject and then cast it */
-			System.out.println("isFirstPlayer: " + isFirstPlayer);
 		}
 		catch (Exception e)
 		{
@@ -95,7 +98,7 @@ public class NetworkHandler extends Observable implements Runnable
 		return isFirstPlayer;
 	}
 
-	private void waitForPlayers()
+	public void waitForPlayers()
 	{
 		System.out.println("Waiting for players to connect...");
 
@@ -114,7 +117,15 @@ public class NetworkHandler extends Observable implements Runnable
 
 			if (message.equals("START"))
 				break;
+
+			else
+				System.out.println("Message received is not START");
 		}
+	}
+
+	public List<LeaderCard> getFourLeadercards()
+	{
+		return (List<LeaderCard>)receive();
 	}
 
 	public void send(String message)
@@ -127,5 +138,27 @@ public class NetworkHandler extends Observable implements Runnable
 		{
 			e.printStackTrace();
 		}
+	}
+
+	public Object receive()
+	{
+		Object inputObj = null;
+
+		try
+		{
+			inputObj = ois.readObject();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return inputObj;
+	}
+
+	@Override
+	public void update(Observable observable, Object o)		/* Send message to server */
+	{
+		send((String)o);
 	}
 }
