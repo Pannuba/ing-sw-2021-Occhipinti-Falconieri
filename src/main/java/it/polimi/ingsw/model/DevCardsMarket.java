@@ -14,7 +14,7 @@ public class DevCardsMarket
 	{
 		System.out.println("Creating devcards market");
 
-		for (int i = 0; i < 12; i++)		/* 12 instead of 48 for debug purposes */
+		for (int i = 0; i < 48; i++)
 		{
 			System.out.println("DevCardsMarket: creating devcard " + (i + 1));
 			try

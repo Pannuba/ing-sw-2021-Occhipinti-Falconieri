@@ -45,7 +45,6 @@ public class Match implements Runnable		/* Controller?? */
 		catch (Exception e)
 		{
 			e.printStackTrace();
-
 		}
 
 		for (int i = 0; i < numPlayers; i++)

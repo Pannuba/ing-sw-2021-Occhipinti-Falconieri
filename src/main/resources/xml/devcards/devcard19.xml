@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="15.0.2" class="java.beans.XMLDecoder">
- <object class="server.model.cards.DevCard" id="DevCard0">
+<java version="14.0.2" class="java.beans.XMLDecoder">
+ <object class="it.polimi.ingsw.model.cards.DevCard" id="DevCard0">
+  <void property="cardNumber">
+   <int>19</int>
+  </void>
   <void property="color">
-   <string>B</string>
+   <object class="java.lang.Enum" method="valueOf">
+    <class>it.polimi.ingsw.model.cards.DevCardColor</class>
+    <string>BLUE</string>
+   </object>
   </void>
   <void property="cost">
-   <void index="0">
-    <object class="server.model.Resource">
-     <void property="category">
-      <string>Y</string>
-     </void>
+   <void method="add">
+    <object class="it.polimi.ingsw.model.Resource">
      <void property="quantity">
       <int>4</int>
      </void>
-    </object>
-   </void>
-   <void index="1">
-    <object class="server.model.Resource">
-     <void property="category">
-      <string>null</string>
+     <void property="resourceType">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>it.polimi.ingsw.model.ResourceType</class>
+       <string>YELLOW</string>
+      </object>
      </void>
     </object>
    </void>
-   <void index="2">
-    <object class="server.model.Resource">
-     <void property="category">
-      <string>null</string>
-     </void>
-    </object>
-   </void>
+  </void>
+  <void property="faithPoints">
+   <int>2</int>
   </void>
   <void property="level">
    <int>2</int>
@@ -36,47 +34,17 @@
   <void property="points">
    <int>5</int>
   </void>
-  <void property="product">
-   <void index="0">
-    <object class="server.model.Resource">
-     <void property="category">
-      <string>R</string>
-     </void>
-     <void property="quantity">
-      <int>2</int>
-     </void>
-    </object>
-   </void>
-   <void index="1">
-    <object class="server.model.Resource">
-     <void property="category">
-      <string>null</string>
-     </void>
-    </object>
-   </void>
-   <void index="2">
-    <object class="server.model.Resource">
-     <void property="category">
-      <string>null</string>
-     </void>
-    </object>
-   </void>
-  </void>
   <void property="requirements">
-   <void index="0">
-    <object class="server.model.Resource">
-     <void property="category">
-      <string>P</string>
-     </void>
+   <void method="add">
+    <object class="it.polimi.ingsw.model.Resource">
      <void property="quantity">
       <int>1</int>
      </void>
-    </object>
-   </void>
-   <void index="1">
-    <object class="server.model.Resource">
-     <void property="category">
-      <string>null</string>
+     <void property="resourceType">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>it.polimi.ingsw.model.ResourceType</class>
+       <string>PURPLE</string>
+      </object>
      </void>
     </object>
    </void>
