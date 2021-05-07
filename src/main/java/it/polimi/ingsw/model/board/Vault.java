@@ -52,10 +52,7 @@ public class Vault
 		return totalResources;
 	}
 
-	public int[] getResourceAmounts()
-	{
-		return resourceAmounts;
-	}
+	public int[] getResourceAmounts() { return resourceAmounts; }
 
 	public void setResourceAmounts(int[] resourceAmounts)
 	{
