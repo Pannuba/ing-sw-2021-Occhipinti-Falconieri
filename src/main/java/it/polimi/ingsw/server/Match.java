@@ -7,6 +7,7 @@ import it.polimi.ingsw.server.controller.Controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Match implements Runnable		/* Controller?? */
 {
@@ -25,6 +26,8 @@ public class Match implements Runnable		/* Controller?? */
 
 	public void run()		/* Create model and controller, send "start match" message and then start the match */
 	{
+		System.out.println("Match thread started");
+
 		try
 		{
 			model = new Model(numPlayers);
@@ -35,8 +38,19 @@ public class Match implements Runnable		/* Controller?? */
 			e.printStackTrace();
 		}
 
+		try
+		{
+			TimeUnit.SECONDS.sleep(2);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+
+		}
+
 		for (int i = 0; i < numPlayers; i++)
 		{
+			System.out.println("Sending player " + (i + 1) + " START message");
 			views.get(i).send("START");
 		}
 	}

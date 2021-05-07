@@ -1,7 +1,5 @@
 package it.polimi.ingsw.server.controller;
 
-/*	InputParser class that converts messages from client to methods calls in controller */
-
 /* TODO: add possible actions the client can do */
 
 import it.polimi.ingsw.model.Model;
@@ -15,14 +13,15 @@ public class Controller implements Observer
 
 	public Controller(Model model)
 	{
+		System.out.println("Creating controller");
 		this.model = model;
 	}
 
 	public void parseInput(String message)
 	{
-		if (message.equals("COMPRA_CARTA"))
+		if (message.equals("BUY_CARD"))
 		{
-			// ...
+			// change model
 		}
 	}
 

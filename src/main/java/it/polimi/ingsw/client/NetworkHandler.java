@@ -30,7 +30,7 @@ public class NetworkHandler extends Observable implements Runnable
 
 	public void run()
 	{
-		System.out.println("Waiting for players to connect...");
+		System.out.println("Created network handler");
 		waitForPlayers();
 		System.out.println("Starting match");
 
@@ -85,6 +85,7 @@ public class NetworkHandler extends Observable implements Runnable
 		try
 		{
 			isFirstPlayer = parseBoolean((String)ois.readObject());		/* Need to use readObject and then cast it */
+			System.out.println("isFirstPlayer: " + isFirstPlayer);
 		}
 		catch (Exception e)
 		{
@@ -96,6 +97,8 @@ public class NetworkHandler extends Observable implements Runnable
 
 	private void waitForPlayers()
 	{
+		System.out.println("Waiting for players to connect...");
+
 		String message = "";
 
 		while(!clientSocket.isClosed())

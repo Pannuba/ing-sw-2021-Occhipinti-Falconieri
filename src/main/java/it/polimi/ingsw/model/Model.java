@@ -25,8 +25,8 @@ public class Model
 
 	public Model(int numPlayers)    /* Pass usernames? */
 	{
+		System.out.println("Creating model...");
 		this.numPlayers = numPlayers;
-		XML_Serialization decoder = new XML_Serialization();
 		LeaderCard cardToAdd = null;
 
 		for(int i = 0; i < numPlayers; i++)
@@ -34,10 +34,10 @@ public class Model
 
 		for (int i = 0; i < 16; i++)
 		{
-			System.out.println("Creating leadercard " + (i + 1));		/* TODO: remake all .xmls, add debug prints */
+			System.out.println("Model: creating leadercard " + (i + 1));
 			try
 			{
-				cardToAdd = (LeaderCard) decoder.deserialize("src/main/resources/xml/leadercards/leadercard" + (i + 1) + ".xml");
+				cardToAdd = (LeaderCard) XML_Serialization.deserialize("src/main/resources/xml/leadercards/leadercard" + (i + 1) + ".xml");
 			}
 			catch (Exception e)
 			{
@@ -55,7 +55,7 @@ public class Model
 
 	}
 
-	private List<List<LeaderCard>> createLeaderCardsLists() throws IOException		/* Returns a list of lists of leadercards, 1 for each player, each list has 4 leadercards to choose from */
+	private List<List<LeaderCard>> createLeaderCardsLists()				/* Returns a list of lists of leadercards, 1 for each player, each list has 4 leadercards to choose from */
 	{
 		int cardsToAssign[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 		List<List<LeaderCard>> listOfLists = new ArrayList<List<LeaderCard>>();

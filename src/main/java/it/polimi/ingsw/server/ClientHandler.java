@@ -1,8 +1,6 @@
 package it.polimi.ingsw.server;
 
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Observable;
@@ -17,7 +15,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 
 	public ClientHandler(Socket clientSocket, String username, DataInputStream dis, ObjectOutputStream oos)
 	{
-		System.out.println("Created thread for: " + clientSocket);
+		System.out.println("Created client handler for: " + username);
 
 		this.clientSocket = clientSocket;
 		this.username = username;
@@ -27,12 +25,14 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 
 	public void run()
 	{
+		System.out.println("Started " + username + "'s clienthandler thread");
 		String message = "";
 
 		while (!clientSocket.isClosed())		/* Translate message, then call respective function in controller */
 		{
 			try
 			{
+				System.out.println(username + " waiting for message from client");
 				message = dis.readUTF();
 				notifyObservers(message);		/* Sends command to controller */
 			}
@@ -59,5 +59,15 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 	public void update(Observable observable, Object o)
 	{
 		/* Send gamestate */
+	}
+
+	public String getUsername()
+	{
+		return username;
+	}
+
+	public Socket getClientSocket()
+	{
+		return clientSocket;
 	}
 }

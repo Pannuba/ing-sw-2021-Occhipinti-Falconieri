@@ -12,9 +12,11 @@ public class DevCardsMarket
 
 	public DevCardsMarket()
 	{
+		System.out.println("Creating devcards market");
 
-		for (int i = 0; i < 48; i++)
+		for (int i = 0; i < 12; i++)		/* 12 instead of 48 for debug purposes */
 		{
+			System.out.println("DevCardsMarket: creating devcard " + (i + 1));
 			try
 			{
 				devCards.add((DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard" + (i + 1) + ".xml"));

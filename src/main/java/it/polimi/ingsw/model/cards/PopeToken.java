@@ -7,6 +7,7 @@ public class PopeToken
 
 	public PopeToken(int points)
 	{
+		System.out.println("PopeToken: creating token with " + points + " points");
 		isUsed = false;
 		this.points = points;
 	}

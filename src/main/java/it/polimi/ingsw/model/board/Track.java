@@ -13,6 +13,7 @@ public class Track
 
 	public Track(int numPlayers)
 	{
+		System.out.println("Track: creating pawns");
 		redPawns = new int[numPlayers];
 
 		for (int i = 0; i < numPlayers; i++)
@@ -26,6 +27,7 @@ public class Track
 
 		/* Initialize track here, hardcoded (at least for now) because 1 xml for each box is too much */
 
+		System.out.println("Track: creating the 25 boxes");
 		faithTrack[0]  = new Box(BoxType.NORMAL, 0,  0);
 		faithTrack[1]  = new Box(BoxType.NORMAL, 1,  0);
 		faithTrack[2]  = new Box(BoxType.NORMAL, 2,  0);

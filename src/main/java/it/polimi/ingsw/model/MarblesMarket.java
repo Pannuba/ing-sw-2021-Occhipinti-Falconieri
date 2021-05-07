@@ -30,6 +30,7 @@ public class MarblesMarket
 
 	public MarblesMarket()		/* TODO: tests */
 	{
+		System.out.println("Creating marbles market");
 		int[] marblesToAssign = {4, 2, 2, 2, 2, 1};
 		MarbleType[] resourcesToAssign = new MarbleType[13];
 		spareMarble = new Marble();

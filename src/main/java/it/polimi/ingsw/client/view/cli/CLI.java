@@ -51,7 +51,6 @@ public class CLI implements Observer
 		}
 
 		new Thread(networkHandler).start();		/* Start listening for gamestate updates from server */
-		//networkHandler.send("ping");
 	}
 
 	public void gameSetup()
