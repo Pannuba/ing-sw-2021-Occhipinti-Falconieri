@@ -2,15 +2,27 @@ package it.polimi.ingsw.model.cards;
 
 import it.polimi.ingsw.model.Resource;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DevCard
 {
 	private int cardNumber;			/* To identify cards. If a devcard is bought from the market, the list size changes so it's impossible to order cards based on their index */
 	private DevCardColor color;
 	private int points;
 	private int level;
-	private Resource[] cost = new Resource[3];				/* At the top of each card */
-	private Resource[] requirements = new Resource[2];		/* Left side		TODO: switch to List */
-	private Resource[] product = new Resource[3];			/* Right side */
+	private int faithPoints;
+	private List<Resource> cost;				/* At the top of each card */
+	private List<Resource> requirements;		/* Left side */
+	private List<Resource> product;			/* Right side */
+
+	public DevCard()
+	{
+		faithPoints = 0;
+		cost = new ArrayList<Resource>();
+		requirements = new ArrayList<Resource>();
+		product = new ArrayList<Resource>();
+	}
 
 	public int getCardNumber()
 	{
@@ -52,32 +64,42 @@ public class DevCard
 		this.level = level;
 	}
 
-	public Resource[] getCost()
+	public int getFaithPoints()
+	{
+		return faithPoints;
+	}
+
+	public void setFaithPoints(int faithPoints)
+	{
+		this.faithPoints = faithPoints;
+	}
+
+	public List<Resource> getCost()
 	{
 		return cost;
 	}
 
-	public void setCost(Resource[] cost)
+	public void setCost(List<Resource> cost)
 	{
 		this.cost = cost;
 	}
 
-	public Resource[] getRequirements()
+	public List<Resource> getRequirements()
 	{
 		return requirements;
 	}
 
-	public void setRequirements(Resource[] requirements)
+	public void setRequirements(List<Resource> requirements)
 	{
 		this.requirements = requirements;
 	}
 
-	public Resource[] getProduct()
+	public List<Resource> getProduct()
 	{
 		return product;
 	}
 
-	public void setProduct(Resource[] product)
+	public void setProduct(List<Resource> product)
 	{
 		this.product = product;
 	}

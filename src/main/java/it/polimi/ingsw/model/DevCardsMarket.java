@@ -12,13 +12,12 @@ public class DevCardsMarket
 
 	public DevCardsMarket()
 	{
-		XML_Serialization xmlDecode = new XML_Serialization();
 
 		for (int i = 0; i < 48; i++)
 		{
 			try
 			{
-				devCards.add((DevCard) xmlDecode.deserialize("src/main/resources/xml/devcards/leadercard" + (i + 1) + ".xml"));
+				devCards.add((DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard" + (i + 1) + ".xml"));
 				devCards.get(i).setCardNumber(i + 1);
 			}
 			catch (Exception e)

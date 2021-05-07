@@ -10,7 +10,7 @@ package it.polimi.ingsw.model;
 public class Marble
 {
 	private MarbleType category;				/* Rename category to type? */
-	private int quantity;
+	private int quantity;			/* I forgot what quantity does */
 
 	public Marble()
 	{
