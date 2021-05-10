@@ -2,10 +2,7 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.model.Player;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -32,6 +29,7 @@ public class ServerListener implements Runnable		/* Thread running listening for
 		System.out.println("Server started");
 		Socket socket = null;
 		DataInputStream dis = null;
+		ObjectInputStream ois = null;
 		ObjectOutputStream oos = null;
 		List<ClientHandler> views = new ArrayList<ClientHandler>();
 		String username = "";
@@ -46,6 +44,7 @@ public class ServerListener implements Runnable		/* Thread running listening for
 			{
 				socket = serverSocket.accept();
 				dis = new DataInputStream(socket.getInputStream());
+				ois = new ObjectInputStream(socket.getInputStream());
 				oos = new ObjectOutputStream(socket.getOutputStream());
 				System.out.println("Incoming connection: " + socket);
 				username = dis.readUTF();
@@ -70,7 +69,7 @@ public class ServerListener implements Runnable		/* Thread running listening for
 			players.add(new Player());
 			players.get(i).setUsername(username);
 
-			ClientHandler clientHandler = new ClientHandler(socket, username, dis, oos);		/* Start view thread that listens for commands from client */
+			ClientHandler clientHandler = new ClientHandler(socket, username, dis, ois, oos);		/* Start view thread that listens for commands from client */
 			views.add(clientHandler);
 			new Thread(clientHandler).start();
 		}

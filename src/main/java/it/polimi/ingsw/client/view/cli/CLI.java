@@ -5,10 +5,8 @@ import it.polimi.ingsw.client.controller.Controller;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.cards.*;
 
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Scanner;
+import java.sql.Array;
+import java.util.*;
 
 public class CLI extends Observable implements Observer
 {
@@ -40,12 +38,12 @@ public class CLI extends Observable implements Observer
 		networkHandler.connect();
 
 		System.out.println("Sending username to server...");
-		networkHandler.send(username);
+		networkHandler.sendString(username);
 
 		if (networkHandler.isFirstPlayer())
 		{
 			System.out.print("Total players: ");
-			networkHandler.send(input.nextLine());
+			networkHandler.sendString(input.nextLine());
 		}
 
 		System.out.println("Created network handler");
@@ -66,9 +64,14 @@ public class CLI extends Observable implements Observer
 			PrintMethods.printLeaderCard(fourLeaderCards.get(i));
 		}
 
-		networkHandler.send(input.nextLine());
+		String cardChoice1 = input.nextLine();					/* Has to be a number */
 		System.out.println("Choose the second leader card: ");
-		networkHandler.send(input.nextLine());
+		String cardChoice2 = input.nextLine();
+		List<String> action = new ArrayList<String>();
+		action.add("SELECT_LEADERCARDS");
+		action.add(cardChoice1);
+		action.add(cardChoice2);
+		notifyObservers(action);		/* Send array of strings to server controller? */
 
 	}
 

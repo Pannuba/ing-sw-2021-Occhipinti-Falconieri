@@ -23,11 +23,8 @@ public class Match implements Runnable		/* Controller?? */
 		this.numPlayers = numPlayers;
 		this.players = players;
 		this.views = views;
-	}
 
-	public void run()		/* Create model and controller, send "start match" message and then start the match */
-	{
-		System.out.println("Match thread started");
+		System.out.println("Creating model and controller for new match...");
 
 		try
 		{
@@ -38,6 +35,11 @@ public class Match implements Runnable		/* Controller?? */
 		{
 			e.printStackTrace();
 		}
+	}
+
+	public void run()		/* Create model and controller, send "start match" message and then start the match */
+	{
+		System.out.println("Match thread started");
 
 		sendToAll("START");
 

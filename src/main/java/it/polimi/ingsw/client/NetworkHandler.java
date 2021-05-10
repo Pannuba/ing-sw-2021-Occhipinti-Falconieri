@@ -4,13 +4,10 @@ import it.polimi.ingsw.client.view.cli.CLI;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.cards.LeaderCard;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.util.List;
 import java.util.Observable;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.net.Socket;
 import java.util.Observer;
 
@@ -21,6 +18,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 	private Socket clientSocket;
 	private ObjectInputStream ois;
 	private DataOutputStream dos;
+	private ObjectOutputStream oos;
 	private String username, ip;
 	private int port;
 	private CLI cli;
@@ -53,10 +51,12 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 			}
 		}
 
-		try					/* When the socket is closed close the output stream, maybe notify the view */
+		try					/* When the socket is closed close the output streams, maybe notify the view */
 		{
 			dos.flush();
+			oos.flush();
 			dos.close();
+			oos.close();
 		}
 		catch(Exception e)
 		{
@@ -71,7 +71,8 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		try
 		{
 			clientSocket = new Socket(ip, port);
-			dos = new DataOutputStream(clientSocket.getOutputStream());		/* Send commands to server as strings */
+			dos = new DataOutputStream(clientSocket.getOutputStream());		/* Send strings to server */
+			oos = new ObjectOutputStream(clientSocket.getOutputStream());	/* Send commands (list of strings) to server */
 			ois = new ObjectInputStream(clientSocket.getInputStream());		/* Receive gamestate from server (object) */
 		}
 		catch (Exception e)
@@ -128,11 +129,23 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		return (List<LeaderCard>)receive();
 	}
 
-	public void send(String message)
+	public void sendString(String message)
 	{
 		try
 		{
 			dos.writeUTF(message);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public void sendCommand(List<String> command)
+	{
+		try
+		{
+			oos.writeObject(command);
 		}
 		catch(Exception e)
 		{
@@ -157,8 +170,8 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 	}
 
 	@Override
-	public void update(Observable observable, Object o)		/* Send message to server */
+	public void update(Observable observable, Object o)		/* Send command (List) to server */
 	{
-		send((String)o);
+		sendCommand((List<String>)o);
 	}
 }

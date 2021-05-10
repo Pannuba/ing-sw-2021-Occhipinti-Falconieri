@@ -124,7 +124,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		String topShelf = "", middleShelf = "", bottomShelf = "";
 		String topShelfResource = convertResourceToString(storage.getShelves()[0].getShelfResource());
 		String middleShelfResource = convertResourceToString(storage.getShelves()[1].getShelfResource());
-		String bottomShelfResource = convertResourceToString(storage.getShelves()[2].getShelfResource())
+		String bottomShelfResource = convertResourceToString(storage.getShelves()[2].getShelfResource());
 
 		switch (storage.getShelves()[0].getShelfResource().getQuantity())
 		{

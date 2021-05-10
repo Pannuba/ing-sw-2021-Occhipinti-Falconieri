@@ -19,9 +19,24 @@ public class Controller implements Observer
 
 	public void parseInput(String message)
 	{
-		if (message.equals("BUY_CARD"))
+
+		if (message.equals("SELECT_LEADERCARD"))
+		{
+
+		}
+		if (message.equals("BUY_DEVCARD"))
 		{
 			// change model
+		}
+
+		if (message.equals("ACTIVATE_PRODUCTION"))
+		{
+
+		}
+
+		if (message.equals("MARBLE_MARKET"))
+		{
+
 		}
 	}
 
