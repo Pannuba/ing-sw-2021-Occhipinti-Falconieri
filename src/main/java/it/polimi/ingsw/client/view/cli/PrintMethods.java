@@ -119,14 +119,6 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	}
 
-/*	Y
-		_______
-		 O   X			shelves[1]
-		_______
-		Z  Z  Z			shelves[2]
-		_______
-*/
-
 	private static void printStorage(Storage storage)		/* Finish other shelves */
 	{
 		String topShelf = "", middleShelf = "", bottomShelf = "";
@@ -167,15 +159,15 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 				break;
 
 			case 1:
-				topShelf = topShelfResource + "  " + ANSI.EMPTY + "  " + ANSI.EMPTY;
+				topShelf = bottomShelfResource + "  " + ANSI.EMPTY + "  " + ANSI.EMPTY;
 				break;
 
 			case 2:
-				topShelf = topShelfResource + "  " + topShelfResource + "  " + ANSI.EMPTY;
+				topShelf = bottomShelfResource + "  " + topShelfResource + "  " + ANSI.EMPTY;
 				break;
 
 			case 3:
-				topShelf = topShelfResource + "  " + topShelfResource + "  " + topShelfResource;
+				topShelf = bottomShelfResource + "  " + topShelfResource + "  " + topShelfResource;
 				break;
 		}
 
