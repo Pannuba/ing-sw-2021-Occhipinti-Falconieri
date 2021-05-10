@@ -1,6 +1,6 @@
 package it.polimi.ingsw.client.view.cli;
 
-public enum Color		/* https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797 | https://unicode.org/charts/nameslist/n_25A0.html */
+public enum ANSI	       /* https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797 | https://unicode.org/charts/nameslist/n_25A0.html */
 {
 	RED("\u001B[31m"),
 	GREEN("\u001B[32m"),
@@ -8,13 +8,16 @@ public enum Color		/* https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296
 	BLUE("\u001B[34m"),
 	PURPLE("\u001B[35m"),
 	GREY("\u001B[38;5;245m"),
-	WHITE("\u001B[37m");
+	WHITE("\u001B[37m"),
 
-	public static final String RESET = "\u001B[0m";
+	RESET("\u001B[0m"),
+
+	MARBLE("\u2B24"),
+	RESOURCE("\u2B1B");
 
 	private final String escape;
 
-	Color(String escape)
+	ANSI(String escape)
 	{
 		this.escape = escape;
 	}

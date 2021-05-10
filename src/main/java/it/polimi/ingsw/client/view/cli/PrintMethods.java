@@ -102,7 +102,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 			{
 				System.out.print(convertMarbleToString(board[i][j]) + "  ");
 			}
-			System.out.print(Color.RESET + "\n");
+			System.out.print(ANSI.RESET + "\n");
 		}
 	}
 
@@ -154,27 +154,26 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	private static String convertMarbleToString(Marble marble)
 	{
-		final String marbleSymbol = "\u2B24";
-
 		switch (marble.getMarbleType())
 		{
 			case YELLOW:
-				return Color.YELLOW + marbleSymbol + Color.RESET;
+
+				return ANSI.YELLOW + ANSI.MARBLE.toString() + ANSI.RESET;
 
 			case PURPLE:
-				return Color.PURPLE + marbleSymbol + Color.RESET;
+				return ANSI.PURPLE + ANSI.MARBLE.toString() + ANSI.RESET;
 
 			case WHITE:
-				return Color.WHITE + marbleSymbol + Color.RESET;
+				return ANSI.WHITE + ANSI.MARBLE.toString() + ANSI.RESET;
 
 			case GREY:
-				return Color.GREY + marbleSymbol + Color.RESET;
+				return ANSI.GREY + ANSI.MARBLE.toString() + ANSI.RESET;
 
 			case BLUE:
-				return Color.BLUE + marbleSymbol + Color.RESET;
+				return ANSI.BLUE + ANSI.MARBLE.toString() + ANSI.RESET;
 
 			case RED:
-				return Color.RED + marbleSymbol + Color.RESET;
+				return ANSI.RED + ANSI.MARBLE.toString() + ANSI.RESET;
 		}
 
 		return null;
@@ -182,23 +181,21 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	private static String convertResourceToString(Resource resource)
 	{
-		final String resourceSymbol = "\u2B1B";
-
 		switch(resource.getResourceType())
 		{
 			case YELLOW:
-				return Color.YELLOW + resourceSymbol + Color.RESET;
+				return ANSI.YELLOW + ANSI.RESOURCE.toString() + ANSI.RESET;
 
 			case PURPLE:
-				return Color.PURPLE + resourceSymbol + Color.RESET;
+				return ANSI.PURPLE + ANSI.RESOURCE.toString() + ANSI.RESET;
 
 			case GREY:
-				return Color.GREY + resourceSymbol + Color.RESET;
+				return ANSI.GREY + ANSI.RESOURCE.toString() + ANSI.RESET;
 
 			case BLUE:
-				return Color.BLUE + resourceSymbol + Color.RESET;
+				return ANSI.BLUE + ANSI.RESOURCE.toString() + ANSI.RESET;
 		}
-		
+
 		return null;
 	}
 }
