@@ -130,20 +130,62 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 	private static void printStorage(Storage storage)		/* Finish other shelves */
 	{
 		String topShelf = "", middleShelf = "", bottomShelf = "";
+		String topShelfResource = convertResourceToString(storage.getShelves()[0].getShelfResource());
+		String middleShelfResource = convertResourceToString(storage.getShelves()[1].getShelfResource());
+		String bottomShelfResource = convertResourceToString(storage.getShelves()[2].getShelfResource())
 
-		if (storage.getShelves()[0].getShelfResource().getQuantity() == 0)
-			topShelf = "       ";
+		switch (storage.getShelves()[0].getShelfResource().getQuantity())
+		{
+			case 0:
+				topShelf = "   " + ANSI.EMPTY + "   ";
+				break;
 
-		else if (storage.getShelves()[0].getShelfResource().getQuantity() == 1)
-			topShelf = "   " + convertResourceToString(storage.getShelves()[0].getShelfResource()) + "   ";
+			case 1:
+				topShelf = "   " + topShelfResource + "   ";
+				break;
+		}
 
-		System.out.print(	"Storage:\n\n"	+
-							topShelf + "\n"	+
-							"_______\n"		+
-							" Y   Y \n"		+
-							"_______\n"		+
-							"Y  Y  Y\n"		+
-							"_______\n"		);
+		switch (storage.getShelves()[1].getShelfResource().getQuantity())
+		{
+			case 0:
+				middleShelf = " " + ANSI.EMPTY + "   " + ANSI.EMPTY + " ";
+				break;
+
+			case 1:
+				middleShelf = " " + middleShelfResource + "   " + ANSI.EMPTY + " ";
+				break;
+
+			case 2:
+				middleShelf = " " + middleShelfResource + "   " + middleShelfResource + " ";
+				break;
+		}
+
+		switch (storage.getShelves()[2].getShelfResource().getQuantity())
+		{
+			case 0:
+				topShelf = ANSI.EMPTY + "  " + ANSI.EMPTY + "  " + ANSI.EMPTY;
+				break;
+
+			case 1:
+				topShelf = topShelfResource + "  " + ANSI.EMPTY + "  " + ANSI.EMPTY;
+				break;
+
+			case 2:
+				topShelf = topShelfResource + "  " + topShelfResource + "  " + ANSI.EMPTY;
+				break;
+
+			case 3:
+				topShelf = topShelfResource + "  " + topShelfResource + "  " + topShelfResource;
+				break;
+		}
+
+		System.out.print(	"Storage:" + "\n\n"	+
+							topShelf + "\n"		+
+							"_______" + "\n"	+
+							middleShelf + "\n"	+
+							"_______" + "\n"	+
+							topShelf + "\n"		+
+							"_______" + "\n"	);
 
 	}
 
@@ -181,7 +223,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	private static String convertResourceToString(Resource resource)
 	{
-		switch(resource.getResourceType())
+		switch (resource.getResourceType())
 		{
 			case YELLOW:
 				return ANSI.YELLOW + ANSI.RESOURCE.toString() + ANSI.RESET;

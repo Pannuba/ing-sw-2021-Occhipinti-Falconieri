@@ -12,8 +12,9 @@ public enum ANSI	       /* https://gist.github.com/fnky/458719343aabd01cfb17a3a4
 
 	RESET("\u001B[0m"),
 
-	MARBLE("\u2B24"),
-	RESOURCE("\u2B1B");
+	MARBLE("\u2B24"),		/* ⬤ */
+	RESOURCE("\u2B1B"),		/* ⬛ */
+	EMPTY("\u25A1");			/* □ */
 
 	private final String escape;
 
