@@ -85,7 +85,7 @@ public class CLI extends Observable implements Observer
 				break;
 
 			case 2:
-				//PrintMethods.printPlayerLeaderCards();		/* gamestate.getPlayer(username).getLeadercards get player by name? */
+				//PrintMethods.printPlayerLeaderCards();		/* gamestate.getPlayerByName(username).getLeadercards */
 				//PrintMethods.printPlayerDevCards();
 				break;
 
