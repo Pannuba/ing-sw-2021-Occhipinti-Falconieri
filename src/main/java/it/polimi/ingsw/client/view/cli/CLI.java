@@ -22,6 +22,7 @@ public class CLI extends Observable implements Observer
 		gameStart();
 		matchSetup();
 		new Thread(networkHandler).start();		/* Start listening for gamestate updates from server. Put this after game setup? Yes. */
+		gameLoop();
 	}
 
 	private void gameStart()
@@ -77,6 +78,11 @@ public class CLI extends Observable implements Observer
 		System.out.println("Notifying observers (network handler)");
 		setChanged();						/* Apparently this is necessary whenever notifyObservers is called */
 		notifyObservers(command);		/* Send array of strings to server controller */
+	}
+
+	private void gameLoop()
+	{
+		System.out.println("It's ");
 	}
 
 	private void chooseAction(int action)	/* "What do you want to do? buy from market (0), activate production (1), view cards (2), view board (3), view markets (4) */

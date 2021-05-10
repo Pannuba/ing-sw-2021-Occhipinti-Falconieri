@@ -11,8 +11,9 @@ import java.util.List;
 
 public class Player implements Serializable
 {
-	private int id;				/* 0, 1, 2, 3 to manage turns, pawns and so on */
+	private int id;							/* 0, 1, 2, 3 to manage turns, pawns and so on */
 	private String username;
+	private boolean isMyTurn;
 	private Dashboard dashboard;
 	private int victoryPoints;
 	private List<DevCard> devCards = new ArrayList<DevCard>();
@@ -42,6 +43,16 @@ public class Player implements Serializable
 	public void setUsername(String username)
 	{
 		this.username = username;
+	}
+
+	public boolean isMyTurn()
+	{
+		return isMyTurn;
+	}
+
+	public void setMyTurn(boolean myTurn)
+	{
+		isMyTurn = myTurn;
 	}
 
 	public Dashboard getDashboard()

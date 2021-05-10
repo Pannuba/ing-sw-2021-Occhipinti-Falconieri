@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.model.Model;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.server.view.ClientHandler;
 
@@ -27,15 +28,11 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 			for (int i = 0; i < 16; i++)
 			{
-				if (String.valueOf(model.getAllLeaderCards().get(i).getCardNumber()).equals(command.get(1)))
+				if (String.valueOf(model.getAllLeaderCards().get(i).getCardNumber()).equals(command.get(1))		||
+					String.valueOf(model.getAllLeaderCards().get(i).getCardNumber()).equals(command.get(2))		)
 					cards.add(model.getAllLeaderCards().get(i));
 			}
 
-			for (int i = 0; i < 16; i++)
-			{
-				if (String.valueOf(model.getAllLeaderCards().get(i).getCardNumber()).equals(command.get(1)))
-					cards.add(model.getAllLeaderCards().get(i));
-			}
 			model.getPlayerByUsername(username).setLeaderCards(cards);
 		}
 
@@ -54,7 +51,26 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 		}
 
+		chooseNextPlayer();
+
 		model.update();		/* Should this be called from Match after every round? */
+	}
+
+	private void chooseNextPlayer()		/* Turns alternate by player ID: 0 -> 1 -> 2 -> 3 */
+	{
+		int activePlayerNum = model.getActivePlayerID();
+
+		if (activePlayerNum == model.getNumPlayers())			/* If activePlayerNum = 4 it can't go to 5, so back to 0 */
+			activePlayerNum = 0;
+
+		else													/* Otherwise just increase by 1 */
+			activePlayerNum++;
+
+		for (int i = 0; i < model.getNumPlayers(); i++)
+		{
+			if (model.getPlayers().get(i).getId() == activePlayerNum)
+				model.getPlayers().get(i).setMyTurn(true);
+		}
 	}
 
 	@Override

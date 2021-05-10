@@ -14,6 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Model extends Observable		/* Observed by the views to create the new gamestate */
 {
 	private int numPlayers;
+	private int activePlayerID;
 	private Track track;
 	private MarblesMarket marblesMarket;
 	private DevCardsMarket devCardsMarket;
@@ -26,18 +27,12 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		this.players = players;
 		numPlayers = players.size();
 
-		for(int i = 0; i < numPlayers; i++)
-		{
-			System.out.println("Creating player " + (i + 1) + "...");
-			players.add(new Player());        /* List of objects, need "new" keyword for each element */
-		}
-
 		createLeaderCards();
+		choosePlayerOrder();
 
 		track = new Track(numPlayers);
 		marblesMarket = new MarblesMarket();
 		devCardsMarket = new DevCardsMarket();
-
 	}
 
 	public void update()			/* Creates the new gamestate and sends it to the views, which send it to the clients */
@@ -66,6 +61,36 @@ public class Model extends Observable		/* Observed by the views to create the ne
 			cardToAdd.setCardNumber(i + 1);		/* Here or in xmls? */
 			allLeaderCards.add(cardToAdd);
 		}
+	}
+
+	private void choosePlayerOrder()		/* Need to test if it's actually random */
+	{
+		System.out.println("Choosing a random first player...");
+
+		int firstPlayer = ThreadLocalRandom.current().nextInt(0, numPlayers + 1);
+		players.get(firstPlayer).setMyTurn(true);
+		players.get(firstPlayer).setId(0);
+		activePlayerID = 0;
+
+		int[] playerNumbers = new int[numPlayers - 1];
+
+		for (int i = 0; i < numPlayers - 1; i++)
+			playerNumbers[i] = 1;
+
+		for (int i = 0; i < numPlayers - 1; i++)
+		{
+			int randNum = ThreadLocalRandom.current().nextInt(0, numPlayers + 1);
+
+			if (playerNumbers[randNum] != 1 || players.get(randNum).getId() == 0)
+				i--;
+
+			else
+			{
+				players.get(randNum).setId(randNum);
+				playerNumbers[i]--;
+			}
+		}
+
 	}
 
 	public List<List<LeaderCard>> createLeaderCardsLists()				/* Returns a list of lists of leadercards, 1 for each player, each list has 4 leadercards to choose from */
@@ -145,6 +170,16 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	public void setNumPlayers(int numPlayers)
 	{
 		this.numPlayers = numPlayers;
+	}
+
+	public int getActivePlayerID()
+	{
+		return activePlayerID;
+	}
+
+	public void setActivePlayerID(int activePlayerID)
+	{
+		this.activePlayerID = activePlayerID;
 	}
 
 	public Track getTrack()
