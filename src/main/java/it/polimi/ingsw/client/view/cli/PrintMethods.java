@@ -1,9 +1,6 @@
 package it.polimi.ingsw.client.view.cli;
 
-import it.polimi.ingsw.model.DevCardsMarket;
-import it.polimi.ingsw.model.Marble;
-import it.polimi.ingsw.model.MarblesMarket;
-import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.board.*;
 import it.polimi.ingsw.model.cards.*;
 
@@ -12,7 +9,7 @@ import java.util.List;
 public class PrintMethods			/* Static methods so we can avoid "PrintMethods printMethods = new PrintMethods()" in CLI.java */
 {
 
-	public static void printBoard(Track track, Dashboard board)		/* Could get both from gamestate but this is more simple */
+	public static void printBoard(Track track, Dashboard board)		/* Could get both from gamestate but this is simpler */
 	{
 		printTrack(track);
 		printVault(board.getVault());
@@ -55,20 +52,44 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	public static void printPlayerLeaderCards(List<LeaderCard> leaderCards)
 	{
+		System.out.println("Player leader cards:");
+
 		for (int i = 0; i < leaderCards.size(); i++)
 		{
 			printLeaderCard(leaderCards.get(i));
 		}
 	}
 
-	public static void printPlayerDevCards()
+	public static void printPlayerDevCards(List<DevCard> devCards)
 	{
+		System.out.println("Player dev cards:\n\n");
 
+		for (int i = 0; i < devCards.size(); i++)
+		{
+			System.out.println("Card " + (i + 1) + ":");
+			printDevCard(devCards.get(i));
+		}
 	}
 
-	public static void printDevCardsMarket(DevCardsMarket market)
+	public static void printDevCardsMarket(DevCardsMarket market)		// market size??
 	{
+		System.out.println("Dev cards market:\n\n");
 
+		for (int i = 0; i < market.getCardsInMarket(); i++)
+		{
+			System.out.println("Card " + (i + 1) + ":");
+			printDevCard(market.getDevCards().get(i));
+		}
+	}
+
+	private static void printDevCard(DevCard devCard)
+	{
+		System.out.println("Points: " + devCard.getPoints());
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
 	}
 
 	public static void printMarblesMarket(MarblesMarket market)		/* private? */
@@ -90,13 +111,39 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		System.out.println("[ | | | | | | | | | | | | | | | | | | | | | | | | | ]");
 	}
 
-	private static void printVault(Vault vault)
+	private static void printVault(Vault vault)			/* Use ANSI color codes */
 	{
+		System.out.print(	"Your vault currently has:\n\n" + vault.getResourceAmounts()[0] + " blue\n" + vault.getResourceAmounts()[1] + " grey\n"
+							+ vault.getResourceAmounts()[2] + " yellow\n" + vault.getResourceAmounts()[3] + "purple\n\n"
+							+ "For a total of " + vault.getTotalResources() + " resources");
 
 	}
 
-	private static void printStorage(Storage storage)
+/*	Y
+		_______
+		 O   X			shelves[1]
+		_______
+		Z  Z  Z			shelves[2]
+		_______
+*/
+
+	private static void printStorage(Storage storage)		/* Finish other shelves */
 	{
+		String topShelf = "", middleShelf = "", bottomShelf = "";
+
+		if (storage.getShelves()[0].getShelfResource().getQuantity() == 0)
+			topShelf = "       ";
+
+		else if (storage.getShelves()[0].getShelfResource().getQuantity() == 1)
+			topShelf = "   " + convertResourceToString(storage.getShelves()[0].getShelfResource()) + "   ";
+
+		System.out.print(	"Storage:\n\n"	+
+							topShelf + "\n"	+
+							"_______\n"		+
+							" Y   Y \n"		+
+							"_______\n"		+
+							"Y  Y  Y\n"		+
+							"_______\n"		);
 
 	}
 
@@ -130,6 +177,28 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 				return Color.RED + marbleSymbol + Color.RESET;
 		}
 
+		return null;
+	}
+
+	private static String convertResourceToString(Resource resource)
+	{
+		final String resourceSymbol = "\u2B1B";
+
+		switch(resource.getResourceType())
+		{
+			case YELLOW:
+				return Color.YELLOW + resourceSymbol + Color.RESET;
+
+			case PURPLE:
+				return Color.PURPLE + resourceSymbol + Color.RESET;
+
+			case GREY:
+				return Color.GREY + resourceSymbol + Color.RESET;
+
+			case BLUE:
+				return Color.BLUE + resourceSymbol + Color.RESET;
+		}
+		
 		return null;
 	}
 }

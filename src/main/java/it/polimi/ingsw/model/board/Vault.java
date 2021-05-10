@@ -35,7 +35,7 @@ public class Vault
 				break;
 
 			default:
-				System.out.println("addResource error");
+				System.out.println("Vault: addResource error");
 				break;
 		}
 
@@ -52,7 +52,10 @@ public class Vault
 		return totalResources;
 	}
 
-	public int[] getResourceAmounts() { return resourceAmounts; }
+	public int[] getResourceAmounts()
+	{
+		return resourceAmounts;
+	}
 
 	public void setResourceAmounts(int[] resourceAmounts)
 	{

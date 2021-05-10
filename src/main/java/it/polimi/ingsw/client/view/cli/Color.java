@@ -1,6 +1,6 @@
 package it.polimi.ingsw.client.view.cli;
 
-public enum Color		/* https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797 */
+public enum Color		/* https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797 | https://unicode.org/charts/nameslist/n_25A0.html */
 {
 	RED("\u001B[31m"),
 	GREEN("\u001B[32m"),

@@ -9,10 +9,13 @@ import java.util.List;
 public class DevCardsMarket
 {
 	private List<DevCard> devCards = new ArrayList<DevCard>();
+	private int cardsInMarket;
 
 	public DevCardsMarket()
 	{
 		System.out.println("Creating devcards market");
+
+		cardsInMarket = 48;
 
 		for (int i = 0; i < 48; i++)
 		{
@@ -29,9 +32,15 @@ public class DevCardsMarket
 		}
 	}
 
-	public DevCard getDevCard(int cardNumber)		/* Set method useless */
+	public void removeCardFromMarket(DevCard cardToRemove)
 	{
-		for (int i = 0; i < 48; i++)
+		devCards.remove(cardToRemove);
+		cardsInMarket--;
+	}
+
+	public DevCard getDevCardByNumber(int cardNumber)		/* Set method useless */
+	{
+		for (int i = 0; i < cardsInMarket; i++)
 		{
 			if (devCards.get(i).getCardNumber() == cardNumber)
 				return devCards.get(i);
@@ -48,5 +57,15 @@ public class DevCardsMarket
 	public void setDevCards(List<DevCard> devCards)
 	{
 		this.devCards = devCards;
+	}
+
+	public int getCardsInMarket()
+	{
+		return cardsInMarket;
+	}
+
+	public void setCardsInMarket(int cardsInMarket)
+	{
+		this.cardsInMarket = cardsInMarket;
 	}
 }
