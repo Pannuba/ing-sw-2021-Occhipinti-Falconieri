@@ -10,7 +10,6 @@ public enum Color		/* https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296
 	GREY("\u001B[38;5;245m"),
 	WHITE("\u001B[37m");
 
-
 	public static final String RESET = "\u001B[0m";
 
 	private final String escape;

@@ -14,7 +14,7 @@ public class Player
 	private String username;
 	private Dashboard dashboard;
 	private int victoryPoints;
-	private List<DevCard> devCards = new ArrayList<DevCard>();		/* TODO: migrate nearly everything to ArrayList */
+	private List<DevCard> devCards = new ArrayList<DevCard>();
 	private List<LeaderCard> leaderCards = new ArrayList<LeaderCard>();
 
 	public Player()

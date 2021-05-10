@@ -3,12 +3,11 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.client.view.cli.CLI;
 import it.polimi.ingsw.client.view.gui.GUI;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main		/* Starting point from which the user chooses to start the CLI or the GUI */
 {
-	public static void main(String[] args) throws IOException
+	public static void main(String[] args)
 	{
 		Scanner input = new Scanner(System.in);
 		String choice = "";
@@ -25,11 +24,11 @@ public class Main		/* Starting point from which the user chooses to start the CL
 		switch(choice)
 		{
 			case "1":
-				CLI cli = new CLI();
+				new CLI();
 				break;
 
 			case "2":
-				GUI gui = new GUI();
+				new GUI();
 				break;
 		}
 	}

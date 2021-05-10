@@ -3,16 +3,12 @@ package it.polimi.ingsw.client.view.cli;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.controller.Controller;
 import it.polimi.ingsw.model.GameState;
-import it.polimi.ingsw.model.Marble;
-import it.polimi.ingsw.model.MarblesMarket;
 import it.polimi.ingsw.model.cards.*;
 
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
-
-import static java.lang.Boolean.parseBoolean;
 
 public class CLI extends Observable implements Observer
 {
@@ -23,9 +19,15 @@ public class CLI extends Observable implements Observer
 
 	public CLI()
 	{
-		controller = new Controller();
+		controller = new Controller();		/* Pass networkHandler instance to controller? Create NH thread in controller? */
 		input = new Scanner(System.in);
+		gameStart();
+		matchSetup();
+		//new Thread(networkHandler).start();		/* Start listening for gamestate updates from server. Put this after game setup? Yes. */
+	}
 
+	private void gameStart()
+	{
 		System.out.print("Username: ");
 		String username = input.nextLine();
 		System.out.print("Server IP: ");
@@ -49,11 +51,9 @@ public class CLI extends Observable implements Observer
 		System.out.println("Created network handler");
 		networkHandler.waitForPlayers();
 		System.out.println("Starting match");
-		gameSetup();
-		//new Thread(networkHandler).start();		/* Start listening for gamestate updates from server. Put this after game setup? Yes. */
 	}
 
-	public void gameSetup()
+	private void matchSetup()
 	{
 		System.out.println("Masters of the Renaissance!");
 
@@ -63,7 +63,7 @@ public class CLI extends Observable implements Observer
 		for (int i = 0; i < 4; i++)
 		{
 			System.out.println("Card " + (i + 1) + ":");
-			printPlayerLeaderCard(fourLeaderCards.get(i));
+			PrintMethods.printLeaderCard(fourLeaderCards.get(i));
 		}
 
 		networkHandler.send(input.nextLine());
@@ -71,96 +71,37 @@ public class CLI extends Observable implements Observer
 		networkHandler.send(input.nextLine());
 
 	}
-	
 
-	public void printBoard()
+	private void chooseAction(int action)	/* "What do you want to do? buy from market (0), activate production (1), view cards (2), view board (3), view markets (4) */
 	{
-		System.out.println("[ | | | | | | | | | | | | | | | | | | | | | | | | | ]");		/* wow */
-	}
-
-	public void printPlayerLeaderCard(Object card)		/* Can't access skill variables from LeaderCard because it's abstract */
-	{
-		switch(card.getClass().getSimpleName())
+		switch(action)
 		{
-			case "SkillDiscount":
-				System.out.println("Leadercard skill: discount");
-				System.out.println("Discounted resource: " + ((SkillDiscount)card).getDiscountedResource());
+			case 0:
+				/* Call controller function, or just send the command through the networkhandler */
 				break;
 
-			case "SkillMarble":
-				System.out.println("Leadercard skill: white marble");
-				System.out.println("White marble resource: " + ((SkillMarble)card).getWhiteMarble());
+			case 1:
+				/* Same */
 				break;
 
-			case "SkillProduction":
-				System.out.println("Leadercard skill: additional production");
-				System.out.println("Requirement type: " + ((SkillProduction)card).getRequirement().getResourceType());
-				System.out.println("Requirement amount: 1");
-				System.out.println("Product type: " + ((SkillProduction)card).getProduct().getResourceType());		/* Null because it's chosen by the player */
-				System.out.println("Product amount: 1");
+			case 2:
+				//PrintMethods.printPlayerLeaderCards();		/* gamestate.getPlayer(username).getLeadercards get player by name? */
+				//PrintMethods.printPlayerDevCards();
 				break;
 
-			case "SkillStorage":
-				System.out.println("Leadercard skill: additional storage");
-				System.out.println("Additional storage resource: " + ((SkillStorage)card).getAdditionalStorage().getShelfResource().getResourceType());
+			case 3:
+				//PrintMethods.printBoard();
 				break;
+
+			case 4:
+				//PrintMethods.printDevCardsMarket();
+				//PrintMethods.printMarblesMarket();
+				break;
+
+			default:
+				System.out.println("Invalid action number");
+
 		}
-
-		System.out.println("Card number: " + ((LeaderCard)card).getCardNumber());
-		System.out.println("Points: " + ((LeaderCard)card).getPoints());
-		System.out.println("Discarded: " + ((LeaderCard)card).isDiscarded());
-	}
-
-	public void printPlayerDevCards()
-	{
-
-	}
-
-	public void printDevCardsMarket()
-	{
-
-	}
-
-	public void printMarblesMarket(MarblesMarket market)		/* private? */
-	{
-		Marble[][] board = market.getMarblesBoard();
-
-		for (int i = 0; i < 3; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				System.out.print(convertMarbleToString(board[i][j]) + "  ");
-			}
-			System.out.print(Color.RESET + "\n");
-		}
-	}
-
-	public String convertMarbleToString(Marble marble)
-	{
-		final String marbleSymbol = "\u2B24";
-
-		switch (marble.getMarbleType())
-		{
-			case YELLOW:
-				return Color.YELLOW + marbleSymbol + Color.RESET;
-
-			case PURPLE:
-				return Color.PURPLE + marbleSymbol + Color.RESET;
-
-			case WHITE:
-				return Color.WHITE + marbleSymbol + Color.RESET;
-
-			case GREY:
-				return Color.GREY + marbleSymbol + Color.RESET;
-
-			case BLUE:
-				return Color.BLUE + marbleSymbol + Color.RESET;
-
-			case RED:
-				return Color.RED + marbleSymbol + Color.RESET;
-		}
-
-		return null;
 	}
 
 	@Override
