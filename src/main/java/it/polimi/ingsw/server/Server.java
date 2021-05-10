@@ -1,6 +1,6 @@
-package it.polimi.ingsw.server.view;
+package it.polimi.ingsw.server;
 
-import it.polimi.ingsw.server.ServerListener;
+import it.polimi.ingsw.server.view.ServerListener;
 
 import java.io.IOException;
 import java.net.InetAddress;

@@ -2,10 +2,11 @@ package it.polimi.ingsw.model.cards;
 
 import it.polimi.ingsw.model.Resource;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DevCard
+public class DevCard implements Serializable
 {
 	private int cardNumber;			/* To identify cards. If a devcard is bought from the market, the list size changes so it's impossible to order cards based on their index */
 	private DevCardColor color;

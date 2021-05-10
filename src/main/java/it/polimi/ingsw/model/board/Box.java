@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.board;
 
-public class Box
+import java.io.Serializable;
+
+public class Box implements Serializable
 {
 	private BoxType category;
 	private int position;

@@ -1,10 +1,8 @@
 package it.polimi.ingsw.server.controller;
 
-/* TODO: add possible actions the client can do */
-
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.cards.LeaderCard;
-import it.polimi.ingsw.server.ClientHandler;
+import it.polimi.ingsw.server.view.ClientHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +21,6 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 	public void parseInput(String username, List<String> command)		/* Gets name from ClientHandler to change that player's stuff */
 	{
-		System.out.print("Command: ");
-
-		for (int i = 0; i < command.size(); i++)		/* Prints command for debugging purposes */
-			System.out.print(command.get(i) + " ");
-
 		if (command.get(0).equals("SELECT_LEADERCARDS"))		/* "SELECT_LEADERCARDS", "x", "y" */
 		{
 			List<LeaderCard> cards = new ArrayList<LeaderCard>();
@@ -60,6 +53,8 @@ public class Controller implements Observer			/* Observes view to get commands..
 		{
 
 		}
+
+		model.update();		/* Should this be called from Match after every round? */
 	}
 
 	@Override

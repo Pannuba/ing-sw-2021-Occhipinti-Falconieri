@@ -3,10 +3,11 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.tools.XML_Serialization;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DevCardsMarket
+public class DevCardsMarket implements Serializable
 {
 	private List<DevCard> devCards = new ArrayList<DevCard>();
 	private int cardsInMarket;

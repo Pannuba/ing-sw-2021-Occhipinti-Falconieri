@@ -3,8 +3,9 @@ package it.polimi.ingsw.model.board;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.tools.XML_Serialization;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class Dashboard
+public class Dashboard implements Serializable
 {
 	private Vault vault;
 	private Storage storage;

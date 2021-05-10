@@ -3,8 +3,7 @@ package it.polimi.ingsw.model.board;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.Shelf;
 
-import java.io.IOException;
-import java.util.List;
+import java.io.Serializable;
 
 /*	   Y			shelves[0]			If I get another Y, I have to swap X and Y so that I have 2 Y in the middle shelf
 	_______
@@ -14,7 +13,7 @@ import java.util.List;
 	_______
 */
 
-public class Storage
+public class Storage implements Serializable
 {
 	private Shelf[] shelves = new Shelf[3];		/* Static array because there are always 3 shelves, no more no less */
 

@@ -21,7 +21,7 @@ public class CLI extends Observable implements Observer
 		input = new Scanner(System.in);
 		gameStart();
 		matchSetup();
-		//new Thread(networkHandler).start();		/* Start listening for gamestate updates from server. Put this after game setup? Yes. */
+		new Thread(networkHandler).start();		/* Start listening for gamestate updates from server. Put this after game setup? Yes. */
 	}
 
 	private void gameStart()
@@ -77,8 +77,6 @@ public class CLI extends Observable implements Observer
 		System.out.println("Notifying observers (network handler)");
 		setChanged();						/* Apparently this is necessary whenever notifyObservers is called */
 		notifyObservers(command);		/* Send array of strings to server controller */
-		String wait = input.nextLine();
-
 	}
 
 	private void chooseAction(int action)	/* "What do you want to do? buy from market (0), activate production (1), view cards (2), view board (3), view markets (4) */
@@ -116,6 +114,8 @@ public class CLI extends Observable implements Observer
 	@Override
 	public void update(Observable observable, Object o)
 	{
+		System.out.println("Gamestate received");
 		this.gameState = (GameState)o;		/* Gamestate is needed in game loop, not during setup */
+		System.out.println("test: " + gameState);
 	}
 }

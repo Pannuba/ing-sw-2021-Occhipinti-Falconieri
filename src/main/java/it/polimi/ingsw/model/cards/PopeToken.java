@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.cards;
 
-public class PopeToken
+import java.io.Serializable;
+
+public class PopeToken implements Serializable
 {
 	private int points;
 	private boolean isUsed;

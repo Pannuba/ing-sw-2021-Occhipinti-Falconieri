@@ -1,6 +1,8 @@
-package it.polimi.ingsw.server;
+package it.polimi.ingsw.server.view;
 
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.server.Match;
+import it.polimi.ingsw.server.view.ClientHandler;
 
 import java.io.*;
 import java.net.ServerSocket;

@@ -2,9 +2,11 @@ package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.cards.PopeToken;
 
+import java.io.Serializable;
+
 /* One track shared among all players */
 
-public class Track
+public class Track implements Serializable
 {
 	private Box[] faithTrack = new Box[25];        /* new Box[25] goes here or in constructor? */
 	private PopeToken[] popeTokens = new PopeToken[3];

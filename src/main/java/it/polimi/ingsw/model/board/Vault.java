@@ -2,7 +2,9 @@ package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.ResourceType;
 
-public class Vault
+import java.io.Serializable;
+
+public class Vault implements Serializable
 {
 	private int[] resourceAmounts = new int[4];		/* 0: blue, 1: grey, 2: yellow, 3: purple */
 

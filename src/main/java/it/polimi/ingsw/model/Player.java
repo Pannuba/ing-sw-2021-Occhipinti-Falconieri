@@ -5,10 +5,11 @@ import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player
+public class Player implements Serializable
 {
 	private int id;				/* 0, 1, 2, 3 to manage turns, pawns and so on */
 	private String username;

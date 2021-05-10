@@ -1,4 +1,6 @@
-package it.polimi.ingsw.server;
+package it.polimi.ingsw.server.view;
+
+import it.polimi.ingsw.model.GameState;
 
 import java.io.DataInputStream;
 import java.io.ObjectInputStream;
@@ -7,7 +9,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;				/* TODO: view observes model, send gamestate to client */
+import java.util.Observer;
 
 public class ClientHandler extends Observable implements Runnable, Observer		/* Observes model waiting for changes, observed by controller */
 {
@@ -62,12 +64,6 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 		}
 	}
 
-	@Override
-	public void update(Observable observable, Object o)
-	{
-		/* Send gamestate */
-	}
-
 	public String getUsername()
 	{
 		return username;
@@ -76,5 +72,12 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 	public Socket getClientSocket()
 	{
 		return clientSocket;
+	}
+
+	@Override
+	public void update(Observable observable, Object o)			/* Send gamestate received from model */
+	{
+		System.out.println("Sending gamestate to " + username);
+		send((GameState)o);
 	}
 }

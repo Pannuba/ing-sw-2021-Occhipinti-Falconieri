@@ -37,12 +37,11 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 	{
 		while(!clientSocket.isClosed())
 		{
-			GameState gameState = null;
-
 			try
 			{
 				System.out.println("Waiting for new gamestate");
-				gameState = (GameState) ois.readObject();			/* Send gamestate to the view? */
+				GameState gameState = (GameState) ois.readObject();			/* Send gamestate to the view? */
+				setChanged();
 				notifyObservers(gameState);
 			}
 			catch (IOException | ClassNotFoundException e)

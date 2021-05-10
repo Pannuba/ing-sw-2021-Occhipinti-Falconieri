@@ -4,13 +4,11 @@ import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.server.controller.Controller;
+import it.polimi.ingsw.server.view.ClientHandler;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class Match implements Runnable		/* Controller?? */
+public class Match implements Runnable
 {
 	private final int numPlayers;
 	private final List<Player> players;
@@ -39,6 +37,7 @@ public class Match implements Runnable		/* Controller?? */
 		for (int i = 0; i < views.size(); i++)
 		{
 			views.get(i).addObserver(controller);		/* Controller observes the views to get the command */
+			model.addObserver(views.get(i));			/* Views observe the model to send the client the new gamestate */
 		}
 	}
 
@@ -55,7 +54,6 @@ public class Match implements Runnable		/* Controller?? */
 			System.out.println("Sending " + players.get(i).getUsername() + " " + leaderCardsLists.get(i));
 			views.get(i).send(leaderCardsLists.get(i));
 		}
-
 
 	}
 

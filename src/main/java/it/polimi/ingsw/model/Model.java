@@ -1,20 +1,17 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.board.Dashboard;
 import it.polimi.ingsw.model.board.Track;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
-import it.polimi.ingsw.model.cards.SkillDiscount;
 
 import it.polimi.ingsw.tools.XML_Serialization;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Model
+public class Model extends Observable		/* Observed by the views to create the new gamestate */
 {
 	private int numPlayers;
 	private Track track;
@@ -40,8 +37,14 @@ public class Model
 		track = new Track(numPlayers);
 		marblesMarket = new MarblesMarket();
 		devCardsMarket = new DevCardsMarket();
-		//pickLeaderCards();
 
+	}
+
+	public void update()			/* Creates the new gamestate and sends it to the views, which send it to the clients */
+	{
+		GameState gameState = new GameState(players, track, marblesMarket, devCardsMarket);
+		setChanged();
+		notifyObservers(gameState);
 	}
 
 	private void createLeaderCards()

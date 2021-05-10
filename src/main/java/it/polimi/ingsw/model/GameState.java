@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.board.Dashboard;
 import it.polimi.ingsw.model.board.Track;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 	TODO: translate GameState object in client
  */
 
-public class GameState
+public class GameState implements Serializable
 {
 	private List<Player> currPlayers;
 	private Dashboard[] currBoards;
@@ -21,9 +22,9 @@ public class GameState
 	private DevCardsMarket currDevCardsMarket;
 	private int round;
 
-	public GameState(List<Player> currPlayers, Track currTrack, MarblesMarket currMarblesMarket, DevCardsMarket currDevCardsMarket, int round)
+	public GameState(List<Player> currPlayers, Track currTrack, MarblesMarket currMarblesMarket, DevCardsMarket currDevCardsMarket)
 	{
-		this.round = round;
+		//this.round = round;
 		this.currPlayers = currPlayers;
 		this.currTrack = currTrack;
 		this.currMarblesMarket = currMarblesMarket;

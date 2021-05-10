@@ -19,11 +19,12 @@ package it.polimi.ingsw.model;
 
 */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class MarblesMarket
+public class MarblesMarket implements Serializable
 {
 	private Marble[][] marblesBoard = new Marble[3][4];
 	private Marble spareMarble;

@@ -7,7 +7,9 @@ package it.polimi.ingsw.model;
 	Cross --> red ----> 4  (faith points)
  */
 
-public class Marble
+import java.io.Serializable;
+
+public class Marble implements Serializable
 {
 	private MarbleType category;				/* Rename category to type? */
 	private int quantity;			/* I forgot what quantity does */
