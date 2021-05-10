@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
+import java.util.Observer;				/* TODO: view observes model, send gamestate to client */
 
 public class ClientHandler extends Observable implements Runnable, Observer		/* Observes model waiting for changes, observed by controller */
 {
@@ -38,7 +38,9 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 			try
 			{
 				System.out.println(username + " waiting for message from client");
-				command = (List<String>)ois.readObject();
+				command = (List<String>)ois.readObject();		/* EOFException when client disconnects */
+				System.out.println("Received " + command + " from " + username);
+				setChanged();
 				notifyObservers(command);		/* Sends command to controller */
 			}
 			catch(Exception e)

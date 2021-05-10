@@ -3,11 +3,15 @@ package it.polimi.ingsw.server.controller;
 /* TODO: add possible actions the client can do */
 
 import it.polimi.ingsw.model.Model;
+import it.polimi.ingsw.model.cards.LeaderCard;
+import it.polimi.ingsw.server.ClientHandler;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Controller implements Observer
+public class Controller implements Observer			/* Observes view to get commands... View observes model right? */
 {
 	private final Model model;
 
@@ -17,24 +21,42 @@ public class Controller implements Observer
 		this.model = model;
 	}
 
-	public void parseInput(String message)
+	public void parseInput(String username, List<String> command)		/* Gets name from ClientHandler to change that player's stuff */
 	{
+		System.out.print("Command: ");
 
-		if (message.equals("SELECT_LEADERCARD"))
+		for (int i = 0; i < command.size(); i++)		/* Prints command for debugging purposes */
+			System.out.print(command.get(i) + " ");
+
+		if (command.get(0).equals("SELECT_LEADERCARDS"))		/* "SELECT_LEADERCARDS", "x", "y" */
 		{
+			List<LeaderCard> cards = new ArrayList<LeaderCard>();
 
+			for (int i = 0; i < 16; i++)
+			{
+				if (String.valueOf(model.getAllLeaderCards().get(i).getCardNumber()).equals(command.get(1)))
+					cards.add(model.getAllLeaderCards().get(i));
+			}
+
+			for (int i = 0; i < 16; i++)
+			{
+				if (String.valueOf(model.getAllLeaderCards().get(i).getCardNumber()).equals(command.get(1)))
+					cards.add(model.getAllLeaderCards().get(i));
+			}
+			model.getPlayerByUsername(username).setLeaderCards(cards);
 		}
-		if (message.equals("BUY_DEVCARD"))
+
+		if (command.get(0).equals("BUY_DEVCARD"))
 		{
 			// change model
 		}
 
-		if (message.equals("ACTIVATE_PRODUCTION"))
+		if (command.get(0).equals("ACTIVATE_PRODUCTION"))
 		{
 
 		}
 
-		if (message.equals("MARBLE_MARKET"))
+		if (command.get(0).equals("MARBLE_MARKET"))
 		{
 
 		}
@@ -43,6 +65,6 @@ public class Controller implements Observer
 	@Override
 	public void update(Observable obs, Object obj)
 	{
-		parseInput((String)obj);
+		parseInput(((ClientHandler)obs).getUsername(), (List<String>)obj);
 	}
 }

@@ -23,14 +23,30 @@ public class Model
 	private List<Player> players = new ArrayList<Player>();
 	private List<LeaderCard> allLeaderCards = new ArrayList<LeaderCard>();		/* All 16 leadercards, each player picks 2 out of 4 */
 
-	public Model(int numPlayers)    /* Pass usernames? */
+	public Model(List<Player> players)
 	{
 		System.out.println("Creating model...");
-		this.numPlayers = numPlayers;
-		LeaderCard cardToAdd = null;
+		this.players = players;
+		numPlayers = players.size();
 
 		for(int i = 0; i < numPlayers; i++)
-			players.add(new Player());		/* Array of object, need "new" keyword for each array element */
+		{
+			System.out.println("Creating player " + (i + 1) + "...");
+			players.add(new Player());        /* List of objects, need "new" keyword for each element */
+		}
+
+		createLeaderCards();
+
+		track = new Track(numPlayers);
+		marblesMarket = new MarblesMarket();
+		devCardsMarket = new DevCardsMarket();
+		//pickLeaderCards();
+
+	}
+
+	private void createLeaderCards()
+	{
+		LeaderCard cardToAdd = null;
 
 		for (int i = 0; i < 16; i++)
 		{
@@ -47,12 +63,6 @@ public class Model
 			cardToAdd.setCardNumber(i + 1);		/* Here or in xmls? */
 			allLeaderCards.add(cardToAdd);
 		}
-
-		track = new Track(numPlayers);
-		marblesMarket = new MarblesMarket();
-		devCardsMarket = new DevCardsMarket();
-		//pickLeaderCards();
-
 	}
 
 	public List<List<LeaderCard>> createLeaderCardsLists()				/* Returns a list of lists of leadercards, 1 for each player, each list has 4 leadercards to choose from */
@@ -110,6 +120,18 @@ public class Model
 		/* Need to calculate popetokens points, but where should vaticanReport be called? */
 
 		return points;
+	}
+
+	public Player getPlayerByUsername(String username)		/* 	NullPointerException because  the usernames taken in ServerListener are discarded when a new model is created in Match */
+	{
+		for (int i = 0; i < numPlayers; i++)
+		{
+			if (players.get(i).getUsername().equals(username))
+				return players.get(i);
+		}
+
+		System.out.println("getPlayerByUsername: returning null");
+		return null;
 	}
 
 	public int getNumPlayers()

@@ -28,12 +28,17 @@ public class Match implements Runnable		/* Controller?? */
 
 		try
 		{
-			model = new Model(numPlayers);
+			model = new Model(players);
 			controller = new Controller(model);
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
+		}
+
+		for (int i = 0; i < views.size(); i++)
+		{
+			views.get(i).addObserver(controller);		/* Controller observes the views to get the command */
 		}
 	}
 

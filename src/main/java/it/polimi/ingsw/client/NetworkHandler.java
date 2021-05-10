@@ -172,6 +172,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 	@Override
 	public void update(Observable observable, Object o)		/* Send command (List) to server */
 	{
+		System.out.println("Sending command " + ((List<String>)o).get(0) + " to server");
 		sendCommand((List<String>)o);
 	}
 }
