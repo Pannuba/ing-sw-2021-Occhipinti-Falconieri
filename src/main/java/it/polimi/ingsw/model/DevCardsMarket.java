@@ -14,13 +14,12 @@ public class DevCardsMarket implements Serializable
 
 	public DevCardsMarket()
 	{
-		System.out.println("Creating devcards market");
+		System.out.println("Creating devcards...");
 
 		cardsInMarket = 48;
 
 		for (int i = 0; i < 48; i++)
 		{
-			System.out.println("DevCardsMarket: creating devcard " + (i + 1));
 			try
 			{
 				devCards.add((DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard" + (i + 1) + ".xml"));

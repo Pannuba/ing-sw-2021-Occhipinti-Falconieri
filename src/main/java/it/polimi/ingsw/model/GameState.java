@@ -15,8 +15,7 @@ import java.util.List;
 public class GameState implements Serializable
 {
 	private List<Player> currPlayers;
-	private Dashboard[] currBoards;
-	private String currPlayerName;
+	private String currPlayerName;		/* Player who has the current turn (choose action). ID? */
 	private Track currTrack;
 	private MarblesMarket currMarblesMarket;
 	private DevCardsMarket currDevCardsMarket;
@@ -40,27 +39,26 @@ public class GameState implements Serializable
 
 		for (int i = 0; i < currPlayers.size(); i++)
 		{
-			if (currPlayers.get(i).getUsername().equals(name))
-				player = currPlayers.get(i);
+			System.out.println("currPlayers " + i + " name: " + currPlayers.get(i).getUsername());
 
-			else
+			if (currPlayers.get(i).getUsername().equals(name))
 			{
-				System.out.println("Player \"" + name + "\" not found");
-				return null;
+				return currPlayers.get(i);
 			}
 		}
 
-		return player;
+		System.out.println("Player \"" + name + "\" not found");
+		return null;
 	}
 
-	public int getRound()
+	public List<Player> getCurrPlayers()
 	{
-		return round;
+		return currPlayers;
 	}
 
-	public void setRound(int round)
+	public void setCurrPlayers(List<Player> currPlayers)
 	{
-		this.round = round;
+		this.currPlayers = currPlayers;
 	}
 
 	public String getCurrPlayerName()
@@ -71,5 +69,45 @@ public class GameState implements Serializable
 	public void setCurrPlayerName(String currPlayerName)
 	{
 		this.currPlayerName = currPlayerName;
+	}
+
+	public Track getCurrTrack()
+	{
+		return currTrack;
+	}
+
+	public void setCurrTrack(Track currTrack)
+	{
+		this.currTrack = currTrack;
+	}
+
+	public MarblesMarket getCurrMarblesMarket()
+	{
+		return currMarblesMarket;
+	}
+
+	public void setCurrMarblesMarket(MarblesMarket currMarblesMarket)
+	{
+		this.currMarblesMarket = currMarblesMarket;
+	}
+
+	public DevCardsMarket getCurrDevCardsMarket()
+	{
+		return currDevCardsMarket;
+	}
+
+	public void setCurrDevCardsMarket(DevCardsMarket currDevCardsMarket)
+	{
+		this.currDevCardsMarket = currDevCardsMarket;
+	}
+
+	public int getRound()
+	{
+		return round;
+	}
+
+	public void setRound(int round)
+	{
+		this.round = round;
 	}
 }

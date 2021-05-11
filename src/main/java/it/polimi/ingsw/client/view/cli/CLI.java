@@ -14,6 +14,7 @@ public class CLI extends Observable implements Observer
 	private NetworkHandler networkHandler;
 	private final Controller controller;
 	private GameState gameState;
+	private String username;
 
 	public CLI()
 	{
@@ -28,7 +29,7 @@ public class CLI extends Observable implements Observer
 	private void gameStart()
 	{
 		System.out.print("Username: ");
-		String username = input.nextLine();
+		username = input.nextLine();
 		System.out.print("Server IP: ");
 		//String ip = input.nextLine();		/* For debugging */
 		String ip = "127.0.0.1";
@@ -85,7 +86,7 @@ public class CLI extends Observable implements Observer
 		System.out.println("It's ");
 	}
 
-	private void chooseAction(int action)	/* "What do you want to do? buy from market (0), activate production (1), view cards (2), view board (3), view markets (4) */
+	private void chooseAction(int action)
 	{
 		switch(action)
 		{
@@ -98,17 +99,17 @@ public class CLI extends Observable implements Observer
 				break;
 
 			case 2:
-				//PrintMethods.printPlayerLeaderCards();		/* gamestate.getPlayerByName(username).getLeadercards */
-				//PrintMethods.printPlayerDevCards();
+				PrintMethods.printPlayerLeaderCards(gameState.getPlayerByName(username).getLeaderCards());
+				PrintMethods.printPlayerDevCards(gameState.getPlayerByName(username).getDevCards());
 				break;
 
 			case 3:
-				//PrintMethods.printBoard();
+				PrintMethods.printBoard(gameState.getCurrTrack(), gameState.getPlayerByName(username).getDashboard());
 				break;
 
 			case 4:
-				//PrintMethods.printDevCardsMarket();
-				//PrintMethods.printMarblesMarket();
+				PrintMethods.printDevCardsMarket(gameState.getCurrDevCardsMarket());
+				PrintMethods.printMarblesMarket(gameState.getCurrMarblesMarket());
 				break;
 
 			default:
@@ -122,6 +123,7 @@ public class CLI extends Observable implements Observer
 	{
 		System.out.println("Gamestate received");
 		this.gameState = (GameState)o;		/* Gamestate is needed in game loop, not during setup */
-		System.out.println("test: " + gameState);
+		System.out.println("What do you want to do?\nBuy from market (0), activate production (1), view cards (2), view board (3), view markets (4)");
+		chooseAction(Integer.parseInt(input.nextLine()));
 	}
 }

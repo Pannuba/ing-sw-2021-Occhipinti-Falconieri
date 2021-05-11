@@ -25,6 +25,8 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	{
 		System.out.println("Creating model...");
 		this.players = players;
+		System.out.println("P1 name: " + players.get(0).getUsername());		/* ok */
+		System.out.println("P2 name: " + players.get(1).getUsername());
 		numPlayers = players.size();
 
 		createLeaderCards();
@@ -44,11 +46,11 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 	private void createLeaderCards()
 	{
+		System.out.println("Model: creating leadercards...");
 		LeaderCard cardToAdd = null;
 
 		for (int i = 0; i < 16; i++)
 		{
-			System.out.println("Model: creating leadercard " + (i + 1));
 			try
 			{
 				cardToAdd = (LeaderCard) XML_Serialization.deserialize("src/main/resources/xml/leadercards/leadercard" + (i + 1) + ".xml");
@@ -67,30 +69,44 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	{
 		System.out.println("Choosing a random first player...");
 
-		int firstPlayer = ThreadLocalRandom.current().nextInt(0, numPlayers + 1);
+		int firstPlayer = ThreadLocalRandom.current().nextInt(0, numPlayers);		/* Not numPlayers + 1 because it's zero-indexed */
 		players.get(firstPlayer).setMyTurn(true);
 		players.get(firstPlayer).setId(0);
 		activePlayerID = 0;
 
-		int[] playerNumbers = new int[numPlayers - 1];
-
-		for (int i = 0; i < numPlayers - 1; i++)
-			playerNumbers[i] = 1;
-
-		for (int i = 0; i < numPlayers - 1; i++)
+		if (numPlayers == 2)
 		{
-			int randNum = ThreadLocalRandom.current().nextInt(0, numPlayers + 1);
-
-			if (playerNumbers[randNum] != 1 || players.get(randNum).getId() == 0)
-				i--;
-
-			else
+			for (int i = 0; i < 2; i++)
 			{
-				players.get(randNum).setId(randNum);
-				playerNumbers[i]--;
+				if (!players.get(i).isMyTurn())
+					players.get(i).setId(1);
 			}
 		}
 
+		else
+		{
+			int[] playerNumbers = new int[numPlayers - 1];
+
+			for (int i = 0; i < numPlayers - 1; i++)
+				playerNumbers[i] = 1;
+
+			for (int i = 0; i < numPlayers - 1; i++)
+			{
+				int randNum = ThreadLocalRandom.current().nextInt(0, numPlayers);
+
+				if (playerNumbers[randNum] != 1 || players.get(randNum).getId() == 0)
+					i--;
+
+				else
+				{
+					players.get(randNum).setId(randNum);
+					playerNumbers[i]--;
+				}
+			}
+		}
+
+		for (int i = 0; i < numPlayers; i++)
+			System.out.println(players.get(i).getUsername() + " has ID " + players.get(i).getId() + " and isFirstTurn: " + players.get(i).isMyTurn());
 	}
 
 	public List<List<LeaderCard>> createLeaderCardsLists()				/* Returns a list of lists of leadercards, 1 for each player, each list has 4 leadercards to choose from */
