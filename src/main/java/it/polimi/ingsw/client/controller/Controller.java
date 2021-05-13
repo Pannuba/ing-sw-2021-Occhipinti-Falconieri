@@ -1,22 +1,29 @@
 package it.polimi.ingsw.client.controller;
 
+import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.cli.CLI;
 
-public class Controller
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+
+public class Controller implements Observer
 {
 	private CLI view;
+	private final NetworkHandler networkHandler;
 
-	public void chooseLeaderCards()
+	public Controller(NetworkHandler networkHandler)
 	{
-
+		this.networkHandler = networkHandler;
 	}
 
-	public void buyResources()
+	public void sendCommand(List<String> command)
 	{
-
+		networkHandler
 	}
 
-	public void activateProduction()
+	@Override
+	public void update(Observable observable, Object o)
 	{
 
 	}

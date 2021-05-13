@@ -52,12 +52,14 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	public static void printPlayerLeaderCards(List<LeaderCard> leaderCards)
 	{
-		System.out.println("Player leader cards:");
+		System.out.print("Player leader cards:\n\n");
 
 		for (int i = 0; i < leaderCards.size(); i++)
 		{
 			printLeaderCard(leaderCards.get(i));
 		}
+
+		System.out.print("\n\n");
 	}
 
 	public static void printPlayerDevCards(List<DevCard> devCards)
@@ -80,6 +82,8 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 			System.out.println("Card " + (i + 1) + ":");
 			printDevCard(market.getDevCards().get(i));
 		}
+
+		System.out.print("\n\n");
 	}
 
 	private static void printDevCard(DevCard devCard)
@@ -108,14 +112,14 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	private static void printTrack(Track track)
 	{
-		System.out.println("[ | | | | | | | | | | | | | | | | | | | | | | | | | ]");
+		System.out.print("Track:\n\n");
 	}
 
 	private static void printVault(Vault vault)			/* Use ANSI color codes */
 	{
 		System.out.print(	"Your vault currently has:\n\n" + vault.getResourceAmounts()[0] + " blue\n" + vault.getResourceAmounts()[1] + " grey\n"
-							+ vault.getResourceAmounts()[2] + " yellow\n" + vault.getResourceAmounts()[3] + "purple\n\n"
-							+ "For a total of " + vault.getTotalResources() + " resources");
+							+ vault.getResourceAmounts()[2] + " yellow\n" + vault.getResourceAmounts()[3] + " purple\n\n"
+							+ "For a total of " + vault.getTotalResources() + " resources\n\n");
 
 	}
 
@@ -155,19 +159,19 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		switch (storage.getShelves()[2].getShelfResource().getQuantity())
 		{
 			case 0:
-				topShelf = ANSI.EMPTY + "  " + ANSI.EMPTY + "  " + ANSI.EMPTY;
+				bottomShelf = ANSI.EMPTY + "  " + ANSI.EMPTY + "  " + ANSI.EMPTY;
 				break;
 
 			case 1:
-				topShelf = bottomShelfResource + "  " + ANSI.EMPTY + "  " + ANSI.EMPTY;
+				bottomShelf = bottomShelfResource + "  " + ANSI.EMPTY + "  " + ANSI.EMPTY;
 				break;
 
 			case 2:
-				topShelf = bottomShelfResource + "  " + topShelfResource + "  " + ANSI.EMPTY;
+				bottomShelf = bottomShelfResource + "  " + topShelfResource + "  " + ANSI.EMPTY;
 				break;
 
 			case 3:
-				topShelf = bottomShelfResource + "  " + topShelfResource + "  " + topShelfResource;
+				bottomShelf = bottomShelfResource + "  " + topShelfResource + "  " + topShelfResource;
 				break;
 		}
 
@@ -176,7 +180,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 							"_______" + "\n"	+
 							middleShelf + "\n"	+
 							"_______" + "\n"	+
-							topShelf + "\n"		+
+							bottomShelf + "\n"		+
 							"_______" + "\n"	);
 
 	}
@@ -215,6 +219,9 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	private static String convertResourceToString(Resource resource)
 	{
+		if (resource.getResourceType() == null)
+			return ANSI.EMPTY.toString();
+
 		switch (resource.getResourceType())
 		{
 			case YELLOW:

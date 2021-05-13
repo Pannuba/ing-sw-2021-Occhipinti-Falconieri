@@ -19,14 +19,14 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 	private ObjectInputStream ois;
 	private DataOutputStream dos;
 	private ObjectOutputStream oos;
-	private String username, ip;
-	private int port;
-	private CLI cli;
+	private final String username, ip;
+	private final int port;
+	private final CLI cli;
 
 	public NetworkHandler(CLI cli, String username, String ip, int port)
 	{
 		this.cli = cli;
-		cli.addObserver(this);			/* Observe CLI */
+		//cli.addObserver(this);			/* Observe CLI */
 
 		this.username = username;
 		this.ip = ip;

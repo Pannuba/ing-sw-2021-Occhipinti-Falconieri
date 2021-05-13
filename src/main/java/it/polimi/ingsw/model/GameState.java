@@ -1,16 +1,12 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.board.Dashboard;
 import it.polimi.ingsw.model.board.Track;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/*	Every turn, the server sends a GameState object to all clients
-	So the client view reads it and updates everything
-	TODO: translate GameState object in client
- */
+/*	Every turn, the server sends a GameState object to all clients so the client view reads it and updates everything */
 
 public class GameState implements Serializable
 {
@@ -28,19 +24,12 @@ public class GameState implements Serializable
 		this.currTrack = currTrack;
 		this.currMarblesMarket = currMarblesMarket;
 		this.currDevCardsMarket = currDevCardsMarket;
-
-		/*currBoard = currPlayers.getDashboard();		Need to get all dashboards from player. for loop?
-		currPlayerName = currPlayers.getUsername();*/
 	}
 
 	public Player getPlayerByName(String name)
 	{
-		Player player = new Player();
-
 		for (int i = 0; i < currPlayers.size(); i++)
 		{
-			System.out.println("currPlayers " + i + " name: " + currPlayers.get(i).getUsername());
-
 			if (currPlayers.get(i).getUsername().equals(name))
 			{
 				return currPlayers.get(i);

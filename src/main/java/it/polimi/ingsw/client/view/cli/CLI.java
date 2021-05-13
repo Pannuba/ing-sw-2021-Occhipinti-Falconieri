@@ -8,17 +8,20 @@ import it.polimi.ingsw.model.cards.*;
 import java.sql.Array;
 import java.util.*;
 
+/* 	FIXME: new gamestate sometimes has no leadercards that were picked
+	TODO: put command generation functions in controller, make CLI call them
+*/
+
 public class CLI extends Observable implements Observer
 {
 	private final Scanner input;
 	private NetworkHandler networkHandler;
-	private final Controller controller;
+	private Controller controller;
 	private GameState gameState;
 	private String username;
 
 	public CLI()
 	{
-		controller = new Controller();		/* Pass networkHandler instance to controller? Create NH thread in controller? */
 		input = new Scanner(System.in);
 		gameStart();
 		matchSetup();
@@ -40,6 +43,8 @@ public class CLI extends Observable implements Observer
 		networkHandler = new NetworkHandler(this, username, ip, port);
 		networkHandler.addObserver(this);		/* CLI observes the networkHandler to get the new gamestate */
 		networkHandler.connect();
+
+		controller = new Controller(networkHandler);		/* Pass NH to controller to send commands to server */
 
 		System.out.println("Sending username to server...");
 		networkHandler.sendString(username);
@@ -73,7 +78,7 @@ public class CLI extends Observable implements Observer
 		System.out.println("Choose the second leader card: ");
 		String cardChoice2 = input.nextLine();
 		List<String> command = new ArrayList<String>();
-		command.add("SELECT_LEADERCARDS");
+		command.add("SELECT_LEADERCARDS");				/* Client controller should be doing this, also to avoid making this file huge */
 		command.add(cardChoice1);
 		command.add(cardChoice2);
 		System.out.println("Notifying observers (network handler)");
@@ -85,7 +90,7 @@ public class CLI extends Observable implements Observer
 	{
 		System.out.println("It's ");
 	}
-
+	
 	private void chooseAction(int action)
 	{
 		switch(action)
@@ -94,20 +99,20 @@ public class CLI extends Observable implements Observer
 				/* Call controller function, or just send the command through the networkhandler */
 				break;
 
-			case 1:
+			case 2:
 				/* Same */
 				break;
 
-			case 2:
+			case 3:
 				PrintMethods.printPlayerLeaderCards(gameState.getPlayerByName(username).getLeaderCards());
 				PrintMethods.printPlayerDevCards(gameState.getPlayerByName(username).getDevCards());
 				break;
 
-			case 3:
+			case 4:
 				PrintMethods.printBoard(gameState.getCurrTrack(), gameState.getPlayerByName(username).getDashboard());
 				break;
 
-			case 4:
+			case 5:
 				PrintMethods.printDevCardsMarket(gameState.getCurrDevCardsMarket());
 				PrintMethods.printMarblesMarket(gameState.getCurrMarblesMarket());
 				break;
@@ -116,6 +121,12 @@ public class CLI extends Observable implements Observer
 				System.out.println("Invalid action number");
 
 		}
+
+		if (action == 3 || action == 4 || action == 5)			/* Player can choose again after viewing things */
+		{
+			System.out.print("What do you want to do now?\nBuy from market (0), buy devcards (1), activate production (2), view cards (3), view board (4), view markets (5): ");
+			chooseAction(Integer.parseInt(input.nextLine()));
+		}
 	}
 
 	@Override
@@ -123,7 +134,17 @@ public class CLI extends Observable implements Observer
 	{
 		System.out.println("Gamestate received");
 		this.gameState = (GameState)o;		/* Gamestate is needed in game loop, not during setup */
-		System.out.println("What do you want to do?\nBuy from market (0), activate production (1), view cards (2), view board (3), view markets (4)");
-		chooseAction(Integer.parseInt(input.nextLine()));
+		System.out.println("It's " + gameState.getCurrPlayerName() + "'s turn!");
+
+		if (gameState.getPlayerByName(username).isMyTurn())
+		{
+			System.out.print("What do you want to do?\nBuy from market (0), buy devcards (1), activate production (2), view cards (3), view board (4), view markets (5): ");
+			chooseAction(Integer.parseInt(input.nextLine()));
+		}
+
+		else
+		{
+
+		}
 	}
 }

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.model.Model;
-import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.server.view.ClientHandler;
 
@@ -32,7 +31,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 					String.valueOf(model.getAllLeaderCards().get(i).getCardNumber()).equals(command.get(2))		)
 					cards.add(model.getAllLeaderCards().get(i));
 			}
-
+			System.out.println("Setting cards #" + cards.get(0).getCardNumber() + " and #" + cards.get(1).getCardNumber() + "for " + username);
 			model.getPlayerByUsername(username).setLeaderCards(cards);
 		}
 
@@ -69,7 +68,10 @@ public class Controller implements Observer			/* Observes view to get commands..
 		for (int i = 0; i < model.getNumPlayers(); i++)
 		{
 			if (model.getPlayers().get(i).getId() == activePlayerNum)
+			{
 				model.getPlayers().get(i).setMyTurn(true);
+				System.out.println("Next player is " + model.getPlayers().get(i).getUsername());
+			}
 		}
 	}
 

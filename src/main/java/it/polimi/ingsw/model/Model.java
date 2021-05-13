@@ -25,8 +25,6 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	{
 		System.out.println("Creating model...");
 		this.players = players;
-		System.out.println("P1 name: " + players.get(0).getUsername());		/* ok */
-		System.out.println("P2 name: " + players.get(1).getUsername());
 		numPlayers = players.size();
 
 		createLeaderCards();
@@ -39,9 +37,12 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 	public void update()			/* Creates the new gamestate and sends it to the views, which send it to the clients */
 	{
-		GameState gameState = new GameState(players, track, marblesMarket, devCardsMarket);
+		System.out.println("Updating gamestate...");
+		System.out.println("In this gamestate, " + players.get(0).getUsername() + "has leadercards #" + players.get(0).getLeaderCards().get(0).getCardNumber() + " and #" + players.get(0).getLeaderCards().get(1).getCardNumber());
+		System.out.println("In this gamestate, " + players.get(1).getUsername() + "has leadercards #" + players.get(1).getLeaderCards().get(0).getCardNumber() + " and #" + players.get(1).getLeaderCards().get(1).getCardNumber());
+		/* Checks out... so it's a client-side bug? */
 		setChanged();
-		notifyObservers(gameState);
+		notifyObservers(new GameState(players, track, marblesMarket, devCardsMarket));
 	}
 
 	private void createLeaderCards()
@@ -111,7 +112,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 	public List<List<LeaderCard>> createLeaderCardsLists()				/* Returns a list of lists of leadercards, 1 for each player, each list has 4 leadercards to choose from */
 	{
-		int cardsToAssign[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+		int[] cardsToAssign = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 		List<List<LeaderCard>> listOfLists = new ArrayList<List<LeaderCard>>();
 		List<LeaderCard> tempList;
 
