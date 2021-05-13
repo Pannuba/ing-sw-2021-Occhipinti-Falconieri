@@ -2,17 +2,22 @@ package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.cards.DevCard;
 
-public class DevCardArea
+import java.util.ArrayList;
+import java.util.List;
+
+public class DevCardArea			/* Devcards can't be removed once added */
 {
-	private DevCard devCard;
+	private boolean isEmpty;
+	private List<DevCard> devCards = new ArrayList<DevCard>();
 	private int layer;
 
 	public DevCardArea()
 	{
+		isEmpty = true;
 		layer = 0;
 	}
 
-	public boolean checkDevCardArea()
+	public boolean checkDevCardArea()			/* Layer is 0 if there are no devcards, 3 if there are 3 devcards */
 	{
 		if (layer < 0 || layer > 3)
 		{
@@ -25,6 +30,9 @@ public class DevCardArea
 
 	public void addDevCard(DevCard cardToAdd)
 	{
+		if (isEmpty)
+			isEmpty = false;
+
 		if (layer == 3)
 		{
 			System.out.println("Error: there are already three cards");		/* Need to use logger (or do we?) */
@@ -33,19 +41,42 @@ public class DevCardArea
 
 		if (cardToAdd.getLevel() == layer + 1)		/* if layer is 0 and we add a card of level 1 (0 + 1), it's ok */
 		{
-			devCard = cardToAdd;
+			devCards.add(cardToAdd);
 			layer++;
 		}
+
+		else
+			System.out.println("Card to be added is not compatible with current dev card area");
 	}
 
-	public DevCard getDevCard()
+	public DevCard getTopDevCard()			/* The devcard of highest level is the most important */
 	{
-		return devCard;
+		return devCards.get(layer - 1);		/* If layer is 3, the third devcard has index 2: [0, 1, 2] */
 	}
 
-	public void setDevCard(DevCard devCard)
+	public int calculatePoints()		/* Returns an int of the total points of all cards. Check calculatePoints in Model */
 	{
-		this.devCard = devCard;
+		return 0;
+	}
+
+	public boolean isEmpty()
+	{
+		return isEmpty;
+	}
+
+	public void setEmpty(boolean empty)
+	{
+		isEmpty = empty;
+	}
+
+	public List<DevCard> getDevCards()
+	{
+		return devCards;
+	}
+
+	public void setDevCards(List<DevCard> devCards)
+	{
+		this.devCards = devCards;
 	}
 
 	public int getLayer()

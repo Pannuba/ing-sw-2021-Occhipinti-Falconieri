@@ -180,14 +180,35 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 							"_______" + "\n"	+
 							middleShelf + "\n"	+
 							"_______" + "\n"	+
-							bottomShelf + "\n"		+
+							bottomShelf + "\n"	+
 							"_______" + "\n"	);
 
 	}
 
-	private static void printDevCardAreas(DevCardArea[] devCardAreas)
+	public static void printDevCardAreas(DevCardArea[] devCardAreas)
 	{
+		if (devCardAreas[0].isEmpty() && devCardAreas[1].isEmpty() && devCardAreas[2].isEmpty())
+		{
+			System.out.println("You have no dev cards!");
+			return;
+		}
 
+		else
+		{
+			for (int i = 0; i < 3; i++)		/* There are always 3 devcardareas, no more, no less */
+			{
+				System.out.println("Dev card area " + (i + 1) + ":");
+
+				if (devCardAreas[i].isEmpty() == false)
+				{
+					System.out.print("Layer: " + devCardAreas[i].getLayer() + ",\n");
+					printDevCard(devCardAreas[i].getTopDevCard());
+				}
+
+				else
+					System.out.println("Empty!");
+			}
+		}
 	}
 
 	private static String convertMarbleToString(Marble marble)

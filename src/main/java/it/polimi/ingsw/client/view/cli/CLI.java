@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.NetworkHandler;
-import it.polimi.ingsw.client.controller.Controller;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.cards.*;
 
@@ -16,7 +15,6 @@ public class CLI extends Observable implements Observer
 {
 	private final Scanner input;
 	private NetworkHandler networkHandler;
-	private Controller controller;
 	private GameState gameState;
 	private String username;
 
@@ -43,8 +41,6 @@ public class CLI extends Observable implements Observer
 		networkHandler = new NetworkHandler(this, username, ip, port);
 		networkHandler.addObserver(this);		/* CLI observes the networkHandler to get the new gamestate */
 		networkHandler.connect();
-
-		controller = new Controller(networkHandler);		/* Pass NH to controller to send commands to server */
 
 		System.out.println("Sending username to server...");
 		networkHandler.sendString(username);
@@ -78,7 +74,7 @@ public class CLI extends Observable implements Observer
 		System.out.println("Choose the second leader card: ");
 		String cardChoice2 = input.nextLine();
 		List<String> command = new ArrayList<String>();
-		command.add("SELECT_LEADERCARDS");				/* Client controller should be doing this, also to avoid making this file huge */
+		command.add("SELECT_LEADERCARDS");
 		command.add(cardChoice1);
 		command.add(cardChoice2);
 		System.out.println("Notifying observers (network handler)");
@@ -91,16 +87,35 @@ public class CLI extends Observable implements Observer
 		System.out.println("It's ");
 	}
 	
-	private void chooseAction(int action)
+	private void chooseAction(int action)			/* Actions class? */
 	{
+		List<String> command = new ArrayList<String>();
+
 		switch(action)
 		{
 			case 0:
-				/* Call controller function, or just send the command through the networkhandler */
+				System.out.print("This is the current marbles market:\n\n");
+				PrintMethods.printMarblesMarket(gameState.getCurrMarblesMarket());
+				System.out.print("Select a row and column\nrow: ");
+				String row = input.nextLine();		/* String which will be converted to int server-side */
+				System.out.println("Column: ");
+				String col = input.nextLine();
+				command.add("BUY_RESOURCES");
+				command.add(row);
+				command.add(col);
+				networkHandler.sendCommand(command);
+				break;
+
+			case 1:
+				System.out.print("These are your current dev card areas:\n\n");
+				PrintMethods.printDevCardAreas(gameState.getPlayerByName(username).getDashboard().getDevCardAreas());
+
+				command.add("BUY_DEVCARD");
+				networkHandler.sendCommand(command);
 				break;
 
 			case 2:
-				/* Same */
+				command.add("ACTIVATE_PRODUCTION");		/* Same */
 				break;
 
 			case 3:

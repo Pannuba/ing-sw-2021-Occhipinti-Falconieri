@@ -45,7 +45,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 		}
 
-		if (command.get(0).equals("MARBLE_MARKET"))
+		if (command.get(0).equals("BUY_RESOURCES"))
 		{
 
 		}
