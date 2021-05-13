@@ -123,7 +123,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	}
 
-	private static void printStorage(Storage storage)		/* Finish other shelves */
+	private static void printStorage(Storage storage)
 	{
 		String topShelf = "", middleShelf = "", bottomShelf = "";
 		String topShelfResource = convertResourceToString(storage.getShelves()[0].getShelfResource());

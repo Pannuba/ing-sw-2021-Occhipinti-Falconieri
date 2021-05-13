@@ -4,12 +4,9 @@ import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.cards.*;
 
-import java.sql.Array;
 import java.util.*;
 
-/* 	FIXME: new gamestate sometimes has no leadercards that were picked
-	TODO: put command generation functions in controller, make CLI call them
-*/
+/* 	FIXME: new gamestate sometimes has no leadercards that were picked */
 
 public class CLI extends Observable implements Observer
 {
@@ -94,23 +91,38 @@ public class CLI extends Observable implements Observer
 		switch(action)
 		{
 			case 0:
+				command.add("BUY_RESOURCES");
+
 				System.out.print("This is the current marbles market:\n\n");
 				PrintMethods.printMarblesMarket(gameState.getCurrMarblesMarket());
-				System.out.print("Select a row and column\nrow: ");
-				String row = input.nextLine();		/* String which will be converted to int server-side */
-				System.out.println("Column: ");
-				String col = input.nextLine();
-				command.add("BUY_RESOURCES");
-				command.add(row);
-				command.add(col);
+
+				String rowOrColNum = "";
+				System.out.print("Select a row (1) or column(2)? ");
+				int choice = Integer.parseInt(input.nextLine());
+
+				if (choice == 1)
+				{
+					command.add("ROW");
+					System.out.print("Insert row #: ");
+					rowOrColNum = input.nextLine();
+				}
+
+				if (choice == 2)
+				{
+					command.add("COLUMN");
+					System.out.print("Insert column #: ");
+					rowOrColNum = input.nextLine();
+				}
+
+				command.add(rowOrColNum);
 				networkHandler.sendCommand(command);
 				break;
 
 			case 1:
+				command.add("BUY_DEVCARD");
 				System.out.print("These are your current dev card areas:\n\n");
 				PrintMethods.printDevCardAreas(gameState.getPlayerByName(username).getDashboard().getDevCardAreas());
-
-				command.add("BUY_DEVCARD");
+				/* Ask */
 				networkHandler.sendCommand(command);
 				break;
 

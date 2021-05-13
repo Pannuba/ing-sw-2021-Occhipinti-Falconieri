@@ -142,7 +142,7 @@ public class MarblesMarket implements Serializable
 			marblesToAdd.add(new Marble());		/* Quantity is set to 0 in constructor */
 		}
 
-		marblesToAdd.get(0).setMarbleType(MarbleType.RED);
+		marblesToAdd.get(0).setMarbleType(MarbleType.RED);			/* The marble object itself isn't needed, only the amount of each marble */
 		marblesToAdd.get(1).setMarbleType(MarbleType.WHITE);
 		marblesToAdd.get(2).setMarbleType(MarbleType.BLUE);
 		marblesToAdd.get(3).setMarbleType(MarbleType.GREY);

@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+/*	TODO: second player chooses 1 resource, third 1 resource and 1 faithPoint, fourth 2 resources and 1 faithPoint
+	Put a check in client view and send a command like SELECT_INITIAL_RESOURCES
+ */
+
 public class Controller implements Observer			/* Observes view to get commands... View observes model right? */
 {
 	private final Model model;
@@ -37,7 +41,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 		if (command.get(0).equals("BUY_DEVCARD"))
 		{
-			// change model
+
 		}
 
 		if (command.get(0).equals("ACTIVATE_PRODUCTION"))
@@ -45,9 +49,18 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 		}
 
-		if (command.get(0).equals("BUY_RESOURCES"))
+		if (command.get(0).equals("BUY_RESOURCES"))		/* What do with marble amounts? Ask where put to them in storage? */
 		{
 
+			if (command.get(1).equals("ROW"))
+			{
+				model.getMarblesMarket().buyMarblesRow(Integer.parseInt(command.get(2)));
+			}
+
+			if (command.get(1).equals("COLUMN"))
+			{
+				model.getMarblesMarket().buyMarblesCol(Integer.parseInt(command.get(2)));
+			}
 		}
 
 		chooseNextPlayer();
@@ -73,6 +86,11 @@ public class Controller implements Observer			/* Observes view to get commands..
 				System.out.println("Next player is " + model.getPlayers().get(i).getUsername());
 			}
 		}
+	}
+
+	private void updatePlayerPosition()		/* To be called when the player buys red marbles, or...? */
+	{
+
 	}
 
 	@Override
