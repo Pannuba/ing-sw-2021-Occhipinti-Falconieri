@@ -17,6 +17,7 @@ import java.beans.XMLDecoder;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class XML_Serialization
@@ -35,9 +36,9 @@ public class XML_Serialization
 			switch (input.nextLine())
 			{
 
-				case "1":															/* LeaderCard to XML */
+				case "1":	/* LeaderCard to XML. TODO: put card number in xml, not during initialization in Model */
+
 					int leaderCardPoints;
-					String leaderCardRequirements = null;
 
 					System.out.print("LeaderCard number [1, 16]: ");
 					filename = "src/main/resources/xml/leadercards/leadercard" + input.nextLine() + ".xml";
@@ -45,85 +46,75 @@ public class XML_Serialization
 					System.out.print("Points: ");
 					leaderCardPoints = Integer.parseInt(input.nextLine());		/* Convert input string to int */
 
-					System.out.print("Requires resources: 1    devCards: 2 ");
-
-					switch(input.nextLine())
-					{
-						case "1":
-							leaderCardRequirements = "RES_";
-							break;
-
-						case "2":
-							leaderCardRequirements = "DEV_";
-							System.out.print("Level: ");			/* Could be hardcoded since we already know the cards, but it's better this way */
-																	/* For simplicity's sake all required cards have to be of the same level */
-							switch(input.nextLine())
-							{
-								case "1":
-									leaderCardRequirements += "LV1_";
-									break;
-
-								case "2":
-									leaderCardRequirements += "LV2_";
-									break;
-
-								case "3":
-									leaderCardRequirements += "LV3_";
-									break;
-
-								default:
-									break;
-							}
-
-							break;
-
-						default:
-							break;
-					}
-
-					System.out.print("Requirements (1Y1P, ...): ");
-					leaderCardRequirements += input.nextLine();
-
 					System.out.print("Skill (1 = discount, 2 = additional storage, 3 = white marble, 4 = additional production): ");
 
 					switch (input.nextLine())
 					{
 						case "1":		/* Get discount */
 							SkillDiscount leaderCardOne = new SkillDiscount();	/* Not too sure about this but we'll give it a try */
-							leaderCardOne.setPoints(leaderCardPoints);
-							leaderCardOne.setRequirements(leaderCardRequirements);
+							DevCardColor[] discountCost = new DevCardColor[2];
+
+							for (int i = 0; i < 2; i++)
+							{
+								System.out.print("(cost) devcard color " + (i + 1) + " (G/Y/B/P): ");
+								discountCost[i] = convertStringToDevColorType(input.nextLine());
+							}
+
 							ResourceType discountedResource = null;
 							System.out.print("Resource (G/Y/B/P): ");
 							discountedResource = convertStringToResType(input.nextLine());
+
+							leaderCardOne.setPoints(leaderCardPoints);
+							leaderCardOne.setCost(discountCost);
 							leaderCardOne.setDiscountedResource(discountedResource);	/* Discount amount is already set in SkillDiscount */
 							serialize(leaderCardOne, filename);
 							break;
 
 						case "2":		/* Additional storage */
 							SkillStorage leaderCardTwo = new SkillStorage();
-							leaderCardTwo.setPoints(leaderCardPoints);
-							leaderCardTwo.setRequirements(leaderCardRequirements);
+							Resource storageCost = new Resource();
+							storageCost.setQuantity(5);
+							System.out.print("Resource cost (G/Y/B/P): ");
+							storageCost.setResourceType(convertStringToResType(input.nextLine()));
 							System.out.print("Additional storage resource (G/Y/B/P): ");
-							leaderCardTwo.getAdditionalStorage().setShelfSize(2);
-							leaderCardTwo.getAdditionalStorage().getShelfResource().setResourceType(convertStringToResType(input.nextLine()));
+							ResourceType storageResource = convertStringToResType(input.nextLine());
+							// leaderCardTwo.getAdditionalStorage().setShelfSize(2);	shelfSize 2 is already in SkillStorage's constructor
+
+							leaderCardTwo.setPoints(leaderCardPoints);
+							leaderCardTwo.setCost(storageCost);
+							leaderCardTwo.getAdditionalStorage().getShelfResource().setResourceType(storageResource);
 							serialize(leaderCardTwo, filename);
 							break;
 
 						case "3":		/* White marble */
 							SkillMarble leaderCardThree = new SkillMarble();
+							DevCardColor[] whiteMarbleCost = new DevCardColor[3];
+
+							for (int i = 0; i < 3; i++)
+							{
+								System.out.print("(cost) Devcard color " + (i + 1) + " (G/Y/B/P): ");
+								whiteMarbleCost[i] = convertStringToDevColorType(input.nextLine());
+							}
+
+							System.out.print("White marble resource (G/Y/B/P): ");
+							ResourceType whiteResource = convertStringToResType(input.nextLine());
+
 							leaderCardThree.setPoints(leaderCardPoints);
-							leaderCardThree.setRequirements(leaderCardRequirements);
-							System.out.print("White marble resource (G/Y/B/P): ");				/* TODO: switch/case for ResourceType */
-							leaderCardThree.setWhiteMarble(convertStringToResType(input.nextLine()));
+							leaderCardThree.setCost(whiteMarbleCost);
+							leaderCardThree.setWhiteMarble(whiteResource);
 							serialize(leaderCardThree, filename);
 							break;
 
 						case "4":		/* Additional production */
 							SkillProduction leaderCardFour = new SkillProduction();
-							leaderCardFour.setPoints(leaderCardPoints);
-							leaderCardFour.setRequirements(leaderCardRequirements);
+							System.out.print("(cost) Devcard color: ");
+							DevCardColor productionCost = convertStringToDevColorType(input.nextLine());
 							System.out.print("Resource needed for production (G/Y/B/P): ");
-							leaderCardFour.getRequirement().setResourceType(convertStringToResType(input.nextLine()));
+							ResourceType productionRequirement = convertStringToResType(input.nextLine());
+
+							leaderCardFour.setPoints(leaderCardPoints);
+							leaderCardFour.setCost(productionCost);
+							leaderCardFour.getRequirement().setResourceType(productionRequirement);
 							serialize(leaderCardFour, filename);
 							break;
 
@@ -152,7 +143,7 @@ public class XML_Serialization
 					devCard.setLevel(Integer.parseInt(input.nextLine()));
 
 					System.out.print("Color (G/Y/B/P): ");
-					devCard.setColor(convertStringToColorType(input.nextLine()));
+					devCard.setColor(convertStringToDevColorType(input.nextLine()));
 
 					System.out.print("Cost, top of the card. How many resources? ");
 					int costNum = Integer.parseInt(input.nextLine());
@@ -230,7 +221,7 @@ public class XML_Serialization
 			return null;
 		}
 
-		switch(str)
+		switch(str.toUpperCase())		/* So inputs like "g" and "y" are still valid */
 		{
 			case "G":
 				return ResourceType.GREY;
@@ -245,14 +236,14 @@ public class XML_Serialization
 				return ResourceType.PURPLE;
 
 			default:
-				System.out.print("Error");
+				System.out.print("Invalid resource type");
 				return null;
 		}
 	}
 
-	public static DevCardColor convertStringToColorType(String str)
+	public static DevCardColor convertStringToDevColorType(String str)
 	{
-		switch(str)
+		switch(str.toUpperCase())
 		{
 			case "G":
 				return DevCardColor.GREEN;
@@ -267,7 +258,7 @@ public class XML_Serialization
 				return DevCardColor.PURPLE;
 
 			default:
-				System.out.print("Error");
+				System.out.print("Invalid color type");
 				return null;
 		}
 	}

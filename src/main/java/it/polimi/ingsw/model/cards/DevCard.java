@@ -15,7 +15,7 @@ public class DevCard implements Serializable
 	private int faithPoints;
 	private List<Resource> cost;				/* At the top of each card */
 	private List<Resource> requirements;		/* Left side */
-	private List<Resource> product;			/* Right side */
+	private List<Resource> product;				/* Right side */
 
 	public DevCard()
 	{
