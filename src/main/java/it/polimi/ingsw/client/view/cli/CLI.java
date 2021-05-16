@@ -75,7 +75,8 @@ public class CLI extends Observable implements Observer
 		command.add(cardChoice1);
 		command.add(cardChoice2);
 		System.out.println("Notifying observers (network handler)");
-		networkHandler.sendCommand(command);
+		setChanged();						/* Apparently this is necessary whenever notifyObservers is called */
+		notifyObservers(command);		/* Send array of strings to server controller */
 	}
 
 	private void gameLoop()
@@ -115,17 +116,13 @@ public class CLI extends Observable implements Observer
 
 				command.add(rowOrColNum);
 				networkHandler.sendCommand(command);
-
-				/* Wait for resources to put in storage, choose which resources to keep or discard */
-
 				break;
 
 			case 1:
 				command.add("BUY_DEVCARD");
 				System.out.print("These are your current dev card areas:\n\n");
 				PrintMethods.printDevCardAreas(gameState.getPlayerByName(username).getDashboard().getDevCardAreas());
-
-				/* TODO: send server layer, get cards that can be bought, select card by number */
+				/* Ask */
 				networkHandler.sendCommand(command);
 				break;
 
@@ -147,8 +144,6 @@ public class CLI extends Observable implements Observer
 				PrintMethods.printMarblesMarket(gameState.getCurrMarblesMarket());
 				break;
 
-				/* TODO: View other players' dashboard? */
-
 			default:
 				System.out.println("Invalid action number");
 
@@ -156,7 +151,7 @@ public class CLI extends Observable implements Observer
 
 		if (action == 3 || action == 4 || action == 5)			/* Player can choose again after viewing things */
 		{
-			System.out.print("What do you want to do now?\nBuy from market (0), buy dev cards (1), activate production (2), view cards (3), view board (4), view markets (5): ");
+			System.out.print("What do you want to do now?\nBuy from market (0), buy devcards (1), activate production (2), view cards (3), view board (4), view markets (5): ");
 			chooseAction(Integer.parseInt(input.nextLine()));
 		}
 	}
@@ -170,13 +165,13 @@ public class CLI extends Observable implements Observer
 
 		if (gameState.getPlayerByName(username).isMyTurn())
 		{
-			System.out.print("What do you want to do?\nBuy from market (0), buy dev cards (1), activate production (2), view cards (3), view board (4), view markets (5): ");
+			System.out.print("What do you want to do?\nBuy from market (0), buy devcards (1), activate production (2), view cards (3), view board (4), view markets (5): ");
 			chooseAction(Integer.parseInt(input.nextLine()));
 		}
 
 		else
 		{
-			// Wait for turn
+
 		}
 	}
 }

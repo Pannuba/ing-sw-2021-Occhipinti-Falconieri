@@ -64,7 +64,6 @@ public class Model extends Observable		/* Observed by the views to create the ne
 			cardToAdd.setCardNumber(i + 1);		/* Here or in xmls? */
 			allLeaderCards.add(cardToAdd);
 		}
-		System.out.println("finished creating leadercards");
 	}
 
 	private void choosePlayerOrder()		/* Need to test if it's actually random */

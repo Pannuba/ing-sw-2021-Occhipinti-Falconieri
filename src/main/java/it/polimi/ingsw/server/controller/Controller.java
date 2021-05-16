@@ -35,7 +35,6 @@ public class Controller implements Observer			/* Observes view to get commands..
 					String.valueOf(model.getAllLeaderCards().get(i).getCardNumber()).equals(command.get(2))		)
 					cards.add(model.getAllLeaderCards().get(i));
 			}
-
 			System.out.println("Setting cards #" + cards.get(0).getCardNumber() + " and #" + cards.get(1).getCardNumber() + "for " + username);
 			model.getPlayerByUsername(username).setLeaderCards(cards);
 		}
@@ -50,9 +49,8 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 		}
 
-		if (command.get(0).equals("BUY_RESOURCES"))		/*	What do with marble amounts? Ask where put to them in storage? */
-		{												/*	If all resources don't fit, ask client which resources he wants to keep,
-															for the ones discarded, give a faith point to every other player */
+		if (command.get(0).equals("BUY_RESOURCES"))		/* What do with marble amounts? Ask where put to them in storage? */
+		{
 
 			if (command.get(1).equals("ROW"))
 			{
