@@ -1,6 +1,8 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.model.Model;
+import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.server.view.ClientHandler;
 
@@ -11,7 +13,7 @@ import java.util.Observer;
 
 /*	TODO: second player chooses 1 resource, third 1 resource and 1 faithPoint, fourth 2 resources and 1 faithPoint
 	Put a check in client view and send a command like SELECT_INITIAL_RESOURCES
- */
+*/
 
 public class Controller implements Observer			/* Observes view to get commands... View observes model right? */
 {
@@ -37,6 +39,27 @@ public class Controller implements Observer			/* Observes view to get commands..
 			}
 			System.out.println("Setting cards #" + cards.get(0).getCardNumber() + " and #" + cards.get(1).getCardNumber() + "for " + username);
 			model.getPlayerByUsername(username).setLeaderCards(cards);
+		}
+
+		if (command.get(0).equals("INITIAL_RESOURCES"))			/* "INITIAL_RESOURCES", "BY", "2" */
+		{
+			if (command.get(1).isEmpty() == false)
+			{
+				for (int i = 0; i < command.get(1).length(); i++)
+				{
+					Resource resourceToAdd = new Resource();
+					resourceToAdd.setQuantity(1);
+					resourceToAdd.setResourceType(ResourceType.convertStringToResType(Character.toString(command.get(1).charAt(i))));
+
+					/* Put resource in storage, ask player where? Create method somewhere */
+
+				}
+			}
+
+			if (command.get(2).isEmpty() == false)		/* If there are initial faithpoints, get that player's pawn and move it */
+			{
+				//
+			}
 		}
 
 		if (command.get(0).equals("BUY_DEVCARD"))

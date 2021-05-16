@@ -17,10 +17,11 @@ public class GameState implements Serializable
 	private DevCardsMarket currDevCardsMarket;
 	private int round;
 
-	public GameState(List<Player> currPlayers, Track currTrack, MarblesMarket currMarblesMarket, DevCardsMarket currDevCardsMarket)
+	public GameState(List<Player> currPlayers, String currPlayerName, Track currTrack, MarblesMarket currMarblesMarket, DevCardsMarket currDevCardsMarket)
 	{
 		//this.round = round;
 		this.currPlayers = currPlayers;
+		this.currPlayerName = currPlayerName;
 		this.currTrack = currTrack;
 		this.currMarblesMarket = currMarblesMarket;
 		this.currDevCardsMarket = currDevCardsMarket;

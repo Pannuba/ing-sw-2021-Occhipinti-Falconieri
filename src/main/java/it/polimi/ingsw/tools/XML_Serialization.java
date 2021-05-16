@@ -94,7 +94,7 @@ public class XML_Serialization
 							leaderCardOne.setRequirements(leaderCardRequirements);
 							ResourceType discountedResource = null;
 							System.out.print("Resource (G/Y/B/P): ");
-							discountedResource = convertStringToResType(input.nextLine());
+							discountedResource = ResourceType.convertStringToResType(input.nextLine());
 							leaderCardOne.setDiscountedResource(discountedResource);	/* Discount amount is already set in SkillDiscount */
 							serialize(leaderCardOne, filename);
 							break;
@@ -105,7 +105,7 @@ public class XML_Serialization
 							leaderCardTwo.setRequirements(leaderCardRequirements);
 							System.out.print("Additional storage resource (G/Y/B/P): ");
 							leaderCardTwo.getAdditionalStorage().setShelfSize(2);
-							leaderCardTwo.getAdditionalStorage().getShelfResource().setResourceType(convertStringToResType(input.nextLine()));
+							leaderCardTwo.getAdditionalStorage().getShelfResource().setResourceType(ResourceType.convertStringToResType(input.nextLine()));
 							serialize(leaderCardTwo, filename);
 							break;
 
@@ -114,7 +114,7 @@ public class XML_Serialization
 							leaderCardThree.setPoints(leaderCardPoints);
 							leaderCardThree.setRequirements(leaderCardRequirements);
 							System.out.print("White marble resource (G/Y/B/P): ");				/* TODO: switch/case for ResourceType */
-							leaderCardThree.setWhiteMarble(convertStringToResType(input.nextLine()));
+							leaderCardThree.setWhiteMarble(ResourceType.convertStringToResType(input.nextLine()));
 							serialize(leaderCardThree, filename);
 							break;
 
@@ -123,7 +123,7 @@ public class XML_Serialization
 							leaderCardFour.setPoints(leaderCardPoints);
 							leaderCardFour.setRequirements(leaderCardRequirements);
 							System.out.print("Resource needed for production (G/Y/B/P): ");
-							leaderCardFour.getRequirement().setResourceType(convertStringToResType(input.nextLine()));
+							leaderCardFour.getRequirement().setResourceType(ResourceType.convertStringToResType(input.nextLine()));
 							serialize(leaderCardFour, filename);
 							break;
 
@@ -152,7 +152,7 @@ public class XML_Serialization
 					devCard.setLevel(Integer.parseInt(input.nextLine()));
 
 					System.out.print("Color (G/Y/B/P): ");
-					devCard.setColor(convertStringToColorType(input.nextLine()));
+					devCard.setColor(DevCardColor.convertStringToDevColorType(input.nextLine()));
 
 					System.out.print("Cost, top of the card. How many resources? ");
 					int costNum = Integer.parseInt(input.nextLine());
@@ -161,7 +161,7 @@ public class XML_Serialization
 					{
 						cost.add(new Resource());
 						System.out.print("Category of cost resource #" + (i + 1) + " (G/Y/B/P): ");
-						cost.get(i).setResourceType(convertStringToResType(input.nextLine()));
+						cost.get(i).setResourceType(ResourceType.convertStringToResType(input.nextLine()));
 
 						System.out.print("Quantity of cost resource #" + (i + 1) + ": ");
 						cost.get(i).setQuantity(Integer.parseInt(input.nextLine()));
@@ -174,7 +174,7 @@ public class XML_Serialization
 					{
 						requirements.add(new Resource());
 						System.out.print("Category of requirement resource #" + (i + 1) + " (G/Y/B/P): ");
-						requirements.get(i).setResourceType(convertStringToResType(input.nextLine()));
+						requirements.get(i).setResourceType(ResourceType.convertStringToResType(input.nextLine()));
 
 						System.out.print("Quantity of requirement resource #" + (i + 1) + ": ");
 						requirements.get(i).setQuantity(Integer.parseInt(input.nextLine()));
@@ -202,7 +202,7 @@ public class XML_Serialization
 						{
 							product.add(new Resource());
 							product.get(i).setQuantity(Integer.parseInt(prodQuantity));
-							product.get(i).setResourceType(convertStringToResType(prodType));
+							product.get(i).setResourceType(ResourceType.convertStringToResType(prodType));
 						}
 					}
 
@@ -220,55 +220,6 @@ public class XML_Serialization
 					System.out.printf("Insert 1, 2 or 3%n");
 					break;
 			}
-		}
-	}
-
-	public static ResourceType convertStringToResType(String str)
-	{
-		if (str == null)
-		{
-			return null;
-		}
-
-		switch(str)
-		{
-			case "G":
-				return ResourceType.GREY;
-
-			case "Y":
-				return ResourceType.YELLOW;
-
-			case "B":
-				return ResourceType.BLUE;
-
-			case "P":
-				return ResourceType.PURPLE;
-
-			default:
-				System.out.print("Error");
-				return null;
-		}
-	}
-
-	public static DevCardColor convertStringToColorType(String str)
-	{
-		switch(str)
-		{
-			case "G":
-				return DevCardColor.GREEN;
-
-			case "Y":
-				return DevCardColor.YELLOW;
-
-			case "B":
-				return DevCardColor.BLUE;
-
-			case "P":
-				return DevCardColor.PURPLE;
-
-			default:
-				System.out.print("Error");
-				return null;
 		}
 	}
 

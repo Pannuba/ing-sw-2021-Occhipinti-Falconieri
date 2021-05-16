@@ -42,7 +42,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		System.out.println("In this gamestate, " + players.get(1).getUsername() + "has leadercards #" + players.get(1).getLeaderCards().get(0).getCardNumber() + " and #" + players.get(1).getLeaderCards().get(1).getCardNumber());
 		/* Checks out... so it's a client-side bug? */
 		setChanged();
-		notifyObservers(new GameState(players, track, marblesMarket, devCardsMarket));
+		notifyObservers(new GameState(players, getCurrentPlayerName(), track, marblesMarket, devCardsMarket));
 	}
 
 	private void createLeaderCards()
@@ -66,7 +66,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		}
 	}
 
-	private void choosePlayerOrder()		/* Need to test if it's actually random */
+	private void choosePlayerOrder()		/* IDs go from 0 to 3. Need to test if it's actually random */
 	{
 		System.out.println("Choosing a random first player...");
 
@@ -176,6 +176,17 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		}
 
 		System.out.println("getPlayerByUsername: returning null");
+		return null;
+	}
+
+	public String getCurrentPlayerName()
+	{
+		for (int i = 0; i < numPlayers; i++)
+		{
+			if (players.get(i).isMyTurn())
+				return players.get(i).getUsername();
+		}
+
 		return null;
 	}
 

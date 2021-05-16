@@ -2,6 +2,8 @@ package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.cards.*;
 
 import java.util.*;
@@ -21,7 +23,7 @@ public class CLI extends Observable implements Observer
 		gameStart();
 		matchSetup();
 		new Thread(networkHandler).start();		/* Start listening for gamestate updates from server. Put this after game setup? Yes. */
-		gameLoop();
+		//gameLoop();
 	}
 
 	private void gameStart()
@@ -57,32 +59,15 @@ public class CLI extends Observable implements Observer
 	{
 		System.out.println("Masters of the Renaissance!");
 
-		List<LeaderCard> fourLeaderCards = networkHandler.getFourLeadercards();		/* Server tells clients info about the four leadercards */
-		System.out.println("Choose leader card " + fourLeaderCards.get(0).getCardNumber() + ", " + fourLeaderCards.get(1).getCardNumber() +
-							", " + fourLeaderCards.get(2).getCardNumber() + ", " + fourLeaderCards.get(3).getCardNumber() + ":");
+		chooseLeaderCards();
+		chooseResources();
 
-		for (int i = 0; i < 4; i++)
-		{
-			System.out.println("Card " + (i + 1) + ":");
-			PrintMethods.printLeaderCard(fourLeaderCards.get(i));
-		}
-
-		String cardChoice1 = input.nextLine();					/* Has to be the leadercard number */
-		System.out.println("Choose the second leader card: ");
-		String cardChoice2 = input.nextLine();
-		List<String> command = new ArrayList<String>();
-		command.add("SELECT_LEADERCARDS");
-		command.add(cardChoice1);
-		command.add(cardChoice2);
-		System.out.println("Notifying observers (network handler)");
-		setChanged();						/* Apparently this is necessary whenever notifyObservers is called */
-		notifyObservers(command);		/* Send array of strings to server controller */
 	}
 
-	private void gameLoop()
+	/*private void gameLoop()
 	{
 		System.out.println("It's ");
-	}
+	}*/
 	
 	private void chooseAction(int action)			/* Actions class? */
 	{
@@ -156,6 +141,74 @@ public class CLI extends Observable implements Observer
 		}
 	}
 
+	private void chooseLeaderCards()
+	{
+		List<LeaderCard> fourLeaderCards = networkHandler.getFourLeadercards();		/* Server tells clients info about the four leadercards */
+		System.out.println("Choose leader card " + fourLeaderCards.get(0).getCardNumber() + ", " + fourLeaderCards.get(1).getCardNumber() +
+							", " + fourLeaderCards.get(2).getCardNumber() + ", " + fourLeaderCards.get(3).getCardNumber() + ":");
+
+		for (int i = 0; i < 4; i++)
+		{
+			System.out.println("Card " + (i + 1) + ":");
+			PrintMethods.printLeaderCard(fourLeaderCards.get(i));
+		}
+
+		String cardChoice1 = input.nextLine();					/* Has to be the leadercard number */
+		System.out.println("Choose the second leader card: ");
+		String cardChoice2 = input.nextLine();
+
+		List<String> command = new ArrayList<String>();
+		command.add("SELECT_LEADERCARDS");
+		command.add(cardChoice1);
+		command.add(cardChoice2);
+
+		System.out.println("Notifying observers (network handler)");
+		networkHandler.sendCommand(command);
+	}
+
+	private void chooseResources()			/* 1st player: nothing; 2nd: 1 resource; 3rd: 1 resource + 1 faithPoint; 4th: 2 resources + 1 faithPoint */
+	{
+		List<String> command = new ArrayList<String>();
+		String chosenResources = "";			/* Will be converted to ResourceType in server controller */
+		String initialFaithPoints = "";
+
+		switch (gameState.getPlayerByName(username).getId())
+		{
+			case 0:
+				System.out.println("You're the first player, so you get nothing!");
+				break;
+
+			case 1:
+				System.out.print("Choose 1 starting resource (B)lue, (G)rey, (Y)ellow, (P)urple: ");		/* Check for input */
+				chosenResources += input.nextLine();
+				break;
+
+			case 2:
+				System.out.print("Choose 1 starting resource (B)lue, (G)rey, (Y)ellow, (P)urple: ");
+				chosenResources += input.nextLine();
+				initialFaithPoints = "1";
+				break;
+
+			case 3:
+				System.out.print("Choose 2 starting resources (B)lue, (G)rey, (Y)ellow, (P)urple\nResource 1: ");
+				chosenResources += input.nextLine();
+				System.out.print("Resource 2: ");
+				chosenResources += input.nextLine();
+				initialFaithPoints = "2";
+				break;
+
+			default:
+				System.out.println("Something bad happened");
+
+		}
+
+		command.add("INITIAL_RESOURCES");
+		command.add(chosenResources);
+		command.add(initialFaithPoints);
+		networkHandler.sendCommand(command);
+
+	}
+
 	@Override
 	public void update(Observable observable, Object o)
 	{
@@ -171,7 +224,7 @@ public class CLI extends Observable implements Observer
 
 		else
 		{
-
+			System.out.println("It's " + gameState.getCurrPlayerName() + "'s turn!");
 		}
 	}
 }
