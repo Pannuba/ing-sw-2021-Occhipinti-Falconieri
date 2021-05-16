@@ -86,14 +86,32 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		System.out.print("\n\n");
 	}
 
-	private static void printDevCard(DevCard devCard)
+	public static void printDevCardsMarketLevel(DevCardsMarket market, int level)
 	{
-		System.out.println("Points: " + devCard.getPoints());
-		System.out.println("");
-		System.out.println("");
-		System.out.println("");
-		System.out.println("");
-		System.out.println("");
+		System.out.println("Dev cards in market with level = " + level + ":\n\n");
+
+		for (int i = 0; i < market.getCardsInMarket(); i++)
+		{
+			if (market.getDevCards().get(i).getLevel() == level)
+			{
+				System.out.println("Card " + (i + 1) + ":");
+				printDevCard(market.getDevCards().get(i));
+			}
+		}
+
+		System.out.print("\n\n");
+	}
+
+	private static void printDevCard(DevCard devCard)		/* Cost and requirements are actually the opposite! */
+	{
+		System.out.println(	"Card number: " + devCard.getCardNumber() +
+							"\nColor: " + devCard.getColor() +
+							"\nLevel: " + devCard.getLevel() +
+							"\nVictory points: " + devCard.getPoints() +
+							"\nFaith points: " + devCard.getFaithPoints() +
+							"\nProduct: " + devCard.getProduct() +
+							"\nCost: " + devCard.getCost() +
+							"\nRequirements: " + devCard.getRequirements() + "\n\n"	);
 	}
 
 	public static void printMarblesMarket(MarblesMarket market)		/* private? */
@@ -198,6 +216,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 			for (int i = 0; i < 3; i++)		/* There are always 3 devcardareas, no more, no less */
 			{
 				System.out.println("Dev card area " + (i + 1) + ":");
+
 
 				if (devCardAreas[i].isEmpty() == false)
 				{

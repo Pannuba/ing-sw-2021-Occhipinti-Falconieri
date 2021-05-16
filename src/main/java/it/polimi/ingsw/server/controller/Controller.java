@@ -18,6 +18,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 {
 	private final Model model;
 	private String username;			/* Username of the player who sent the command */
+	private ClientHandler view;			/* ClientHandler instance of the view which sent the command. Used for send() method */
 
 	public Controller(Model model)
 	{
@@ -82,6 +83,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 		if (command.get(0).equals("BUY_RESOURCES"))		/* What do with marble amounts? Ask where put to them in storage? */
 		{
 			List<Marble> boughtMarbles = new ArrayList<Marble>();
+			List<Resource> resourcesToAddToStorage = new ArrayList<Resource>();
 
 			if (command.get(1).equals("ROW"))
 				boughtMarbles = model.getMarblesMarket().buyMarblesRow(Integer.parseInt(command.get(2)) - 1);		/* - 1 because 0-indexed, [0, 1, 2] */
@@ -102,18 +104,13 @@ public class Controller implements Observer			/* Observes view to get commands..
 					{
 						List<ResourceType> whiteMarbleTypes = model.getPlayerByUsername(username).getWhiteMarbleTypes();    /* or model.getWhiteMarbleTypes(username */
 
-						if (whiteMarbleTypes.isEmpty())		/* Meaning there are no active SkillMarble cards */
-						{
-							break;
-						}
+						if (whiteMarbleTypes.size() == 1)		/* If there's only 1 active SkillMarble */
+							marbleResourceType = whiteMarbleTypes.get(0);
 
 						if (whiteMarbleTypes.size() > 1)
 						{
 							/* Ask client which resourcetype they want to pick to convert white marbles */
 						}
-
-						else		/* If there's only 1 active SkillMarble */
-							marbleResourceType = whiteMarbleTypes.get(0);
 					}
 
 					else
@@ -122,16 +119,17 @@ public class Controller implements Observer			/* Observes view to get commands..
 					Resource resourceToAdd = new Resource();
 					resourceToAdd.setResourceType(marbleResourceType);
 					resourceToAdd.setQuantity(boughtMarbles.get(i).getQuantity());
-
-					/* Add resource to storage????? */
-
+					resourcesToAddToStorage.add(resourceToAdd);
 				}
 			}
+
+			/* Add resources to storage */
+			view.send(resourcesToAddToStorage);
 
 			chooseNextPlayer();
 		}
 
-		model.update();		/* Should this be called from Match after every round? */
+		model.update();		/* Send new gamestate to everyone */
 	}
 
 	private void chooseNextPlayer()		/* Turns alternate by player ID: 0 -> 1 -> 2 -> 3 */
@@ -194,6 +192,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 	public void update(Observable obs, Object obj)
 	{
 		username = ((ClientHandler)obs).getUsername();
+		view = (ClientHandler)obs;
 		parseInput((List<String>)obj);
 	}
 }

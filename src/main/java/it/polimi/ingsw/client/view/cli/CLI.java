@@ -103,18 +103,39 @@ public class CLI extends Observable implements Observer
 
 				command.add(rowOrColNum);
 				networkHandler.sendCommand(command);
+
+				/* "force" wait for gamestate with message from server controller? */
+				List<Resource> boughtResources = (List<Resource>)networkHandler.receive();
+				System.out.println("Bought the following resources: " + boughtResources);
 				break;
 
 			case 1:
 				command.add("BUY_DEVCARD");
 				System.out.print("These are your current dev card areas:\n\n");
 				PrintMethods.printDevCardAreas(gameState.getPlayerByName(username).getDashboard().getDevCardAreas());
-				/* Ask */
+				System.out.print("Which dev card area do you want to put the new card in? ");
+				int devCardAreaIndex = Integer.parseInt(input.nextLine());		/* 1, 2 or 3			- 1 because arrays are zero-indexed */
+				int targetAreaLayer = gameState.getPlayerByName(username).getDashboard().getDevCardAreas()[devCardAreaIndex - 1].getLayer();
+
+				if (targetAreaLayer == 3)
+				{
+					System.out.println("This dev card area already has three cards!");
+				}
+
+				else			/* Print devcards of level targetAreaLayer + 1 (layer = level of top devcard. New card has to have a higher level) */
+				{
+					PrintMethods.printDevCardsMarketLevel(gameState.getCurrDevCardsMarket(), targetAreaLayer + 1);
+				}
+
+				/* Choose the card to buy */
+
+				/* Check for resources. Here or server? */
+
 				networkHandler.sendCommand(command);
 				break;
 
 			case 2:
-				command.add("ACTIVATE_PRODUCTION");		/* Same */
+				command.add("ACTIVATE_PRODUCTION");
 				break;
 
 			case 3:
