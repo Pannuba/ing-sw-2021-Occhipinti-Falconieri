@@ -3,6 +3,8 @@ package it.polimi.ingsw.model.board;
 import it.polimi.ingsw.model.cards.PopeToken;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /* One track shared among all players */
 
@@ -10,16 +12,18 @@ public class Track implements Serializable
 {
 	private Box[] faithTrack = new Box[25];        /* new Box[25] goes here or in constructor? */
 	private PopeToken[] popeTokens = new PopeToken[3];
-	private int[] redPawns;
+	private List<Integer> redPawns;
 	private int blackPawn;
 
 	public Track(int numPlayers)
 	{
 		System.out.println("Track: creating pawns");
-		redPawns = new int[numPlayers];
+		redPawns = new ArrayList<Integer>();
 
-		for (int i = 0; i < numPlayers; i++)
-			redPawns[i] = 0;
+		for (int i = 0; i < numPlayers; i++)		/* Initialize player pawns, player ID 0 has redPawns[0], ID 1 has redPawns[1] and so on */
+		{
+			redPawns.add(0);
+		}
 
 		blackPawn = 0;
 
@@ -63,9 +67,9 @@ public class Track implements Serializable
 		for (int i = 0; i < 4; i++)			/* Need numPlayers, 4 is temporary */
 		{
 
-			if (redPawns[i] >= 8  && popeTokens[0].isUsed() == false ||
-				redPawns[i] >= 16 && popeTokens[1].isUsed() == false ||
-				redPawns[i] == 24 && popeTokens[2].isUsed() == false )
+			if (redPawns.get(i) >= 8  && popeTokens[0].isUsed() == false ||
+				redPawns.get(i) >= 16 && popeTokens[1].isUsed() == false ||
+				redPawns.get(i) == 24 && popeTokens[2].isUsed() == false )
 				return true;
 
 			else
@@ -84,7 +88,7 @@ public class Track implements Serializable
 			{
 				popeTokens[0].setUsed(true);
 
-				if (redPawns[i] >= 5 && redPawns[i] <= 8)
+				if (redPawns.get(i) >= 5 && redPawns.get(i) <= 8)
 				{
 					// player[i].setVictoryPoints(player[i].getVictoryPoints() + popeTokens[0].getPoints());
 					// player.get(i).setPopeTokenPoints(player.get(i).getPopeTokenPoints() + popeTokens[0].getPoints());
@@ -97,7 +101,7 @@ public class Track implements Serializable
 			{
 				popeTokens[1].setUsed(true);
 
-				if (redPawns[i] >= 12 && redPawns[i] <= 16)
+				if (redPawns.get(i) >= 12 && redPawns.get(i) <= 16)
 				{
 					// player[i].setVictoryPoints(player[i].getVictoryPoints() + popeTokens[1].getPoints());
 
@@ -111,7 +115,7 @@ public class Track implements Serializable
 			{
 				popeTokens[2].setUsed(true);
 
-				if (redPawns[i] >= 19 && redPawns[i] <= 24)
+				if (redPawns.get(i) >= 19 && redPawns.get(i) <= 24)
 				{
 					// player[i].setVictoryPoints(player[i].getVictoryPoints() + popeTokens[2].getPoints());
 				}
@@ -137,12 +141,12 @@ public class Track implements Serializable
 		this.faithTrack = faithTrack;
 	}
 
-	public int[] getRedPawns()
+	public List<Integer> getRedPawns()
 	{
 		return redPawns;
 	}
 
-	public void setRedPawns(int[] redPawns)
+	public void setRedPawns(List<Integer> redPawns)
 	{
 		this.redPawns = redPawns;
 	}

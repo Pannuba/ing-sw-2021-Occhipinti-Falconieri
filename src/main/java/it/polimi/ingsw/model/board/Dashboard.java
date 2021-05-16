@@ -13,6 +13,9 @@ public class Dashboard implements Serializable
 
 	public Dashboard()
 	{
+		for (int i = 0; i < 3; i++)
+			devCardAreas[i] = new DevCardArea();
+
 		vault = new Vault();
 		storage = new Storage();
 	}

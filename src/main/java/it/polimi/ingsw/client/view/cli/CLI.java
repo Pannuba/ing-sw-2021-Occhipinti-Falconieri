@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.cards.*;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /* 	FIXME: new gamestate sometimes has no leadercards that were picked */
 
@@ -22,7 +23,8 @@ public class CLI extends Observable implements Observer
 		input = new Scanner(System.in);
 		gameStart();
 		matchSetup();
-		new Thread(networkHandler).start();		/* Start listening for gamestate updates from server. Put this after game setup? Yes. */
+		new Thread(networkHandler).start();		/* Start listening for gamestate updates from server. Put this after game setup? Maybe. */
+
 		//gameLoop();
 	}
 
@@ -168,6 +170,7 @@ public class CLI extends Observable implements Observer
 
 	private void chooseResources()			/* 1st player: nothing; 2nd: 1 resource; 3rd: 1 resource + 1 faithPoint; 4th: 2 resources + 1 faithPoint */
 	{
+		gameState = networkHandler.getGameState();
 		List<String> command = new ArrayList<String>();
 		String chosenResources = "";			/* Will be converted to ResourceType in server controller */
 		String initialFaithPoints = "";

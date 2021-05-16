@@ -40,7 +40,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 			try
 			{
 				System.out.println("Waiting for new gamestate");
-				GameState gameState = (GameState) ois.readObject();			/* Send gamestate to the view? */
+				GameState gameState = (GameState) ois.readObject();
 				setChanged();
 				notifyObservers(gameState);
 			}
@@ -121,6 +121,12 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 			else
 				System.out.println("Message received is not START");
 		}
+	}
+
+	public GameState getGameState()		/* Manually get gamestate without using observer/observable */
+	{
+		GameState gameState = (GameState)receive();
+		return gameState;
 	}
 
 	public List<LeaderCard> getFourLeadercards()

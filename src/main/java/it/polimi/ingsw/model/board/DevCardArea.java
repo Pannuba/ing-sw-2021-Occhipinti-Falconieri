@@ -2,10 +2,11 @@ package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.cards.DevCard;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DevCardArea			/* Devcards can't be removed once added */
+public class DevCardArea implements Serializable            /* Devcards can't be removed once added */
 {
 	private boolean isEmpty;
 	private List<DevCard> devCards = new ArrayList<DevCard>();

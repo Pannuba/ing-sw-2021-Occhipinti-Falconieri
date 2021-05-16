@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.server.view.ClientHandler;
 
+import javax.print.MultiDocPrintService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -27,6 +28,8 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 	public void parseInput(String username, List<String> command)		/* Gets name from ClientHandler to change that player's stuff */
 	{
+		System.out.println("activePlayerID in model: " + model.getActivePlayerID() + ", username ID: " + model.getPlayerByUsername(username).getId());
+
 		if (command.get(0).equals("SELECT_LEADERCARDS"))		/* "SELECT_LEADERCARDS", "x", "y" */
 		{
 			List<LeaderCard> cards = new ArrayList<LeaderCard>();
@@ -58,18 +61,23 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 			if (command.get(2).isEmpty() == false)		/* If there are initial faithpoints, get that player's pawn and move it */
 			{
-				//
+				updatePlayerPosition(model.getPlayerByUsername(username).getId(), Integer.parseInt(command.get(2)));
+				/* model.getPlayerByUsername(username).getID() and model.getActivePlayerID() should always be the same */
 			}
 		}
 
 		if (command.get(0).equals("BUY_DEVCARD"))
 		{
 
+
+			chooseNextPlayer();		/* Don't choose next player during setup actions */
 		}
 
 		if (command.get(0).equals("ACTIVATE_PRODUCTION"))
 		{
 
+
+			chooseNextPlayer();
 		}
 
 		if (command.get(0).equals("BUY_RESOURCES"))		/* What do with marble amounts? Ask where put to them in storage? */
@@ -84,9 +92,9 @@ public class Controller implements Observer			/* Observes view to get commands..
 			{
 				model.getMarblesMarket().buyMarblesCol(Integer.parseInt(command.get(2)));
 			}
-		}
 
-		chooseNextPlayer();
+			chooseNextPlayer();
+		}
 
 		model.update();		/* Should this be called from Match after every round? */
 	}
@@ -101,6 +109,8 @@ public class Controller implements Observer			/* Observes view to get commands..
 		else													/* Otherwise just increase by 1 */
 			activePlayerNum++;
 
+		model.setActivePlayerID(activePlayerNum);		/* Is activePlayerID even needed? Only the active player sends commands, we can get their ID and increase by 1 */
+
 		for (int i = 0; i < model.getNumPlayers(); i++)
 		{
 			if (model.getPlayers().get(i).getId() == activePlayerNum)
@@ -111,9 +121,13 @@ public class Controller implements Observer			/* Observes view to get commands..
 		}
 	}
 
-	private void updatePlayerPosition()		/* To be called when the player buys red marbles, or...? */
+	private void updatePlayerPosition(int ID, int faithPoints)		/* To be called when the player buys red marbles, or...? */
 	{
-
+		System.out.println("Updating position for " + model.getPlayerByID(ID).getUsername() + " by " + faithPoints + " faithpoints");
+		List<Integer> newRedPawns = model.getTrack().getRedPawns();
+		/* Gets the pawn at position ID [0, 4] and increments the existing value by the new faithPoints */
+		newRedPawns.set(ID, model.getTrack().getRedPawns().get(ID) + faithPoints);
+		model.getTrack().setRedPawns(newRedPawns);
 	}
 
 	@Override

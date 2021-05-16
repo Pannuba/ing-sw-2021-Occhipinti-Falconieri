@@ -14,7 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Model extends Observable		/* Observed by the views to create the new gamestate */
 {
 	private int numPlayers;
-	private int activePlayerID;
+	private int activePlayerID;				/* Is activePlayerID even needed? Only the active player sends commands, we can get their ID and increase by 1 */
 	private Track track;
 	private MarblesMarket marblesMarket;
 	private DevCardsMarket devCardsMarket;
@@ -38,8 +38,8 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	public void update()			/* Creates the new gamestate and sends it to the views, which send it to the clients */
 	{
 		System.out.println("Updating gamestate...");
-		System.out.println("In this gamestate, " + players.get(0).getUsername() + "has leadercards #" + players.get(0).getLeaderCards().get(0).getCardNumber() + " and #" + players.get(0).getLeaderCards().get(1).getCardNumber());
-		System.out.println("In this gamestate, " + players.get(1).getUsername() + "has leadercards #" + players.get(1).getLeaderCards().get(0).getCardNumber() + " and #" + players.get(1).getLeaderCards().get(1).getCardNumber());
+		//System.out.println("In this gamestate, " + players.get(0).getUsername() + "has leadercards #" + players.get(0).getLeaderCards().get(0).getCardNumber() + " and #" + players.get(0).getLeaderCards().get(1).getCardNumber());
+		//System.out.println("In this gamestate, " + players.get(1).getUsername() + "has leadercards #" + players.get(1).getLeaderCards().get(0).getCardNumber() + " and #" + players.get(1).getLeaderCards().get(1).getCardNumber());
 		/* Checks out... so it's a client-side bug? */
 		setChanged();
 		notifyObservers(new GameState(players, getCurrentPlayerName(), track, marblesMarket, devCardsMarket));
@@ -176,6 +176,18 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		}
 
 		System.out.println("getPlayerByUsername: returning null");
+		return null;
+	}
+
+	public Player getPlayerByID(int ID)
+	{
+		for (int i = 0; i < numPlayers; i++)
+		{
+			if (players.get(i).getId() == ID)
+				return players.get(i);
+		}
+
+		System.out.println("getPlayerByID: returning null");
 		return null;
 	}
 
