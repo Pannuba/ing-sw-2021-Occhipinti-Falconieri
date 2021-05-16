@@ -29,7 +29,7 @@ public enum ResourceType
 				return ResourceType.PURPLE;
 
 			default:
-				System.out.print("Error");
+				System.out.print("Error\n");
 				return null;
 		}
 	}

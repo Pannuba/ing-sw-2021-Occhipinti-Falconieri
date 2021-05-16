@@ -1,8 +1,6 @@
 package it.polimi.ingsw.server.controller;
 
-import it.polimi.ingsw.model.Model;
-import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.model.ResourceType;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.server.view.ClientHandler;
 
@@ -19,6 +17,7 @@ import java.util.Observer;
 public class Controller implements Observer			/* Observes view to get commands... View observes model right? */
 {
 	private final Model model;
+	private String username;			/* Username of the player who sent the command */
 
 	public Controller(Model model)
 	{
@@ -26,7 +25,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 		this.model = model;
 	}
 
-	public void parseInput(String username, List<String> command)		/* Gets name from ClientHandler to change that player's stuff */
+	public void parseInput(List<String> command)		/* Gets name from ClientHandler to change that player's stuff */
 	{
 		System.out.println("activePlayerID in model: " + model.getActivePlayerID() + ", username ID: " + model.getPlayerByUsername(username).getId());
 
@@ -82,15 +81,51 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 		if (command.get(0).equals("BUY_RESOURCES"))		/* What do with marble amounts? Ask where put to them in storage? */
 		{
+			List<Marble> boughtMarbles = new ArrayList<Marble>();
 
 			if (command.get(1).equals("ROW"))
-			{
-				model.getMarblesMarket().buyMarblesRow(Integer.parseInt(command.get(2)));
-			}
+				boughtMarbles = model.getMarblesMarket().buyMarblesRow(Integer.parseInt(command.get(2)) - 1);		/* - 1 because 0-indexed, [0, 1, 2] */
 
 			if (command.get(1).equals("COLUMN"))
+				boughtMarbles = model.getMarblesMarket().buyMarblesCol(Integer.parseInt(command.get(2))- 1);
+
+			for (int i = 0; i < boughtMarbles.size(); i++)
 			{
-				model.getMarblesMarket().buyMarblesCol(Integer.parseInt(command.get(2)));
+				if (i == 0)		/* boughtMarbles[0] has the red marbles, so faithpoints */
+					updatePlayerPosition(model.getPlayerByUsername(username).getId(), boughtMarbles.get(0).getQuantity());
+
+				else
+				{
+					ResourceType marbleResourceType = null;
+
+					if (i == 1)        /* boughtMarbles[1] has the white marbles */
+					{
+						List<ResourceType> whiteMarbleTypes = model.getPlayerByUsername(username).getWhiteMarbleTypes();    /* or model.getWhiteMarbleTypes(username */
+
+						if (whiteMarbleTypes.isEmpty())		/* Meaning there are no active SkillMarble cards */
+						{
+							break;
+						}
+
+						if (whiteMarbleTypes.size() > 1)
+						{
+							/* Ask client which resourcetype they want to pick to convert white marbles */
+						}
+
+						else		/* If there's only 1 active SkillMarble */
+							marbleResourceType = whiteMarbleTypes.get(0);
+					}
+
+					else
+						marbleResourceType = convertMarbleToResType(boughtMarbles.get(i).getMarbleType());
+
+					Resource resourceToAdd = new Resource();
+					resourceToAdd.setResourceType(marbleResourceType);
+					resourceToAdd.setQuantity(boughtMarbles.get(i).getQuantity());
+
+					/* Add resource to storage????? */
+
+				}
 			}
 
 			chooseNextPlayer();
@@ -130,9 +165,35 @@ public class Controller implements Observer			/* Observes view to get commands..
 		model.getTrack().setRedPawns(newRedPawns);
 	}
 
+	private ResourceType convertMarbleToResType(MarbleType marbleType)		/* Also check player leadercards SkillMarble, if active */
+	{
+		if (marbleType == null)
+			return null;
+
+		switch(marbleType)			/* White marbles have their separate function */
+		{
+			case GREY:
+				return ResourceType.GREY;
+
+			case YELLOW:
+				return ResourceType.YELLOW;
+
+			case BLUE:
+				return ResourceType.BLUE;
+
+			case PURPLE:
+				return ResourceType.PURPLE;
+
+			default:
+				System.out.print("Error\n");
+				return null;
+		}
+	}
+
 	@Override
 	public void update(Observable obs, Object obj)
 	{
-		parseInput(((ClientHandler)obs).getUsername(), (List<String>)obj);
+		username = ((ClientHandler)obs).getUsername();
+		parseInput((List<String>)obj);
 	}
 }

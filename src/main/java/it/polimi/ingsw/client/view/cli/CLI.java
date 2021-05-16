@@ -84,7 +84,7 @@ public class CLI extends Observable implements Observer
 				PrintMethods.printMarblesMarket(gameState.getCurrMarblesMarket());
 
 				String rowOrColNum = "";
-				System.out.print("Select a row (1) or column(2)? ");
+				System.out.print("\nSelect a row (1) or column(2)? ");
 				int choice = Integer.parseInt(input.nextLine());
 
 				if (choice == 1)

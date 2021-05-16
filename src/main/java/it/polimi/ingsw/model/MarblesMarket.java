@@ -135,51 +135,57 @@ public class MarblesMarket implements Serializable
 
 	public List<Marble> buyMarblesRow(int row)			/* Returns a list of marbles to the controller, which then acts for each marble */
 	{
-		List<Marble> marblesToAdd = new ArrayList<Marble>();
+		List<Marble> boughtMarbles = new ArrayList<Marble>();
 
 		for (int i = 0; i < 6; i++)		/* Create one resource for each type. 0 -> blue, 1 -> grey, 2 -> yellow, 3 -> purple */
 		{
-			marblesToAdd.add(new Marble());		/* Quantity is set to 0 in constructor */
+			boughtMarbles.add(new Marble());		/* Quantity is set to 0 in constructor */
 		}
 
-		marblesToAdd.get(0).setMarbleType(MarbleType.RED);			/* The marble object itself isn't needed, only the amount of each marble */
-		marblesToAdd.get(1).setMarbleType(MarbleType.WHITE);
-		marblesToAdd.get(2).setMarbleType(MarbleType.BLUE);
-		marblesToAdd.get(3).setMarbleType(MarbleType.GREY);
-		marblesToAdd.get(4).setMarbleType(MarbleType.YELLOW);
-		marblesToAdd.get(5).setMarbleType(MarbleType.PURPLE);
+		boughtMarbles.get(0).setMarbleType(MarbleType.RED);			/* The marble object itself isn't needed, only the amount of each marble */
+		boughtMarbles.get(1).setMarbleType(MarbleType.WHITE);
+		boughtMarbles.get(2).setMarbleType(MarbleType.BLUE);
+		boughtMarbles.get(3).setMarbleType(MarbleType.GREY);
+		boughtMarbles.get(4).setMarbleType(MarbleType.YELLOW);
+		boughtMarbles.get(5).setMarbleType(MarbleType.PURPLE);
 
 		for (int i = 0; i < 3; i++)
 		{
 			switch(marblesBoard[row][i].getMarbleType())
 			{
 				case RED:
-					marblesToAdd.get(0).setQuantity(marblesToAdd.get(0).getQuantity() + 1);
+					boughtMarbles.get(0).setQuantity(boughtMarbles.get(0).getQuantity() + 1);
 					break;
 
 				case WHITE:
-					marblesToAdd.get(1).setQuantity(marblesToAdd.get(1).getQuantity() + 1);
+					boughtMarbles.get(1).setQuantity(boughtMarbles.get(1).getQuantity() + 1);
 					break;
 
 				case BLUE:
-					marblesToAdd.get(2).setQuantity(marblesToAdd.get(2).getQuantity() + 1);
+					boughtMarbles.get(2).setQuantity(boughtMarbles.get(2).getQuantity() + 1);
 					break;
 
 				case GREY:
-					marblesToAdd.get(3).setQuantity(marblesToAdd.get(3).getQuantity() + 1);
+					boughtMarbles.get(3).setQuantity(boughtMarbles.get(3).getQuantity() + 1);
 					break;
 
 				case YELLOW:
-					marblesToAdd.get(4).setQuantity(marblesToAdd.get(4).getQuantity() + 1);
+					boughtMarbles.get(4).setQuantity(boughtMarbles.get(4).getQuantity() + 1);
 					break;
 
 				case PURPLE:
-					marblesToAdd.get(5).setQuantity(marblesToAdd.get(5).getQuantity() + 1);
+					boughtMarbles.get(5).setQuantity(boughtMarbles.get(5).getQuantity() + 1);
 					break;
 
 				default:
 					break;
 			}
+		}
+
+		for (int i = 0; i < boughtMarbles.size(); i++)			/* Remove marble types that haven't been bought even once */
+		{
+			if (boughtMarbles.get(i).getQuantity() == 0)
+				boughtMarbles.remove(i);
 		}
 
 		Marble oldSpareMarble = spareMarble;					/* Changes the marbles grid pushing the spare marble in */
@@ -190,56 +196,62 @@ public class MarblesMarket implements Serializable
 
 		marblesBoard[row][3] = oldSpareMarble;
 
-		return marblesToAdd;
+		return boughtMarbles;
 	}
 
 	public List<Marble> buyMarblesCol(int col)
 	{
-		List<Marble> marblesToAdd = new ArrayList<Marble>();
+		List<Marble> boughtMarbles = new ArrayList<Marble>();
 
 		for (int i = 0; i < 6; i++)		/* Create one resource for each type. 0 -> blue, 1 -> grey, 2 -> yellow, 3 -> purple */
 		{
-			marblesToAdd.add(new Marble());		/* Quantity is set to 0 in constructor */
+			boughtMarbles.add(new Marble());		/* Quantity is set to 0 in constructor */
 		}
 
-		marblesToAdd.get(0).setMarbleType(MarbleType.RED);
-		marblesToAdd.get(1).setMarbleType(MarbleType.WHITE);
-		marblesToAdd.get(2).setMarbleType(MarbleType.BLUE);
-		marblesToAdd.get(3).setMarbleType(MarbleType.GREY);
-		marblesToAdd.get(4).setMarbleType(MarbleType.YELLOW);
-		marblesToAdd.get(5).setMarbleType(MarbleType.PURPLE);
+		boughtMarbles.get(0).setMarbleType(MarbleType.RED);
+		boughtMarbles.get(1).setMarbleType(MarbleType.WHITE);
+		boughtMarbles.get(2).setMarbleType(MarbleType.BLUE);
+		boughtMarbles.get(3).setMarbleType(MarbleType.GREY);
+		boughtMarbles.get(4).setMarbleType(MarbleType.YELLOW);
+		boughtMarbles.get(5).setMarbleType(MarbleType.PURPLE);
 
 		for (int i = 0; i < 3; i++)
 		{
 			switch(marblesBoard[i][col].getMarbleType())
 			{
 				case RED:
-					marblesToAdd.get(0).setQuantity(marblesToAdd.get(0).getQuantity() + 1);
+					boughtMarbles.get(0).setQuantity(boughtMarbles.get(0).getQuantity() + 1);
 					break;
 
 				case WHITE:
-					marblesToAdd.get(1).setQuantity(marblesToAdd.get(1).getQuantity() + 1);
+					boughtMarbles.get(1).setQuantity(boughtMarbles.get(1).getQuantity() + 1);
 					break;
 
 				case BLUE:
-					marblesToAdd.get(2).setQuantity(marblesToAdd.get(2).getQuantity() + 1);
+					boughtMarbles.get(2).setQuantity(boughtMarbles.get(2).getQuantity() + 1);
 					break;
 
 				case GREY:
-					marblesToAdd.get(3).setQuantity(marblesToAdd.get(3).getQuantity() + 1);
+					boughtMarbles.get(3).setQuantity(boughtMarbles.get(3).getQuantity() + 1);
 					break;
 
 				case YELLOW:
-					marblesToAdd.get(4).setQuantity(marblesToAdd.get(4).getQuantity() + 1);
+					boughtMarbles.get(4).setQuantity(boughtMarbles.get(4).getQuantity() + 1);
 					break;
 
 				case PURPLE:
-					marblesToAdd.get(5).setQuantity(marblesToAdd.get(5).getQuantity() + 1);
+					boughtMarbles.get(5).setQuantity(boughtMarbles.get(5).getQuantity() + 1);
 					break;
 
 				default:
 					break;
 			}
+		}
+
+		for (int i = 0; i < boughtMarbles.size(); i++)			/* Remove marble types that haven't been bought even once */
+		{
+			if (boughtMarbles.get(i).getQuantity() == 0)
+				boughtMarbles.remove(i);
 		}
 
 		Marble oldSpareMarble = spareMarble;
@@ -250,7 +262,7 @@ public class MarblesMarket implements Serializable
 
 		marblesBoard[2][col] = oldSpareMarble;
 
-		return marblesToAdd;
+		return boughtMarbles;
 	}
 
 	public Marble[][] getMarblesBoard()

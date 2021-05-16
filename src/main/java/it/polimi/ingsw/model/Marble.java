@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class Marble implements Serializable
 {
 	private MarbleType category;				/* Rename category to type? */
-	private int quantity;			/* I forgot what quantity does */
+	private int quantity;			/* I forgot what quantity does. It's the quantity, bro */
 
 	public Marble()
 	{

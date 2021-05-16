@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.board.Dashboard;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
+import it.polimi.ingsw.model.cards.SkillMarble;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -23,6 +24,22 @@ public class Player implements Serializable
 	{
 		victoryPoints = 0;
 		dashboard = new Dashboard();
+	}
+
+	public List<ResourceType> getWhiteMarbleTypes()		/* Checks if the player has activated a SkillMarble leadercard. If so, returns the MarbleType(s) of the cards */
+	{
+		/* If there are 2 SkillMarble cards, the player has to choose which resource to convert the white marbles */
+		List<ResourceType> whiteMarbleResources = new ArrayList<ResourceType>();
+
+		for (int i = 0; i < leaderCards.size(); i++)
+		{
+			if (leaderCards.get(i).isDiscarded() == false && leaderCards.get(i).getClass().getSimpleName() == "SkillMarble")		/* && is active? */
+			{
+				whiteMarbleResources.add(((SkillMarble)leaderCards.get(i)).getWhiteMarble());
+			}
+		}
+
+		return whiteMarbleResources;
 	}
 
 	public int getId()

@@ -41,6 +41,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		//System.out.println("In this gamestate, " + players.get(0).getUsername() + "has leadercards #" + players.get(0).getLeaderCards().get(0).getCardNumber() + " and #" + players.get(0).getLeaderCards().get(1).getCardNumber());
 		//System.out.println("In this gamestate, " + players.get(1).getUsername() + "has leadercards #" + players.get(1).getLeaderCards().get(0).getCardNumber() + " and #" + players.get(1).getLeaderCards().get(1).getCardNumber());
 		/* Checks out... so it's a client-side bug? */
+		/* TODO: add message from server to gamestate with the result of every command, for example what resources were bought */
 		setChanged();
 		notifyObservers(new GameState(players, getCurrentPlayerName(), track, marblesMarket, devCardsMarket));
 	}
