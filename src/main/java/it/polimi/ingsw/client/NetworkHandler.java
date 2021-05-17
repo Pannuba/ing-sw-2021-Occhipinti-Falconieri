@@ -46,21 +46,13 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 			}
 			catch (IOException | ClassNotFoundException e)
 			{
+				System.out.println("Lost connection to server!");
 				e.printStackTrace();
+				break;
 			}
 		}
 
-		try					/* When the socket is closed close the output streams, maybe notify the view */
-		{
-			dos.flush();
-			oos.flush();
-			dos.close();
-			oos.close();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		shutdown();
 	}
 
 	public void connect()
@@ -78,7 +70,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		{
 			e.printStackTrace();
 			System.out.println("Connection failed to server");
-			System.exit(1);
+			shutdown();
 		}
 	}
 
@@ -109,17 +101,19 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 			try
 			{
 				message = (String)ois.readObject();
+
+				if (message.equals("START"))
+					break;
+
+				else
+					System.out.println("Message received is not START");
 			}
 			catch (Exception e)
 			{
 				e.printStackTrace();
+				System.out.println("Server closed connection!");
+				shutdown();
 			}
-
-			if (message.equals("START"))
-				break;
-
-			else
-				System.out.println("Message received is not START");
 		}
 	}
 
@@ -172,6 +166,27 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		}
 
 		return inputObj;
+	}
+
+	public void shutdown()
+	{
+		System.out.println("Shutting down...");
+
+		try
+		{
+			dos.flush();
+			oos.flush();
+			dos.close();
+			oos.close();
+
+			clientSocket.close();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		System.exit(1);
 	}
 
 	@Override

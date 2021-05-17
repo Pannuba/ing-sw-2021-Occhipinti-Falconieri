@@ -48,6 +48,8 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 			catch(Exception e)
 			{
 				e.printStackTrace();
+				System.out.println(username + " disconnected!");
+				break;
 			}
 		}
 	}

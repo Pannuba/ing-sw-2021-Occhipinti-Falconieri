@@ -177,20 +177,22 @@ public class CLI extends Observable implements Observer
 		}
 	}
 
-	private void chooseLeaderCards()
+	private void chooseLeaderCards()			/* TODO: server waits for all players to pick leadercards */
 	{
 		List<LeaderCard> fourLeaderCards = networkHandler.getFourLeadercards();		/* Server tells clients info about the four leadercards */
-		System.out.println("Choose leader card " + fourLeaderCards.get(0).getCardNumber() + ", " + fourLeaderCards.get(1).getCardNumber() +
-							", " + fourLeaderCards.get(2).getCardNumber() + ", " + fourLeaderCards.get(3).getCardNumber() + ":");
 
 		for (int i = 0; i < 4; i++)
 		{
 			System.out.println("Card " + (i + 1) + ":");
 			PrintMethods.printLeaderCard(fourLeaderCards.get(i));
+			System.out.print("\n");
 		}
 
+		System.out.print(	"Choose leader card " + fourLeaderCards.get(0).getCardNumber() + ", " + fourLeaderCards.get(1).getCardNumber() +
+							", " + fourLeaderCards.get(2).getCardNumber() + ", " + fourLeaderCards.get(3).getCardNumber() + ": ");
+
 		String cardChoice1 = input.nextLine();					/* Has to be the leadercard number */
-		System.out.println("Choose the second leader card: ");
+		System.out.print("Choose the second leader card: ");
 		String cardChoice2 = input.nextLine();
 
 		List<String> command = new ArrayList<String>();
