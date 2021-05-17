@@ -42,7 +42,7 @@ public class CLI extends Observable implements Observer
 		//int port = Integer.parseInt(input.nextLine());
 		int port = 2000;
 
-		networkHandler = new NetworkHandler(this, username, ip, port);
+		networkHandler = new NetworkHandler(username, ip, port);
 		networkHandler.addObserver(this);		/* CLI observes the networkHandler to get the new gamestate */
 		networkHandler.connect();
 
@@ -107,7 +107,7 @@ public class CLI extends Observable implements Observer
 				command.add(rowOrColNum);
 				networkHandler.sendCommand(command);
 
-				/* "force" wait for gamestate with message from server controller? */
+				/* Throws exception because it reads the gamestates "in queue" received while waiting for user for input */
 				List<Resource> boughtResources = (List<Resource>)networkHandler.receive();		/* Only ask for input if resources have to be discarded */
 				System.out.println("Bought the following resources: " + boughtResources);
 				break;
@@ -252,10 +252,10 @@ public class CLI extends Observable implements Observer
 	{
 		System.out.println("Gamestate received");
 		this.gameState = (GameState)o;		/* Gamestate is needed in game loop, not during setup */
-		System.out.println("It's " + gameState.getCurrPlayerName() + "'s turn!");
 
 		if (gameState.getPlayerByName(username).isMyTurn())
 		{
+			System.out.println("It's your turn!");
 			System.out.print("What do you want to do?\nBuy from market (0), buy devcards (1), activate production (2), view cards (3), view board (4), view markets (5): ");
 			chooseAction(Integer.parseInt(input.nextLine()));
 		}

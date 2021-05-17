@@ -20,7 +20,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 	{
 		System.out.println("Card number: " + ((LeaderCard)card).getCardNumber());
 		System.out.println("Points: " + ((LeaderCard)card).getPoints());
-		System.out.print("Discarded: " + ((LeaderCard)card).isDiscarded());
+		System.out.println("Discarded: " + ((LeaderCard)card).isDiscarded());
 
 		switch(card.getClass().getSimpleName())
 		{
@@ -48,7 +48,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 				break;
 		}
 
-		System.out.print("\n\n");
+		System.out.print("\n");
 	}
 
 	public static void printPlayerLeaderCards(List<LeaderCard> leaderCards)
