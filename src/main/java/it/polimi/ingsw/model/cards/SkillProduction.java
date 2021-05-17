@@ -4,27 +4,27 @@ import it.polimi.ingsw.model.Resource;
 
 public class SkillProduction extends LeaderCard		/* Every card gives one faith point and one product that can be chosen */
 {
-	private Resource requirement;			/* Always 1 requirement, 1 output resource (chosen by user), 1 faith point */
+	private Resource cost;			/* Always 1 requirement, 1 output resource (chosen by user), 1 faith point */
 	private Resource product;
 	private final int faithPoints = 1;
 
 	public SkillProduction()
 	{
-		requirement = new Resource();
-		requirement.setQuantity(1);
+		cost = new Resource();
+		cost.setQuantity(1);
 
 		product = new Resource();
 		product.setQuantity(1);
 	}
 
-	public Resource getRequirement()
+	public Resource getCost()
 	{
-		return requirement;
+		return cost;
 	}
 
-	public void setRequirement(Resource requirement)
+	public void setCost(Resource cost)
 	{
-		this.requirement = requirement;
+		this.cost = cost;
 	}
 
 	public Resource getProduct()

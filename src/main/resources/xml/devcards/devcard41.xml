@@ -14,12 +14,12 @@
    <void method="add">
     <object class="it.polimi.ingsw.model.Resource">
      <void property="quantity">
-      <int>7</int>
+      <int>1</int>
      </void>
      <void property="resourceType">
       <object class="java.lang.Enum" method="valueOf">
        <class>it.polimi.ingsw.model.ResourceType</class>
-       <string>BLUE</string>
+       <string>PURPLE</string>
       </object>
      </void>
     </object>
@@ -53,12 +53,12 @@
    <void method="add">
     <object class="it.polimi.ingsw.model.Resource">
      <void property="quantity">
-      <int>1</int>
+      <int>7</int>
      </void>
      <void property="resourceType">
       <object class="java.lang.Enum" method="valueOf">
        <class>it.polimi.ingsw.model.ResourceType</class>
-       <string>PURPLE</string>
+       <string>BLUE</string>
       </object>
      </void>
     </object>

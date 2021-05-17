@@ -193,7 +193,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 	{
 		Storage storage = playerBoard.getStorage();
 		Vault vault = playerBoard.getVault();
-		List<Resource> requirements = boughtCard.getCost();		/* TODO: switch "cost" and "requirements" in xmls, serialization, dev/leadercards! */
+		List<Resource> requirements = boughtCard.getRequirements();		/* TODO: switch "cost" and "requirements" in xmls, serialization, dev/leadercards! */
 		// ... ... ...
 		return false;
 	}

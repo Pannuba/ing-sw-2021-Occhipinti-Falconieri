@@ -14,12 +14,12 @@
    <void method="add">
     <object class="it.polimi.ingsw.model.Resource">
      <void property="quantity">
-      <int>2</int>
+      <int>1</int>
      </void>
      <void property="resourceType">
       <object class="java.lang.Enum" method="valueOf">
        <class>it.polimi.ingsw.model.ResourceType</class>
-       <string>YELLOW</string>
+       <string>BLUE</string>
       </object>
      </void>
     </object>
@@ -27,12 +27,12 @@
    <void method="add">
     <object class="it.polimi.ingsw.model.Resource">
      <void property="quantity">
-      <int>2</int>
+      <int>1</int>
      </void>
      <void property="resourceType">
-      <object class="java.lang.Enum" id="ResourceType0" method="valueOf">
+      <object class="java.lang.Enum" method="valueOf">
        <class>it.polimi.ingsw.model.ResourceType</class>
-       <string>PURPLE</string>
+       <string>GREY</string>
       </object>
      </void>
     </object>
@@ -54,7 +54,10 @@
       <int>2</int>
      </void>
      <void property="resourceType">
-      <object idref="ResourceType0"/>
+      <object class="java.lang.Enum" id="ResourceType0" method="valueOf">
+       <class>it.polimi.ingsw.model.ResourceType</class>
+       <string>PURPLE</string>
+      </object>
      </void>
     </object>
    </void>
@@ -63,12 +66,12 @@
    <void method="add">
     <object class="it.polimi.ingsw.model.Resource">
      <void property="quantity">
-      <int>1</int>
+      <int>2</int>
      </void>
      <void property="resourceType">
       <object class="java.lang.Enum" method="valueOf">
        <class>it.polimi.ingsw.model.ResourceType</class>
-       <string>BLUE</string>
+       <string>YELLOW</string>
       </object>
      </void>
     </object>
@@ -76,13 +79,10 @@
    <void method="add">
     <object class="it.polimi.ingsw.model.Resource">
      <void property="quantity">
-      <int>1</int>
+      <int>2</int>
      </void>
      <void property="resourceType">
-      <object class="java.lang.Enum" method="valueOf">
-       <class>it.polimi.ingsw.model.ResourceType</class>
-       <string>GREY</string>
-      </object>
+      <object idref="ResourceType0"/>
      </void>
     </object>
    </void>

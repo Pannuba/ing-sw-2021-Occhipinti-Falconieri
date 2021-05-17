@@ -13,15 +13,15 @@ public class DevCard implements Serializable
 	private int points;
 	private int level;
 	private int faithPoints;
-	private List<Resource> cost;				/* At the top of each card */
-	private List<Resource> requirements;		/* Left side */
-	private List<Resource> product;			/* Right side */
+	private List<Resource> requirements;		/* At the top of each card */
+	private List<Resource> cost;				/* Left side */
+	private List<Resource> product;				/* Right side */
 
 	public DevCard()
 	{
 		faithPoints = 0;
-		cost = new ArrayList<Resource>();
 		requirements = new ArrayList<Resource>();
+		cost = new ArrayList<Resource>();
 		product = new ArrayList<Resource>();
 	}
 

@@ -123,7 +123,7 @@ public class XML_Serialization
 							leaderCardFour.setPoints(leaderCardPoints);
 							leaderCardFour.setRequirements(leaderCardRequirements);
 							System.out.print("Resource needed for production (G/Y/B/P): ");
-							leaderCardFour.getRequirement().setResourceType(ResourceType.convertStringToResType(input.nextLine()));
+							leaderCardFour.getCost().setResourceType(ResourceType.convertStringToResType(input.nextLine()));
 							serialize(leaderCardFour, filename);
 							break;
 
@@ -154,30 +154,32 @@ public class XML_Serialization
 					System.out.print("Color (G/Y/B/P): ");
 					devCard.setColor(DevCardColor.convertStringToDevColorType(input.nextLine()));
 
-					System.out.print("Cost, top of the card. How many resources? ");
-					int costNum = Integer.parseInt(input.nextLine());
-
-					for (i = 0; i < costNum; i++)
-					{
-						cost.add(new Resource());
-						System.out.print("Category of cost resource #" + (i + 1) + " (G/Y/B/P): ");
-						cost.get(i).setResourceType(ResourceType.convertStringToResType(input.nextLine()));
-
-						System.out.print("Quantity of cost resource #" + (i + 1) + ": ");
-						cost.get(i).setQuantity(Integer.parseInt(input.nextLine()));
-					}
-
-					System.out.print("Requirements, left side of the card. How many resources? ");
+					System.out.print("Requirements, top of the card. How many resources? ");
 					int reqNum = Integer.parseInt(input.nextLine());
 
 					for (i = 0; i < reqNum; i++)
 					{
 						requirements.add(new Resource());
-						System.out.print("Category of requirement resource #" + (i + 1) + " (G/Y/B/P): ");
-						requirements.get(i).setResourceType(ResourceType.convertStringToResType(input.nextLine()));
 
 						System.out.print("Quantity of requirement resource #" + (i + 1) + ": ");
 						requirements.get(i).setQuantity(Integer.parseInt(input.nextLine()));
+
+						System.out.print("Category of requirement resource #" + (i + 1) + " (G/Y/B/P): ");
+						requirements.get(i).setResourceType(ResourceType.convertStringToResType(input.nextLine()));
+					}
+
+					System.out.print("Cost, left side of the card. How many resources? ");
+					int costNum = Integer.parseInt(input.nextLine());
+
+					for (i = 0; i < costNum; i++)
+					{
+						cost.add(new Resource());
+
+						System.out.print("Quantity of cost resource #" + (i + 1) + ": ");
+						cost.get(i).setQuantity(Integer.parseInt(input.nextLine()));
+
+						System.out.print("Category of cost resource #" + (i + 1) + " (G/Y/B/P): ");
+						cost.get(i).setResourceType(ResourceType.convertStringToResType(input.nextLine()));
 					}
 
 					System.out.print("Product, right side of the card. How many resources? ");
@@ -187,11 +189,11 @@ public class XML_Serialization
 					{
 						String prodQuantity, prodType;
 
-						System.out.print("Category of product resource #" + (i + 1) + " (G/Y/B/P/R): ");
-						prodType = input.nextLine();
-
 						System.out.print("Quantity of product resource #" + (i + 1) + ": ");
 						prodQuantity = input.nextLine();
+
+						System.out.print("Category of product resource #" + (i + 1) + " (G/Y/B/P/R): ");
+						prodType = input.nextLine();
 
 						if (prodType.equals("R"))		/* If the card produced faith points, set the faithpoints value */
 						{

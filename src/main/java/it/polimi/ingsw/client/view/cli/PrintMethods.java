@@ -36,8 +36,8 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 			case "SkillProduction":
 				System.out.println("Leadercard skill: additional production");
-				System.out.println("Requirement type: " + convertResourceTypeToString(((SkillProduction)card).getRequirement().getResourceType()));
-				System.out.println("Requirement amount: 1");
+				System.out.println("Cost type: " + convertResourceTypeToString(((SkillProduction)card).getCost().getResourceType()));
+				System.out.println("Cost amount: 1");
 				/* Product is null because it's chosen by the player */
 				System.out.println("Product amount: 1");
 				break;

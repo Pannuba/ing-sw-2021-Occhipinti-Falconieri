@@ -4,7 +4,7 @@
   <void property="points">
    <int>4</int>
   </void>
-  <void property="requirement">
+  <void property="cost">
    <void property="resourceType">
     <object class="java.lang.Enum" method="valueOf">
      <class>it.polimi.ingsw.model.ResourceType</class>
