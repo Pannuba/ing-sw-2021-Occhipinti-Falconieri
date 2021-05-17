@@ -9,9 +9,8 @@ import java.util.List;
 public class PrintMethods			/* Static methods so we can avoid "PrintMethods printMethods = new PrintMethods()" in CLI.java */
 {
 
-	public static void printBoard(Track track, Dashboard board)		/* Could get both from gamestate but this is simpler */
+	public static void printBoard(Dashboard board)		/* Could get both from gamestate but this is simpler */
 	{
-		printTrack(track);
 		printVault(board.getVault());
 		printStorage(board.getStorage());
 		printDevCardAreas(board.getDevCardAreas());
@@ -128,9 +127,14 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		}
 	}
 
-	private static void printTrack(Track track)
+	public static void printTrack(Track track, List<Player> players)		/* Players are ordered by ID in model after randomly generating IDs */
 	{
 		System.out.print("Track:\n\n");
+
+		for (int i = 0; i < track.getRedPawns().size(); i++)		/* Size of redPawns = numPlayers, to avoid passing gamestate */
+		{
+			System.out.println(players.get(i).getUsername() + "is at position " + track.getRedPawns().get(i));
+		}
 	}
 
 	private static void printVault(Vault vault)			/* Use ANSI color codes */

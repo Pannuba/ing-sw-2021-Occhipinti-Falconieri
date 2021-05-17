@@ -4,6 +4,9 @@ import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
+import it.polimi.ingsw.model.board.Dashboard;
+import it.polimi.ingsw.model.board.Storage;
+import it.polimi.ingsw.model.board.Vault;
 import it.polimi.ingsw.model.cards.*;
 
 import java.util.*;
@@ -105,7 +108,7 @@ public class CLI extends Observable implements Observer
 				networkHandler.sendCommand(command);
 
 				/* "force" wait for gamestate with message from server controller? */
-				List<Resource> boughtResources = (List<Resource>)networkHandler.receive();
+				List<Resource> boughtResources = (List<Resource>)networkHandler.receive();		/* Only ask for input if resources have to be discarded */
 				System.out.println("Bought the following resources: " + boughtResources);
 				break;
 
@@ -119,7 +122,7 @@ public class CLI extends Observable implements Observer
 
 				if (targetAreaLayer == 3)
 				{
-					System.out.println("This dev card area already has three cards!");
+					System.out.println("This dev card area already has three cards!");			/* Get input again */
 				}
 
 				else			/* Print devcards of level targetAreaLayer + 1 (layer = level of top devcard. New card has to have a higher level) */
@@ -127,9 +130,18 @@ public class CLI extends Observable implements Observer
 					PrintMethods.printDevCardsMarketLevel(gameState.getCurrDevCardsMarket(), targetAreaLayer + 1);
 				}
 
-				/* Choose the card to buy */
+				System.out.print("Insert the card number you want to buy: ");
 
-				/* Check for resources. Here or server? */
+				command.add(input.nextLine());
+
+				//DevCard boughtCard = gameState.getCurrDevCardsMarket().getDevCardByNumber(cardNumberToBuy);
+
+				//checkResources(gameState.getPlayerByName(username).getDashboard(), boughtCard);
+
+																		/*	Check for resources. Here or server? LocalModel class?
+																			If client-side check, send new vault, storage and devcard market.
+																			If server-side check, send messages. I think server side is better.
+																		*/
 
 				networkHandler.sendCommand(command);
 				break;
@@ -144,7 +156,8 @@ public class CLI extends Observable implements Observer
 				break;
 
 			case 4:
-				PrintMethods.printBoard(gameState.getCurrTrack(), gameState.getPlayerByName(username).getDashboard());
+				PrintMethods.printTrack(gameState.getCurrTrack(), gameState.getCurrPlayers());
+				PrintMethods.printBoard(gameState.getPlayerByName(username).getDashboard());
 				break;
 
 			case 5:
@@ -230,7 +243,6 @@ public class CLI extends Observable implements Observer
 		command.add(chosenResources);
 		command.add(initialFaithPoints);
 		networkHandler.sendCommand(command);
-
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		createLeaderCards();
 		choosePlayerOrder();
 
-		track = new Track(numPlayers);
+		track = new Track(players);
 		marblesMarket = new MarblesMarket();
 		devCardsMarket = new DevCardsMarket();
 	}
@@ -71,17 +71,24 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	{
 		System.out.println("Choosing a random first player...");
 
+		List<Player> playersSortedByID = new ArrayList<Player>();
+
 		int firstPlayer = ThreadLocalRandom.current().nextInt(0, numPlayers);		/* Not numPlayers + 1 because it's zero-indexed */
 		players.get(firstPlayer).setMyTurn(true);
 		players.get(firstPlayer).setId(0);
 		activePlayerID = 0;
+
+		playersSortedByID.add(players.get(firstPlayer));
 
 		if (numPlayers == 2)
 		{
 			for (int i = 0; i < 2; i++)
 			{
 				if (!players.get(i).isMyTurn())
+				{
 					players.get(i).setId(1);
+					playersSortedByID.add(players.get(i));
+				}
 			}
 		}
 
@@ -102,16 +109,19 @@ public class Model extends Observable		/* Observed by the views to create the ne
 				else
 				{
 					players.get(randNum).setId(randNum);
+					playersSortedByID.add(players.get(randNum));
 					playerNumbers[i]--;
 				}
 			}
 		}
 
+		setPlayers(playersSortedByID);		/* ! */
+
 		for (int i = 0; i < numPlayers; i++)
 			System.out.println(players.get(i).getUsername() + " has ID " + players.get(i).getId() + " and isFirstTurn: " + players.get(i).isMyTurn());
 	}
 
-	public List<List<LeaderCard>> createLeaderCardsLists()				/* Returns a list of lists of leadercards, 1 for each player, each list has 4 leadercards to choose from */
+	public List<List<LeaderCard>> createLeaderCardsLists()				/* Returns a list of lists of leadercards, 1 for each player, each list has 4 leadercards to choose 2 from */
 	{
 		int[] cardsToAssign = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 		List<List<LeaderCard>> listOfLists = new ArrayList<List<LeaderCard>>();

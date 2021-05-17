@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.board;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.Shelf;
 
-import java.io.Serializable;
+import java.io.Serializable;			/* Has resources bought from the marbles market */
 
 /*	   Y			shelves[0]			If I get another Y, I have to swap X and Y so that I have 2 Y in the middle shelf
 	_______

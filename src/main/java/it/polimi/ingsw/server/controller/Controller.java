@@ -1,18 +1,14 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.board.Dashboard;
+import it.polimi.ingsw.model.board.Storage;
+import it.polimi.ingsw.model.board.Vault;
+import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.server.view.ClientHandler;
 
-import javax.print.MultiDocPrintService;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-
-/*	TODO: second player chooses 1 resource, third 1 resource and 1 faithPoint, fourth 2 resources and 1 faithPoint
-	Put a check in client view and send a command like SELECT_INITIAL_RESOURCES
-*/
+import java.util.*;
 
 public class Controller implements Observer			/* Observes view to get commands... View observes model right? */
 {
@@ -66,8 +62,13 @@ public class Controller implements Observer			/* Observes view to get commands..
 			}
 		}
 
-		if (command.get(0).equals("BUY_DEVCARD"))
+		if (command.get(0).equals("BUY_DEVCARD"))		/* 	Client picks a devcard # to buy from their local devCardsMarket. Server checks for resources
+															If there are enough resources, spend them and add the devcards to Player
+															Otherwise send an error message. Can client perform another action?		*/
 		{
+			int boughtCardNum = Integer.parseInt(command.get(1));
+			DevCard boughtCard = model.getDevCardsMarket().getDevCardByNumber(boughtCardNum);
+			checkResources(model.getPlayerByUsername(username).getDashboard(), boughtCard);
 
 
 			chooseNextPlayer();		/* Don't choose next player during setup actions */
@@ -157,9 +158,9 @@ public class Controller implements Observer			/* Observes view to get commands..
 	private void updatePlayerPosition(int ID, int faithPoints)		/* To be called when the player buys red marbles, or...? */
 	{
 		System.out.println("Updating position for " + model.getPlayerByID(ID).getUsername() + " by " + faithPoints + " faithpoints");
-		List<Integer> newRedPawns = model.getTrack().getRedPawns();
+		HashMap<Integer, Integer> newRedPawns = model.getTrack().getRedPawns();
 		/* Gets the pawn at position ID [0, 4] and increments the existing value by the new faithPoints */
-		newRedPawns.set(ID, model.getTrack().getRedPawns().get(ID) + faithPoints);
+		newRedPawns.put(ID, model.getTrack().getRedPawns().get(ID) + faithPoints);
 		model.getTrack().setRedPawns(newRedPawns);
 	}
 
@@ -186,6 +187,14 @@ public class Controller implements Observer			/* Observes view to get commands..
 				System.out.print("Error\n");
 				return null;
 		}
+	}
+
+	private boolean checkResources(Dashboard playerBoard, DevCard boughtCard)	/* If there are enough resources, get them from storage, otherwise vault */
+	{
+		Storage storage = playerBoard.getStorage();
+		Vault vault = playerBoard.getVault();
+		List<Resource> requirements = boughtCard.getCost();		/* TODO: switch "cost" and "requirements" in xmls, serialization, dev/leadercards! */
+		// ... ... ...
 	}
 
 	@Override

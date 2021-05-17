@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Player implements Serializable
 {
-	private int id;							/* 0, 1, 2, 3 to manage turns, pawns and so on */
+	private int id;							/* Set randomly in model. 0, 1, 2, 3 to manage turns, pawns and so on */
 	private String username;
 	private boolean isMyTurn;
 	private Dashboard dashboard;
@@ -22,6 +22,7 @@ public class Player implements Serializable
 
 	public Player()
 	{
+		isMyTurn = false;
 		victoryPoints = 0;
 		dashboard = new Dashboard();
 	}

@@ -1,28 +1,33 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.cards.PopeToken;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /* One track shared among all players */
 
 public class Track implements Serializable
 {
-	private Box[] faithTrack = new Box[25];        /* new Box[25] goes here or in constructor? */
+	private Box[] faithTrack = new Box[25];
 	private PopeToken[] popeTokens = new PopeToken[3];
-	private List<Integer> redPawns;
+	private HashMap<Integer, Integer> redPawns;				/*  Key: ID, value: position. Do the same in vault, maybe */
+	private int numPlayers;
 	private int blackPawn;
 
-	public Track(int numPlayers)
+	public Track(List<Player> players)
 	{
-		System.out.println("Track: creating pawns");
-		redPawns = new ArrayList<Integer>();
+		numPlayers = players.size();
 
-		for (int i = 0; i < numPlayers; i++)		/* Initialize player pawns, player ID 0 has redPawns[0], ID 1 has redPawns[1] and so on */
+		System.out.println("Track: creating pawns");
+		redPawns = new HashMap<Integer, Integer>();
+
+		for (int i = 0; i < players.size(); i++)		/* Initialize player pawns, player ID 0 has redPawns[0], ID 1 has redPawns[1] and so on */
 		{
-			redPawns.add(0);
+			redPawns.put(players.get(i).getId(), 0);
 		}
 
 		blackPawn = 0;
@@ -34,6 +39,7 @@ public class Track implements Serializable
 		/* Initialize track here, hardcoded (at least for now) because 1 xml for each box is too much */
 
 		System.out.println("Track: creating the 25 boxes");
+
 		faithTrack[0]  = new Box(BoxType.NORMAL, 0,  0);
 		faithTrack[1]  = new Box(BoxType.NORMAL, 1,  0);
 		faithTrack[2]  = new Box(BoxType.NORMAL, 2,  0);
@@ -64,7 +70,7 @@ public class Track implements Serializable
 	public boolean checkVaticanReport()
 	{
 
-		for (int i = 0; i < 4; i++)			/* Need numPlayers, 4 is temporary */
+		for (int i = 0; i < numPlayers; i++)		/* redPawns.get(i) returns the position of player ID i */
 		{
 
 			if (redPawns.get(i) >= 8  && popeTokens[0].isUsed() == false ||
@@ -141,12 +147,12 @@ public class Track implements Serializable
 		this.faithTrack = faithTrack;
 	}
 
-	public List<Integer> getRedPawns()
+	public HashMap<Integer, Integer> getRedPawns()
 	{
 		return redPawns;
 	}
 
-	public void setRedPawns(List<Integer> redPawns)
+	public void setRedPawns(HashMap<Integer, Integer> redPawns)
 	{
 		this.redPawns = redPawns;
 	}

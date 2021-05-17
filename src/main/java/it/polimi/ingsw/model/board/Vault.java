@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.ResourceType;
 
 import java.io.Serializable;
 
-public class Vault implements Serializable
+public class Vault implements Serializable		/* Has resources obtained through production */
 {
 	private int[] resourceAmounts = new int[4];		/* 0: blue, 1: grey, 2: yellow, 3: purple */
 
