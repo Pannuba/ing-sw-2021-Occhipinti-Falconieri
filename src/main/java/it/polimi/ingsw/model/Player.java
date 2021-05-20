@@ -17,15 +17,23 @@ public class Player implements Serializable
 	private String username;
 	private boolean isMyTurn;
 	private Dashboard dashboard;
-	private int victoryPoints;
-	private List<DevCard> devCards = new ArrayList<DevCard>();
-	private List<LeaderCard> leaderCards = new ArrayList<LeaderCard>();
+	private int victoryPoints;				/* Value assigned at the end of the match */
+	private List<DevCard> devCards;
+	private List<LeaderCard> leaderCards;
 	private PopeToken[] popeTokens = new PopeToken[3];			/* Discarded or turned/activated depending on pawn position during vatican report */
 
-	public Player()
+	public Player(String username)
 	{
+		this.username = username;
 		isMyTurn = false;
 		victoryPoints = 0;
+
+		popeTokens[0] = new PopeToken(2);
+		popeTokens[1] = new PopeToken(3);
+		popeTokens[2] = new PopeToken(4);
+
+		devCards = new ArrayList<DevCard>();
+		leaderCards = new ArrayList<LeaderCard>();
 		dashboard = new Dashboard();
 	}
 

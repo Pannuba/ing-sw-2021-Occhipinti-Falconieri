@@ -38,9 +38,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	public void update()			/* Creates the new gamestate and sends it to the views, which send it to the clients */
 	{
 		System.out.println("Updating gamestate...");
-		//System.out.println("In this gamestate, " + players.get(0).getUsername() + "has leadercards #" + players.get(0).getLeaderCards().get(0).getCardNumber() + " and #" + players.get(0).getLeaderCards().get(1).getCardNumber());
-		//System.out.println("In this gamestate, " + players.get(1).getUsername() + "has leadercards #" + players.get(1).getLeaderCards().get(0).getCardNumber() + " and #" + players.get(1).getLeaderCards().get(1).getCardNumber());
-		/* Checks out... so it's a client-side bug? */
+
 		/* TODO: add message from server to gamestate with the result of every command, for example what resources were bought */
 		setChanged();
 		notifyObservers(new GameState(players, getCurrentPlayerName(), track, marblesMarket, devCardsMarket));
@@ -192,6 +190,17 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		}
 	}
 
+	public boolean isMatchOver()
+	{
+		for (int i = 0; i < numPlayers; i++)		/* Check for every player */
+		{
+			if (track.getRedPawns().get(i) >= 24 || players.get(i).getDevCards().size() == 7)
+				return true;
+		}
+
+		return false;
+	}
+
 	public int calculatePoints(Player player)		/* Gets total points for a player and sets them */
 	{												/* Should this method go here? in Player? */
 		int points = 0;
@@ -219,7 +228,15 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		return points;
 	}
 
-	public Player getPlayerByUsername(String username)		/* 	NullPointerException because  the usernames taken in ServerListener are discarded when a new model is created in Match */
+	public void endMatch()
+	{
+		for (int i = 0; i < numPlayers; i++)
+		{
+			players.get(i).setVictoryPoints(calculatePoints(players.get(i)));
+		}
+	}
+
+	public Player getPlayerByUsername(String username)		/* 	NullPointerException because the usernames taken in ServerListener are discarded when a new model is created in Match */
 	{
 		for (int i = 0; i < numPlayers; i++)
 		{

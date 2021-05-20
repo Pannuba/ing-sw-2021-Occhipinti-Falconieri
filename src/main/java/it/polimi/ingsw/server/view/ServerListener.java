@@ -2,7 +2,6 @@ package it.polimi.ingsw.server.view;
 
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.server.Match;
-import it.polimi.ingsw.server.view.ClientHandler;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -29,11 +28,13 @@ public class ServerListener implements Runnable		/* Thread running listening for
 	public void run()
 	{
 		System.out.println("Server started");
+
 		Socket socket = null;
 		DataInputStream dis = null;
 		ObjectInputStream ois = null;
 		ObjectOutputStream oos = null;
 		List<ClientHandler> views = new ArrayList<ClientHandler>();
+
 		String username = "";
 		int numPlayers = 1;
 		List<Player> players = new ArrayList<Player>();
@@ -68,15 +69,14 @@ public class ServerListener implements Runnable		/* Thread running listening for
 				e.printStackTrace();
 			}
 
-			players.add(new Player());
-			players.get(i).setUsername(username);
+			players.add(new Player(username));
 
 			ClientHandler clientHandler = new ClientHandler(socket, username, dis, ois, oos);		/* Start view thread that listens for commands from client */
 			views.add(clientHandler);
 			new Thread(clientHandler).start();
 		}
 
-		Runnable r = new Match(numPlayers, players, views);
+		Runnable r = new Match(players, views);			/* Start match, passes players and views. TODO: advanced functionality to create multiple matches */
 		new Thread(r).start();
 	}
 

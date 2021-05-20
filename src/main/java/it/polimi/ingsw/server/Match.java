@@ -16,10 +16,10 @@ public class Match implements Runnable
 	private Model model;
 	private Controller controller;
 
-	public Match(int numPlayers, List<Player> players, List<ClientHandler> views)
+	public Match(List<Player> players, List<ClientHandler> views)
 	{
-		this.numPlayers = numPlayers;
 		this.players = players;
+		this.numPlayers = players.size();
 		this.views = views;
 
 		System.out.println("Creating model and controller for new match...");
@@ -47,7 +47,7 @@ public class Match implements Runnable
 
 		sendToAll("START");		/* When all players are connected */
 
-		List<List<LeaderCard>> leaderCardsLists = model.createLeaderCardsLists();
+		List<List<LeaderCard>> leaderCardsLists = model.createLeaderCardsLists();		/* Put this in controller? */
 
 		for (int i = 0; i < numPlayers; i++)
 		{

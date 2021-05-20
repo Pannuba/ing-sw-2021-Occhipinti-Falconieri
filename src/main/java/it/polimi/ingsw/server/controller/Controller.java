@@ -10,7 +10,7 @@ import it.polimi.ingsw.server.view.ClientHandler;
 
 import java.util.*;
 
-public class Controller implements Observer			/* Observes view to get commands... View observes model right? */
+public class Controller implements Observer			/* Observes view to get commands... View observes model */
 {
 	private final Model model;
 	private String username;			/* Username of the player who sent the command */
@@ -130,10 +130,11 @@ public class Controller implements Observer			/* Observes view to get commands..
 			chooseNextPlayer();
 		}
 
+		postRoundChecks();
 		model.update();		/* Send new gamestate to everyone */
 	}
 
-	private void chooseNextPlayer()		/* Turns alternate by player ID: 0 -> 1 -> 2 -> 3 */
+	private void chooseNextPlayer()		/* In model? Turns alternate by player ID: 0 -> 1 -> 2 -> 3 */
 	{
 		int activePlayerNum = model.getActivePlayerID();
 
@@ -159,6 +160,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 	{
 		System.out.println("Updating position for " + model.getPlayerByID(ID).getUsername() + " by " + faithPoints + " faithpoints");
 		HashMap<Integer, Integer> newRedPawns = model.getTrack().getRedPawns();
+
 		/* Gets the pawn at position ID [0, 4] and increments the existing value by the new faithPoints */
 		newRedPawns.put(ID, model.getTrack().getRedPawns().get(ID) + faithPoints);
 		model.getTrack().setRedPawns(newRedPawns);
@@ -189,11 +191,22 @@ public class Controller implements Observer			/* Observes view to get commands..
 		}
 	}
 
-	private boolean checkResources(Dashboard playerBoard, DevCard boughtCard)	/* If there are enough resources, get them from storage, otherwise vault */
+	private void postRoundChecks()		/* What should be in model and controller? */
 	{
+		int vaticanReportNum = model.getTrack().checkVaticanReport();
+
+		if (vaticanReportNum != 0)
+			model.vaticanReport(vaticanReportNum);	/* Clients need to check if a vatican report has happened */
+
+		if (model.isMatchOver())		/* Clients perform a check. If victorypoints != 0, the match has ended */
+			model.endMatch();
+	}
+
+	private boolean checkResources(Dashboard playerBoard, DevCard boughtCard)	/* If there are enough resources, get them from storage, otherwise vault */
+	{																			/* Ask for player input only when bought resouces have to be discarded, see Slack */
 		Storage storage = playerBoard.getStorage();
 		Vault vault = playerBoard.getVault();
-		List<Resource> requirements = boughtCard.getRequirements();		/* TODO: switch "cost" and "requirements" in xmls, serialization, dev/leadercards! */
+		List<Resource> requirements = boughtCard.getRequirements();
 		// ... ... ...
 		return false;
 	}
