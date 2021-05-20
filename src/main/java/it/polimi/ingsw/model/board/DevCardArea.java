@@ -60,11 +60,6 @@ public class DevCardArea implements Serializable            /* Devcards can't be
 		return devCards.get(layer - 1);		/* If layer is 3, the third devcard has index 2: [0, 1, 2] */
 	}
 
-	public int calculatePoints()		/* Returns an int of the total points of all cards. Check calculatePoints in Model */
-	{
-		return 0;
-	}
-
 	public boolean isEmpty()
 	{
 		return isEmpty;

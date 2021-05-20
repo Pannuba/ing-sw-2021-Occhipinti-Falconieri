@@ -194,28 +194,29 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	{
 		for (int i = 0; i < numPlayers; i++)		/* Check for every player */
 		{
-			if (track.getRedPawns().get(i) >= 24 || players.get(i).getDevCards().size() == 7)
+			if (track.getRedPawns().get(i) >= 24 || players.get(i).getDashboard().getTotalDevCardsNum() == 7)
 				return true;
 		}
 
 		return false;
 	}
 
-	public int calculatePoints(Player player)		/* Gets total points for a player and sets them */
+	public int calculatePoints(Player player)		/* Gets total points for a player at the end of the match */
 	{												/* Should this method go here? in Player? */
 		int points = 0;
 
-		List<DevCard> devcards = player.getDevCards();
-		List<LeaderCard> leadercards = player.getLeaderCards();
+		List<LeaderCard> leaderCards = player.getLeaderCards();
 
-		for (int i = 0; i < devcards.size(); i++)		/* Points from devcards */
-			points += devcards.get(i).getPoints();
-
-		for (int i = 0; i < leadercards.size(); i++)		/* Points from leadercards */
+		for (int i = 0; i < leaderCards.size(); i++)		/* Points from leadercards */
 		{
-			if (leadercards.get(i).isDiscarded() == false)
-				points += leadercards.get(i).getPoints();
+			if (leaderCards.get(i).isDiscarded() == false)		/* Discarded vs activated? */
+				points += leaderCards.get(i).getPoints();
 		}
+
+		List<DevCard> devCards = player.getDashboard().getAllDevCards();
+
+		for (int i = 0; i < devCards.size(); i++)			/* Points from devcards */
+			points += devCards.get(i).getPoints();
 
 		int totalResources = 0;
 		totalResources += player.getDashboard().getVault().getTotalResources();		/* Points from resources */

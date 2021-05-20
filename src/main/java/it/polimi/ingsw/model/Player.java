@@ -1,12 +1,10 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.board.Dashboard;
-import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.model.cards.PopeToken;
 import it.polimi.ingsw.model.cards.SkillMarble;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +16,6 @@ public class Player implements Serializable
 	private boolean isMyTurn;
 	private Dashboard dashboard;
 	private int victoryPoints;				/* Value assigned at the end of the match */
-	private List<DevCard> devCards;
 	private List<LeaderCard> leaderCards;
 	private PopeToken[] popeTokens = new PopeToken[3];			/* Discarded or turned/activated depending on pawn position during vatican report */
 
@@ -32,7 +29,6 @@ public class Player implements Serializable
 		popeTokens[1] = new PopeToken(3);
 		popeTokens[2] = new PopeToken(4);
 
-		devCards = new ArrayList<DevCard>();
 		leaderCards = new ArrayList<LeaderCard>();
 		dashboard = new Dashboard();
 	}
@@ -114,16 +110,6 @@ public class Player implements Serializable
 	public void setVictoryPoints(int victoryPoints)
 	{
 		this.victoryPoints = victoryPoints;
-	}
-
-	public List<DevCard> getDevCards()
-	{
-		return devCards;
-	}
-
-	public void setDevCards(List<DevCard> devCards)
-	{
-		this.devCards = devCards;
 	}
 
 	public List<LeaderCard> getLeaderCards()
