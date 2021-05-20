@@ -7,10 +7,11 @@ import static org.junit.Assert.*;
 
 public class VaultTest {
 
+    private Vault a = new Vault();
+
     @Test
     public void addResource1()
     {
-        Vault a = new Vault();
         ResourceType resource1 = ResourceType.BLUE;
         a.addResource(resource1);
         ResourceType resource2 = ResourceType.BLUE;
@@ -22,7 +23,6 @@ public class VaultTest {
     @Test
     public void addResource2()
     {
-        Vault a = new Vault();
         ResourceType resource1 = ResourceType.BLUE;
         a.addResource(resource1);
         ResourceType resource2 = ResourceType.PURPLE;
@@ -34,7 +34,6 @@ public class VaultTest {
     @Test
     public void addResource3()
     {
-        Vault a = new Vault();
         ResourceType resource1 = ResourceType.BLUE;
         a.addResource(resource1);
         ResourceType resource2 = ResourceType.GREY;
@@ -47,4 +46,11 @@ public class VaultTest {
         assertArrayEquals("Error", b, a.getResourceAmounts());
     }
 
+    @Test
+    public void getTotalResources()
+    {
+        int[] resourceAmounts = {7,10,3,6};
+        a.setResourceAmounts(resourceAmounts);
+        assertEquals("Error", 26, a.getTotalResources());
+    }
 }

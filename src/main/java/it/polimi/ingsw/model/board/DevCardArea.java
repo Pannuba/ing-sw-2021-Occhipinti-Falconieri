@@ -29,7 +29,7 @@ public class DevCardArea implements Serializable            /* Devcards can't be
 			return true;
 	}
 
-	public void addDevCard(DevCard cardToAdd)
+	public boolean addDevCard(DevCard cardToAdd)   /* changed from void to boolean for testing */
 	{
 		if (isEmpty)
 			isEmpty = false;
@@ -37,17 +37,21 @@ public class DevCardArea implements Serializable            /* Devcards can't be
 		if (layer == 3)
 		{
 			System.out.println("Error: there are already three cards");		/* Need to use logger (or do we?) */
-			return;
+			return false;
 		}
 
 		if (cardToAdd.getLevel() == layer + 1)		/* if layer is 0 and we add a card of level 1 (0 + 1), it's ok */
 		{
 			devCards.add(cardToAdd);
 			layer++;
+			return true;
 		}
 
 		else
+		{
 			System.out.println("Card to be added is not compatible with current dev card area");
+			return false;
+		}
 	}
 
 	public DevCard getTopDevCard()			/* The devcard of highest level is the most important */
