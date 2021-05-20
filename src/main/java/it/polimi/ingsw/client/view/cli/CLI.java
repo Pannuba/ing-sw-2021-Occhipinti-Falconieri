@@ -248,7 +248,7 @@ public class CLI extends Observable implements Observer
 	}
 
 	@Override
-	public void update(Observable observable, Object o)
+	public void update(Observable observable, Object o)		/* Make a (Local)GameState thread that gets the new gamestate? */
 	{
 		System.out.println("Gamestate received");
 		this.gameState = (GameState)o;		/* Gamestate is needed in game loop, not during setup */

@@ -13,9 +13,9 @@ import java.util.List;
 public class Track implements Serializable
 {
 	private Box[] faithTrack = new Box[25];
-	private PopeToken[] popeTokens = new PopeToken[3];
-	private HashMap<Integer, Integer> redPawns;				/*  Key: ID, value: position. Do the same in vault, maybe */
-	private int numPlayers;
+	private PopeToken[] popeTokens = new PopeToken[3];		/* Track has 3 popetokens, discarded when a player calls a vatican report for each token */
+	private HashMap<Integer, Integer> redPawns;				/* Key: ID, value: position. Do the same in vault, maybe */
+	private final int numPlayers;
 	private int blackPawn;
 
 	public Track(List<Player> players)
@@ -67,74 +67,32 @@ public class Track implements Serializable
 		faithTrack[24] = new Box(BoxType.POPE,   24, 20);
 	}
 
-	public boolean checkVaticanReport()
+	public int checkVaticanReport()		/* Returns the number of the pope box that triggered the vatican report. 0 if no vatican report */
 	{
 
 		for (int i = 0; i < numPlayers; i++)		/* redPawns.get(i) returns the position of player ID i */
 		{
 
-			if (redPawns.get(i) >= 8  && popeTokens[0].isUsed() == false ||
-				redPawns.get(i) >= 16 && popeTokens[1].isUsed() == false ||
-				redPawns.get(i) == 24 && popeTokens[2].isUsed() == false )
-				return true;
-
-			else
-				return false;
-		}
-
-		return false;
-	}
-
-	public void vaticanReport(Box popeBox, int numPlayers)		/* Called when a player reaches a pope box. But where? */
-	{
-
-		for (int i = 0; i < numPlayers; i++)		/* Need numPlayers */
-		{
-			if (popeBox.getPosition() == 8)                /* First pope box has been reached */
+			switch (redPawns.get(i))
 			{
-				popeTokens[0].setUsed(true);
+				case 8:
 
-				if (redPawns.get(i) >= 5 && redPawns.get(i) <= 8)
-				{
-					// player[i].setVictoryPoints(player[i].getVictoryPoints() + popeTokens[0].getPoints());
-					// player.get(i).setPopeTokenPoints(player.get(i).getPopeTokenPoints() + popeTokens[0].getPoints());
-				}
+					if (popeTokens[0].isDiscarded() == false) return 8;
+					break;
 
-				return;
-			}
+				case 16:
 
-			else if (popeBox.getPosition() == 16)        /* Second pope box */
-			{
-				popeTokens[1].setUsed(true);
+					if (popeTokens[1].isDiscarded() == false) return 16;
+					break;
 
-				if (redPawns.get(i) >= 12 && redPawns.get(i) <= 16)
-				{
-					// player[i].setVictoryPoints(player[i].getVictoryPoints() + popeTokens[1].getPoints());
+				case 24:
 
-				}
-
-				return;
-
-			}
-
-			else if (popeBox.getPosition() == 24)        /* Third pope box */
-			{
-				popeTokens[2].setUsed(true);
-
-				if (redPawns.get(i) >= 19 && redPawns.get(i) <= 24)
-				{
-					// player[i].setVictoryPoints(player[i].getVictoryPoints() + popeTokens[2].getPoints());
-				}
-
-				return;
-			}
-
-			else
-			{
-				System.out.println("Error");
-				return;
+					if (popeTokens[2].isDiscarded() == false) return 24;
+					break;
 			}
 		}
+
+		return 0;
 	}
 
 	public Box[] getFaithTrack()
@@ -145,6 +103,16 @@ public class Track implements Serializable
 	public void setFaithTrack(Box[] faithTrack)
 	{
 		this.faithTrack = faithTrack;
+	}
+
+	public PopeToken[] getPopeTokens()
+	{
+		return popeTokens;
+	}
+
+	public void setPopeTokens(PopeToken[] popeTokens)
+	{
+		this.popeTokens = popeTokens;
 	}
 
 	public HashMap<Integer, Integer> getRedPawns()

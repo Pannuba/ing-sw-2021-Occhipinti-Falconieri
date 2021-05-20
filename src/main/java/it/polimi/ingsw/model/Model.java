@@ -115,7 +115,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 			}
 		}
 
-		setPlayers(playersSortedByID);		/* ! */
+		setPlayers(playersSortedByID);
 
 		for (int i = 0; i < numPlayers; i++)
 			System.out.println(players.get(i).getUsername() + " has ID " + players.get(i).getId() + " and isFirstTurn: " + players.get(i).isMyTurn());
@@ -151,13 +151,53 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		return listOfLists;
 	}
 
+	public void vaticanReport(int popeBoxNumber)		/* Called when a player reaches a pope box. Called by match? */
+	{
+		System.out.println("Calling vatican report for pope box " + popeBoxNumber);
+
+		for (int i = 0; i < numPlayers; i++)
+		{
+			switch (popeBoxNumber)
+			{
+				case 8:				/* First pope box has been reached */
+
+					track.getPopeTokens()[0].setDiscarded(true);		/* Discard the track's popeToken so no more vatican reports can be called for the same box */
+
+					if (track.getRedPawns().get(i) >= 5 && track.getRedPawns().get(i) <= 8)		/* If a player is inside the perimeter */
+						players.get(i).getPopeTokens()[0].setActive(true);
+
+					break;
+
+				case 16:        	/* Second pope box */
+
+					track.getPopeTokens()[1].setDiscarded(true);
+
+					if (track.getRedPawns().get(i) >= 12 && track.getRedPawns().get(i) <= 16)
+						players.get(i).getPopeTokens()[1].setActive(true);
+
+					break;
+
+				case 24:			/* Third pope box */
+
+					track.getPopeTokens()[2].setDiscarded(true);
+
+					if (track.getRedPawns().get(i) >= 19 && track.getRedPawns().get(i) <= 24)
+						players.get(i).getPopeTokens()[2].setActive(true);
+
+					break;
+
+				default:
+					System.out.println("Error");
+			}
+		}
+	}
+
 	public int calculatePoints(Player player)		/* Gets total points for a player and sets them */
 	{												/* Should this method go here? in Player? */
 		int points = 0;
 
 		List<DevCard> devcards = player.getDevCards();
 		List<LeaderCard> leadercards = player.getLeaderCards();
-		int totalResources = 0;
 
 		for (int i = 0; i < devcards.size(); i++)		/* Points from devcards */
 			points += devcards.get(i).getPoints();
@@ -168,12 +208,13 @@ public class Model extends Observable		/* Observed by the views to create the ne
 				points += leadercards.get(i).getPoints();
 		}
 
+		int totalResources = 0;
 		totalResources += player.getDashboard().getVault().getTotalResources();		/* Points from resources */
 		totalResources += player.getDashboard().getStorage().getTotalResources();
 
 		points += totalResources / 5;	/* 1 point every 5 resources, dividing integers only keeps the whole part of the number */
 
-		/* Need to calculate popetokens points, but where should vaticanReport be called? */
+		points += player.getPopeTokenPoints();		/* Points from activated popeTokens */
 
 		return points;
 	}

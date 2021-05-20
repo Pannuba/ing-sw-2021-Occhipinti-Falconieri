@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.board.Dashboard;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
+import it.polimi.ingsw.model.cards.PopeToken;
 import it.polimi.ingsw.model.cards.SkillMarble;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class Player implements Serializable
 	private int victoryPoints;
 	private List<DevCard> devCards = new ArrayList<DevCard>();
 	private List<LeaderCard> leaderCards = new ArrayList<LeaderCard>();
+	private PopeToken[] popeTokens = new PopeToken[3];			/* Discarded or turned/activated depending on pawn position during vatican report */
 
 	public Player()
 	{
@@ -41,6 +43,19 @@ public class Player implements Serializable
 		}
 
 		return whiteMarbleResources;
+	}
+
+	public int getPopeTokenPoints()
+	{
+		int popeTokenPoints = 0;
+
+		for (int i = 0; i < 3; i++)			/* Make pope tokens number dynamic? */
+		{
+			if (popeTokens[i].isActive())
+				popeTokenPoints += popeTokens[i].getPoints();
+		}
+
+		return popeTokenPoints;
 	}
 
 	public int getId()
@@ -111,5 +126,15 @@ public class Player implements Serializable
 	public void setLeaderCards(List<LeaderCard> leaderCards)
 	{
 		this.leaderCards = leaderCards;
+	}
+
+	public PopeToken[] getPopeTokens()
+	{
+		return popeTokens;
+	}
+
+	public void setPopeTokens(PopeToken[] popeTokens)
+	{
+		this.popeTokens = popeTokens;
 	}
 }

@@ -55,6 +55,8 @@ public class Match implements Runnable
 			views.get(i).send(leaderCardsLists.get(i));
 		}
 
+		/* Round management. controller? Call checkVaticanReport at the end of every round */
+
 	}
 
 	private void sendToAll(Object obj)

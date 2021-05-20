@@ -5,13 +5,16 @@ import java.io.Serializable;
 public class PopeToken implements Serializable
 {
 	private int points;
-	private boolean isUsed;
+	private boolean isActive;			/* True when a player is inside the perimeter when a vatican report is called */
+	private boolean isDiscarded;		/* True when a player is outside the perimeter or when the vatican report for that token is called */
 
 	public PopeToken(int points)
 	{
 		System.out.println("PopeToken: creating token with " + points + " points");
-		isUsed = false;
 		this.points = points;
+
+		isActive = false;
+		isDiscarded = false;
 	}
 
 	public int getPoints()
@@ -24,13 +27,23 @@ public class PopeToken implements Serializable
 		this.points = points;
 	}
 
-	public boolean isUsed()
+	public boolean isActive()
 	{
-		return isUsed;
+		return isActive;
 	}
 
-	public void setUsed(boolean isUsed)
+	public void setActive(boolean isActive)
 	{
-		this.isUsed = isUsed;
+		this.isActive = isActive;
+	}
+
+	public boolean isDiscarded()
+	{
+		return isDiscarded;
+	}
+
+	public void setDiscarded(boolean discarded)
+	{
+		isDiscarded = discarded;
 	}
 }
