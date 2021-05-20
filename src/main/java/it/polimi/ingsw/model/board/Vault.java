@@ -3,63 +3,45 @@ package it.polimi.ingsw.model.board;
 import it.polimi.ingsw.model.ResourceType;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class Vault implements Serializable		/* Has resources obtained through production */
 {
-	private int[] resourceAmounts = new int[4];		/* 0: blue, 1: grey, 2: yellow, 3: purple */
+	private HashMap<ResourceType, Integer> resourceAmounts;
 
 	public Vault()
 	{
-		resourceAmounts[0] = 0;
-		resourceAmounts[1] = 0;
-		resourceAmounts[2] = 0;
-		resourceAmounts[3] = 0;
+		resourceAmounts = new HashMap<ResourceType, Integer>();
+
+		resourceAmounts.put(ResourceType.BLUE,	 0);
+		resourceAmounts.put(ResourceType.GREY,	 0);
+		resourceAmounts.put(ResourceType.YELLOW, 0);
+		resourceAmounts.put(ResourceType.PURPLE, 0);
 	}
 
 	public void addResource(ResourceType resourceToAdd)
 	{
-		switch (resourceToAdd)
-		{
-			case BLUE:
-				resourceAmounts[0]++;
-				break;
-
-			case GREY:
-				resourceAmounts[1]++;
-				break;
-
-			case YELLOW:
-				resourceAmounts[2]++;
-				break;
-
-			case PURPLE:
-				resourceAmounts[3]++;
-				break;
-
-			default:
-				System.out.println("Vault: addResource error");
-				break;
-		}
-
-		return;
+		resourceAmounts.put(resourceToAdd, resourceAmounts.get(resourceToAdd) + 1);
 	}
 
 	public int getTotalResources()
 	{
 		int totalResources = 0;
 
-		for (int i = 0; i < 4; i++)
-			totalResources += resourceAmounts[i];
+		totalResources += resourceAmounts.get(ResourceType.BLUE);
+		totalResources += resourceAmounts.get(ResourceType.GREY);
+		totalResources += resourceAmounts.get(ResourceType.YELLOW);
+		totalResources += resourceAmounts.get(ResourceType.PURPLE);
 
 		return totalResources;
 	}
 
-	public int[] getResourceAmounts()
+	public HashMap<ResourceType, Integer> getResourceAmounts()
 	{
 		return resourceAmounts;
 	}
 
-	public void setResourceAmounts(int[] resourceAmounts)
+	public void setResourceAmounts(HashMap<ResourceType, Integer> resourceAmounts)
 	{
 		this.resourceAmounts = resourceAmounts;
 	}

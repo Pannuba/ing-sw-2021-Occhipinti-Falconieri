@@ -102,8 +102,6 @@ public class CLI extends Observable implements Observer
 				networkHandler.sendCommand(command);
 
 				/* Need to wait until QueuedObj changes... */
-				try{
-					TimeUnit.SECONDS.sleep(1);}catch(Exception e){e.printStackTrace();}
 				List<Resource> boughtResources = (List<Resource>)networkHandler.getQueuedObj();		/* Only ask for input if resources have to be discarded */
 				System.out.println("Bought the following resources: " + boughtResources);
 				break;

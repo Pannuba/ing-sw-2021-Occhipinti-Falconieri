@@ -14,7 +14,7 @@ public class Track implements Serializable
 {
 	private Box[] faithTrack = new Box[25];
 	private PopeToken[] popeTokens = new PopeToken[3];		/* Track has 3 popetokens, discarded when a player calls a vatican report for each token */
-	private HashMap<Integer, Integer> redPawns;				/* Key: ID, value: position. Do the same in vault, maybe */
+	private HashMap<Integer, Integer> redPawns;				/* Key: ID, value: position */
 	private final int numPlayers;
 	private int blackPawn;
 

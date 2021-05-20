@@ -146,9 +146,8 @@ public class Controller implements Observer			/* Observes view to get commands..
 			activePlayerID++;
 
 		model.getPlayerByUsername(username).setMyTurn(false);		/* Sets false for the player who just sent the command */
-
 		model.getPlayerByID(activePlayerID).setMyTurn(true);
-		System.out.println("ActivePlayerID after " + activePlayerID);
+
 		System.out.println("Next player is " + model.getPlayerByID(activePlayerID).getUsername());
 	}
 

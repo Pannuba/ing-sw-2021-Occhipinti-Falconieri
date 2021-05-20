@@ -26,17 +26,17 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		{
 			case "SkillDiscount":
 				System.out.println("Leadercard skill: discount");
-				System.out.println("Discounted resource: " + convertResourceTypeToString(((SkillDiscount)card).getDiscountedResource()));
+				System.out.println("Discounted resource: " + convertResTypeToString(((SkillDiscount)card).getDiscountedResource()));
 				break;
 
 			case "SkillMarble":
 				System.out.println("Leadercard skill: white marble");
-				System.out.println("White marble resource: " + convertResourceTypeToString(((SkillMarble)card).getWhiteMarble()));
+				System.out.println("White marble resource: " + convertResTypeToString(((SkillMarble)card).getWhiteMarble()));
 				break;
 
 			case "SkillProduction":
 				System.out.println("Leadercard skill: additional production");
-				System.out.println("Cost type: " + convertResourceTypeToString(((SkillProduction)card).getCost().getResourceType()));
+				System.out.println("Cost type: " + convertResTypeToString(((SkillProduction)card).getCost().getResourceType()));
 				System.out.println("Cost amount: 1");
 				/* Product is null because it's chosen by the player */
 				System.out.println("Product amount: 1");
@@ -44,7 +44,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 			case "SkillStorage":
 				System.out.println("Leadercard skill: additional storage");
-				System.out.println("Additional storage resource: " + convertResourceTypeToString(((SkillStorage)card).getAdditionalStorage().getShelfResource().getResourceType()));
+				System.out.println("Additional storage resource: " + convertResTypeToString(((SkillStorage)card).getAdditionalStorage().getShelfResource().getResourceType()));
 				break;
 		}
 
@@ -150,18 +150,20 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	private static void printVault(Vault vault)			/* Use ANSI color codes */
 	{
-		System.out.print(	"Your vault currently has:\n\n" + vault.getResourceAmounts()[0] + " blue\n" + vault.getResourceAmounts()[1] + " grey\n"
-							+ vault.getResourceAmounts()[2] + " yellow\n" + vault.getResourceAmounts()[3] + " purple\n\n"
-							+ "For a total of " + vault.getTotalResources() + " resources\n\n");
-
+		System.out.print("Your vault currently has:\n\n"																					+
+						 vault.getResourceAmounts().get(ResourceType.BLUE)	 + " " + convertResTypeToString(ResourceType.BLUE)	 + ", "		+
+						 vault.getResourceAmounts().get(ResourceType.GREY)	 + " " + convertResTypeToString(ResourceType.GREY)	 + ", "		+
+						 vault.getResourceAmounts().get(ResourceType.YELLOW) + " " + convertResTypeToString(ResourceType.YELLOW) + ", and "	+
+						 vault.getResourceAmounts().get(ResourceType.PURPLE) + " " + convertResTypeToString(ResourceType.PURPLE) + "\n" 	+
+						 "For a total of " + vault.getTotalResources() + " resources\n\n" );
 	}
 
 	private static void printStorage(Storage storage)
 	{
 		String topShelf = "", middleShelf = "", bottomShelf = "";
-		String topShelfResource = convertResourceTypeToString(storage.getShelves()[0].getShelfResource().getResourceType());
-		String middleShelfResource = convertResourceTypeToString(storage.getShelves()[1].getShelfResource().getResourceType());
-		String bottomShelfResource = convertResourceTypeToString(storage.getShelves()[2].getShelfResource().getResourceType());
+		String topShelfResource = convertResTypeToString(storage.getShelves()[0].getShelfResource().getResourceType());
+		String middleShelfResource = convertResTypeToString(storage.getShelves()[1].getShelfResource().getResourceType());
+		String bottomShelfResource = convertResTypeToString(storage.getShelves()[2].getShelfResource().getResourceType());
 
 		switch (storage.getShelves()[0].getShelfResource().getQuantity())
 		{
@@ -272,7 +274,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		return null;
 	}
 
-	private static String convertResourceTypeToString(ResourceType resourceType)
+	private static String convertResTypeToString(ResourceType resourceType)
 	{
 		if (resourceType == null)
 			return ANSI.EMPTY.toString();
