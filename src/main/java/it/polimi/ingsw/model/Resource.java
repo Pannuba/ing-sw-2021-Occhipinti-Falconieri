@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Resource implements Serializable
 {
 	private ResourceType category;				/* Can be null, see DevCard serialization */
-	private int quantity;
+	private int quantity;						/* TODO: rename to type */
 	private boolean isInVault;
 
 	public Resource()

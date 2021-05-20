@@ -20,7 +20,7 @@ public class Storage implements Serializable
 	public Storage()
 	{
 		for (int i = 0; i < 3; i++)
-			shelves[i] = new Shelf(i + 1);		/* Initialize shelves passing i+1 as shelf size */
+			shelves[i] = new Shelf(i + 1);		/* Initialize shelves passing i + 1 as shelf size */
 	}
 
 	public boolean checkShelves()
@@ -50,51 +50,52 @@ public class Storage implements Serializable
 	{
 		Shelf destinationShelf = convertIndexToShelf(shelfNumber);
 
-		if (checkShelves() == true && (destinationShelf.getShelfSize() - destinationShelf.getShelfResource().getQuantity()) >= resourceToAdd.getQuantity()	&&
-			resourceToAdd.getResourceType() == destinationShelf.getShelfResource().getResourceType())
+		if (checkShelves() == true && (destinationShelf.getShelfSize() - destinationShelf.getShelfResource().getQuantity()) >= resourceToAdd.getQuantity())
 		{
-			if (destinationShelf.getShelfResource().getResourceType() == null)
-				destinationShelf.getShelfResource().setResourceType(resourceToAdd.getResourceType());
+			if (resourceToAdd.getResourceType() == destinationShelf.getShelfResource().getResourceType())
+			{
+				if (destinationShelf.getShelfResource().getResourceType() == null)
+					destinationShelf.getShelfResource().setResourceType(resourceToAdd.getResourceType());
 
-			destinationShelf.getShelfResource().setQuantity(destinationShelf.getShelfResource().getQuantity() + resourceToAdd.getQuantity());
+				destinationShelf.getShelfResource().setQuantity(destinationShelf.getShelfResource().getQuantity() + resourceToAdd.getQuantity());
 
-			assignToLocalShelves(destinationShelf);
+				assignToLocalShelves(destinationShelf);
+			}
+
+			else
+				System.out.println("Storage addResource: destination shelf and resource to add have different resource types");
 		}
 
 		else
-		{
-			System.out.println("Error");
-		}
+			System.out.println("Storage addResource: not enough space on the destination shelf");
 	}
 
-	public void moveResources(int shelfFromNum, int shelfToNum, int amount)	/* Java is pass-by-value, if this is called from another file the shelves will remain unchanged */
-	{
-		Shelf shelfFrom = convertIndexToShelf(shelfFromNum);
+	public void moveResources(int shelfFromNum, int shelfToNum)				/* Can't have 2 shelves with the same resource according to the rules, */
+	{																		/* so this function can only move resources to an empty shelf */
+		Shelf shelfFrom = convertIndexToShelf(shelfFromNum);				/* and the source shelf has to be empty afterwards */
 		Shelf shelfTo = convertIndexToShelf(shelfToNum);
+		int amount = shelfFrom.getShelfResource().getQuantity();
 
-		if (checkShelves() == true && (shelfTo.getShelfSize() - shelfTo.getShelfResource().getQuantity()) >= amount)	/* If there's enough space to move the resource(s) */
+		if (shelfTo.getShelfResource().getQuantity() != 0)
 		{
-																/* If the destination shelf is not empty, the two resource types have to be the same */
-			if (shelfTo.getShelfResource().getQuantity() == 0 || shelfFrom.getShelfResource().getResourceType() != shelfTo.getShelfResource().getResourceType())
-			{
-				if (shelfTo.getShelfResource().getQuantity() == 0)		/* If the destination shelf was empty, set the new resource type */
-					shelfTo.getShelfResource().setResourceType(shelfFrom.getShelfResource().getResourceType());
+			System.out.println("Storage moveResources: destination shelf is not empty");
+			return;
+		}
 
-				shelfFrom.getShelfResource().setQuantity(shelfFrom.getShelfResource().getQuantity() - amount);
-				shelfTo.getShelfResource().setQuantity(shelfTo.getShelfResource().getQuantity() + amount);
+		if (checkShelves() == true && shelfTo.getShelfSize() >= amount)			/* If there's enough space to move the resource(s) */
+		{
+			shelfTo.getShelfResource().setResourceType(shelfFrom.getShelfResource().getResourceType());
+			shelfTo.getShelfResource().setQuantity(amount);
 
-				if (shelfFrom.getShelfResource().getQuantity() == 0)	/* If the source shelf is now empty, set the resource type to null */
-					shelfFrom.getShelfResource().setResourceType(null);
-			}
+			shelfFrom.getShelfResource().setQuantity(0);
+			shelfFrom.getShelfResource().setResourceType(null);			/* Set the resource type to null because the source shelf is now empty */
 
 			assignToLocalShelves(shelfFrom);
 			assignToLocalShelves(shelfTo);
 		}
 
 		else
-		{
-			System.out.println("Can't move resources");
-		}
+			System.out.println("Storage moveResources: not enough space on destination shelf");
 	}
 
 	public int getTotalResources()
