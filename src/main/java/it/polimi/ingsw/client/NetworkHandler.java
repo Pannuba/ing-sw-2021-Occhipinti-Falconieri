@@ -182,7 +182,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 			e.printStackTrace();
 		}
 
-		System.exit(1);
+		System.exit(0);
 	}
 
 	@Override

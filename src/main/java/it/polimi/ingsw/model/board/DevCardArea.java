@@ -29,14 +29,11 @@ public class DevCardArea implements Serializable            /* Devcards can't be
 			return true;
 	}
 
-	public boolean addDevCard(DevCard cardToAdd)   /* changed from void to boolean for testing */
+	public boolean addDevCard(DevCard cardToAdd)	/* changed from void to boolean for testing */
 	{
-		if (isEmpty)
-			isEmpty = false;
-
 		if (layer == 3)
 		{
-			System.out.println("Error: there are already three cards");		/* Need to use logger (or do we?) */
+			System.out.println("Error: there are already three cards");
 			return false;
 		}
 
@@ -44,6 +41,10 @@ public class DevCardArea implements Serializable            /* Devcards can't be
 		{
 			devCards.add(cardToAdd);
 			layer++;
+
+			if (isEmpty)
+				isEmpty = false;
+
 			return true;
 		}
 

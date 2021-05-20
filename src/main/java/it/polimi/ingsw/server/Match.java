@@ -45,7 +45,7 @@ public class Match implements Runnable
 	{
 		System.out.println("Match thread started");
 
-		sendToAll("START");
+		sendToAll("START");		/* When all players are connected */
 
 		List<List<LeaderCard>> leaderCardsLists = model.createLeaderCardsLists();
 
@@ -55,7 +55,19 @@ public class Match implements Runnable
 			views.get(i).send(leaderCardsLists.get(i));
 		}
 
-		/* Round management. controller? Call checkVaticanReport at the end of every round */
+		/* Round management. controller? Call checkVaticanReport at the end of every round
+
+		while (model.isMatchOver == false)
+		{
+			... round management
+			model.getTrack().checkVaticanReport()
+		}
+
+		model.calculatePoints()
+		send "MATCH_END" to all players, with score and results
+
+
+		 */
 
 	}
 

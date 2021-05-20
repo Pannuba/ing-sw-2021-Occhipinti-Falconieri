@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 
-
 public class Server
 {
 
@@ -16,6 +15,21 @@ public class Server
 		Runnable r = new ServerListener(serverSocket);
 		new Thread(r).start();
 
-		//serverSocket.close();
+		Runtime.getRuntime().addShutdownHook(new Thread()
+		{
+			public void run()		/* Also add this to ServerListener? */
+			{
+				try
+				{
+					System.out.println("Interrupt signal received!\nClosing server socket...");
+					serverSocket.close();
+				}
+				catch (Exception e)
+				{
+					Thread.currentThread().interrupt();
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }
