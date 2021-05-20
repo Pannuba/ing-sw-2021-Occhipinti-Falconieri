@@ -24,7 +24,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 	public void parseInput(List<String> command)		/* Gets name from ClientHandler to change that player's stuff */
 	{
-		System.out.println("activePlayerID in model: " + model.getActivePlayerID() + ", username ID: " + model.getPlayerByUsername(username).getId());
+		System.out.println("Username ID: " + model.getPlayerByUsername(username).getId());
 
 		if (command.get(0).equals("SELECT_LEADERCARDS"))		/* "SELECT_LEADERCARDS", "x", "y" */
 		{
@@ -36,7 +36,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 					String.valueOf(model.getAllLeaderCards().get(i).getCardNumber()).equals(command.get(2))		)
 					cards.add(model.getAllLeaderCards().get(i));
 			}
-			System.out.println("Setting cards #" + cards.get(0).getCardNumber() + " and #" + cards.get(1).getCardNumber() + "for " + username);
+			System.out.println("Setting cards #" + cards.get(0).getCardNumber() + " and #" + cards.get(1).getCardNumber() + " for " + username);
 			model.getPlayerByUsername(username).setLeaderCards(cards);
 		}
 
@@ -125,6 +125,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 			}
 
 			/* Add resources to storage */
+			System.out.println("Sending " + resourcesToAddToStorage + " to " + username);
 			view.send(resourcesToAddToStorage);
 
 			chooseNextPlayer();
@@ -136,29 +137,24 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 	private void chooseNextPlayer()		/* In model? Turns alternate by player ID: 0 -> 1 -> 2 -> 3 */
 	{
-		int activePlayerNum = model.getActivePlayerID();
+		int activePlayerID = model.getPlayerByUsername(username).getId();
 
-		if (activePlayerNum == model.getNumPlayers())			/* If activePlayerNum = 4 it can't go to 5, so back to 0 */
-			activePlayerNum = 0;
+		if (activePlayerID == model.getNumPlayers() - 1)			/* If activePlayerID = 3 it can't go to 4 (0-indexed!), so back to 0 */
+			activePlayerID = 0;
 
 		else													/* Otherwise just increase by 1 */
-			activePlayerNum++;
+			activePlayerID++;
 
-		model.setActivePlayerID(activePlayerNum);		/* Is activePlayerID even needed? Only the active player sends commands, we can get their ID and increase by 1 */
+		model.getPlayerByUsername(username).setMyTurn(false);		/* Sets false for the player who just sent the command */
 
-		for (int i = 0; i < model.getNumPlayers(); i++)
-		{
-			if (model.getPlayers().get(i).getId() == activePlayerNum)
-			{
-				model.getPlayers().get(i).setMyTurn(true);
-				System.out.println("Next player is " + model.getPlayers().get(i).getUsername());
-			}
-		}
+		model.getPlayerByID(activePlayerID).setMyTurn(true);
+		System.out.println("ActivePlayerID after " + activePlayerID);
+		System.out.println("Next player is " + model.getPlayerByID(activePlayerID).getUsername());
 	}
 
 	private void updatePlayerPosition(int ID, int faithPoints)		/* To be called when the player buys red marbles, or...? */
 	{
-		System.out.println("Updating position for " + model.getPlayerByID(ID).getUsername() + " by " + faithPoints + " faithpoints");
+		System.out.println("Updating position for " + model.getPlayerByID(ID).getUsername() + " by " + faithPoints + " faithpoint(s)");
 		HashMap<Integer, Integer> newRedPawns = model.getTrack().getRedPawns();
 
 		/* Gets the pawn at position ID [0, 4] and increments the existing value by the new faithPoints */

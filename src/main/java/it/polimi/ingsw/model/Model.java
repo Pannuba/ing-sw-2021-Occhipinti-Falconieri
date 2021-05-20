@@ -14,7 +14,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Model extends Observable		/* Observed by the views to create the new gamestate */
 {
 	private int numPlayers;
-	private int activePlayerID;				/* Is activePlayerID even needed? Only the active player sends commands, we can get their ID and increase by 1 */
 	private Track track;
 	private MarblesMarket marblesMarket;
 	private DevCardsMarket devCardsMarket;
@@ -74,7 +73,6 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		int firstPlayer = ThreadLocalRandom.current().nextInt(0, numPlayers);		/* Not numPlayers + 1 because it's zero-indexed */
 		players.get(firstPlayer).setMyTurn(true);
 		players.get(firstPlayer).setId(0);
-		activePlayerID = 0;
 
 		playersSortedByID.add(players.get(firstPlayer));
 
@@ -280,16 +278,6 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	public void setNumPlayers(int numPlayers)
 	{
 		this.numPlayers = numPlayers;
-	}
-
-	public int getActivePlayerID()
-	{
-		return activePlayerID;
-	}
-
-	public void setActivePlayerID(int activePlayerID)
-	{
-		this.activePlayerID = activePlayerID;
 	}
 
 	public Track getTrack()

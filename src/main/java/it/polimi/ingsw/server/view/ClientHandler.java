@@ -59,6 +59,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 		try
 		{
 			oos.writeObject(message);
+			oos.reset();
 		}
 		catch (Exception e)
 		{

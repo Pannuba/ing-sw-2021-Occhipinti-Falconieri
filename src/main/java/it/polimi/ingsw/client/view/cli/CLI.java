@@ -3,16 +3,10 @@ package it.polimi.ingsw.client.view.cli;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.model.ResourceType;
-import it.polimi.ingsw.model.board.Dashboard;
-import it.polimi.ingsw.model.board.Storage;
-import it.polimi.ingsw.model.board.Vault;
 import it.polimi.ingsw.model.cards.*;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-
-/* 	FIXME: new gamestate sometimes has no leadercards that were picked */
 
 public class CLI extends Observable implements Observer
 {
@@ -107,8 +101,10 @@ public class CLI extends Observable implements Observer
 				command.add(rowOrColNum);
 				networkHandler.sendCommand(command);
 
-				/* Throws exception because it reads the gamestates "in queue" received while waiting for user for input */
-				List<Resource> boughtResources = (List<Resource>)networkHandler.receive();		/* Only ask for input if resources have to be discarded */
+				/* Need to wait until QueuedObj changes... */
+				try{
+					TimeUnit.SECONDS.sleep(1);}catch(Exception e){e.printStackTrace();}
+				List<Resource> boughtResources = (List<Resource>)networkHandler.getQueuedObj();		/* Only ask for input if resources have to be discarded */
 				System.out.println("Bought the following resources: " + boughtResources);
 				break;
 
@@ -152,7 +148,7 @@ public class CLI extends Observable implements Observer
 
 			case 3:
 				PrintMethods.printPlayerLeaderCards(gameState.getPlayerByName(username).getLeaderCards());
-				PrintMethods.printPlayerDevCards(gameState.getPlayerByName(username).getDevCards());
+				PrintMethods.printPlayerDevCards(gameState.getPlayerByName(username).getDashboard().getAllDevCards());
 				break;
 
 			case 4:
@@ -250,7 +246,7 @@ public class CLI extends Observable implements Observer
 	@Override
 	public void update(Observable observable, Object o)		/* Make a (Local)GameState thread that gets the new gamestate? */
 	{
-		System.out.println("Gamestate received");		/* Check if match is over */
+		/* Check if match is over */
 		this.gameState = (GameState)o;		/* Gamestate is needed in game loop, not during setup */
 
 		if (gameState.getPlayerByName(username).isMyTurn())

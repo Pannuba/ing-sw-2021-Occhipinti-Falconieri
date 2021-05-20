@@ -19,6 +19,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 	private ObjectInputStream ois;
 	private DataOutputStream dos;
 	private ObjectOutputStream oos;
+	private Object queuedObj;			/* Object (not a GameState) such as lists, resources... that the CLI accesses through get method */
 	private final String username, ip;
 	private final int port;
 
@@ -35,10 +36,22 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		{
 			try
 			{
-				System.out.println("Waiting for new gamestate");
-				GameState gameState = (GameState) ois.readObject();
-				setChanged();
-				notifyObservers(gameState);
+				System.out.println("Waiting for new object from server");
+				Object inputObj = ois.readObject();
+
+				if (inputObj.getClass().getSimpleName().equals("GameState"))
+				{
+					System.out.println("New gamestate received!");
+					setChanged();
+					notifyObservers(inputObj);
+				}
+
+				else
+				{
+					System.out.println(inputObj.getClass().getSimpleName() + " received");
+					queuedObj = inputObj;
+					//queuedObj.notify();
+				}
 			}
 			catch (IOException | ClassNotFoundException e)
 			{
@@ -53,7 +66,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 
 	public void connect()
 	{
-		System.out.println("Connecting to server...");
+		System.out.println("Connecting to server...");		/* TODO: add timeout */
 
 		try
 		{
@@ -141,6 +154,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		try
 		{
 			oos.writeObject(command);
+			oos.reset();		/* omg if this works i swear to god */
 		}
 		catch(Exception e)
 		{
@@ -190,5 +204,10 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 	{
 		System.out.println("Sending command " + ((List<String>)o).get(0) + " to server");
 		sendCommand((List<String>)o);
+	}
+
+	public Object getQueuedObj()
+	{
+		return queuedObj;
 	}
 }
