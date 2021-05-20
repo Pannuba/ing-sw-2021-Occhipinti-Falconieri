@@ -13,8 +13,8 @@ public class Match implements Runnable
 	private final int numPlayers;
 	private final List<Player> players;
 	private final List<ClientHandler> views;
-	private Model model;
-	private Controller controller;
+	private final Model model;
+	private final Controller controller;
 
 	public Match(List<Player> players, List<ClientHandler> views)
 	{
@@ -23,16 +23,8 @@ public class Match implements Runnable
 		this.views = views;
 
 		System.out.println("Creating model and controller for new match...");
-
-		try
-		{
-			model = new Model(players);
-			controller = new Controller(model);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+		model = new Model(players);
+		controller = new Controller(model);
 
 		for (int i = 0; i < views.size(); i++)
 		{

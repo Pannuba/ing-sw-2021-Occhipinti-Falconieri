@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class Box implements Serializable
 {
-	private BoxType category;
-	private int position;
-	private int victoryPoints;
+	private final BoxType category;
+	private final int position;
+	private final int victoryPoints;
 
 	public Box(BoxType category, int position, int victoryPoints)
 	{
@@ -15,16 +15,9 @@ public class Box implements Serializable
 		this.victoryPoints = victoryPoints;
 	}
 
-	/* Set methods are pretty much useless, but I'll leave them anyway */
-
 	public BoxType getCategory()
 	{
 		return category;
-	}
-
-	public void setCategory(BoxType category)
-	{
-		this.category = category;
 	}
 
 	public int getPosition()
@@ -32,18 +25,8 @@ public class Box implements Serializable
 		return position;
 	}
 
-	public void setPosition(int position)
-	{
-		this.position = position;
-	}
-
 	public int getVictoryPoints()
 	{
 		return victoryPoints;
-	}
-
-	public void setVictoryPoints(int victoryPoints)
-	{
-		this.victoryPoints = victoryPoints;
 	}
 }

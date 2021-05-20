@@ -2,14 +2,13 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.tools.XML_Serialization;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DevCardsMarket implements Serializable
 {
-	private List<DevCard> devCards = new ArrayList<DevCard>();
+	private List<DevCard> devCards = new ArrayList<>();
 	private int cardsInMarket;
 
 	public DevCardsMarket()
@@ -23,7 +22,7 @@ public class DevCardsMarket implements Serializable
 			try
 			{
 				devCards.add((DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard" + (i + 1) + ".xml"));
-				//devCards.get(i).setCardNumber(i + 1); Already in xmls
+				//devCards.get(i).setCardNumber(i + 1); Already in xmls, TODO: do the same to leadercards
 			}
 			catch (Exception e)
 			{
@@ -32,10 +31,13 @@ public class DevCardsMarket implements Serializable
 		}
 	}
 
-	public void removeCardFromMarket(DevCard cardToRemove)
+	public DevCard buyCardFromMarket(int boughtCardNum)
 	{
-		devCards.remove(cardToRemove);
+		DevCard boughtCard = getDevCardByNumber(boughtCardNum);
+		devCards.remove(boughtCard);
 		cardsInMarket--;
+
+		return boughtCard;
 	}
 
 	public DevCard getDevCardByNumber(int cardNumber)		/* Set method useless */

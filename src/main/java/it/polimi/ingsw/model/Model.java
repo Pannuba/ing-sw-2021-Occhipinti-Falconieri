@@ -13,12 +13,12 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Model extends Observable		/* Observed by the views to create the new gamestate */
 {
-	private int numPlayers;
-	private Track track;
-	private MarblesMarket marblesMarket;
-	private DevCardsMarket devCardsMarket;
-	private List<Player> players = new ArrayList<Player>();
-	private List<LeaderCard> allLeaderCards = new ArrayList<LeaderCard>();		/* All 16 leadercards, each player picks 2 out of 4 */
+	private final int numPlayers;
+	private final Track track;
+	private final MarblesMarket marblesMarket;
+	private final DevCardsMarket devCardsMarket;
+	private List<Player> players;
+	private List<LeaderCard> allLeaderCards;		/* All 16 leadercards, each player picks 2 out of 4 */
 
 	public Model(List<Player> players)
 	{
@@ -46,6 +46,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	private void createLeaderCards()
 	{
 		System.out.println("Model: creating leadercards...");
+		allLeaderCards = new ArrayList<>();		/* Necessary? */
 		LeaderCard cardToAdd = null;
 
 		for (int i = 0; i < 16; i++)
@@ -59,7 +60,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 				e.printStackTrace();
 			}
 
-			cardToAdd.setCardNumber(i + 1);		/* Here or in xmls? */
+			cardToAdd.setCardNumber(i + 1);		/* Here or in xmls? xmls!!! */
 			allLeaderCards.add(cardToAdd);
 		}
 	}
@@ -68,7 +69,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	{
 		System.out.println("Choosing a random first player...");
 
-		List<Player> playersSortedByID = new ArrayList<Player>();
+		List<Player> playersSortedByID = new ArrayList<>();
 
 		int firstPlayer = ThreadLocalRandom.current().nextInt(0, numPlayers);		/* Not numPlayers + 1 because it's zero-indexed */
 		players.get(firstPlayer).setMyTurn(true);
@@ -120,12 +121,12 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	public List<List<LeaderCard>> createLeaderCardsLists()				/* Returns a list of lists of leadercards, 1 for each player, each list has 4 leadercards to choose 2 from */
 	{
 		int[] cardsToAssign = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-		List<List<LeaderCard>> listOfLists = new ArrayList<List<LeaderCard>>();
+		List<List<LeaderCard>> listOfLists = new ArrayList<>();
 		List<LeaderCard> tempList;
 
 		for (int i = 0; i < numPlayers; i++)
 		{
-			tempList = new ArrayList<LeaderCard>();		/* Resets the temp list so we don't end up with a 16-element list */
+			tempList = new ArrayList<>();		/* Resets the temp list so we don't end up with a 16-element list */
 
 			for (int j = 0; j < 4; j++)            /* TODO: test!!! */
 			{
@@ -275,19 +276,9 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		return numPlayers;
 	}
 
-	public void setNumPlayers(int numPlayers)
-	{
-		this.numPlayers = numPlayers;
-	}
-
 	public Track getTrack()
 	{
 		return track;
-	}
-
-	public void setTrack(Track track)
-	{
-		this.track = track;
 	}
 
 	public MarblesMarket getMarblesMarket()
@@ -295,19 +286,9 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		return marblesMarket;
 	}
 
-	public void setMarblesMarket(MarblesMarket marblesMarket)
-	{
-		this.marblesMarket = marblesMarket;
-	}
-
 	public DevCardsMarket getDevCardsMarket()
 	{
 		return devCardsMarket;
-	}
-
-	public void setDevCardsMarket(DevCardsMarket devCardsMarket)
-	{
-		this.devCardsMarket = devCardsMarket;
 	}
 
 	public List<Player> getPlayers()
@@ -323,10 +304,5 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	public List<LeaderCard> getAllLeaderCards()
 	{
 		return allLeaderCards;
-	}
-
-	public void setAllLeaderCards(List<LeaderCard> allLeaderCards)
-	{
-		this.allLeaderCards = allLeaderCards;
 	}
 }

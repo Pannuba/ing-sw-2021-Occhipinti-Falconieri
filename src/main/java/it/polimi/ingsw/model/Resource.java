@@ -1,12 +1,12 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serializable;
+
 /*	Stone --> grey ---> 0
 	Coin --> yellow --> 1
 	Shield --> blue --> 2
 	Slave --> purple -> 3
  */
-
-import java.io.Serializable;
 
 public class Resource implements Serializable
 {

@@ -8,6 +8,7 @@ public abstract class LeaderCard implements Serializable        /* Can't do new 
 	private int points;
 	private String requirements;		/* Can be devcards or resources, so it's a string that will be decoded elsewhere */
 	private boolean isDiscarded;		/* Not included in cards .xmls, is set when the player discards a leadercard */
+										/* boolean isActive? */
 
 	public LeaderCard()				/* For some reason, XML_Serialization throws exceptions without this */
 	{

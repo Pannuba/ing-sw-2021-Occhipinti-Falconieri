@@ -33,7 +33,7 @@ public class Dashboard implements Serializable
 
 	public List<DevCard> getAllDevCards()
 	{
-		List<DevCard> allDevCards = new ArrayList<DevCard>();
+		List<DevCard> allDevCards = new ArrayList<>();
 
 		for (int i = 0; i < 3; i++)
 		{

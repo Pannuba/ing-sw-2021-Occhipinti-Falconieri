@@ -12,12 +12,12 @@ import java.util.List;
 public class Player implements Serializable
 {
 	private int id;							/* Set randomly in model. 0, 1, 2, 3 to manage turns, pawns and so on */
-	private String username;
 	private boolean isMyTurn;
-	private Dashboard dashboard;
 	private int victoryPoints;				/* Value assigned at the end of the match */
 	private List<LeaderCard> leaderCards;
-	private PopeToken[] popeTokens = new PopeToken[3];			/* Discarded or turned/activated depending on pawn position during vatican report */
+	private final String username;
+	private final Dashboard dashboard;
+	private final PopeToken[] popeTokens = new PopeToken[3];			/* Discarded or turned/activated depending on pawn position during vatican report */
 
 	public Player(String username)
 	{
@@ -29,14 +29,14 @@ public class Player implements Serializable
 		popeTokens[1] = new PopeToken(3);
 		popeTokens[2] = new PopeToken(4);
 
-		leaderCards = new ArrayList<LeaderCard>();
+		leaderCards = new ArrayList<>();
 		dashboard = new Dashboard();
 	}
 
 	public List<ResourceType> getWhiteMarbleTypes()		/* Checks if the player has activated a SkillMarble leadercard. If so, returns the MarbleType(s) of the cards */
 	{
 		/* If there are 2 SkillMarble cards, the player has to choose which resource to convert the white marbles */
-		List<ResourceType> whiteMarbleResources = new ArrayList<ResourceType>();
+		List<ResourceType> whiteMarbleResources = new ArrayList<>();
 
 		for (int i = 0; i < leaderCards.size(); i++)
 		{
@@ -77,11 +77,6 @@ public class Player implements Serializable
 		return username;
 	}
 
-	public void setUsername(String username)
-	{
-		this.username = username;
-	}
-
 	public boolean isMyTurn()
 	{
 		return isMyTurn;
@@ -95,11 +90,6 @@ public class Player implements Serializable
 	public Dashboard getDashboard()
 	{
 		return dashboard;
-	}
-
-	public void setDashboard(Dashboard dashboard)
-	{
-		this.dashboard = dashboard;
 	}
 
 	public int getVictoryPoints()
@@ -125,10 +115,5 @@ public class Player implements Serializable
 	public PopeToken[] getPopeTokens()
 	{
 		return popeTokens;
-	}
-
-	public void setPopeTokens(PopeToken[] popeTokens)
-	{
-		this.popeTokens = popeTokens;
 	}
 }

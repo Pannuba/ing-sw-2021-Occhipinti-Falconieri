@@ -1,5 +1,10 @@
 package it.polimi.ingsw.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+
 /*	13 total marbles, 12 in matrix and 1 spare:
 	4 white, 2 blue, 2 grey, 2 yellow, 2 purple, 1 red
 
@@ -19,14 +24,9 @@ package it.polimi.ingsw.model;
 
 */
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-
 public class MarblesMarket implements Serializable
 {
-	private Marble[][] marblesBoard = new Marble[3][4];
+	private Marble[][] marblesBoard = new Marble[3][4];			/* Final? but it keeps changing */
 	private Marble spareMarble;
 
 	public MarblesMarket()		/* TODO: tests */
@@ -135,7 +135,7 @@ public class MarblesMarket implements Serializable
 
 	public List<Marble> buyMarblesRow(int row)			/* Returns a list of marbles to the controller, which then acts for each marble */
 	{
-		List<Marble> boughtMarbles = new ArrayList<Marble>();
+		List<Marble> boughtMarbles = new ArrayList<>();			/* Can be significantly simplified with a hashmap */
 
 		for (int i = 0; i < 6; i++)		/* Create one resource for each type. 0 -> blue, 1 -> grey, 2 -> yellow, 3 -> purple */
 		{
@@ -201,7 +201,7 @@ public class MarblesMarket implements Serializable
 
 	public List<Marble> buyMarblesCol(int col)
 	{
-		List<Marble> boughtMarbles = new ArrayList<Marble>();
+		List<Marble> boughtMarbles = new ArrayList<>();
 
 		for (int i = 0; i < 6; i++)		/* Create one resource for each type. 0 -> blue, 1 -> grey, 2 -> yellow, 3 -> purple */
 		{
@@ -268,20 +268,5 @@ public class MarblesMarket implements Serializable
 	public Marble[][] getMarblesBoard()
 	{
 		return marblesBoard;
-	}
-
-	public void setMarblesBoard(Marble[][] marblesBoard)
-	{
-		this.marblesBoard = marblesBoard;
-	}
-
-	public Marble getSpareMarble()
-	{
-		return spareMarble;
-	}
-
-	public void setSpareMarble(Marble spareMarble)
-	{
-		this.spareMarble = spareMarble;
 	}
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Shelf implements Serializable
 {
-	private int shelfSize;
+	private final int shelfSize;
 	private Resource shelfResource;
 
 	public Shelf(int shelfSize)
@@ -16,11 +16,6 @@ public class Shelf implements Serializable
 	public int getShelfSize()
 	{
 		return shelfSize;
-	}
-
-	public void setShelfSize(int shelfSize)
-	{
-		this.shelfSize = shelfSize;
 	}
 
 	public Resource getShelfResource()

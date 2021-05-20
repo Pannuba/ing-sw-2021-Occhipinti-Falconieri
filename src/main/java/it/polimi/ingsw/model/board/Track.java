@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.cards.PopeToken;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class Track implements Serializable
 		numPlayers = players.size();
 
 		System.out.println("Track: creating pawns");
-		redPawns = new HashMap<Integer, Integer>();
+		redPawns = new HashMap<>();
 
 		for (int i = 0; i < players.size(); i++)		/* Initialize player pawns, player ID 0 has redPawns[0], ID 1 has redPawns[1] and so on */
 		{
@@ -100,19 +99,9 @@ public class Track implements Serializable
 		return faithTrack;
 	}
 
-	public void setFaithTrack(Box[] faithTrack)
-	{
-		this.faithTrack = faithTrack;
-	}
-
 	public PopeToken[] getPopeTokens()
 	{
 		return popeTokens;
-	}
-
-	public void setPopeTokens(PopeToken[] popeTokens)
-	{
-		this.popeTokens = popeTokens;
 	}
 
 	public HashMap<Integer, Integer> getRedPawns()

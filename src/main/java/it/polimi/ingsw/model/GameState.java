@@ -10,12 +10,12 @@ import java.util.List;
 
 public class GameState implements Serializable
 {
-	private List<Player> currPlayers;
-	private String currPlayerName;		/* Player who has the current turn (choose action). ID? */
-	private Track currTrack;
-	private MarblesMarket currMarblesMarket;
-	private DevCardsMarket currDevCardsMarket;
-	private int round;
+	private final List<Player> currPlayers;
+	private final String currPlayerName;		/* Player who has the current turn (choose action). ID? */
+	private final Track currTrack;
+	private final MarblesMarket currMarblesMarket;
+	private final DevCardsMarket currDevCardsMarket;
+	//private int round;
 
 	public GameState(List<Player> currPlayers, String currPlayerName, Track currTrack, MarblesMarket currMarblesMarket, DevCardsMarket currDevCardsMarket)
 	{
@@ -46,19 +46,9 @@ public class GameState implements Serializable
 		return currPlayers;
 	}
 
-	public void setCurrPlayers(List<Player> currPlayers)
-	{
-		this.currPlayers = currPlayers;
-	}
-
 	public String getCurrPlayerName()
 	{
 		return currPlayerName;
-	}
-
-	public void setCurrPlayerName(String currPlayerName)
-	{
-		this.currPlayerName = currPlayerName;
 	}
 
 	public Track getCurrTrack()
@@ -66,19 +56,9 @@ public class GameState implements Serializable
 		return currTrack;
 	}
 
-	public void setCurrTrack(Track currTrack)
-	{
-		this.currTrack = currTrack;
-	}
-
 	public MarblesMarket getCurrMarblesMarket()
 	{
 		return currMarblesMarket;
-	}
-
-	public void setCurrMarblesMarket(MarblesMarket currMarblesMarket)
-	{
-		this.currMarblesMarket = currMarblesMarket;
 	}
 
 	public DevCardsMarket getCurrDevCardsMarket()
@@ -86,18 +66,8 @@ public class GameState implements Serializable
 		return currDevCardsMarket;
 	}
 
-	public void setCurrDevCardsMarket(DevCardsMarket currDevCardsMarket)
-	{
-		this.currDevCardsMarket = currDevCardsMarket;
-	}
-
-	public int getRound()
+	/*public int getRound()
 	{
 		return round;
-	}
-
-	public void setRound(int round)
-	{
-		this.round = round;
-	}
+	}*/
 }

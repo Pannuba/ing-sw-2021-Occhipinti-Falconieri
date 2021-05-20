@@ -11,7 +11,7 @@ public class Vault implements Serializable		/* Has resources obtained through pr
 
 	public Vault()
 	{
-		resourceAmounts = new HashMap<ResourceType, Integer>();
+		resourceAmounts = new HashMap<>();
 
 		resourceAmounts.put(ResourceType.BLUE,	 0);
 		resourceAmounts.put(ResourceType.GREY,	 0);

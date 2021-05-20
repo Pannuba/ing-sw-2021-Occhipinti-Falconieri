@@ -6,7 +6,6 @@ import java.io.DataInputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -15,9 +14,9 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 {
 	private final Socket clientSocket;
 	private final String username;
-	private DataInputStream dis;
-	private ObjectInputStream ois;
-	private ObjectOutputStream oos;
+	private final DataInputStream dis;
+	private final ObjectInputStream ois;
+	private final ObjectOutputStream oos;
 
 	public ClientHandler(Socket clientSocket, String username, DataInputStream dis, ObjectInputStream ois, ObjectOutputStream oos)
 	{
@@ -40,7 +39,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 			try
 			{
 				System.out.println(username + " waiting for message from client");
-				command = (List<String>)ois.readObject();		/* EOFException when client disconnects */
+				command = (List<String>) ois.readObject();		/* EOFException when client disconnects */
 				System.out.println("Received " + command + " from " + username);
 				setChanged();
 				notifyObservers(command);		/* Sends command to controller */
@@ -72,15 +71,10 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 		return username;
 	}
 
-	public Socket getClientSocket()
-	{
-		return clientSocket;
-	}
-
 	@Override
-	public void update(Observable observable, Object o)			/* Send gamestate received from model */
+	public void update(Observable obs, Object obj)			/* Send gamestate received from model */
 	{
 		System.out.println("Sending gamestate to " + username);
-		send((GameState)o);
+		send((GameState) obj);
 	}
 }

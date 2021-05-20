@@ -2,13 +2,10 @@
 	It is used to set the parameters of every DevCard, LeaderCard and ActionToken without hardcoding them.
 */
 
-/* TODO: fix new enum types input */
-
 package it.polimi.ingsw.tools;
 
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.model.Shelf;
 import it.polimi.ingsw.model.cards.*;
 
 import java.beans.ExceptionListener;
@@ -104,7 +101,6 @@ public class XML_Serialization
 							leaderCardTwo.setPoints(leaderCardPoints);
 							leaderCardTwo.setRequirements(leaderCardRequirements);
 							System.out.print("Additional storage resource (G/Y/B/P): ");
-							leaderCardTwo.getAdditionalStorage().setShelfSize(2);
 							leaderCardTwo.getAdditionalStorage().getShelfResource().setResourceType(ResourceType.convertStringToResType(input.nextLine()));
 							serialize(leaderCardTwo, filename);
 							break;
@@ -135,9 +131,9 @@ public class XML_Serialization
 
 				case "2":															/* DevCard to XML */
 					DevCard devCard = new DevCard();
-					List<Resource> cost = new ArrayList<Resource>();
-					List<Resource> requirements = new ArrayList<Resource>();
-					List<Resource> product = new ArrayList<Resource>();
+					List<Resource> cost = new ArrayList<>();
+					List<Resource> requirements = new ArrayList<>();
+					List<Resource> product = new ArrayList<>();
 					int i = 0;
 
 					System.out.print("DevCard number [1, 48]: ");
@@ -231,15 +227,6 @@ public class XML_Serialization
 		myfile.createNewFile();
 		FileOutputStream fos = new FileOutputStream(myfile);
 		XMLEncoder encoder = new XMLEncoder(fos);
-
-		encoder.setExceptionListener(new ExceptionListener()
-		{
-			public void exceptionThrown(Exception e)
-			{
-				System.out.println("Exception: " + e.toString());
-			}
-		});
-
 		encoder.writeObject(toSerialize);		/* Throws exceptions */
 		encoder.close();
 		fos.close();

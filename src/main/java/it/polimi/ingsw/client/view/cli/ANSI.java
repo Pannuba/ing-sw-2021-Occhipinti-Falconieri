@@ -33,25 +33,4 @@ public enum ANSI	       /* https://gist.github.com/fnky/458719343aabd01cfb17a3a4
 	{
 		return escape;
 	}
-
-	public String getName()
-	{
-		switch (this)
-		{
-			case RED:
-				return "Red";
-
-			case GREEN:
-				return "Green";
-
-			case YELLOW:
-				return "Yellow";
-
-			case PURPLE:
-				return "Purple";
-
-			default:
-				return "Blue";
-		}
-	}
 }

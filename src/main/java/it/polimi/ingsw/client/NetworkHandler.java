@@ -20,12 +20,11 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 	private DataOutputStream dos;
 	private ObjectOutputStream oos;
 	private Object queuedObj;			/* Object (not a GameState) such as lists, resources... that the CLI accesses through get method */
-	private final String username, ip;
+	private final String ip;
 	private final int port;
 
-	public NetworkHandler(String username, String ip, int port)
+	public NetworkHandler(String ip, int port)
 	{
-		this.username = username;
 		this.ip = ip;
 		this.port = port;
 	}
@@ -89,7 +88,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 
 		try
 		{
-			isFirstPlayer = parseBoolean((String)ois.readObject());		/* Need to use readObject and then cast it */
+			isFirstPlayer = parseBoolean((String) ois.readObject());		/* Need to use readObject and then cast it */
 		}
 		catch (Exception e)
 		{
@@ -109,7 +108,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		{
 			try
 			{
-				message = (String)ois.readObject();
+				message = (String) ois.readObject();
 
 				if (message.equals("START"))
 					break;
@@ -128,13 +127,12 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 
 	public GameState getGameState()		/* Manually get gamestate without using observer/observable */
 	{
-		GameState gameState = (GameState)receive();
-		return gameState;
+		return (GameState) receive();
 	}
 
 	public List<LeaderCard> getFourLeadercards()
 	{
-		return (List<LeaderCard>)receive();
+		return (List<LeaderCard>) receive();
 	}
 
 	public void sendString(String message)
@@ -154,7 +152,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		try
 		{
 			oos.writeObject(command);
-			oos.reset();		/* omg if this works i swear to god */
+			oos.reset();						/* omg if this works i swear to god (it did kinda) */
 		}
 		catch(Exception e)
 		{
@@ -200,10 +198,10 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 	}
 
 	@Override
-	public void update(Observable observable, Object o)		/* Send command (List) to server */
+	public void update(Observable obs, Object obj)		/* Send command (List) to server */
 	{
-		System.out.println("Sending command " + ((List<String>)o).get(0) + " to server");
-		sendCommand((List<String>)o);
+		System.out.println("Sending command " + ((List<String>) obj).get(0) + " to server");
+		sendCommand((List<String>) obj);
 	}
 
 	public Object getQueuedObj()

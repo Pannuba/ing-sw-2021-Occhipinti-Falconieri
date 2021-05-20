@@ -9,7 +9,7 @@ import java.util.List;
 public class DevCardArea implements Serializable            /* Devcards can't be removed once added */
 {
 	private boolean isEmpty;
-	private List<DevCard> devCards = new ArrayList<DevCard>();
+	private List<DevCard> devCards = new ArrayList<>();
 	private int layer;
 
 	public DevCardArea()
@@ -22,7 +22,8 @@ public class DevCardArea implements Serializable            /* Devcards can't be
 	{
 		if (layer < 0 || layer > 3)
 		{
-			return false;	// Error
+			System.out.println("checkDevCardArea: layer is < 0 or > 3");
+			return false;
 		}
 
 		else

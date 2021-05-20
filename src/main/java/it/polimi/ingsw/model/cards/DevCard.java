@@ -20,9 +20,9 @@ public class DevCard implements Serializable
 	public DevCard()
 	{
 		faithPoints = 0;
-		requirements = new ArrayList<Resource>();
-		cost = new ArrayList<Resource>();
-		product = new ArrayList<Resource>();
+		requirements = new ArrayList<>();
+		cost = new ArrayList<>();
+		product = new ArrayList<>();
 	}
 
 	public int getCardNumber()

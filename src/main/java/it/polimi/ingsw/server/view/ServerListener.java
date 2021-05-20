@@ -33,11 +33,11 @@ public class ServerListener implements Runnable		/* Thread running listening for
 		DataInputStream dis = null;
 		ObjectInputStream ois = null;
 		ObjectOutputStream oos = null;
-		List<ClientHandler> views = new ArrayList<ClientHandler>();
+		List<ClientHandler> views = new ArrayList<>();
 
 		String username = "";
 		int numPlayers = 1;
-		List<Player> players = new ArrayList<Player>();
+		List<Player> players = new ArrayList<>();
 
 		for (int i = 0; i < numPlayers; i++)        /* Create first lobby */
 		{
@@ -55,9 +55,9 @@ public class ServerListener implements Runnable		/* Thread running listening for
 
 				if (i == 0)		/* Get numPlayers from the first player who connects */
 				{
-						oos.writeObject("true");
-						numPlayers = Integer.parseInt(dis.readUTF());        /* So the loop is repeated numPlayers times to get numPlayers players */
-						System.out.println("numPlayers: " + numPlayers);
+					oos.writeObject("true");
+					numPlayers = Integer.parseInt(dis.readUTF());        /* So the loop is repeated numPlayers times to get numPlayers players */
+					System.out.println("numPlayers: " + numPlayers);
 				}
 
 				else
@@ -79,5 +79,4 @@ public class ServerListener implements Runnable		/* Thread running listening for
 		Runnable r = new Match(players, views);			/* Start match, passes players and views. TODO: advanced functionality to create multiple matches */
 		new Thread(r).start();
 	}
-
 }

@@ -6,7 +6,6 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.cards.*;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public class CLI extends Observable implements Observer
 {
@@ -36,7 +35,7 @@ public class CLI extends Observable implements Observer
 		//int port = Integer.parseInt(input.nextLine());
 		int port = 2000;
 
-		networkHandler = new NetworkHandler(username, ip, port);
+		networkHandler = new NetworkHandler(ip, port);
 		networkHandler.addObserver(this);		/* CLI observes the networkHandler to get the new gamestate */
 		networkHandler.connect();
 
@@ -70,7 +69,7 @@ public class CLI extends Observable implements Observer
 	
 	private void chooseAction(int action)			/* Actions class? */
 	{
-		List<String> command = new ArrayList<String>();
+		List<String> command = new ArrayList<>();
 
 		switch(action)
 		{
@@ -242,10 +241,10 @@ public class CLI extends Observable implements Observer
 	}
 
 	@Override
-	public void update(Observable observable, Object o)		/* Make a (Local)GameState thread that gets the new gamestate? */
+	public void update(Observable obs, Object obj)		/* Make a (Local)GameState thread that gets the new gamestate? */
 	{
 		/* Check if match is over */
-		this.gameState = (GameState)o;		/* Gamestate is needed in game loop, not during setup */
+		this.gameState = (GameState) obj;		/* Gamestate is needed in game loop, not during setup */
 
 		if (gameState.getPlayerByName(username).isMyTurn())
 		{

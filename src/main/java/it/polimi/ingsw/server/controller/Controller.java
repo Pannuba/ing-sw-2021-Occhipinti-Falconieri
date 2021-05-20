@@ -28,7 +28,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 		if (command.get(0).equals("SELECT_LEADERCARDS"))		/* "SELECT_LEADERCARDS", "x", "y" */
 		{
-			List<LeaderCard> cards = new ArrayList<LeaderCard>();
+			List<LeaderCard> cards = new ArrayList<>();
 
 			for (int i = 0; i < 16; i++)
 			{
@@ -83,8 +83,8 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 		if (command.get(0).equals("BUY_RESOURCES"))		/* What do with marble amounts? Ask where put to them in storage? */
 		{
-			List<Marble> boughtMarbles = new ArrayList<Marble>();
-			List<Resource> resourcesToAddToStorage = new ArrayList<Resource>();
+			List<Marble> boughtMarbles = new ArrayList<>();
+			List<Resource> resourcesToAddToStorage = new ArrayList<>();
 
 			if (command.get(1).equals("ROW"))
 				boughtMarbles = model.getMarblesMarket().buyMarblesRow(Integer.parseInt(command.get(2)) - 1);		/* - 1 because 0-indexed, [0, 1, 2] */
