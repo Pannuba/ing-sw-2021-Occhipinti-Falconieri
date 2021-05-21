@@ -40,7 +40,7 @@ public class Player implements Serializable
 
 		for (int i = 0; i < leaderCards.size(); i++)
 		{
-			if (leaderCards.get(i).isDiscarded() == false && leaderCards.get(i).getClass().getSimpleName() == "SkillMarble")		/* && is active? */
+			if (leaderCards.get(i).isDiscarded() == false && leaderCards.get(i) instanceof SkillMarble)		/* && is active? */
 			{
 				whiteMarbleResources.add(((SkillMarble)leaderCards.get(i)).getWhiteMarble());
 			}

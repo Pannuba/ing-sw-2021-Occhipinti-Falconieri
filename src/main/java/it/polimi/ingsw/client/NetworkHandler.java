@@ -19,7 +19,6 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 	private ObjectInputStream ois;
 	private DataOutputStream dos;
 	private ObjectOutputStream oos;
-	private Object queuedObj;			/* Object (not a GameState) such as lists, resources... that the CLI accesses through get method */
 	private final String ip;
 	private final int port;
 
@@ -37,20 +36,8 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 			{
 				System.out.println("Waiting for new object from server");
 				Object inputObj = ois.readObject();
-
-				if (inputObj.getClass().getSimpleName().equals("GameState"))
-				{
-					System.out.println("New gamestate received!");
-					setChanged();
-					notifyObservers(inputObj);
-				}
-
-				else
-				{
-					System.out.println(inputObj.getClass().getSimpleName() + " received");
-					queuedObj = inputObj;
-					//queuedObj.notify();
-				}
+				setChanged();
+				notifyObservers(inputObj);
 			}
 			catch (IOException | ClassNotFoundException e)
 			{
@@ -204,8 +191,4 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		sendCommand((List<String>) obj);
 	}
 
-	public Object getQueuedObj()
-	{
-		return queuedObj;
-	}
 }

@@ -7,7 +7,7 @@ public class Pair<Object1, Object2> implements Serializable            /* Used b
 	public Object1 obj1;
 	public Object2 obj2;
 
-	public Pair()			/* InstantiationException without empty constructor */
+	public Pair()			/* InstantiationException during serialization without empty constructor */
 	{
 		this.obj1 = null;
 		this.obj2 = null;

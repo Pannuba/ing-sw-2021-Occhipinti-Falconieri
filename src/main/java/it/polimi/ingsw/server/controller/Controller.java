@@ -5,7 +5,6 @@ import it.polimi.ingsw.model.board.Dashboard;
 import it.polimi.ingsw.model.board.Storage;
 import it.polimi.ingsw.model.board.Vault;
 import it.polimi.ingsw.model.cards.DevCard;
-import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.server.view.ClientHandler;
 
 import java.util.*;
@@ -13,6 +12,7 @@ import java.util.*;
 public class Controller implements Observer			/* Observes view to get commands... View observes model */
 {
 	private final Model model;
+	private final CommandProcessor runCommand;
 	private String username;			/* Username of the player who sent the command */
 	private ClientHandler view;			/* ClientHandler instance of the view which sent the command. Used for send() method */
 
@@ -20,111 +20,40 @@ public class Controller implements Observer			/* Observes view to get commands..
 	{
 		System.out.println("Creating controller");
 		this.model = model;
+		this.runCommand = new CommandProcessor(model, this);		/* CommandProcessor edits the same model created in Match */
 	}
 
 	public void parseInput(List<String> command)		/* Gets name from ClientHandler to change that player's stuff */
 	{
 		System.out.println("Username ID: " + model.getPlayerByUsername(username).getId());
 
-		if (command.get(0).equals("SELECT_LEADERCARDS"))		/* "SELECT_LEADERCARDS", "x", "y" */
+		switch (command.get(0))
 		{
-			List<LeaderCard> cards = new ArrayList<>();
+			case "SELECT_LEADERCARDS":							/* "SELECT_LEADERCARDS", "x", "y" */
+				runCommand.selectLeaderCards(command, username);
+				break;
 
-			for (int i = 0; i < 16; i++)
-			{
-				if (String.valueOf(model.getAllLeaderCards().get(i).getCardNumber()).equals(command.get(1))		||
-					String.valueOf(model.getAllLeaderCards().get(i).getCardNumber()).equals(command.get(2))		)
-					cards.add(model.getAllLeaderCards().get(i));
-			}
-			System.out.println("Setting cards #" + cards.get(0).getCardNumber() + " and #" + cards.get(1).getCardNumber() + " for " + username);
-			model.getPlayerByUsername(username).setLeaderCards(cards);
-		}
+			case "INITIAL_RESOURCES":							/* "INITIAL_RESOURCES", "BY", "2" */
+				runCommand.initialResources(command, username);
+				break;
 
-		if (command.get(0).equals("INITIAL_RESOURCES"))			/* "INITIAL_RESOURCES", "BY", "2" */
-		{
-			if (command.get(1).isEmpty() == false)
-			{
-				for (int i = 0; i < command.get(1).length(); i++)
-				{
-					Resource resourceToAdd = new Resource();
-					resourceToAdd.setQuantity(1);
-					resourceToAdd.setResourceType(ResourceType.convertStringToResType(Character.toString(command.get(1).charAt(i))));
-
-					/* Put resource in storage, ask player where? Create method somewhere */
-
-				}
-			}
-
-			if (command.get(2).isEmpty() == false)		/* If there are initial faithpoints, get that player's pawn and move it */
-			{
-				updatePlayerPosition(model.getPlayerByUsername(username).getId(), Integer.parseInt(command.get(2)));
-			}
-		}
-
-		if (command.get(0).equals("BUY_DEVCARD"))		/* 	Client picks a devcard # to buy from their local devCardsMarket. Server checks for resources
+			case "BUY_DEVCARD":							/* 	Client picks a devcard # to buy from their local devCardsMarket. Server checks for resources
 															If there are enough resources, spend them and add the devcards to Player
 															Otherwise send an error message. Can client perform another action?		*/
-		{
-			int boughtCardNum = Integer.parseInt(command.get(1));
-			DevCard boughtCard = model.getDevCardsMarket().getDevCardByNumber(boughtCardNum);
-			checkResources(model.getPlayerByUsername(username).getDashboard(), boughtCard);
+				runCommand.buyDevCard(command, username);
+				chooseNextPlayer();		/* Don't choose next player during setup actions */
+				break;
 
+			case "ACTIVATE_PRODUCTION":
 
-			chooseNextPlayer();		/* Don't choose next player during setup actions */
-		}
+				chooseNextPlayer();
+				break;
 
-		if (command.get(0).equals("ACTIVATE_PRODUCTION"))
-		{
-
-
-			chooseNextPlayer();
-		}
-
-		if (command.get(0).equals("BUY_RESOURCES"))		/* What do with marble amounts? Ask where put to them in storage? */
-		{
-			List<MarbleType> boughtMarbles = new ArrayList<>();
-			List<ResourceType> resourcesToAddToStorage = new ArrayList<>();		/* Should either be a hashmap or a list of resourcetypes */
-
-			if (command.get(1).equals("ROW"))
-				boughtMarbles = model.getMarblesMarket().buyMarblesRow(Integer.parseInt(command.get(2)) - 1);		/* - 1 because 0-indexed, [0, 1, 2] */
-
-			if (command.get(1).equals("COLUMN"))
-				boughtMarbles = model.getMarblesMarket().buyMarblesCol(Integer.parseInt(command.get(2))- 1);
-
-			for (int i = 0; i < boughtMarbles.size(); i++)
-			{
-				System.out.println("buyMarbles result: " + boughtMarbles.get(i));
-
-				if (boughtMarbles.get(i) == MarbleType.RED)
-					updatePlayerPosition(model.getPlayerByUsername(username).getId(), 1);
-
-				else if (boughtMarbles.get(i) == MarbleType.WHITE)
-				{
-					List<ResourceType> whiteMarbleTypes = model.getPlayerByUsername(username).getWhiteMarbleTypes();    /* or model.getWhiteMarbleTypes(username */
-
-					if (whiteMarbleTypes.size() == 1)		/* If there's only 1 active SkillMarble */
-						resourcesToAddToStorage.add(whiteMarbleTypes.get(0));
-
-					else if (whiteMarbleTypes.size() > 1)
-					{
-						/* Ask client which resourcetype they want to pick to convert white marbles */
-					}
-
-					else
-						System.out.println(username + "has no active SkillMarble cards!");
-				}
-
-				else
-					resourcesToAddToStorage.add(convertMarbleToResType(boughtMarbles.get(i)));
-			}
-
-			/* Add resources to storage */
-			for (int i = 0; i < resourcesToAddToStorage.size(); i++)	/* debug */
-				System.out.println("Sending " + resourcesToAddToStorage.get(i) + " to " + username);
-
-			view.send(resourcesToAddToStorage);		/* Sends a list of resourceType to the client. Or Resource with set quantities? */
-
-			chooseNextPlayer();
+			case "BUY_RESOURCES":					/* What do with marble amounts? Ask where put to them in storage? */
+													/* Cut off when it sends the bought resources, and make another command for the rest of the action? */
+				runCommand.buyResources(command, username);
+				chooseNextPlayer();
+				break;
 		}
 
 		postRoundChecks();
@@ -147,7 +76,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 		System.out.println("Next player is " + model.getPlayerByID(activePlayerID).getUsername());
 	}
 
-	private void updatePlayerPosition(int ID, int faithPoints)		/* To be called when the player buys red marbles, or...? */
+	public void updatePlayerPosition(int ID, int faithPoints)		/* To be called when the player buys red marbles, or...? */
 	{
 		System.out.println("Updating position for " + model.getPlayerByID(ID).getUsername() + " by " + faithPoints + " faithpoint(s)");
 		HashMap<Integer, Integer> newRedPawns = model.getTrack().getRedPawns();
@@ -155,31 +84,6 @@ public class Controller implements Observer			/* Observes view to get commands..
 		/* Gets the pawn at position ID [0, 4] and increments the existing value by the new faithPoints */
 		newRedPawns.put(ID, model.getTrack().getRedPawns().get(ID) + faithPoints);
 		model.getTrack().setRedPawns(newRedPawns);
-	}
-
-	private ResourceType convertMarbleToResType(MarbleType marbleType)		/* Also check player leadercards SkillMarble, if active */
-	{
-		if (marbleType == null)
-			return null;
-
-		switch(marbleType)			/* White marbles have their separate function */
-		{
-			case GREY:
-				return ResourceType.GREY;
-
-			case YELLOW:
-				return ResourceType.YELLOW;
-
-			case BLUE:
-				return ResourceType.BLUE;
-
-			case PURPLE:
-				return ResourceType.PURPLE;
-
-			default:
-				System.out.print("Error\n");
-				return null;
-		}
 	}
 
 	private void postRoundChecks()		/* What should be in model and controller? */
@@ -193,7 +97,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 			model.endMatch();
 	}
 
-	private boolean checkResources(Dashboard playerBoard, DevCard boughtCard)	/* If there are enough resources, get them from storage, otherwise vault */
+	public boolean checkResources(Dashboard playerBoard, DevCard boughtCard)	/* If there are enough resources, get them from storage, otherwise vault */
 	{																			/* Ask for player input only when bought resouces have to be discarded, see Slack */
 		Storage storage = playerBoard.getStorage();
 		Vault vault = playerBoard.getVault();
@@ -208,5 +112,10 @@ public class Controller implements Observer			/* Observes view to get commands..
 		username = ((ClientHandler)obs).getUsername();
 		view = (ClientHandler)obs;
 		parseInput((List<String>)obj);
+	}
+
+	public ClientHandler getView()
+	{
+		return view;
 	}
 }
