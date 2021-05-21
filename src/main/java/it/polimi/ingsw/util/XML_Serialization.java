@@ -223,7 +223,7 @@ public class XML_Serialization
 		myfile.createNewFile();
 		FileOutputStream fos = new FileOutputStream(myfile);
 		XMLEncoder encoder = new XMLEncoder(fos);
-		encoder.writeObject(toSerialize);		/* Throws exceptions */
+		encoder.writeObject(toSerialize);		/* Doesn't serialize "final" fields for some reason */
 		encoder.close();
 		fos.close();
 	}

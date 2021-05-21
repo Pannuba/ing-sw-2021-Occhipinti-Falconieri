@@ -207,7 +207,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 		for (int i = 0; i < leaderCards.size(); i++)		/* Points from leadercards */
 		{
-			if (leaderCards.get(i).isDiscarded() == false)		/* Discarded vs activated? */
+			if (leaderCards.get(i).isActive())		/* Discarded vs activated? */
 				points += leaderCards.get(i).getPoints();
 		}
 

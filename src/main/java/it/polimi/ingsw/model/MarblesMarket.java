@@ -29,10 +29,10 @@ public class MarblesMarket implements Serializable
 	private final Marble[][] marblesBoard = new Marble[3][4];			/* Final? but it keeps changing */
 	private Marble spareMarble;
 
-	public MarblesMarket()		/* TODO: tests */
+	public MarblesMarket()
 	{
 		System.out.println("Creating marbles market");
-		int[] marblesToAssign = {4, 2, 2, 2, 2, 1};
+		int[] marblesToAssign = {4, 2, 2, 2, 2, 1};		/* 4 white, 2 blue, 2 grey, 2 purple, 2 yellow, 1 red */
 		MarbleType[] resourcesToAssign = new MarbleType[13];
 		spareMarble = new Marble();
 
@@ -59,6 +59,7 @@ public class MarblesMarket implements Serializable
 						i--;
 						break;
 					}
+
 					marblesToAssign[1]--;
 					resourcesToAssign[i] = MarbleType.BLUE;
 					break;
@@ -70,6 +71,7 @@ public class MarblesMarket implements Serializable
 						i--;
 						break;
 					}
+
 					marblesToAssign[2]--;
 					resourcesToAssign[i] = MarbleType.GREY;
 					break;
@@ -81,6 +83,7 @@ public class MarblesMarket implements Serializable
 						i--;
 						break;
 					}
+
 					marblesToAssign[3]--;
 					resourcesToAssign[i] = MarbleType.PURPLE;
 					break;
@@ -92,6 +95,7 @@ public class MarblesMarket implements Serializable
 						i--;
 						break;
 					}
+
 					marblesToAssign[4]--;
 					resourcesToAssign[i] = MarbleType.YELLOW;
 					break;
@@ -103,12 +107,11 @@ public class MarblesMarket implements Serializable
 						i--;
 						break;
 					}
+
 					marblesToAssign[5]--;
 					resourcesToAssign[i] = MarbleType.RED;
 					break;
 
-				default:
-					break;
 			}
 		}
 
@@ -142,14 +145,14 @@ public class MarblesMarket implements Serializable
 			boughtMarbles.add(new Marble());		/* Quantity is set to 0 in constructor */
 		}
 
-		boughtMarbles.get(0).setMarbleType(MarbleType.RED);			/* The marble object itself isn't needed, only the amount of each marble */
+		boughtMarbles.get(0).setMarbleType(MarbleType.RED);			/* The marble object itself isn't needed, only the amount of each marble. hashmap!!! */
 		boughtMarbles.get(1).setMarbleType(MarbleType.WHITE);
 		boughtMarbles.get(2).setMarbleType(MarbleType.BLUE);
 		boughtMarbles.get(3).setMarbleType(MarbleType.GREY);
 		boughtMarbles.get(4).setMarbleType(MarbleType.YELLOW);
 		boughtMarbles.get(5).setMarbleType(MarbleType.PURPLE);
 
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			switch(marblesBoard[row][i].getMarbleType())
 			{
@@ -274,5 +277,10 @@ public class MarblesMarket implements Serializable
 	public Marble[][] getMarblesBoard()
 	{
 		return marblesBoard;
+	}
+
+	public Marble getSpareMarble()
+	{
+		return spareMarble;
 	}
 }

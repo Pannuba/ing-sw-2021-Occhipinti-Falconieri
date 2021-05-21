@@ -7,7 +7,7 @@ public enum ANSI	       /* https://gist.github.com/fnky/458719343aabd01cfb17a3a4
 	YELLOW("\u001B[33m"),
 	BLUE("\u001B[34m"),
 	PURPLE("\u001B[35m"),
-	GREY("\u001B[38;5;245m"),
+	GREY("\u001B[30m"),
 	WHITE("\u001B[37m"),
 
 	RESET("\u001B[0m"),

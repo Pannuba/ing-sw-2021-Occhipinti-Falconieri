@@ -71,7 +71,7 @@ public class CLI extends Observable implements Observer
 	{
 		List<String> command = new ArrayList<>();
 
-		switch(action)
+		switch(action)		/* TODO: action class? So it can be like case 0: buyResources(); */
 		{
 			case 0:
 				command.add("BUY_RESOURCES");

@@ -18,25 +18,30 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	public static void printLeaderCard(Object card)		/* Can't access skill variables from LeaderCard because it's abstract */
 	{
-		System.out.println("Card number: " + ((LeaderCard)card).getCardNumber());
-		System.out.println("Points: " + ((LeaderCard)card).getPoints());
-		System.out.println("Discarded: " + ((LeaderCard)card).isDiscarded());
+		System.out.println("Card number: " + ((LeaderCard) card).getCardNumber());
+		System.out.println("Points: " + ((LeaderCard) card).getPoints());
+
+		//if (((LeaderCard) card).isActive())			/* Active cards can't be discarded, and vice versa. Will remove this check for debugging */
+			System.out.println("Active: " + ((LeaderCard) card).isActive());
+
+		//else
+			System.out.println("Discarded: " + ((LeaderCard) card).isDiscarded());
 
 		switch(card.getClass().getSimpleName())
 		{
 			case "SkillDiscount":
 				System.out.println("Leadercard skill: discount");
-				System.out.println("Discounted resource: " + convertResTypeToString(((SkillDiscount)card).getDiscountedResource()));
+				System.out.println("Discounted resource: " + convertResTypeToString(((SkillDiscount) card).getDiscountedResource()));
 				break;
 
 			case "SkillMarble":
 				System.out.println("Leadercard skill: white marble");
-				System.out.println("White marble resource: " + convertResTypeToString(((SkillMarble)card).getWhiteMarble()));
+				System.out.println("White marble resource: " + convertResTypeToString(((SkillMarble) card).getWhiteMarble()));
 				break;
 
 			case "SkillProduction":
 				System.out.println("Leadercard skill: additional production");
-				System.out.println("Cost type: " + convertResTypeToString(((SkillProduction)card).getCost().getResourceType()));
+				System.out.println("Cost type: " + convertResTypeToString(((SkillProduction) card).getCost().getResourceType()));
 				System.out.println("Cost amount: 1");
 				/* Product is null because it's chosen by the player */
 				System.out.println("Product amount: 1");
@@ -44,7 +49,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 			case "SkillStorage":
 				System.out.println("Leadercard skill: additional storage");
-				System.out.println("Additional storage resource: " + convertResTypeToString(((SkillStorage)card).getAdditionalStorage().getShelfResource().getResourceType()));
+				System.out.println("Additional storage resource: " + convertResTypeToString(((SkillStorage) card).getAdditionalStorage().getShelfResource().getResourceType()));
 				break;
 		}
 
@@ -136,6 +141,8 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 			}
 			System.out.print(ANSI.RESET + "\n");
 		}
+
+		System.out.println("Spare marble: " + convertMarbleToString(market.getSpareMarble()));
 	}
 
 	public static void printTrack(Track track, List<Player> players)		/* Players are ordered by ID in model after randomly generating IDs */

@@ -58,7 +58,6 @@ public class Controller implements Observer			/* Observes view to get commands..
 			if (command.get(2).isEmpty() == false)		/* If there are initial faithpoints, get that player's pawn and move it */
 			{
 				updatePlayerPosition(model.getPlayerByUsername(username).getId(), Integer.parseInt(command.get(2)));
-				/* model.getPlayerByUsername(username).getID() and model.getActivePlayerID() should always be the same */
 			}
 		}
 
@@ -93,6 +92,9 @@ public class Controller implements Observer			/* Observes view to get commands..
 				boughtMarbles = model.getMarblesMarket().buyMarblesCol(Integer.parseInt(command.get(2))- 1);
 
 			for (int i = 0; i < boughtMarbles.size(); i++)
+				System.out.println("buyMarbles result: " + boughtMarbles.get(i).getMarbleType());
+
+			for (int i = 0; i < boughtMarbles.size(); i++)
 			{
 				if (i == 0)		/* boughtMarbles[0] has the red marbles, so faithpoints */
 					updatePlayerPosition(model.getPlayerByUsername(username).getId(), boughtMarbles.get(0).getQuantity());
@@ -125,7 +127,8 @@ public class Controller implements Observer			/* Observes view to get commands..
 			}
 
 			/* Add resources to storage */
-			System.out.println("Sending " + resourcesToAddToStorage + " to " + username);
+			for (int i = 0; i < resourcesToAddToStorage.size(); i++)
+				System.out.println("Sending " + resourcesToAddToStorage.get(i).getResourceType() + " to " + username);
 			view.send(resourcesToAddToStorage);
 
 			chooseNextPlayer();
