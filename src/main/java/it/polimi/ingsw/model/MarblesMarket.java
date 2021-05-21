@@ -26,7 +26,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MarblesMarket implements Serializable
 {
-	private Marble[][] marblesBoard = new Marble[3][4];			/* Final? but it keeps changing */
+	private final Marble[][] marblesBoard = new Marble[3][4];			/* Final? but it keeps changing */
 	private Marble spareMarble;
 
 	public MarblesMarket()		/* TODO: tests */
@@ -185,7 +185,10 @@ public class MarblesMarket implements Serializable
 		for (int i = 0; i < boughtMarbles.size(); i++)			/* Remove marble types that haven't been bought even once */
 		{
 			if (boughtMarbles.get(i).getQuantity() == 0)
+			{
 				boughtMarbles.remove(i);
+				i--;
+			}
 		}
 
 		Marble oldSpareMarble = spareMarble;					/* Changes the marbles grid pushing the spare marble in */
@@ -251,7 +254,10 @@ public class MarblesMarket implements Serializable
 		for (int i = 0; i < boughtMarbles.size(); i++)			/* Remove marble types that haven't been bought even once */
 		{
 			if (boughtMarbles.get(i).getQuantity() == 0)
+			{
 				boughtMarbles.remove(i);
+				i--;
+			}
 		}
 
 		Marble oldSpareMarble = spareMarble;

@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Shelf implements Serializable
 {
 	private final int shelfSize;
-	private Resource shelfResource;
+	private Resource shelfResource;			/* shelfResource.getQuantity() can't be higher than shelfSize */
 
 	public Shelf(int shelfSize)
 	{
