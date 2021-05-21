@@ -82,8 +82,8 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 		if (command.get(0).equals("BUY_RESOURCES"))		/* What do with marble amounts? Ask where put to them in storage? */
 		{
-			List<Marble> boughtMarbles = new ArrayList<>();
-			List<Resource> resourcesToAddToStorage = new ArrayList<>();
+			List<MarbleType> boughtMarbles = new ArrayList<>();
+			List<ResourceType> resourcesToAddToStorage = new ArrayList<>();		/* Should either be a hashmap or a list of resourcetypes */
 
 			if (command.get(1).equals("ROW"))
 				boughtMarbles = model.getMarblesMarket().buyMarblesRow(Integer.parseInt(command.get(2)) - 1);		/* - 1 because 0-indexed, [0, 1, 2] */
@@ -92,44 +92,37 @@ public class Controller implements Observer			/* Observes view to get commands..
 				boughtMarbles = model.getMarblesMarket().buyMarblesCol(Integer.parseInt(command.get(2))- 1);
 
 			for (int i = 0; i < boughtMarbles.size(); i++)
-				System.out.println("buyMarbles result: " + boughtMarbles.get(i).getMarbleType());
-
-			for (int i = 0; i < boughtMarbles.size(); i++)
 			{
-				if (i == 0)		/* boughtMarbles[0] has the red marbles, so faithpoints */
-					updatePlayerPosition(model.getPlayerByUsername(username).getId(), boughtMarbles.get(0).getQuantity());
+				System.out.println("buyMarbles result: " + boughtMarbles.get(i));
 
-				else
+				if (boughtMarbles.get(i) == MarbleType.RED)
+					updatePlayerPosition(model.getPlayerByUsername(username).getId(), 1);
+
+				else if (boughtMarbles.get(i) == MarbleType.WHITE)
 				{
-					ResourceType marbleResourceType = null;
+					List<ResourceType> whiteMarbleTypes = model.getPlayerByUsername(username).getWhiteMarbleTypes();    /* or model.getWhiteMarbleTypes(username */
 
-					if (i == 1)        /* boughtMarbles[1] has the white marbles */
+					if (whiteMarbleTypes.size() == 1)		/* If there's only 1 active SkillMarble */
+						resourcesToAddToStorage.add(whiteMarbleTypes.get(0));
+
+					else if (whiteMarbleTypes.size() > 1)
 					{
-						List<ResourceType> whiteMarbleTypes = model.getPlayerByUsername(username).getWhiteMarbleTypes();    /* or model.getWhiteMarbleTypes(username */
-
-						if (whiteMarbleTypes.size() == 1)		/* If there's only 1 active SkillMarble */
-							marbleResourceType = whiteMarbleTypes.get(0);
-
-						if (whiteMarbleTypes.size() > 1)
-						{
-							/* Ask client which resourcetype they want to pick to convert white marbles */
-						}
+						/* Ask client which resourcetype they want to pick to convert white marbles */
 					}
 
 					else
-						marbleResourceType = convertMarbleToResType(boughtMarbles.get(i).getMarbleType());
-
-					Resource resourceToAdd = new Resource();
-					resourceToAdd.setResourceType(marbleResourceType);
-					resourceToAdd.setQuantity(boughtMarbles.get(i).getQuantity());
-					resourcesToAddToStorage.add(resourceToAdd);
+						System.out.println(username + "has no active SkillMarble cards!");
 				}
+
+				else
+					resourcesToAddToStorage.add(convertMarbleToResType(boughtMarbles.get(i)));
 			}
 
 			/* Add resources to storage */
-			for (int i = 0; i < resourcesToAddToStorage.size(); i++)
-				System.out.println("Sending " + resourcesToAddToStorage.get(i).getResourceType() + " to " + username);
-			view.send(resourcesToAddToStorage);
+			for (int i = 0; i < resourcesToAddToStorage.size(); i++)	/* debug */
+				System.out.println("Sending " + resourcesToAddToStorage.get(i) + " to " + username);
+
+			view.send(resourcesToAddToStorage);		/* Sends a list of resourceType to the client. Or Resource with set quantities? */
 
 			chooseNextPlayer();
 		}

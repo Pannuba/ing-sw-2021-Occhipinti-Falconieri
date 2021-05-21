@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.view.cli;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.cards.*;
 
 import java.util.*;
@@ -101,7 +102,7 @@ public class CLI extends Observable implements Observer
 				networkHandler.sendCommand(command);
 
 				/* Need to wait until QueuedObj changes... */
-				List<Resource> boughtResources = (List<Resource>)networkHandler.getQueuedObj();		/* Only ask for input if resources have to be discarded */
+				List<ResourceType> boughtResources = (List<ResourceType>)networkHandler.getQueuedObj();		/* Only ask for input if resources have to be discarded */
 				System.out.println("Bought the following resources: " + boughtResources);
 				break;
 
