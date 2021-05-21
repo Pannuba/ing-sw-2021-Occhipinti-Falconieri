@@ -9,9 +9,9 @@ import java.util.concurrent.ThreadLocalRandom;
 	4 white, 2 blue, 2 grey, 2 yellow, 2 purple, 1 red
 
 	Hardcode or xml file for marble amounts? Need to change grid size if so
-*/
 
-/*	O O O O <		Spare marble is pushed from the end of rows and columns
+
+	O O O O <		Spare marble is pushed from the end of rows and columns
 	O O O O <
 	O O O O	<		[row][col]
 	^ ^ ^ ^

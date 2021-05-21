@@ -1,18 +1,36 @@
 package it.polimi.ingsw.model.cards;
 
+import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.Shelf;
 
 public class SkillStorage extends LeaderCard
 {
-	private final Shelf additionalStorage;		/* shelfSize always 2, initial quantity 0 */
+	private Resource requirements;		/* "final" keyword makes serialization not work */
+	private Shelf additionalStorage;
 
-	public SkillStorage()		/* Put constructor or setQuantity(0) in xml? Can LeaderCard objects be created if it's abstract? */
+	public SkillStorage()
 	{
-		additionalStorage = new Shelf(2);
+		requirements = new Resource();
+		additionalStorage = new Shelf();		/* shelfSize is not specified because the value is in the card's xml */
+	}
+
+	public Resource getRequirements()
+	{
+		return requirements;
+	}
+
+	public void setRequirements(Resource requirements)
+	{
+		this.requirements = requirements;
 	}
 
 	public Shelf getAdditionalStorage()
 	{
 		return additionalStorage;
+	}
+
+	public void setAdditionalStorage(Shelf additionalStorage)
+	{
+		this.additionalStorage = additionalStorage;
 	}
 }

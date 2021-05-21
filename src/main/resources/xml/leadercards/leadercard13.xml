@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="14.0.2" class="java.beans.XMLDecoder">
  <object class="it.polimi.ingsw.model.cards.SkillProduction" id="SkillProduction0">
-  <void property="points">
-   <int>4</int>
+  <void property="cardNumber">
+   <int>13</int>
   </void>
   <void property="cost">
+   <void property="quantity">
+    <int>1</int>
+   </void>
    <void property="resourceType">
     <object class="java.lang.Enum" method="valueOf">
      <class>it.polimi.ingsw.model.ResourceType</class>
@@ -12,8 +15,37 @@
     </object>
    </void>
   </void>
+  <void property="faithPoints">
+   <int>1</int>
+  </void>
+  <void property="points">
+   <int>4</int>
+  </void>
+  <void property="product">
+   <void property="quantity">
+    <int>1</int>
+   </void>
+  </void>
   <void property="requirements">
-   <string>DEV_LV2_1Y</string>
+   <object class="it.polimi.ingsw.util.Pair" id="Pair0">
+    <void class="it.polimi.ingsw.util.Pair" method="getField">
+     <string>obj1</string>
+     <void method="set">
+      <object idref="Pair0"/>
+      <object class="java.lang.Enum" method="valueOf">
+       <class>it.polimi.ingsw.model.cards.DevCardColor</class>
+       <string>YELLOW</string>
+      </object>
+     </void>
+    </void>
+    <void class="it.polimi.ingsw.util.Pair" method="getField">
+     <string>obj2</string>
+     <void method="set">
+      <object idref="Pair0"/>
+      <int>2</int>
+     </void>
+    </void>
+   </object>
   </void>
  </object>
 </java>

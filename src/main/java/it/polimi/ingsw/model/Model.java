@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.board.Track;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
 
-import it.polimi.ingsw.tools.XML_Serialization;
+import it.polimi.ingsw.util.XML_Serialization;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +60,6 @@ public class Model extends Observable		/* Observed by the views to create the ne
 				e.printStackTrace();
 			}
 
-			cardToAdd.setCardNumber(i + 1);		/* Here or in xmls? xmls!!! */
 			allLeaderCards.add(cardToAdd);
 		}
 	}

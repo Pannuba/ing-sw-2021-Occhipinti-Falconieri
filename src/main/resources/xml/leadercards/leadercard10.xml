@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="14.0.2" class="java.beans.XMLDecoder">
- <object class="it.polimi.ingsw.model.cards.SkillMarble">
+ <object class="it.polimi.ingsw.model.cards.SkillMarble" id="SkillMarble0">
+  <void property="cardNumber">
+   <int>10</int>
+  </void>
   <void property="points">
    <int>5</int>
   </void>
   <void property="requirements">
-   <string>DEV_LV1_2G1P</string>
+   <void method="add">
+    <object class="java.lang.Enum" id="DevCardColor0" method="valueOf">
+     <class>it.polimi.ingsw.model.cards.DevCardColor</class>
+     <string>GREEN</string>
+    </object>
+   </void>
+   <void method="add">
+    <object idref="DevCardColor0"/>
+   </void>
+   <void method="add">
+    <object class="java.lang.Enum" method="valueOf">
+     <class>it.polimi.ingsw.model.cards.DevCardColor</class>
+     <string>PURPLE</string>
+    </object>
+   </void>
   </void>
   <void property="whiteMarble">
    <object class="java.lang.Enum" method="valueOf">

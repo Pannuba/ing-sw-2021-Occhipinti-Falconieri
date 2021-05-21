@@ -2,15 +2,18 @@ package it.polimi.ingsw.model.cards;
 
 import java.io.Serializable;
 
+/*	Parameter editor has to edit leadercard requirements. For simplicity's sake, and order to keep symmetry with the original game,
+	the type of requirement cannot be changed (devcards, resources)
+*/
+
 public abstract class LeaderCard implements Serializable        /* Can't do new LeaderCard(); because it's abstract */
 {
 	private int cardNumber;
 	private int points;
-	private String requirements;		/* Can be devcards or resources, so it's a string that will be decoded elsewhere */
 	private boolean isDiscarded;		/* Not included in cards .xmls, is set when the player discards a leadercard */
 										/* boolean isActive? */
 
-	public LeaderCard()				/* For some reason, XML_Serialization throws exceptions without this */
+	public LeaderCard()
 	{
 		isDiscarded = false;
 	}
@@ -33,16 +36,6 @@ public abstract class LeaderCard implements Serializable        /* Can't do new 
 	public void setPoints(int points)
 	{
 		this.points = points;
-	}
-
-	public String getRequirements()
-	{
-		return requirements;
-	}
-
-	public void setRequirements(String requirements)
-	{
-		this.requirements = requirements;
 	}
 
 	public boolean isDiscarded()

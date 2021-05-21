@@ -1,14 +1,21 @@
-/*	This is a standalone program that converts Java code to XML files.
-	It is used to set the parameters of every DevCard, LeaderCard and ActionToken without hardcoding them.
+/*	This is a standalone program that converts Java objects to XML files.
+	It is used to set the parameters of every DevCard and LeaderCard without hardcoding them.
+	In order to find a good balance between freedom of customization and practicality, the tool automatically sets some fields
+	based on the base game's cards. For example, it automatically sets "points = 5" for leadercards with the marble skill or
+	the produced faithpoints in SkillProduction cards to 1 instead of asking for user input.
+	These values are still included in the xmls so they can be edited manually by the user or with the parameters editor.
+	There are still some limitations as to what can be customized, because too much freedom leads to chaos and excessive complexity.
+	For example, leadercard requirements depend on the card's skill.
+	For SkillProduction cards, only the card's level and color can be changed and not the amount of cards, or the type
+	(resources instead of devcards), because adding a list or changing the type would be a mess.
 */
 
-package it.polimi.ingsw.tools;
+package it.polimi.ingsw.util;
 
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.cards.*;
 
-import java.beans.ExceptionListener;
 import java.beans.XMLEncoder;
 import java.beans.XMLDecoder;
 import java.io.*;
@@ -33,53 +40,10 @@ public class XML_Serialization
 			{
 
 				case "1":															/* LeaderCard to XML */
-					int leaderCardPoints;
-					String leaderCardRequirements = null;
 
 					System.out.print("LeaderCard number [1, 16]: ");
-					filename = "src/main/resources/xml/leadercards/leadercard" + input.nextLine() + ".xml";
-
-					System.out.print("Points: ");
-					leaderCardPoints = Integer.parseInt(input.nextLine());		/* Convert input string to int */
-
-					System.out.print("Requires resources: 1    devCards: 2 ");
-
-					switch(input.nextLine())
-					{
-						case "1":
-							leaderCardRequirements = "RES_";
-							break;
-
-						case "2":
-							leaderCardRequirements = "DEV_";
-							System.out.print("Level: ");			/* Could be hardcoded since we already know the cards, but it's better this way */
-																	/* For simplicity's sake all required cards have to be of the same level */
-							switch(input.nextLine())
-							{
-								case "1":
-									leaderCardRequirements += "LV1_";
-									break;
-
-								case "2":
-									leaderCardRequirements += "LV2_";
-									break;
-
-								case "3":
-									leaderCardRequirements += "LV3_";
-									break;
-
-								default:
-									break;
-							}
-
-							break;
-
-						default:
-							break;
-					}
-
-					System.out.print("Requirements (1Y1P, ...): ");
-					leaderCardRequirements += input.nextLine();
+					int leaderCardNumber = Integer.parseInt(input.nextLine());
+					filename = "src/main/resources/xml/leadercards/leadercard" + leaderCardNumber + ".xml";
 
 					System.out.print("Skill (1 = discount, 2 = additional storage, 3 = white marble, 4 = additional production): ");
 
@@ -87,43 +51,75 @@ public class XML_Serialization
 					{
 						case "1":		/* Get discount */
 							SkillDiscount leaderCardOne = new SkillDiscount();	/* Not too sure about this but we'll give it a try */
-							leaderCardOne.setPoints(leaderCardPoints);
-							leaderCardOne.setRequirements(leaderCardRequirements);
-							ResourceType discountedResource = null;
-							System.out.print("Resource (G/Y/B/P): ");
-							discountedResource = ResourceType.convertStringToResType(input.nextLine());
-							leaderCardOne.setDiscountedResource(discountedResource);	/* Discount amount is already set in SkillDiscount */
+							leaderCardOne.setCardNumber(leaderCardNumber);
+							leaderCardOne.setPoints(2);
+
+							List<DevCardColor> discountReq = new ArrayList<>();
+							System.out.print("Required devcard color #1 (G/Y/B/P): ");
+							discountReq.add(DevCardColor.convertStringToDevColorType(input.nextLine()));
+							System.out.print("Required devcard color #2: ");
+							discountReq.add(DevCardColor.convertStringToDevColorType(input.nextLine()));
+							leaderCardOne.setRequirements(discountReq);
+
+							System.out.print("Discounted resource (G/Y/B/P): ");
+							leaderCardOne.setDiscountedResource(ResourceType.convertStringToResType(input.nextLine()));
+							leaderCardOne.setDiscount(-1);		/* In xml so it can be changed by parameters editor */
+
 							serialize(leaderCardOne, filename);
 							break;
 
 						case "2":		/* Additional storage */
 							SkillStorage leaderCardTwo = new SkillStorage();
-							leaderCardTwo.setPoints(leaderCardPoints);
-							leaderCardTwo.setRequirements(leaderCardRequirements);
+							leaderCardTwo.setCardNumber(leaderCardNumber);
+							leaderCardTwo.setPoints(3);
+
+							System.out.print("Requirement resource (G/Y/B/P): ");
+							leaderCardTwo.getRequirements().setQuantity(5);
+							leaderCardTwo.getRequirements().setResourceType(ResourceType.convertStringToResType(input.nextLine()));
+
 							System.out.print("Additional storage resource (G/Y/B/P): ");
+							leaderCardTwo.getAdditionalStorage().setShelfSize(2);			/* shelfSize in xml so it can be changed by the parameters editor */
 							leaderCardTwo.getAdditionalStorage().getShelfResource().setResourceType(ResourceType.convertStringToResType(input.nextLine()));
+
 							serialize(leaderCardTwo, filename);
 							break;
 
 						case "3":		/* White marble */
 							SkillMarble leaderCardThree = new SkillMarble();
-							leaderCardThree.setPoints(leaderCardPoints);
-							leaderCardThree.setRequirements(leaderCardRequirements);
-							System.out.print("White marble resource (G/Y/B/P): ");				/* TODO: switch/case for ResourceType */
+							leaderCardThree.setCardNumber(leaderCardNumber);
+							leaderCardThree.setPoints(5);
+
+							List<DevCardColor> marbleReq = new ArrayList<>();
+							System.out.print("Required devcard color #1 (G/Y/B/P): ");
+							marbleReq.add(DevCardColor.convertStringToDevColorType(input.nextLine()));
+							System.out.print("Required devcard color #2 (same as before): ");
+							marbleReq.add(DevCardColor.convertStringToDevColorType(input.nextLine()));
+							System.out.print("Required devcard color #3: ");
+							marbleReq.add(DevCardColor.convertStringToDevColorType(input.nextLine()));
+							leaderCardThree.setRequirements(marbleReq);
+
+							System.out.print("White marble resource (G/Y/B/P): ");
 							leaderCardThree.setWhiteMarble(ResourceType.convertStringToResType(input.nextLine()));
+
 							serialize(leaderCardThree, filename);
 							break;
 
 						case "4":		/* Additional production */
 							SkillProduction leaderCardFour = new SkillProduction();
-							leaderCardFour.setPoints(leaderCardPoints);
-							leaderCardFour.setRequirements(leaderCardRequirements);
+							leaderCardFour.setCardNumber(leaderCardNumber);
+							leaderCardFour.setPoints(4);
+
+							System.out.print("Required devcard color (G/Y/B/P): ");
+							Pair<DevCardColor, Integer> productionReq = new Pair<>(DevCardColor.convertStringToDevColorType(input.nextLine()), 2);
+							leaderCardFour.setRequirements(productionReq);
+
 							System.out.print("Resource needed for production (G/Y/B/P): ");
 							leaderCardFour.getCost().setResourceType(ResourceType.convertStringToResType(input.nextLine()));
-							serialize(leaderCardFour, filename);
-							break;
+							leaderCardFour.getCost().setQuantity(1);
+							leaderCardFour.getProduct().setQuantity(1);			/* In xml so it can be changed by parameters editor */
+							leaderCardFour.setFaithPoints(1);
 
-						default:
+							serialize(leaderCardFour, filename);
 							break;
 					}
 
@@ -137,9 +133,9 @@ public class XML_Serialization
 					int i = 0;
 
 					System.out.print("DevCard number [1, 48]: ");
-					int cardNumber = Integer.parseInt(input.nextLine());
-					filename = "src/main/resources/xml/devcards/devcard" + cardNumber + ".xml";
-					devCard.setCardNumber(cardNumber);
+					int devCardNumber = Integer.parseInt(input.nextLine());
+					filename = "src/main/resources/xml/devcards/devcard" + devCardNumber + ".xml";
+					devCard.setCardNumber(devCardNumber);
 
 					System.out.print("Points: ");
 					devCard.setPoints(Integer.parseInt(input.nextLine()));
@@ -215,7 +211,7 @@ public class XML_Serialization
 					return;
 
 				default:
-					System.out.printf("Insert 1, 2 or 3%n");
+					System.out.println("Insert 1, 2 or 3");
 					break;
 			}
 		}

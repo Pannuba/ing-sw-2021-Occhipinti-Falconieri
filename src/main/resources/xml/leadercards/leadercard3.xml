@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="14.0.2" class="java.beans.XMLDecoder">
- <object class="it.polimi.ingsw.model.cards.SkillDiscount">
+ <object class="it.polimi.ingsw.model.cards.SkillDiscount" id="SkillDiscount0">
+  <void property="cardNumber">
+   <int>3</int>
+  </void>
+  <void property="discount">
+   <int>-1</int>
+  </void>
   <void property="discountedResource">
    <object class="java.lang.Enum" method="valueOf">
     <class>it.polimi.ingsw.model.ResourceType</class>
@@ -11,7 +17,18 @@
    <int>2</int>
   </void>
   <void property="requirements">
-   <string>DEV_LV1_1G1B</string>
+   <void method="add">
+    <object class="java.lang.Enum" method="valueOf">
+     <class>it.polimi.ingsw.model.cards.DevCardColor</class>
+     <string>GREEN</string>
+    </object>
+   </void>
+   <void method="add">
+    <object class="java.lang.Enum" method="valueOf">
+     <class>it.polimi.ingsw.model.cards.DevCardColor</class>
+     <string>BLUE</string>
+    </object>
+   </void>
   </void>
  </object>
 </java>

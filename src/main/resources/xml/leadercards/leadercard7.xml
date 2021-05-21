@@ -10,12 +10,26 @@
      </object>
     </void>
    </void>
+   <void property="shelfSize">
+    <int>2</int>
+   </void>
+  </void>
+  <void property="cardNumber">
+   <int>7</int>
   </void>
   <void property="points">
    <int>3</int>
   </void>
   <void property="requirements">
-   <string>RES_5P</string>
+   <void property="quantity">
+    <int>5</int>
+   </void>
+   <void property="resourceType">
+    <object class="java.lang.Enum" method="valueOf">
+     <class>it.polimi.ingsw.model.ResourceType</class>
+     <string>PURPLE</string>
+    </object>
+   </void>
   </void>
  </object>
 </java>

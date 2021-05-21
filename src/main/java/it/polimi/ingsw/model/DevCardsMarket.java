@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.cards.DevCard;
-import it.polimi.ingsw.tools.XML_Serialization;
+import it.polimi.ingsw.util.XML_Serialization;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,6 @@ public class DevCardsMarket implements Serializable
 			try
 			{
 				devCards.add((DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard" + (i + 1) + ".xml"));
-				//devCards.get(i).setCardNumber(i + 1); Already in xmls, TODO: do the same to leadercards
 			}
 			catch (Exception e)
 			{
