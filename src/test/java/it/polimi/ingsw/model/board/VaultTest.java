@@ -3,54 +3,61 @@ package it.polimi.ingsw.model.board;
 import it.polimi.ingsw.model.ResourceType;
 import org.junit.Test;
 
+import java.util.HashMap;
+
 import static org.junit.Assert.*;
 
-public class VaultTest {        /* TODO: change from array to hashmap */
+public class VaultTest {
 
     private Vault a = new Vault();
+    private HashMap<ResourceType, Integer> resourceAmounts = new HashMap<>();
 
     @Test
     public void addResource1()
     {
-        ResourceType resource1 = ResourceType.BLUE;
-        a.addResource(resource1);
-        ResourceType resource2 = ResourceType.BLUE;
-        a.addResource(resource2);
-        int[] b = {2,0,0,0};
-        //assertArrayEquals("Error", b, a.getResourceAmounts());
+        a.addResource(ResourceType.BLUE);
+        a.addResource(ResourceType.BLUE);
+        resourceAmounts.put(ResourceType.BLUE,	 2);
+        resourceAmounts.put(ResourceType.GREY,	 0);
+        resourceAmounts.put(ResourceType.YELLOW, 0);
+        resourceAmounts.put(ResourceType.PURPLE, 0);
+        assertEquals("Error",resourceAmounts, a.getResourceAmounts());
     }
 
     @Test
     public void addResource2()
     {
-        ResourceType resource1 = ResourceType.BLUE;
-        a.addResource(resource1);
-        ResourceType resource2 = ResourceType.PURPLE;
-        a.addResource(resource2);
-        int[] b = {1,0,0,1};
-        //assertArrayEquals("Error", b, a.getResourceAmounts());
+        a.addResource(ResourceType.BLUE);
+        a.addResource(ResourceType.PURPLE);
+        resourceAmounts.put(ResourceType.BLUE,	 1);
+        resourceAmounts.put(ResourceType.GREY,	 0);
+        resourceAmounts.put(ResourceType.YELLOW, 0);
+        resourceAmounts.put(ResourceType.PURPLE, 1);
+        assertEquals("Error",resourceAmounts, a.getResourceAmounts());
     }
 
     @Test
     public void addResource3()
     {
-        ResourceType resource1 = ResourceType.BLUE;
-        a.addResource(resource1);
-        ResourceType resource2 = ResourceType.GREY;
-        a.addResource(resource2);
-        ResourceType resource3 = ResourceType.YELLOW;
-        a.addResource(resource3);
-        ResourceType resource4 = ResourceType.PURPLE;
-        a.addResource(resource4);
-        int[] b = {1,1,1,1};
-        //assertArrayEquals("Error", b, a.getResourceAmounts());
+        a.addResource(ResourceType.BLUE);
+        a.addResource(ResourceType.GREY);
+        a.addResource(ResourceType.YELLOW);
+        a.addResource(ResourceType.PURPLE);
+        resourceAmounts.put(ResourceType.BLUE,	 1);
+        resourceAmounts.put(ResourceType.GREY,	 1);
+        resourceAmounts.put(ResourceType.YELLOW, 1);
+        resourceAmounts.put(ResourceType.PURPLE, 1);
+        assertEquals("Error",resourceAmounts, a.getResourceAmounts());
     }
 
     @Test
     public void getTotalResources()
     {
-        int[] resourceAmounts = {7,10,3,6};
-        //a.setResourceAmounts(resourceAmounts);
+        a.setResourceAmounts(resourceAmounts);
+        resourceAmounts.put(ResourceType.BLUE,	 7);
+        resourceAmounts.put(ResourceType.GREY,	10);
+        resourceAmounts.put(ResourceType.YELLOW, 3);
+        resourceAmounts.put(ResourceType.PURPLE, 6);
         assertEquals("Error", 26, a.getTotalResources());
     }
 }
