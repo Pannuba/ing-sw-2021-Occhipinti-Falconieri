@@ -14,6 +14,7 @@ public class DevCardAreaTest {
     private DevCardArea d = new DevCardArea();
     private DevCard card1 = new DevCard();
     private DevCard card2 = new DevCard();
+    private DevCard card3 = new DevCard();
     private List<DevCard> devCards = new ArrayList<>();
 
     @Before
@@ -71,5 +72,32 @@ public class DevCardAreaTest {
         d.setLayer(2);
         card1.setLevel(2);
         assertFalse(d.addDevCard(card1));
+    }
+
+    @Test
+    public void getTopDevCard1()
+    {
+        devCards.add(card1);
+        devCards.add(card2);
+        card1.setLevel(1);
+        card2.setLevel(2);
+        d.addDevCard(card1);
+        d.addDevCard(card2);
+        assertEquals("Error", card2, d.getTopDevCard());
+    }
+
+    @Test
+    public void getTopDevCard2()
+    {
+        devCards.add(card1);
+        devCards.add(card2);
+        devCards.add(card3);
+        card1.setLevel(1);
+        card2.setLevel(2);
+        card3.setLevel(3);
+        d.addDevCard(card1);
+        d.addDevCard(card2);
+        d.addDevCard(card3);
+        assertEquals("Error", card3, d.getTopDevCard());
     }
 }
