@@ -13,6 +13,7 @@ public class StorageTest
     private Resource a = new Resource();
     private Resource b = new Resource();
     private Resource c = new Resource();
+    private Resource resourceToAdd = new Resource();
     private Shelf[] shelves = new Shelf[3];
 
 
