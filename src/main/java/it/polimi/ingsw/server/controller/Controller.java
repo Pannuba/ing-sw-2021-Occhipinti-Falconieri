@@ -106,7 +106,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 			model.endMatch();
 	}
 
-	public boolean checkLeaderRequirements(Dashboard playerBoard, LeaderCard boughtCard)		/* Put in Model? */
+	public boolean checkLeaderRequirements(Dashboard playerBoard, LeaderCard boughtCard)		/* True if requirements are satisfied. Put in Model? */
 	{
 		List<DevCard> devCards = playerBoard.getAllDevCards();
 
@@ -171,8 +171,19 @@ public class Controller implements Observer			/* Observes view to get commands..
 	{
 		Storage storage = playerBoard.getStorage();				/* If there are enough resources, get them from storage, otherwise vault */
 		Vault vault = playerBoard.getVault();					/* Ask for player input only when bought resources have to be discarded, see Slack */
+		List<Resource> requirements = boughtCard.getRequirements();
 
-		return false;
+		for (int i = 0; i < requirements.size(); i++)
+		{
+			int requiredResAmount = 0;
+			requiredResAmount += storage.findResourceByType(requirements.get(i).getResourceType());
+			requiredResAmount += vault.getResourceAmounts().get(requirements.get(i).getResourceType());
+
+			if (requiredResAmount < requirements.get(i).getQuantity())		/* If only 1 resource (type and quantity) isn't satisfied, return false */
+				return false;
+		}
+
+		return true;
 	}
 
 	@Override
