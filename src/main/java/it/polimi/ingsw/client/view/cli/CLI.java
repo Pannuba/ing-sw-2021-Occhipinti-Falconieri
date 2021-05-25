@@ -60,14 +60,17 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets old 
 		switch(choice)
 		{
 			case 0:
+				action.leaderChoice();
 				action.buyResources();
 				break;
 
 			case 1:
+				action.leaderChoice();
 				action.buyDevCard();
 				break;
 
 			case 2:
+				action.leaderChoice();
 				action.activateProduction();
 				break;
 

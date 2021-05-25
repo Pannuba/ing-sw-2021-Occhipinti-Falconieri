@@ -53,6 +53,28 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 			controller.updatePlayerPosition(model.getPlayerByUsername(username).getId(), Integer.parseInt(command.get(2)));
 	}
 
+	public void activateLeader(List<String> command, String username)
+	{
+		int cardToActivate = Integer.parseInt(command.get(1));
+
+
+		// check resources
+
+		if (!model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivate).isDiscarded())	/* Discarded leadercards can't be activated */
+			model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivate).setActive(true);
+	}
+
+	public void discardLeader(List<String> command, String username)
+	{
+		int cardToDiscard = Integer.parseInt(command.get(1));
+
+		if (!model.getPlayerByUsername(username).getLeaderCardByNumber(cardToDiscard).isActive())		/* Activated leadercards can't be discarded */
+		{
+			model.getPlayerByUsername(username).getLeaderCardByNumber(cardToDiscard).setDiscarded(true);
+			controller.updatePlayerPosition(model.getPlayerByUsername(username).getId(), 1);
+		}
+	}
+
 	public void buyResources(List<String> command, String username)
 	{
 		List<MarbleType> boughtMarbles = new ArrayList<>();
@@ -102,7 +124,7 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 	{
 		int boughtCardNum = Integer.parseInt(command.get(1));
 		DevCard boughtCard = model.getDevCardsMarket().getDevCardByNumber(boughtCardNum);
-		controller.checkResources(model.getPlayerByUsername(username).getDashboard(), boughtCard);
+		controller.checkDevCardRequirements(model.getPlayerByUsername(username).getDashboard(), boughtCard);
 	}
 
 

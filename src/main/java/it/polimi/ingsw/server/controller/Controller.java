@@ -4,7 +4,7 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.board.Dashboard;
 import it.polimi.ingsw.model.board.Storage;
 import it.polimi.ingsw.model.board.Vault;
-import it.polimi.ingsw.model.cards.DevCard;
+import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.server.view.ClientHandler;
 
 import java.util.*;
@@ -35,6 +35,14 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 			case "INITIAL_RESOURCES":							/* "INITIAL_RESOURCES", "BY", "2" */
 				runCommand.initialResources(command, username);
+				break;
+
+			case "ACTIVATE_LEADER":
+				runCommand.activateLeader(command, username);
+				break;
+
+			case "DISCARD_LEADER":
+				runCommand.discardLeader(command, username);
 				break;
 
 			case "BUY_DEVCARD":							/* 	Client picks a devcard # to buy from their local devCardsMarket. Server checks for resources
@@ -97,12 +105,34 @@ public class Controller implements Observer			/* Observes view to get commands..
 			model.endMatch();
 	}
 
-	public boolean checkResources(Dashboard playerBoard, DevCard boughtCard)	/* If there are enough resources, get them from storage, otherwise vault */
-	{																			/* Ask for player input only when bought resouces have to be discarded, see Slack */
-		Storage storage = playerBoard.getStorage();
-		Vault vault = playerBoard.getVault();
-		List<Resource> requirements = boughtCard.getRequirements();
-		// ... ... ...
+	public boolean checkLeaderRequirements(Dashboard playerBoard, LeaderCard boughtCard)		/* Put in Model? */
+	{
+		Storage storage = playerBoard.getStorage();				/* If there are enough resources, get them from storage, otherwise vault */
+		Vault vault = playerBoard.getVault();					/* Ask for player input only when bought resources have to be discarded, see Slack */
+
+		switch(boughtCard.getClass().getSimpleName())
+		{
+			case "SkillDiscount":
+
+				break;
+
+			case "SkillMarble":
+
+				break;
+
+			case "SkillProduction":
+
+				break;
+
+			case "SkillStorage":
+
+				break;
+		}
+		return false;
+	}
+
+	public boolean checkDevCardRequirements(Dashboard playerboard, DevCard boughtCard)
+	{
 		return false;
 	}
 

@@ -62,6 +62,18 @@ public class Player implements Serializable
 		return popeTokenPoints;
 	}
 
+	public LeaderCard getLeaderCardByNumber(int number)
+	{
+		for (int i = 0; i < leaderCards.size(); i++)
+		{
+			if (leaderCards.get(i).getCardNumber() == number)
+				return leaderCards.get(i);
+		}
+
+		System.out.println("getLeaderCardByNumber: no cards found!");
+		return null;
+	}
+
 	public int getId()
 	{
 		return id;

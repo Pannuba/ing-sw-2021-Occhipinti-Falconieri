@@ -2,9 +2,7 @@ package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.cards.LeaderCard;
-import it.polimi.ingsw.server.messages.Message;
 
-import javax.swing.*;
 import java.util.List;
 
 public class MessageDecoder		/* Reads Message objects sent by server and runs the respective method */
@@ -27,6 +25,9 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 	}
 	public void getBoughtResources(List<ResourceType> boughtResources)
 	{
-		System.out.println("Received the following resources: " + boughtResources);
+		System.out.print("Received the following resources: ");
+
+		for (int i = 0; i < boughtResources.size(); i++)
+			System.out.print(PrintMethods.convertResTypeToString(boughtResources.get(i)) + " ");
 	}
 }

@@ -281,7 +281,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		return null;
 	}
 
-	private static String convertResTypeToString(ResourceType resourceType)
+	public static String convertResTypeToString(ResourceType resourceType)
 	{
 		if (resourceType == null)
 			return ANSI.EMPTY.toString();

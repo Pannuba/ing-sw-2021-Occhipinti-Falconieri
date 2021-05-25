@@ -12,17 +12,19 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 {
 	private final Scanner input;
 	private final CLI cli;
+	private final NetworkHandler networkHandler;
+	private final List<String> command;
 
 	public ActionExecutor(CLI cli)
 	{
 		this.cli = cli;
 		this.input = cli.getInput();
+		this.networkHandler = cli.getNetworkHandler();
+		command = new ArrayList<>();
 	}
 
 	public void chooseLeaderCards(List<LeaderCard> fourLeaderCards)
 	{
-		NetworkHandler networkHandler = cli.getNetworkHandler();
-
 		for (int i = 0; i < 4; i++)
 		{
 			System.out.println("Card " + (i + 1) + ":");
@@ -37,20 +39,18 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		System.out.print("Choose the second leader card: ");
 		String cardChoice2 = input.nextLine();
 
-		List<String> command = new ArrayList<String>();
 		command.add("SELECT_LEADERCARDS");
 		command.add(cardChoice1);
 		command.add(cardChoice2);
 
 		System.out.println("Notifying observers (network handler)");
 		networkHandler.sendCommand(command);
+		command.clear();
 	}
 
 	public void chooseResources()			/* 1st player: nothing; 2nd: 1 resource; 3rd: 1 resource + 1 faithPoint; 4th: 2 resources + 1 faithPoint */
 	{
-		NetworkHandler networkHandler = cli.getNetworkHandler();
 		GameState gameState = networkHandler.getGameState();
-		List<String> command = new ArrayList<String>();
 		String chosenResources = "";			/* Will be converted to ResourceType in server controller */
 		String initialFaithPoints = "";
 
@@ -88,11 +88,51 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		command.add(chosenResources);
 		command.add(initialFaithPoints);
 		networkHandler.sendCommand(command);
+		command.clear();
+	}
+
+	public void leaderChoice()
+	{
+		System.out.print("Do you want to activate or discard a leader? A/D: ");
+
+		switch (input.nextLine().toUpperCase())
+		{
+			case "A":
+				activateLeader();
+				break;
+
+			case "D":
+				discardLeader();
+				break;
+		}
+	}
+
+	private void activateLeader()		/* Sends command to activate a leader, server checks resources and replies with another message */
+	{
+		List<LeaderCard> leaderCards = cli.getGameState().getPlayerByName(cli.getUsername()).getLeaderCards();
+		PrintMethods.printPlayerLeaderCards(leaderCards);
+		System.out.print("Select card #" + leaderCards.get(0).getCardNumber() + " or #" + leaderCards.get(1).getCardNumber() + ": ");
+		String chosenCard = input.nextLine();
+
+		command.add("ACTIVATE_LEADER");
+		command.add(chosenCard);
+		networkHandler.sendCommand(command);
+	}
+
+	private void discardLeader()
+	{
+		List<LeaderCard> leaderCards = cli.getGameState().getPlayerByName(cli.getUsername()).getLeaderCards();
+		PrintMethods.printPlayerLeaderCards(leaderCards);
+		System.out.print("Select card #" + leaderCards.get(0).getCardNumber() + " or #" + leaderCards.get(1).getCardNumber() + ": ");
+		String chosenCard = input.nextLine();
+
+		command.add("DISCARD_LEADER");
+		command.add(chosenCard);
+		networkHandler.sendCommand(command);
 	}
 
 	public void buyResources()
 	{
-		List<String> command = new ArrayList<>();
 		command.add("BUY_RESOURCES");
 
 		System.out.print("This is the current marbles market:\n\n");
@@ -118,11 +158,11 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 		command.add(rowOrColNum);
 		cli.getNetworkHandler().sendCommand(command);
+		command.clear();
 	}
 
 	public void buyDevCard()
 	{
-		List<String> command = new ArrayList<>();
 		command.add("BUY_DEVCARD");
 		System.out.print("These are your current dev card areas:\n\n");
 		PrintMethods.printDevCardAreas(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas());
@@ -154,6 +194,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 																		*/
 
 		cli.getNetworkHandler().sendCommand(command);
+		command.clear();
 	}
 
 	public void activateProduction()
