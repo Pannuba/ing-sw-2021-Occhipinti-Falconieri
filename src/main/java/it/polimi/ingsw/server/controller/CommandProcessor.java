@@ -55,22 +55,26 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 
 	public void activateLeader(List<String> command, String username)
 	{
-		int cardToActivate = Integer.parseInt(command.get(1));
+		int cardToActivateNum = Integer.parseInt(command.get(1));
+		LeaderCard cardToActivate = model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivateNum);
 
+		if (controller.checkLeaderRequirements(model.getPlayerByUsername(username).getDashboard(), cardToActivate))
+		{
+			if (cardToActivate.isDiscarded() == false)			/* Discarded leadercards can't be activated. Remove discarded cards from client choices? */
+				model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivateNum).setActive(true);
+		}
 
-		// check resources
-
-		if (!model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivate).isDiscarded())	/* Discarded leadercards can't be activated */
-			model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivate).setActive(true);
+		else
+			System.out.println("Couldn't activate leader: requirements not satisfied");
 	}
 
-	public void discardLeader(List<String> command, String username)
+	public void discardLeader(List<String> command, String username)	/* Activated leadercards can't be discarded. Remove active cards from client choices? */
 	{
-		int cardToDiscard = Integer.parseInt(command.get(1));
+		int cardToDiscardNum = Integer.parseInt(command.get(1));
 
-		if (!model.getPlayerByUsername(username).getLeaderCardByNumber(cardToDiscard).isActive())		/* Activated leadercards can't be discarded */
+		if (!model.getPlayerByUsername(username).getLeaderCardByNumber(cardToDiscardNum).isActive())
 		{
-			model.getPlayerByUsername(username).getLeaderCardByNumber(cardToDiscard).setDiscarded(true);
+			model.getPlayerByUsername(username).getLeaderCardByNumber(cardToDiscardNum).setDiscarded(true);
 			controller.updatePlayerPosition(model.getPlayerByUsername(username).getId(), 1);
 		}
 	}

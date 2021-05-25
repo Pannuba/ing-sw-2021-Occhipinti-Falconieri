@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.board;
 
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.Shelf;
 
 import java.io.Serializable;			/* Has resources bought from the marbles market */
@@ -146,6 +147,19 @@ public class Storage implements Serializable
 
 		else
 			System.out.println("Storage moveResources: not enough space on destination shelf");
+	}
+
+	public int findResourceByType(ResourceType resourceToFind)		/* Returns the number of resources of passed type. Used to check cards requirements */
+	{
+		int counter = 0;
+
+		for (int i = 0; i < 3; i++)
+		{
+			if (shelves[i].getShelfResourceType() == resourceToFind)
+				counter += shelves[i].getShelfResourceQuantity();
+		}
+
+		return counter;
 	}
 
 	public int getTotalResources()

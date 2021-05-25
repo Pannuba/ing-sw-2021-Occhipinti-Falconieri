@@ -3,9 +3,9 @@ package it.polimi.ingsw.model.cards;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.Shelf;
 
-public class SkillStorage extends LeaderCard
+public class SkillStorage extends LeaderCard		/* "final" keyword in instance variables makes serialization not work */
 {
-	private Resource requirements;		/* "final" keyword makes serialization not work */
+	private Resource requirements;			/* Only 1 resource type */
 	private Shelf additionalStorage;
 
 	public SkillStorage()

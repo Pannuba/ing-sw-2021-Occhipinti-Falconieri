@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.board.Storage;
 import it.polimi.ingsw.model.board.Vault;
 import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.server.view.ClientHandler;
+import it.polimi.ingsw.util.Pair;
 
 import java.util.*;
 
@@ -107,32 +108,70 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 	public boolean checkLeaderRequirements(Dashboard playerBoard, LeaderCard boughtCard)		/* Put in Model? */
 	{
-		Storage storage = playerBoard.getStorage();				/* If there are enough resources, get them from storage, otherwise vault */
-		Vault vault = playerBoard.getVault();					/* Ask for player input only when bought resources have to be discarded, see Slack */
+		List<DevCard> devCards = playerBoard.getAllDevCards();
 
 		switch(boughtCard.getClass().getSimpleName())
 		{
-			case "SkillDiscount":
-
-				break;
-
+			case "SkillDiscount":		/* Player has to have x devcards of any level */
 			case "SkillMarble":
 
-				break;
+				List<DevCardColor> colorRequirements = ((SkillDiscount)boughtCard).getRequirements();
 
-			case "SkillProduction":
+				for (int i = 0; i < devCards.size(); i++)
+				{
+					for (int j = 0; j < colorRequirements.size(); j++)
+					{
+						if (devCards.get(i).getColor() == colorRequirements.get(j))
+						{
+							colorRequirements.remove(j);		/* Remove a requirement for every card that satisfies it */
+							j--;
+						}
+					}
+				}
 
-				break;
+				if (colorRequirements.isEmpty())				/* If there are no more requirements left, it means they're all satisfied */
+					return true;
 
-			case "SkillStorage":
+				else
+					return false;
 
-				break;
+			case "SkillProduction":		/* Player has to have 1 devcard of color x and level y */
+
+				Pair<DevCardColor, Integer> prodRequirements = ((SkillProduction) boughtCard).getRequirements();
+
+				for (int i = 0; i < devCards.size(); i++)
+				{
+					if (devCards.get(i).getColor() == prodRequirements.obj1 && devCards.get(i).getLevel() == prodRequirements.obj2)
+						return true;
+				}
+
+				return false;
+
+			case "SkillStorage":		/* Player has to have x resources of the same type */
+
+				Resource storageRequirements = ((SkillStorage) boughtCard).getRequirements();
+				Storage storage = playerBoard.getStorage();
+				Vault vault = playerBoard.getVault();
+
+				int reqResourceQuantity = 0;
+				reqResourceQuantity = storage.findResourceByType(storageRequirements.getResourceType());
+				reqResourceQuantity += vault.getResourceAmounts().get(storageRequirements.getResourceType());
+
+				if (reqResourceQuantity >= storageRequirements.getQuantity())
+					return true;
+
+				else
+					return false;
 		}
+
 		return false;
 	}
 
-	public boolean checkDevCardRequirements(Dashboard playerboard, DevCard boughtCard)
+	public boolean checkDevCardRequirements(Dashboard playerBoard, DevCard boughtCard)
 	{
+		Storage storage = playerBoard.getStorage();				/* If there are enough resources, get them from storage, otherwise vault */
+		Vault vault = playerBoard.getVault();					/* Ask for player input only when bought resources have to be discarded, see Slack */
+
 		return false;
 	}
 
