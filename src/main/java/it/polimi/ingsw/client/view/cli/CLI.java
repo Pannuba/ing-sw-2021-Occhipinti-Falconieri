@@ -12,6 +12,7 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets old 
 {
 	private final Scanner input;
 	private final ActionExecutor action;
+	private final MessageDecoder messageDecoder;
 	private NetworkHandler networkHandler;
 	private GameState gameState;
 	private String username;
@@ -20,6 +21,7 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets old 
 	{
 		input = new Scanner(System.in);
 		action = new ActionExecutor(this);		/* Pass CLI to ActionExecutor for the NetworkHandler and input instance, gamestate and username */
+		messageDecoder = new MessageDecoder(action);
 		gameStart();
 		new Thread(networkHandler).start();		/* Start listening for messages or gamestate updates from server */
 	}
@@ -96,21 +98,11 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets old 
 		}
 	}
 
-	public void chooseLeaderCards(List<LeaderCard> leaderCards)		/* Call function in ActionExecutor directly from the message? */
-	{
-		action.chooseLeaderCards(leaderCards);
-	}
-
-	public void chooseResources()
-	{
-		action.chooseResources();
-	}
-
 	@Override
 	public void update(Observable obs, Object obj)
 	{
 		if (obj instanceof Message)
-			((Message) obj).process(this);		/* Calls method in cli specified in the message */
+			((Message) obj).process(messageDecoder);		/* Calls method in cli specified in the message */
 
 		if (obj instanceof GameState)		/* TODO: check if match is over, or make server send "match over" message */
 		{
@@ -132,11 +124,6 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets old 
 					System.out.println("It's " + gameState.getCurrPlayerName() + "'s turn!");
 			}
 		}
-	}
-
-	public void getBoughtResources(List<ResourceType> boughtResources)
-	{
-		System.out.println("Received the following resources: " + boughtResources);
 	}
 
 	public NetworkHandler getNetworkHandler()

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server.messages;
 
 import it.polimi.ingsw.client.view.cli.CLI;
+import it.polimi.ingsw.client.view.cli.MessageDecoder;
 import it.polimi.ingsw.model.cards.LeaderCard;
 
 import java.io.Serializable;
@@ -17,8 +18,8 @@ public class ChooseLeadersMessage implements Message, Serializable
 	}
 
 	@Override
-	public void process(CLI cli)
+	public void process(MessageDecoder decoder)
 	{
-		cli.chooseLeaderCards(leaderCards);
+		decoder.chooseLeaderCards(leaderCards);
 	}
 }
