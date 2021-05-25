@@ -32,6 +32,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 		{
 			case "SELECT_LEADERCARDS":							/* "SELECT_LEADERCARDS", "x", "y" */
 				runCommand.selectLeaderCards(command, username);
+				model.update();			/* Send new gamestate to everyone */
 				break;
 
 			case "INITIAL_RESOURCES":							/* "INITIAL_RESOURCES", "BY", "2" */
@@ -51,22 +52,24 @@ public class Controller implements Observer			/* Observes view to get commands..
 															Otherwise send an error message. Can client perform another action?		*/
 				runCommand.buyDevCard(command, username);
 				chooseNextPlayer();		/* Don't choose next player during setup actions */
+				model.update();
 				break;
 
 			case "ACTIVATE_PRODUCTION":
 
 				chooseNextPlayer();
+				model.update();
 				break;
 
 			case "BUY_RESOURCES":					/* What do with marble amounts? Ask where put to them in storage? */
 													/* Cut off when it sends the bought resources, and make another command for the rest of the action? */
 				runCommand.buyResources(command, username);
 				chooseNextPlayer();
+				model.update();
 				break;
 		}
 
 		postRoundChecks();
-		model.update();		/* Send new gamestate to everyone */
 	}
 
 	private void chooseNextPlayer()		/* In model? Turns alternate by player ID: 0 -> 1 -> 2 -> 3 */

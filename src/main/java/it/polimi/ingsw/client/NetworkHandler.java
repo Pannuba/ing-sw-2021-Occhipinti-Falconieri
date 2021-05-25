@@ -36,6 +36,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 			{
 				System.out.println("Waiting for new object from server");
 				Object inputObj = ois.readObject();
+				System.out.println("Received " + inputObj.getClass().getSimpleName());
 				setChanged();
 				notifyObservers(inputObj);
 			}

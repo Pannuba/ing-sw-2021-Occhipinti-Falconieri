@@ -28,4 +28,14 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 	{
 		System.out.println(message);
 	}
+
+	public void getBoughtResources(List<ResourceType> boughtResources)
+	{
+		System.out.print("Received the following resources: ");
+
+		for (int i = 0; i < boughtResources.size(); i++)
+			System.out.print(PrintMethods.convertResTypeToString(boughtResources.get(i)) + " ");
+
+		System.out.print("\n");
+	}
 }

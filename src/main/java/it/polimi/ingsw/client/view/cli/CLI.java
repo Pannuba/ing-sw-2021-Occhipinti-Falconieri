@@ -20,10 +20,10 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets old 
 	public CLI()
 	{
 		input = new Scanner(System.in);
-		action = new ActionExecutor(this);		/* Pass CLI to ActionExecutor for the NetworkHandler and input instance, gamestate and username */
-		messageDecoder = new MessageDecoder(action);
 		gameStart();
 		new Thread(networkHandler).start();		/* Start listening for messages or gamestate updates from server */
+		action = new ActionExecutor(this);		/* Pass CLI to ActionExecutor for the NetworkHandler and input instance, gamestate and username */
+		messageDecoder = new MessageDecoder(action);
 	}
 
 	private void gameStart()
@@ -109,7 +109,6 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets old 
 
 		if (obj instanceof GameState)		/* TODO: check if match is over, or make server send "match over" message */
 		{
-			System.out.println("Received gamestate");
 			this.gameState = (GameState) obj;        /* Gamestate is needed in game loop, not during setup */
 			System.out.println(gameState.getCurrPlayers().get(0).getUsername() + " is active? " + gameState.getCurrPlayers().get(0).isMyTurn());
 			System.out.println(gameState.getCurrPlayers().get(1).getUsername() + " is active? " + gameState.getCurrPlayers().get(1).isMyTurn());

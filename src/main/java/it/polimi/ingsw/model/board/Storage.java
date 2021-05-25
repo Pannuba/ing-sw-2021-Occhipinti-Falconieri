@@ -35,9 +35,13 @@ public class Storage implements Serializable
 			}
 		}
 
+		if (shelves[0].getShelfResource().getResourceType() == null && shelves[1].getShelfResource().getResourceType() == null &&
+			shelves[2].getShelfResource().getResourceType() == null)
+			return true;		/* Otherwise checkShelves returns false at the start of the match */
+
 		if (shelves[0].getShelfResource().getResourceType() == shelves[1].getShelfResource().getResourceType()   ||
 			shelves[1].getShelfResource().getResourceType() == shelves[2].getShelfResource().getResourceType()   ||
-			shelves[0].getShelfResource().getResourceType() == shelves[2].getShelfResource().getResourceType())
+			shelves[0].getShelfResource().getResourceType() == shelves[2].getShelfResource().getResourceType()	 )
 		{
 			System.out.println("Shelf has the same type of resource of another shelf");
 			return false;
@@ -53,7 +57,7 @@ public class Storage implements Serializable
 
 		if (checkShelves() == true && (destinationShelf.getShelfSize() - destinationShelf.getShelfResourceQuantity()) >= resourceToAdd.getQuantity())
 		{
-			if (resourceToAdd.getResourceType() == destinationShelf.getShelfResource().getResourceType())
+			if (resourceToAdd.getResourceType() == destinationShelf.getShelfResource().getResourceType() || destinationShelf.getShelfResource().getResourceType() == null)
 			{
 				if (destinationShelf.getShelfResource().getResourceType() == null)
 					destinationShelf.getShelfResource().setResourceType(resourceToAdd.getResourceType());

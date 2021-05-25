@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
+import it.polimi.ingsw.server.messages.BoughtResMessage;
 import it.polimi.ingsw.server.messages.OperationResultMessage;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
 public class CommandProcessor        /* Contains the code that runs when a certain command is received */
 {
 	private final Model model;
-	private final Controller controller;		/* To access its functions, command and username */
+	private final Controller controller;		/* To access its functions, command, view and username */
 	private String message;
 
 	public CommandProcessor(Model model, Controller controller)
@@ -35,11 +36,11 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 					String.valueOf(model.getAllLeaderCards().get(i).getCardNumber()).equals(command.get(2))		)
 				cards.add(model.getAllLeaderCards().get(i));
 		}
-		System.out.println("Setting cards #" + cards.get(0).getCardNumber() + " and #" + cards.get(1).getCardNumber() + " for " + username);
+
 		model.getPlayerByUsername(username).setLeaderCards(cards);
 	}
 
-	public void initialResources(List<String> command, String username)
+	public void initialResources(List<String> command, String username)		/* No need to reply with any message */
 	{
 		if (command.get(1).isEmpty() == false)
 		{
@@ -59,7 +60,6 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 	public void activateLeader(List<String> command, String username)
 	{
 		int cardToActivateNum = Integer.parseInt(command.get(1));
-		message = "";
 
 		LeaderCard cardToActivate = model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivateNum);
 
@@ -81,7 +81,6 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 	public void discardLeader(List<String> command, String username)	/* Activated leadercards can't be discarded. Remove active cards from client choices? */
 	{
 		int cardToDiscardNum = Integer.parseInt(command.get(1));
-		message = "";
 
 		LeaderCard cardToDiscard = model.getPlayerByUsername(username).getLeaderCardByNumber(cardToDiscardNum);
 
@@ -99,7 +98,6 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 	{
 		List<MarbleType> boughtMarbles = new ArrayList<>();
 		List<ResourceType> resourcesToAddToStorage = new ArrayList<>();		/* Should either be a hashmap or a list of resourcetypes */
-		message = "";
 
 		if (command.get(1).equals("ROW"))
 			boughtMarbles = model.getMarblesMarket().buyMarblesRow(Integer.parseInt(command.get(2)) - 1);		/* - 1 because 0-indexed, [0, 1, 2] */
@@ -137,12 +135,7 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 		for (int i = 0; i < resourcesToAddToStorage.size(); i++)	/* debug */
 			System.out.println("Sending " + resourcesToAddToStorage.get(i) + " to " + username);
 
-		message = "Received the following resources: ";
-
-		for (int i = 0; i < resourcesToAddToStorage.size(); i++)
-			message += PrintMethods.convertResTypeToString(resourcesToAddToStorage.get(i)) + " ";
-
-		controller.getView().send(new OperationResultMessage(message));		/* Sends a list of resourceType to the client */
+		controller.getView().send(new BoughtResMessage(resourcesToAddToStorage));		/* Sends a list of resourceType to the client */
 	}
 
 	public void buyDevCard(List<String> command, String username)
