@@ -27,7 +27,6 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 	{
 		for (int i = 0; i < 4; i++)
 		{
-			System.out.println("Card " + (i + 1) + ":");
 			PrintMethods.printLeaderCard(fourLeaderCards.get(i));
 			System.out.print("\n");
 		}
@@ -45,7 +44,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 		System.out.println("Notifying observers (network handler)");
 		networkHandler.sendCommand(command);
-		command.clear();
+		command.clear();		/* So the same command List<String> instance can be used in all functions */
 	}
 
 	public void chooseResources()			/* 1st player: nothing; 2nd: 1 resource; 3rd: 1 resource + 1 faithPoint; 4th: 2 resources + 1 faithPoint */
@@ -164,37 +163,31 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 	public void buyDevCard()
 	{
 		command.add("BUY_DEVCARD");
+		int devCardAreaIndex, targetAreaLayer;
 		System.out.print("These are your current dev card areas:\n\n");
 		PrintMethods.printDevCardAreas(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas());
 		System.out.print("Which dev card area do you want to put the new card in? ");
-		int devCardAreaIndex = Integer.parseInt(input.nextLine());		/* 1, 2 or 3			- 1 because arrays are zero-indexed */
-		int targetAreaLayer = cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas()[devCardAreaIndex - 1].getLayer();
+		devCardAreaIndex = Integer.parseInt(input.nextLine());		/* 1, 2 or 3			- 1 because arrays are zero-indexed */
+		targetAreaLayer = cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas()[devCardAreaIndex - 1].getLayer();
 
-		if (targetAreaLayer == 3)
+		while (targetAreaLayer == 3)
 		{
-			System.out.println("This dev card area already has three cards!");			/* Get input again */
+			System.out.print("This dev card area already has three cards!\nWhich dev card area do you want to put the new card in? ");
+			devCardAreaIndex = Integer.parseInt(input.nextLine());		/* 1, 2 or 3			- 1 because arrays are zero-indexed */
+			targetAreaLayer = cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas()[devCardAreaIndex - 1].getLayer();
 		}
 
-		else			/* Print devcards of level targetAreaLayer + 1 (layer = level of top devcard. New card has to have a higher level) */
-		{
-			PrintMethods.printDevCardsMarketLevel(cli.getGameState().getCurrDevCardsMarket(), targetAreaLayer + 1);
-		}
+		/* Print devcards of level targetAreaLayer + 1 (layer = level of top devcard. New card has to have a higher level) */
+		PrintMethods.printDevCardsMarketLevel(cli.getGameState().getCurrDevCardsMarket(), targetAreaLayer + 1);
 
 		System.out.print("Insert the card number you want to buy: ");
 
 		command.add(input.nextLine());
-
-		//DevCard boughtCard = gameState.getCurrDevCardsMarket().getDevCardByNumber(cardNumberToBuy);
-
-		//checkResources(gameState.getPlayerByName(username).getDashboard(), boughtCard);
-
-																		/*	Check for resources. Here or server? LocalModel class?
-																			If client-side check, send new vault, storage and devcard market.
-																			If server-side check, send messages. I think server side is better.
-																		*/
-
 		cli.getNetworkHandler().sendCommand(command);
 		command.clear();
+
+	/*	Check for resources. Here or server? SERVER		LocalModel class? NO
+		If client-side check, send new vault, storage and devcard market. If server-side check, send messages. I think server side is better. YES	*/
 	}
 
 	public void activateProduction()

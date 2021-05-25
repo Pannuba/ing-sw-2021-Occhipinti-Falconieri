@@ -6,11 +6,11 @@ import it.polimi.ingsw.model.ResourceType;
 import java.io.Serializable;
 import java.util.List;
 
-public class BoughtResMessage implements Message, Serializable
+public class BoughtResourcesMessage implements Message, Serializable
 {
 	private List<ResourceType> boughtResources;
 
-	public BoughtResMessage(List<ResourceType> boughtResources)
+	public BoughtResourcesMessage(List<ResourceType> boughtResources)
 	{
 		this.boughtResources = boughtResources;
 	}

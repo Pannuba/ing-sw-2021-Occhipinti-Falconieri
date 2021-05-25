@@ -5,7 +5,7 @@ import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.server.controller.Controller;
 import it.polimi.ingsw.server.messages.ChooseLeadersMessage;
-import it.polimi.ingsw.server.messages.InitialResMessage;
+import it.polimi.ingsw.server.messages.InitialResourcesMessage;
 import it.polimi.ingsw.server.view.ClientHandler;
 
 import java.util.List;
@@ -49,7 +49,7 @@ public class Match implements Runnable
 			views.get(i).send(new ChooseLeadersMessage(leaderCardsLists.get(i)));
 		}
 
-		sendToAll(new InitialResMessage());
+		sendToAll(new InitialResourcesMessage());
 
 		/* Round management. controller? Call checkVaticanReport at the end of every round
 

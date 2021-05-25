@@ -5,7 +5,7 @@ import it.polimi.ingsw.client.view.cli.MessageDecoder;
 
 import java.io.Serializable;
 
-public class InitialResMessage implements Message, Serializable
+public class InitialResourcesMessage implements Message, Serializable
 {
 	@Override
 	public void process(MessageDecoder decoder)

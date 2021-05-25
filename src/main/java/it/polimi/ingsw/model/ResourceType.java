@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model;
 
+import java.util.HashMap;
+import java.util.List;
+
 public enum ResourceType
 {
 	BLUE,
@@ -60,5 +63,20 @@ public enum ResourceType
 				System.out.println("convertMarbleToResType: error");
 				return null;
 		}
+	}
+
+	public static HashMap<ResourceType, Integer> convertResTypeListToHashMap(List<ResourceType> list)
+	{
+		HashMap<ResourceType, Integer> map = new HashMap<>();
+
+		map.put(BLUE, 0);
+		map.put(GREY, 0);
+		map.put(YELLOW, 0);
+		map.put(PURPLE, 0);
+
+		for (int i = 0; i < list.size(); i++)
+			map.put(list.get(i), map.get(list.get(i)) + 1);			/* Increase counter for "key" resource type */
+
+		return map;
 	}
 }

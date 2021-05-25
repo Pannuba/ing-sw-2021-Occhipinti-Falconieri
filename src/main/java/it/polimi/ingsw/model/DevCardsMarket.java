@@ -9,13 +9,10 @@ import java.util.List;
 public class DevCardsMarket implements Serializable
 {
 	private List<DevCard> devCards = new ArrayList<>();
-	private int cardsInMarket;
 
 	public DevCardsMarket()
 	{
 		System.out.println("Creating devcards...");
-
-		cardsInMarket = 48;
 
 		for (int i = 0; i < 48; i++)
 		{
@@ -32,16 +29,16 @@ public class DevCardsMarket implements Serializable
 
 	public DevCard buyCardFromMarket(int boughtCardNum)
 	{
+		System.out.println("DevCardMarket: buying card #" + boughtCardNum);
 		DevCard boughtCard = getDevCardByNumber(boughtCardNum);
 		devCards.remove(boughtCard);
-		cardsInMarket--;
 
 		return boughtCard;
 	}
 
 	public DevCard getDevCardByNumber(int cardNumber)		/* Set method useless */
 	{
-		for (int i = 0; i < cardsInMarket; i++)
+		for (int i = 0; i < devCards.size(); i++)
 		{
 			if (devCards.get(i).getCardNumber() == cardNumber)
 				return devCards.get(i);
@@ -58,15 +55,5 @@ public class DevCardsMarket implements Serializable
 	public void setDevCards(List<DevCard> devCards)
 	{
 		this.devCards = devCards;
-	}
-
-	public int getCardsInMarket()
-	{
-		return cardsInMarket;
-	}
-
-	public void setCardsInMarket(int cardsInMarket)
-	{
-		this.cardsInMarket = cardsInMarket;
 	}
 }

@@ -118,11 +118,6 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		return (GameState) receive();
 	}
 
-	public List<LeaderCard> getFourLeadercards()
-	{
-		return (List<LeaderCard>) receive();
-	}
-
 	public void sendString(String message)
 	{
 		try

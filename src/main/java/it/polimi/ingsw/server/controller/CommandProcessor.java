@@ -1,16 +1,17 @@
 package it.polimi.ingsw.server.controller;
 
-import it.polimi.ingsw.client.view.cli.PrintMethods;
 import it.polimi.ingsw.model.MarbleType;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
-import it.polimi.ingsw.server.messages.BoughtResMessage;
+import it.polimi.ingsw.server.messages.BoughtDevCardMessage;
+import it.polimi.ingsw.server.messages.BoughtResourcesMessage;
 import it.polimi.ingsw.server.messages.OperationResultMessage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class CommandProcessor        /* Contains the code that runs when a certain command is received */
@@ -50,7 +51,7 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 				resourceToAdd.setQuantity(1);
 				resourceToAdd.setResourceType(ResourceType.convertStringToResType(Character.toString(command.get(1).charAt(i))));
 				model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(resourceToAdd);
-			}
+			}	/* TODO: change to (ResourceType, quantity)! Or pass a new Resource with a new constructor to set ResourceType and quantity */
 		}
 
 		if (command.get(2).isEmpty() == false)		/* If there are initial faithpoints, get that player's pawn and move it */
@@ -130,18 +131,29 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 				resourcesToAddToStorage.add(ResourceType.convertMarbleToResType(boughtMarbles.get(i)));
 		}
 
-		/* TODO: add resources to storage */
+		/* TODO: add resources to storage. [BLUE PURPLE BLUE]. Sort hashmap? List? */
 
-		for (int i = 0; i < resourcesToAddToStorage.size(); i++)	/* debug */
-			System.out.println("Sending " + resourcesToAddToStorage.get(i) + " to " + username);
+		HashMap<ResourceType, Integer> resourcesMap = ResourceType.convertResTypeListToHashMap(resourcesToAddToStorage);
 
-		controller.getView().send(new BoughtResMessage(resourcesToAddToStorage));		/* Sends a list of resourceType to the client */
+		//if (resourcesMap.get(ResourceType.BLUE) != 0)
+			//model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(/* new Resource(ResourceType.BLUE, resourcesMap.get(ResourceType.BLUE) */);
+
+
+		controller.getView().send(new BoughtResourcesMessage(resourcesToAddToStorage));		/* Sends a list of resourceType to the client */
 	}
 
 	public void buyDevCard(List<String> command, String username)
 	{
-		int boughtCardNum = Integer.parseInt(command.get(1));
-		DevCard boughtCard = model.getDevCardsMarket().getDevCardByNumber(boughtCardNum);
-		controller.checkDevCardRequirements(model.getPlayerByUsername(username).getDashboard(), boughtCard);
+		int cardToBuyNum = Integer.parseInt(command.get(1));
+		DevCard cardToBuy = model.getDevCardsMarket().getDevCardByNumber(cardToBuyNum);
+
+		if (controller.checkDevCardRequirements(model.getPlayerByUsername(username).getDashboard(), cardToBuy))
+		{
+			model.getDevCardsMarket().buyCardFromMarket(cardToBuyNum);		/* Returns a DevCard but we already have it... Change to void? */
+			controller.getView().send(new BoughtDevCardMessage(cardToBuy));
+		}
+
+		else
+			controller.getView().send(new OperationResultMessage("Couldn't buy devcard: requirements not satisfied"));
 	}
 }

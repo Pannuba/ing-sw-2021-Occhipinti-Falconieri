@@ -91,7 +91,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 	{
 		System.out.println("Dev cards market:\n\n");
 
-		for (int i = 0; i < market.getCardsInMarket(); i++)
+		for (int i = 0; i < market.getDevCards().size(); i++)
 		{
 			System.out.println("Card " + (i + 1) + ":");
 			printDevCard(market.getDevCards().get(i));
@@ -104,7 +104,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 	{
 		System.out.println("Dev cards in market with level = " + level + ":\n\n");
 
-		for (int i = 0; i < market.getCardsInMarket(); i++)
+		for (int i = 0; i < market.getDevCards().size(); i++)
 		{
 			if (market.getDevCards().get(i).getLevel() == level)
 			{
@@ -116,7 +116,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		System.out.print("\n\n");
 	}
 
-	private static void printDevCard(DevCard devCard)		/* Cost and requirements are actually the opposite! */
+	public static void printDevCard(DevCard devCard)		/* Cost and requirements are actually the opposite! */
 	{
 		System.out.print(	"Card number: " + devCard.getCardNumber() +
 							"\nColor: " + devCard.getColor() +
@@ -151,18 +151,20 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 		for (int i = 0; i < track.getRedPawns().size(); i++)		/* Size of redPawns = numPlayers, to avoid passing gamestate */
 		{
-			System.out.println(players.get(i).getUsername() + " is at position " + track.getRedPawns().get(i));
+			System.out.println(players.get(i).getUsername() + " is at position " + track.getRedPawns().get(i) + "/24");
 		}
+
+		System.out.print("\n");
 	}
 
 	private static void printVault(Vault vault)			/* Use ANSI color codes */
 	{
-		System.out.print("Your vault currently has:\n\n"																					+
+		System.out.print("Your vault currently has:\n"																					+
 						 vault.getResourceAmounts().get(ResourceType.BLUE)	 + " " + convertResTypeToString(ResourceType.BLUE)	 + ", "		+
 						 vault.getResourceAmounts().get(ResourceType.GREY)	 + " " + convertResTypeToString(ResourceType.GREY)	 + ", "		+
 						 vault.getResourceAmounts().get(ResourceType.YELLOW) + " " + convertResTypeToString(ResourceType.YELLOW) + ", and "	+
-						 vault.getResourceAmounts().get(ResourceType.PURPLE) + " " + convertResTypeToString(ResourceType.PURPLE) + "\n" 	+
-						 "For a total of " + vault.getTotalResources() + " resources\n\n" );
+						 vault.getResourceAmounts().get(ResourceType.PURPLE) + " " + convertResTypeToString(ResourceType.PURPLE) + " " 	+
+						 "for a total of " + vault.getTotalResources() + " resources\n\n" );
 	}
 
 	private static void printStorage(Storage storage)
@@ -223,7 +225,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 							middleShelf + "\n"	+
 							"_______" + "\n"	+
 							bottomShelf + "\n"	+
-							"_______" + "\n"	);
+							"_______" + "\n\n"	);
 
 	}
 
@@ -231,7 +233,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 	{
 		if (devCardAreas[0].isEmpty() && devCardAreas[1].isEmpty() && devCardAreas[2].isEmpty())
 		{
-			System.out.println("You have no dev cards!");
+			System.out.print("You have no dev cards!\n\n");
 			return;
 		}
 

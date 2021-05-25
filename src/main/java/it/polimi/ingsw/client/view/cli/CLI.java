@@ -2,8 +2,6 @@ package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.model.GameState;
-import it.polimi.ingsw.model.ResourceType;
-import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.server.messages.Message;
 
 import java.util.*;

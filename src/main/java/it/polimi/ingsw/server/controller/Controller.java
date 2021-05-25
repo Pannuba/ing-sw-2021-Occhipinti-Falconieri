@@ -48,7 +48,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 				break;
 
 			case "BUY_DEVCARD":							/* 	Client picks a devcard # to buy from their local devCardsMarket. Server checks for resources
-															If there are enough resources, spend them and add the devcards to Player
+															If there are enough resources, spend them and add the devcard to Player
 															Otherwise send an error message. Can client perform another action?		*/
 				runCommand.buyDevCard(command, username);
 				chooseNextPlayer();		/* Don't choose next player during setup actions */
