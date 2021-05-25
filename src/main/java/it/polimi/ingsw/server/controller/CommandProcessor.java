@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
+import it.polimi.ingsw.server.messages.BoughtResMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,9 +45,7 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 				Resource resourceToAdd = new Resource();
 				resourceToAdd.setQuantity(1);
 				resourceToAdd.setResourceType(ResourceType.convertStringToResType(Character.toString(command.get(1).charAt(i))));
-
-				/* Put resource in storage, ask player where? Create method somewhere */
-
+				model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(resourceToAdd);
 			}
 		}
 
@@ -96,7 +95,7 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 		for (int i = 0; i < resourcesToAddToStorage.size(); i++)	/* debug */
 			System.out.println("Sending " + resourcesToAddToStorage.get(i) + " to " + username);
 
-		controller.getView().send(resourcesToAddToStorage);		/* Sends a list of resourceType to the client. Or Resource with set quantities? */
+		controller.getView().send(new BoughtResMessage(resourcesToAddToStorage));		/* Sends a list of resourceType to the client */
 	}
 
 	public void buyDevCard(List<String> command, String username)

@@ -27,7 +27,7 @@ public class Storage implements Serializable
 	{
 		for (int i = 0; i < shelves.length; i++)		/* shelves.length is always 3 */
 		{
-			if (shelves[i].getShelfResource().getQuantity() > shelves[i].getShelfSize())
+			if (shelves[i].getShelfResourceQuantity() > shelves[i].getShelfSize())
 			{
 				System.out.println("Shelf " + (i + 1) + " has incorrect amount of resources");
 				return false;
@@ -50,14 +50,14 @@ public class Storage implements Serializable
 	{
 		Shelf destinationShelf = convertIndexToShelf(shelfNumber);
 
-		if (checkShelves() == true && (destinationShelf.getShelfSize() - destinationShelf.getShelfResource().getQuantity()) >= resourceToAdd.getQuantity())
+		if (checkShelves() == true && (destinationShelf.getShelfSize() - destinationShelf.getShelfResourceQuantity()) >= resourceToAdd.getQuantity())
 		{
 			if (resourceToAdd.getResourceType() == destinationShelf.getShelfResource().getResourceType())
 			{
 				if (destinationShelf.getShelfResource().getResourceType() == null)
 					destinationShelf.getShelfResource().setResourceType(resourceToAdd.getResourceType());
 
-				destinationShelf.getShelfResource().setQuantity(destinationShelf.getShelfResource().getQuantity() + resourceToAdd.getQuantity());
+				destinationShelf.getShelfResource().setQuantity(destinationShelf.getShelfResourceQuantity() + resourceToAdd.getQuantity());
 
 				assignToLocalShelves(destinationShelf);
 			}
@@ -70,13 +70,63 @@ public class Storage implements Serializable
 			System.out.println("Storage addResource: not enough space on the destination shelf");
 	}
 
+	public void addResourceSmart(Resource resourceToAdd)	/* Adds a resource without having to specify the shelf number. Checks the smaller shelf first */
+	{
+
+		switch(resourceToAdd.getQuantity())
+		{
+			case 1:
+				if 		(shelves[0].isEmpty())
+					addResource(resourceToAdd, 1);
+
+				else if (shelves[1].isEmpty() && shelves[0].getShelfResourceType() == resourceToAdd.getResourceType())
+				{
+					moveResources(1, 2);		/* First check if shelves can be optimized by moving the same resource type from a smaller shelf to a bigger one */
+					addResource(resourceToAdd, 2);
+				}
+
+				else if (shelves[2].isEmpty() && shelves[1].getShelfResourceType() == resourceToAdd.getResourceType())
+				{
+					moveResources(2, 3);
+					addResource(resourceToAdd, 3);
+				}
+
+				else if (shelves[1].isEmpty())						/* Otherwise just move them to the next shelf with enough space */
+					addResource(resourceToAdd, 2);
+
+				else if (shelves[2].isEmpty())
+					addResource(resourceToAdd, 3);
+
+				break;
+
+			case 2:
+				if 		(shelves[1].isEmpty())
+					addResource(resourceToAdd, 2);
+
+				else if (shelves[2].isEmpty() && shelves[1].getShelfResourceType() == resourceToAdd.getResourceType() && shelves[1].getShelfResourceQuantity() < 2)
+				{
+					moveResources(2, 3);
+					addResource(resourceToAdd, 3);
+				}
+
+				break;
+
+			case 3:
+				if (shelves[2].isEmpty())
+					addResource(resourceToAdd, 3);
+
+			/* Is it possible to add 4 or more resources at the same time? */
+
+		}
+	}
+
 	public void moveResources(int shelfFromNum, int shelfToNum)				/* Can't have 2 shelves with the same resource according to the rules, */
 	{																		/* so this function can only move resources to an empty shelf */
 		Shelf shelfFrom = convertIndexToShelf(shelfFromNum);				/* and the source shelf has to be empty afterwards */
 		Shelf shelfTo = convertIndexToShelf(shelfToNum);
-		int amount = shelfFrom.getShelfResource().getQuantity();
+		int amount = shelfFrom.getShelfResourceQuantity();
 
-		if (shelfTo.getShelfResource().getQuantity() != 0)
+		if (shelfTo.getShelfResourceQuantity() != 0)
 		{
 			System.out.println("Storage moveResources: destination shelf is not empty");
 			return;
@@ -103,7 +153,7 @@ public class Storage implements Serializable
 		int totalResources = 0;
 
 		for (int i = 0; i < shelves.length; i++)
-			totalResources += shelves[i].getShelfResource().getQuantity();
+			totalResources += shelves[i].getShelfResourceQuantity();
 
 		return totalResources;
 	}

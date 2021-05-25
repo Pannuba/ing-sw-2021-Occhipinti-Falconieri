@@ -2,10 +2,12 @@ package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.model.ResourceType;
+import it.polimi.ingsw.server.messages.Message;
 
 import java.util.*;
 
-public class CLI extends Observable implements Observer
+public class CLI extends Observable implements Observer		/* FIXME: CLI gets old information from gamestates. executors/threadpools, or send less gamestates? */
 {
 	private final Scanner input;
 	private final ActionExecutor action;
@@ -97,20 +99,10 @@ public class CLI extends Observable implements Observer
 	}
 
 	@Override
-	public void update(Observable obs, Object obj)		/* Make a (Local)GameState thread that gets the new gamestate? */
+	public void update(Observable obs, Object obj)
 	{
-	/*	if (obj instanceof Message)
-		{
-			((Message) obj).process(); // calls method in cli
-		}
-
-		OR
-
-		if (obj instanceof BuyResourcesMessage)
-		{
-			getBoughtResources();
-		}
-	*/
+		if (obj instanceof Message)
+			((Message) obj).process(this);		/* Calls method in cli specified in the message */
 
 		if (obj instanceof GameState)		/* TODO: check if match is over, or make server send "match over" message */
 		{
@@ -129,6 +121,11 @@ public class CLI extends Observable implements Observer
 			else
 				System.out.println("It's " + gameState.getCurrPlayerName() + "'s turn!");
 		}
+	}
+
+	public void getBoughtResources(List<ResourceType> boughtResources)
+	{
+		System.out.println("Received the following resources: " + boughtResources);
 	}
 
 	public NetworkHandler getNetworkHandler()

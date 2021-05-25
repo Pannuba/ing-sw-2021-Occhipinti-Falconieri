@@ -18,6 +18,15 @@ public class Shelf implements Serializable
 		shelfResource = new Resource();			/* Quantity is set to 0 in Resource constructor */
 	}
 
+	public boolean isEmpty()
+	{
+		if (shelfResource.getQuantity() == 0 && shelfResource.getResourceType() == null)
+			return true;
+
+		else
+			return false;
+	}
+
 	public int getShelfSize()
 	{
 		return shelfSize;
@@ -26,6 +35,16 @@ public class Shelf implements Serializable
 	public void setShelfSize(int shelfSize)
 	{
 		this.shelfSize = shelfSize;
+	}
+
+	public ResourceType getShelfResourceType()
+	{
+		return shelfResource.getResourceType();
+	}
+
+	public int getShelfResourceQuantity()
+	{
+		return shelfResource.getQuantity();
 	}
 
 	public Resource getShelfResource()
