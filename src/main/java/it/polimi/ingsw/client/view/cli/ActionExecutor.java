@@ -19,10 +19,9 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		this.input = cli.getInput();
 	}
 
-	public void chooseLeaderCards()
+	public void chooseLeaderCards(List<LeaderCard> fourLeaderCards)
 	{
 		NetworkHandler networkHandler = cli.getNetworkHandler();
-		List<LeaderCard> fourLeaderCards = networkHandler.getFourLeadercards();		/* Server tells clients info about the four leadercards */
 
 		for (int i = 0; i < 4; i++)
 		{
@@ -155,5 +154,10 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 																		*/
 
 		cli.getNetworkHandler().sendCommand(command);
+	}
+
+	public void activateProduction()
+	{
+
 	}
 }

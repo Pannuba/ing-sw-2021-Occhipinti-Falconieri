@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.view.cli;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.ResourceType;
+import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.server.messages.Message;
 
 import java.util.*;
@@ -18,12 +19,9 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets old 
 	public CLI()
 	{
 		input = new Scanner(System.in);
-		action = new ActionExecutor(this);
-		gameStart();						/* Will probably have to start the networkHandler immediately and use messages also for setup to avoid sync problems */
-		action.chooseLeaderCards();
-		action.chooseResources();
-		new Thread(networkHandler).start();		/* Start listening for gamestate updates from server. Put this after game setup? Maybe. */
-
+		action = new ActionExecutor(this);		/* Pass CLI to ActionExecutor for the NetworkHandler and input instance, gamestate and username */
+		gameStart();
+		new Thread(networkHandler).start();		/* Start listening for messages or gamestate updates from server */
 	}
 
 	private void gameStart()
@@ -68,7 +66,7 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets old 
 				break;
 
 			case 2:
-				//command.add("ACTIVATE_PRODUCTION");
+				action.activateProduction();
 				break;
 
 			case 3:
@@ -98,6 +96,16 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets old 
 		}
 	}
 
+	public void chooseLeaderCards(List<LeaderCard> leaderCards)		/* Call function in ActionExecutor directly from the message? */
+	{
+		action.chooseLeaderCards(leaderCards);
+	}
+
+	public void chooseResources()
+	{
+		action.chooseResources();
+	}
+
 	@Override
 	public void update(Observable obs, Object obj)
 	{
@@ -111,15 +119,18 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets old 
 			System.out.println(gameState.getCurrPlayers().get(0).getUsername() + " is active? " + gameState.getCurrPlayers().get(0).isMyTurn());
 			System.out.println(gameState.getCurrPlayers().get(1).getUsername() + " is active? " + gameState.getCurrPlayers().get(1).isMyTurn());
 
-			if (gameState.getPlayerByName(username).isMyTurn())
+			if (gameState.getCurrPlayerName() != null)
 			{
-				System.out.println("It's your turn!");
-				System.out.print("What do you want to do?\nBuy from market (0), buy devcards (1), activate production (2), view cards (3), view board (4), view markets (5): ");
-				chooseAction(Integer.parseInt(input.nextLine()));
-			}
+				if (gameState.getPlayerByName(username).isMyTurn())
+				{
+					System.out.println("It's your turn!");
+					System.out.print("What do you want to do?\nBuy from market (0), buy devcards (1), activate production (2), view cards (3), view board (4), view markets (5): ");
+					chooseAction(Integer.parseInt(input.nextLine()));
+				}
 
-			else
-				System.out.println("It's " + gameState.getCurrPlayerName() + "'s turn!");
+				else
+					System.out.println("It's " + gameState.getCurrPlayerName() + "'s turn!");
+			}
 		}
 	}
 
