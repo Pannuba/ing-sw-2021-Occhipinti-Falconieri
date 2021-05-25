@@ -13,6 +13,7 @@ public class StorageTest
     private Resource a = new Resource();
     private Resource b = new Resource();
     private Resource c = new Resource();
+    private Resource resourceToAdd = new Resource();
     private Shelf[] shelves = new Shelf[3];
 
 
@@ -31,7 +32,7 @@ public class StorageTest
         shelves[1].setShelfResource(b);
         shelves[2].setShelfResource(c);
         storage.setShelves(shelves);
-        assertEquals("Error", false, storage.checkShelves());
+        assertFalse("Error", storage.checkShelves());
     }
 
     @Test
@@ -49,7 +50,7 @@ public class StorageTest
         shelves[1].setShelfResource(b);
         shelves[2].setShelfResource(c);
         storage.setShelves(shelves);
-        assertEquals("Error", false, storage.checkShelves());
+        assertFalse("Error", storage.checkShelves());
     }
 
     @Test
@@ -67,15 +68,180 @@ public class StorageTest
         shelves[1].setShelfResource(b);
         shelves[2].setShelfResource(c);
         storage.setShelves(shelves);
-        assertEquals("Error", true, storage.checkShelves());
+        assertTrue("Error", storage.checkShelves());
     }
 
     @Test
-    public void addResource() {
+    public void addResource1()     /* Test for entering correct parameters */
+    {
+        for (int i=0; i<3; i++)
+            shelves[i] = new Shelf(i+1);
+        a.setQuantity(1);
+        a.setResourceType(ResourceType.PURPLE);
+        b.setQuantity(1);
+        b.setResourceType(ResourceType.GREY);
+        c.setQuantity(3);
+        c.setResourceType(ResourceType.YELLOW);
+        shelves[0].setShelfResource(a);
+        shelves[1].setShelfResource(b);
+        shelves[2].setShelfResource(c);
+        storage.setShelves(shelves);
+        resourceToAdd.setQuantity(1);
+        resourceToAdd.setResourceType(ResourceType.GREY);
+        assertTrue(storage.addResource(resourceToAdd, 2));
+        assertEquals("Error", 2, shelves[1].getShelfResourceQuantity());
     }
 
     @Test
-    public void moveResources() {
+    public void addResource2()    /* Test for entering correct parameters */
+    {
+        for (int i=0; i<3; i++)
+            shelves[i] = new Shelf(i+1);
+        b.setQuantity(1);
+        b.setResourceType(ResourceType.GREY);
+        c.setQuantity(3);
+        c.setResourceType(ResourceType.YELLOW);
+        shelves[0].setShelfResource(a);
+        shelves[1].setShelfResource(b);
+        shelves[2].setShelfResource(c);
+        storage.setShelves(shelves);
+        resourceToAdd.setQuantity(1);
+        resourceToAdd.setResourceType(ResourceType.BLUE);
+        assertTrue(storage.addResource(resourceToAdd, 1));
+        assertEquals("Error", 1, shelves[0].getShelfResourceQuantity());
+        assertEquals("Error", ResourceType.BLUE, shelves[0].getShelfResourceType());
+    }
+
+    @Test
+    public void addResource3()        /* destination shelf and resource to add have different resource types */
+    {
+        for (int i=0; i<3; i++)
+            shelves[i] = new Shelf(i+1);
+        a.setQuantity(1);
+        a.setResourceType(ResourceType.PURPLE);
+        b.setQuantity(1);
+        b.setResourceType(ResourceType.GREY);
+        c.setQuantity(3);
+        c.setResourceType(ResourceType.YELLOW);
+        shelves[0].setShelfResource(a);
+        shelves[1].setShelfResource(b);
+        shelves[2].setShelfResource(c);
+        storage.setShelves(shelves);
+        resourceToAdd.setQuantity(1);
+        resourceToAdd.setResourceType(ResourceType.BLUE);
+        assertFalse(storage.addResource(resourceToAdd, 2));
+    }
+
+    @Test
+    public void addResource4()        /* not enough space on the destination shelf */
+    {
+        for (int i=0; i<3; i++)
+            shelves[i] = new Shelf(i+1);
+        a.setQuantity(1);
+        a.setResourceType(ResourceType.PURPLE);
+        b.setQuantity(1);
+        b.setResourceType(ResourceType.GREY);
+        c.setQuantity(3);
+        c.setResourceType(ResourceType.YELLOW);
+        shelves[0].setShelfResource(a);
+        shelves[1].setShelfResource(b);
+        shelves[2].setShelfResource(c);
+        storage.setShelves(shelves);
+        resourceToAdd.setQuantity(2);
+        resourceToAdd.setResourceType(ResourceType.GREY);
+        assertFalse(storage.addResource(resourceToAdd, 2));
+    }
+
+    @Test
+    public void addResourceSmart()
+    {
+
+    }
+
+    @Test
+    public void moveResources1()     /* destination shelf is not empty */
+    {
+        for (int i=0; i<3; i++)
+            shelves[i] = new Shelf(i+1);
+        a.setQuantity(1);
+        a.setResourceType(ResourceType.PURPLE);
+        b.setQuantity(1);
+        b.setResourceType(ResourceType.GREY);
+        c.setQuantity(3);
+        c.setResourceType(ResourceType.YELLOW);
+        shelves[0].setShelfResource(a);
+        shelves[1].setShelfResource(b);
+        shelves[2].setShelfResource(c);
+        storage.setShelves(shelves);
+        assertFalse(storage.moveResources(1,2));
+    }
+
+    @Test
+    public void moveResources2()     /* correct parameters */
+    {
+        for (int i=0; i<3; i++)
+            shelves[i] = new Shelf(i+1);
+        a.setQuantity(1);
+        a.setResourceType(ResourceType.PURPLE);
+        c.setQuantity(3);
+        c.setResourceType(ResourceType.YELLOW);
+        shelves[0].setShelfResource(a);
+        shelves[1].setShelfResource(b);
+        shelves[2].setShelfResource(c);
+        storage.setShelves(shelves);
+        assertTrue(storage.moveResources(1,2));
+        assertEquals("Error", 0, shelves[0].getShelfResourceQuantity());
+        assertEquals("Error", 1, shelves[1].getShelfResourceQuantity());
+        assertNull("Error", shelves[0].getShelfResourceType());
+        assertEquals("Error", ResourceType.PURPLE, shelves[1].getShelfResourceType());
+    }
+
+    @Test
+    public void moveResources3()     /* not enough space on destination shelf */
+    {
+        for (int i=0; i<3; i++)
+            shelves[i] = new Shelf(i+1);
+        a.setQuantity(1);
+        a.setResourceType(ResourceType.PURPLE);
+        c.setQuantity(3);
+        c.setResourceType(ResourceType.YELLOW);
+        shelves[0].setShelfResource(a);
+        shelves[1].setShelfResource(b);
+        shelves[2].setShelfResource(c);
+        storage.setShelves(shelves);
+        assertFalse(storage.moveResources(3,2));
+    }
+
+    @Test
+    public void findResourceByType()
+    {
+        for (int i=0; i<3; i++)
+            shelves[i] = new Shelf(i+1);
+        a.setQuantity(1);
+        a.setResourceType(ResourceType.BLUE);
+        b.setQuantity(2);
+        b.setResourceType(ResourceType.GREY);
+        c.setQuantity(2);
+        c.setResourceType(ResourceType.YELLOW);
+        shelves[0].setShelfResource(a);
+        shelves[1].setShelfResource(b);
+        shelves[2].setShelfResource(c);
+        storage.setShelves(shelves);
+        assertEquals("Error", 1, storage.findResourceByType(ResourceType.BLUE));
+        assertEquals("Error", 2, storage.findResourceByType(ResourceType.GREY));
+        assertEquals("Error", 2, storage.findResourceByType(ResourceType.YELLOW));
+        assertEquals("Error", 0, storage.findResourceByType(ResourceType.PURPLE));
+    }
+
+    @Test
+    public void convertIndexToShelf()
+    {
+        for (int i=0; i<3; i++)
+            shelves[i] = new Shelf(i+1);
+        storage.setShelves(shelves);
+        assertEquals("Error", shelves[0], storage.convertIndexToShelf(1));
+        assertEquals("Error", shelves[1], storage.convertIndexToShelf(2));
+        assertEquals("Error", shelves[2], storage.convertIndexToShelf(3));
     }
 
     @Test

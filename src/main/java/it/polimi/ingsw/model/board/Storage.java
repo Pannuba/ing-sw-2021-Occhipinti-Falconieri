@@ -51,7 +51,7 @@ public class Storage implements Serializable
 			return true;
 	}
 
-	public void addResource(Resource resourceToAdd, int shelfNumber)		/* Called in controller, shelfNumber is 1 for shelves[0] and so on */
+	public boolean addResource(Resource resourceToAdd, int shelfNumber)		/* Called in controller, shelfNumber is 1 for shelves[0] and so on */
 	{
 		Shelf destinationShelf = convertIndexToShelf(shelfNumber);
 
@@ -65,14 +65,21 @@ public class Storage implements Serializable
 				destinationShelf.getShelfResource().setQuantity(destinationShelf.getShelfResourceQuantity() + resourceToAdd.getQuantity());
 
 				assignToLocalShelves(destinationShelf);
+				return true;
 			}
 
 			else
+			{
 				System.out.println("Storage addResource: destination shelf and resource to add have different resource types");
+				return false;
+			}
 		}
 
 		else
+		{
 			System.out.println("Storage addResource: not enough space on the destination shelf");
+			return false;
+		}
 	}
 
 	public void addResourceSmart(Resource resourceToAdd)	/* Adds a resource without having to specify the shelf number. Checks the smaller shelf first */
@@ -125,7 +132,7 @@ public class Storage implements Serializable
 		}
 	}
 
-	public void moveResources(int shelfFromNum, int shelfToNum)				/* Can't have 2 shelves with the same resource according to the rules, */
+	public boolean moveResources(int shelfFromNum, int shelfToNum)				/* Can't have 2 shelves with the same resource according to the rules, */
 	{																		/* so this function can only move resources to an empty shelf */
 		Shelf shelfFrom = convertIndexToShelf(shelfFromNum);				/* and the source shelf has to be empty afterwards */
 		Shelf shelfTo = convertIndexToShelf(shelfToNum);
@@ -134,7 +141,7 @@ public class Storage implements Serializable
 		if (shelfTo.getShelfResourceQuantity() != 0)
 		{
 			System.out.println("Storage moveResources: destination shelf is not empty");
-			return;
+			return false;
 		}
 
 		if (checkShelves() == true && shelfTo.getShelfSize() >= amount)			/* If there's enough space to move the resource(s) */
@@ -147,10 +154,13 @@ public class Storage implements Serializable
 
 			assignToLocalShelves(shelfFrom);
 			assignToLocalShelves(shelfTo);
+			return true;
 		}
 
-		else
+		else {
 			System.out.println("Storage moveResources: not enough space on destination shelf");
+			return false;
+		}
 	}
 
 	public int findResourceByType(ResourceType resourceToFind)		/* Returns the number of resources of passed type. Used to check cards requirements */
@@ -176,7 +186,7 @@ public class Storage implements Serializable
 		return totalResources;
 	}
 
-	private Shelf convertIndexToShelf(int shelfNumber)
+	public Shelf convertIndexToShelf(int shelfNumber)
 	{
 		switch (shelfNumber)
 		{
