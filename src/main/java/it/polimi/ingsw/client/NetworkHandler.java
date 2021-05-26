@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.util.Ping;
 
 import java.io.*;
 import java.util.*;
@@ -13,7 +14,6 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 {
 	private Socket clientSocket;
 	private ObjectInputStream ois;
-	private DataOutputStream dos;
 	private ObjectOutputStream oos;
 	private final String ip;
 	private final int port;
@@ -32,9 +32,13 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 			{
 				System.out.println("Waiting for new object from server");
 				Object inputObj = ois.readObject();
-				System.out.println("Received " + inputObj.getClass().getSimpleName());		/* TODO: if (inputObj instanceof Ping) -> don't care */
-				setChanged();
-				notifyObservers(inputObj);
+				System.out.println("Received " + inputObj.getClass().getSimpleName());
+
+				if (!(inputObj instanceof Ping))		/* Don't care if it's a ping */
+				{
+					setChanged();
+					notifyObservers(inputObj);
+				}
 			}
 			catch (IOException | ClassNotFoundException e)
 			{
@@ -54,8 +58,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		try
 		{
 			clientSocket = new Socket(ip, port);
-			clientSocket.setSoTimeout(20000);								/* 20000 ms = 20 seconds */
-			dos = new DataOutputStream(clientSocket.getOutputStream());		/* Send strings to server */
+			clientSocket.setSoTimeout(20000);								/* 20000 ms = 20 seconds. shutdown() after 3 failed pings? */
 			oos = new ObjectOutputStream(clientSocket.getOutputStream());	/* Send commands (list of strings) to server */
 			ois = new ObjectInputStream(clientSocket.getInputStream());		/* Receive gamestate from server (object) */
 		}
@@ -70,12 +73,12 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		{
 			public void run()
 			{
-				sendString("ping");
+				send(new Ping());
 			}
 		};
 
 		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(timerTask, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
+		//timer.scheduleAtFixedRate(timerTask, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
 	}
 
 	public boolean isFirstPlayer()
@@ -126,23 +129,11 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		return (GameState) receive();
 	}
 
-	public void sendString(String message)		/* writeUTF vs writeObject? */
+	public void send(Object obj)
 	{
 		try
 		{
-			dos.writeUTF(message);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
-
-	public void sendCommand(List<String> command)
-	{
-		try
-		{
-			oos.writeObject(command);
+			oos.writeObject(obj);
 			oos.reset();						/* omg if this works i swear to god (it did kinda) */
 		}
 		catch (Exception e)
@@ -173,9 +164,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 
 		try
 		{
-			dos.flush();
 			oos.flush();
-			dos.close();
 			oos.close();
 
 			clientSocket.close();
@@ -192,7 +181,6 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 	public void update(Observable obs, Object obj)		/* Send command (List) to server */
 	{
 		System.out.println("Sending command " + ((List<String>) obj).get(0) + " to server");
-		sendCommand((List<String>) obj);
+		send((List<String>) obj);
 	}
-
 }

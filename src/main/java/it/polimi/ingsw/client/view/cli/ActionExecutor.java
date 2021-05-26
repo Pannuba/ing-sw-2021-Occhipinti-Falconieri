@@ -41,7 +41,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		command.add(cardChoice2);
 
 		System.out.println("Notifying observers (network handler)");
-		networkHandler.sendCommand(command);
+		networkHandler.send(command);
 		command.clear();		/* So the same command List<String> instance can be used in all functions */
 	}
 
@@ -84,7 +84,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		command.add("INITIAL_RESOURCES");
 		command.add(chosenResources);
 		command.add(initialFaithPoints);
-		networkHandler.sendCommand(command);
+		networkHandler.send(command);
 		command.clear();
 	}
 
@@ -113,7 +113,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 		command.add("ACTIVATE_LEADER");
 		command.add(chosenCard);
-		networkHandler.sendCommand(command);
+		networkHandler.send(command);
 		command.clear();
 	}
 
@@ -126,7 +126,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 		command.add("DISCARD_LEADER");
 		command.add(chosenCard);
-		networkHandler.sendCommand(command);
+		networkHandler.send(command);
 		command.clear();
 	}
 
@@ -156,7 +156,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		command.add("BUY_RESOURCES");
 		command.add(rowOrCol);
 		command.add(rowOrColNum);
-		networkHandler.sendCommand(command);
+		networkHandler.send(command);
 		command.clear();
 	}
 
@@ -183,7 +183,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 		command.add("BUY_DEVCARD");
 		command.add(input.nextLine());
-		networkHandler.sendCommand(command);
+		networkHandler.send(command);
 		command.clear();
 
 	/*	Check for resources. Here or server? SERVER		LocalModel class? NO
@@ -255,7 +255,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 				}
 		}
 
-		networkHandler.sendCommand(command);
+		networkHandler.send(command);
 		command.clear();
 	}
 }

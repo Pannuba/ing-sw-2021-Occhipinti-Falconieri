@@ -30,7 +30,6 @@ public class ServerListener				/* Thread running listening for incoming connecti
 		System.out.println("Server started");
 
 		Socket socket = null;
-		DataInputStream dis = null;			/* TODO: use ois to get username and numPlayers? */
 		ObjectInputStream ois = null;
 		ObjectOutputStream oos = null;
 
@@ -48,17 +47,16 @@ public class ServerListener				/* Thread running listening for incoming connecti
 				try
 				{
 					socket = serverSocket.accept();
-					dis = new DataInputStream(socket.getInputStream());
 					ois = new ObjectInputStream(socket.getInputStream());
 					oos = new ObjectOutputStream(socket.getOutputStream());
 					System.out.println("Incoming connection: " + socket);
-					username = dis.readUTF();
+					username = (String) ois.readObject();
 					System.out.println("Username: " + username);
 
 					if (i == 0)		/* Get numPlayers from the first player who connects */
 					{
 						oos.writeObject("true");
-						numPlayers = Integer.parseInt(dis.readUTF());        /* So the loop is repeated numPlayers times to get numPlayers players */
+						numPlayers = Integer.parseInt((String) ois.readObject());        /* So the loop is repeated numPlayers times to get numPlayers players */
 						System.out.println("numPlayers: " + numPlayers);
 					}
 

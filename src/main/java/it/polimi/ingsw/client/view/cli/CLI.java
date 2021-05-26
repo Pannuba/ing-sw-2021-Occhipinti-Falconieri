@@ -40,12 +40,12 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets stuc
 		networkHandler.connect();
 
 		System.out.println("Sending username to server...");
-		networkHandler.sendString(username);
+		networkHandler.send(username);
 
 		if (networkHandler.isFirstPlayer())
 		{
 			System.out.print("Total players: ");
-			networkHandler.sendString(input.nextLine());
+			networkHandler.send(input.nextLine());
 		}
 
 		System.out.println("Created network handler");

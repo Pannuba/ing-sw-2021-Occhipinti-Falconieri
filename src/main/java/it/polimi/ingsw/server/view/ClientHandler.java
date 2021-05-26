@@ -1,5 +1,7 @@
 package it.polimi.ingsw.server.view;
 
+import it.polimi.ingsw.util.Ping;
+
 import java.io.DataInputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -26,28 +28,32 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 		{
 			public void run()
 			{
-				send("ping");		/* TODO: send Ping object, not string */
+				send(new Ping());
 			}
 		};
 
 		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(timerTask, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
+		//timer.scheduleAtFixedRate(timerTask, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
 	}
 
 	public void run()		/* Activates after the setup phase has ended */
 	{
 		System.out.println("Started " + username + "'s clienthandler thread");
-		List<String> command;
+		Object inputObj;
 
 		while (!clientSocket.isClosed())		/* Translate message, then call respective function in controller */
 		{
 			try
 			{
 				System.out.println(username + " waiting for message from client");
-				command = (List<String>) ois.readObject();				/* TODO: if (obj instanceof ... like in CLI to tell apart commands and pings */
-				System.out.println("Received " + command + " from " + username);
-				setChanged();
-				notifyObservers(command);		/* Sends command to controller */
+				inputObj = ois.readObject();
+
+				if (!(inputObj instanceof Ping))		/* Don't care about pings, they're just used to not make the timeout expire */
+				{
+					System.out.println("Received " + inputObj + " from " + username);
+					setChanged();
+					notifyObservers(inputObj);        /* Sends command to controller */
+				}
 			}
 			catch (Exception e)				/* EOFException when client disconnects */
 			{
