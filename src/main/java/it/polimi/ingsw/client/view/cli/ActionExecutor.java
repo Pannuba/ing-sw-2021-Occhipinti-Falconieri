@@ -47,7 +47,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 	public void chooseResources()			/* 1st player: nothing; 2nd: 1 resource; 3rd: 1 resource + 1 faithPoint; 4th: 2 resources + 1 faithPoint */
 	{
-		GameState gameState = networkHandler.getGameState();
+		GameState gameState = networkHandler.getGameState();		/* FIXME: this may be the cause of my desperation, but now I'm too tired */
 		String chosenResources = "";			/* Will be converted to ResourceType in server controller */
 		String initialFaithPoints = "";
 

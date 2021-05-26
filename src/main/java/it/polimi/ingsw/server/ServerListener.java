@@ -1,7 +1,7 @@
-package it.polimi.ingsw.server.view;
+package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.server.Match;
+import it.polimi.ingsw.server.view.ClientHandler;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -14,7 +14,7 @@ import java.util.List;
 */
 
 
-public class ServerListener implements Runnable		/* Thread running listening for incoming connections */
+public class ServerListener				/* Thread running listening for incoming connections */
 {
 	private final ServerSocket serverSocket;
 
@@ -25,12 +25,12 @@ public class ServerListener implements Runnable		/* Thread running listening for
 		this.serverSocket = serverSocket;
 	}
 
-	public void run()
+	public void start()
 	{
 		System.out.println("Server started");
 
 		Socket socket = null;
-		DataInputStream dis = null;
+		DataInputStream dis = null;			/* TODO: use ois to get username and numPlayers? */
 		ObjectInputStream ois = null;
 		ObjectOutputStream oos = null;
 
@@ -73,12 +73,12 @@ public class ServerListener implements Runnable		/* Thread running listening for
 
 				players.add(new Player(username));
 
-				ClientHandler clientHandler = new ClientHandler(socket, username, dis, ois, oos);		/* Start view thread that listens for commands from client */
+				ClientHandler clientHandler = new ClientHandler(socket, username, ois, oos);		/* Start view thread that listens for commands from client */
 				views.add(clientHandler);
 				new Thread(clientHandler).start();
 			}
 
-			Runnable r = new Match(players, views);			/* Start match, passes players and views. TODO: advanced functionality to create multiple matches */
+			Runnable r = new Match(players, views);			/* Start match, passes players and views */
 			new Thread(r).start();
 		}
 	}

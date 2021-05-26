@@ -3,11 +3,9 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.model.GameState;
 
 import java.io.*;
-import java.util.List;
-import java.util.Observable;
+import java.util.*;
 
 import java.net.Socket;
-import java.util.Observer;
 
 import static java.lang.Boolean.parseBoolean;
 
@@ -34,7 +32,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 			{
 				System.out.println("Waiting for new object from server");
 				Object inputObj = ois.readObject();
-				System.out.println("Received " + inputObj.getClass().getSimpleName());
+				System.out.println("Received " + inputObj.getClass().getSimpleName());		/* TODO: if (inputObj instanceof Ping) -> don't care */
 				setChanged();
 				notifyObservers(inputObj);
 			}
@@ -51,11 +49,12 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 
 	public void connect()
 	{
-		System.out.println("Connecting to server...");		/* TODO: add timeout */
+		System.out.println("Connecting to server...");
 
 		try
 		{
 			clientSocket = new Socket(ip, port);
+			clientSocket.setSoTimeout(20000);								/* 20000 ms = 20 seconds */
 			dos = new DataOutputStream(clientSocket.getOutputStream());		/* Send strings to server */
 			oos = new ObjectOutputStream(clientSocket.getOutputStream());	/* Send commands (list of strings) to server */
 			ois = new ObjectInputStream(clientSocket.getInputStream());		/* Receive gamestate from server (object) */
@@ -66,6 +65,17 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 			System.out.println("Connection failed to server");
 			shutdown();
 		}
+
+		TimerTask timerTask = new TimerTask()
+		{
+			public void run()
+			{
+				sendString("ping");
+			}
+		};
+
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(timerTask, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
 	}
 
 	public boolean isFirstPlayer()
@@ -88,7 +98,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 	{
 		System.out.println("Waiting for players to connect...");
 
-		String message = "";
+		String message;
 
 		while (!clientSocket.isClosed())
 		{
@@ -105,18 +115,18 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 			catch (Exception e)
 			{
 				e.printStackTrace();
-				System.out.println("Server closed connection!");
+				System.out.println("Server closed connection!");	/* Separate error messages for timeout or server crash? */
 				shutdown();
 			}
 		}
 	}
 
-	public GameState getGameState()		/* Manually get gamestate without using observer/observable */
+	public GameState getGameState()		/* Manually get gamestate without using observer/observable. Should probably get rid of this */
 	{
 		return (GameState) receive();
 	}
 
-	public void sendString(String message)
+	public void sendString(String message)		/* writeUTF vs writeObject? */
 	{
 		try
 		{

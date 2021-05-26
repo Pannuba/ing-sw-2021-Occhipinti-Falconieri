@@ -1,32 +1,37 @@
 package it.polimi.ingsw.server.view;
 
-import it.polimi.ingsw.model.GameState;
-
 import java.io.DataInputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 public class ClientHandler extends Observable implements Runnable, Observer		/* Observes model waiting for changes, observed by controller */
 {
 	private final Socket clientSocket;
 	private final String username;
-	private final DataInputStream dis;
 	private final ObjectInputStream ois;
 	private final ObjectOutputStream oos;
 
-	public ClientHandler(Socket clientSocket, String username, DataInputStream dis, ObjectInputStream ois, ObjectOutputStream oos)
+	public ClientHandler(Socket clientSocket, String username, ObjectInputStream ois, ObjectOutputStream oos)
 	{
 		System.out.println("Created client handler for: " + username);
 
 		this.clientSocket = clientSocket;
 		this.username = username;
-		this.dis = dis;				/* Can't create a I/O stream for a socket that already has one (created in ServerListener) */
-		this.ois = ois;
+		this.ois = ois;			/* Can't create a I/O stream for a socket that already has one (created in ServerListener) */
 		this.oos = oos;
+
+		TimerTask timerTask = new TimerTask()
+		{
+			public void run()
+			{
+				send("ping");		/* TODO: send Ping object, not string */
+			}
+		};
+
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(timerTask, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
 	}
 
 	public void run()		/* Activates after the setup phase has ended */
@@ -39,12 +44,12 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 			try
 			{
 				System.out.println(username + " waiting for message from client");
-				command = (List<String>) ois.readObject();		/* EOFException when client disconnects */
+				command = (List<String>) ois.readObject();				/* TODO: if (obj instanceof ... like in CLI to tell apart commands and pings */
 				System.out.println("Received " + command + " from " + username);
 				setChanged();
 				notifyObservers(command);		/* Sends command to controller */
 			}
-			catch (Exception e)
+			catch (Exception e)				/* EOFException when client disconnects */
 			{
 				e.printStackTrace();
 				System.out.println(username + " disconnected!");

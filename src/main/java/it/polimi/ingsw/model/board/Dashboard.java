@@ -8,8 +8,8 @@ import java.util.List;
 
 public class Dashboard implements Serializable
 {
-	private Vault vault;
-	private Storage storage;
+	private final Vault vault;
+	private final Storage storage;
 	private DevCardArea[] devCardAreas = new DevCardArea[3];
 
 	public Dashboard()
@@ -62,19 +62,9 @@ public class Dashboard implements Serializable
 		return vault;
 	}
 
-	public void setVault(Vault vault)
-	{
-		this.vault = vault;
-	}
-
 	public Storage getStorage()
 	{
 		return storage;
-	}
-
-	public void setStorage(Storage storage)
-	{
-		this.storage = storage;
 	}
 
 	public DevCardArea[] getDevCardAreas()
