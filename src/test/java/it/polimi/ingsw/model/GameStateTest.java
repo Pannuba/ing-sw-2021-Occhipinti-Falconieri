@@ -10,33 +10,33 @@ import static org.junit.Assert.*;
 
 public class GameStateTest {
 
-    String pippo = "pippo";
-    String pluto = "pluto";
-    String paperino = "paperino";
-    private Player a = new Player(pippo);
-    private Player b = new Player(pluto);
-    private Player c = new Player(paperino);
+    String p1Name = "pippo";
+    String p2Name = "pluto";
+    String p3Name = "paperino";
+    private Player p1 = new Player(p1Name);
+    private Player p2 = new Player(p2Name);
+    private Player p3 = new Player(p3Name);
     private List<Player> players = new ArrayList<>();
     private Track track = new Track(players);
     private MarblesMarket marblesMarket = new MarblesMarket();
     private DevCardsMarket devCardsMarket = new DevCardsMarket();
-    private GameState gameState = new GameState(players,pluto,track,marblesMarket,devCardsMarket);
+    private GameState gameState = new GameState(players, p2Name,track,marblesMarket,devCardsMarket);
 
     @Test
     public void getPlayerByName1()
     {
-        players.add(a);
-        players.add(b);
-        players.add(c);
-        assertEquals("Error", b, gameState.getPlayerByName(gameState.getCurrPlayerName()));
+        players.add(p1);
+        players.add(p2);
+        players.add(p3);
+        assertEquals("Error", p2, gameState.getPlayerByName(gameState.getCurrPlayerName()));
     }
 
     @Test
     public void getCurrPlayers()
     {
-        players.add(a);
-        players.add(b);
-        players.add(c);
+        players.add(p1);
+        players.add(p2);
+        players.add(p3);
         assertEquals("Error", players, gameState.getCurrPlayers());
     }
 }
