@@ -34,11 +34,12 @@ public class Controller implements Observer			/* Observes view to get commands..
 			case "SELECT_LEADERCARDS":							/* "SELECT_LEADERCARDS", "x", "y" */
 				runCommand.selectLeaderCards(command, username);
 				model.update();			/* Send new gamestate to everyone */
-				break;
+				return;			/* Skip postRoundChecks for singleplayer... Or put flipActionToken somewhere else? */
 
 			case "INITIAL_RESOURCES":							/* "INITIAL_RESOURCES", "BY", "2" */
 				runCommand.initialResources(command, username);
-				break;
+				//if (model.getNumPlayers() == 1) model.update();
+				return;
 
 			case "ACTIVATE_LEADER":
 				runCommand.activateLeader(command, username);

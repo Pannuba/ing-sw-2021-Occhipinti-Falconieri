@@ -19,9 +19,9 @@ public class Track implements Serializable
 
 	public Track(List<Player> players)
 	{
-		numPlayers = players.size();
+		System.out.println("Creating track...");
 
-		System.out.println("Track: creating pawns");
+		numPlayers = players.size();
 		redPawns = new HashMap<>();
 
 		for (int i = 0; i < players.size(); i++)		/* Initialize player pawns, player ID 0 has redPawns[0], ID 1 has redPawns[1] and so on */
@@ -36,8 +36,6 @@ public class Track implements Serializable
 		popeTokens[2] = new PopeToken(4);
 
 		/* Initialize track here, hardcoded (at least for now) because 1 xml for each box is too much */
-
-		System.out.println("Track: creating the 25 boxes");
 
 		faithTrack[0]  = new Box(BoxType.NORMAL, 0,  0);
 		faithTrack[1]  = new Box(BoxType.NORMAL, 1,  0);

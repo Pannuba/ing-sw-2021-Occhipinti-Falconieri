@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.cards;
 
-public abstract class ActionToken
+import java.io.Serializable;
+
+public abstract class ActionToken implements Serializable
 {
 	private boolean isFlipped;
 

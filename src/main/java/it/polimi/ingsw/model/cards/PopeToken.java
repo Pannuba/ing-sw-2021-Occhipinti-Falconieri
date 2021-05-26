@@ -10,9 +10,7 @@ public class PopeToken implements Serializable
 
 	public PopeToken(int points)
 	{
-		System.out.println("PopeToken: creating token with " + points + " points");
 		this.points = points;
-
 		isActive = false;
 		isDiscarded = false;
 	}

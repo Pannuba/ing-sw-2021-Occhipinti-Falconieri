@@ -24,7 +24,6 @@ public class Match implements Runnable
 		this.numPlayers = players.size();
 		this.views = views;
 
-		System.out.println("Creating model and controller for new match...");
 		model = new Model(players);
 		controller = new Controller(model);
 
@@ -44,10 +43,7 @@ public class Match implements Runnable
 		List<List<LeaderCard>> leaderCardsLists = model.createLeaderCardsLists();		/* Put this in controller? */
 
 		for (int i = 0; i < numPlayers; i++)
-		{
-			System.out.println("Sending " + players.get(i).getUsername() + " " + leaderCardsLists.get(i));
 			views.get(i).send(new ChooseLeadersMessage(leaderCardsLists.get(i)));
-		}
 
 		sendToAll(new InitialResourcesMessage());
 	}
@@ -55,9 +51,6 @@ public class Match implements Runnable
 	private void sendToAll(Object obj)
 	{
 		for (int i = 0; i < numPlayers; i++)
-		{
-			System.out.println("Sending " + players.get(i).getUsername() + " " + obj);
 			views.get(i).send(obj);
-		}
 	}
 }

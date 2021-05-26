@@ -57,6 +57,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 	{
 		try
 		{
+			System.out.println("Sending " + message.getClass().getSimpleName() + " to " + username);
 			oos.writeObject(message);
 			oos.reset();
 		}
@@ -74,7 +75,6 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 	@Override
 	public void update(Observable obs, Object obj)			/* Send gamestate received from model */
 	{
-		System.out.println("Sending gamestate to " + username);
-		send((GameState) obj);
+		send(obj);
 	}
 }

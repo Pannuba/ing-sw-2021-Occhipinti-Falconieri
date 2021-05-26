@@ -141,7 +141,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		}
 
 		if (players.size() == 1)
-			System.out.println("Lawrence the Magnificent is at position " + track.getBlackPawn() + "/24");
+			System.out.println("Lorenzo the Magnificent is at position " + track.getBlackPawn() + "/24");
 
 		System.out.print("\n");
 	}
