@@ -8,7 +8,7 @@ import java.util.List;
 
 public class BoughtResourcesMessage implements Message, Serializable
 {
-	private List<ResourceType> boughtResources;
+	private final List<ResourceType> boughtResources;
 
 	public BoughtResourcesMessage(List<ResourceType> boughtResources)
 	{

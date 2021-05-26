@@ -11,7 +11,7 @@ import java.util.List;
 
 /*	When a new clients connects to the server it sends the username and then either NEW_GAME or JOIN_GAME.
 	After that, another thread is created for each socket, waiting for messages coming from that user.
- */
+*/
 
 
 public class ServerListener implements Runnable		/* Thread running listening for incoming connections */

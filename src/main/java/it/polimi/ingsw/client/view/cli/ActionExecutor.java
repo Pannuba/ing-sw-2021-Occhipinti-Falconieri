@@ -27,13 +27,10 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 	public void chooseLeaderCards(List<LeaderCard> fourLeaderCards)
 	{
 		for (int i = 0; i < 4; i++)
-		{
 			PrintMethods.printLeaderCard(fourLeaderCards.get(i));
-			System.out.print("\n");
-		}
 
 		System.out.print(	"Choose leader card " + fourLeaderCards.get(0).getCardNumber() + ", " + fourLeaderCards.get(1).getCardNumber() +
-				", " + fourLeaderCards.get(2).getCardNumber() + ", " + fourLeaderCards.get(3).getCardNumber() + ": ");
+							", " + fourLeaderCards.get(2).getCardNumber() + ", " + fourLeaderCards.get(3).getCardNumber() + ": ");
 
 		String cardChoice1 = input.nextLine();					/* Has to be the leadercard number */
 		System.out.print("Choose the second leader card: ");

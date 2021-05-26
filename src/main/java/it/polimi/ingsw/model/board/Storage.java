@@ -39,9 +39,9 @@ public class Storage implements Serializable
 			shelves[2].getShelfResource().getResourceType() == null)
 			return true;		/* Otherwise checkShelves returns false at the start of the match */
 
-		if (shelves[0].getShelfResource().getResourceType() == shelves[1].getShelfResource().getResourceType()   ||
-			shelves[1].getShelfResource().getResourceType() == shelves[2].getShelfResource().getResourceType()   ||
-			shelves[0].getShelfResource().getResourceType() == shelves[2].getShelfResource().getResourceType()	 )
+		if (shelves[0].getShelfResource().getResourceType() == shelves[1].getShelfResource().getResourceType()	||
+			shelves[1].getShelfResource().getResourceType() == shelves[2].getShelfResource().getResourceType()	||
+			shelves[0].getShelfResource().getResourceType() == shelves[2].getShelfResource().getResourceType()	)
 		{
 			System.out.println("Shelf has the same type of resource of another shelf");
 			return false;
@@ -85,7 +85,7 @@ public class Storage implements Serializable
 	public void addResourceSmart(Resource resourceToAdd)	/* Adds a resource without having to specify the shelf number. Checks the smaller shelf first */
 	{
 
-		switch(resourceToAdd.getQuantity())
+		switch (resourceToAdd.getQuantity())
 		{
 			case 1:
 				if 		(shelves[0].isEmpty() && shelves[1].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[2].getShelfResourceType() != resourceToAdd.getResourceType())
@@ -112,6 +112,7 @@ public class Storage implements Serializable
 				break;
 
 			case 2:
+
 				if 		(shelves[1].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[2].getShelfResourceType() != resourceToAdd.getResourceType())
 					addResource(resourceToAdd, 2);
 
@@ -120,12 +121,14 @@ public class Storage implements Serializable
 					moveResources(2, 3);
 					addResource(resourceToAdd, 3);
 				}
+
 				else if (shelves[2].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[1].getShelfResourceType() != resourceToAdd.getResourceType())
 					addResource(resourceToAdd,3);
 
 				break;
 
 			case 3:
+
 				if (shelves[2].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[1].getShelfResourceType() != resourceToAdd.getResourceType())
 					addResource(resourceToAdd, 3);
 
@@ -139,6 +142,7 @@ public class Storage implements Serializable
 		switch (resourceToRemove.getQuantity())
 		{
 			case 1:
+
 				if (shelves[0].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[0].getShelfResourceQuantity() == 1)
 				{
 					shelves[0].getShelfResource().setQuantity(0);
@@ -148,6 +152,7 @@ public class Storage implements Serializable
 				else if (shelves[1].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[1].getShelfResourceQuantity() >= 1)
 				{
 					shelves[1].getShelfResource().setQuantity(shelves[1].getShelfResourceQuantity() - 1);
+
 					if (shelves[1].getShelfResourceQuantity() == 0)
 						shelves[1].getShelfResource().setResourceType(null);
 				}
@@ -155,6 +160,7 @@ public class Storage implements Serializable
 				else if (shelves[2].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[2].getShelfResourceQuantity() >= 1)
 				{
 					shelves[2].getShelfResource().setQuantity(shelves[2].getShelfResourceQuantity() - 1);
+
 					if (shelves[2].getShelfResourceQuantity() == 0)
 						shelves[2].getShelfResource().setResourceType(null);
 				}
@@ -162,6 +168,7 @@ public class Storage implements Serializable
 				break;
 
 			case 2:
+
 				if (shelves[1].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[1].getShelfResourceQuantity() == 2)
 				{
 					shelves[1].getShelfResource().setQuantity(0);
@@ -171,6 +178,7 @@ public class Storage implements Serializable
 				else if (shelves[2].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[2].getShelfResourceQuantity() >= 2)
 				{
 					shelves[2].getShelfResource().setQuantity(shelves[2].getShelfResourceQuantity() - 2);
+
 					if (shelves[2].getShelfResourceQuantity() == 0)
 						shelves[2].getShelfResource().setResourceType(null);
 				}
@@ -178,6 +186,7 @@ public class Storage implements Serializable
 				break;
 
 			case 3:
+
 				if (shelves[2].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[2].getShelfResourceQuantity() == 3)
 				{
 					shelves[2].getShelfResource().setQuantity(0);
@@ -189,7 +198,7 @@ public class Storage implements Serializable
 		}
 	}
 
-	public boolean moveResources(int shelfFromNum, int shelfToNum)				/* Can't have 2 shelves with the same resource according to the rules, */
+	public boolean moveResources(int shelfFromNum, int shelfToNum)			/* Can't have 2 shelves with the same resource according to the rules, */
 	{																		/* so this function can only move resources to an empty shelf */
 		Shelf shelfFrom = convertIndexToShelf(shelfFromNum);				/* and the source shelf has to be empty afterwards */
 		Shelf shelfTo = convertIndexToShelf(shelfToNum);

@@ -1,8 +1,6 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.client.view.cli.CLI;
 import it.polimi.ingsw.model.GameState;
-import it.polimi.ingsw.model.cards.LeaderCard;
 
 import java.io.*;
 import java.util.List;

@@ -133,7 +133,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	public static void printTrack(Track track, List<Player> players)		/* Players are ordered by ID in model after randomly generating IDs */
 	{
-		System.out.print("Track:\n\n");
+		System.out.print("Track:\n");
 
 		for (int i = 0; i < track.getRedPawns().size(); i++)		/* Size of redPawns = numPlayers, to avoid passing gamestate */
 		{
