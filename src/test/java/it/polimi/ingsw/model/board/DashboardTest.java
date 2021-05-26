@@ -11,9 +11,9 @@ import static org.junit.Assert.*;
 public class DashboardTest {
 
     private Dashboard dashboard = new Dashboard();
-    DevCardArea one = new DevCardArea();
-    DevCardArea two = new DevCardArea();
-    DevCardArea three = new DevCardArea();
+    DevCardArea devCardArea1 = new DevCardArea();
+    DevCardArea devCardArea2 = new DevCardArea();
+    DevCardArea devCardArea3 = new DevCardArea();
     DevCardArea[] devCardAreas = new DevCardArea[3];
     DevCard card1 = new DevCard();
     DevCard card2 = new DevCard();
@@ -24,12 +24,12 @@ public class DashboardTest {
     @Test
     public void getTotalDevCardsNum()
     {
-        devCardAreas[0] = one;
-        devCardAreas[1] = two;
-        devCardAreas[2] = three;
-        one.setLayer(3);
-        two.setLayer(2);
-        three.setLayer(1);
+        devCardAreas[0] = devCardArea1;
+        devCardAreas[1] = devCardArea2;
+        devCardAreas[2] = devCardArea3;
+        devCardArea1.setLayer(3);
+        devCardArea2.setLayer(2);
+        devCardArea3.setLayer(1);
         dashboard.setDevCardAreas(devCardAreas);
         assertEquals("Error", 6, dashboard.getTotalDevCardsNum());
     }
@@ -41,13 +41,13 @@ public class DashboardTest {
         card2.setLevel(2);
         card3.setLevel(1);
         card4.setLevel(2);
-        one.addDevCard(card1);
-        one.addDevCard(card2);
-        two.addDevCard(card3);
-        two.addDevCard(card4);
-        devCardAreas[0] = one;
-        devCardAreas[1] = two;
-        devCardAreas[2] = three;
+        devCardArea1.addDevCard(card1);
+        devCardArea1.addDevCard(card2);
+        devCardArea2.addDevCard(card3);
+        devCardArea2.addDevCard(card4);
+        devCardAreas[0] = devCardArea1;
+        devCardAreas[1] = devCardArea2;
+        devCardAreas[2] = devCardArea3;
         dashboard.setDevCardAreas(devCardAreas);
         allDevCards.add(card1);
         allDevCards.add(card2);
