@@ -21,9 +21,9 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 		action.chooseLeaderCards(leaderCards);
 	}
 
-	public void chooseResources()
+	public void chooseResources(int playerID)
 	{
-		action.chooseResources();
+		action.chooseResources(playerID);
 	}
 
 	public void getOperationResultMessage(String message)		/* Give choice to repeat a failed action? */

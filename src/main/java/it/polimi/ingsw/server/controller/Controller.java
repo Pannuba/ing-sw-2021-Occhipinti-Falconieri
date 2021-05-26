@@ -32,13 +32,11 @@ public class Controller implements Observer			/* Observes view to get commands..
 		switch (command.get(0))
 		{
 			case "SELECT_LEADERCARDS":							/* "SELECT_LEADERCARDS", "x", "y" */
-				runCommand.selectLeaderCards(command, username);
-				model.update();			/* Send new gamestate to everyone */
+				runCommand.selectLeaderCards(command, username);		/* model.update() here or in INITIAL_RESOURCES fricks everything up */
 				return;			/* Skip postRoundChecks for singleplayer... Or put flipActionToken somewhere else? */
 
 			case "INITIAL_RESOURCES":							/* "INITIAL_RESOURCES", "BY", "2" */
 				runCommand.initialResources(command, username);
-				//if (model.getNumPlayers() == 1) model.update();
 				return;
 
 			case "ACTIVATE_LEADER":
@@ -54,7 +52,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 															Otherwise send an error message. Can client perform another action?		*/
 				runCommand.buyDevCard(command, username);
 				chooseNextPlayer();		/* Don't choose next player during setup actions */
-				model.update();
+				model.update();			/* Send new gamestate to everyone */
 				break;
 
 			case "ACTIVATE_PRODUCTION":
@@ -201,7 +199,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 	{
 		ActionToken token = model.getNextActionToken();
 		token.doAction();
-		view.send(new ActionTokenMessage(token));
+		view.send(new ActionTokenMessage(token));		/* FIXME: client receives too many messages at once, only reads one so they queue up */
 	}
 
 	@Override

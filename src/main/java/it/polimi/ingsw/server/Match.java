@@ -43,9 +43,12 @@ public class Match implements Runnable
 		List<List<LeaderCard>> leaderCardsLists = model.createLeaderCardsLists();		/* Put this in controller? */
 
 		for (int i = 0; i < numPlayers; i++)
+		{
 			views.get(i).send(new ChooseLeadersMessage(leaderCardsLists.get(i)));
+			views.get(i).send(new InitialResourcesMessage(i));		/* Because the player list in Model is sorted by ID. players[0] has ID 0 and so on */
+		}
 
-		sendToAll(new InitialResourcesMessage());
+		model.update();		/* Send the first gamestate after the setup messages. Putting this here instead of the controller makes everything work */
 	}
 
 	private void sendToAll(Object obj)

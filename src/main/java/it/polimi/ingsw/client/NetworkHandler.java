@@ -58,7 +58,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		try
 		{
 			clientSocket = new Socket(ip, port);
-			clientSocket.setSoTimeout(20000);								/* 20000 ms = 20 seconds. shutdown() after 3 failed pings? */
+			clientSocket.setSoTimeout(2000000);							/* 20000 ms = 20 seconds. shutdown() after 3 failed pings? */
 			oos = new ObjectOutputStream(clientSocket.getOutputStream());	/* Send commands (list of strings) to server */
 			ois = new ObjectInputStream(clientSocket.getInputStream());		/* Receive gamestate from server (object) */
 		}
