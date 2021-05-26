@@ -2,7 +2,6 @@ package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.model.GameState;
-import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.model.cards.SkillProduction;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ActionExecutor		/* Has methods that perform actions such as buying resources, to avoid cluttering the CLI */
+public class ActionExecutor		/* Has methods that perform actions such as buying resources, to avoid cluttering the CLI. Interface? */
 {
 	private final Scanner input;
 	private final CLI cli;
@@ -118,6 +117,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		command.add("ACTIVATE_LEADER");
 		command.add(chosenCard);
 		networkHandler.sendCommand(command);
+		command.clear();
 	}
 
 	private void discardLeader()
@@ -130,6 +130,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		command.add("DISCARD_LEADER");
 		command.add(chosenCard);
 		networkHandler.sendCommand(command);
+		command.clear();
 	}
 
 	public void buyResources()
@@ -158,7 +159,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		command.add("BUY_RESOURCES");
 		command.add(rowOrCol);
 		command.add(rowOrColNum);
-		cli.getNetworkHandler().sendCommand(command);
+		networkHandler.sendCommand(command);
 		command.clear();
 	}
 
@@ -185,7 +186,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 		command.add("BUY_DEVCARD");
 		command.add(input.nextLine());
-		cli.getNetworkHandler().sendCommand(command);
+		networkHandler.sendCommand(command);
 		command.clear();
 
 	/*	Check for resources. Here or server? SERVER		LocalModel class? NO
@@ -228,7 +229,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 			case "3":
 				List<LeaderCard> leaderCards = cli.getGameState().getPlayerByName(cli.getUsername()).getLeaderCards();
 				List<LeaderCard> activeCardsWithProdSkill = new ArrayList<>();
-				String chosenCardNum = "";
+				String chosenCardNum = "", resourceToMakeLeader = "";
 
 				for (int i = 0; i < leaderCards.size(); i++)
 				{
@@ -244,16 +245,20 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 					for (int i = 0; i < activeCardsWithProdSkill.size(); i++)			/* For the rare chance that the player has both cards SkillProduction */
 						PrintMethods.printLeaderCard(activeCardsWithProdSkill.get(i));
 
-					System.out.println("Which card do you want to use?");
+					System.out.print("Which card do you want to use? ");
 					chosenCardNum = input.nextLine();
 
+					System.out.print("Insert the resource you want to make (B/G/Y/P)");
+					resourceToMakeLeader = input.nextLine();
+
 					command.add("ACTIVATE_PRODUCTION");
-					command.add("SKILLPRODUCTION");
+					command.add("LEADER_SKILL");
 					command.add(chosenCardNum);
+					command.add(resourceToMakeLeader);
 				}
 		}
 
-		cli.getNetworkHandler().sendCommand(command);
+		networkHandler.sendCommand(command);
 		command.clear();
 	}
 }

@@ -44,7 +44,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 				setChanged();
 				notifyObservers(command);		/* Sends command to controller */
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 				e.printStackTrace();
 				System.out.println(username + " disconnected!");

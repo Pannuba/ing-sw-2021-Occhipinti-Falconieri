@@ -55,7 +55,7 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets old 
 	
 	private void chooseAction(int choice)			/* Actions class? */
 	{
-		switch(choice)
+		switch (choice)
 		{
 			case 0:
 				action.leaderChoice();

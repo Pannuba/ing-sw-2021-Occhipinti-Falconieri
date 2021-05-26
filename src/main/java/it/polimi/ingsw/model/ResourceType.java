@@ -17,7 +17,7 @@ public enum ResourceType
 			return null;
 		}
 
-		switch(str.toUpperCase())		/* So lowercase inputs like "g" are still valid */
+		switch (str.toUpperCase())		/* So lowercase inputs like "g" are still valid */
 		{
 			case "G":
 				return ResourceType.GREY;
@@ -42,7 +42,7 @@ public enum ResourceType
 		if (marbleType == null)
 			return null;
 
-		switch(marbleType)
+		switch (marbleType)
 		{
 			case WHITE:			/* White marbles have their separate function */
 				return null;

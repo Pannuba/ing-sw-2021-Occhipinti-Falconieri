@@ -9,7 +9,7 @@ public enum DevCardColor
 
 	public static DevCardColor convertStringToDevColorType(String str)
 	{
-		switch(str.toUpperCase())
+		switch (str.toUpperCase())
 		{
 			case "G":
 				return DevCardColor.GREEN;

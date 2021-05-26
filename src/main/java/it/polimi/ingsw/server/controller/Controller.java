@@ -57,6 +57,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 			case "ACTIVATE_PRODUCTION":
 
+				runCommand.activateProduction(command, username);
 				chooseNextPlayer();
 				model.update();
 				break;
@@ -113,7 +114,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 	{
 		List<DevCard> devCards = playerBoard.getAllDevCards();
 
-		switch(boughtCard.getClass().getSimpleName())
+		switch (boughtCard.getClass().getSimpleName())
 		{
 			case "SkillDiscount":		/* Player has to have x devcards of any level */
 			case "SkillMarble":
@@ -157,7 +158,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 				Vault vault = playerBoard.getVault();
 
 				int reqResourceQuantity = 0;
-				reqResourceQuantity = storage.findResourceByType(storageRequirements.getResourceType());
+				reqResourceQuantity += storage.findResourceByType(storageRequirements.getResourceType());
 				reqResourceQuantity += vault.getResourceAmounts().get(storageRequirements.getResourceType());
 
 				if (reqResourceQuantity >= storageRequirements.getQuantity())

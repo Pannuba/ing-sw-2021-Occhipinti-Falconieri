@@ -157,4 +157,29 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 		else
 			controller.getView().send(new OperationResultMessage("Couldn't buy devcard: requirements not satisfied"));
 	}
+
+	public void activateProduction(List<String> command, String username)
+	{
+		switch (command.get(1))
+		{
+			case "DEFAULT":				/* "ACTIVATE_PRODUCTION", "DEFAULT", "B", "Y" */
+
+				ResourceType resourceToConvert = ResourceType.convertStringToResType(command.get(2));
+				ResourceType resourceToMake = ResourceType.convertStringToResType(command.get(3));
+				break;
+
+			case "DEVCARD":				/* "ACTIVATE_PRODUCTION", "DEVCARD", "5" */
+
+				DevCard devCard = model.getPlayerByUsername(username).getDashboard().getTopDevCardByNumber(Integer.parseInt(command.get(2)));
+				/* take resources from storage/vault, send boughtresourcesmessage */
+				break;
+
+			case "LEADER_SKILL":		/* "ACTIVATE_PRODUCTION", "LEADER_SKILL", "13", "B" */
+
+				LeaderCard leaderCard = model.getPlayerByUsername(username).getLeaderCardByNumber(Integer.parseInt(command.get(2)));
+				ResourceType resourceToMakeLeader = ResourceType.convertStringToResType(command.get(3));
+
+				break;
+		}
+	}
 }

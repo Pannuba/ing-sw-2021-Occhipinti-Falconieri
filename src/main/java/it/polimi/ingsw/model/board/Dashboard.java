@@ -21,7 +21,7 @@ public class Dashboard implements Serializable
 		storage = new Storage();
 	}
 
-	public int getTotalDevCardsNum()
+	public int getTotalDevCardsNum()		/* It's just getAllDevCards().size()... */
 	{
 		int totCards = 0;
 
@@ -45,6 +45,21 @@ public class Dashboard implements Serializable
 		}
 
 		return allDevCards;
+	}
+
+	public DevCard getTopDevCardByNumber(int number)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			if (devCardAreas[i].isEmpty() == false)
+			{
+					if (devCardAreas[i].getTopDevCard().getCardNumber() == number)
+						return devCardAreas[i].getTopDevCard();
+			}
+		}
+
+		System.out.println("getTopDevCardByNumber: card not found!");
+		return null;
 	}
 
 	public Vault getVault()

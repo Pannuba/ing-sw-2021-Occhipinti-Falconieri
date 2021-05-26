@@ -27,7 +27,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		//else
 			System.out.println("Discarded: " + ((LeaderCard) card).isDiscarded());
 
-		switch(card.getClass().getSimpleName())
+		switch (card.getClass().getSimpleName())
 		{
 			case "SkillDiscount":
 				System.out.println("Leadercard skill: discount");
@@ -78,13 +78,8 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		}
 
 		else
-		{
 			for (int i = 0; i < devCards.size(); i++)
-			{
-				System.out.println("Card " + (i + 1) + ":");
 				printDevCard(devCards.get(i));
-			}
-		}
 	}
 
 	public static void printDevCardsMarket(DevCardsMarket market)		// market size??
@@ -92,40 +87,31 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		System.out.println("Dev cards market:\n\n");
 
 		for (int i = 0; i < market.getDevCards().size(); i++)
-		{
-			System.out.println("Card " + (i + 1) + ":");
 			printDevCard(market.getDevCards().get(i));
-		}
 
-		System.out.print("\n\n");
 	}
 
 	public static void printDevCardsMarketLevel(DevCardsMarket market, int level)
 	{
-		System.out.println("Dev cards in market with level = " + level + ":\n\n");
+		System.out.print("Dev cards in market with level = " + level + ":\n\n");
 
 		for (int i = 0; i < market.getDevCards().size(); i++)
 		{
 			if (market.getDevCards().get(i).getLevel() == level)
-			{
-				System.out.println("Card " + (i + 1) + ":");
 				printDevCard(market.getDevCards().get(i));
-			}
 		}
-
-		System.out.print("\n\n");
 	}
 
 	public static void printDevCard(DevCard devCard)		/* Cost and requirements are actually the opposite! */
 	{
 		System.out.print(	"Card number: " + devCard.getCardNumber() +
-							"\nColor: " + devCard.getColor() +
+							"\nColor: " + convertDevCardColorToString(devCard.getColor()) +
 							"\nLevel: " + devCard.getLevel() +
 							"\nVictory points: " + devCard.getPoints() +
 							"\nFaith points: " + devCard.getFaithPoints() +
-							"\nProduct: " + devCard.getProduct() +
-							"\nCost: " + devCard.getCost() +
-							"\nRequirements: " + devCard.getRequirements() + "\n\n"	);
+							"\nProduct: " + convertResListToString(devCard.getProduct()) +
+							"\nCost: " + convertResListToString(devCard.getCost()) +
+							"\nRequirements: " + convertResListToString(devCard.getRequirements()) + "\n\n"	);
 	}
 
 	public static void printMarblesMarket(MarblesMarket market)		/* private? */
@@ -229,20 +215,16 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	}
 
-	public static void printDevCardAreas(DevCardArea[] devCardAreas)		/* Used to print usable devcards for production */
+	public static void printDevCardAreas(DevCardArea[] devCardAreas)		/* Used to print usable (aka top) devcards for production */
 	{
 		if (devCardAreas[0].isEmpty() && devCardAreas[1].isEmpty() && devCardAreas[2].isEmpty())
-		{
 			System.out.print("You have no dev cards!\n\n");
-			return;
-		}
 
 		else
 		{
 			for (int i = 0; i < 3; i++)		/* There are always 3 devcardareas, no more, no less */
 			{
 				System.out.println("Dev card area " + (i + 1) + ":");
-
 
 				if (devCardAreas[i].isEmpty() == false)
 				{
@@ -304,5 +286,43 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		}
 
 		return null;
+	}
+
+	private static String convertDevCardColorToString(DevCardColor color)
+	{
+		if (color == null)
+			return "ERR";
+
+		switch (color)			/* Use a different symbol? */
+		{
+			case YELLOW:
+				return ANSI.YELLOW + ANSI.RESOURCE.toString() + ANSI.RESET;
+
+			case PURPLE:
+				return ANSI.PURPLE + ANSI.RESOURCE.toString() + ANSI.RESET;
+
+			case BLUE:
+				return ANSI.BLUE + ANSI.RESOURCE.toString() + ANSI.RESET;
+
+			case GREEN:
+				return ANSI.GREEN + ANSI.RESOURCE.toString() + ANSI.RESET;
+		}
+
+		return null;
+	}
+
+	private static String convertResListToString(List<Resource> resources)		/* [BLUE, 2], [YELLOW, 3], [PURPLE, 1] */
+	{
+		String strResources = "";
+
+		for (int i = 0; i < resources.size(); i++)
+		{
+			strResources += resources.get(i).getQuantity() + " " + convertResTypeToString(resources.get(i).getResourceType());
+
+			if (i != resources.size() - 1)
+				strResources += ", ";
+		}
+
+		return strResources;
 	}
 }

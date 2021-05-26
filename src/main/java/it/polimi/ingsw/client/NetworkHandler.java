@@ -30,7 +30,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 
 	public void run()
 	{
-		while(!clientSocket.isClosed())
+		while (!clientSocket.isClosed())
 		{
 			try
 			{
@@ -92,7 +92,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 
 		String message = "";
 
-		while(!clientSocket.isClosed())
+		while (!clientSocket.isClosed())
 		{
 			try
 			{
@@ -124,7 +124,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		{
 			dos.writeUTF(message);
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -137,7 +137,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 			oos.writeObject(command);
 			oos.reset();						/* omg if this works i swear to god (it did kinda) */
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}

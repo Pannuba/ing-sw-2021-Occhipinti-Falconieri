@@ -25,7 +25,7 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 		action.chooseResources();
 	}
 
-	public void getOperationResultMessage(String message)
+	public void getOperationResultMessage(String message)		/* Give choice to repeat a failed action? */
 	{
 		System.out.println(message);
 	}

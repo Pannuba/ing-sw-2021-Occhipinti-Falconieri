@@ -84,8 +84,7 @@ public class Storage implements Serializable
 
 	public void addResourceSmart(Resource resourceToAdd)	/* Adds a resource without having to specify the shelf number. Checks the smaller shelf first */
 	{
-
-		switch(resourceToAdd.getQuantity())
+		switch (resourceToAdd.getQuantity())
 		{
 			case 1:
 				if 		(shelves[0].isEmpty())
@@ -157,7 +156,8 @@ public class Storage implements Serializable
 			return true;
 		}
 
-		else {
+		else
+		{
 			System.out.println("Storage moveResources: not enough space on destination shelf");
 			return false;
 		}
