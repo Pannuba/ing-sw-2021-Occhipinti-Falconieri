@@ -11,26 +11,30 @@ import static org.junit.Assert.*;
 
 public class TrackTest {
 
-    String p1Name = "pippo";
-    String p2Name = "pluto";
-    String p3Name = "paperino";
-    private Player p1 = new Player(p1Name);
-    private Player p2 = new Player(p2Name);
-    private Player p3 = new Player(p3Name);
-    private List<Player> players = new ArrayList<>();
-    private Track track = new Track(players);
-    private HashMap<Integer, Integer> redPawns = new HashMap<>();
+	private Player p1;
+	private Player p2;
+	private Player p3;
+	private List<Player> players = new ArrayList<>();
+	private Track track;
+	private HashMap<Integer, Integer> redPawns = new HashMap<>();
 
-    @Test
-    public void checkVaticanReport()
-    {
-        players.add(p1);
-        players.add(p2);
-        players.add(p3);
-        redPawns.put(players.get(0).getId(), 8);
-        redPawns.put(players.get(1).getId(), 3);
-        redPawns.put(players.get(2).getId(), 7);
-        track.setRedPawns(redPawns);
-        assertEquals("Error", 8, track.checkVaticanReport());
-    }
+	@Test
+	public void checkVaticanReport()
+	{
+		p1 = new Player("pippo");
+		p2 = new Player("pluto");
+		p3 = new Player("paperino");
+		p1.setId(0);
+		p2.setId(1);
+		p3.setId(2);
+		players.add(p1);
+		players.add(p2);
+		players.add(p3);
+		track = new Track(players);
+		redPawns.put(players.get(0).getId(), 2);
+		redPawns.put(players.get(1).getId(), 3);
+		redPawns.put(players.get(2).getId(), 8);
+		track.setRedPawns(redPawns);
+		assertEquals("Error", 8, track.checkVaticanReport());
+	}
 }
