@@ -52,6 +52,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 															Otherwise send an error message. Can client perform another action?		*/
 				runCommand.buyDevCard(command, username);
 				chooseNextPlayer();		/* Don't choose next player during setup actions */
+				postRoundChecks();		/* Put in model as separate method, or in update()? */
 				model.update();			/* Send new gamestate to everyone */
 				break;
 
@@ -59,6 +60,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 				runCommand.activateProduction(command, username);
 				chooseNextPlayer();
+				postRoundChecks();
 				model.update();
 				break;
 
@@ -66,11 +68,10 @@ public class Controller implements Observer			/* Observes view to get commands..
 													/* Cut off when it sends the bought resources, and make another command for the rest of the action? */
 				runCommand.buyResources(command, username);
 				chooseNextPlayer();
+				postRoundChecks();
 				model.update();
 				break;
 		}
-
-		postRoundChecks();
 	}
 
 	private void chooseNextPlayer()		/* In model? Turns alternate by player ID: 0 -> 1 -> 2 -> 3 */
