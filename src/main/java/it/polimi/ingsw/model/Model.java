@@ -161,12 +161,12 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	{
 		actionTokens = new ArrayList<>();
 
-		actionTokens.add(new ActionDevCard(DevCardColor.GREEN));
-		actionTokens.add(new ActionDevCard(DevCardColor.BLUE));
-		actionTokens.add(new ActionDevCard(DevCardColor.PURPLE));
-		actionTokens.add(new ActionDevCard(DevCardColor.YELLOW));
-		actionTokens.add(new ActionBlack1());
-		actionTokens.add(new ActionBlack2());
+		actionTokens.add(new ActionDevCard(DevCardColor.GREEN, devCardsMarket));
+		actionTokens.add(new ActionDevCard(DevCardColor.BLUE, devCardsMarket));
+		actionTokens.add(new ActionDevCard(DevCardColor.PURPLE, devCardsMarket));
+		actionTokens.add(new ActionDevCard(DevCardColor.YELLOW, devCardsMarket));
+		actionTokens.add(new ActionBlack1(track, actionTokens));		/* Pass the list itself to shuffle it */
+		actionTokens.add(new ActionBlack2(track));
 
 		Collections.shuffle(actionTokens);
 	}
@@ -339,7 +339,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		this.actionTokens = actionTokens;
 	}
 
-	public ActionToken getNextActionToken()		/* Tokens are flipped in the controller. This method un-flips them and return the next one to be flipped */
+	public ActionToken getNextActionToken()		/* This method un-flips the current flipped token, flips the next one and returns it */
 	{
 		boolean noFlippedTokens = true;
 		int flippedTokenPos = 0, tokenToFlipPos = 0;		/* Both are [0, 5] */
@@ -358,7 +358,11 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		System.out.println("getNextActionToken: noFlippedTokens = " + noFlippedTokens + ", flippedTokenPos = " + flippedTokenPos);
 
 		if (noFlippedTokens)		/* If all goes well, this happens only at the first round */
-			return actionTokens.get(ThreadLocalRandom.current().nextInt(0, actionTokens.size()));
+		{
+			tokenToFlipPos = ThreadLocalRandom.current().nextInt(0, actionTokens.size());
+			actionTokens.get(tokenToFlipPos).setFlipped(true);
+			return actionTokens.get(tokenToFlipPos);
+		}
 
 		else
 		{
@@ -370,6 +374,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 			System.out.println("getNextActionToken: returning token at position " + tokenToFlipPos);
 
+			actionTokens.get(tokenToFlipPos).setFlipped(true);
 			return actionTokens.get(tokenToFlipPos);
 		}
 	}

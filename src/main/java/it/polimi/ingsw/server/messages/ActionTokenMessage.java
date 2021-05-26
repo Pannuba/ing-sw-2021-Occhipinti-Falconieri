@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class ActionTokenMessage implements Message, Serializable
 {
-	private ActionToken token;
+	private final ActionToken token;
 
 	public ActionTokenMessage(ActionToken token)
 	{

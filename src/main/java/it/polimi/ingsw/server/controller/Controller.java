@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.board.Dashboard;
 import it.polimi.ingsw.model.board.Storage;
 import it.polimi.ingsw.model.board.Vault;
 import it.polimi.ingsw.model.cards.*;
+import it.polimi.ingsw.server.messages.ActionTokenMessage;
 import it.polimi.ingsw.server.view.ClientHandler;
 import it.polimi.ingsw.util.Pair;
 
@@ -198,7 +199,8 @@ public class Controller implements Observer			/* Observes view to get commands..
 	private void flipActionToken()
 	{
 		ActionToken token = model.getNextActionToken();
-		// TODO
+		token.doAction();
+		view.send(new ActionTokenMessage(token));
 	}
 
 	@Override

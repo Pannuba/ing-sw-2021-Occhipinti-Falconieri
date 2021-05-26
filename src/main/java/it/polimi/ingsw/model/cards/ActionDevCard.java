@@ -6,15 +6,19 @@ import java.util.List;
 
 public class ActionDevCard extends ActionToken
 {
-	private DevCardColor color;
+	private final DevCardColor color;
+	private final DevCardsMarket devCardsMarket;
 
-	public ActionDevCard(DevCardColor color)
+	public ActionDevCard(DevCardColor color, DevCardsMarket devCardsMarket)
 	{
 		this.color = color;
-	}
+		this.devCardsMarket = devCardsMarket;		/* Pass pointer to devCardsMarket in constructor to avoid doing it when calling action(), */
+	}												/* so the abstract method action can be used correctly */
 
-	public void removeDevCards(DevCardsMarket devCardsMarket)			/* Remove 2 devcards of color from market starting from the lowest level */
+	@Override
+	public void doAction()			/* Remove 2 devcards of color from market starting from the lowest level */
 	{
+		System.out.println("Activating action of ActionDevCard");
 		List<DevCard> devCards = devCardsMarket.getDevCards();		/* Put this here or outside removeDevCards? */
 		int cardsToRemove = 2;
 
@@ -39,10 +43,5 @@ public class ActionDevCard extends ActionToken
 	public DevCardColor getColor()
 	{
 		return color;
-	}
-
-	public void setColor(DevCardColor color)
-	{
-		this.color = color;
 	}
 }

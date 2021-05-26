@@ -5,16 +5,22 @@ import it.polimi.ingsw.model.board.Track;
 import java.util.Collections;
 import java.util.List;
 
-public class ActionBlack1 extends ActionToken
-{
-	public void moveBlackPawn(Track track)
+public class ActionBlack1 extends ActionToken		/* I can also do an instanceof check in the controller, and if it's an ActionBlack1 manually shuffle the tokens... we'll see */
+{													/* but then it doesn't really make sense to use an abstract method, either do one thing or the other, no inbetweens */
+	private final Track track;
+	private final List<ActionToken> tokens;
+
+	public ActionBlack1(Track track, List<ActionToken> tokens)
 	{
-		track.setBlackPawn(track.getBlackPawn() + 1);
+		this.track = track;
+		this.tokens = tokens;
 	}
 
-	public List<ActionToken> shuffleTokens(List<ActionToken> tokens)
+	@Override
+	public void doAction()
 	{
+		System.out.println("Activating action of ActionBlack1");
+		track.setBlackPawn(track.getBlackPawn() + 1);
 		Collections.shuffle(tokens);		/* Feels like cheating */
-		return tokens;
 	}
 }

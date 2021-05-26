@@ -2,18 +2,9 @@ package it.polimi.ingsw.model.cards;
 
 public abstract class ActionToken
 {
-	private int quantity;
 	private boolean isFlipped;
 
-	public int getQuantity()
-	{
-		return quantity;
-	}
-
-	public void setQuantity(int quantity)
-	{
-		this.quantity = quantity;
-	}
+	public abstract void doAction();		/* All ActionTokens only do one thing when they are flipped. Executed by server controller, not client */
 
 	public boolean isFlipped()
 	{
