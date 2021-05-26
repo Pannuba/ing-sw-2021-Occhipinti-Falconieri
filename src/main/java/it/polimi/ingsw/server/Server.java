@@ -17,7 +17,7 @@ public class Server
 
 		Runtime.getRuntime().addShutdownHook(new Thread()
 		{
-			public void run()		/* Also add this to ServerListener? */
+			public void run()		/* Runs when the program receives an interrupt signal like CTRL+C. Also add this to ServerListener? */
 			{
 				try
 				{

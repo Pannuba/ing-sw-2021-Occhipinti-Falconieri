@@ -33,50 +33,53 @@ public class ServerListener implements Runnable		/* Thread running listening for
 		DataInputStream dis = null;
 		ObjectInputStream ois = null;
 		ObjectOutputStream oos = null;
-		List<ClientHandler> views = new ArrayList<>();
 
-		String username = "";
-		int numPlayers = 1;
-		List<Player> players = new ArrayList<>();
-
-		for (int i = 0; i < numPlayers; i++)        /* Create first lobby */
+		while (!serverSocket.isClosed())
 		{
-			System.out.println("Waiting for player " + (i + 1) + "...");
+			List<Player> players = new ArrayList<>();
+			List<ClientHandler> views = new ArrayList<>();
+			String username = "";
+			int numPlayers = 1;
 
-			try
+			for (int i = 0; i < numPlayers; i++)        /* Create lobby */
 			{
-				socket = serverSocket.accept();
-				dis = new DataInputStream(socket.getInputStream());
-				ois = new ObjectInputStream(socket.getInputStream());
-				oos = new ObjectOutputStream(socket.getOutputStream());
-				System.out.println("Incoming connection: " + socket);
-				username = dis.readUTF();
-				System.out.println("Username: " + username);
+				System.out.println("Waiting for player " + (i + 1) + "...");
 
-				if (i == 0)		/* Get numPlayers from the first player who connects */
+				try
 				{
-					oos.writeObject("true");
-					numPlayers = Integer.parseInt(dis.readUTF());        /* So the loop is repeated numPlayers times to get numPlayers players */
-					System.out.println("numPlayers: " + numPlayers);
+					socket = serverSocket.accept();
+					dis = new DataInputStream(socket.getInputStream());
+					ois = new ObjectInputStream(socket.getInputStream());
+					oos = new ObjectOutputStream(socket.getOutputStream());
+					System.out.println("Incoming connection: " + socket);
+					username = dis.readUTF();
+					System.out.println("Username: " + username);
+
+					if (i == 0)		/* Get numPlayers from the first player who connects */
+					{
+						oos.writeObject("true");
+						numPlayers = Integer.parseInt(dis.readUTF());        /* So the loop is repeated numPlayers times to get numPlayers players */
+						System.out.println("numPlayers: " + numPlayers);
+					}
+
+					else
+						oos.writeObject("false");
+
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
 				}
 
-				else
-					oos.writeObject("false");
+				players.add(new Player(username));
 
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
+				ClientHandler clientHandler = new ClientHandler(socket, username, dis, ois, oos);		/* Start view thread that listens for commands from client */
+				views.add(clientHandler);
+				new Thread(clientHandler).start();
 			}
 
-			players.add(new Player(username));
-
-			ClientHandler clientHandler = new ClientHandler(socket, username, dis, ois, oos);		/* Start view thread that listens for commands from client */
-			views.add(clientHandler);
-			new Thread(clientHandler).start();
+			Runnable r = new Match(players, views);			/* Start match, passes players and views. TODO: advanced functionality to create multiple matches */
+			new Thread(r).start();
 		}
-
-		Runnable r = new Match(players, views);			/* Start match, passes players and views. TODO: advanced functionality to create multiple matches */
-		new Thread(r).start();
 	}
 }
