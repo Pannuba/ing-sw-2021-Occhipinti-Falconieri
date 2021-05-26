@@ -84,50 +84,108 @@ public class Storage implements Serializable
 
 	public void addResourceSmart(Resource resourceToAdd)	/* Adds a resource without having to specify the shelf number. Checks the smaller shelf first */
 	{
-		switch (resourceToAdd.getQuantity())
+
+		switch(resourceToAdd.getQuantity())
 		{
 			case 1:
-				if 		(shelves[0].isEmpty())
+				if 		(shelves[0].isEmpty() && shelves[1].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[2].getShelfResourceType() != resourceToAdd.getResourceType())
 					addResource(resourceToAdd, 1);
 
-				else if (shelves[1].isEmpty() && shelves[0].getShelfResourceType() == resourceToAdd.getResourceType())
+				else if (shelves[1].isEmpty() && shelves[0].getShelfResourceType() == resourceToAdd.getResourceType() && shelves[2].getShelfResourceType() != resourceToAdd.getResourceType())
 				{
 					moveResources(1, 2);		/* First check if shelves can be optimized by moving the same resource type from a smaller shelf to a bigger one */
 					addResource(resourceToAdd, 2);
 				}
 
-				else if (shelves[2].isEmpty() && shelves[1].getShelfResourceType() == resourceToAdd.getResourceType())
+				else if (shelves[2].isEmpty() && shelves[1].getShelfResourceType() == resourceToAdd.getResourceType() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType())
 				{
 					moveResources(2, 3);
 					addResource(resourceToAdd, 3);
 				}
 
-				else if (shelves[1].isEmpty())						/* Otherwise just move them to the next shelf with enough space */
+				else if (shelves[1].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[2].getShelfResourceType() != resourceToAdd.getResourceType())						/* Otherwise just move them to the next shelf with enough space */
 					addResource(resourceToAdd, 2);
 
-				else if (shelves[2].isEmpty())
+				else if (shelves[2].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[1].getShelfResourceType() != resourceToAdd.getResourceType())
 					addResource(resourceToAdd, 3);
 
 				break;
 
 			case 2:
-				if 		(shelves[1].isEmpty())
+				if 		(shelves[1].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[2].getShelfResourceType() != resourceToAdd.getResourceType())
 					addResource(resourceToAdd, 2);
 
-				else if (shelves[2].isEmpty() && shelves[1].getShelfResourceType() == resourceToAdd.getResourceType() && shelves[1].getShelfResourceQuantity() < 2)
+				else if (shelves[2].isEmpty() && shelves[1].getShelfResourceType() == resourceToAdd.getResourceType() && shelves[1].getShelfResourceQuantity() < 2 && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType())
 				{
 					moveResources(2, 3);
 					addResource(resourceToAdd, 3);
+				}
+				else if (shelves[2].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[1].getShelfResourceType() != resourceToAdd.getResourceType())
+					addResource(resourceToAdd,3);
+
+				break;
+
+			case 3:
+				if (shelves[2].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[1].getShelfResourceType() != resourceToAdd.getResourceType())
+					addResource(resourceToAdd, 3);
+
+			default:
+				System.out.println("Can't add more than three resources");		/* Is it possible to add 4 or more resources at the same time? NO */
+		}
+	}
+
+	public void removeResource(Resource resourceToRemove)
+	{
+		switch (resourceToRemove.getQuantity())
+		{
+			case 1:
+				if (shelves[0].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[0].getShelfResourceQuantity() == 1)
+				{
+					shelves[0].getShelfResource().setQuantity(0);
+					shelves[0].getShelfResource().setResourceType(null);
+				}
+
+				else if (shelves[1].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[1].getShelfResourceQuantity() >= 1)
+				{
+					shelves[1].getShelfResource().setQuantity(shelves[1].getShelfResourceQuantity() - 1);
+					if (shelves[1].getShelfResourceQuantity() == 0)
+						shelves[1].getShelfResource().setResourceType(null);
+				}
+
+				else if (shelves[2].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[2].getShelfResourceQuantity() >= 1)
+				{
+					shelves[2].getShelfResource().setQuantity(shelves[2].getShelfResourceQuantity() - 1);
+					if (shelves[2].getShelfResourceQuantity() == 0)
+						shelves[2].getShelfResource().setResourceType(null);
+				}
+
+				break;
+
+			case 2:
+				if (shelves[1].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[1].getShelfResourceQuantity() == 2)
+				{
+					shelves[1].getShelfResource().setQuantity(0);
+					shelves[1].getShelfResource().setResourceType(null);
+				}
+
+				else if (shelves[2].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[2].getShelfResourceQuantity() >= 2)
+				{
+					shelves[2].getShelfResource().setQuantity(shelves[2].getShelfResourceQuantity() - 2);
+					if (shelves[2].getShelfResourceQuantity() == 0)
+						shelves[2].getShelfResource().setResourceType(null);
 				}
 
 				break;
 
 			case 3:
-				if (shelves[2].isEmpty())
-					addResource(resourceToAdd, 3);
+				if (shelves[2].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[2].getShelfResourceQuantity() == 3)
+				{
+					shelves[2].getShelfResource().setQuantity(0);
+					shelves[2].getShelfResource().setResourceType(null);
+				}
 
-			/* Is it possible to add 4 or more resources at the same time? */
-
+			default:
+				System.out.println("Can't remove more than three resources");
 		}
 	}
 
