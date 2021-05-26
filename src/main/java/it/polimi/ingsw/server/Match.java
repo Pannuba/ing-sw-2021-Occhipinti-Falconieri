@@ -50,21 +50,6 @@ public class Match implements Runnable
 		}
 
 		sendToAll(new InitialResourcesMessage());
-
-		/* Round management. controller? Call checkVaticanReport at the end of every round
-
-		while (model.isMatchOver == false)
-		{
-			... round management
-			model.getTrack().checkVaticanReport()
-		}
-
-		model.calculatePoints()
-		send "MATCH_END" to all players, with score and results
-
-
-		 */
-
 	}
 
 	private void sendToAll(Object obj)

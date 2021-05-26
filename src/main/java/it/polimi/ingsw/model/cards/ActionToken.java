@@ -3,7 +3,7 @@ package it.polimi.ingsw.model.cards;
 public abstract class ActionToken
 {
 	private int quantity;
-	private boolean isActive;
+	private boolean isFlipped;
 
 	public int getQuantity()
 	{
@@ -15,13 +15,13 @@ public abstract class ActionToken
 		this.quantity = quantity;
 	}
 
-	public boolean isActive()
+	public boolean isFlipped()
 	{
-		return isActive;
+		return isFlipped;
 	}
 
-	public void setActive(boolean active)
+	public void setFlipped(boolean flipped)
 	{
-		isActive = active;
+		isFlipped = flipped;
 	}
 }

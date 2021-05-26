@@ -1,12 +1,12 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.board.Track;
-import it.polimi.ingsw.model.cards.DevCard;
-import it.polimi.ingsw.model.cards.LeaderCard;
+import it.polimi.ingsw.model.cards.*;
 
 import it.polimi.ingsw.util.XML_Serialization;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 import java.util.concurrent.ThreadLocalRandom;
@@ -19,6 +19,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	private final DevCardsMarket devCardsMarket;
 	private List<Player> players;
 	private List<LeaderCard> allLeaderCards;		/* All 16 leadercards, each player picks 2 out of 4 */
+	private List<ActionToken> actionTokens;
 
 	public Model(List<Player> players)
 	{
@@ -32,13 +33,14 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		track = new Track(players);
 		marblesMarket = new MarblesMarket();
 		devCardsMarket = new DevCardsMarket();
+
+		if (numPlayers == 1)
+			createActionTokens();
 	}
 
 	public void update()			/* Creates the new gamestate and sends it to the views, which send it to the clients */
 	{
 		System.out.println("Updating gamestate...");
-
-		/* TODO: add message from server to gamestate with the result of every command, for example what resources were bought */
 		setChanged();
 		notifyObservers(new GameState(players, getCurrentPlayerName(), track, marblesMarket, devCardsMarket));
 	}
@@ -46,7 +48,8 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	private void createLeaderCards()
 	{
 		System.out.println("Model: creating leadercards...");
-		allLeaderCards = new ArrayList<>();		/* Necessary? */
+
+		allLeaderCards = new ArrayList<>();		/* Necessary? YES */
 		LeaderCard cardToAdd = null;
 
 		for (int i = 0; i < 16; i++)
@@ -67,6 +70,13 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	private void choosePlayerOrder()		/* IDs go from 0 to 3. Need to test if it's actually random */
 	{
 		System.out.println("Choosing a random first player...");
+
+		if (numPlayers == 1)
+		{
+			players.get(0).setId(0);
+			players.get(0).setMyTurn(true);
+			return;
+		}
 
 		List<Player> playersSortedByID = new ArrayList<>();
 
@@ -120,18 +130,18 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	public List<List<LeaderCard>> createLeaderCardsLists()				/* Returns a list of lists of leadercards, 1 for each player, each list has 4 leadercards to choose 2 from */
 	{
 		int[] cardsToAssign = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-		List<List<LeaderCard>> listOfLists = new ArrayList<>();
+		List<List<LeaderCard>> listOfLists = new ArrayList<>();							/* TODO: simplify using Collections.shuffle(), see ActionTokens */
 		List<LeaderCard> tempList;
 
 		for (int i = 0; i < numPlayers; i++)
 		{
 			tempList = new ArrayList<>();		/* Resets the temp list so we don't end up with a 16-element list */
 
-			for (int j = 0; j < 4; j++)            /* TODO: test!!! */
+			for (int j = 0; j < 4; j++)
 			{
 				int randNum = ThreadLocalRandom.current().nextInt(0, 15 + 1);
 
-				if (cardsToAssign[randNum] != 1)    /* If the leaderCard has already been picked, skip the loop and reset the counter (i) */
+				if (cardsToAssign[randNum] != 1)    /* If the leaderCard has already been picked, skip the loop and reset the counter (j) */
 					j--;
 
 				else
@@ -145,6 +155,20 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		}
 
 		return listOfLists;
+	}
+
+	public void createActionTokens()		/* Hardcoded, don't really see a use in making them serializable */
+	{
+		actionTokens = new ArrayList<>();
+
+		actionTokens.add(new ActionDevCard(DevCardColor.GREEN));
+		actionTokens.add(new ActionDevCard(DevCardColor.BLUE));
+		actionTokens.add(new ActionDevCard(DevCardColor.PURPLE));
+		actionTokens.add(new ActionDevCard(DevCardColor.YELLOW));
+		actionTokens.add(new ActionBlack1());
+		actionTokens.add(new ActionBlack2());
+
+		Collections.shuffle(actionTokens);
 	}
 
 	public void vaticanReport(int popeBoxNumber)		/* Called when a player reaches a pope box. Called by match? */
@@ -183,7 +207,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 					break;
 
 				default:
-					System.out.println("Error");
+					System.out.println("vaticanReport: error");
 			}
 		}
 	}
@@ -303,5 +327,50 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	public List<LeaderCard> getAllLeaderCards()
 	{
 		return allLeaderCards;
+	}
+
+	public List<ActionToken> getActionTokens()
+	{
+		return actionTokens;
+	}
+
+	public void setActionTokens(List<ActionToken> actionTokens)
+	{
+		this.actionTokens = actionTokens;
+	}
+
+	public ActionToken getNextActionToken()		/* Tokens are flipped in the controller. This method un-flips them and return the next one to be flipped */
+	{
+		boolean noFlippedTokens = true;
+		int flippedTokenPos = 0, tokenToFlipPos = 0;		/* Both are [0, 5] */
+
+		for (int i = 0; i < actionTokens.size(); i++)		/* Checks if there is at least 1 flipped token. yes -> return the next one, no -> return 1 random */
+		{
+
+			if (actionTokens.get(i).isFlipped())
+			{
+				noFlippedTokens = false;
+				flippedTokenPos = i;
+				actionTokens.get(i).setFlipped(false);		/* There can't be multiple tokens flipped at the same time */
+			}
+		}
+
+		System.out.println("getNextActionToken: noFlippedTokens = " + noFlippedTokens + ", flippedTokenPos = " + flippedTokenPos);
+
+		if (noFlippedTokens)		/* If all goes well, this happens only at the first round */
+			return actionTokens.get(ThreadLocalRandom.current().nextInt(0, actionTokens.size()));
+
+		else
+		{
+			if (flippedTokenPos == actionTokens.size() - 1)		/* 6 ActionTokens, 0-indexed so the position of the last token is 5 = 6 - 1 */
+				tokenToFlipPos = 0;
+
+			else
+				tokenToFlipPos = flippedTokenPos + 1;
+
+			System.out.println("getNextActionToken: returning token at position " + tokenToFlipPos);
+
+			return actionTokens.get(tokenToFlipPos);
+		}
 	}
 }

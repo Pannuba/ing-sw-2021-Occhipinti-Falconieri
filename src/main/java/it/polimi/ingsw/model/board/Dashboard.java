@@ -21,16 +21,6 @@ public class Dashboard implements Serializable
 		storage = new Storage();
 	}
 
-	public int getTotalDevCardsNum()		/* It's just getAllDevCards().size()... */
-	{
-		int totCards = 0;
-
-		for (int i = 0; i < 3; i++)
-			totCards += devCardAreas[i].getLayer();
-
-		return totCards;
-	}
-
 	public List<DevCard> getAllDevCards()
 	{
 		List<DevCard> allDevCards = new ArrayList<>();
@@ -45,6 +35,11 @@ public class Dashboard implements Serializable
 		}
 
 		return allDevCards;
+	}
+
+	public int getTotalDevCardsNum()		/* Used to calculate the sum of layers in all areas, but it's simply getAllDevCards().size() */
+	{
+		return getAllDevCards().size();
 	}
 
 	public DevCard getTopDevCardByNumber(int number)

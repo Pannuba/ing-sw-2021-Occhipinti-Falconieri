@@ -101,6 +101,11 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 	private void postRoundChecks()		/* What should be in model and controller? */
 	{
+		if (model.getNumPlayers() == 1)
+		{
+			flipActionToken();		/* Not in CommandProcessor because it's not a command sent by the client */
+		}
+
 		int vaticanReportNum = model.getTrack().checkVaticanReport();
 
 		if (vaticanReportNum != 0)
@@ -188,6 +193,12 @@ public class Controller implements Observer			/* Observes view to get commands..
 		}
 
 		return true;
+	}
+
+	private void flipActionToken()
+	{
+		ActionToken token = model.getNextActionToken();
+		// TODO
 	}
 
 	@Override

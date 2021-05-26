@@ -24,7 +24,7 @@ public enum DevCardColor
 				return DevCardColor.PURPLE;
 
 			default:
-				System.out.print("Error\n");
+				System.out.print("convertStringToDevColorType: error\n");
 				return null;
 		}
 	}

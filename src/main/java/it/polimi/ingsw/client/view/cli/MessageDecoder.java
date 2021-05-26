@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.model.ResourceType;
+import it.polimi.ingsw.model.cards.ActionToken;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
 
@@ -44,5 +45,11 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 	{
 		System.out.print("Received the following devcard:\n");
 		PrintMethods.printDevCard(boughtCard);
+	}
+
+	public void getActionToken(ActionToken token)
+	{
+		System.out.print("Received the following action token:\n");
+		//PrintMethods.printActionToken(token);
 	}
 }
