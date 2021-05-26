@@ -37,6 +37,8 @@ public class ActionDevCard extends ActionToken
 			}
 		}
 
+		/* TODO: if cardsToRemove != 0 error? */
+
 		devCardsMarket.setDevCards(devCards);
 	}
 
