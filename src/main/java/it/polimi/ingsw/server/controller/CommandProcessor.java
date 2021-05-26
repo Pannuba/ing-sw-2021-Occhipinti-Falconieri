@@ -151,6 +151,7 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 		{
 			model.getDevCardsMarket().buyCardFromMarket(cardToBuyNum);		/* Returns a DevCard but we already have it... Change to void? */
 			controller.getView().send(new BoughtDevCardMessage(cardToBuy));
+			/* TODO: remove required resources from storage first, vault if storage doesn't have them */
 		}
 
 		else

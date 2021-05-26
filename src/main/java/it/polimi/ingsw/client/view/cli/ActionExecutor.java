@@ -2,7 +2,9 @@ package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.cards.LeaderCard;
+import it.polimi.ingsw.model.cards.SkillProduction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,29 +134,29 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 	public void buyResources()
 	{
-		command.add("BUY_RESOURCES");
-
 		System.out.print("This is the current marbles market:\n\n");
 		PrintMethods.printMarblesMarket(cli.getGameState().getCurrMarblesMarket());
 
-		String rowOrColNum = "";
+		String rowOrCol = "", rowOrColNum = "";
 		System.out.print("\nSelect a row (1) or column(2)? ");
 		int choice = Integer.parseInt(input.nextLine());
 
 		if (choice == 1)
 		{
-			command.add("ROW");
+			rowOrCol = "ROW";
 			System.out.print("Insert row #: ");
 			rowOrColNum = input.nextLine();
 		}
 
 		if (choice == 2)
 		{
-			command.add("COLUMN");
+			rowOrCol = "COLUMN";
 			System.out.print("Insert column #: ");
 			rowOrColNum = input.nextLine();
 		}
 
+		command.add("BUY_RESOURCES");
+		command.add(rowOrCol);
 		command.add(rowOrColNum);
 		cli.getNetworkHandler().sendCommand(command);
 		command.clear();
@@ -162,7 +164,6 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 	public void buyDevCard()
 	{
-		command.add("BUY_DEVCARD");
 		int devCardAreaIndex, targetAreaLayer;
 		System.out.print("These are your current dev card areas:\n\n");
 		PrintMethods.printDevCardAreas(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas());
@@ -182,6 +183,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 		System.out.print("Insert the card number you want to buy: ");
 
+		command.add("BUY_DEVCARD");
 		command.add(input.nextLine());
 		cli.getNetworkHandler().sendCommand(command);
 		command.clear();
@@ -190,8 +192,68 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		If client-side check, send new vault, storage and devcard market. If server-side check, send messages. I think server side is better. YES	*/
 	}
 
-	public void activateProduction()
+	public void activateProduction()		/* How many times can a production be repeated? See rules */
 	{
+		System.out.println("This is your current storage and vault:");
+		PrintMethods.printStorage(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getStorage());
+		PrintMethods.printVault(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getVault());
+		System.out.print("Do you want to use the default production (1), a devcard (2) or a SkillProduction leader card (3)? ");
 
+		switch (input.nextLine())
+		{
+			case "1":
+				String resourceToConvert = "", resourceToMake = "";
+				System.out.print("Insert the resource type you want to convert (B/G/Y/P): ");
+				resourceToConvert = input.nextLine();
+				System.out.print("Insert the resource type you want to make (B/G/Y/P): ");
+				resourceToMake = input.nextLine();
+
+				command.add("ACTIVATE_PRODUCTION");
+				command.add("DEFAULT");
+				command.add(resourceToConvert);
+				command.add(resourceToMake);
+				break;
+
+			case "2":
+				String cardNumber = "";
+				PrintMethods.printDevCardAreas(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas());
+				System.out.print("Insert the devcard's # you want to use: ");
+				cardNumber = input.nextLine();
+
+				command.add("ACTIVATE_PRODUCTION");
+				command.add("DEVCARD");
+				command.add(cardNumber);
+				break;
+
+			case "3":
+				List<LeaderCard> leaderCards = cli.getGameState().getPlayerByName(cli.getUsername()).getLeaderCards();
+				List<LeaderCard> activeCardsWithProdSkill = new ArrayList<>();
+				String chosenCardNum = "";
+
+				for (int i = 0; i < leaderCards.size(); i++)
+				{
+					if (leaderCards.get(i) instanceof SkillProduction && leaderCards.get(i).isActive())
+						activeCardsWithProdSkill.add(leaderCards.get(i));
+				}
+
+				if (activeCardsWithProdSkill.isEmpty())
+					System.out.println("You don't have any active leaders that have a production skill!");
+
+				else
+				{
+					for (int i = 0; i < activeCardsWithProdSkill.size(); i++)			/* For the rare chance that the player has both cards SkillProduction */
+						PrintMethods.printLeaderCard(activeCardsWithProdSkill.get(i));
+
+					System.out.println("Which card do you want to use?");
+					chosenCardNum = input.nextLine();
+
+					command.add("ACTIVATE_PRODUCTION");
+					command.add("SKILLPRODUCTION");
+					command.add(chosenCardNum);
+				}
+		}
+
+		cli.getNetworkHandler().sendCommand(command);
+		command.clear();
 	}
 }

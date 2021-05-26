@@ -68,9 +68,9 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		System.out.print("\n");
 	}
 
-	public static void printPlayerDevCards(List<DevCard> devCards)
+	public static void printPlayerDevCards(List<DevCard> devCards)		/* Used to print ALL devcards got with getAllDevCards in Dashboard */
 	{
-		System.out.print("Player dev cards:\n\n");
+		System.out.print("These are your dev cards:\n\n");
 
 		if (devCards.size() == 0)
 		{
@@ -157,7 +157,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		System.out.print("\n");
 	}
 
-	private static void printVault(Vault vault)			/* Use ANSI color codes */
+	public static void printVault(Vault vault)			/* Use ANSI color codes */
 	{
 		System.out.print("Your vault currently has:\n"																					+
 						 vault.getResourceAmounts().get(ResourceType.BLUE)	 + " " + convertResTypeToString(ResourceType.BLUE)	 + ", "		+
@@ -167,7 +167,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 						 "for a total of " + vault.getTotalResources() + " resources\n\n" );
 	}
 
-	private static void printStorage(Storage storage)
+	public static void printStorage(Storage storage)
 	{
 		String topShelf = "", middleShelf = "", bottomShelf = "";
 		String topShelfResource = convertResTypeToString(storage.getShelves()[0].getShelfResource().getResourceType());
@@ -229,7 +229,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	}
 
-	public static void printDevCardAreas(DevCardArea[] devCardAreas)
+	public static void printDevCardAreas(DevCardArea[] devCardAreas)		/* Used to print usable devcards for production */
 	{
 		if (devCardAreas[0].isEmpty() && devCardAreas[1].isEmpty() && devCardAreas[2].isEmpty())
 		{
@@ -251,7 +251,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 				}
 
 				else
-					System.out.println("Empty!");
+					System.out.print("Empty!\n\n");
 			}
 		}
 	}
