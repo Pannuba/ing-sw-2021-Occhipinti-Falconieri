@@ -10,25 +10,31 @@ import java.io.Serializable;
 
 public class Resource implements Serializable
 {
-	private ResourceType type;				/* Can be null, see DevCard serialization */
+	private ResourceType resourceType;				/* Can be null, see DevCard serialization */
 	private int quantity;
 	private boolean isInVault;
 
+	public Resource (ResourceType resourceType, int quantity)
+	{
+		this.resourceType = resourceType;
+		this.quantity = quantity;
+	}
+
 	public Resource()
 	{
-		type = null;
+		resourceType = null;
 		quantity = 0;
 		isInVault = false;
 	}
 
 	public ResourceType getResourceType()
 	{
-		return type;
+		return resourceType;
 	}
 
-	public void setResourceType(ResourceType type)
+	public void setResourceType(ResourceType resourceType)
 	{
-		this.type = type;
+		this.resourceType = resourceType;
 	}
 
 	public int getQuantity()

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.util.Ping;
 
 import java.io.*;
@@ -124,11 +123,6 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		}
 	}
 
-	public GameState getGameState()		/* Manually get gamestate without using observer/observable. Should probably get rid of this */
-	{
-		return (GameState) receive();
-	}
-
 	public void send(Object obj)
 	{
 		try
@@ -140,22 +134,6 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		{
 			e.printStackTrace();
 		}
-	}
-
-	public Object receive()
-	{
-		Object inputObj = null;
-
-		try
-		{
-			inputObj = ois.readObject();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		return inputObj;
 	}
 
 	public void shutdown()

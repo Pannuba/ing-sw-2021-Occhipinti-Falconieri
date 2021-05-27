@@ -11,7 +11,6 @@ import it.polimi.ingsw.server.messages.BoughtResourcesMessage;
 import it.polimi.ingsw.server.messages.OperationResultMessage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class CommandProcessor        /* Contains the code that runs when a certain command is received */
@@ -51,7 +50,7 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 				resourceToAdd.setQuantity(1);
 				resourceToAdd.setResourceType(ResourceType.convertStringToResType(Character.toString(command.get(1).charAt(i))));
 				model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(resourceToAdd);
-			}	/* TODO: change to (ResourceType, quantity)! Or pass a new Resource with a new constructor to set ResourceType and quantity */
+			}
 		}
 
 		if (command.get(2).isEmpty() == false)		/* If there are initial faithpoints, get that player's pawn and move it */
@@ -131,15 +130,12 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 				resourcesToAddToStorage.add(ResourceType.convertMarbleToResType(boughtMarbles.get(i)));
 		}
 
-		/* TODO: add resources to storage. [BLUE PURPLE BLUE]. Sort hashmap? List? */
+		List<Resource> boughtResourcesList = ResourceType.convertResTypeListToResList(resourcesToAddToStorage);
 
-		HashMap<ResourceType, Integer> resourcesMap = ResourceType.convertResTypeListToHashMap(resourcesToAddToStorage);
+		for (int i = 0; i < boughtResourcesList.size(); i++)
+			model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(boughtResourcesList.get(i));
 
-		//if (resourcesMap.get(ResourceType.BLUE) != 0)
-			//model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(/* new Resource(ResourceType.BLUE, resourcesMap.get(ResourceType.BLUE) */);
-
-
-		controller.getView().send(new BoughtResourcesMessage(resourcesToAddToStorage));		/* Sends a list of resourceType to the client */
+		controller.getView().send(new BoughtResourcesMessage(boughtResourcesList));		/* Sends a list of resources to the client */
 	}
 
 	public void buyDevCard(List<String> command, String username)

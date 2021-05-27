@@ -314,7 +314,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		return null;
 	}
 
-	private static String convertResListToString(List<Resource> resources)		/* [BLUE, 2], [YELLOW, 3], [PURPLE, 1] */
+	public static String convertResListToString(List<Resource> resources)		/* [BLUE, 2], [YELLOW, 3], [PURPLE, 1] */
 	{
 		String strResources = "";
 

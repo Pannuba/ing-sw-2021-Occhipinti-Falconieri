@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -78,5 +79,48 @@ public enum ResourceType
 			map.put(list.get(i), map.get(list.get(i)) + 1);			/* Increase counter for "key" resource type */
 
 		return map;
+	}
+
+	public static List<Resource> convertResTypeListToResList(List<ResourceType> list)
+	{
+		List<Resource> resList = new ArrayList<>();
+
+		resList.add(new Resource(BLUE,	 0));
+		resList.add(new Resource(GREY,	 0));
+		resList.add(new Resource(YELLOW, 0));
+		resList.add(new Resource(PURPLE, 0));
+
+		for (int i = 0; i < list.size(); i++)
+		{
+			switch (list.get(i))
+			{
+				case BLUE:
+					resList.get(0).setQuantity(resList.get(0).getQuantity() + 1);
+					break;
+
+				case GREY:
+					resList.get(1).setQuantity(resList.get(1).getQuantity() + 1);
+					break;
+
+				case YELLOW:
+					resList.get(2).setQuantity(resList.get(2).getQuantity() + 1);
+					break;
+
+				case PURPLE:
+					resList.get(3).setQuantity(resList.get(3).getQuantity() + 1);
+					break;
+			}
+		}
+
+		for (int i = 0; i < resList.size(); i++)
+		{
+			if (resList.get(i).getQuantity() == 0)		/* Remove empty resources */
+			{
+				resList.remove(i);
+				i--;
+			}
+		}
+
+		return resList;
 	}
 }

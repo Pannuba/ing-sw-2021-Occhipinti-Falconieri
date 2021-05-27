@@ -91,6 +91,8 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 	public void leaderChoice()
 	{
+		/* TODO: check if player has any leadercard, if not, don't ask */
+
 		System.out.print("Do you want to activate or discard a leader? A/D: ");
 
 		switch (input.nextLine().toUpperCase())
