@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Pair<Object1, Object2> implements Serializable            /* Used by SkillProduction for requirements */
 {
-	public Object1 obj1;
+	public Object1 obj1;		/* TODO: see if they can turn to private */
 	public Object2 obj2;
 
 	public Pair()			/* InstantiationException during serialization without empty constructor */

@@ -32,24 +32,29 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 			case "SkillDiscount":
 				System.out.println("Leadercard skill: discount");
 				System.out.println("Discounted resource: " + convertResTypeToString(((SkillDiscount) card).getDiscountedResource()));
+				System.out.println("Requirements: " + convertDevColorListToString(((SkillDiscount) card).getRequirements()) + " dev cards");
 				break;
-
+												/* TODO: separate symbol for devCards/devCardColor? */
 			case "SkillMarble":
 				System.out.println("Leadercard skill: white marble");
 				System.out.println("White marble resource: " + convertResTypeToString(((SkillMarble) card).getWhiteMarble()));
+				System.out.println("Requirements: " + convertDevColorListToString(((SkillMarble) card).getRequirements()) + " dev cards");
 				break;
 
 			case "SkillProduction":
 				System.out.println("Leadercard skill: additional production");
-				System.out.println("Cost type: " + convertResTypeToString(((SkillProduction) card).getCost().getResourceType()));
-				System.out.println("Cost amount: 1");
+				System.out.println("Cost: 1 " + convertResTypeToString(((SkillProduction) card).getCost().getResourceType()));
 				/* Product is null because it's chosen by the player */
 				System.out.println("Product amount: 1");
+				System.out.println(	"Requirements: a " + convertDevCardColorToString(((SkillProduction) card).getRequirements().obj1)	+
+									" lvl " + ((SkillProduction) card).getRequirements().obj2 + " dev card");
 				break;
 
 			case "SkillStorage":
 				System.out.println("Leadercard skill: additional storage");
 				System.out.println("Additional storage resource: " + convertResTypeToString(((SkillStorage) card).getAdditionalStorage().getShelfResource().getResourceType()));
+				System.out.println(	"Requirements: " + ((SkillStorage) card).getRequirements().getQuantity() + " " +
+									convertResTypeToString(((SkillStorage) card).getRequirements().getResourceType()));
 				break;
 		}
 
@@ -61,11 +66,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		System.out.print("Player leader cards:\n\n");
 
 		for (int i = 0; i < leaderCards.size(); i++)
-		{
 			printLeaderCard(leaderCards.get(i));
-		}
-
-		System.out.print("\n");
 	}
 
 	public static void printPlayerDevCards(List<DevCard> devCards)		/* Used to print ALL devcards got with getAllDevCards in Dashboard */
@@ -73,9 +74,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		System.out.print("These are your dev cards:\n\n");
 
 		if (devCards.size() == 0)
-		{
 			System.out.println("Nothing here!");
-		}
 
 		else
 			for (int i = 0; i < devCards.size(); i++)
@@ -122,9 +121,8 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 4; j++)
-			{
 				System.out.print(convertMarbleToString(board[i][j]) + "  ");
-			}
+
 			System.out.print(ANSI.RESET + "\n");
 		}
 
@@ -146,13 +144,13 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		System.out.print("\n");
 	}
 
-	public static void printVault(Vault vault)			/* Use ANSI color codes */
+	public static void printVault(Vault vault)
 	{
-		System.out.print("Your vault currently has:\n"																					+
+		System.out.print("Your vault currently has:\n"																						+
 						 vault.getResourceAmounts().get(ResourceType.BLUE)	 + " " + convertResTypeToString(ResourceType.BLUE)	 + ", "		+
 						 vault.getResourceAmounts().get(ResourceType.GREY)	 + " " + convertResTypeToString(ResourceType.GREY)	 + ", "		+
 						 vault.getResourceAmounts().get(ResourceType.YELLOW) + " " + convertResTypeToString(ResourceType.YELLOW) + ", and "	+
-						 vault.getResourceAmounts().get(ResourceType.PURPLE) + " " + convertResTypeToString(ResourceType.PURPLE) + " " 	+
+						 vault.getResourceAmounts().get(ResourceType.PURPLE) + " " + convertResTypeToString(ResourceType.PURPLE) + " " 		+
 						 "for a total of " + vault.getTotalResources() + " resources\n\n" );
 	}
 
@@ -314,6 +312,21 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		}
 
 		return null;
+	}
+
+	public static String convertDevColorListToString(List<DevCardColor> colors)		/* [BLUE, GREEN, BLUE, YELLOW] -> 2B, 1G, 1Y */
+	{
+		String strColors = "";
+
+		for (int i = 0; i < colors.size(); i++)
+		{
+			strColors += convertDevCardColorToString(colors.get(i));
+
+			if (i != colors.size() - 1)
+				strColors += ", ";
+		}
+
+		return strColors;
 	}
 
 	public static String convertResListToString(List<Resource> resources)		/* [BLUE, 2], [YELLOW, 3], [PURPLE, 1] */
