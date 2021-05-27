@@ -36,7 +36,7 @@ public class DevCardsMarket implements Serializable
 		return boughtCard;
 	}
 
-	public DevCard getDevCardByNumber(int cardNumber)		/* Set method useless */
+	public DevCard getDevCardByNumber(int cardNumber)
 	{
 		for (int i = 0; i < devCards.size(); i++)
 		{

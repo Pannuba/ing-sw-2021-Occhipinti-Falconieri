@@ -69,10 +69,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		}
 
 		if (choice.equals("3") || choice.equals("4") || choice.equals("5"))			/* Player can choose again after viewing things */
-		{
-			System.out.println("What do you want to do now?");
 			chooseAction();
-		}
 	}
 
 	public void chooseLeaderCards(List<LeaderCard> fourLeaderCards)
@@ -231,13 +228,15 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 	public void buyDevCard()
 	{
 		int devCardAreaIndex, targetAreaLayer;
+		String cardToBuyNum;
+
 		System.out.print("These are your current dev card areas:\n\n");
 		PrintMethods.printDevCardAreas(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas());
-		System.out.print("Which dev card area do you want to put the new card in? ");
-		devCardAreaIndex = Integer.parseInt(input.nextLine());			/* 1, 2 or 3			- 1 because arrays are zero-indexed */
+		System.out.print("Insert the dev card area # you want to put the new card in (1/2/3): ");
+		devCardAreaIndex = Integer.parseInt(input.nextLine());											/* - 1 because arrays are zero-indexed */
 		targetAreaLayer = cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas()[devCardAreaIndex - 1].getLayer();
 
-		while (targetAreaLayer == 3)
+		while (targetAreaLayer == 3)		/* TODO: add option to "quit" and choose another action */
 		{
 			System.out.print("This dev card area already has three cards!\nWhich dev card area do you want to put the new card in? ");
 			devCardAreaIndex = Integer.parseInt(input.nextLine());		/* 1, 2 or 3			- 1 because arrays are zero-indexed */
@@ -248,9 +247,11 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		PrintMethods.printDevCardsMarketLevel(cli.getGameState().getCurrDevCardsMarket(), targetAreaLayer + 1);
 
 		System.out.print("Insert the card number you want to buy: ");
+		cardToBuyNum = input.nextLine();
 
 		command.add("BUY_DEVCARD");
-		command.add(input.nextLine());
+		command.add(cardToBuyNum);
+		command.add(Integer.toString(devCardAreaIndex));
 		networkHandler.send(command);
 		command.clear();
 

@@ -33,7 +33,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 		};
 
 		Timer timer = new Timer();
-		//timer.scheduleAtFixedRate(timerTask, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
+		timer.scheduleAtFixedRate(timerTask, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
 	}
 
 	public void run()		/* Activates after the setup phase has ended */
@@ -48,9 +48,9 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 				System.out.println(username + " waiting for message from client");
 				inputObj = ois.readObject();
 
-				if (!(inputObj instanceof Ping))		/* Don't care about pings, they're just used to not make the timeout expire */
+				if (!(inputObj instanceof Ping))		/* Don't care about pings */
 				{
-					System.out.println("Received " + inputObj + " from " + username);
+					System.out.println("Received " + inputObj + " from " + username);		/* Prints the command */
 					setChanged();
 					notifyObservers(inputObj);        /* Sends command to controller */
 				}
@@ -64,12 +64,13 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 		}
 	}
 
-	public void send(Object message)
+	public void send(Object obj)
 	{
+		if (!obj.getClass().getSimpleName().equals("Ping"))		/* Pings are really annoying */
+			System.out.println("Sending " + obj.getClass().getSimpleName() + " to " + username);
 		try
 		{
-			System.out.println("Sending " + message.getClass().getSimpleName() + " to " + username);
-			oos.writeObject(message);
+			oos.writeObject(obj);
 			oos.reset();
 		}
 		catch (Exception e)

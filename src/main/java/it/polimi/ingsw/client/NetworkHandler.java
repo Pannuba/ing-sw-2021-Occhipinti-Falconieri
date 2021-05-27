@@ -77,7 +77,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		};
 
 		Timer timer = new Timer();
-		//timer.scheduleAtFixedRate(timerTask, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
+		timer.scheduleAtFixedRate(timerTask, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
 	}
 
 	public boolean isFirstPlayer()

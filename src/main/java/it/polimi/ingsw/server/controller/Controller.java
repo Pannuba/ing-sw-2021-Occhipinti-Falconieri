@@ -35,25 +35,25 @@ public class Controller implements Observer			/* Observes view to get commands..
 				runCommand.initialResources(command, username);
 				return;
 
-			case "ACTIVATE_LEADER":
+			case "ACTIVATE_LEADER":								/* "ACTIVATE_LEADER", "4" */
 				runCommand.activateLeader(command, username);
 				break;
 
-			case "DISCARD_LEADER":
+			case "DISCARD_LEADER":								/* "DISCARD_LEADER", "13" */
 				runCommand.discardLeader(command, username);
 				break;
 
-			case "BUY_DEVCARD":								/*	Client picks a devcard # to buy from their local devCardsMarket				*/
-				runCommand.buyDevCard(command, username);	/*	Server checks for resources. If there are enough resources, 				*/
-				break;										/*	Spend them and add the devcard to Player, otherwise send an error message	*/
+			case "BUY_DEVCARD":									/* "BUY_DEVCARD", "card#", "devCardArea#" */
+				runCommand.buyDevCard(command, username);
+				break;
 
 			case "ACTIVATE_PRODUCTION":
 
 				runCommand.activateProduction(command, username);
 				break;
 
-			case "BUY_RESOURCES":					/* What do with marble amounts? Ask where put to them in storage? */
-													/* Cut off when it sends the bought resources, and make another command for the rest of the action? */
+			case "BUY_RESOURCES":								/* "BUY_RESOURCES", "ROW", "2" */
+
 				runCommand.buyResources(command, username);
 				break;
 		}

@@ -118,7 +118,7 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 			boughtMarbles = model.getMarblesMarket().buyMarblesRow(Integer.parseInt(command.get(2)) - 1);		/* - 1 because 0-indexed, [0, 1, 2] */
 
 		if (command.get(1).equals("COLUMN"))
-			boughtMarbles = model.getMarblesMarket().buyMarblesCol(Integer.parseInt(command.get(2))- 1);
+			boughtMarbles = model.getMarblesMarket().buyMarblesCol(Integer.parseInt(command.get(2)) - 1);
 
 		for (int i = 0; i < boughtMarbles.size(); i++)
 		{
@@ -157,21 +157,23 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 	public void buyDevCard(List<String> command, String username)
 	{
 		int cardToBuyNum = Integer.parseInt(command.get(1));
+		int devCardAreaIndex = Integer.parseInt(command.get(2)) - 1;		/* If the client chooses the area #3, it's #2 because 0-indexed */
 		DevCard cardToBuy = model.getDevCardsMarket().getDevCardByNumber(cardToBuyNum);
 		List<Resource> requirements = cardToBuy.getRequirements();
 
-		if (cardToBuy.checkRequirements(model.getPlayerByUsername(username).getDashboard()))	/* If player has enough resources */
+		if (cardToBuy.checkReqOrCost(model.getPlayerByUsername(username).getDashboard(), requirements))	/* If player has enough resources */
 		{
 			if (!controller.spendResources(requirements))	/* Shouldn't return false if it passed checkDevCardRequirements... */
 			{
-				System.out.println("buyDevCard: error");	/* TODO: make sure checkDevCardRequirements and spendResources do the same */
+				/* TODO: make sure checkDevCardRequirements and spendResources do the same */
 				message = "Couldn't buy devcard: requirements not satisfied";
 				isFailed = true;
 			}
-
+			
 			else
 			{
-				cardToBuy = model.getDevCardsMarket().buyCardFromMarket(cardToBuyNum);		/* Finally buy the card and send it to the client */
+				model.getDevCardsMarket().buyCardFromMarket(cardToBuyNum);		/* Finally buy the card and send it to the client */
+				model.getPlayerByUsername(username).getDashboard().addDevCardToArea(cardToBuy, devCardAreaIndex);
 				controller.getView().send(new BoughtDevCardMessage(cardToBuy));
 				message = "Card bought successfully!";
 				isFailed = false;
@@ -201,7 +203,17 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 
 				DevCard devCard = model.getPlayerByUsername(username).getDashboard().getTopDevCardByNumber(Integer.parseInt(command.get(2)));
 				List<Resource> cardCost = devCard.getCost();
-				/* take resources from storage/vault, send boughtresourcesmessage */
+
+				if (devCard.checkReqOrCost(model.getPlayerByUsername(username).getDashboard(), cardCost))
+				{
+					//spend, not failed...
+				}
+
+				else
+				{
+					//error!!!
+				}
+
 				break;
 
 			case "LEADER_SKILL":		/* "ACTIVATE_PRODUCTION", "LEADER_SKILL", "13", "B" */

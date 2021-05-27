@@ -37,9 +37,9 @@ public class Dashboard implements Serializable
 		return allDevCards;
 	}
 
-	public int getTotalDevCardsNum()		/* Used to calculate the sum of layers in all areas, but it's simply getAllDevCards().size() */
+	public void addDevCardToArea(DevCard cardToAdd, int areaIndex)		/* Find the devCardArea where cardToAdd can be added, then adds it */
 	{
-		return getAllDevCards().size();
+		devCardAreas[areaIndex].addDevCard(cardToAdd);		/* Need to trust the client that it chose a compatible area... add checks in controller? */
 	}
 
 	public DevCard getTopDevCardByNumber(int number)
@@ -56,6 +56,12 @@ public class Dashboard implements Serializable
 		System.out.println("getTopDevCardByNumber: card not found!");
 		return null;
 	}
+
+	public int getTotalDevCardsNum()		/* Used to calculate the sum of layers in all areas, but it's simply getAllDevCards().size() */
+	{
+		return getAllDevCards().size();
+	}
+
 
 	public Vault getVault()
 	{
