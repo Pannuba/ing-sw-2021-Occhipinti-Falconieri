@@ -16,7 +16,7 @@ public class Player implements Serializable
 	private int victoryPoints;				/* Value assigned at the end of the match */
 	private List<LeaderCard> leaderCards;
 	private final String username;
-	private final Dashboard dashboard;
+	private Dashboard dashboard;
 	private final PopeToken[] popeTokens = new PopeToken[3];			/* Discarded or turned/activated depending on pawn position during vatican report */
 
 	public Player(String username)
@@ -104,6 +104,8 @@ public class Player implements Serializable
 	{
 		return dashboard;
 	}
+
+	public void setDashboard (Dashboard dashboard) { this.dashboard = dashboard; }
 
 	public int getVictoryPoints()
 	{

@@ -11,31 +11,18 @@ import static org.junit.Assert.*;
 public class DashboardTest {
 
 	private Dashboard dashboard = new Dashboard();
-	DevCardArea devCardArea1 = new DevCardArea();
-	DevCardArea devCardArea2 = new DevCardArea();
-	DevCardArea devCardArea3 = new DevCardArea();
-	DevCardArea[] devCardAreas = new DevCardArea[3];
-	DevCard card1 = new DevCard();
-	DevCard card2 = new DevCard();
-	DevCard card3 = new DevCard();
-	DevCard card4 = new DevCard();
-	List<DevCard> allDevCards = new ArrayList<>();
+	private DevCardArea devCardArea1 = new DevCardArea();
+	private DevCardArea devCardArea2 = new DevCardArea();
+	private DevCardArea devCardArea3 = new DevCardArea();
+	private DevCardArea[] devCardAreas = new DevCardArea[3];
+	private DevCard card1 = new DevCard();
+	private DevCard card2 = new DevCard();
+	private DevCard card3 = new DevCard();
+	private DevCard card4 = new DevCard();
+	private List<DevCard> allDevCards = new ArrayList<>();
 
 	@Test
-	public void getTotalDevCardsNum()
-	{
-		devCardAreas[0] = devCardArea1;
-		devCardAreas[1] = devCardArea2;
-		devCardAreas[2] = devCardArea3;
-		devCardArea1.setLayer(3);
-		devCardArea2.setLayer(2);
-		devCardArea3.setLayer(1);
-		dashboard.setDevCardAreas(devCardAreas);
-		assertEquals("Error", 6, dashboard.getTotalDevCardsNum());
-	}
-
-	@Test
-	public void getAllDevCards()
+	public void getAllDevCards()  /* check also getAllDevCardsNum method */
 	{
 		card1.setLevel(1);
 		card2.setLevel(2);
@@ -54,5 +41,6 @@ public class DashboardTest {
 		allDevCards.add(card3);
 		allDevCards.add(card4);
 		assertEquals("Error", allDevCards, dashboard.getAllDevCards());
+		assertEquals("Error", 4, dashboard.getTotalDevCardsNum());
 	}
 }

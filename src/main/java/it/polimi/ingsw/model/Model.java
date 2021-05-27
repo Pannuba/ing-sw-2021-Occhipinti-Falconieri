@@ -14,7 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Model extends Observable		/* Observed by the views to create the new gamestate */
 {
 	private final int numPlayers;
-	private final Track track;
+	private Track track;
 	private final MarblesMarket marblesMarket;
 	private final DevCardsMarket devCardsMarket;
 	private List<Player> players;
@@ -303,6 +303,8 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	{
 		return track;
 	}
+
+	public void setTrack (Track track) { this.track = track; }
 
 	public MarblesMarket getMarblesMarket()
 	{
