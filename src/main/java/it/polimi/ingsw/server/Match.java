@@ -38,9 +38,10 @@ public class Match implements Runnable
 	{
 		System.out.println("Match thread started");
 
-		sendToAll("START");		/* When all players are connected */
+		for (int i = 0; i < numPlayers; i++)			/* When all players are connected */
+			views.get(i).send("START");
 
-		List<List<LeaderCard>> leaderCardsLists = model.createLeaderCardsLists();		/* Put this in controller? */
+		List<List<LeaderCard>> leaderCardsLists = model.createLeaderCardsLists();
 
 		for (int i = 0; i < numPlayers; i++)
 		{
@@ -49,11 +50,5 @@ public class Match implements Runnable
 		}
 
 		model.update();		/* Send the first gamestate after the setup messages. Putting this here instead of the controller makes everything work */
-	}
-
-	private void sendToAll(Object obj)
-	{
-		for (int i = 0; i < numPlayers; i++)
-			views.get(i).send(obj);
 	}
 }

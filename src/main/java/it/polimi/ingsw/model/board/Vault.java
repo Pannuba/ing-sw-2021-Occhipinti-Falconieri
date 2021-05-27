@@ -38,6 +38,7 @@ public class Vault implements Serializable		/* Has resources obtained through pr
 			}
 		}
 
+		System.out.println("Vault removeResource: removed " + removedResNum + " " + resourceToRemove.getResourceType());
 		return removedResNum;
 	}
 

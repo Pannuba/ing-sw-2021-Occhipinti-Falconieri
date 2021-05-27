@@ -134,74 +134,45 @@ public class Storage implements Serializable
 					addResource(resourceToAdd, 3);
 
 			default:
-				System.out.println("Can't add more than three resources");		/* Is it possible to add 4 or more resources at the same time? NO */
+				System.out.println("Can't add more than three resources");		/* It's not possible to add 4 or more resources at the same time */
 		}
 	}
 
-	public int removeResource(Resource resourceToRemove)			/* Returns the number of removed resources */
+	public int removeResource(Resource resourceToRemove)			/* Returns the number of removed resources. [4, YELLOW] */
 	{
-		switch (resourceToRemove.getQuantity())
+		int removedResNum = 0;
+
+		for (int i = 0; i < resourceToRemove.getQuantity(); i++)		/* Remove 1 resource every iteration */
 		{
-			case 1:		/* TODO: if resourceToRemove.type is not found, return false. Check resourceType */
 
-				if (shelves[0].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[0].getShelfResourceQuantity() == 1)
-				{
-					shelves[0].getShelfResource().setQuantity(0);
-					shelves[0].getShelfResource().setResourceType(null);
-				}
+			if (shelves[0].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[0].getShelfResourceQuantity() == 1)	/* Second check is redundant */
+			{
+				shelves[0].getShelfResource().setQuantity(0);
+				shelves[0].getShelfResource().setResourceType(null);
+				removedResNum++;
+			}
 
-				else if (shelves[1].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[1].getShelfResourceQuantity() >= 1)
-				{
-					shelves[1].getShelfResource().setQuantity(shelves[1].getShelfResourceQuantity() - 1);
-
-					if (shelves[1].getShelfResourceQuantity() == 0)
-						shelves[1].getShelfResource().setResourceType(null);
-				}
-
-				else if (shelves[2].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[2].getShelfResourceQuantity() >= 1)
-				{
-					shelves[2].getShelfResource().setQuantity(shelves[2].getShelfResourceQuantity() - 1);
-
-					if (shelves[2].getShelfResourceQuantity() == 0)
-						shelves[2].getShelfResource().setResourceType(null);
-				}
-
-				//return true;
-
-			case 2:
-
-				if (shelves[1].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[1].getShelfResourceQuantity() == 2)
-				{
-					shelves[1].getShelfResource().setQuantity(0);
+			else if (shelves[1].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[1].getShelfResourceQuantity() >= 1)
+			{
+				if (shelves[1].getShelfResourceQuantity() == 0)
 					shelves[1].getShelfResource().setResourceType(null);
-				}
 
-				else if (shelves[2].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[2].getShelfResourceQuantity() >= 2)
-				{
-					shelves[2].getShelfResource().setQuantity(shelves[2].getShelfResourceQuantity() - 2);
+				shelves[1].getShelfResource().setQuantity(shelves[1].getShelfResourceQuantity() - 1);
+				removedResNum++;
+			}
 
-					if (shelves[2].getShelfResourceQuantity() == 0)
-						shelves[2].getShelfResource().setResourceType(null);
-				}
-
-				//return true;
-
-			case 3:
-
-				if (shelves[2].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[2].getShelfResourceQuantity() == 3)
-				{
-					shelves[2].getShelfResource().setQuantity(0);
+			else if (shelves[2].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[2].getShelfResourceQuantity() >= 1)
+			{
+				if (shelves[2].getShelfResourceQuantity() == 0)
 					shelves[2].getShelfResource().setResourceType(null);
-				}
 
-				//return true;
-
-			default:
-				System.out.println("Can't remove more than three resources");
-				//return false;
+				shelves[2].getShelfResource().setQuantity(shelves[2].getShelfResourceQuantity() - 1);
+				removedResNum++;
+			}
 		}
 
-		return 0; /* Placeholder */
+		System.out.println("Storage removeResource: removed " + removedResNum + " " + resourceToRemove.getResourceType());
+		return removedResNum;
 	}
 
 	public boolean moveResources(int shelfFromNum, int shelfToNum)			/* Can't have 2 shelves with the same resource according to the rules, */

@@ -1,13 +1,9 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.model.board.Dashboard;
-import it.polimi.ingsw.model.board.Storage;
-import it.polimi.ingsw.model.board.Vault;
 import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.server.messages.ActionTokenMessage;
 import it.polimi.ingsw.server.view.ClientHandler;
-import it.polimi.ingsw.util.Pair;
 
 import java.util.*;
 
@@ -33,7 +29,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 		{
 			case "SELECT_LEADERCARDS":							/* "SELECT_LEADERCARDS", "x", "y" */
 				runCommand.selectLeaderCards(command, username);		/* model.update() here or in INITIAL_RESOURCES fricks everything up */
-				return;			/* Skip postRoundChecks for singleplayer... Or put flipActionToken somewhere else? */
+				return;
 
 			case "INITIAL_RESOURCES":							/* "INITIAL_RESOURCES", "BY", "2" */
 				runCommand.initialResources(command, username);
@@ -121,7 +117,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 		int reqAmount;
 		ResourceType reqType;
 
-		for (int i = 0; i < requirements.size(); i++)		/* Check every Resource in requirements */
+		for (int i = 0; i < requirements.size(); i++)		/* Check every Resource in requirements list */
 		{
 			reqAmount = requirements.get(i).getQuantity();
 			reqType = requirements.get(i).getResourceType();
