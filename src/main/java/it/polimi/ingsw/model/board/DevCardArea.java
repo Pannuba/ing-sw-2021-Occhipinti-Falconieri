@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DevCardArea implements Serializable            /* Devcards can't be removed once added */
+public class DevCardArea implements Serializable			/* Devcards can't be removed once added */
 {
 	private boolean isEmpty;
 	private List<DevCard> devCards = new ArrayList<>();

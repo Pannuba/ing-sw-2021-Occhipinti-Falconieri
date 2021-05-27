@@ -25,7 +25,7 @@ import java.util.Scanner;
 
 public class XML_Serialization
 {
-	public static void main(String[] args) throws IOException        /* Wouldn't run because of no "static" and "String[] args"!!! */
+	public static void main(String[] args) throws IOException		/* Wouldn't run because of no "static" and "String[] args"!!! */
 	{
 		/* Interactive system to generate XML without having to hardcode every card */
 
@@ -228,7 +228,7 @@ public class XML_Serialization
 		fos.close();
 	}
 
-	public static Object deserialize(String filename) throws IOException    /* Works! println output is the same before and after serialization */
+	public static Object deserialize(String filename) throws IOException	/* Works! println output is the same before and after serialization */
 	{
 		FileInputStream fis = new FileInputStream(filename);
 		XMLDecoder decoder = new XMLDecoder(fis);

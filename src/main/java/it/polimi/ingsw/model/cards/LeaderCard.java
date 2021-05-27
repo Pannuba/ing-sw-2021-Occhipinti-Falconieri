@@ -16,7 +16,7 @@ import java.util.List;
 	in calculatePoints() OR discard the leadercard and gain 1 faithPoint, with no victory points at the end of the round
 */
 
-public abstract class LeaderCard implements Serializable        /* Can't do new LeaderCard(); because it's abstract */
+public abstract class LeaderCard implements Serializable		/* Can't do new LeaderCard(); because it's abstract */
 {
 	private int cardNumber;
 	private int points;

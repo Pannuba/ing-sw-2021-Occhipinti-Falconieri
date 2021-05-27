@@ -61,7 +61,7 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets stuc
 
 		if (obj instanceof GameState)		/* TODO: check if match is over, or make server send "match over" message */
 		{
-			this.gameState = (GameState) obj;        /* Gamestate is needed in game loop, not during setup */
+			this.gameState = (GameState) obj;		/* Gamestate is needed in game loop, not during setup */
 			//System.out.println(gameState.getCurrPlayers().get(0).getUsername() + " is active? " + gameState.getCurrPlayers().get(0).isMyTurn());
 			//System.out.println(gameState.getCurrPlayers().get(1).getUsername() + " is active? " + gameState.getCurrPlayers().get(1).isMyTurn());
 

@@ -13,7 +13,7 @@ import it.polimi.ingsw.server.messages.OperationResultMessage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommandProcessor        /* Contains the code that runs when a certain command is received */
+public class CommandProcessor			/* Contains the code that runs when a certain command is received */
 {
 	private final Model model;
 	private final Controller controller;		/* To access its functions, command, view and username */

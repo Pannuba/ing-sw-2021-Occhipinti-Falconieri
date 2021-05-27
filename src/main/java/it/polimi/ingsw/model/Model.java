@@ -5,7 +5,6 @@ import it.polimi.ingsw.model.cards.*;
 
 import it.polimi.ingsw.util.XML_Serialization;
 
-import java.awt.image.ImagingOpException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -86,29 +85,21 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 	public List<List<LeaderCard>> createLeaderCardsLists()				/* Returns a list of lists of leadercards, 1 for each player, each list has 4 leadercards to choose 2 from */
 	{
-		int[] cardsToAssign = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-		List<List<LeaderCard>> listOfLists = new ArrayList<>();							/* TODO: simplify using Collections.shuffle(), see ActionTokens */
-		List<LeaderCard> tempList;
+		List<List<LeaderCard>> listOfLists = new ArrayList<>();
 
-		for (int i = 0; i < numPlayers; i++)
+		Collections.shuffle(allLeaderCards);
+
+		int i = 0;
+
+		for (int j = 0; j < numPlayers; j++)        /* Create numPlayer lists of 4 cards each */
 		{
-			tempList = new ArrayList<>();		/* Resets the temp list so we don't end up with a 16-element list */
+			listOfLists.add(new ArrayList<>());
 
-			for (int j = 0; j < 4; j++)
+			for (int k = 0; k < 4; k++)
 			{
-				int randNum = ThreadLocalRandom.current().nextInt(0, 15 + 1);
-
-				if (cardsToAssign[randNum] != 1)    /* If the leaderCard has already been picked, skip the loop and reset the counter (j) */
-					j--;
-
-				else
-				{
-					tempList.add(allLeaderCards.get(randNum));
-					cardsToAssign[randNum]--;
-				}
+				listOfLists.get(j).add(allLeaderCards.get(i));
+				i++;
 			}
-
-			listOfLists.add(tempList);
 		}
 
 		return listOfLists;
@@ -118,8 +109,8 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	{
 		actionTokens = new ArrayList<>();
 
-		actionTokens.add(new ActionDevCard(DevCardColor.GREEN, devCardsMarket));
-		actionTokens.add(new ActionDevCard(DevCardColor.BLUE, devCardsMarket));
+		actionTokens.add(new ActionDevCard(DevCardColor.GREEN,	devCardsMarket));
+		actionTokens.add(new ActionDevCard(DevCardColor.BLUE,	devCardsMarket));
 		actionTokens.add(new ActionDevCard(DevCardColor.PURPLE, devCardsMarket));
 		actionTokens.add(new ActionDevCard(DevCardColor.YELLOW, devCardsMarket));
 		actionTokens.add(new ActionBlack1(track, actionTokens));		/* Pass the list itself to shuffle it */

@@ -53,7 +53,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 				{
 					System.out.println("Received " + inputObj + " from " + username);		/* Prints the command */
 					setChanged();
-					notifyObservers(inputObj);        /* Sends command to controller */
+					notifyObservers(inputObj);		/* Sends command to controller */
 				}
 			}
 			catch (IOException | ClassNotFoundException e)				/* EOFException when client disconnects */
