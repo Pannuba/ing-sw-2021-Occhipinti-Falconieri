@@ -65,7 +65,7 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 
 		if (cardToActivate.checkRequirements(model.getPlayerByUsername(username).getDashboard()))
 		{
-			if (!cardToActivate.isDiscarded())			/* Discarded leadercards can't be activated. TODO: remove discarded & activated cards from client choices */
+			if (!cardToActivate.isDiscarded())			/* Discarded leadercards can't be activated */
 			{
 				model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivateNum).setActive(true);
 				message = "Leadercard " + model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivateNum).getCardNumber() + " activated successfully!";
