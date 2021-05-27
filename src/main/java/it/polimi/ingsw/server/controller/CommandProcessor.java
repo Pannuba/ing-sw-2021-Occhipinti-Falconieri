@@ -169,7 +169,7 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 				message = "Couldn't buy devcard: requirements not satisfied";
 				isFailed = true;
 			}
-			
+
 			else
 			{
 				model.getDevCardsMarket().buyCardFromMarket(cardToBuyNum);		/* Finally buy the card and send it to the client */

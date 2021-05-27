@@ -46,7 +46,8 @@ public class ServerListener				/* Thread running listening for incoming connecti
 
 				try
 				{
-					socket = serverSocket.accept();					/* FIXME: throws exception when the socket times out even with pings active. SocketTimeOutException */
+					socket = serverSocket.accept();
+					socket.setSoTimeout(2000000);
 					ois = new ObjectInputStream(socket.getInputStream());
 					oos = new ObjectOutputStream(socket.getOutputStream());
 					System.out.println("Incoming connection: " + socket);
