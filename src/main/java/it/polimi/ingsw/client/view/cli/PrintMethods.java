@@ -335,17 +335,17 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		{
 			case "ActionDevCard":
 
-				System.out.println("Token type: discard 2 " + convertDevCardColorToString(((ActionDevCard) token).getColor()) + " dev cards");
+				System.out.println("discard 2 " + convertDevCardColorToString(((ActionDevCard) token).getColor()) + " dev cards");
 				/* Print new devCardsMarket? */
 				break;
 
 			case "ActionBlack1":
-				System.out.println("Token type: move black pawn by 1 place, then shuffle the action tokens");
+				System.out.println("move black pawn by 1 place, then shuffle the action tokens");
 				/* Print new track? Add track to message? */
 				break;
 
 			case "ActionBlack2":
-				System.out.println("Token type: move black pawn by 2 places");
+				System.out.println("move black pawn by 2 places");
 				break;
 		}
 	}

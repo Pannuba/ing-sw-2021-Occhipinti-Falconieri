@@ -1,6 +1,13 @@
 package it.polimi.ingsw.model.cards;
 
+import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.board.Dashboard;
+import it.polimi.ingsw.model.board.Storage;
+import it.polimi.ingsw.model.board.Vault;
+import it.polimi.ingsw.util.Pair;
+
 import java.io.Serializable;
+import java.util.List;
 
 /*	Parameter editor has to edit leadercard requirements. For simplicity's sake, and order to keep symmetry with the original game,
 	the type of requirement cannot be changed (devcards, resources).
@@ -20,6 +27,67 @@ public abstract class LeaderCard implements Serializable        /* Can't do new 
 	{
 		isDiscarded = false;
 		isActive = false;
+	}
+
+	public boolean checkRequirements(Dashboard playerBoard)		/* True if requirements are satisfied. Here or Model? */
+	{
+		List<DevCard> devCards = playerBoard.getAllDevCards();
+
+		switch (this.getClass().getSimpleName())		/* Works! "this" is black magic I swear */
+		{
+			case "SkillDiscount":		/* Player has to have x devcards of any level */
+			case "SkillMarble":
+
+				List<DevCardColor> colorRequirements = ((SkillDiscount) this).getRequirements();
+
+				for (int i = 0; i < devCards.size(); i++)
+				{
+					for (int j = 0; j < colorRequirements.size(); j++)
+					{
+						if (devCards.get(i).getColor() == colorRequirements.get(j))
+						{
+							colorRequirements.remove(j);		/* Remove a requirement for every card that satisfies it */
+							j--;
+						}
+					}
+				}
+
+				if (colorRequirements.isEmpty())				/* If there are no more requirements left, it means they're all satisfied */
+					return true;
+
+				else
+					return false;
+
+			case "SkillProduction":		/* Player has to have 1 devcard of color x and level y */
+
+				Pair<DevCardColor, Integer> prodRequirements = ((SkillProduction) this).getRequirements();
+
+				for (int i = 0; i < devCards.size(); i++)
+				{
+					if (devCards.get(i).getColor() == prodRequirements.obj1 && devCards.get(i).getLevel() == prodRequirements.obj2)
+						return true;
+				}
+
+				return false;
+
+			case "SkillStorage":		/* Player has to have x resources of the same type */
+
+				Resource storageRequirements = ((SkillStorage) this).getRequirements();
+				Storage storage = playerBoard.getStorage();
+				Vault vault = playerBoard.getVault();
+
+				int reqResourceQuantity = 0;
+				reqResourceQuantity += storage.findResourceByType(storageRequirements.getResourceType());
+				reqResourceQuantity += vault.getResourceAmounts().get(storageRequirements.getResourceType());
+
+				if (reqResourceQuantity >= storageRequirements.getQuantity())
+					return true;
+
+				else
+					return false;
+		}
+
+		return false;
 	}
 
 	public int getCardNumber()

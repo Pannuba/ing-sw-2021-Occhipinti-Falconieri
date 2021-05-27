@@ -44,7 +44,7 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 
 	public void getActionToken(ActionToken token)
 	{
-		System.out.print("Received the following action token:\n");
+		System.out.print("Received action token: ");
 		PrintMethods.printActionToken(token);
 	}
 }

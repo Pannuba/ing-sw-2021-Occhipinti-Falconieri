@@ -1,6 +1,9 @@
 package it.polimi.ingsw.model.cards;
 
 import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.board.Dashboard;
+import it.polimi.ingsw.model.board.Storage;
+import it.polimi.ingsw.model.board.Vault;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,6 +26,26 @@ public class DevCard implements Serializable
 		requirements = new ArrayList<>();
 		cost = new ArrayList<>();
 		product = new ArrayList<>();
+	}
+
+	public boolean checkRequirements(Dashboard playerBoard)
+	{
+		List<Resource> requirements = this.requirements;		/* Gets requirements from the card instance that is being bought */
+
+		Storage storage = playerBoard.getStorage();				/* If there are enough resources, get them from storage, otherwise vault */
+		Vault vault = playerBoard.getVault();					/* Ask for player input only when bought resources have to be discarded, see Slack */
+
+		for (int i = 0; i < requirements.size(); i++)
+		{
+			int requiredResAmount = 0;
+			requiredResAmount += storage.findResourceByType(requirements.get(i).getResourceType());
+			requiredResAmount += vault.getResourceAmounts().get(requirements.get(i).getResourceType());
+
+			if (requiredResAmount < requirements.get(i).getQuantity())		/* If only 1 resource (type and quantity) isn't satisfied, return false */
+				return false;
+		}
+
+		return true;
 	}
 
 	public int getCardNumber()

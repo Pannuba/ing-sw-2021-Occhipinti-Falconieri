@@ -63,9 +63,9 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 
 		LeaderCard cardToActivate = model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivateNum);
 
-		if (controller.checkLeaderRequirements(model.getPlayerByUsername(username).getDashboard(), cardToActivate))
+		if (cardToActivate.checkRequirements(model.getPlayerByUsername(username).getDashboard()))
 		{
-			if (cardToActivate.isDiscarded() == false)			/* Discarded leadercards can't be activated. Remove discarded cards from client choices? */
+			if (!cardToActivate.isDiscarded())			/* Discarded leadercards can't be activated. TODO: remove discarded & activated cards from client choices */
 			{
 				model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivateNum).setActive(true);
 				message = "Leadercard " + model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivateNum).getCardNumber() + " activated successfully!";
@@ -142,9 +142,10 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 	public void buyDevCard(List<String> command, String username)
 	{
 		int cardToBuyNum = Integer.parseInt(command.get(1));
-		List<Resource> requirements = model.getDevCardsMarket().getDevCardByNumber(cardToBuyNum).getRequirements();
+		DevCard cardToBuy = model.getDevCardsMarket().getDevCardByNumber(cardToBuyNum);
+		List<Resource> requirements = cardToBuy.getRequirements();
 
-		if (controller.checkDevCardRequirements(model.getPlayerByUsername(username).getDashboard(), requirements))	/* If player has enough resources */
+		if (cardToBuy.checkRequirements(model.getPlayerByUsername(username).getDashboard()))	/* If player has enough resources */
 		{
 			if (!controller.spendResources(requirements))	/* Shouldn't return false if it passed checkDevCardRequirements... */
 			{
@@ -154,7 +155,7 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 
 			else
 			{
-				DevCard cardToBuy = model.getDevCardsMarket().buyCardFromMarket(cardToBuyNum);		/* Finally buy the card and send it to the client */
+				cardToBuy = model.getDevCardsMarket().buyCardFromMarket(cardToBuyNum);		/* Finally buy the card and send it to the client */
 				controller.getView().send(new BoughtDevCardMessage(cardToBuy));
 			}
 		}
