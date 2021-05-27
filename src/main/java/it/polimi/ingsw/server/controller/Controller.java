@@ -118,7 +118,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 	public boolean checkLeaderRequirements(Dashboard playerBoard, LeaderCard boughtCard)		/* True if requirements are satisfied. Put in Model? */
 	{
-		List<DevCard> devCards = playerBoard.getAllDevCards();
+		List<DevCard> devCards = playerBoard.getAllDevCards();						/* TODO: put in Model */
 
 		switch (boughtCard.getClass().getSimpleName())
 		{
@@ -177,11 +177,10 @@ public class Controller implements Observer			/* Observes view to get commands..
 		return false;
 	}
 
-	public boolean checkDevCardRequirements(Dashboard playerBoard, DevCard boughtCard)
+	public boolean checkDevCardRequirements(Dashboard playerBoard, List<Resource> requirements)		/* TODO: put in Model */
 	{
 		Storage storage = playerBoard.getStorage();				/* If there are enough resources, get them from storage, otherwise vault */
 		Vault vault = playerBoard.getVault();					/* Ask for player input only when bought resources have to be discarded, see Slack */
-		List<Resource> requirements = boughtCard.getRequirements();
 
 		for (int i = 0; i < requirements.size(); i++)
 		{
@@ -190,6 +189,27 @@ public class Controller implements Observer			/* Observes view to get commands..
 			requiredResAmount += vault.getResourceAmounts().get(requirements.get(i).getResourceType());
 
 			if (requiredResAmount < requirements.get(i).getQuantity())		/* If only 1 resource (type and quantity) isn't satisfied, return false */
+				return false;
+		}
+
+		return true;
+	}
+
+	public boolean spendResources(List<Resource> requirements)		/* Returns false if it can't remove all the resources from storage and/or vault */
+	{
+		int reqAmount;
+		ResourceType reqType;
+
+		for (int i = 0; i < requirements.size(); i++)		/* Check every Resource in requirements */
+		{
+			reqAmount = requirements.get(i).getQuantity();
+			reqType = requirements.get(i).getResourceType();
+			reqAmount -= model.getPlayerByUsername(username).getDashboard().getStorage().removeResource(requirements.get(i));
+
+			if (reqAmount != 0)		/* If there are still resources to be removed after checking storage, also check vault */
+				reqAmount -= model.getPlayerByUsername(username).getDashboard().getVault().removeResource(new Resource(reqType, reqAmount));
+
+			if (reqAmount != 0)		/* If there are STILL resources to be removed after checking vault, return false */
 				return false;
 		}
 

@@ -138,11 +138,11 @@ public class Storage implements Serializable
 		}
 	}
 
-	public void removeResource(Resource resourceToRemove)
+	public int removeResource(Resource resourceToRemove)			/* Returns the number of removed resources */
 	{
 		switch (resourceToRemove.getQuantity())
 		{
-			case 1:
+			case 1:		/* TODO: if resourceToRemove.type is not found, return false. Check resourceType */
 
 				if (shelves[0].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[0].getShelfResourceQuantity() == 1)
 				{
@@ -166,7 +166,7 @@ public class Storage implements Serializable
 						shelves[2].getShelfResource().setResourceType(null);
 				}
 
-				break;
+				//return true;
 
 			case 2:
 
@@ -184,7 +184,7 @@ public class Storage implements Serializable
 						shelves[2].getShelfResource().setResourceType(null);
 				}
 
-				break;
+				//return true;
 
 			case 3:
 
@@ -194,9 +194,14 @@ public class Storage implements Serializable
 					shelves[2].getShelfResource().setResourceType(null);
 				}
 
+				//return true;
+
 			default:
 				System.out.println("Can't remove more than three resources");
+				//return false;
 		}
+
+		return 0; /* Placeholder */
 	}
 
 	public boolean moveResources(int shelfFromNum, int shelfToNum)			/* Can't have 2 shelves with the same resource according to the rules, */

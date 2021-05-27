@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 
 import java.io.Serializable;
@@ -22,6 +23,22 @@ public class Vault implements Serializable		/* Has resources obtained through pr
 	public void addResource(ResourceType resourceToAdd)
 	{
 		resourceAmounts.put(resourceToAdd, resourceAmounts.get(resourceToAdd) + 1);
+	}
+
+	public int removeResource(Resource resourceToRemove)
+	{
+		int removedResNum = 0;
+
+		for (int i = 0; i < resourceToRemove.getQuantity(); i++)		/* Remove resources one at a time */
+		{
+			if (resourceAmounts.get(resourceToRemove.getResourceType()) > 0)
+			{
+				resourceAmounts.put(resourceToRemove.getResourceType(), resourceAmounts.get(resourceToRemove.getResourceType()) - 1);
+				removedResNum++;
+			}
+		}
+
+		return removedResNum;
 	}
 
 	public int getTotalResources()

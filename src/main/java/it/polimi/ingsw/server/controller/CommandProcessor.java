@@ -136,18 +136,27 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 			model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(boughtResourcesList.get(i));
 
 		controller.getView().send(new BoughtResourcesMessage(boughtResourcesList));		/* Sends a list of resources to the client */
+		/* TODO: ask player to discard resources if they don't fit in the storage */
 	}
 
 	public void buyDevCard(List<String> command, String username)
 	{
 		int cardToBuyNum = Integer.parseInt(command.get(1));
-		DevCard cardToBuy = model.getDevCardsMarket().getDevCardByNumber(cardToBuyNum);
+		List<Resource> requirements = model.getDevCardsMarket().getDevCardByNumber(cardToBuyNum).getRequirements();
 
-		if (controller.checkDevCardRequirements(model.getPlayerByUsername(username).getDashboard(), cardToBuy))
+		if (controller.checkDevCardRequirements(model.getPlayerByUsername(username).getDashboard(), requirements))	/* If player has enough resources */
 		{
-			model.getDevCardsMarket().buyCardFromMarket(cardToBuyNum);		/* Returns a DevCard but we already have it... Change to void? */
-			controller.getView().send(new BoughtDevCardMessage(cardToBuy));
-			/* TODO: remove required resources from storage first, vault if storage doesn't have them */
+			if (!controller.spendResources(requirements))	/* Shouldn't return false if it passed checkDevCardRequirements... */
+			{
+				System.out.println("buyDevCard: error");	/* TODO: make sure checkDevCardRequirements and spendResources do the same */
+				controller.getView().send(new OperationResultMessage("Couldn't buy devcard: requirements not satisfied"));
+			}
+
+			else
+			{
+				DevCard cardToBuy = model.getDevCardsMarket().buyCardFromMarket(cardToBuyNum);		/* Finally buy the card and send it to the client */
+				controller.getView().send(new BoughtDevCardMessage(cardToBuy));
+			}
 		}
 
 		else

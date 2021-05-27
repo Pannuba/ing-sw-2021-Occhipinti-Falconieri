@@ -21,6 +21,6 @@ public class ActionBlack1 extends ActionToken		/* I can also do an instanceof ch
 	{
 		System.out.println("Activating action of ActionBlack1");
 		track.setBlackPawn(track.getBlackPawn() + 1);
-		Collections.shuffle(tokens);		/* Feels like cheating */
+		Collections.shuffle(tokens);
 	}
 }

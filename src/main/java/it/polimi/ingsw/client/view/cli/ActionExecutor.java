@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.NetworkHandler;
-import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.model.cards.SkillProduction;
 
@@ -91,7 +90,10 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 	public void leaderChoice()
 	{
-		/* TODO: check if player has any leadercard, if not, don't ask */
+		List<LeaderCard> leaderCards = cli.getGameState().getPlayerByName(cli.getUsername()).getLeaderCards();
+
+		if (leaderCards.isEmpty() || (leaderCards.get(0).isDiscarded() && leaderCards.get(1).isDiscarded()))
+			return;			/* If the player has no leadercards or they are both discarded, skip the choice */
 
 		System.out.print("Do you want to activate or discard a leader? A/D: ");
 
@@ -169,7 +171,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		System.out.print("These are your current dev card areas:\n\n");
 		PrintMethods.printDevCardAreas(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas());
 		System.out.print("Which dev card area do you want to put the new card in? ");
-		devCardAreaIndex = Integer.parseInt(input.nextLine());		/* 1, 2 or 3			- 1 because arrays are zero-indexed */
+		devCardAreaIndex = Integer.parseInt(input.nextLine());			/* 1, 2 or 3			- 1 because arrays are zero-indexed */
 		targetAreaLayer = cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas()[devCardAreaIndex - 1].getLayer();
 
 		while (targetAreaLayer == 3)
@@ -190,7 +192,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		command.clear();
 
 	/*	Check for resources. Here or server? SERVER		LocalModel class? NO
-		If client-side check, send new vault, storage and devcard market. If server-side check, send messages. I think server side is better. YES	*/
+		If client-side check, send new vault, storage and devcard market. If server-side check, send messages. I think server side is better. YES */
 	}
 
 	public void activateProduction()		/* How many times can a production be repeated? See rules */
