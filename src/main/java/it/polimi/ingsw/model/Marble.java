@@ -11,22 +11,23 @@ import java.io.Serializable;
 
 public class Marble implements Serializable
 {
-	private MarbleType type;
+	private MarbleType marbleType;
 	private int quantity;			/* I forgot what quantity does. It's the quantity, bro */
 
 	public Marble()
 	{
 		quantity = 0;
+		marbleType = null;
 	}
 
 	public MarbleType getMarbleType()
 	{
-		return type;
+		return marbleType;
 	}
 
-	public void setMarbleType(MarbleType type)
+	public void setMarbleType(MarbleType marbleType)
 	{
-		this.type = type;
+		this.marbleType = marbleType;
 	}
 
 	public int getQuantity()

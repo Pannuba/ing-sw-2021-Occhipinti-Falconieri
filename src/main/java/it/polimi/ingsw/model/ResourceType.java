@@ -14,9 +14,7 @@ public enum ResourceType
 	public static ResourceType convertStringToResType(String str)
 	{
 		if (str == null)
-		{
 			return null;
-		}
 
 		switch (str.toUpperCase())		/* So lowercase inputs like "g" are still valid */
 		{
@@ -33,7 +31,7 @@ public enum ResourceType
 				return ResourceType.PURPLE;
 
 			default:
-				System.out.print("Error\n");
+				System.out.println("convertStringToResType: error");
 				return null;
 		}
 	}

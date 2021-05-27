@@ -9,6 +9,9 @@ public enum DevCardColor
 
 	public static DevCardColor convertStringToDevColorType(String str)
 	{
+		if (str == null)
+			return null;
+
 		switch (str.toUpperCase())
 		{
 			case "G":
@@ -24,7 +27,7 @@ public enum DevCardColor
 				return DevCardColor.PURPLE;
 
 			default:
-				System.out.print("convertStringToDevColorType: error\n");
+				System.out.println("convertStringToDevColorType: error");
 				return null;
 		}
 	}

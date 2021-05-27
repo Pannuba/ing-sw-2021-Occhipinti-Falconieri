@@ -243,10 +243,12 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	private static String convertMarbleToString(Marble marble)
 	{
+		if (marble.getMarbleType() == null)
+			return "ERR";
+
 		switch (marble.getMarbleType())
 		{
 			case YELLOW:
-
 				return ANSI.YELLOW + ANSI.MARBLE.toString() + ANSI.RESET;
 
 			case PURPLE:

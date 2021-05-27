@@ -2,6 +2,8 @@ package it.polimi.ingsw.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -26,114 +28,30 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MarblesMarket implements Serializable
 {
-	private final Marble[][] marblesBoard = new Marble[3][4];			/* Final? but it keeps changing */
+	private final Marble[][] marblesBoard = new Marble[3][4];
 	private Marble spareMarble;
 
 	public MarblesMarket()
 	{
-		System.out.println("Creating marbles market");
-		int[] marblesToAssign = {4, 2, 2, 2, 2, 1};		/* 4 white, 2 blue, 2 grey, 2 purple, 2 yellow, 1 red */
-		MarbleType[] resourcesToAssign = new MarbleType[13];
-		spareMarble = new Marble();
+		System.out.println("Creating marbles market...");
 
-		for (int i = 0; i < 13; i++)
+		List<String> marblesToAssign = Arrays.asList("W", "W", "W", "W", "B", "B", "G", "G", "P", "P", "Y", "Y", "R");
+		Collections.shuffle(marblesToAssign);
+
+		spareMarble = new Marble();		/* spareMarble is the first marbleToAssign, 0 */
+		spareMarble.setMarbleType(MarbleType.convertStringToMarbleType(marblesToAssign.get(0)));
+
+		int i = 1;		/* Other marbles to assign are [1, 12] */
+
+		for (int j = 0; j < 3; j++)
 		{
-			switch (ThreadLocalRandom.current().nextInt(0, 5+1))            /* 5+1 because bound is not included */
+			for (int k = 0; k < 4; k++)
 			{
-				case 0:
-
-					if (marblesToAssign[0] == 0)
-					{
-						i--;    /* So it iterates another time, doesn't count because we ran out of white marbles */
-						break;
-					}
-
-					marblesToAssign[0]--;
-					resourcesToAssign[i] = MarbleType.WHITE;
-					break;
-
-				case 1:
-
-					if (marblesToAssign[1] == 0)
-					{
-						i--;
-						break;
-					}
-
-					marblesToAssign[1]--;
-					resourcesToAssign[i] = MarbleType.BLUE;
-					break;
-
-				case 2:
-
-					if (marblesToAssign[2] == 0)
-					{
-						i--;
-						break;
-					}
-
-					marblesToAssign[2]--;
-					resourcesToAssign[i] = MarbleType.GREY;
-					break;
-
-				case 3:
-
-					if (marblesToAssign[3] == 0)
-					{
-						i--;
-						break;
-					}
-
-					marblesToAssign[3]--;
-					resourcesToAssign[i] = MarbleType.PURPLE;
-					break;
-
-				case 4:
-
-					if (marblesToAssign[4] == 0)
-					{
-						i--;
-						break;
-					}
-
-					marblesToAssign[4]--;
-					resourcesToAssign[i] = MarbleType.YELLOW;
-					break;
-
-				case 5:
-
-					if (marblesToAssign[5] == 0)
-					{
-						i--;
-						break;
-					}
-
-					marblesToAssign[5]--;
-					resourcesToAssign[i] = MarbleType.RED;
-					break;
-
+				marblesBoard[j][k] = new Marble();
+				marblesBoard[j][k].setMarbleType(MarbleType.convertStringToMarbleType(marblesToAssign.get(i)));
+				i++;
 			}
 		}
-
-		for (int i = 0; i < 13;  /**/  )
-		{
-			if (i == 12)		/* TODO: test this in a separate program , should exit all for loops because the last marble to assign is the spare one */
-			{
-				spareMarble.setMarbleType(resourcesToAssign[i]);
-				break;
-			}
-
-			for (int j = 0; j < 3; j++)
-			{
-				for (int k = 0; k < 4; k++)
-				{
-					marblesBoard[j][k] = new Marble();
-					marblesBoard[j][k].setMarbleType(resourcesToAssign[i]);        /* Need to use MarbleType enum and Marble class */
-					i++;
-				}
-			}
-		}
-
 	}
 
 	public List<MarbleType> buyMarblesRow(int row)			/* Returns a list of marbletypes to the controller, which then acts for each marble */
