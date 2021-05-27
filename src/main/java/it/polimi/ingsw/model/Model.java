@@ -5,6 +5,8 @@ import it.polimi.ingsw.model.cards.*;
 
 import it.polimi.ingsw.util.XML_Serialization;
 
+import java.awt.image.ImagingOpException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -58,7 +60,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 			{
 				cardToAdd = (LeaderCard) XML_Serialization.deserialize("src/main/resources/xml/leadercards/leadercard" + (i + 1) + ".xml");
 			}
-			catch (Exception e)
+			catch (IOException e)
 			{
 				e.printStackTrace();
 			}
@@ -71,57 +73,12 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	{
 		System.out.println("Choosing a random first player...");
 
-		if (numPlayers == 1)
-		{
-			players.get(0).setId(0);
-			players.get(0).setMyTurn(true);
-			return;
-		}
+		Collections.shuffle(players);		/* Randomize player list */
 
-		List<Player> playersSortedByID = new ArrayList<>();
+		players.get(0).setMyTurn(true);		/* Set active turn for player with ID 0 */
 
-		int firstPlayer = ThreadLocalRandom.current().nextInt(0, numPlayers);		/* Not numPlayers + 1 because it's zero-indexed */
-		players.get(firstPlayer).setMyTurn(true);
-		players.get(firstPlayer).setId(0);
-
-		playersSortedByID.add(players.get(firstPlayer));
-
-		if (numPlayers == 2)
-		{
-			for (int i = 0; i < 2; i++)
-			{
-				if (!players.get(i).isMyTurn())
-				{
-					players.get(i).setId(1);
-					playersSortedByID.add(players.get(i));
-				}
-			}
-		}
-
-		else
-		{
-			int[] playerNumbers = new int[numPlayers - 1];
-
-			for (int i = 0; i < numPlayers - 1; i++)
-				playerNumbers[i] = 1;
-
-			for (int i = 0; i < numPlayers - 1; i++)
-			{
-				int randNum = ThreadLocalRandom.current().nextInt(0, numPlayers);
-
-				if (playerNumbers[randNum] != 1 || players.get(randNum).getId() == 0)
-					i--;
-
-				else
-				{
-					players.get(randNum).setId(randNum);
-					playersSortedByID.add(players.get(randNum));
-					playerNumbers[i]--;
-				}
-			}
-		}
-
-		setPlayers(playersSortedByID);
+		for (int i = 0; i < numPlayers; i++)
+			players.get(i).setId(i);
 
 		for (int i = 0; i < numPlayers; i++)
 			System.out.println(players.get(i).getUsername() + " has ID " + players.get(i).getId() + " and isFirstTurn: " + players.get(i).isMyTurn());

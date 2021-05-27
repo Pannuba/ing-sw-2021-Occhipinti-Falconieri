@@ -173,7 +173,7 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 			else
 			{
 				model.getDevCardsMarket().buyCardFromMarket(cardToBuyNum);		/* Finally buy the card and send it to the client */
-				model.getPlayerByUsername(username).getDashboard().addDevCardToArea(cardToBuy, devCardAreaIndex);
+				model.getPlayerByUsername(username).getDashboard().addDevCardToArea(cardToBuy, devCardAreaIndex);	/* TODO: check if layer is compatible */
 				controller.getView().send(new BoughtDevCardMessage(cardToBuy));
 				message = "Card bought successfully!";
 				isFailed = false;

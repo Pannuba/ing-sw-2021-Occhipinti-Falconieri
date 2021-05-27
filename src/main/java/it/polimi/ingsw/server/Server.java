@@ -22,7 +22,7 @@ public class Server
 					System.out.println("Interrupt signal received!\nClosing server socket...");
 					serverSocket.close();
 				}
-				catch (Exception e)
+				catch (IOException e)
 				{
 					Thread.currentThread().interrupt();
 					e.printStackTrace();

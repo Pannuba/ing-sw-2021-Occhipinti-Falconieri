@@ -57,11 +57,11 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		try
 		{
 			clientSocket = new Socket(ip, port);
-			clientSocket.setSoTimeout(2000000);							/* 20000 ms = 20 seconds. shutdown() after 3 failed pings? */
+			clientSocket.setSoTimeout(20000);								/* 20000 ms = 20 seconds. shutdown() after 3 failed pings? */
 			oos = new ObjectOutputStream(clientSocket.getOutputStream());	/* Send commands (list of strings) to server */
 			ois = new ObjectInputStream(clientSocket.getInputStream());		/* Receive gamestate from server (object) */
 		}
-		catch (Exception e)
+		catch (IOException e)
 		{
 			e.printStackTrace();
 			System.out.println("Connection failed to server");
@@ -88,7 +88,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		{
 			isFirstPlayer = parseBoolean((String) ois.readObject());		/* Need to use readObject and then cast it */
 		}
-		catch (Exception e)
+		catch (IOException | ClassNotFoundException e)
 		{
 			e.printStackTrace();
 		}
@@ -96,7 +96,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		return isFirstPlayer;
 	}
 
-	public void waitForPlayers()
+	public void waitForPlayers()		/* Remove this and create WaitForPlayersMessage? */
 	{
 		System.out.println("Waiting for players to connect...");
 
@@ -106,7 +106,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		{
 			try
 			{
-				message = (String) ois.readObject();
+				message = (String) ois.readObject();		/* Handle if it receives a ping here */
 
 				if (message.equals("START"))
 					break;
@@ -114,7 +114,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 				else
 					System.out.println("Message received is not START");
 			}
-			catch (Exception e)
+			catch (IOException | ClassNotFoundException e)
 			{
 				e.printStackTrace();
 				System.out.println("Server closed connection!");	/* Separate error messages for timeout or server crash? */
@@ -130,7 +130,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 			oos.writeObject(obj);
 			oos.reset();						/* omg if this works i swear to god (it did kinda) */
 		}
-		catch (Exception e)
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
@@ -147,7 +147,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 
 			clientSocket.close();
 		}
-		catch (Exception e)
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}

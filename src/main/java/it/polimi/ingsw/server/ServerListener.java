@@ -47,7 +47,7 @@ public class ServerListener				/* Thread running listening for incoming connecti
 				try
 				{
 					socket = serverSocket.accept();
-					socket.setSoTimeout(2000000);
+					socket.setSoTimeout(20000);
 					ois = new ObjectInputStream(socket.getInputStream());
 					oos = new ObjectOutputStream(socket.getOutputStream());
 					System.out.println("Incoming connection: " + socket);
@@ -65,7 +65,7 @@ public class ServerListener				/* Thread running listening for incoming connecti
 						oos.writeObject("false");
 
 				}
-				catch (Exception e)
+				catch (IOException | ClassNotFoundException e)
 				{
 					e.printStackTrace();
 				}
