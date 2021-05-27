@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.board.Dashboard;
 import it.polimi.ingsw.model.board.DevCardArea;
 import it.polimi.ingsw.model.board.Track;
 import it.polimi.ingsw.model.cards.DevCard;
+import org.junit.After;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -16,11 +17,11 @@ public class ModelTest {
 
 	private Player p1;
 	private Player p2;
-	private List<Player> players = new ArrayList<>();
+	private List<Player> players;
 	private Model model;
 	private Track track;
-	private HashMap<Integer, Integer> redPawns = new HashMap<>();
-	private Dashboard dashboard = new Dashboard();
+	private HashMap<Integer, Integer> redPawns;
+	private Dashboard dashboard;
 	private DevCardArea devCardArea1 = new DevCardArea();
 	private DevCardArea devCardArea2 = new DevCardArea();
 	private DevCardArea devCardArea3 = new DevCardArea();
@@ -32,14 +33,103 @@ public class ModelTest {
 	private DevCard card5 = new DevCard();
 	private DevCard card6 = new DevCard();
 	private DevCard card7 = new DevCard();
-	private List<DevCard> allDevCards = new ArrayList<>();
 
 	@Test
 	public void createActionTokens() {
 	}
 
 	@Test
-	public void vaticanReport() {
+	public void vaticanReport1()
+	{
+		p1 = new Player("pippo");
+		p2 = new Player("pluto");
+		players = new ArrayList<>();
+		players.add(p1);
+		players.add(p2);
+		model = new Model(players);
+		model.getPlayers().get(0).setId(0);
+		model.getPlayers().get(1).setId(1);
+		track = new Track(players);
+		redPawns = new HashMap<>();
+		redPawns.put(players.get(0).getId(), 2);
+		redPawns.put(players.get(1).getId(), 8);
+		track.setRedPawns(redPawns);
+		model.setTrack(track);
+		model.vaticanReport(8);
+		System.out.println("False " + players.get(0).getPopeTokens()[0].isActive());
+		System.out.println("True " + players.get(1).getPopeTokens()[0].isActive());
+		assertTrue("Error", track.getPopeTokens()[0].isDiscarded());
+		assertFalse("Error", players.get(0).getPopeTokens()[0].isActive());
+		assertTrue("Error", players.get(1).getPopeTokens()[0].isActive());
+	}
+
+	@Test
+	public void vaticanReport2()
+	{
+		p1 = new Player("pippo");
+		p2 = new Player("pluto");
+		players = new ArrayList<>();
+		players.add(p1);
+		players.add(p2);
+		model = new Model(players);
+		model.getPlayers().get(0).setId(0);
+		model.getPlayers().get(1).setId(1);
+		track = new Track(players);
+		redPawns = new HashMap<>();
+		redPawns.put(players.get(0).getId(), 5);
+		redPawns.put(players.get(1).getId(), 8);
+		track.setRedPawns(redPawns);
+		model.setTrack(track);
+		model.vaticanReport(8);
+		assertTrue("Error", track.getPopeTokens()[0].isDiscarded());
+		assertTrue("Error", players.get(0).getPopeTokens()[0].isActive());
+		assertTrue("Error", players.get(1).getPopeTokens()[0].isActive());
+	}
+
+	@Test
+	public void vaticanReport3()
+	{
+		p1 = new Player("pippo");
+		p2 = new Player("pluto");
+		players = new ArrayList<>();
+		players.add(p1);
+		players.add(p2);
+		model = new Model(players);
+		model.getPlayers().get(0).setId(0);
+		model.getPlayers().get(1).setId(1);
+		track = new Track(players);
+		redPawns = new HashMap<>();
+		redPawns.put(players.get(0).getId(), 16);
+		redPawns.put(players.get(1).getId(), 13);
+		track.setRedPawns(redPawns);
+		model.setTrack(track);
+		model.vaticanReport(16);
+		assertTrue("Error", track.getPopeTokens()[1].isDiscarded());
+		assertTrue("Error", players.get(0).getPopeTokens()[1].isActive());
+		assertTrue("Error", players.get(1).getPopeTokens()[1].isActive());
+	}
+
+	@Test
+	public void vaticanReport4()
+	{
+		p1 = new Player("pippo");
+		p2 = new Player("pluto");
+		players = new ArrayList<>();
+		players.add(p1);
+		players.add(p2);
+		model = new Model(players);
+		model.getPlayers().get(0).setId(0);
+		model.getPlayers().get(1).setId(1);
+		track = new Track(players);
+		redPawns = new HashMap<>();
+		redPawns.put(players.get(0).getId(), 16);
+		redPawns.put(players.get(1).getId(), 24);
+		track.setRedPawns(redPawns);
+		model.setTrack(track);
+		model.vaticanReport(24);
+		assertTrue("Error", track.getPopeTokens()[2].isDiscarded());
+		assertFalse("Error", players.get(0).getPopeTokens()[2].isActive());
+		assertTrue("Error", players.get(1).getPopeTokens()[2].isActive());
 	}
 
 	@Test
@@ -49,9 +139,11 @@ public class ModelTest {
 		p2 = new Player("pluto");
 		p1.setId(0);
 		p2.setId(1);
+		players = new ArrayList<>();
 		players.add(p1);
 		players.add(p2);
 		track = new Track(players);
+		redPawns = new HashMap<>();
 		redPawns.put(players.get(0).getId(), 2);
 		redPawns.put(players.get(1).getId(), 24);
 		track.setRedPawns(redPawns);
@@ -80,15 +172,18 @@ public class ModelTest {
 		devCardAreas[0] = devCardArea1;
 		devCardAreas[1] = devCardArea2;
 		devCardAreas[2] = devCardArea3;
+		dashboard = new Dashboard();
 		dashboard.setDevCardAreas(devCardAreas);
 		p1 = new Player("pippo");
 		p2 = new Player("pluto");
 		p1.setId(0);
 		p2.setId(1);
 		p1.setDashboard(dashboard);
+		players = new ArrayList<>();
 		players.add(p1);
 		players.add(p2);
 		track = new Track(players);
+		redPawns = new HashMap<>();
 		redPawns.put(players.get(0).getId(), 2);
 		redPawns.put(players.get(1).getId(), 16);
 		track.setRedPawns(redPawns);
@@ -112,15 +207,18 @@ public class ModelTest {
 		devCardAreas[0] = devCardArea1;
 		devCardAreas[1] = devCardArea2;
 		devCardAreas[2] = devCardArea3;
+		dashboard = new Dashboard();
 		dashboard.setDevCardAreas(devCardAreas);
 		p1 = new Player("pippo");
 		p2 = new Player("pluto");
 		p1.setId(0);
 		p2.setId(1);
 		p1.setDashboard(dashboard);
+		players = new ArrayList<>();
 		players.add(p1);
 		players.add(p2);
 		track = new Track(players);
+		redPawns = new HashMap<>();
 		redPawns.put(players.get(0).getId(), 5);
 		redPawns.put(players.get(1).getId(), 16);
 		track.setRedPawns(redPawns);
