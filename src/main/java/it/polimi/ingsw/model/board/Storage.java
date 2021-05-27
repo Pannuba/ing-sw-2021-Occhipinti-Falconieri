@@ -85,10 +85,10 @@ public class Storage implements Serializable
 
 	public void addResourceSmart(Resource resourceToAdd)	/* Adds a resource without having to specify the shelf number. Checks the smaller shelf first */
 	{
-
 		switch (resourceToAdd.getQuantity())
 		{
 			case 1:
+
 				if 		(shelves[0].isEmpty() && shelves[1].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[2].getShelfResourceType() != resourceToAdd.getResourceType())
 					addResource(resourceToAdd, 1);
 

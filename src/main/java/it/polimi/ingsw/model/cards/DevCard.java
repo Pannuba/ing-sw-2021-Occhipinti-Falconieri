@@ -28,12 +28,12 @@ public class DevCard implements Serializable
 		product = new ArrayList<>();
 	}
 
-	public boolean checkRequirements(Dashboard playerBoard)
+	public boolean checkRequirements(Dashboard playerBoard)		/* TODO: same function for requirements and cost */
 	{
 		List<Resource> requirements = this.requirements;		/* Gets requirements from the card instance that is being bought */
 
-		Storage storage = playerBoard.getStorage();				/* If there are enough resources, get them from storage, otherwise vault */
-		Vault vault = playerBoard.getVault();					/* Ask for player input only when bought resources have to be discarded, see Slack */
+		Storage storage = playerBoard.getStorage();
+		Vault vault = playerBoard.getVault();
 
 		for (int i = 0; i < requirements.size(); i++)
 		{

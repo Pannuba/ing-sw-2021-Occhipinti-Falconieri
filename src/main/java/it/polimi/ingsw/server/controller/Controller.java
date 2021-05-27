@@ -43,30 +43,27 @@ public class Controller implements Observer			/* Observes view to get commands..
 				runCommand.discardLeader(command, username);
 				break;
 
-			case "BUY_DEVCARD":							/* 	Client picks a devcard # to buy from their local devCardsMarket. Server checks for resources
-															If there are enough resources, spend them and add the devcard to Player
-															Otherwise send an error message. Can client perform another action?		*/
-				runCommand.buyDevCard(command, username);
-				chooseNextPlayer();		/* Don't choose next player during setup actions */
-				postRoundChecks();		/* Put in model as separate method, or in update()? */
-				model.update();			/* Send new gamestate to everyone */
-				break;
+			case "BUY_DEVCARD":								/*	Client picks a devcard # to buy from their local devCardsMarket				*/
+				runCommand.buyDevCard(command, username);	/*	Server checks for resources. If there are enough resources, 				*/
+				break;										/*	Spend them and add the devcard to Player, otherwise send an error message	*/
 
 			case "ACTIVATE_PRODUCTION":
 
 				runCommand.activateProduction(command, username);
-				chooseNextPlayer();
-				postRoundChecks();
-				model.update();
 				break;
 
 			case "BUY_RESOURCES":					/* What do with marble amounts? Ask where put to them in storage? */
 													/* Cut off when it sends the bought resources, and make another command for the rest of the action? */
 				runCommand.buyResources(command, username);
-				chooseNextPlayer();
-				postRoundChecks();
-				model.update();
 				break;
+		}
+
+		if ((command.get(0).equals("BUY_RESOURCES") || command.get(0).equals("BUY_DEVCARD")	||
+			command.get(0).equals("ACTIVATE_PRODUCTION")) && !runCommand.isFailed())
+		{
+			chooseNextPlayer();			/* Don't choose next player during setup actions */
+			postRoundChecks();			/* Put in model as separate method, or in update()? */
+			model.update();				/* Send new gamestate to everyone */
 		}
 	}
 

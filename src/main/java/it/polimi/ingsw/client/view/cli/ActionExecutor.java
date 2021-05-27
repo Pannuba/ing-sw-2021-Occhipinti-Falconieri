@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.NetworkHandler;
+import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.model.cards.SkillProduction;
 
@@ -21,6 +22,57 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		this.input = cli.getInput();
 		this.networkHandler = cli.getNetworkHandler();
 		command = new ArrayList<>();
+	}
+
+	public void chooseAction()
+	{
+		GameState gameState = cli.getGameState();
+		System.out.print("What do you want to do?\nBuy from market (0), buy devcards (1), activate production (2), view cards (3), view board (4), view markets (5): ");
+
+		String choice = input.nextLine();
+
+		switch (choice)
+		{
+			case "0":
+				leaderChoice();
+				buyResources();
+				break;
+
+			case "1":
+				leaderChoice();
+				buyDevCard();
+				break;
+
+			case "2":
+				leaderChoice();
+				activateProduction();
+				break;
+
+			case "3":
+				PrintMethods.printPlayerLeaderCards(gameState.getPlayerByName(cli.getUsername()).getLeaderCards());
+				PrintMethods.printPlayerDevCards(gameState.getPlayerByName(cli.getUsername()).getDashboard().getAllDevCards());
+				break;
+
+			case "4":
+				PrintMethods.printTrack(gameState.getCurrTrack(), gameState.getCurrPlayers());
+				PrintMethods.printBoard(gameState.getPlayerByName(cli.getUsername()).getDashboard());
+				break;
+
+			case "5":
+				PrintMethods.printDevCardsMarket(gameState.getCurrDevCardsMarket());
+				PrintMethods.printMarblesMarket(gameState.getCurrMarblesMarket());
+				break;
+
+			default:
+				System.out.println("Invalid action number");
+
+		}
+
+		if (choice.equals("3") || choice.equals("4") || choice.equals("5"))			/* Player can choose again after viewing things */
+		{
+			System.out.println("What do you want to do now?");
+			chooseAction();
+		}
 	}
 
 	public void chooseLeaderCards(List<LeaderCard> fourLeaderCards)

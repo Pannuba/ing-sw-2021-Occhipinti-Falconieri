@@ -18,12 +18,15 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 	private final Model model;
 	private final Controller controller;		/* To access its functions, command, view and username */
 	private String message;
+	private boolean isFailed;		/* Becomes true if something bad happens while processing the commands */
 
 	public CommandProcessor(Model model, Controller controller)
 	{
 		this.model = model;
 		this.controller = controller;
+
 		message = "";
+		isFailed = false;
 	}
 
 	public void selectLeaderCards(List<String> command, String username)
@@ -69,13 +72,17 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 			{
 				model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivateNum).setActive(true);
 				message = "Leadercard " + model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivateNum).getCardNumber() + " activated successfully!";
+				isFailed = false;
 			}
 		}
 
 		else
+		{
 			message = "Couldn't activate leader: requirements not satisfied";
+			isFailed = true;
+		}
 
-		controller.getView().send(new OperationResultMessage(message));
+		controller.getView().send(new OperationResultMessage(message, isFailed));
 	}
 
 	public void discardLeader(List<String> command, String username)	/* Activated leadercards can't be discarded. Remove active cards from client choices? */
@@ -89,13 +96,21 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 			model.getPlayerByUsername(username).getLeaderCardByNumber(cardToDiscardNum).setDiscarded(true);
 			controller.updatePlayerPosition(model.getPlayerByUsername(username).getId(), 1);
 			message = "Leadercard " + cardToDiscard.getCardNumber() + " discarded successfully! Gained 1 faith point";
+			isFailed = false;
 		}
 
-		controller.getView().send(new OperationResultMessage(message));
+		else
+		{
+			message = "Failed to discard leadercard";
+			isFailed = true;
+		}
+
+		controller.getView().send(new OperationResultMessage(message, isFailed));
 	}
 
 	public void buyResources(List<String> command, String username)
 	{
+		isFailed = false;		/* How can this action fail? */
 		List<MarbleType> boughtMarbles = new ArrayList<>();
 		List<ResourceType> resourcesToAddToStorage = new ArrayList<>();		/* Should either be a hashmap or a list of resourcetypes */
 
@@ -150,18 +165,26 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 			if (!controller.spendResources(requirements))	/* Shouldn't return false if it passed checkDevCardRequirements... */
 			{
 				System.out.println("buyDevCard: error");	/* TODO: make sure checkDevCardRequirements and spendResources do the same */
-				controller.getView().send(new OperationResultMessage("Couldn't buy devcard: requirements not satisfied"));
+				message = "Couldn't buy devcard: requirements not satisfied";
+				isFailed = true;
 			}
 
 			else
 			{
 				cardToBuy = model.getDevCardsMarket().buyCardFromMarket(cardToBuyNum);		/* Finally buy the card and send it to the client */
 				controller.getView().send(new BoughtDevCardMessage(cardToBuy));
+				message = "Card bought successfully!";
+				isFailed = false;
 			}
 		}
 
 		else
-			controller.getView().send(new OperationResultMessage("Couldn't buy devcard: requirements not satisfied"));
+		{
+			message = "Couldn't buy devcard: requirements not satisfied";
+			isFailed = true;
+		}
+
+		controller.getView().send(new OperationResultMessage(message, isFailed));
 	}
 
 	public void activateProduction(List<String> command, String username)
@@ -177,6 +200,7 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 			case "DEVCARD":				/* "ACTIVATE_PRODUCTION", "DEVCARD", "5" */
 
 				DevCard devCard = model.getPlayerByUsername(username).getDashboard().getTopDevCardByNumber(Integer.parseInt(command.get(2)));
+				List<Resource> cardCost = devCard.getCost();
 				/* take resources from storage/vault, send boughtresourcesmessage */
 				break;
 
@@ -187,5 +211,10 @@ public class CommandProcessor        /* Contains the code that runs when a certa
 
 				break;
 		}
+	}
+
+	public boolean isFailed()
+	{
+		return isFailed;
 	}
 }

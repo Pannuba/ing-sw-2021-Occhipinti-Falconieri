@@ -52,52 +52,6 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets stuc
 		networkHandler.waitForPlayers();
 		System.out.println("Starting match\n\nMasters of the Renaissance!");
 	}
-	
-	private void chooseAction(int choice)			/* Actions class? */
-	{
-		switch (choice)
-		{
-			case 0:
-				action.leaderChoice();
-				action.buyResources();
-				break;
-
-			case 1:
-				action.leaderChoice();
-				action.buyDevCard();
-				break;
-
-			case 2:
-				action.leaderChoice();
-				action.activateProduction();
-				break;
-
-			case 3:
-				PrintMethods.printPlayerLeaderCards(gameState.getPlayerByName(username).getLeaderCards());
-				PrintMethods.printPlayerDevCards(gameState.getPlayerByName(username).getDashboard().getAllDevCards());
-				break;
-
-			case 4:
-				PrintMethods.printTrack(gameState.getCurrTrack(), gameState.getCurrPlayers());
-				PrintMethods.printBoard(gameState.getPlayerByName(username).getDashboard());
-				break;
-
-			case 5:
-				PrintMethods.printDevCardsMarket(gameState.getCurrDevCardsMarket());
-				PrintMethods.printMarblesMarket(gameState.getCurrMarblesMarket());
-				break;
-
-			default:
-				System.out.println("Invalid action number");
-
-		}
-
-		if (choice == 3 || choice == 4 || choice == 5)			/* Player can choose again after viewing things */
-		{
-			System.out.print("What do you want to do now?\nBuy from market (0), buy devcards (1), activate production (2), view cards (3), view board (4), view markets (5): ");
-			chooseAction(Integer.parseInt(input.nextLine()));
-		}
-	}
 
 	@Override
 	public void update(Observable obs, Object obj)
@@ -115,9 +69,8 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets stuc
 			{
 				if (gameState.getPlayerByName(username).isMyTurn())
 				{
-					System.out.println("It's your turn!");
-					System.out.print("What do you want to do?\nBuy from market (0), buy devcards (1), activate production (2), view cards (3), view board (4), view markets (5): ");
-					chooseAction(Integer.parseInt(input.nextLine()));
+					System.out.print("It's your turn! ");
+					action.chooseAction();
 				}
 
 				else

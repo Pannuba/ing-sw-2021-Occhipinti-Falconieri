@@ -4,18 +4,25 @@ import it.polimi.ingsw.client.view.cli.MessageDecoder;
 
 import java.io.Serializable;
 
+/*	This message is sent after (nearly?) every action the client performs. If the boolean is true the action has failed, so the
+	controller doesn't progress the game by sending a new gamestate and choosing the next player (and flipping the next actiontoken
+	for singleplayer matches) so that the client can perform another action in the same round.
+ */
+
 public class OperationResultMessage implements Message, Serializable
 {
-	private String message;
+	private final String message;
+	private final boolean isFailed;
 
-	public OperationResultMessage(String message)
+	public OperationResultMessage(String message, boolean isFailed)
 	{
 		this.message = message;
+		this.isFailed = isFailed;
 	}
 
 	@Override
 	public void process(MessageDecoder decoder)
 	{
-		decoder.getOperationResultMessage(message);
+		decoder.getOperationResultMessage(message, isFailed);
 	}
 }
