@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.server.controller.Controller;
 import it.polimi.ingsw.server.messages.ChooseLeadersMessage;
 import it.polimi.ingsw.server.messages.InitialResourcesMessage;
+import it.polimi.ingsw.server.messages.MatchStartMessage;
 import it.polimi.ingsw.server.view.ClientHandler;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class Match implements Runnable
 		System.out.println("Match thread started");
 
 		for (int i = 0; i < numPlayers; i++)			/* When all players are connected */
-			views.get(i).send("START");
+			views.get(i).send(new MatchStartMessage());
 
 		List<List<LeaderCard>> leaderCardsLists = model.createLeaderCardsLists();
 

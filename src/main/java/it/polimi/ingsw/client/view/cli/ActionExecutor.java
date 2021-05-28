@@ -24,6 +24,15 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		command = new ArrayList<>();
 	}
 
+	public void firstPlayer(boolean isFirstPlayer)
+	{
+		if (isFirstPlayer)
+		{
+			System.out.print("Total players: ");
+			networkHandler.send(input.nextLine());
+		}
+	}
+
 	public void chooseAction()
 	{
 		GameState gameState = cli.getGameState();

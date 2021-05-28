@@ -6,7 +6,7 @@ import it.polimi.ingsw.server.messages.Message;
 
 import java.util.*;
 
-public class CLI extends Observable implements Observer		/* FIXME: CLI gets stuck at the beginning of singleplayer matches, the first gamestate disappears */
+public class CLI extends Observable implements Observer
 {
 	private final Scanner input;
 	private final ActionExecutor action;
@@ -20,6 +20,7 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets stuc
 		input = new Scanner(System.in);
 		gameStart();
 		new Thread(networkHandler).start();		/* Start listening for messages or gamestate updates from server */
+
 		action = new ActionExecutor(this);		/* Pass CLI to ActionExecutor for the NetworkHandler and input instance, gamestate and username */
 		messageDecoder = new MessageDecoder(action);
 	}
@@ -36,21 +37,12 @@ public class CLI extends Observable implements Observer		/* FIXME: CLI gets stuc
 		int port = 2000;
 
 		networkHandler = new NetworkHandler(ip, port);
-		networkHandler.addObserver(this);		/* CLI observes the networkHandler to get the new gamestate */
+		System.out.println("Created network handler");
+		networkHandler.addObserver(this);		/* CLI observes the networkHandler to get gamestates and messages */
 		networkHandler.connect();
 
 		System.out.println("Sending username to server...");
 		networkHandler.send(username);
-
-		if (networkHandler.isFirstPlayer())
-		{
-			System.out.print("Total players: ");
-			networkHandler.send(input.nextLine());
-		}
-
-		System.out.println("Created network handler");
-		networkHandler.waitForPlayers();
-		System.out.println("Starting match\n\nMasters of the Renaissance!");
 	}
 
 	@Override

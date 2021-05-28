@@ -17,6 +17,16 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 		this.action = action;
 	}
 
+	public void firstPlayer(boolean isFirstPlayer)
+	{
+		action.firstPlayer(isFirstPlayer);	/* Very simple, bundle action here? */
+	}
+
+	public void startMatch()
+	{
+		System.out.println("Starting match\n\nMasters of the Renaissance!");
+	}
+
 	public void chooseLeaderCards(List<LeaderCard> leaderCards)		/* Call function in ActionExecutor directly from the message? */
 	{
 		action.chooseLeaderCards(leaderCards);

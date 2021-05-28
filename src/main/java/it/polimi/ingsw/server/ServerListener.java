@@ -1,6 +1,7 @@
 package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.server.messages.FirstPlayerMessage;
 import it.polimi.ingsw.server.view.ClientHandler;
 
 import java.io.*;
@@ -56,13 +57,13 @@ public class ServerListener				/* Thread running listening for incoming connecti
 
 					if (i == 0)		/* Get numPlayers from the first player who connects */
 					{
-						oos.writeObject("true");
+						oos.writeObject(new FirstPlayerMessage(true));
 						numPlayers = Integer.parseInt((String) ois.readObject());        /* So the loop is repeated numPlayers times to get numPlayers players */
 						System.out.println("numPlayers: " + numPlayers);
 					}
 
 					else
-						oos.writeObject("false");
+						oos.writeObject(new FirstPlayerMessage(false));
 
 				}
 				catch (IOException | ClassNotFoundException e)
