@@ -66,11 +66,11 @@ public class Track implements Serializable
 	{
 		for (int i = 0; i < numPlayers; i++)		/* redPawns.get(i) returns the position of player ID i */
 		{
-			if (redPawns.get(i) >= 8  && !popeTokens[0].isDiscarded())	return 8;
+			if (redPawns.get(i) >= 24 && !popeTokens[2].isDiscarded())	return 24;
 
 			if (redPawns.get(i) >= 16 && !popeTokens[1].isDiscarded())	return 16;
 
-			if (redPawns.get(i) >= 24 && !popeTokens[2].isDiscarded())	return 24;
+			if (redPawns.get(i) >= 8  && !popeTokens[0].isDiscarded())	return 8;
 		}
 
 		return 0;

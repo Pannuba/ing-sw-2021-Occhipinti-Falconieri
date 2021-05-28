@@ -55,7 +55,7 @@ public class TrackTest {
 		redPawns.put(players.get(1).getId(), 16);
 		redPawns.put(players.get(2).getId(), 9);
 		track.setRedPawns(redPawns);
-		// assertEquals("Error", 16, track.checkVaticanReport());
+		assertEquals("Error", 16, track.checkVaticanReport());
 	}
 
 	@Test
@@ -75,6 +75,6 @@ public class TrackTest {
 		redPawns.put(players.get(1).getId(), 15);
 		redPawns.put(players.get(2).getId(), 20);
 		track.setRedPawns(redPawns);
-		// assertEquals("Error", 24, track.checkVaticanReport());
+		assertEquals("Error", 24, track.checkVaticanReport());
 	}
 }
