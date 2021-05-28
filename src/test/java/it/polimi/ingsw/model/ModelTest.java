@@ -4,7 +4,6 @@ import it.polimi.ingsw.model.board.Dashboard;
 import it.polimi.ingsw.model.board.DevCardArea;
 import it.polimi.ingsw.model.board.Track;
 import it.polimi.ingsw.model.cards.DevCard;
-import org.junit.After;
 import org.junit.Test;
 
 import java.util.ArrayList;

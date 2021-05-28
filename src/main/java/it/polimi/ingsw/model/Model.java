@@ -308,11 +308,6 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		return actionTokens;
 	}
 
-	public void setActionTokens(List<ActionToken> actionTokens)
-	{
-		this.actionTokens = actionTokens;
-	}
-
 	public ActionToken getNextActionToken()		/* This method un-flips the current flipped token, flips the next one and returns it */
 	{
 		boolean noFlippedTokens = true;
@@ -320,7 +315,6 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 		for (int i = 0; i < actionTokens.size(); i++)		/* Checks if there is at least 1 flipped token. yes -> return the next one, no -> return 1 random */
 		{
-
 			if (actionTokens.get(i).isFlipped())
 			{
 				noFlippedTokens = false;
@@ -332,11 +326,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		System.out.println("getNextActionToken: noFlippedTokens = " + noFlippedTokens + ", flippedTokenPos = " + flippedTokenPos);
 
 		if (noFlippedTokens)		/* If all goes well, this happens only at the first round */
-		{
 			tokenToFlipPos = ThreadLocalRandom.current().nextInt(0, actionTokens.size());
-			actionTokens.get(tokenToFlipPos).setFlipped(true);
-			return actionTokens.get(tokenToFlipPos);
-		}
 
 		else
 		{
@@ -345,11 +335,10 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 			else
 				tokenToFlipPos = flippedTokenPos + 1;
-
-			System.out.println("getNextActionToken: returning token at position " + tokenToFlipPos);
-
-			actionTokens.get(tokenToFlipPos).setFlipped(true);
-			return actionTokens.get(tokenToFlipPos);
 		}
+
+		System.out.println("getNextActionToken: returning token at position " + tokenToFlipPos);
+		actionTokens.get(tokenToFlipPos).setFlipped(true);
+		return actionTokens.get(tokenToFlipPos);
 	}
 }

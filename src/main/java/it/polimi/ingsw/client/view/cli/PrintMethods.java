@@ -227,7 +227,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 			{
 				System.out.println("Dev card area " + (i + 1) + ":");
 
-				if (devCardAreas[i].isEmpty() == false)
+				if (!devCardAreas[i].isEmpty())
 				{
 					System.out.print("Layer: " + devCardAreas[i].getLayer() + ",\n");
 					printDevCard(devCardAreas[i].getTopDevCard());

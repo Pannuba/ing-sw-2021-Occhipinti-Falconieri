@@ -25,9 +25,7 @@ public class Track implements Serializable
 		redPawns = new HashMap<>();
 
 		for (int i = 0; i < players.size(); i++)		/* Initialize player pawns, player ID 0 has redPawns[0], ID 1 has redPawns[1] and so on */
-		{
 			redPawns.put(players.get(i).getId(), 0);
-		}
 
 		blackPawn = 0;
 
@@ -66,27 +64,13 @@ public class Track implements Serializable
 
 	public int checkVaticanReport()		/* Returns the number of the pope box that triggered the vatican report. 0 if no vatican report */
 	{
-
 		for (int i = 0; i < numPlayers; i++)		/* redPawns.get(i) returns the position of player ID i */
 		{
+			if (redPawns.get(i) >= 8  && !popeTokens[0].isDiscarded())	return 8;
 
-			switch (redPawns.get(i))
-			{
-				case 8:
+			if (redPawns.get(i) >= 16 && !popeTokens[1].isDiscarded())	return 16;
 
-					if (!popeTokens[0].isDiscarded()) return 8;
-					break;
-
-				case 16:
-
-					if (!popeTokens[1].isDiscarded()) return 16;
-					break;
-
-				case 24:
-
-					if (!popeTokens[2].isDiscarded()) return 24;
-					break;
-			}
+			if (redPawns.get(i) >= 24 && !popeTokens[0].isDiscarded())	return 24;
 		}
 
 		return 0;

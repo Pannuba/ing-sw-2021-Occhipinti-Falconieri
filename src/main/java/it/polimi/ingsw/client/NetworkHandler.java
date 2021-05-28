@@ -9,7 +9,7 @@ import java.net.Socket;
 
 import static java.lang.Boolean.parseBoolean;
 
-public class NetworkHandler extends Observable implements Observer, Runnable		/* Observes CLI to get input to send to server, observed by CLI to send it the newest gamestate */
+public class NetworkHandler extends Observable implements Runnable		/* Observes CLI to get input to send to server, observed by CLI to send it the newest gamestate */
 {
 	private Socket clientSocket;
 	private ObjectInputStream ois;
@@ -138,7 +138,7 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 
 	public void shutdown()
 	{
-		System.out.println("Shutting down...");
+		System.out.println("Shutting down...");		/* TODO: stop heartbeat? */
 
 		try
 		{
@@ -153,12 +153,5 @@ public class NetworkHandler extends Observable implements Observer, Runnable		/*
 		}
 
 		System.exit(0);
-	}
-
-	@Override
-	public void update(Observable obs, Object obj)		/* Send command (List) to server */
-	{
-		System.out.println("Sending command " + ((List<String>) obj).get(0) + " to server");
-		send((List<String>) obj);
 	}
 }

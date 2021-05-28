@@ -45,7 +45,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 	public void initialResources(List<String> command, String username)		/* No need to reply with any message */
 	{
-		if (command.get(1).isEmpty() == false)
+		if (!command.get(1).isEmpty())
 		{
 			for (int i = 0; i < command.get(1).length(); i++)
 			{
@@ -56,7 +56,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 			}
 		}
 
-		if (command.get(2).isEmpty() == false)		/* If there are initial faithpoints, get that player's pawn and move it */
+		if (!command.get(2).isEmpty())		/* If there are initial faithpoints, get that player's pawn and move it */
 			controller.updatePlayerPosition(model.getPlayerByUsername(username).getId(), Integer.parseInt(command.get(2)));
 	}
 

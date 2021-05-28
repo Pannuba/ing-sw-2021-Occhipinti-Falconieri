@@ -1,4 +1,4 @@
-package tools;
+package it.polimi.ingsw.util;
 
 import java.io.File;
 import java.io.FileWriter;

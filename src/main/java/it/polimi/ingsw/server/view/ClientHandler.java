@@ -2,7 +2,6 @@ package it.polimi.ingsw.server.view;
 
 import it.polimi.ingsw.util.Ping;
 
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -59,7 +58,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 			catch (IOException | ClassNotFoundException e)				/* EOFException when client disconnects */
 			{
 				e.printStackTrace();
-				System.out.println(username + " disconnected!");		/* TODO: stop timer when crash happens, also in client */
+				System.out.println(username + " disconnected!");		/* TODO: stop timer when crash happens, also in client. Close socket based on exception? */
 				break;
 			}
 		}

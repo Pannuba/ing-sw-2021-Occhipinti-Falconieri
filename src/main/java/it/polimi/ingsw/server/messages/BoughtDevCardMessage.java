@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class BoughtDevCardMessage implements Message, Serializable
 {
-	private DevCard boughtCard;
+	private final DevCard boughtCard;
 
 	public BoughtDevCardMessage(DevCard boughtCard)
 	{

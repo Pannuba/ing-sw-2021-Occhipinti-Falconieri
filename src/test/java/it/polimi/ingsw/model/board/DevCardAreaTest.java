@@ -18,7 +18,7 @@ public class DevCardAreaTest {
 	private List<DevCard> devCards = new ArrayList<>();
 
 	@Before
-	public void setUp() throws Exception
+	public void setUp()
 	{
 		assertNotNull(devCardArea);
 	}

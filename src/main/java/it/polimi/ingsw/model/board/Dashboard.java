@@ -27,7 +27,7 @@ public class Dashboard implements Serializable
 
 		for (int i = 0; i < 3; i++)
 		{
-			if (devCardAreas[i].isEmpty() == false)		/* To avoid exceptions when accessing devCards.get(0) if layer is 0 */
+			if (!devCardAreas[i].isEmpty())		/* To avoid exceptions when accessing devCards.get(0) if layer is 0 */
 			{
 				for (int j = 0; j < devCardAreas[i].getLayer(); j++)
 					allDevCards.add(devCardAreas[i].getDevCards().get(j));
@@ -46,7 +46,7 @@ public class Dashboard implements Serializable
 	{
 		for (int i = 0; i < 3; i++)
 		{
-			if (devCardAreas[i].isEmpty() == false)
+			if (!devCardAreas[i].isEmpty())
 			{
 					if (devCardAreas[i].getTopDevCard().getCardNumber() == number)
 						return devCardAreas[i].getTopDevCard();

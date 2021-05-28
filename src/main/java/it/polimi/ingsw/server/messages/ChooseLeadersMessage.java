@@ -1,6 +1,5 @@
 package it.polimi.ingsw.server.messages;
 
-import it.polimi.ingsw.client.view.cli.CLI;
 import it.polimi.ingsw.client.view.cli.MessageDecoder;
 import it.polimi.ingsw.model.cards.LeaderCard;
 

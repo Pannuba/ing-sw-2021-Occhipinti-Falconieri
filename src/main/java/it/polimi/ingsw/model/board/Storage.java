@@ -56,7 +56,7 @@ public class Storage implements Serializable
 	{
 		Shelf destinationShelf = convertIndexToShelf(shelfNumber);
 
-		if (checkShelves() == true && (destinationShelf.getShelfSize() - destinationShelf.getShelfResourceQuantity()) >= resourceToAdd.getQuantity())
+		if (checkShelves() && (destinationShelf.getShelfSize() - destinationShelf.getShelfResourceQuantity()) >= resourceToAdd.getQuantity())
 		{
 			if (resourceToAdd.getResourceType() == destinationShelf.getShelfResourceType() || destinationShelf.getShelfResourceType() == null)
 			{
@@ -187,7 +187,7 @@ public class Storage implements Serializable
 			return false;
 		}
 
-		if (checkShelves() == true && shelfTo.getShelfSize() >= amount)			/* If there's enough space to move the resource(s) */
+		if (checkShelves() && shelfTo.getShelfSize() >= amount)			/* If there's enough space to move the resource(s) */
 		{
 			shelfTo.getShelfResource().setResourceType(shelfFrom.getShelfResource().getResourceType());
 			shelfTo.getShelfResource().setQuantity(amount);

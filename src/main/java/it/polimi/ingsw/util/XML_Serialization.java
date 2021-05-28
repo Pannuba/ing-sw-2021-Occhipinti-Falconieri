@@ -25,7 +25,7 @@ import java.util.Scanner;
 
 public class XML_Serialization
 {
-	public static void main(String[] args) throws IOException		/* Wouldn't run because of no "static" and "String[] args"!!! */
+	public static void main(String[] args) throws IOException
 	{
 		/* Interactive system to generate XML without having to hardcode every card */
 
@@ -130,7 +130,7 @@ public class XML_Serialization
 					List<Resource> cost = new ArrayList<>();
 					List<Resource> requirements = new ArrayList<>();
 					List<Resource> product = new ArrayList<>();
-					int i = 0;
+					int i;
 
 					System.out.print("DevCard number [1, 48]: ");
 					int devCardNumber = Integer.parseInt(input.nextLine());
@@ -188,9 +188,7 @@ public class XML_Serialization
 						prodType = input.nextLine();
 
 						if (prodType.equals("R"))		/* If the card produced faith points, set the faithpoints value */
-						{
 							devCard.setFaithPoints(Integer.parseInt(prodQuantity));
-						}
 
 						else
 						{
@@ -232,7 +230,7 @@ public class XML_Serialization
 	{
 		FileInputStream fis = new FileInputStream(filename);
 		XMLDecoder decoder = new XMLDecoder(fis);
-		Object decodedObject = (Object) decoder.readObject();
+		Object decodedObject = decoder.readObject();
 		decoder.close();
 		fis.close();
 		return decodedObject;

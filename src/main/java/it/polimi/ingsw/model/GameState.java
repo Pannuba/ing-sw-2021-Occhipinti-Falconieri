@@ -3,7 +3,6 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.board.Track;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /*	Every turn, the server sends a GameState object to all clients so the client view reads it and updates everything */
@@ -15,11 +14,9 @@ public class GameState implements Serializable
 	private final Track currTrack;
 	private final MarblesMarket currMarblesMarket;
 	private final DevCardsMarket currDevCardsMarket;
-	//private int round;
 
 	public GameState(List<Player> currPlayers, String currPlayerName, Track currTrack, MarblesMarket currMarblesMarket, DevCardsMarket currDevCardsMarket)
 	{
-		//this.round = round;
 		this.currPlayers = currPlayers;
 		this.currPlayerName = currPlayerName;
 		this.currTrack = currTrack;
@@ -65,9 +62,4 @@ public class GameState implements Serializable
 	{
 		return currDevCardsMarket;
 	}
-
-	/*public int getRound()
-	{
-		return round;
-	}*/
 }
