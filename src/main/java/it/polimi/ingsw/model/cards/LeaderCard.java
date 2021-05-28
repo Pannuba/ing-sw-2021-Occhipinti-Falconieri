@@ -64,7 +64,7 @@ public abstract class LeaderCard implements Serializable		/* Can't do new Leader
 
 				for (int i = 0; i < devCards.size(); i++)
 				{
-					if (devCards.get(i).getColor() == prodRequirements.obj1 && devCards.get(i).getLevel() == prodRequirements.obj2)
+					if (devCards.get(i).getColor() == prodRequirements.getObj1() && devCards.get(i).getLevel() == prodRequirements.getObj2())
 						return true;
 				}
 

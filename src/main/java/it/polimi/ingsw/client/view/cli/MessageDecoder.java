@@ -57,7 +57,7 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 		System.out.println("Match over! The winner is " + winner);
 
 		for (int i = 0; i < pointsTable.size(); i++)
-			System.out.println(pointsTable.get(i).obj1 + ": " + pointsTable.get(i).obj2 + " points");
+			System.out.println(pointsTable.get(i).getObj1() + ": " + pointsTable.get(i).getObj2() + " points");
 
 		//action.quit? back to Main?
 

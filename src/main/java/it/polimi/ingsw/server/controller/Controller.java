@@ -48,12 +48,10 @@ public class Controller implements Observer			/* Observes view to get commands..
 				break;
 
 			case "ACTIVATE_PRODUCTION":
-
 				runCommand.activateProduction(command, username);
 				break;
 
 			case "BUY_RESOURCES":								/* "BUY_RESOURCES", "ROW", "2" */
-
 				runCommand.buyResources(command, username);
 				break;
 		}

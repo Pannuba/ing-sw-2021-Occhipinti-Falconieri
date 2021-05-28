@@ -46,8 +46,8 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 				System.out.println("Cost: 1 " + convertResTypeToString(((SkillProduction) card).getCost().getResourceType()));
 				/* Product is null because it's chosen by the player */
 				System.out.println("Product amount: 1");
-				System.out.println(	"Requirements: a " + convertDevCardColorToString(((SkillProduction) card).getRequirements().obj1)	+
-									" lvl " + ((SkillProduction) card).getRequirements().obj2 + " dev card");
+				System.out.println(	"Requirements: a " + convertDevCardColorToString(((SkillProduction) card).getRequirements().getObj1())	+
+									" lvl " + ((SkillProduction) card).getRequirements().getObj2() + " dev card");
 				break;
 
 			case "SkillStorage":

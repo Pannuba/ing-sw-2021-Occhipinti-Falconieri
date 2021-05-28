@@ -14,6 +14,8 @@ public class NetworkHandler extends Observable implements Runnable		/* Observes 
 	private Socket clientSocket;
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
+	private final Timer heartbeat;
+	private final TimerTask sendPing;
 	private final String ip;
 	private final int port;
 
@@ -21,6 +23,11 @@ public class NetworkHandler extends Observable implements Runnable		/* Observes 
 	{
 		this.ip = ip;
 		this.port = port;
+		heartbeat = new Timer();
+
+		sendPing = new TimerTask() {
+			public void run() {
+				send(new Ping()); } };
 	}
 
 	public void run()
@@ -68,15 +75,6 @@ public class NetworkHandler extends Observable implements Runnable		/* Observes 
 			shutdown();
 		}
 
-		TimerTask sendPing = new TimerTask()
-		{
-			public void run()
-			{
-				send(new Ping());
-			}
-		};
-
-		Timer heartbeat = new Timer();
 		heartbeat.scheduleAtFixedRate(sendPing, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
 	}
 

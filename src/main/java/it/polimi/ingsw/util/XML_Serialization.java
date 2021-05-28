@@ -43,7 +43,7 @@ public class XML_Serialization
 
 					System.out.print("LeaderCard number [1, 16]: ");
 					int leaderCardNumber = Integer.parseInt(input.nextLine());
-					filename = "src/main/resources/xml/leadercards/leadercard" + leaderCardNumber + ".xml";
+					filename = "src/main/resources/xml/leadercards/leadercardTEST" + leaderCardNumber + ".xml";
 
 					System.out.print("Skill (1 = discount, 2 = additional storage, 3 = white marble, 4 = additional production): ");
 
