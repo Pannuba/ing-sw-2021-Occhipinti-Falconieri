@@ -11,8 +11,8 @@ import java.util.List;
 
 public class Track implements Serializable
 {
-	private Box[] faithTrack = new Box[25];
-	private PopeToken[] popeTokens = new PopeToken[3];		/* Track has 3 popetokens, discarded when a player calls a vatican report for each token */
+	private final Box[] faithTrack = new Box[25];
+	private final PopeToken[] popeTokens = new PopeToken[3];		/* Track has 3 popetokens, discarded when a player calls a vatican report for each token */
 	private HashMap<Integer, Integer> redPawns;				/* Key: ID, value: position */
 	private final int numPlayers;
 	private int blackPawn;
@@ -74,17 +74,17 @@ public class Track implements Serializable
 			{
 				case 8:
 
-					if (popeTokens[0].isDiscarded() == false) return 8;
+					if (!popeTokens[0].isDiscarded()) return 8;
 					break;
 
 				case 16:
 
-					if (popeTokens[1].isDiscarded() == false) return 16;
+					if (!popeTokens[1].isDiscarded()) return 16;
 					break;
 
 				case 24:
 
-					if (popeTokens[2].isDiscarded() == false) return 24;
+					if (!popeTokens[2].isDiscarded()) return 24;
 					break;
 			}
 		}

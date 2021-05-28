@@ -188,7 +188,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 		for (int i = 0; i < leaderCards.size(); i++)		/* Points from leadercards */
 		{
-			if (leaderCards.get(i).isActive())		/* Discarded vs activated? */
+			if (leaderCards.get(i).isActive())
 				points += leaderCards.get(i).getPoints();
 		}
 
@@ -205,12 +205,14 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 		points += player.getPopeTokenPoints();		/* Points from activated popeTokens */
 
+		points += track.getFaithTrack()[track.getRedPawns().get(player.getId())].getVictoryPoints();	/* Points if the player's pawn is on a POINTS box */
+
 		return points;
 	}
 
 	public void endMatch()
 	{
-		String winner = "";
+		String winnerName = "";
 		int winnerPoints = 0;
 		List<Integer> victoryPointsList = new ArrayList<>();
 
@@ -222,7 +224,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 			if (victoryPoints > winnerPoints)
 			{
 				winnerPoints = victoryPoints;
-				winner = players.get(i).getUsername();
+				winnerName = players.get(i).getUsername();
 			}
 		}
 

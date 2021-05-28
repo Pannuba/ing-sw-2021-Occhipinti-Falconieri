@@ -4,20 +4,20 @@ import java.io.Serializable;
 
 public class Box implements Serializable
 {
-	private final BoxType category;
+	private final BoxType boxType;
 	private final int position;
 	private final int victoryPoints;
 
-	public Box(BoxType category, int position, int victoryPoints)
+	public Box(BoxType boxType, int position, int victoryPoints)
 	{
-		this.category = category;
+		this.boxType = boxType;
 		this.position = position;
 		this.victoryPoints = victoryPoints;
 	}
 
-	public BoxType getCategory()
+	public BoxType getBoxType()
 	{
-		return category;
+		return boxType;
 	}
 
 	public int getPosition()
