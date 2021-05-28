@@ -25,7 +25,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 		this.ois = ois;			/* Can't create a I/O stream for a socket that already has one (created in ServerListener) */
 		this.oos = oos;
 
-		TimerTask timerTask = new TimerTask()
+		TimerTask sendPing = new TimerTask()
 		{
 			public void run()
 			{
@@ -33,8 +33,8 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 			}
 		};
 
-		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(timerTask, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
+		Timer heartbeat = new Timer();
+		heartbeat.scheduleAtFixedRate(sendPing, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
 	}
 
 	public void run()		/* Activates after the setup phase has ended */

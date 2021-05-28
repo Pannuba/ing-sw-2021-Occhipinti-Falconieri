@@ -210,10 +210,23 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 	public void endMatch()
 	{
-		for (int i = 0; i < numPlayers; i++)
+		String winner = "";
+		int winnerPoints = 0;
+		List<Integer> victoryPointsList = new ArrayList<>();
+
+		for (int i = 0; i < numPlayers; i++)		/* Calculate victoryPoints for every player */
 		{
-			players.get(i).setVictoryPoints(calculatePoints(players.get(i)));
+			int victoryPoints = calculatePoints(players.get(i));
+			players.get(i).setVictoryPoints(victoryPoints);
+
+			if (victoryPoints > winnerPoints)
+			{
+				winnerPoints = victoryPoints;
+				winner = players.get(i).getUsername();
+			}
 		}
+
+		/* Return winner and controller sends it, or add "boolean isMatchOver; String winner" to GameState and client checks? */
 	}
 
 	public Player getPlayerByUsername(String username)		/* 	NullPointerException because the usernames taken in ServerListener are discarded when a new model is created in Match */

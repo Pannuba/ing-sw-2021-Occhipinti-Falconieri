@@ -292,7 +292,8 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 				command.add(cardNumber);
 				break;
 
-			case "3":
+			case "3":	/* Checks are both server side (to prevent cheating) and client side (to avoid useless server load and message exchange) */
+
 				List<LeaderCard> leaderCards = cli.getGameState().getPlayerByName(cli.getUsername()).getLeaderCards();
 				List<LeaderCard> activeCardsWithProdSkill = new ArrayList<>();
 				String chosenCardNum = "", resourceToMakeLeader = "";
@@ -304,7 +305,10 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 				}
 
 				if (activeCardsWithProdSkill.isEmpty())
+				{
 					System.out.println("You don't have any active leaders that have a production skill!");
+					chooseAction();
+				}
 
 				else
 				{

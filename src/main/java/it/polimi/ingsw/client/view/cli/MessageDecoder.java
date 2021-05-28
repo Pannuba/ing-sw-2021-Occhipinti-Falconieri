@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.cards.ActionToken;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
+import it.polimi.ingsw.util.Pair;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 		System.out.println(message);
 
 		if (isFailed)
-			action.chooseAction();
+			action.chooseAction();		/* Client can repeat the round for failed actions */
 	}
 
 	public void getBoughtResources(List<Resource> boughtResources)
@@ -49,5 +50,16 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 	{
 		System.out.print("Received action token: ");
 		PrintMethods.printActionToken(token);
+	}
+
+	public void matchOver(String winner, List<Pair<String, Integer>> pointsTable)
+	{
+		System.out.println("Match over! The winner is " + winner);
+
+		for (int i = 0; i < pointsTable.size(); i++)
+			System.out.println(pointsTable.get(i).obj1 + ": " + pointsTable.get(i).obj2 + " points");
+
+		//action.quit? back to Main?
+
 	}
 }

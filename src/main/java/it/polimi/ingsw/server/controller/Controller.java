@@ -61,7 +61,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 		if ((command.get(0).equals("BUY_RESOURCES") || command.get(0).equals("BUY_DEVCARD")	||
 			command.get(0).equals("ACTIVATE_PRODUCTION")) && !runCommand.isFailed())
 		{
-			chooseNextPlayer();			/* Don't choose next player during setup actions */
+			chooseNextPlayer();			/* Don't choose next player during setup or failed actions */
 			postRoundChecks();			/* Put in model as separate method, or in update()? */
 			model.update();				/* Send new gamestate to everyone */
 		}
@@ -96,9 +96,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 	private void postRoundChecks()		/* What should be in model and controller? */
 	{
 		if (model.getNumPlayers() == 1)
-		{
 			flipActionToken();		/* Not in CommandProcessor because it's not a command sent by the client */
-		}
 
 		int vaticanReportNum = model.getTrack().checkVaticanReport();
 
