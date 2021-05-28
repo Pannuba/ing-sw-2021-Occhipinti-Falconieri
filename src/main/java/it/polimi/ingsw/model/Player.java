@@ -17,7 +17,7 @@ public class Player implements Serializable
 	private List<LeaderCard> leaderCards;
 	private final String username;
 	private Dashboard dashboard;
-	private final PopeToken[] popeTokens = new PopeToken[3];			/* Discarded or turned/activated depending on pawn position during vatican report */
+	private PopeToken[] popeTokens = new PopeToken[3];			/* Discarded or turned/activated depending on pawn position during vatican report */
 
 	public Player(String username)
 	{
@@ -131,4 +131,6 @@ public class Player implements Serializable
 	{
 		return popeTokens;
 	}
+
+	public void setPopeTokens(PopeToken[] popeTokens) { this.popeTokens = popeTokens; }
 }
