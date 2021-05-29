@@ -185,26 +185,34 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 	public void activateProduction(List<String> command, String username)
 	{
 		List<Resource> producedResources = new ArrayList<>();
+		List<Resource> cost = new ArrayList<>();
 
-		switch (command.get(1))
+		switch (command.get(1))		/* TODO: pack the part after cost and producedResources has been established, now it's repeated three times */
 		{
 			case "DEFAULT":				/* "ACTIVATE_PRODUCTION", "DEFAULT", "B", "Y" */
 
-				ResourceType costResType = ResourceType.convertStringToResType(command.get(2));
+				cost.add(new Resource(ResourceType.convertStringToResType(command.get(2)), 2));	/* Get value from config for parameter editor! */
 				ResourceType productResType = ResourceType.convertStringToResType(command.get(3));
 
 				producedResources.add(new Resource(productResType, 1));		/* Convert ResourceType to Resource */
+
+				if (controller.checkResourceAmounts(model.getPlayerByUsername(username).getDashboard(), cost))
+				{
+					controller.spendResources(cost);
+					//...
+				}
+
 				break;
 
 			case "DEVCARD":				/* "ACTIVATE_PRODUCTION", "DEVCARD", "5" */
 
 				DevCard devCard = model.getPlayerByUsername(username).getDashboard().getTopDevCardByNumber(Integer.parseInt(command.get(2)));
-				List<Resource> cardCost = devCard.getCost();
+				cost = devCard.getCost();
 				producedResources = devCard.getProduct();
 
-				if (controller.checkResourceAmounts(model.getPlayerByUsername(username).getDashboard(), cardCost))
+				if (controller.checkResourceAmounts(model.getPlayerByUsername(username).getDashboard(), cost))
 				{
-					controller.spendResources(cardCost);
+					controller.spendResources(cost);
 					message = "Production successful!";		/* Send BoughtResourcesMessage before or after OpResult? Another boolean? */
 					isFailed = false;
 				}
