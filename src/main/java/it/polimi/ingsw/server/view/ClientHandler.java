@@ -15,7 +15,6 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 	private final ObjectInputStream ois;
 	private final ObjectOutputStream oos;
 	private final Timer heartbeat;
-	private final TimerTask sendPing;
 
 	public ClientHandler(Socket clientSocket, String username, ObjectInputStream ois, ObjectOutputStream oos)
 	{
@@ -26,7 +25,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 		this.ois = ois;			/* Can't create a I/O stream for a socket that already has one (created in ServerListener) */
 		this.oos = oos;
 
-		sendPing = new TimerTask() {
+		TimerTask sendPing = new TimerTask() {
 			public void run() {
 				send(new Ping()); } };
 
@@ -53,10 +52,11 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 					notifyObservers(inputObj);		/* Sends command to controller */
 				}
 			}
-			catch (IOException | ClassNotFoundException e)				/* EOFException when client disconnects */
+			catch (IOException | ClassNotFoundException e)				/* EOFException when client disconnects. Catch it? */
 			{
 				e.printStackTrace();
-				System.out.println(username + " disconnected!");		/* TODO: stop timer when crash happens, also in client. Close socket based on exception? */
+				System.out.println(username + " disconnected!");
+				close();
 			}
 		}
 	}

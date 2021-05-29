@@ -14,19 +14,16 @@ import java.util.List;
 public class Match implements Runnable
 {
 	private final int numPlayers;
-	private final List<Player> players;
 	private final List<ClientHandler> views;
 	private final Model model;
-	private final Controller controller;
 
 	public Match(List<Player> players, List<ClientHandler> views)
 	{
-		this.players = players;
 		this.numPlayers = players.size();
 		this.views = views;
 
 		model = new Model(players);
-		controller = new Controller(model);
+		Controller controller = new Controller(model);
 
 		for (int i = 0; i < views.size(); i++)
 		{
@@ -51,5 +48,11 @@ public class Match implements Runnable
 		}
 
 		model.update();		/* Send the first gamestate after the setup messages. Putting this here instead of the controller makes everything work */
+	}
+
+	public void stop()		/* If I create a Match list in ServerListener and call stop() on every match on shutdown, it doesn't work */
+	{
+		for (int i = 0; i < views.size(); i++)		/* Close views in this match */
+			views.get(i).close();
 	}
 }

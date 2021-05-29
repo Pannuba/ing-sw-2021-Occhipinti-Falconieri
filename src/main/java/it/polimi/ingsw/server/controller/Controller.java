@@ -67,6 +67,9 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 	private void chooseNextPlayer()		/* In model? Turns alternate by player ID: 0 -> 1 -> 2 -> 3 */
 	{
+		if (model.getNumPlayers() == 1)
+			return;
+
 		int activePlayerID = model.getPlayerByUsername(username).getId();
 
 		if (activePlayerID == model.getNumPlayers() - 1)			/* If activePlayerID = 3 it can't go to 4 (0-indexed!), so back to 0 */

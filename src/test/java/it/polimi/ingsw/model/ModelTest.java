@@ -249,35 +249,14 @@ public class ModelTest {
 	{
 		leaderCards = new ArrayList<>();
 
-		try {
+		try
+		{
 			leaderCards.add((LeaderCard) XML_Serialization.deserialize("src/main/resources/xml/leadercards/leadercard1.xml"));
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
-		try {
-			leaderCards.add((LeaderCard) XML_Serialization.deserialize("src/main/resources/xml/leadercards/leadercard8.xml"));		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
-		try
-		{
+			leaderCards.add((LeaderCard) XML_Serialization.deserialize("src/main/resources/xml/leadercards/leadercard8.xml"));
 			card1 = (DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard5.xml");
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		try
-		{
 			card2 = (DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard30.xml");
 		}
-		catch (Exception e)
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}

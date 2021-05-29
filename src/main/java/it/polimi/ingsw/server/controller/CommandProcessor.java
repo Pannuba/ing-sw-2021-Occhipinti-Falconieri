@@ -203,15 +203,19 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 				DevCard devCard = model.getPlayerByUsername(username).getDashboard().getTopDevCardByNumber(Integer.parseInt(command.get(2)));
 				List<Resource> cardCost = devCard.getCost();
+				List<Resource> product = devCard.getProduct();
 
 				if (devCard.checkReqOrCost(model.getPlayerByUsername(username).getDashboard(), cardCost))
 				{
-					//spend, not failed...
+					controller.spendResources(cardCost);
+					message = "Production successful!";		/* Send BoughtResourcesMessage before or after OpResult? Another boolean? */
+					isFailed = false;
 				}
 
 				else
 				{
-					//error!!!
+					message = "Couldn't activate production with devcard: requirements not satisfied.";
+					isFailed = true;
 				}
 
 				break;
@@ -220,9 +224,15 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 				LeaderCard leaderCard = model.getPlayerByUsername(username).getLeaderCardByNumber(Integer.parseInt(command.get(2)));
 				ResourceType resourceToMakeLeader = ResourceType.convertStringToResType(command.get(3));
+				ResourceType resourceCost;
 
 				break;
 		}
+
+		controller.getView().send(new OperationResultMessage(message, isFailed));
+
+		//if (!isFailed)
+			//controller.getView().send(new BoughtResourcesMessage());
 	}
 
 	public boolean isFailed()
