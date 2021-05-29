@@ -4,12 +4,11 @@ import it.polimi.ingsw.client.view.cli.MessageDecoder;
 import it.polimi.ingsw.model.cards.LeaderCard;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ChooseLeadersMessage implements Message, Serializable
 {
-	List<LeaderCard> leaderCards = new ArrayList<>();
+	List<LeaderCard> leaderCards;
 
 	public ChooseLeadersMessage(List<LeaderCard> leaderCards)
 	{

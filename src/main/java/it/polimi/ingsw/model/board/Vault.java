@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.ResourceType;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 
 public class Vault implements Serializable		/* Has resources obtained through production */
 {
@@ -23,6 +24,15 @@ public class Vault implements Serializable		/* Has resources obtained through pr
 	public void addResource(ResourceType resourceToAdd)
 	{
 		resourceAmounts.put(resourceToAdd, resourceAmounts.get(resourceToAdd) + 1);
+	}
+
+	public void addResourceList(List<Resource> resourcesToAdd)
+	{
+		for (int i = 0; i < resourcesToAdd.size(); i++)
+		{
+			for (int j = 0; j < resourcesToAdd.get(i).getQuantity(); j++)
+				addResource(resourcesToAdd.get(i).getResourceType());
+		}
 	}
 
 	public int removeResource(Resource resourceToRemove)

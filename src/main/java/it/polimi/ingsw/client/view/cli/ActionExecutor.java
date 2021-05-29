@@ -74,7 +74,8 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 			default:
 				System.out.println("Invalid action number");
-
+				chooseAction();
+				return;
 		}
 
 		if (choice.equals("3") || choice.equals("4") || choice.equals("5"))			/* Player can choose again after viewing things */
@@ -204,25 +205,31 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 	public void buyResources()
 	{
+		String rowOrCol = "", rowOrColNum = "", choice;
+
 		System.out.print("This is the current marbles market:\n\n");
 		PrintMethods.printMarblesMarket(cli.getGameState().getCurrMarblesMarket());
 
-		String rowOrCol = "", rowOrColNum = "";
-		System.out.print("\nSelect a row (1) or column(2)? ");
-		int choice = Integer.parseInt(input.nextLine());
+		System.out.print("\nSelect a row (1) or column(2)? (Q = choose another action) ");
+		choice = input.nextLine();
 
-		if (choice == 1)
+		switch (choice)
 		{
-			rowOrCol = "ROW";
-			System.out.print("Insert row #: ");
-			rowOrColNum = input.nextLine();
-		}
+			case "1":
+				rowOrCol = "ROW";
+				System.out.print("Insert row #: ");
+				rowOrColNum = input.nextLine();
+				break;
 
-		if (choice == 2)
-		{
-			rowOrCol = "COLUMN";
-			System.out.print("Insert column #: ");
-			rowOrColNum = input.nextLine();
+			case "2":
+				rowOrCol = "COLUMN";
+				System.out.print("Insert column #: ");
+				rowOrColNum = input.nextLine();
+				break;
+
+			default:
+				chooseAction();
+				return;		/* Without return it still sends a command after the recursion(?) which leads to chaos */
 		}
 
 		command.add("BUY_RESOURCES");
@@ -235,15 +242,23 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 	public void buyDevCard()
 	{
 		int devCardAreaIndex, targetAreaLayer;
-		String cardToBuyNum;
+		String choice, cardToBuyNum;
 
 		System.out.print("These are your current dev card areas:\n\n");
 		PrintMethods.printDevCardAreas(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas());
-		System.out.print("Insert the dev card area # you want to put the new card in (1/2/3): ");
-		devCardAreaIndex = Integer.parseInt(input.nextLine());											/* - 1 because arrays are zero-indexed */
+		System.out.print("Insert the dev card area # you want to put the new card in (1/2/3) (Q = choose another action) ");
+		choice = input.nextLine();
+
+		if (!choice.equals("1") && !choice.equals("2") && choice.equals("3"))
+		{
+			chooseAction();
+			return;
+		}
+
+		devCardAreaIndex = Integer.parseInt(choice);											/* - 1 because arrays are zero-indexed */
 		targetAreaLayer = cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas()[devCardAreaIndex - 1].getLayer();
 
-		while (targetAreaLayer == 3)		/* TODO: add option to "quit" and choose another action */
+		while (targetAreaLayer == 3)
 		{
 			System.out.print("This dev card area already has three cards!\nWhich dev card area do you want to put the new card in? ");
 			devCardAreaIndex = Integer.parseInt(input.nextLine());		/* 1, 2 or 3			- 1 because arrays are zero-indexed */
@@ -271,11 +286,12 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		System.out.println("This is your current storage and vault:");
 		PrintMethods.printStorage(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getStorage());
 		PrintMethods.printVault(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getVault());
-		System.out.print("Do you want to use the default production (1), a devcard (2) or a SkillProduction leader card (3)? ");
+		System.out.print("Do you want to use the default production (1), a devcard (2) or a SkillProduction leader card (3)? (Q = choose another action) ");
 
 		switch (input.nextLine())
 		{
 			case "1":
+
 				String resourceToConvert = "", resourceToMake = "";
 				System.out.print("Insert the resource type you want to convert (B/G/Y/P): ");
 				resourceToConvert = input.nextLine();
@@ -289,7 +305,8 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 				break;
 
 			case "2":
-				String cardNumber = "";
+
+				String cardNumber;
 				PrintMethods.printDevCardAreas(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas());
 				System.out.print("Insert the devcard's # you want to use: ");
 				cardNumber = input.nextLine();
@@ -315,6 +332,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 				{
 					System.out.println("You don't have any active leaders that have a production skill!");
 					chooseAction();
+					return;
 				}
 
 				else
@@ -333,6 +351,12 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 					command.add(chosenCardNum);
 					command.add(resourceToMakeLeader);
 				}
+
+				break;
+
+			default:
+				chooseAction();
+				return;
 		}
 
 		networkHandler.send(command);

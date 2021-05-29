@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
+import it.polimi.ingsw.model.cards.SkillProduction;
 import it.polimi.ingsw.server.messages.BoughtDevCardMessage;
 import it.polimi.ingsw.server.messages.BoughtResourcesMessage;
 import it.polimi.ingsw.server.messages.OperationResultMessage;
@@ -192,15 +193,9 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 			case "DEFAULT":				/* "ACTIVATE_PRODUCTION", "DEFAULT", "B", "Y" */
 
 				cost.add(new Resource(ResourceType.convertStringToResType(command.get(2)), 2));	/* Get value from config for parameter editor! */
+
 				ResourceType productResType = ResourceType.convertStringToResType(command.get(3));
-
 				producedResources.add(new Resource(productResType, 1));		/* Convert ResourceType to Resource */
-
-				if (controller.checkResourceAmounts(model.getPlayerByUsername(username).getDashboard(), cost))
-				{
-					controller.spendResources(cost);
-					//...
-				}
 
 				break;
 
@@ -210,28 +205,39 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 				cost = devCard.getCost();
 				producedResources = devCard.getProduct();
 
-				if (controller.checkResourceAmounts(model.getPlayerByUsername(username).getDashboard(), cost))
-				{
-					controller.spendResources(cost);
-					message = "Production successful!";		/* Send BoughtResourcesMessage before or after OpResult? Another boolean? */
-					isFailed = false;
-				}
-
-				else
-				{
-					message = "Couldn't activate production with devcard: requirements not satisfied.";
-					isFailed = true;
-				}
-
 				break;
 
 			case "LEADER_SKILL":		/* "ACTIVATE_PRODUCTION", "LEADER_SKILL", "13", "B" */
 
 				LeaderCard leaderCard = model.getPlayerByUsername(username).getLeaderCardByNumber(Integer.parseInt(command.get(2)));
-				ResourceType resourceToMakeLeader = ResourceType.convertStringToResType(command.get(3));
-				ResourceType resourceCost;
+
+				if (leaderCard.isActive())
+				{
+					producedResources.add(new Resource(ResourceType.convertStringToResType(command.get(3)), 1));
+					cost.add(((SkillProduction) leaderCard).getCost());
+				}
+
+				else
+				{
+					controller.getView().send(new OperationResultMessage("Can't activate production: leader not active", true));
+					return;
+				}
 
 				break;
+		}
+
+		if (controller.checkResourceAmounts(model.getPlayerByUsername(username).getDashboard(), cost))
+		{
+			controller.spendResources(cost);
+			model.getPlayerByUsername(username).getDashboard().getVault().addResourceList(producedResources);
+			message = "Production successful!";		/* Send BoughtResourcesMessage before or after OpResult? Another boolean? */
+			isFailed = false;
+		}
+
+		else
+		{
+			message = "Couldn't activate production: requirements not satisfied.";
+			isFailed = true;
 		}
 
 		controller.getView().send(new OperationResultMessage(message, isFailed));
