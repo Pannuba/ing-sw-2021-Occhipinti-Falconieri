@@ -7,7 +7,7 @@ import java.util.*;
 
 import java.net.Socket;
 
-public class NetworkHandler extends Observable implements Runnable		/* Observes CLI to get input to send to server, observed by CLI to send it the newest gamestate */
+public class NetworkHandler extends Observable implements Runnable		/* Observed by CLI to send it the newest gamestate */
 {
 	private Socket clientSocket;
 	private ObjectInputStream ois;
@@ -21,11 +21,12 @@ public class NetworkHandler extends Observable implements Runnable		/* Observes 
 	{
 		this.ip = ip;
 		this.port = port;
-		heartbeat = new Timer();
 
 		sendPing = new TimerTask() {
 			public void run() {
 				send(new Ping()); } };
+
+		heartbeat = new Timer();
 	}
 
 	public void run()
@@ -47,12 +48,11 @@ public class NetworkHandler extends Observable implements Runnable		/* Observes 
 			catch (IOException | ClassNotFoundException e)
 			{
 				System.out.println("Lost connection to server!");
+				shutdown();
 				e.printStackTrace();
 				break;
 			}
 		}
-
-		shutdown();
 	}
 
 	public void connect()
@@ -85,7 +85,9 @@ public class NetworkHandler extends Observable implements Runnable		/* Observes 
 		}
 		catch (IOException e)
 		{
+			System.out.println("Couldn't send " + obj + " to server!");
 			e.printStackTrace();
+			shutdown();
 		}
 	}
 
@@ -95,11 +97,12 @@ public class NetworkHandler extends Observable implements Runnable		/* Observes 
 
 		try
 		{
-			oos.flush();
-			oos.close();
-
 			heartbeat.cancel();
 			heartbeat.purge();
+
+			ois.close();
+			oos.flush();
+			oos.close();
 
 			clientSocket.close();
 		}

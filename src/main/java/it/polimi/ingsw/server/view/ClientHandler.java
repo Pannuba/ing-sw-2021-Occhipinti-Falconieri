@@ -14,6 +14,8 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 	private final String username;
 	private final ObjectInputStream ois;
 	private final ObjectOutputStream oos;
+	private final Timer heartbeat;
+	private final TimerTask sendPing;
 
 	public ClientHandler(Socket clientSocket, String username, ObjectInputStream ois, ObjectOutputStream oos)
 	{
@@ -24,15 +26,11 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 		this.ois = ois;			/* Can't create a I/O stream for a socket that already has one (created in ServerListener) */
 		this.oos = oos;
 
-		TimerTask sendPing = new TimerTask()
-		{
-			public void run()
-			{
-				send(new Ping());
-			}
-		};
+		sendPing = new TimerTask() {
+			public void run() {
+				send(new Ping()); } };
 
-		Timer heartbeat = new Timer();
+		heartbeat = new Timer();
 		heartbeat.scheduleAtFixedRate(sendPing, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
 	}
 
@@ -46,7 +44,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 			try
 			{
 				System.out.println(username + " waiting for message from client");
-				inputObj = ois.readObject();
+				inputObj = ois.readObject();		/* Throws SocketException: Socket closed when shutting down server */
 
 				if (!(inputObj instanceof Ping))		/* Don't care about pings */
 				{
@@ -59,7 +57,6 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 			{
 				e.printStackTrace();
 				System.out.println(username + " disconnected!");		/* TODO: stop timer when crash happens, also in client. Close socket based on exception? */
-				break;
 			}
 		}
 	}
@@ -79,14 +76,36 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 		}
 	}
 
-	public String getUsername()
+	public void close()
 	{
-		return username;
+		System.out.println("Closing view of player " + username);
+
+		try
+		{
+			heartbeat.cancel();
+			heartbeat.purge();
+
+			ois.close();
+			oos.flush();
+			oos.close();
+
+			clientSocket.close();
+			Thread.currentThread().interrupt();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void update(Observable obs, Object obj)			/* Send gamestate received from model */
 	{
 		send(obj);
+	}
+
+	public String getUsername()			/* Used by controller */
+	{
+		return username;
 	}
 }

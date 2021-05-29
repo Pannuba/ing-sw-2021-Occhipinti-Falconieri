@@ -18,9 +18,10 @@ public class CLI extends Observable implements Observer
 	public CLI()
 	{
 		input = new Scanner(System.in);
-		gameStart();
-		new Thread(networkHandler).start();		/* Start listening for messages or gamestate updates from server */
 
+		gameStart();
+
+		new Thread(networkHandler).start();		/* Start listening for messages or gamestate updates from server */
 		action = new ActionExecutor(this);		/* Pass CLI to ActionExecutor for the NetworkHandler and input instance, gamestate and username */
 		messageDecoder = new MessageDecoder(action);
 	}

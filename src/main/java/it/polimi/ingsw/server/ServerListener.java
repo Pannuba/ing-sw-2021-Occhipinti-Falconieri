@@ -7,6 +7,7 @@ import it.polimi.ingsw.server.view.ClientHandler;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,12 +19,18 @@ import java.util.List;
 public class ServerListener				/* Thread running listening for incoming connections */
 {
 	private final ServerSocket serverSocket;
+	private final List<ClientHandler> views;
 
 	/* Static method to get name/choice from client? So Match can use them */
 
 	public ServerListener(ServerSocket serverSocket)
 	{
 		this.serverSocket = serverSocket;
+		views = new ArrayList<>();
+
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			public void run() {		/* Runs when the program receives an interrupt signal like CTRL+C */
+				shutdown(); } });
 	}
 
 	public void start()
@@ -37,7 +44,6 @@ public class ServerListener				/* Thread running listening for incoming connecti
 		while (!serverSocket.isClosed())
 		{
 			List<Player> players = new ArrayList<>();
-			List<ClientHandler> views = new ArrayList<>();
 			String username = "";
 			int numPlayers = 1;
 
@@ -80,6 +86,26 @@ public class ServerListener				/* Thread running listening for incoming connecti
 
 			Runnable r = new Match(players, views);			/* Start match, passes players and views */
 			new Thread(r).start();
+		}
+	}
+
+	public void shutdown()
+	{
+		try
+		{
+			System.out.println("Shutting down...");
+
+			for (int i = 0; i < views.size(); i++)		/* Close views, then server socket */
+				views.get(i).close();
+
+			System.out.println("Closing server socket");
+			serverSocket.close();
+			System.out.println("Closed server socket");
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			Thread.currentThread().interrupt();
 		}
 	}
 }
