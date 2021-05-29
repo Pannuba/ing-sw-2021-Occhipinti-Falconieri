@@ -30,31 +30,30 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		switch (card.getClass().getSimpleName())
 		{
 			case "SkillDiscount":
-				System.out.println("Leadercard skill: discount");
-				System.out.println("Discounted resource: " + convertResTypeToString(((SkillDiscount) card).getDiscountedResource()));
-				System.out.println("Requirements: " + convertDevColorListToString(((SkillDiscount) card).getRequirements()) + " dev cards");
+				System.out.println(	"Leadercard skill: discount"																			+
+									"Discounted resource: " + convertResTypeToString(((SkillDiscount) card).getDiscountedResource())		+
+									"Requirements: " + convertDevColorListToString(((SkillDiscount) card).getRequirements()) + " dev cards"	);
 				break;
 												/* TODO: separate symbol for devCards/devCardColor? */
 			case "SkillMarble":
-				System.out.println("Leadercard skill: white marble");
-				System.out.println("White marble resource: " + convertResTypeToString(((SkillMarble) card).getWhiteMarble()));
-				System.out.println("Requirements: " + convertDevColorListToString(((SkillMarble) card).getRequirements()) + " dev cards");
+				System.out.println(	"Leadercard skill: white marble"																		+
+									"White marble resource: " + convertResTypeToString(((SkillMarble) card).getWhiteMarble())				+
+									"Requirements: " + convertDevColorListToString(((SkillMarble) card).getRequirements()) + " dev cards"	);
 				break;
 
 			case "SkillProduction":
-				System.out.println("Leadercard skill: additional production");
-				System.out.println("Cost: 1 " + convertResTypeToString(((SkillProduction) card).getCost().getResourceType()));
-				/* Product is null because it's chosen by the player */
-				System.out.println("Product amount: 1");
-				System.out.println(	"Requirements: a " + convertDevCardColorToString(((SkillProduction) card).getRequirements().getObj1())	+
-									" lvl " + ((SkillProduction) card).getRequirements().getObj2() + " dev card");
+				System.out.println(	"Leadercard skill: additional production"																+
+									"Cost: 1 " + convertResTypeToString(((SkillProduction) card).getCost().getResourceType())				+
+									"Product amount: 1"																						+
+									"Requirements: a " + convertDevCardColorToString(((SkillProduction) card).getRequirements().getObj1())	+
+									" lvl " + ((SkillProduction) card).getRequirements().getObj2() + " dev card"							);
 				break;
 
 			case "SkillStorage":
-				System.out.println("Leadercard skill: additional storage");
-				System.out.println("Additional storage resource: " + convertResTypeToString(((SkillStorage) card).getAdditionalStorage().getShelfResource().getResourceType()));
-				System.out.println(	"Requirements: " + ((SkillStorage) card).getRequirements().getQuantity() + " " +
-									convertResTypeToString(((SkillStorage) card).getRequirements().getResourceType()));
+				System.out.println(	"Leadercard skill: additional storage"																										+
+									"Additional storage resource: " + convertResTypeToString(((SkillStorage) card).getAdditionalStorage().getShelfResource().getResourceType())	+
+									"Requirements: " + ((SkillStorage) card).getRequirements().getQuantity() + " "																+
+									convertResTypeToString(((SkillStorage) card).getRequirements().getResourceType())															);
 				break;
 		}
 
@@ -103,13 +102,13 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	public static void printDevCard(DevCard devCard)		/* Cost and requirements are actually the opposite! */
 	{
-		System.out.print(	"Card number: " + devCard.getCardNumber() +
-							"\nColor: " + convertDevCardColorToString(devCard.getColor()) +
-							"\nLevel: " + devCard.getLevel() +
-							"\nVictory points: " + devCard.getPoints() +
-							"\nFaith points: " + devCard.getFaithPoints() +
-							"\nProduct: " + convertResListToString(devCard.getProduct()) +
-							"\nCost: " + convertResListToString(devCard.getCost()) +
+		System.out.print(	"Card number: " + devCard.getCardNumber()										+
+							"\nColor: " + convertDevCardColorToString(devCard.getColor())					+
+							"\nLevel: " + devCard.getLevel()												+
+							"\nVictory points: " + devCard.getPoints()										+
+							"\nFaith points: " + devCard.getFaithPoints()									+
+							"\nProduct: " + convertResListToString(devCard.getProduct())					+
+							"\nCost: " + convertResListToString(devCard.getCost())							+
 							"\nRequirements: " + convertResListToString(devCard.getRequirements()) + "\n\n"	);
 	}
 
@@ -133,7 +132,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 	{
 		System.out.print("Track:\n");
 
-		for (int i = 0; i < track.getRedPawns().size(); i++)		/* Size of redPawns = numPlayers, to avoid passing gamestate */
+		for (int i = 0; i < track.getRedPawns().size(); i++)		/* Size of redPawns = numPlayers = size of players list */
 		{
 			System.out.println(players.get(i).getUsername() + " is at position " + track.getRedPawns().get(i) + "/24");
 		}
@@ -157,7 +156,8 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 	public static void printStorage(Storage storage)
 	{
 		String topShelf = "", middleShelf = "", bottomShelf = "";
-		String topShelfResource = convertResTypeToString(storage.getShelves()[0].getShelfResource().getResourceType());
+
+		String topShelfResource    = convertResTypeToString(storage.getShelves()[0].getShelfResource().getResourceType());
 		String middleShelfResource = convertResTypeToString(storage.getShelves()[1].getShelfResource().getResourceType());
 		String bottomShelfResource = convertResTypeToString(storage.getShelves()[2].getShelfResource().getResourceType());
 
@@ -206,13 +206,13 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 				break;
 		}
 
-		System.out.print(	"Storage:" + "\n\n"	+
-							topShelf + "\n"		+
-							"_______" + "\n"	+
-							middleShelf + "\n"	+
-							"_______" + "\n"	+
-							bottomShelf + "\n"	+
-							"_______" + "\n\n"	);
+		System.out.print(	"Storage:"	+ "\n\n"	+
+							topShelf	+ "\n"		+
+							"_______"	+ "\n"		+
+							middleShelf	+ "\n"		+
+							"_______"	+ "\n"		+
+							bottomShelf	+ "\n"		+
+							"_______"	+ "\n\n"	);
 
 	}
 
@@ -253,16 +253,16 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 				return ANSI.PURPLE + ANSI.MARBLE.toString() + ANSI.RESET;
 
 			case WHITE:
-				return ANSI.WHITE + ANSI.MARBLE.toString() + ANSI.RESET;
+				return ANSI.WHITE  + ANSI.MARBLE.toString() + ANSI.RESET;
 
 			case GREY:
-				return ANSI.GREY + ANSI.MARBLE.toString() + ANSI.RESET;
+				return ANSI.GREY   + ANSI.MARBLE.toString() + ANSI.RESET;
 
 			case BLUE:
-				return ANSI.BLUE + ANSI.MARBLE.toString() + ANSI.RESET;
+				return ANSI.BLUE   + ANSI.MARBLE.toString() + ANSI.RESET;
 
 			case RED:
-				return ANSI.RED + ANSI.MARBLE.toString() + ANSI.RESET;
+				return ANSI.RED    + ANSI.MARBLE.toString() + ANSI.RESET;
 		}
 
 		return null;
@@ -282,10 +282,10 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 				return ANSI.PURPLE + ANSI.RESOURCE.toString() + ANSI.RESET;
 
 			case GREY:
-				return ANSI.GREY + ANSI.RESOURCE.toString() + ANSI.RESET;
+				return ANSI.GREY   + ANSI.RESOURCE.toString() + ANSI.RESET;
 
 			case BLUE:
-				return ANSI.BLUE + ANSI.RESOURCE.toString() + ANSI.RESET;
+				return ANSI.BLUE   + ANSI.RESOURCE.toString() + ANSI.RESET;
 		}
 
 		return null;
@@ -305,10 +305,10 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 				return ANSI.PURPLE + ANSI.RESOURCE.toString() + ANSI.RESET;
 
 			case BLUE:
-				return ANSI.BLUE + ANSI.RESOURCE.toString() + ANSI.RESET;
+				return ANSI.BLUE   + ANSI.RESOURCE.toString() + ANSI.RESET;
 
 			case GREEN:
-				return ANSI.GREEN + ANSI.RESOURCE.toString() + ANSI.RESET;
+				return ANSI.GREEN  + ANSI.RESOURCE.toString() + ANSI.RESET;
 		}
 
 		return null;

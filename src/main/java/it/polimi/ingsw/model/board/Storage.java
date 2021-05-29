@@ -36,8 +36,8 @@ public class Storage implements Serializable
 		}
 
 		if	((shelves[0].getShelfResourceType() == null && shelves[1].getShelfResourceType() == null) ||
-			(shelves[1].getShelfResourceType() == null && shelves[2].getShelfResourceType() == null) ||
-			(shelves[0].getShelfResourceType() == null && shelves[2].getShelfResourceType() == null))
+			( shelves[1].getShelfResourceType() == null && shelves[2].getShelfResourceType() == null) ||
+			( shelves[0].getShelfResourceType() == null && shelves[2].getShelfResourceType() == null))
 			return true;		/* Otherwise checkShelves returns false at the start of the match */
 
 		if (shelves[0].getShelfResourceType() == shelves[1].getShelfResourceType()	||
@@ -65,7 +65,7 @@ public class Storage implements Serializable
 
 				destinationShelf.getShelfResource().setQuantity(destinationShelf.getShelfResourceQuantity() + resourceToAdd.getQuantity());
 
-				assignToLocalShelves(destinationShelf);
+				assignToLocalShelves(destinationShelf);		/* One of the old shelves is replaced by the local shelf created in this function */
 				return true;
 			}
 
@@ -85,53 +85,64 @@ public class Storage implements Serializable
 
 	public void addResourceSmart(Resource resourceToAdd)	/* Adds a resource without having to specify the shelf number. Checks the smaller shelf first */
 	{
-		switch (resourceToAdd.getQuantity())
+		switch (resourceToAdd.getQuantity())		/* TODO: return resources that can't be added? */
 		{
 			case 1:
 
-				if 		(shelves[0].isEmpty() && shelves[1].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[2].getShelfResourceType() != resourceToAdd.getResourceType())
+				if 		(shelves[0].isEmpty() && shelves[1].getShelfResourceType() != resourceToAdd.getResourceType()	&&
+						 shelves[2].getShelfResourceType() != resourceToAdd.getResourceType())
 					addResource(resourceToAdd, 1);
 
-				else if (shelves[1].isEmpty() && shelves[0].getShelfResourceType() == resourceToAdd.getResourceType() && shelves[2].getShelfResourceType() != resourceToAdd.getResourceType())
+				else if (shelves[1].isEmpty() && shelves[0].getShelfResourceType() == resourceToAdd.getResourceType() 	&&
+						 shelves[2].getShelfResourceType() != resourceToAdd.getResourceType())
 				{
 					moveResources(1, 2);		/* First check if shelves can be optimized by moving the same resource type from a smaller shelf to a bigger one */
 					addResource(resourceToAdd, 2);
 				}
 
-				else if (shelves[2].isEmpty() && shelves[1].getShelfResourceType() == resourceToAdd.getResourceType() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType())
+				else if (shelves[2].isEmpty() && shelves[1].getShelfResourceType() == resourceToAdd.getResourceType()	&&
+						 shelves[0].getShelfResourceType() != resourceToAdd.getResourceType())
 				{
 					moveResources(2, 3);
 					addResource(resourceToAdd, 3);
 				}
 
-				else if (shelves[1].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[2].getShelfResourceType() != resourceToAdd.getResourceType())						/* Otherwise just move them to the next shelf with enough space */
+				else if (shelves[1].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType()	&&
+						 shelves[2].getShelfResourceType() != resourceToAdd.getResourceType())						/* Otherwise just move them to the next shelf with enough space */
 					addResource(resourceToAdd, 2);
 
-				else if (shelves[2].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[1].getShelfResourceType() != resourceToAdd.getResourceType())
+				else if (shelves[2].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType()	&&
+						 shelves[1].getShelfResourceType() != resourceToAdd.getResourceType())
 					addResource(resourceToAdd, 3);
 
 				break;
 
 			case 2:
 
-				if 		(shelves[1].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[2].getShelfResourceType() != resourceToAdd.getResourceType())
+				if 		(shelves[1].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType()	&&
+						 shelves[2].getShelfResourceType() != resourceToAdd.getResourceType())
 					addResource(resourceToAdd, 2);
 
-				else if (shelves[2].isEmpty() && shelves[1].getShelfResourceType() == resourceToAdd.getResourceType() && shelves[1].getShelfResourceQuantity() < 2 && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType())
+				else if (shelves[2].isEmpty() && shelves[1].getShelfResourceType() == resourceToAdd.getResourceType()	&&
+						 shelves[1].getShelfResourceQuantity() < 2 && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType())
 				{
 					moveResources(2, 3);
 					addResource(resourceToAdd, 3);
 				}
 
-				else if (shelves[2].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[1].getShelfResourceType() != resourceToAdd.getResourceType())
+				else if (shelves[2].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType()	&&
+						 shelves[1].getShelfResourceType() != resourceToAdd.getResourceType())
 					addResource(resourceToAdd,3);
 
 				break;
 
 			case 3:
 
-				if (shelves[2].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType() && shelves[1].getShelfResourceType() != resourceToAdd.getResourceType())
+				if 		(shelves[2].isEmpty() && shelves[0].getShelfResourceType() != resourceToAdd.getResourceType()	&&
+						 shelves[1].getShelfResourceType() != resourceToAdd.getResourceType())
 					addResource(resourceToAdd, 3);
+
+				break;
 
 			default:
 				System.out.println("Can't add more than three resources");		/* It's not possible to add 4 or more resources at the same time */
