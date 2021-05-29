@@ -161,23 +161,16 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 		DevCard cardToBuy = model.getDevCardsMarket().getDevCardByNumber(cardToBuyNum);
 		List<Resource> requirements = cardToBuy.getRequirements();
 
-		if (cardToBuy.checkReqOrCost(model.getPlayerByUsername(username).getDashboard(), requirements))	/* If player has enough resources */
+		if (controller.checkResourceAmounts(model.getPlayerByUsername(username).getDashboard(), requirements))	/* If player has enough resources */
 		{
-			if (!controller.spendResources(requirements))	/* Shouldn't return false if it passed checkDevCardRequirements... */
-			{
-				/* TODO: make sure checkDevCardRequirements and spendResources do the same */
-				message = "Couldn't buy devcard: requirements not satisfied";
-				isFailed = true;
-			}
+			controller.spendResources(requirements);
 
-			else
-			{
-				model.getDevCardsMarket().buyCardFromMarket(cardToBuyNum);		/* Finally buy the card and send it to the client */
-				model.getPlayerByUsername(username).getDashboard().addDevCardToArea(cardToBuy, devCardAreaIndex);	/* TODO: check if layer is compatible */
-				controller.getView().send(new BoughtDevCardMessage(cardToBuy));
-				message = "Card bought successfully!";
-				isFailed = false;
-			}
+			model.getDevCardsMarket().buyCardFromMarket(cardToBuyNum);		/* Finally buy the card and send it to the client */
+			model.getPlayerByUsername(username).getDashboard().addDevCardToArea(cardToBuy, devCardAreaIndex);	/* TODO: check if layer is compatible */
+			controller.getView().send(new BoughtDevCardMessage(cardToBuy));
+
+			message = "Card bought successfully!";
+			isFailed = false;
 		}
 
 		else
@@ -191,21 +184,25 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 	public void activateProduction(List<String> command, String username)
 	{
+		List<Resource> producedResources = new ArrayList<>();
+
 		switch (command.get(1))
 		{
 			case "DEFAULT":				/* "ACTIVATE_PRODUCTION", "DEFAULT", "B", "Y" */
 
-				ResourceType resourceToConvert = ResourceType.convertStringToResType(command.get(2));
-				ResourceType resourceToMake = ResourceType.convertStringToResType(command.get(3));
+				ResourceType costResType = ResourceType.convertStringToResType(command.get(2));
+				ResourceType productResType = ResourceType.convertStringToResType(command.get(3));
+
+				producedResources.add(new Resource(productResType, 1));		/* Convert ResourceType to Resource */
 				break;
 
 			case "DEVCARD":				/* "ACTIVATE_PRODUCTION", "DEVCARD", "5" */
 
 				DevCard devCard = model.getPlayerByUsername(username).getDashboard().getTopDevCardByNumber(Integer.parseInt(command.get(2)));
 				List<Resource> cardCost = devCard.getCost();
-				List<Resource> product = devCard.getProduct();
+				producedResources = devCard.getProduct();
 
-				if (devCard.checkReqOrCost(model.getPlayerByUsername(username).getDashboard(), cardCost))
+				if (controller.checkResourceAmounts(model.getPlayerByUsername(username).getDashboard(), cardCost))
 				{
 					controller.spendResources(cardCost);
 					message = "Production successful!";		/* Send BoughtResourcesMessage before or after OpResult? Another boolean? */
@@ -231,8 +228,8 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 		controller.getView().send(new OperationResultMessage(message, isFailed));
 
-		//if (!isFailed)
-			//controller.getView().send(new BoughtResourcesMessage());
+		if (!isFailed)
+			controller.getView().send(new BoughtResourcesMessage(producedResources));
 	}
 
 	public boolean isFailed()

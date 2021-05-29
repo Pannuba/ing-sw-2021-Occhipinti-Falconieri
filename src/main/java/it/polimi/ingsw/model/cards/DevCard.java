@@ -28,24 +28,6 @@ public class DevCard implements Serializable
 		product = new ArrayList<>();
 	}
 
-	public boolean checkReqOrCost(Dashboard playerBoard, List<Resource> reqOrCost)
-	{
-		Storage storage = playerBoard.getStorage();
-		Vault vault = playerBoard.getVault();
-
-		for (int i = 0; i < reqOrCost.size(); i++)
-		{
-			int requiredResAmount = 0;
-			requiredResAmount += storage.findResourceByType(reqOrCost.get(i).getResourceType());
-			requiredResAmount += vault.getResourceAmounts().get(reqOrCost.get(i).getResourceType());
-
-			if (requiredResAmount < reqOrCost.get(i).getQuantity())		/* If only 1 resource (type and quantity) isn't satisfied, return false */
-				return false;
-		}
-
-		return true;
-	}
-
 	public int getCardNumber()
 	{
 		return cardNumber;

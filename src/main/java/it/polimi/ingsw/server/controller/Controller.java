@@ -1,6 +1,9 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.board.Dashboard;
+import it.polimi.ingsw.model.board.Storage;
+import it.polimi.ingsw.model.board.Vault;
 import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.server.messages.ActionTokenMessage;
 import it.polimi.ingsw.server.view.ClientHandler;
@@ -108,25 +111,40 @@ public class Controller implements Observer			/* Observes view to get commands..
 			model.endMatch();
 	}
 
-	public boolean spendResources(List<Resource> requirements)		/* Returns false if it can't remove all the resources from storage and/or vault */
+	public boolean checkResourceAmounts(Dashboard playerBoard, List<Resource> requirements)		/* Checks without spending anything */
 	{
-		int reqAmount;
-		ResourceType reqType;
+		Storage storage = playerBoard.getStorage();
+		Vault vault = playerBoard.getVault();
 
-		for (int i = 0; i < requirements.size(); i++)		/* Check every Resource in requirements list */
+		for (int i = 0; i < requirements.size(); i++)
 		{
-			reqAmount = requirements.get(i).getQuantity();
-			reqType = requirements.get(i).getResourceType();
-			reqAmount -= model.getPlayerByUsername(username).getDashboard().getStorage().removeResource(requirements.get(i));
+			int requiredResAmount = 0;
+			requiredResAmount += storage.findResourceByType(requirements.get(i).getResourceType());
+			requiredResAmount += vault.getResourceAmounts().get(requirements.get(i).getResourceType());
 
-			if (reqAmount != 0)		/* If there are still resources to be removed after checking storage, also check vault */
-				reqAmount -= model.getPlayerByUsername(username).getDashboard().getVault().removeResource(new Resource(reqType, reqAmount));
-
-			if (reqAmount != 0)		/* If there are STILL resources to be removed after checking vault, return false */
+			if (requiredResAmount < requirements.get(i).getQuantity())		/* If only 1 resource (type and quantity) isn't satisfied, return false */
 				return false;
 		}
 
 		return true;
+	}
+
+	public void spendResources(List<Resource> resourcesToSpend)
+	{
+		int reqAmount = 0;
+		ResourceType reqType;
+
+		for (int i = 0; i < resourcesToSpend.size(); i++)		/* Check every Resource in requirements list */
+		{
+			reqAmount = resourcesToSpend.get(i).getQuantity();
+			reqType = resourcesToSpend.get(i).getResourceType();
+			reqAmount -= model.getPlayerByUsername(username).getDashboard().getStorage().removeResource(resourcesToSpend.get(i));
+
+			if (reqAmount != 0)		/* If there are still resources to be removed after checking storage, also check vault */
+				reqAmount -= model.getPlayerByUsername(username).getDashboard().getVault().removeResource(new Resource(reqType, reqAmount));
+		}
+
+		System.out.println("spendResources: reqAmount = " + reqAmount + " (SHOULD BE ZERO)");
 	}
 
 	private void flipActionToken()
