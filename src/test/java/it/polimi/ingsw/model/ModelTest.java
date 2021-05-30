@@ -316,8 +316,4 @@ public class ModelTest {
 		model.setTrack(track);
 		assertEquals("Error", 47, model.calculatePoints(p1));
 	}
-
-	@Test
-	public void endMatch() {
-	}
 }

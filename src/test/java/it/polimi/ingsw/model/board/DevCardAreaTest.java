@@ -27,21 +27,21 @@ public class DevCardAreaTest {
 	public void checkDevCardArea1()
 	{
 		devCardArea.setLayer(-1);
-		assertEquals("Error", false, devCardArea.checkDevCardArea());
+		assertFalse("Error", devCardArea.checkDevCardArea());
 	}
 
 	@Test
 	public void checkDevCardArea2()
 	{
 		devCardArea.setLayer(4);
-		assertEquals("Error", false, devCardArea.checkDevCardArea());
+		assertFalse("Error", devCardArea.checkDevCardArea());
 	}
 
 	@Test
 	public void checkDevCardArea3()
 	{
 		devCardArea.setLayer(2);
-		assertEquals("Error", true, devCardArea.checkDevCardArea());
+		assertTrue("Error", devCardArea.checkDevCardArea());
 	}
 
 	@Test
