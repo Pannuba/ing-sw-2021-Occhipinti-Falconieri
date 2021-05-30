@@ -63,7 +63,7 @@ public class XML_Serialization
 
 							System.out.print("Discounted resource (G/Y/B/P): ");
 							leaderCardOne.setDiscountedResource(ResourceType.convertStringToResType(input.nextLine()));
-							leaderCardOne.setDiscount(-1);		/* In xml so it can be changed by parameters editor */
+							leaderCardOne.setDiscountNum(1);		/* In xml so it can be changed by parameters editor */
 
 							serialize(leaderCardOne, filename);
 							break;

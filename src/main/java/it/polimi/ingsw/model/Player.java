@@ -1,10 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.board.Dashboard;
-import it.polimi.ingsw.model.cards.LeaderCard;
-import it.polimi.ingsw.model.cards.PopeToken;
-import it.polimi.ingsw.model.cards.SkillMarble;
-import it.polimi.ingsw.model.cards.SkillStorage;
+import it.polimi.ingsw.model.cards.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -59,6 +56,20 @@ public class Player implements Serializable
 			{
 				if (((SkillStorage) leaderCards.get(i)).getAdditionalStorage().getShelfResourceType() == resType)
 					return ((SkillStorage) leaderCards.get(i));
+			}
+		}
+
+		return null;
+	}
+
+	public SkillDiscount getDiscountLeader(ResourceType discountedResource)
+	{
+		for (int i = 0; i < leaderCards.size(); i++)
+		{
+			if (leaderCards.get(i).isActive() && leaderCards.get(i) instanceof SkillDiscount)
+			{
+				if (((SkillDiscount) leaderCards.get(i)).getDiscountedResource() == discountedResource)
+					return ((SkillDiscount) leaderCards.get(i));
 			}
 		}
 

@@ -6,7 +6,7 @@ import it.polimi.ingsw.model.Shelf;
 public class SkillStorage extends LeaderCard		/* "final" keyword in instance variables makes serialization not work */
 {
 	private Resource requirements;			/* Only 1 resource type */
-	private Shelf additionalStorage;
+	private final Shelf additionalStorage;
 
 	public SkillStorage()
 	{

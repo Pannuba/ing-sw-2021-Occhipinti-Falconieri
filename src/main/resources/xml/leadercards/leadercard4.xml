@@ -5,7 +5,7 @@
    <int>4</int>
   </void>
   <void property="discount">
-   <int>-1</int>
+   <int>1</int>
   </void>
   <void property="discountedResource">
    <object class="java.lang.Enum" method="valueOf">

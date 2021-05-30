@@ -7,7 +7,7 @@ import java.util.List;
 
 public class SkillDiscount extends LeaderCard
 {
-	private int discount;
+	private int discountNum;
 	private List<DevCardColor> requirements;			/* Requires devcards of different color, any level. 2 in base game but List for scalability */
 	private ResourceType discountedResource;
 
@@ -16,14 +16,14 @@ public class SkillDiscount extends LeaderCard
 		requirements = new ArrayList<>();
 	}
 
-	public int getDiscount()
+	public int getDiscountNum()
 	{
-		return discount;
+		return discountNum;
 	}
 
-	public void setDiscount(int discount)
+	public void setDiscountNum(int discountNum)
 	{
-		this.discount = discount;
+		this.discountNum = discountNum;
 	}
 
 	public List<DevCardColor> getRequirements()

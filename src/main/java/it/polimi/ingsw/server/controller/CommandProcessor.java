@@ -4,10 +4,7 @@ import it.polimi.ingsw.model.MarbleType;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
-import it.polimi.ingsw.model.cards.DevCard;
-import it.polimi.ingsw.model.cards.LeaderCard;
-import it.polimi.ingsw.model.cards.SkillProduction;
-import it.polimi.ingsw.model.cards.SkillStorage;
+import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.server.messages.BoughtDevCardMessage;
 import it.polimi.ingsw.server.messages.BoughtResourcesMessage;
 import it.polimi.ingsw.server.messages.OperationResultMessage;
@@ -169,9 +166,15 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 		int cardToBuyNum = Integer.parseInt(command.get(1));
 		int devCardAreaIndex = Integer.parseInt(command.get(2)) - 1;		/* If the client chooses the area #3, it's #2 because 0-indexed */
 		DevCard cardToBuy = model.getDevCardsMarket().getDevCardByNumber(cardToBuyNum);
-		List<Resource> requirements = cardToBuy.getRequirements();
+		List<Resource> requirements = cardToBuy.getRequirements();			/* The resources to spend to buy the devcard */
 
-		/* TODO: check for SkillDiscount cards */
+		for (int i = 0; i < requirements.size(); i++)		/* Apply the discount of SkillDiscount cards, if any */
+		{
+			SkillDiscount discountLeader = model.getPlayerByUsername(username).getDiscountLeader(requirements.get(i).getResourceType());
+
+			if (discountLeader != null)		/* No need to worry about cards being used multiple times because of resource type in requirements */
+				requirements.get(i).setQuantity(requirements.get(i).getQuantity() - discountLeader.getDiscountNum());
+		}
 
 		if (controller.checkResourceAmounts(model.getPlayerByUsername(username).getDashboard(), requirements))	/* If player has enough resources */
 		{

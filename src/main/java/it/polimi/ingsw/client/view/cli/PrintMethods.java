@@ -12,7 +12,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 	public static void printBoard(Dashboard board)		/* Could get both from gamestate but this is simpler */
 	{
 		printVault(board.getVault());
-		printStorage(board.getStorage());
+		printStorage(board.getStorage());			/* TODO: add SkillStorage */
 		printDevCardAreas(board.getDevCardAreas());
 	}
 
