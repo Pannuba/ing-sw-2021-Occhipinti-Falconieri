@@ -4,7 +4,7 @@
   <void property="cardNumber">
    <int>2</int>
   </void>
-  <void property="discount">
+  <void property="discountNum">
    <int>1</int>
   </void>
   <void property="discountedResource">
