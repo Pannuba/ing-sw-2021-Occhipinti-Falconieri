@@ -148,9 +148,6 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 		List<Resource> boughtResourcesList = ResourceType.convertResTypeListToResList(resourcesToAddToStorage);			/* B, B, G -> 2B, 1G */
 
-		//for (int i = 0; i < boughtResourcesList.size(); i++)
-		//	model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(boughtResourcesList.get(i));
-
 		for (int i = 0; i < resourcesToAddToStorage.size(); i++)
 		{
 			model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(resourcesToAddToStorage.get(i));

@@ -85,6 +85,8 @@ public class Storage implements Serializable
 		}
 	}
 
+	/* FIXME: adds what's in shelf[0] in shelf[2] */
+
 	public void addResourceSmart(ResourceType resourceToAdd)	/* Adds a resource without having to specify the shelf number. Checks the smaller shelf first */
 	{														/* TODO: return resources that can't be added? */
 
@@ -259,7 +261,7 @@ public class Storage implements Serializable
 
 	private void assignToLocalShelves(Shelf shelf)
 	{
-		for (int i = 0; i < shelf.getShelfSize(); i++)
+		for (int i = 0; i < shelves.length; i++)
 		{
 			if (shelves[i].getShelfSize() == shelf.getShelfSize())
 				shelves[i] = shelf;

@@ -198,11 +198,11 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 				break;
 
 			case 2:
-				bottomShelf = bottomShelfResource + "  " + topShelfResource + "  " + ANSI.EMPTY;
+				bottomShelf = bottomShelfResource + "  " + bottomShelfResource + "  " + ANSI.EMPTY;
 				break;
 
 			case 3:
-				bottomShelf = bottomShelfResource + "  " + topShelfResource + "  " + topShelfResource;
+				bottomShelf = bottomShelfResource + "  " + bottomShelfResource + "  " + bottomShelfResource;
 				break;
 		}
 
