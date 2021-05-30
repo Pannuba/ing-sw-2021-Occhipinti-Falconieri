@@ -140,9 +140,12 @@ public class Controller implements Observer			/* Observes view to get commands..
 			reqType = resourcesToSpend.get(i).getResourceType();
 			reqAmount -= model.getPlayerByUsername(username).getDashboard().getStorage().removeResource(resourcesToSpend.get(i));
 
-			/* TODO: check for SkillStorage cards */
+			/* If there are still resources to be removed after checking storage, check SkillStorage cards (if any) */
 
-			if (reqAmount != 0)		/* If there are still resources to be removed after checking storage, also check vault */
+			if (reqAmount != 0 && model.getPlayerByUsername(username).getStorageLeader(resourcesToSpend.get(i).getResourceType()) != null)
+				reqAmount -= model.getPlayerByUsername(username).getStorageLeader(resourcesToSpend.get(i).getResourceType()).removeResources(reqAmount);
+
+			if (reqAmount != 0)		/* If there are still resources to be removed after checking SkillStorage cards, also check vault */
 				reqAmount -= model.getPlayerByUsername(username).getDashboard().getVault().removeResource(new Resource(reqType, reqAmount));
 		}
 

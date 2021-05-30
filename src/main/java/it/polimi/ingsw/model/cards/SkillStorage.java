@@ -10,8 +10,30 @@ public class SkillStorage extends LeaderCard		/* "final" keyword in instance var
 
 	public SkillStorage()
 	{
-		requirements = new Resource();
-		additionalStorage = new Shelf();		/* shelfSize is not specified because the value is in the card's xml */
+		requirements = new Resource();			/* shelfSize and resource type are not specified because the value is in the card's xml */
+		additionalStorage = new Shelf();
+	}
+
+	public void addOneResource()			/* Increases the amount of resources in the additionalStorage by 1. Checks already performed by controller */
+	{
+		additionalStorage.getShelfResource().setQuantity(additionalStorage.getShelfResourceQuantity() + 1);
+	}
+
+	public int removeResources(int resToRemoveNum)
+	{
+		int removedResNum = 0;
+
+		for (int i = 0; i < resToRemoveNum; i++)
+		{
+			if (!additionalStorage.isEmpty())		/* To avoid going below zero */
+			{
+				additionalStorage.getShelfResource().setQuantity(additionalStorage.getShelfResourceQuantity() - 1);
+				removedResNum++;
+			}
+		}
+
+		System.out.println("SkillStorage removeResources: removed " + removedResNum + " " + additionalStorage.getShelfResourceType());
+		return removedResNum;
 	}
 
 	public Resource getRequirements()
@@ -27,10 +49,5 @@ public class SkillStorage extends LeaderCard		/* "final" keyword in instance var
 	public Shelf getAdditionalStorage()
 	{
 		return additionalStorage;
-	}
-
-	public void setAdditionalStorage(Shelf additionalStorage)
-	{
-		this.additionalStorage = additionalStorage;
 	}
 }

@@ -30,8 +30,8 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		switch (card.getClass().getSimpleName())
 		{
 			case "SkillDiscount":
-				System.out.println(	"Leadercard skill: discount"																			+
-									"\nDiscounted resource: " + convertResTypeToString(((SkillDiscount) card).getDiscountedResource())		+
+				System.out.println(	"Leadercard skill: discount"																				+
+									"\nDiscounted resource: " + convertResTypeToString(((SkillDiscount) card).getDiscountedResource())			+
 									"\nRequirements: " + convertDevColorListToString(((SkillDiscount) card).getRequirements()) + " dev cards"	);
 				break;
 												/* TODO: separate symbol for devCards/devCardColor? */
@@ -42,18 +42,18 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 				break;
 
 			case "SkillProduction":
-				System.out.println(	"Leadercard skill: additional production"																+
-									"\nCost: 1 " + convertResTypeToString(((SkillProduction) card).getCost().getResourceType())				+
+				System.out.println(	"Leadercard skill: additional production"																	+
+									"\nCost: 1 " + convertResTypeToString(((SkillProduction) card).getCost().getResourceType())					+
 									"\nProduct amount: 1"																						+
 									"\nRequirements: a " + convertDevCardColorToString(((SkillProduction) card).getRequirements().getObj1())	+
-									" lvl " + ((SkillProduction) card).getRequirements().getObj2() + " dev card"							);
+									" lvl " + ((SkillProduction) card).getRequirements().getObj2() + " dev card"								);
 				break;
 
 			case "SkillStorage":
 				System.out.println(	"\nLeadercard skill: additional storage"																										+
 									"\nAdditional storage resource: " + convertResTypeToString(((SkillStorage) card).getAdditionalStorage().getShelfResource().getResourceType())	+
 									"\nRequirements: " + ((SkillStorage) card).getRequirements().getQuantity() + " "																+
-									convertResTypeToString(((SkillStorage) card).getRequirements().getResourceType())															);
+									convertResTypeToString(((SkillStorage) card).getRequirements().getResourceType())																);
 				break;
 		}
 
@@ -133,9 +133,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		System.out.print("Track:\n");
 
 		for (int i = 0; i < track.getRedPawns().size(); i++)		/* Size of redPawns = numPlayers = size of players list */
-		{
 			System.out.println(players.get(i).getUsername() + " is at position " + track.getRedPawns().get(i) + "/24");
-		}
 
 		if (players.size() == 1)
 			System.out.println("Lorenzo the Magnificent is at position " + track.getBlackPawn() + "/24");
@@ -213,7 +211,6 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 							"_______"	+ "\n"		+
 							bottomShelf	+ "\n"		+
 							"_______"	+ "\n\n"	);
-
 	}
 
 	public static void printDevCardAreas(DevCardArea[] devCardAreas)		/* Used to print usable (aka top) devcards for production */

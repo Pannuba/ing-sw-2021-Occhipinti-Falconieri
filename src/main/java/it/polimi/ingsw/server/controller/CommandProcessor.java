@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.model.cards.SkillProduction;
+import it.polimi.ingsw.model.cards.SkillStorage;
 import it.polimi.ingsw.server.messages.BoughtDevCardMessage;
 import it.polimi.ingsw.server.messages.BoughtResourcesMessage;
 import it.polimi.ingsw.server.messages.OperationResultMessage;
@@ -149,9 +150,14 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 		List<Resource> boughtResourcesList = ResourceType.convertResTypeListToResList(resourcesToAddToStorage);			/* B, B, G -> 2B, 1G */
 
 		for (int i = 0; i < resourcesToAddToStorage.size(); i++)
-		{
-			model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(resourcesToAddToStorage.get(i));
-			/* TODO: check for SkillStorage cards!!! */
+		{																/* Gets the storageLeader compatible with the resource to add */
+			SkillStorage storageLeader = model.getPlayerByUsername(username).getStorageLeader(resourcesToAddToStorage.get(i));
+
+			if (storageLeader != null && !storageLeader.getAdditionalStorage().isFull())				/* If possible, add the resources to storage leaders */
+				model.getPlayerByUsername(username).getStorageLeader(resourcesToAddToStorage.get(i)).addOneResource();
+
+			else																						/* Otherwise add them to storage */
+				model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(resourcesToAddToStorage.get(i));
 		}
 
 		controller.getView().send(new BoughtResourcesMessage(boughtResourcesList));		/* Sends a list of resources to the client */
@@ -193,7 +199,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 		List<Resource> producedResources = new ArrayList<>();
 		List<Resource> cost = new ArrayList<>();
 
-		switch (command.get(1))		/* TODO: pack the part after cost and producedResources has been established, now it's repeated three times */
+		switch (command.get(1))
 		{
 			case "DEFAULT":				/* "ACTIVATE_PRODUCTION", "DEFAULT", "B", "Y" */
 

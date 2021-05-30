@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.board.Dashboard;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.model.cards.PopeToken;
 import it.polimi.ingsw.model.cards.SkillMarble;
+import it.polimi.ingsw.model.cards.SkillStorage;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -48,6 +49,20 @@ public class Player implements Serializable
 
 		System.out.println("Player getWhiteMarbleTypes: returning " + whiteMarbleResources);
 		return whiteMarbleResources;
+	}
+
+	public SkillStorage getStorageLeader(ResourceType resType)		/* Returns the active SkillStorage leadercard with the passed ResourceType */
+	{
+		for (int i = 0; i < leaderCards.size(); i++)
+		{
+			if (leaderCards.get(i).isActive() && leaderCards.get(i) instanceof SkillStorage)		/* Check for discarded? */
+			{
+				if (((SkillStorage) leaderCards.get(i)).getAdditionalStorage().getShelfResourceType() == resType)
+					return ((SkillStorage) leaderCards.get(i));
+			}
+		}
+
+		return null;
 	}
 
 	public int getPopeTokenPoints()
