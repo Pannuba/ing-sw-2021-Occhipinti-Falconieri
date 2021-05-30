@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.NetworkHandler;
+import it.polimi.ingsw.client.view.localserver.LocalServer;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.server.messages.Message;
 
@@ -28,14 +29,34 @@ public class CLI extends Observable implements Observer
 
 	private void gameStart()
 	{
+		String ip = "";
+		int port = 0;
+
 		System.out.print("Username: ");
 		username = input.nextLine();
-		System.out.print("Server IP: ");
-		//String ip = input.nextLine();		/* For debugging */
-		String ip = "127.0.0.1";
-		System.out.print("Server port: ");
-		//int port = Integer.parseInt(input.nextLine());
-		int port = 2000;
+
+		System.out.print("Singleplayer local match? (Y/N) ");
+
+		switch (input.nextLine().toUpperCase())
+		{
+			case "Y":
+
+				ip = "127.0.0.1";
+				port = 2000;
+
+				LocalServer localServer = new LocalServer();
+				new Thread(localServer).start();
+				break;
+
+			case "N":
+
+				System.out.print("Server IP: ");
+				//String ip = input.nextLine();		/* For debugging */
+				ip = "127.0.0.1";
+				System.out.print("Server port: ");
+				//int port = Integer.parseInt(input.nextLine());
+				port = 2000;
+		}
 
 		networkHandler = new NetworkHandler(ip, port);
 		System.out.println("Created network handler");

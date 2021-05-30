@@ -82,8 +82,7 @@ public class ServerListener
 				new Thread(clientHandler).start();
 			}
 
-			Match m = new Match(players, views);
-						/* Start match, passes players and views */
+			Match m = new Match(players, views);		/* Start match, passes players and views */
 			new Thread(m).start();
 		}
 	}
