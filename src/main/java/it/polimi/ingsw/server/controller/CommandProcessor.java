@@ -50,9 +50,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 		{
 			for (int i = 0; i < command.get(1).length(); i++)
 			{
-				Resource resourceToAdd = new Resource();
-				resourceToAdd.setQuantity(1);
-				resourceToAdd.setResourceType(ResourceType.convertStringToResType(Character.toString(command.get(1).charAt(i))));
+				ResourceType resourceToAdd = ResourceType.convertStringToResType(Character.toString(command.get(1).charAt(i)));
 				model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(resourceToAdd);
 			}
 		}
@@ -75,6 +73,8 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 				message = "Leadercard " + model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivateNum).getCardNumber() + " activated successfully!";
 				isFailed = false;
 			}
+
+			/* else? */
 		}
 
 		else
@@ -111,7 +111,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 	public void buyResources(List<String> command, String username)
 	{
-		isFailed = false;		/* How can this action fail? */
+		isFailed = false;		/* How can this action fail? When resources don't fit? */
 		List<MarbleType> boughtMarbles = new ArrayList<>();
 		List<ResourceType> resourcesToAddToStorage = new ArrayList<>();		/* Should either be a hashmap or a list of resourcetypes */
 
@@ -146,10 +146,16 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 				resourcesToAddToStorage.add(ResourceType.convertMarbleToResType(boughtMarbles.get(i)));
 		}
 
-		List<Resource> boughtResourcesList = ResourceType.convertResTypeListToResList(resourcesToAddToStorage);
+		List<Resource> boughtResourcesList = ResourceType.convertResTypeListToResList(resourcesToAddToStorage);			/* B, B, G -> 2B, 1G */
 
-		for (int i = 0; i < boughtResourcesList.size(); i++)
-			model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(boughtResourcesList.get(i));
+		//for (int i = 0; i < boughtResourcesList.size(); i++)
+		//	model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(boughtResourcesList.get(i));
+
+		for (int i = 0; i < resourcesToAddToStorage.size(); i++)
+		{
+			model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(resourcesToAddToStorage.get(i));
+			/* TODO: check for SkillStorage cards!!! */
+		}
 
 		controller.getView().send(new BoughtResourcesMessage(boughtResourcesList));		/* Sends a list of resources to the client */
 		/* TODO: ask player to discard resources if they don't fit in the storage */
@@ -161,6 +167,8 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 		int devCardAreaIndex = Integer.parseInt(command.get(2)) - 1;		/* If the client chooses the area #3, it's #2 because 0-indexed */
 		DevCard cardToBuy = model.getDevCardsMarket().getDevCardByNumber(cardToBuyNum);
 		List<Resource> requirements = cardToBuy.getRequirements();
+
+		/* TODO: check for SkillDiscount cards */
 
 		if (controller.checkResourceAmounts(model.getPlayerByUsername(username).getDashboard(), requirements))	/* If player has enough resources */
 		{

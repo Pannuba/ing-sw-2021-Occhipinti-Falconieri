@@ -22,5 +22,7 @@ public class ActionBlack1 extends ActionToken		/* I can also do an instanceof ch
 		System.out.println("Activating action of ActionBlack1");
 		track.setBlackPawn(track.getBlackPawn() + 1);
 		Collections.shuffle(tokens);
+		setFlipped(false);			/* After shuffling the tokens, getNextActionToken returns the token after this one */
+									/* Setting this to false makes the function return the token at index 0, the "first" one of the stack */
 	}
 }

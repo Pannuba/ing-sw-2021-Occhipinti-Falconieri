@@ -31,28 +31,28 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		{
 			case "SkillDiscount":
 				System.out.println(	"Leadercard skill: discount"																			+
-									"Discounted resource: " + convertResTypeToString(((SkillDiscount) card).getDiscountedResource())		+
-									"Requirements: " + convertDevColorListToString(((SkillDiscount) card).getRequirements()) + " dev cards"	);
+									"\nDiscounted resource: " + convertResTypeToString(((SkillDiscount) card).getDiscountedResource())		+
+									"\nRequirements: " + convertDevColorListToString(((SkillDiscount) card).getRequirements()) + " dev cards"	);
 				break;
 												/* TODO: separate symbol for devCards/devCardColor? */
 			case "SkillMarble":
 				System.out.println(	"Leadercard skill: white marble"																		+
-									"White marble resource: " + convertResTypeToString(((SkillMarble) card).getWhiteMarble())				+
-									"Requirements: " + convertDevColorListToString(((SkillMarble) card).getRequirements()) + " dev cards"	);
+									"\nWhite marble resource: " + convertResTypeToString(((SkillMarble) card).getWhiteMarble())				+
+									"\nRequirements: " + convertDevColorListToString(((SkillMarble) card).getRequirements()) + " dev cards"	);
 				break;
 
 			case "SkillProduction":
 				System.out.println(	"Leadercard skill: additional production"																+
-									"Cost: 1 " + convertResTypeToString(((SkillProduction) card).getCost().getResourceType())				+
-									"Product amount: 1"																						+
-									"Requirements: a " + convertDevCardColorToString(((SkillProduction) card).getRequirements().getObj1())	+
+									"\nCost: 1 " + convertResTypeToString(((SkillProduction) card).getCost().getResourceType())				+
+									"\nProduct amount: 1"																						+
+									"\nRequirements: a " + convertDevCardColorToString(((SkillProduction) card).getRequirements().getObj1())	+
 									" lvl " + ((SkillProduction) card).getRequirements().getObj2() + " dev card"							);
 				break;
 
 			case "SkillStorage":
-				System.out.println(	"Leadercard skill: additional storage"																										+
-									"Additional storage resource: " + convertResTypeToString(((SkillStorage) card).getAdditionalStorage().getShelfResource().getResourceType())	+
-									"Requirements: " + ((SkillStorage) card).getRequirements().getQuantity() + " "																+
+				System.out.println(	"\nLeadercard skill: additional storage"																										+
+									"\nAdditional storage resource: " + convertResTypeToString(((SkillStorage) card).getAdditionalStorage().getShelfResource().getResourceType())	+
+									"\nRequirements: " + ((SkillStorage) card).getRequirements().getQuantity() + " "																+
 									convertResTypeToString(((SkillStorage) card).getRequirements().getResourceType())															);
 				break;
 		}

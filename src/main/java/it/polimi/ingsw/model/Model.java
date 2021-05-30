@@ -309,7 +309,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	public ActionToken getNextActionToken()		/* This method un-flips the current flipped token, flips the next one and returns it */
 	{
 		boolean noFlippedTokens = true;
-		int flippedTokenPos = 0, tokenToFlipPos = 0;		/* Both are [0, 5] */
+		int flippedTokenPos = 0, tokenToFlipPos;		/* Both are [0, 5] */
 
 		for (int i = 0; i < actionTokens.size(); i++)		/* Checks if there is at least 1 flipped token. yes -> return the next one, no -> return 1 random */
 		{
@@ -324,7 +324,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		System.out.println("getNextActionToken: noFlippedTokens = " + noFlippedTokens + ", flippedTokenPos = " + flippedTokenPos);
 
 		if (noFlippedTokens)		/* If all goes well, this happens only at the first round */
-			tokenToFlipPos = ThreadLocalRandom.current().nextInt(0, actionTokens.size());
+			tokenToFlipPos = 0;		/* No need to use random, tokens are already shuffled in createActionTokens() */
 
 		else
 		{

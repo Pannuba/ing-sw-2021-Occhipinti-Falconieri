@@ -169,7 +169,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 		switch (input.nextLine().toUpperCase())
 		{
-			case "A":
+			case "A":		/* TODO: check if inactiveLeaders is empty */
 				activateLeader(inactiveLeaders);		/* Only pass cards that can be activated */
 				break;
 
@@ -249,7 +249,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		System.out.print("Insert the dev card area # you want to put the new card in (1/2/3) (Q = choose another action) ");
 		choice = input.nextLine();
 
-		if (!choice.equals("1") && !choice.equals("2") && choice.equals("3"))
+		if (!choice.equals("1") && !choice.equals("2") && !choice.equals("3"))
 		{
 			chooseAction();
 			return;
