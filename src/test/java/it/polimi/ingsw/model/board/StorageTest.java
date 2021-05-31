@@ -14,6 +14,7 @@ public class StorageTest
 	private Resource r2 = new Resource();
 	private Resource r3 = new Resource();
 	private Resource resourceToAdd = new Resource();
+	private Resource resourceToRemove = new Resource();
 	private Shelf[] shelves = new Shelf[3];
 
 
@@ -227,6 +228,73 @@ public class StorageTest
 		assertEquals("Error", 2, shelves[1].getShelfResourceQuantity());
 		assertEquals("Error", ResourceType.GREY, shelves[1].getShelfResourceType());
 	}
+
+	@Test
+	public void removeResource1()		/* remove from first shelf */
+	{
+		for (int i=0; i<3; i++)
+			shelves[i] = new Shelf(i+1);
+		r1.setQuantity(1);
+		r1.setResourceType(ResourceType.PURPLE);
+		r2.setQuantity(1);
+		r2.setResourceType(ResourceType.GREY);
+		r3.setQuantity(3);
+		r3.setResourceType(ResourceType.YELLOW);
+		shelves[0].setShelfResource(r1);
+		shelves[1].setShelfResource(r2);
+		shelves[2].setShelfResource(r3);
+		storage.setShelves(shelves);
+		resourceToRemove.setQuantity(1);
+		resourceToRemove.setResourceType(ResourceType.PURPLE);
+		assertEquals("Error", 1, storage.removeResource(resourceToRemove));
+		assertNull("Error", shelves[0].getShelfResourceType());
+		assertEquals("Error", 0, shelves[0].getShelfResourceQuantity());
+	}
+
+	@Test
+	public void removeResource2()		/* remove from second shelf */
+	{
+		for (int i=0; i<3; i++)
+			shelves[i] = new Shelf(i+1);
+		r1.setQuantity(1);
+		r1.setResourceType(ResourceType.PURPLE);
+		r2.setQuantity(2);
+		r2.setResourceType(ResourceType.GREY);
+		r3.setQuantity(3);
+		r3.setResourceType(ResourceType.YELLOW);
+		shelves[0].setShelfResource(r1);
+		shelves[1].setShelfResource(r2);
+		shelves[2].setShelfResource(r3);
+		storage.setShelves(shelves);
+		resourceToRemove.setQuantity(1);
+		resourceToRemove.setResourceType(ResourceType.GREY);
+		assertEquals("Error", 1, storage.removeResource(resourceToRemove));
+		assertEquals("Error", ResourceType.GREY, shelves[1].getShelfResourceType());
+		assertEquals("Error", 1, shelves[1].getShelfResourceQuantity());
+	}
+
+	@Test
+	public void removeResource3()		/* remove from third shelf */
+	{
+		for (int i=0; i<3; i++)
+			shelves[i] = new Shelf(i+1);
+		r1.setQuantity(1);
+		r1.setResourceType(ResourceType.PURPLE);
+		r2.setQuantity(1);
+		r2.setResourceType(ResourceType.GREY);
+		r3.setQuantity(3);
+		r3.setResourceType(ResourceType.YELLOW);
+		shelves[0].setShelfResource(r1);
+		shelves[1].setShelfResource(r2);
+		shelves[2].setShelfResource(r3);
+		storage.setShelves(shelves);
+		resourceToRemove.setQuantity(3);
+		resourceToRemove.setResourceType(ResourceType.YELLOW);
+		assertEquals("Error", 3, storage.removeResource(resourceToRemove));
+		assertNull("Error", shelves[2].getShelfResourceType());
+		assertEquals("Error", 0, shelves[2].getShelfResourceQuantity());
+	}
+
 
 	@Test
 	public void moveResources1()     /* destination shelf is not empty */

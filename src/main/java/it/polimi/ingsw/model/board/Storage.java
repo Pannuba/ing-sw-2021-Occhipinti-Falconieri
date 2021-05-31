@@ -166,19 +166,21 @@ public class Storage implements Serializable
 
 			else if (shelves[1].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[1].getShelfResourceQuantity() >= 1)
 			{
+				shelves[1].getShelfResource().setQuantity(shelves[1].getShelfResourceQuantity() - 1);
+
 				if (shelves[1].getShelfResourceQuantity() == 0)
 					shelves[1].getShelfResource().setResourceType(null);
 
-				shelves[1].getShelfResource().setQuantity(shelves[1].getShelfResourceQuantity() - 1);
 				removedResNum++;
 			}
 
 			else if (shelves[2].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[2].getShelfResourceQuantity() >= 1)
 			{
+				shelves[2].getShelfResource().setQuantity(shelves[2].getShelfResourceQuantity() - 1);
+
 				if (shelves[2].getShelfResourceQuantity() == 0)
 					shelves[2].getShelfResource().setResourceType(null);
 
-				shelves[2].getShelfResource().setQuantity(shelves[2].getShelfResourceQuantity() - 1);
 				removedResNum++;
 			}
 		}

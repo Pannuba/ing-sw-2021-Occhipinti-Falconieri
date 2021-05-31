@@ -67,7 +67,7 @@ public class DevCardAreaTest {
 	}
 
 	@Test
-	public void addDevCard()   /* Card to be added is not compatible with current dev card area */
+	public void addDevCard3()   /* Card to be added is not compatible with current dev card area */
 	{
 		devCardArea.setLayer(2);
 		card1.setLevel(2);
