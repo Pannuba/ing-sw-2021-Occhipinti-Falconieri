@@ -171,13 +171,22 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 		if (!resourcesToDiscard.isEmpty())
 		{
-			for (int i = 0; i < model.getNumPlayers(); i++)
+			if (model.getNumPlayers() == 1)		/* If singleplayer match, give Lorenzo #-discarded-resources points */
+				model.getTrack().setBlackPawn(model.getTrack().getBlackPawn() + resourcesToDiscard.size());
+
+			else								/* Otherwise give 1 faith point to everyone who's not the current user */
 			{
-				if (!model.getPlayerByID(i).getUsername().equals(username))		/* Give 1 faith point to everyone who's not the current user */
-					controller.updatePlayerPosition(i, 1);
+				for (int i = 0; i < model.getNumPlayers(); i++)
+				{
+					if (!model.getPlayerByID(i).getUsername().equals(username))
+					{
+						System.out.println("Giving " + username + " " + resourcesToDiscard.size() + " faithpoints");
+						controller.updatePlayerPosition(i, resourcesToDiscard.size());
+					}
+				}
 			}
 
-			model.discardResources(resourcesToDiscard.size(), username);
+			model.discardResources(resourcesToDiscard.size(), username);		/* Sends DiscardedResourcesMessage to everyone */
 		}
 
 		List<Resource> boughtResources = ResourceType.convertResTypeListToResList(resourcesToAdd);			/* B, B, G -> 2B, 1G */

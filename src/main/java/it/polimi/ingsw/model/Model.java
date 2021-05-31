@@ -220,7 +220,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		return points;
 	}
 
-	public void endMatch()
+	public void endMatch()		/* Singleplayer? */
 	{
 		String winnerName = "";
 		int winnerPoints = 0;
@@ -239,6 +239,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		}
 
 		/* Return winner and controller sends it, or add "boolean isMatchOver; String winner" to GameState and client checks? */
+		/* Better idea: send MatchOverMessage to everyone (notifyObservers) including a message of who won */
 	}
 
 	public Player getPlayerByUsername(String username)		/* 	NullPointerException because the usernames taken in ServerListener are discarded when a new model is created in Match */
