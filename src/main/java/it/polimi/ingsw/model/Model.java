@@ -179,11 +179,28 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		notifyObservers(new DiscardedResourcesMessage(discardedResNum, playerWhoDiscarded));
 	}
 
-	public boolean isMatchOver()
+	public boolean isMatchOver()		/* TODO: return string of why the match is over? "NO" otherwise */
 	{
-		for (int i = 0; i < numPlayers; i++)		/* Check for every player */
+		if (numPlayers == 1)				/* Special checks for singleplayer match */
 		{
-			if (track.getRedPawns().get(i) >= 24 || players.get(i).getDashboard().getTotalDevCardsNum() == 7)
+			List<List<DevCard>> devCardStacks = devCardsMarket.getDevCardStacks();
+			/* Match over if all "color" devcards are gone. wow */
+			if ((devCardStacks.get(0).isEmpty() && devCardStacks.get(1).isEmpty()  && devCardStacks.get(2).isEmpty())	||
+				(devCardStacks.get(3).isEmpty() && devCardStacks.get(4).isEmpty()  && devCardStacks.get(5).isEmpty())	||
+				(devCardStacks.get(6).isEmpty() && devCardStacks.get(7).isEmpty()  && devCardStacks.get(8).isEmpty())	||
+				(devCardStacks.get(9).isEmpty() && devCardStacks.get(10).isEmpty() && devCardStacks.get(11).isEmpty())	)
+					return true;
+
+			if (track.getBlackPawn() >= 24)
+				return true;
+		}
+
+		for (int i = 0; i < numPlayers; i++)        /* Check for every player */
+		{
+			if (track.getRedPawns().get(i) >= 24)
+				return true;
+
+			if (players.get(i).getDashboard().getTotalDevCardsNum() >= 7)
 				return true;
 		}
 
@@ -220,7 +237,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		return points;
 	}
 
-	public void endMatch()		/* Singleplayer? */
+	public void endMatch()		/* Pass reason why the match is over from isMatchOver */
 	{
 		String winnerName = "";
 		int winnerPoints = 0;

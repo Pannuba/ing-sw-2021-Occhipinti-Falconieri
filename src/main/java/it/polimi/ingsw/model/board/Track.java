@@ -75,6 +75,8 @@ public class Track implements Serializable
 
 		/* TODO: if we want to know which player triggered the vatican report, add a boolean to Player like didVaticanReport, and check in Model */
 
+		/* TODO: also check blackPawn */
+
 		return 0;
 	}
 
