@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.board.Track;
 import it.polimi.ingsw.model.cards.*;
 
 import it.polimi.ingsw.server.messages.DiscardedResourcesMessage;
+import it.polimi.ingsw.server.messages.MatchOverMessage;
 import it.polimi.ingsw.server.messages.VaticanReportMessage;
 import it.polimi.ingsw.util.XML_Serialization;
 
@@ -249,7 +250,6 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	{
 		String winnerName = "";
 		int winnerPoints = 0;
-		List<Integer> victoryPointsList = new ArrayList<>();
 
 		for (int i = 0; i < numPlayers; i++)		/* Calculate victoryPoints for every player */
 		{
@@ -262,9 +262,9 @@ public class Model extends Observable		/* Observed by the views to create the ne
 				winnerName = players.get(i).getUsername();
 			}
 		}
-
-		/* Return winner and controller sends it, or add "boolean isMatchOver; String winner" to GameState and client checks? */
-		/* Better idea: send MatchOverMessage to everyone (notifyObservers) including a message of who won */
+		/* Send MatchOverMessage to everyone (notifyObservers) including a message of who won */
+		setChanged();
+		notifyObservers(new MatchOverMessage(winnerName, players));
 	}
 
 	public Player getPlayerByUsername(String username)		/* 	NullPointerException because the usernames taken in ServerListener are discarded when a new model is created in Match */

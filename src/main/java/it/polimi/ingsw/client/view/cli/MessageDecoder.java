@@ -75,15 +75,9 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 		PrintMethods.printActionToken(token);
 	}
 
-	public void matchOver(String winner, List<Pair<String, Integer>> pointsTable)
+	public void matchOver(String winner, List<Player> players)
 	{
-		System.out.println("Match over! The winner is " + winner);
-
-		for (int i = 0; i < pointsTable.size(); i++)
-			System.out.println(pointsTable.get(i).getObj1() + ": " + pointsTable.get(i).getObj2() + " points");
-
-		//action.quit? back to Main?
-
+		action.matchOver(winner, players);
 	}
 
 	public void singlePlayerGameOver(String message)

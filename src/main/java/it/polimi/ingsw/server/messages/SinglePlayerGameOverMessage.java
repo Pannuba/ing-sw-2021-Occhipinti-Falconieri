@@ -21,6 +21,6 @@ public class SinglePlayerGameOverMessage implements Message, Serializable
 	@Override
 	public void process(MessageDecoder decoder)
 	{
-		//decoder.singlePlayerGameOver(message);
+		decoder.singlePlayerGameOver(message);
 	}
 }

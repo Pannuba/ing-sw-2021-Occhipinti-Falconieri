@@ -6,12 +6,15 @@ import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.model.cards.SkillMarble;
 import it.polimi.ingsw.model.cards.SkillProduction;
+import it.polimi.ingsw.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 /* Make the same file with the same action but GUI-style */
+
+/* Package with a class for each action? This file is pretty big */
 
 public class ActionExecutor		/* Has methods that perform actions such as buying resources, to avoid cluttering the CLI. Interface? */
 {
@@ -437,7 +440,39 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 	public void singlePlayerGameOver(String message)		/* When the player has lost, print the game over message and close the client */
 	{
 		System.out.println(message);
-		networkHandler.stop();
-		new CLI(cli.getInput());		/* Test this */
+
+		System.out.print("Do you want to play again? (Y/N) ");			/* TODO: test this */
+
+		if (input.nextLine().equalsIgnoreCase("Y"))
+		{
+			networkHandler.stop();
+			new CLI(cli.getInput());
+		}
+
+		else
+			networkHandler.shutdown();
+	}
+
+	public void matchOver(String winner, List<Player> players)
+	{
+		if (cli.getUsername().equals(winner))
+			System.out.print("You win! ");
+
+		else
+			System.out.print("Game over! The winner is " + winner);
+
+		for (int i = 0; i < players.size(); i++)
+			System.out.println(players.get(i).getUsername() + ": " + players.get(i).getVictoryPoints() + " points");
+
+		System.out.print("Do you want to play again? (Y/N) ");
+
+		if (input.nextLine().equalsIgnoreCase("Y"))
+		{
+			networkHandler.stop();
+			new CLI(cli.getInput());
+		}
+
+		else
+			networkHandler.shutdown();
 	}
 }
