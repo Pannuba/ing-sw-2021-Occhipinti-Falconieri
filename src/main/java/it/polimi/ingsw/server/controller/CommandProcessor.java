@@ -113,6 +113,15 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 		List<MarbleType> boughtMarbles = new ArrayList<>();
 		List<ResourceType> resourcesToAddToStorage = new ArrayList<>();		/* Should either be a hashmap or a list of resourcetypes */
 
+		List<ResourceType> whiteMarbleTypes = model.getPlayerByUsername(username).getWhiteMarbleTypes();
+		ResourceType whiteMarbleRes = null;
+
+		if (whiteMarbleTypes.size() == 1)
+			whiteMarbleRes = whiteMarbleTypes.get(0);
+
+		else if (whiteMarbleTypes.size() > 1)
+			whiteMarbleRes = ResourceType.convertStringToResType(command.get(3));
+
 		if (command.get(1).equals("ROW"))
 			boughtMarbles = model.getMarblesMarket().buyMarblesRow(Integer.parseInt(command.get(2)) - 1);		/* - 1 because 0-indexed, [0, 1, 2] */
 
@@ -126,15 +135,8 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 			else if (boughtMarbles.get(i) == MarbleType.WHITE)
 			{
-				List<ResourceType> whiteMarbleTypes = model.getPlayerByUsername(username).getWhiteMarbleTypes();    /* or model.getWhiteMarbleTypes(username */
-
-				if (whiteMarbleTypes.size() == 1)		/* If there's only 1 active SkillMarble */
-					resourcesToAddToStorage.add(whiteMarbleTypes.get(0));
-
-				else if (whiteMarbleTypes.size() > 1)
-				{
-					/* Ask client which resourcetype they want to pick to convert white marbles */
-				}
+				if (whiteMarbleRes != null)
+					resourcesToAddToStorage.add(whiteMarbleRes);
 
 				else
 					System.out.println(username + "has no active SkillMarble cards!");

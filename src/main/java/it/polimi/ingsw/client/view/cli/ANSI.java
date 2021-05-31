@@ -13,7 +13,7 @@ public enum ANSI	       /* https://gist.github.com/fnky/458719343aabd01cfb17a3a4
 	RESET("\u001B[0m"),
 
 	MARBLE("\u2B24"),		/* ⬤ */
-	RESOURCE("\u2B1B"),		/* ⬛ */
+	RESOURCE("\u25FC"),		/* ◼ */
 	EMPTY("\u25A1");			/* □ */
 
 	private final String escape;
@@ -21,11 +21,6 @@ public enum ANSI	       /* https://gist.github.com/fnky/458719343aabd01cfb17a3a4
 	ANSI(String escape)
 	{
 		this.escape = escape;
-	}
-
-	public String getEscape()
-	{
-		return escape;
 	}
 
 	@Override

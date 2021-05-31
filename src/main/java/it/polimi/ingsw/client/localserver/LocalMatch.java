@@ -16,7 +16,7 @@ public class LocalMatch implements Runnable
 	private final List<ClientHandler> views;
 	private final Model model;
 
-	public LocalMatch(List<Player> players, List<ClientHandler> views)		/* TODO: use Player instead of a List<Player> */
+	public LocalMatch(List<Player> players, List<ClientHandler> views)
 	{
 		this.views = views;
 

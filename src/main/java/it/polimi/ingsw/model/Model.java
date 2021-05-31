@@ -166,6 +166,8 @@ public class Model extends Observable		/* Observed by the views to create the ne
 					System.out.println("vaticanReport: error");
 			}
 		}
+
+		/* TODO: setChanged(); notifyObservers(new VaticanReportMessage(box, num??) */
 	}
 
 	public boolean isMatchOver()

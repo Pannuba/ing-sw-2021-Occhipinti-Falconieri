@@ -48,6 +48,19 @@ public class Player implements Serializable
 		return whiteMarbleResources;
 	}
 
+	public List<SkillMarble> getMarbleLeaders()		/* Used by CLI to check if the player has 2 active SkillMarbles */
+	{
+		List<SkillMarble> marbleLeaders = new ArrayList<>();
+
+		for (int i = 0; i < leaderCards.size(); i++)
+		{
+			if (leaderCards.get(i).isActive() && leaderCards.get(i) instanceof SkillMarble)
+				marbleLeaders.add(((SkillMarble)leaderCards.get(i)));
+		}
+
+		return marbleLeaders;
+	}
+
 	public SkillStorage getStorageLeader(ResourceType resType)		/* Returns the active SkillStorage leadercard with the passed ResourceType */
 	{
 		for (int i = 0; i < leaderCards.size(); i++)

@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.view.cli;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.cards.LeaderCard;
+import it.polimi.ingsw.model.cards.SkillMarble;
 import it.polimi.ingsw.model.cards.SkillProduction;
 
 import java.util.ArrayList;
@@ -122,7 +123,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 			case 2:
 				System.out.print("Choose 1 starting resource (B)lue, (G)rey, (Y)ellow, (P)urple: ");
 				chosenResources += input.nextLine();
-				initialFaithPoints = "1";
+				initialFaithPoints = "1";			/* Add server-side check? */
 				break;
 
 			case 3:
@@ -205,7 +206,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 	public void buyResources()
 	{
-		String rowOrCol = "", rowOrColNum = "", choice;
+		String rowOrCol = "", rowOrColNum = "", whiteMarbleRes = "", choice;
 
 		System.out.print("This is the current marbles market:\n\n");
 		PrintMethods.printMarblesMarket(cli.getGameState().getCurrMarblesMarket());
@@ -232,9 +233,18 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 				return;		/* Without return it still sends a command after the recursion(?) which leads to chaos */
 		}
 
+		List<SkillMarble> marbleLeaders = cli.getGameState().getPlayerByName(cli.getUsername()).getMarbleLeaders();
+
+		if (marbleLeaders.size() > 1)
+		{
+			System.out.print("You have " + marbleLeaders.size() + " leaders with a white marble skill!\nInsert the resource type you want to convert (G/Y/B/P): ");
+			whiteMarbleRes = input.nextLine();
+		}
+
 		command.add("BUY_RESOURCES");
 		command.add(rowOrCol);
 		command.add(rowOrColNum);
+		command.add(whiteMarbleRes);
 		networkHandler.send(command);
 		command.clear();
 	}

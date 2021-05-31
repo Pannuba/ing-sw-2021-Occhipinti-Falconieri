@@ -25,7 +25,7 @@ public class Main		/* Starting point from which the user chooses to start the CL
 		switch (choice)
 		{
 			case "1":
-				new CLI();
+				new CLI(input);
 				break;
 
 			case "2":

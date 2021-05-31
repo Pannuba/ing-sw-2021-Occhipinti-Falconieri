@@ -16,9 +16,9 @@ public class CLI extends Observable implements Observer
 	private GameState gameState;
 	private String username;
 
-	public CLI()
+	public CLI(Scanner input)
 	{
-		input = new Scanner(System.in);
+		this.input = input;
 
 		gameStart();
 
