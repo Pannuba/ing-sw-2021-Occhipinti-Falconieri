@@ -59,6 +59,11 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 		PrintMethods.printDevCard(boughtCard);
 	}
 
+	public void getDiscardedResources(int discardedResNum, String playerWhoDiscarded)
+	{
+		action.discardedResources(discardedResNum, playerWhoDiscarded);
+	}
+
 	public void vaticanReport(int popeBoxNum, List<Player> players)
 	{
 		action.vaticanReport(popeBoxNum, players);

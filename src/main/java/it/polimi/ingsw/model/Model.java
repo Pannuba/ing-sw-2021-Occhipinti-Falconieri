@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.board.Track;
 import it.polimi.ingsw.model.cards.*;
 
+import it.polimi.ingsw.server.messages.DiscardedResourcesMessage;
 import it.polimi.ingsw.server.messages.VaticanReportMessage;
 import it.polimi.ingsw.util.XML_Serialization;
 
@@ -170,6 +171,12 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 		setChanged();
 		notifyObservers(new VaticanReportMessage(popeBoxNumber, players));
+	}
+
+	public void discardResources(int discardedResNum, String playerWhoDiscarded)
+	{
+		setChanged();
+		notifyObservers(new DiscardedResourcesMessage(discardedResNum, playerWhoDiscarded));
 	}
 
 	public boolean isMatchOver()

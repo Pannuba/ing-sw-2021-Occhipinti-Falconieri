@@ -424,4 +424,13 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 				System.out.println("This should never ever ever happen");
 		}
 	}
+
+	public void discardedResources(int discardedResNum, String playerWhoDiscarded)
+	{
+		if (!playerWhoDiscarded.equals(cli.getUsername()))
+			System.out.println(playerWhoDiscarded + " discarded " + discardedResNum + " resources, so you gained " + discardedResNum + " faith points!");
+
+		else
+			System.out.println(discardedResNum + " resources couldn't fit in the storage, so they have been discarded");
+	}
 }

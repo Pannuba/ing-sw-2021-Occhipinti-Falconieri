@@ -177,7 +177,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 					controller.updatePlayerPosition(i, 1);
 			}
 
-			//model.discardResources(resourcesToDiscard);        /* TODO: sends a DiscardedResourcesMessage to everyone */
+			model.discardResources(resourcesToDiscard, username);
 		}
 
 		List<Resource> boughtResources = ResourceType.convertResTypeListToResList(resourcesToAdd);			/* B, B, G -> 2B, 1G */
