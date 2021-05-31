@@ -1,10 +1,13 @@
 package it.polimi.ingsw.client.view.cli;
 
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.cards.ActionToken;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.util.Pair;
+
+/* Call an action everytime to allow for an abstract class for CLI and GUI? CLIAction and GUIAction */
 
 import java.util.List;
 
@@ -54,6 +57,11 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 	{
 		System.out.print("Received the following devcard:\n");
 		PrintMethods.printDevCard(boughtCard);
+	}
+
+	public void vaticanReport(int popeBoxNum, List<Player> players)
+	{
+		action.vaticanReport(popeBoxNum, players);
 	}
 
 	public void getActionToken(ActionToken token)

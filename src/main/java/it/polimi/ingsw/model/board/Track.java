@@ -73,6 +73,8 @@ public class Track implements Serializable
 			if (redPawns.get(i) >= 8  && !popeTokens[0].isDiscarded())	return 8;
 		}
 
+		/* TODO: if we want to know which player triggered the vatican report, add a boolean to Player like didVaticanReport, and check in Model */
+
 		return 0;
 	}
 

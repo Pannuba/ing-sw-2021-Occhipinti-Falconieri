@@ -119,7 +119,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 		if (whiteMarbleTypes.size() == 1)
 			whiteMarbleRes = whiteMarbleTypes.get(0);
 
-		else if (whiteMarbleTypes.size() > 1)
+		if (whiteMarbleTypes.size() > 1)
 			whiteMarbleRes = ResourceType.convertStringToResType(command.get(3));
 
 		if (command.get(1).equals("ROW"))

@@ -105,7 +105,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 		int vaticanReportNum = model.getTrack().checkVaticanReport();
 
 		if (vaticanReportNum != 0)
-			model.vaticanReport(vaticanReportNum);	/* Clients need to check if a vatican report has happened */
+			model.vaticanReport(vaticanReportNum);
 
 		if (model.isMatchOver())		/* Clients perform a check. If victorypoints != 0, the match has ended */
 			model.endMatch();

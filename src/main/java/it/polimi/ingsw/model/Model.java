@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.board.Track;
 import it.polimi.ingsw.model.cards.*;
 
+import it.polimi.ingsw.server.messages.VaticanReportMessage;
 import it.polimi.ingsw.util.XML_Serialization;
 
 import java.io.IOException;
@@ -118,7 +119,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		Collections.shuffle(actionTokens);
 	}
 
-	public void vaticanReport(int popeBoxNumber)		/* Called when a player reaches a pope box. Called by match? */
+	public void vaticanReport(int popeBoxNumber)		/* Called when a player reaches a pope box. Put in controller? */
 	{
 		System.out.println("Calling vatican report for pope box " + popeBoxNumber);
 
@@ -167,7 +168,8 @@ public class Model extends Observable		/* Observed by the views to create the ne
 			}
 		}
 
-		/* TODO: setChanged(); notifyObservers(new VaticanReportMessage(box, num??) */
+		setChanged();
+		notifyObservers(new VaticanReportMessage(popeBoxNumber, players));
 	}
 
 	public boolean isMatchOver()
