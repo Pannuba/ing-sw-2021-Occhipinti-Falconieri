@@ -209,7 +209,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 	public void buyResources()
 	{
-		String rowOrCol = "", rowOrColNum = "", whiteMarbleRes = "", choice;
+		String rowOrCol, rowOrColNum, whiteMarbleRes = "", choice;
 
 		System.out.print("This is the current marbles market:\n\n");
 		PrintMethods.printMarblesMarket(cli.getGameState().getCurrMarblesMarket());
@@ -305,7 +305,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		{
 			case "1":
 
-				String resourceToConvert = "", resourceToMake = "";
+				String resourceToConvert, resourceToMake;
 				System.out.print("Insert the resource type you want to convert (B/G/Y/P): ");
 				resourceToConvert = input.nextLine();
 				System.out.print("Insert the resource type you want to make (B/G/Y/P): ");
@@ -333,7 +333,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 				List<LeaderCard> leaderCards = cli.getGameState().getPlayerByName(cli.getUsername()).getLeaderCards();
 				List<LeaderCard> activeCardsWithProdSkill = new ArrayList<>();
-				String chosenCardNum = "", resourceToMakeLeader = "";
+				String chosenCardNum, resourceToMakeLeader;
 
 				for (int i = 0; i < leaderCards.size(); i++)
 				{
@@ -432,5 +432,12 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 		else
 			System.out.println(discardedResNum + " resources couldn't fit in the storage, so they have been discarded");
+	}
+
+	public void singlePlayerGameOver(String message)		/* When the player has lost, print the game over message and close the client */
+	{
+		System.out.println(message);
+		networkHandler.stop();
+		new CLI(cli.getInput());		/* Test this */
 	}
 }

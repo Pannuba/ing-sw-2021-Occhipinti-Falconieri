@@ -91,7 +91,7 @@ public class NetworkHandler extends Observable implements Runnable		/* Observed 
 		}
 	}
 
-	public void shutdown()
+	public void stop()
 	{
 		System.out.println("Shutting down...");
 
@@ -110,7 +110,11 @@ public class NetworkHandler extends Observable implements Runnable		/* Observed 
 		{
 			e.printStackTrace();
 		}
+	}
 
+	public void shutdown()
+	{
+		stop();
 		System.exit(0);
 	}
 }

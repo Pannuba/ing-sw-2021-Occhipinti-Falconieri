@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.board.Storage;
 import it.polimi.ingsw.model.board.Vault;
 import it.polimi.ingsw.model.cards.*;
 import it.polimi.ingsw.server.messages.ActionTokenMessage;
+import it.polimi.ingsw.server.messages.SinglePlayerGameOverMessage;
 import it.polimi.ingsw.server.view.ClientHandler;
 
 import java.util.*;
@@ -100,7 +101,16 @@ public class Controller implements Observer			/* Observes view to get commands..
 	private void postRoundChecks()		/* What should be in model and controller? */
 	{
 		if (model.getNumPlayers() == 1)
-			flipActionToken();		/* Not in CommandProcessor because it's not a command sent by the client */
+		{
+			if (model.isSinglePlayerMatchLost() != null)		/* If the singleplayer has lost the game */
+			{
+				view.send(new SinglePlayerGameOverMessage(model.isSinglePlayerMatchLost()));
+				return;		/* Don't want to execute the other functions below if the match is over */
+			}
+
+			else
+				flipActionToken();        /* Not in CommandProcessor because it's not a command sent by the client */
+		}
 
 		int vaticanReportNum = model.getTrack().checkVaticanReport();
 

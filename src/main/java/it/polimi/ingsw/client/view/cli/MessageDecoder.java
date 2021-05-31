@@ -85,4 +85,9 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 		//action.quit? back to Main?
 
 	}
+
+	public void singlePlayerGameOver(String message)
+	{
+		action.singlePlayerGameOver(message);
+	}
 }

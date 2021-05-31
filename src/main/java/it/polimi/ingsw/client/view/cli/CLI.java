@@ -73,7 +73,7 @@ public class CLI extends Observable implements Observer
 		if (obj instanceof Message)
 			((Message) obj).process(messageDecoder);		/* Calls method in cli specified in the message */
 
-		if (obj instanceof GameState)		/* TODO: check if match is over, or make server send "match over" message */
+		if (obj instanceof GameState)
 		{
 			this.gameState = (GameState) obj;		/* Gamestate is needed in game loop, not during setup */
 			//System.out.println(gameState.getCurrPlayers().get(0).getUsername() + " is active? " + gameState.getCurrPlayers().get(0).isMyTurn());

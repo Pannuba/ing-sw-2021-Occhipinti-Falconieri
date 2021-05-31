@@ -179,22 +179,8 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		notifyObservers(new DiscardedResourcesMessage(discardedResNum, playerWhoDiscarded));
 	}
 
-	public boolean isMatchOver()		/* TODO: return string of why the match is over? "NO" otherwise */
+	public boolean isMatchOver()
 	{
-		if (numPlayers == 1)				/* Special checks for singleplayer match */
-		{
-			List<List<DevCard>> devCardStacks = devCardsMarket.getDevCardStacks();
-			/* Match over if all "color" devcards are gone. wow */
-			if ((devCardStacks.get(0).isEmpty() && devCardStacks.get(1).isEmpty()  && devCardStacks.get(2).isEmpty())	||
-				(devCardStacks.get(3).isEmpty() && devCardStacks.get(4).isEmpty()  && devCardStacks.get(5).isEmpty())	||
-				(devCardStacks.get(6).isEmpty() && devCardStacks.get(7).isEmpty()  && devCardStacks.get(8).isEmpty())	||
-				(devCardStacks.get(9).isEmpty() && devCardStacks.get(10).isEmpty() && devCardStacks.get(11).isEmpty())	)
-					return true;
-
-			if (track.getBlackPawn() >= 24)
-				return true;
-		}
-
 		for (int i = 0; i < numPlayers; i++)        /* Check for every player */
 		{
 			if (track.getRedPawns().get(i) >= 24)
@@ -205,6 +191,28 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		}
 
 		return false;
+	}
+
+	public String isSinglePlayerMatchLost()		/* Returns a string if the player has lost, otherwise null */
+	{
+		List<List<DevCard>> devCardStacks = devCardsMarket.getDevCardStacks();
+		/* Match over if all "color" devcards are gone. wow */
+		if ((devCardStacks.get(0).isEmpty() && devCardStacks.get(1).isEmpty()  && devCardStacks.get(2).isEmpty()))
+			return "You lose! There are no more green dev cards in the market.";
+
+		if ((devCardStacks.get(3).isEmpty() && devCardStacks.get(4).isEmpty()  && devCardStacks.get(5).isEmpty()))
+			return "You lose! There are no more blue dev cards in the market.";
+
+		if ((devCardStacks.get(6).isEmpty() && devCardStacks.get(7).isEmpty()  && devCardStacks.get(8).isEmpty()))
+			return "You lose! There are no more purple dev cards in the market.";
+
+		if ((devCardStacks.get(9).isEmpty() && devCardStacks.get(10).isEmpty() && devCardStacks.get(11).isEmpty()))
+			return "You lose! There are no more yellow dev cards in the market.";
+
+		if (track.getBlackPawn() >= 24)
+			return "You lose! Lorenzo has reached the end of the Faith Track.";
+
+		return null;
 	}
 
 	public int calculatePoints(Player player)		/* Gets total points for a player at the end of the match */
