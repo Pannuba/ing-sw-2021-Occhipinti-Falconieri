@@ -84,8 +84,11 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 	{
 		System.out.println("Dev cards market:\n\n");
 
-		for (int i = 0; i < market.getDevCardStacks().size(); i++)
+		for (int i = 0; i < market.getDevCardStacks().size(); i++)		/* Show "is empty" if size = 0? */
+		{
+			System.out.println("Dev card stack #" + (i + 1) + " has " + market.getDevCardStacks().get(i).size() + " cards");
 			printDevCard(market.getDevCardStacks().get(i).get(0));
+		}
 
 	}
 
@@ -144,9 +147,9 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 	{
 		String topShelf = "", middleShelf = "", bottomShelf = "";
 
-		String topShelfResource    = convertResTypeToString(storage.getShelves()[0].getShelfResource().getResourceType());
-		String middleShelfResource = convertResTypeToString(storage.getShelves()[1].getShelfResource().getResourceType());
-		String bottomShelfResource = convertResTypeToString(storage.getShelves()[2].getShelfResource().getResourceType());
+		String topShelfResource    = convertResTypeToString(storage.getShelves()[0].getShelfResourceType());
+		String middleShelfResource = convertResTypeToString(storage.getShelves()[1].getShelfResourceType());
+		String bottomShelfResource = convertResTypeToString(storage.getShelves()[2].getShelfResourceType());
 
 		switch (storage.getShelves()[0].getShelfResource().getQuantity())
 		{
@@ -209,7 +212,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 		else
 		{
-			for (int i = 0; i < 3; i++)		/* There are always 3 devcardareas, no more, no less */
+			for (int i = 0; i < devCardAreas.length; i++)
 			{
 				System.out.println("Dev card area " + (i + 1) + ":");
 
