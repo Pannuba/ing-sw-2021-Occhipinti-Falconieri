@@ -85,12 +85,10 @@ public class Storage implements Serializable
 		}
 	}
 
-	/* FIXME: adds what's in shelf[0] in shelf[2] */
-
-	public void addResourceSmart(ResourceType resourceToAdd)	/* Adds a resource without having to specify the shelf number. Checks the smaller shelf first */
-	{														/* TODO: return resources that can't be added? */
-
+	public ResourceType addResourceSmart(ResourceType resourceToAdd)	/* Adds a resource without having to specify the shelf number. Checks the smaller shelf first */
+	{
 		System.out.println("addResoruceSmart: adding " + resourceToAdd);
+		ResourceType excessResource = null;
 
 		if	(shelves[2].isEmpty() && shelves[0].getShelfResourceType() == resourceToAdd)
 		{
@@ -144,7 +142,12 @@ public class Storage implements Serializable
 		}
 
 		else
+		{
 			System.out.println("addResourceSmart: error");
+			excessResource = resourceToAdd;
+		}
+
+		return excessResource;
 	}
 
 	public int removeResource(Resource resourceToRemove)			/* Returns the number of removed resources. [4, YELLOW] */

@@ -120,6 +120,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 		{
 			int requiredResAmount = 0;
 			requiredResAmount += storage.findResourceByType(requirements.get(i).getResourceType());
+			/* TODO: add SkillStorage!! */
 			requiredResAmount += vault.getResourceAmounts().get(requirements.get(i).getResourceType());
 
 			if (requiredResAmount < requirements.get(i).getQuantity())		/* If only 1 resource (type and quantity) isn't satisfied, return false */
@@ -129,7 +130,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 		return true;
 	}
 
-	public void spendResources(List<Resource> resourcesToSpend)
+	public void spendResources(List<Resource> resourcesToSpend)		/* Only called when a player has enough resources */
 	{
 		int reqAmount = 0;
 		ResourceType reqType;

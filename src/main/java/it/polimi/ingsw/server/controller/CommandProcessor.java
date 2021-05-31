@@ -111,7 +111,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 	{
 		isFailed = false;		/* How can this action fail? When resources don't fit? */
 		List<MarbleType> boughtMarbles = new ArrayList<>();
-		List<ResourceType> resourcesToAddToStorage = new ArrayList<>();		/* Should either be a hashmap or a list of resourcetypes */
+		List<ResourceType> resourcesToAdd = new ArrayList<>();		/* Should either be a hashmap or a list of resourcetypes */
 
 		List<ResourceType> whiteMarbleTypes = model.getPlayerByUsername(username).getWhiteMarbleTypes();
 		ResourceType whiteMarbleRes = null;
@@ -130,37 +130,58 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 		for (int i = 0; i < boughtMarbles.size(); i++)
 		{
-			if (boughtMarbles.get(i) == MarbleType.RED)
+			if (boughtMarbles.get(i) == MarbleType.RED)		/* TODO: tell player they bought red marbles */
 				controller.updatePlayerPosition(model.getPlayerByUsername(username).getId(), 1);
 
 			else if (boughtMarbles.get(i) == MarbleType.WHITE)
 			{
 				if (whiteMarbleRes != null)
-					resourcesToAddToStorage.add(whiteMarbleRes);
+					resourcesToAdd.add(whiteMarbleRes);
 
 				else
 					System.out.println(username + "has no active SkillMarble cards!");
 			}
 
 			else
-				resourcesToAddToStorage.add(ResourceType.convertMarbleToResType(boughtMarbles.get(i)));
+				resourcesToAdd.add(ResourceType.convertMarbleToResType(boughtMarbles.get(i)));
 		}
 
-		List<Resource> boughtResourcesList = ResourceType.convertResTypeListToResList(resourcesToAddToStorage);			/* B, B, G -> 2B, 1G */
+		List<ResourceType> resourcesToDiscard = new ArrayList<>();
 
-		for (int i = 0; i < resourcesToAddToStorage.size(); i++)
+		for (int i = 0; i < resourcesToAdd.size(); i++)
 		{																/* Gets the storageLeader compatible with the resource to add */
-			SkillStorage storageLeader = model.getPlayerByUsername(username).getStorageLeader(resourcesToAddToStorage.get(i));
+			SkillStorage storageLeader = model.getPlayerByUsername(username).getStorageLeader(resourcesToAdd.get(i));
 
 			if (storageLeader != null && !storageLeader.getAdditionalStorage().isFull())				/* If possible, add the resources to storage leaders */
-				model.getPlayerByUsername(username).getStorageLeader(resourcesToAddToStorage.get(i)).addOneResource();
+				model.getPlayerByUsername(username).getStorageLeader(resourcesToAdd.get(i)).addOneResource();
 
 			else																						/* Otherwise add them to storage */
-				model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(resourcesToAddToStorage.get(i));
+				resourcesToDiscard.add(model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(resourcesToAdd.get(i)));
+				/* Adds the return value of addResourceSmart to resourcesToAdd */
 		}
 
-		controller.getView().send(new BoughtResourcesMessage(boughtResourcesList));		/* Sends a list of resources to the client */
-		/* TODO: ask player to discard resources if they don't fit in the storage */
+		for (int i = 0; i < resourcesToDiscard.size(); i++)		/* Remove null elements from resourcesToDiscard */
+		{
+			if (resourcesToDiscard.get(i) == null)
+			{
+				resourcesToDiscard.remove(i);
+				i--;
+			}
+		}
+
+		if (!resourcesToDiscard.isEmpty())
+		{
+			for (int i = 0; i < model.getNumPlayers(); i++)
+			{
+				if (!model.getPlayerByID(i).getUsername().equals(username))		/* Give 1 faith point to everyone who's not the current user */
+					controller.updatePlayerPosition(i, 1);
+			}
+
+			//model.discardResources(resourcesToDiscard);        /* TODO: sends a DiscardedResourcesMessage to everyone */
+		}
+
+		List<Resource> boughtResources = ResourceType.convertResTypeListToResList(resourcesToAdd);			/* B, B, G -> 2B, 1G */
+		controller.getView().send(new BoughtResourcesMessage(boughtResources));		/* Sends a list of resources to the client */
 	}
 
 	public void buyDevCard(List<String> command, String username)
