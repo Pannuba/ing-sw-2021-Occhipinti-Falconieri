@@ -19,7 +19,7 @@ public class DevCardsMarketTest {
 		assertEquals("Error", card, devCardsMarket.buyCardFromMarket(27));
 		card = devCardsMarket.getDevCardByNumber(30);
 		assertEquals("Error", card, devCardsMarket.buyCardFromMarket(30));
-		assertEquals("Error", null, devCardsMarket.getDevCardByNumber(27));  /* check that the card has really been removed */
-		assertEquals("Error", null, devCardsMarket.getDevCardByNumber(30));
+		assertNull("Error", devCardsMarket.getDevCardByNumber(27));				/* check that the card has really been removed */
+		assertNull("Error", devCardsMarket.getDevCardByNumber(30));
 	}
 }

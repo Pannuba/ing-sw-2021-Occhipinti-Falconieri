@@ -68,6 +68,8 @@ public class ModelTest {
 		assertTrue("Error", track.getPopeTokens()[0].isDiscarded());
 		assertFalse("Error", players.get(0).getPopeTokens()[0].isActive());
 		assertTrue("Error", players.get(1).getPopeTokens()[0].isActive());
+		assertTrue("Error", players.get(0).getPopeTokens()[0].isDiscarded());
+		assertFalse("Error", players.get(1).getPopeTokens()[0].isDiscarded());
 	}
 
 	@Test
@@ -101,6 +103,10 @@ public class ModelTest {
 		assertTrue("Error", players.get(1).getPopeTokens()[0].isActive());
 		assertFalse("Error", players.get(2).getPopeTokens()[0].isActive());
 		assertFalse("Error", players.get(3).getPopeTokens()[0].isActive());
+		assertFalse("Error", players.get(0).getPopeTokens()[0].isDiscarded());
+		assertFalse("Error", players.get(1).getPopeTokens()[0].isDiscarded());
+		assertTrue("Error", players.get(2).getPopeTokens()[0].isDiscarded());
+		assertTrue("Error", players.get(3).getPopeTokens()[0].isDiscarded());
 	}
 
 	@Test
@@ -124,6 +130,8 @@ public class ModelTest {
 		assertTrue("Error", track.getPopeTokens()[1].isDiscarded());
 		assertTrue("Error", players.get(0).getPopeTokens()[1].isActive());
 		assertTrue("Error", players.get(1).getPopeTokens()[1].isActive());
+		assertFalse("Error", players.get(0).getPopeTokens()[1].isDiscarded());
+		assertFalse("Error", players.get(1).getPopeTokens()[1].isDiscarded());
 	}
 
 	@Test
@@ -147,6 +155,8 @@ public class ModelTest {
 		assertTrue("Error", track.getPopeTokens()[2].isDiscarded());
 		assertFalse("Error", players.get(0).getPopeTokens()[2].isActive());
 		assertTrue("Error", players.get(1).getPopeTokens()[2].isActive());
+		assertTrue("Error", players.get(0).getPopeTokens()[2].isDiscarded());
+		assertFalse("Error", players.get(1).getPopeTokens()[2].isDiscarded());
 	}
 
 	@Test

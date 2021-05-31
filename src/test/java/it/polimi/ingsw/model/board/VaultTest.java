@@ -113,11 +113,12 @@ public class VaultTest {
 	public void getTotalResources()
 	{
 		vault = new Vault();
-		vault.setResourceAmounts(resourceAmounts);
+		resourceAmounts = new HashMap<>();
 		resourceAmounts.put(ResourceType.BLUE,	 7);
 		resourceAmounts.put(ResourceType.GREY,	10);
 		resourceAmounts.put(ResourceType.YELLOW, 3);
 		resourceAmounts.put(ResourceType.PURPLE, 6);
+		vault.setResourceAmounts(resourceAmounts);
 		assertEquals("Error", 26, vault.getTotalResources());
 	}
 }
