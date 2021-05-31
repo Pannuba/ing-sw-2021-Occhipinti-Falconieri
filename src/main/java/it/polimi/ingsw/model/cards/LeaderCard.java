@@ -78,6 +78,7 @@ public abstract class LeaderCard implements Serializable		/* Can't do new Leader
 
 				int reqResourceQuantity = 0;
 				reqResourceQuantity += storage.findResourceByType(storageRequirements.getResourceType());
+				/* TODO: add existing SkillStorage? */
 				reqResourceQuantity += vault.getResourceAmounts().get(storageRequirements.getResourceType());
 
 				if (reqResourceQuantity >= storageRequirements.getQuantity())

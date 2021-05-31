@@ -42,12 +42,12 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 		{
 			try
 			{
-				System.out.println(username + " waiting for message from client");
+				//System.out.println(username + " waiting for message from client");
 				inputObj = ois.readObject();		/* Throws SocketException: Socket closed when shutting down server */
 
 				if (!(inputObj instanceof Ping))		/* Don't care about pings */
 				{
-					System.out.println("Received " + inputObj + " from " + username);		/* Prints the command */
+					//System.out.println("Received " + inputObj + " from " + username);		/* Prints the command */
 					setChanged();
 					notifyObservers(inputObj);		/* Sends command to controller */
 				}

@@ -90,52 +90,52 @@ public class Storage implements Serializable
 		System.out.println("addResoruceSmart: adding " + resourceToAdd);
 		ResourceType excessResource = null;
 
-		if	(shelves[2].isEmpty() && shelves[0].getShelfResourceType() == resourceToAdd)
+		if	(shelves[2].isEmpty() && shelves[0].getShelfResourceType() == resourceToAdd && shelves[1].getShelfResourceType() != resourceToAdd)
 		{
 			System.out.println("A");
 			moveResources(1, 3);
 			addResource(resourceToAdd, 3);
 		}
 
-		else if (shelves[2].isEmpty() && shelves[1].getShelfResourceType() == resourceToAdd)
+		else if (shelves[2].isEmpty() && shelves[1].getShelfResourceType() == resourceToAdd && shelves[0].getShelfResourceType() != resourceToAdd)
 		{
 			System.out.println("B");
 			moveResources(2, 3);
 			addResource(resourceToAdd, 3);
 		}
 
-		else if (shelves[2].isEmpty())
+		else if (shelves[2].isEmpty() && shelves[1].getShelfResourceType() != resourceToAdd && shelves[0].getShelfResourceType() != resourceToAdd)
 		{
 			System.out.println("C");
 			addResource(resourceToAdd, 3);
 		}
 
-		else if (!shelves[2].isFull() && shelves[2].getShelfResourceType() == resourceToAdd)
+		else if (!shelves[2].isFull() && shelves[2].getShelfResourceType() == resourceToAdd && shelves[0].getShelfResourceType() != resourceToAdd && shelves[1].getShelfResourceType() != resourceToAdd)
 		{
 			System.out.println("D");
 			addResource(resourceToAdd, 3);
 		}
 
-		else if (shelves[1].isEmpty() && shelves[0].getShelfResourceType() == resourceToAdd)
+		else if (shelves[1].isEmpty() && shelves[0].getShelfResourceType() == resourceToAdd && shelves[2].getShelfResourceType() != resourceToAdd)
 		{
 			System.out.println("E");
 			moveResources(1, 2);		/* First check if shelves can be optimized by moving the same resource type from a smaller shelf to a bigger one */
 			addResource(resourceToAdd, 2);
 		}
 
-		else if (shelves[1].isEmpty())
+		else if (shelves[1].isEmpty() && shelves[2].getShelfResourceType() != resourceToAdd && shelves[0].getShelfResourceType() != resourceToAdd)
 		{
 			System.out.println("F");
 			addResource(resourceToAdd, 2);
 		}
 
-		else if (!shelves[1].isFull() && shelves[1].getShelfResourceType() == resourceToAdd)		/* If no shelves are empty */
+		else if (!shelves[1].isFull() && shelves[1].getShelfResourceType() == resourceToAdd && shelves[0].getShelfResourceType() != resourceToAdd && shelves[2].getShelfResourceType() != resourceToAdd)
 		{
 			System.out.println("G");
 			addResource(resourceToAdd, 2);
 		}
 
-		else if	(shelves[0].isEmpty())
+		else if	(shelves[0].isEmpty() && shelves[1].getShelfResourceType() != resourceToAdd && shelves[2].getShelfResourceType() != resourceToAdd)
 		{
 			System.out.println("H");
 			addResource(resourceToAdd, 1);

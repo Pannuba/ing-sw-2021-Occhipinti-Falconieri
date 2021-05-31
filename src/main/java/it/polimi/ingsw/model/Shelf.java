@@ -31,7 +31,7 @@ public class Shelf implements Serializable
 	{
 		if (shelfResource.getQuantity() == shelfSize)
 		{
-			System.out.println("shelf " + shelfSize + " is full!");
+			System.out.println("Shelf " + shelfSize + " is full!");
 			return true;
 		}
 
