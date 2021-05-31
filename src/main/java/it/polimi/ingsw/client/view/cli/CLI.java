@@ -7,6 +7,8 @@ import it.polimi.ingsw.server.messages.Message;
 
 import java.util.*;
 
+/* Abstract class View, CLI extends view? */
+
 public class CLI extends Observable implements Observer
 {
 	private final Scanner input;

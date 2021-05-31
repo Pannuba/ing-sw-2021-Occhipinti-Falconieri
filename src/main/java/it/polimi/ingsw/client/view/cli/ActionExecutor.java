@@ -1,6 +1,9 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.NetworkHandler;
+import it.polimi.ingsw.client.view.cli.actions.ActivateProduction;
+import it.polimi.ingsw.client.view.cli.actions.BuyDevCard;
+import it.polimi.ingsw.client.view.cli.actions.BuyResources;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Resource;
@@ -24,7 +27,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 	private final NetworkHandler networkHandler;
 	private final List<String> command;
 
-	public ActionExecutor(CLI cli)
+	public ActionExecutor(CLI cli)		/* TODO: tidy parameters passed from CLI and to other actions */
 	{
 		this.cli = cli;
 		this.input = cli.getInput();
@@ -218,47 +221,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 	public void buyResources()
 	{
-		String rowOrCol, rowOrColNum, whiteMarbleRes = "", choice;
-
-		System.out.print("This is the current marbles market:\n\n");
-		PrintMethods.printMarblesMarket(cli.getGameState().getCurrMarblesMarket());
-
-		System.out.print("\nSelect a row (1) or column(2)? (Q = choose another action) ");
-		choice = input.nextLine();
-
-		switch (choice)
-		{
-			case "1":
-				rowOrCol = "ROW";
-				System.out.print("Insert row #: ");
-				rowOrColNum = input.nextLine();
-				break;
-
-			case "2":
-				rowOrCol = "COLUMN";
-				System.out.print("Insert column #: ");
-				rowOrColNum = input.nextLine();
-				break;
-
-			default:
-				chooseAction();
-				return;		/* Without return it still sends a command after the recursion(?) which leads to chaos */
-		}
-
-		List<SkillMarble> marbleLeaders = cli.getGameState().getPlayerByName(cli.getUsername()).getMarbleLeaders();
-
-		if (marbleLeaders.size() > 1)
-		{
-			System.out.print("You have " + marbleLeaders.size() + " leaders with a white marble skill!\nInsert the resource type you want to convert (G/Y/B/P): ");
-			whiteMarbleRes = input.nextLine();
-		}
-
-		command.add("BUY_RESOURCES");
-		command.add(rowOrCol);
-		command.add(rowOrColNum);
-		command.add(whiteMarbleRes);
-		networkHandler.send(command);
-		command.clear();
+		new BuyResources(this, input, command, networkHandler, cli);
 	}
 
 	public void getBoughtResources(List<Resource> boughtResources)
@@ -268,44 +231,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 	public void buyDevCard()
 	{
-		int devCardAreaIndex, targetAreaLayer;
-		String choice, cardToBuyNum;
-
-		System.out.print("These are your current dev card areas:\n\n");
-		PrintMethods.printDevCardAreas(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas());
-		System.out.print("Insert the dev card area # you want to put the new card in (1/2/3) (Q = choose another action) ");
-		choice = input.nextLine();
-
-		if (!choice.equals("1") && !choice.equals("2") && !choice.equals("3"))
-		{
-			chooseAction();
-			return;
-		}
-
-		devCardAreaIndex = Integer.parseInt(choice);											/* - 1 because arrays are zero-indexed */
-		targetAreaLayer = cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas()[devCardAreaIndex - 1].getLayer();
-
-		while (targetAreaLayer == 3)
-		{
-			System.out.print("This dev card area already has three cards!\nWhich dev card area do you want to put the new card in? ");
-			devCardAreaIndex = Integer.parseInt(input.nextLine());		/* 1, 2 or 3			- 1 because arrays are zero-indexed */
-			targetAreaLayer = cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas()[devCardAreaIndex - 1].getLayer();
-		}
-
-		/* Print devcards of level targetAreaLayer + 1 (layer = level of top devcard. New card has to have a higher level) */
-		PrintMethods.printDevCardsMarket(cli.getGameState().getCurrDevCardsMarket());
-
-		System.out.print("Insert the card number you want to buy: ");
-		cardToBuyNum = input.nextLine();
-
-		command.add("BUY_DEVCARD");
-		command.add(cardToBuyNum);
-		command.add(Integer.toString(devCardAreaIndex));
-		networkHandler.send(command);
-		command.clear();
-
-	/*	Check for resources. Here or server? SERVER		LocalModel class? NO
-		If client-side check, send new vault, storage and devcard market. If server-side check, send messages. I think server side is better. YES */
+		new BuyDevCard(this, input, command, networkHandler, cli);
 	}
 
 	public void getBoughtDevCard(DevCard boughtCard)
@@ -316,84 +242,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 	public void activateProduction()		/* How many times can a production be repeated? See rules */
 	{
-		System.out.println("This is your current storage and vault:");
-		PrintMethods.printStorage(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getStorage());
-		PrintMethods.printVault(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getVault());
-		System.out.print("Do you want to use the default production (1), a devcard (2) or a SkillProduction leader card (3)? (Q = choose another action) ");
-
-		switch (input.nextLine())
-		{
-			case "1":
-
-				String resourceToConvert, resourceToMake;
-				System.out.print("Insert the resource type you want to convert (B/G/Y/P): ");
-				resourceToConvert = input.nextLine();
-				System.out.print("Insert the resource type you want to make (B/G/Y/P): ");
-				resourceToMake = input.nextLine();
-
-				command.add("ACTIVATE_PRODUCTION");
-				command.add("DEFAULT");
-				command.add(resourceToConvert);
-				command.add(resourceToMake);
-				break;
-
-			case "2":
-
-				String cardNumber;
-				PrintMethods.printDevCardAreas(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas());
-				System.out.print("Insert the devcard's # you want to use: ");
-				cardNumber = input.nextLine();
-
-				command.add("ACTIVATE_PRODUCTION");
-				command.add("DEVCARD");
-				command.add(cardNumber);
-				break;
-
-			case "3":	/* Checks are both server side (to prevent cheating) and client side (to avoid useless server load and message exchange) */
-
-				List<LeaderCard> leaderCards = cli.getGameState().getPlayerByName(cli.getUsername()).getLeaderCards();
-				List<LeaderCard> activeCardsWithProdSkill = new ArrayList<>();
-				String chosenCardNum, resourceToMakeLeader;
-
-				for (int i = 0; i < leaderCards.size(); i++)
-				{
-					if (leaderCards.get(i) instanceof SkillProduction && leaderCards.get(i).isActive())
-						activeCardsWithProdSkill.add(leaderCards.get(i));
-				}
-
-				if (activeCardsWithProdSkill.isEmpty())
-				{
-					System.out.println("You don't have any active leaders that have a production skill!");
-					chooseAction();
-					return;
-				}
-
-				else
-				{
-					for (int i = 0; i < activeCardsWithProdSkill.size(); i++)			/* For the rare chance that the player has both cards SkillProduction */
-						PrintMethods.printLeaderCard(activeCardsWithProdSkill.get(i));
-
-					System.out.print("Which card do you want to use? ");
-					chosenCardNum = input.nextLine();
-
-					System.out.print("Insert the resource you want to make (B/G/Y/P)");
-					resourceToMakeLeader = input.nextLine();
-
-					command.add("ACTIVATE_PRODUCTION");
-					command.add("LEADER_SKILL");
-					command.add(chosenCardNum);
-					command.add(resourceToMakeLeader);
-				}
-
-				break;
-
-			default:
-				chooseAction();
-				return;
-		}
-
-		networkHandler.send(command);
-		command.clear();
+		new ActivateProduction(this, input, command, networkHandler, cli);
 	}
 
 	public void getOperationResultMessage(String message, boolean isFailed)
