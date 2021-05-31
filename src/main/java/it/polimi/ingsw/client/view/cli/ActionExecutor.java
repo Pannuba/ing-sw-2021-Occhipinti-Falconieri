@@ -266,7 +266,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		}
 
 		/* Print devcards of level targetAreaLayer + 1 (layer = level of top devcard. New card has to have a higher level) */
-		PrintMethods.printDevCardsMarketLevel(cli.getGameState().getCurrDevCardsMarket(), targetAreaLayer + 1);
+		PrintMethods.printDevCardsMarket(cli.getGameState().getCurrDevCardsMarket());
 
 		System.out.print("Insert the card number you want to buy: ");
 		cardToBuyNum = input.nextLine();

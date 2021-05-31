@@ -10,13 +10,12 @@ import java.util.List;
 
 public class DevCardsMarket implements Serializable
 {
-	private List<DevCard> allDevCards;
-	private List<List<DevCard>> devCardStacks;			/* TODO: adjust PrintMethods, ActionDevCard and client-server actions */
+	private List<List<DevCard>> devCardStacks;
 
 	public DevCardsMarket()
 	{
 		System.out.println("Creating devcards...");
-		allDevCards = new ArrayList<>();
+		List<DevCard> allDevCards = new ArrayList<>();
 		devCardStacks = new ArrayList<>();
 
 		for (int i = 0; i < 48; i++)
@@ -38,8 +37,8 @@ public class DevCardsMarket implements Serializable
 			tempList = new ArrayList<>();
 
 			for (int i = 0; i < 48; i++)
-			{
-				if (allDevCards.get(i).getColor() == DevCardColor.GREEN && allDevCards.get(i).getLevel() == j)
+			{																	/* j + 1 because level 0 devcards don't exist */
+				if (allDevCards.get(i).getColor() == DevCardColor.GREEN && allDevCards.get(i).getLevel() == (j + 1))
 					tempList.add(allDevCards.get(i));
 			}
 
@@ -52,7 +51,7 @@ public class DevCardsMarket implements Serializable
 
 			for (int i = 0; i < 48; i++)
 			{
-				if (allDevCards.get(i).getColor() == DevCardColor.GREEN && allDevCards.get(i).getLevel() == j)
+				if (allDevCards.get(i).getColor() == DevCardColor.BLUE && allDevCards.get(i).getLevel() == (j + 1))
 					tempList.add(allDevCards.get(i));
 			}
 
@@ -65,7 +64,7 @@ public class DevCardsMarket implements Serializable
 
 			for (int i = 0; i < 48; i++)
 			{
-				if (allDevCards.get(i).getColor() == DevCardColor.GREEN && allDevCards.get(i).getLevel() == j)
+				if (allDevCards.get(i).getColor() == DevCardColor.PURPLE && allDevCards.get(i).getLevel() == (j + 1))
 					tempList.add(allDevCards.get(i));
 			}
 
@@ -78,7 +77,7 @@ public class DevCardsMarket implements Serializable
 
 			for (int i = 0; i < 48; i++)
 			{
-				if (allDevCards.get(i).getColor() == DevCardColor.GREEN && allDevCards.get(i).getLevel() == j)
+				if (allDevCards.get(i).getColor() == DevCardColor.YELLOW && allDevCards.get(i).getLevel() == (j + 1))
 					tempList.add(allDevCards.get(i));
 			}
 
@@ -92,30 +91,45 @@ public class DevCardsMarket implements Serializable
 	public DevCard buyCardFromMarket(int boughtCardNum)
 	{
 		System.out.println("DevCardMarket: buying card #" + boughtCardNum);
+
 		DevCard boughtCard = getDevCardByNumber(boughtCardNum);
-		allDevCards.remove(boughtCard);
+
+		for (int i = 0; i < devCardStacks.size(); i++)			/* So many for loops, not very efficient... */
+		{
+			for (int j = 0; j < devCardStacks.get(i).size(); j++)
+			{
+				if (devCardStacks.get(i).get(j) == boughtCard)
+				{
+					devCardStacks.get(i).remove(j);
+					j--;		/* Not really necessary but prevents the warning from IntelliJ */
+				}
+			}
+		}
 
 		return boughtCard;
 	}
 
 	public DevCard getDevCardByNumber(int cardNumber)
 	{
-		for (int i = 0; i < allDevCards.size(); i++)
+		for (int i = 0; i < devCardStacks.size(); i++)				/* Always 12 */
 		{
-			if (allDevCards.get(i).getCardNumber() == cardNumber)
-				return allDevCards.get(i);
+			for (int j = 0; j < devCardStacks.get(i).size(); j++)		/* Not always 4 */
+			{
+				if (devCardStacks.get(i).get(j).getCardNumber() == cardNumber)
+					return devCardStacks.get(i).get(j);
+			}
 		}
 
 		return null;
 	}
 
-	public List<DevCard> getAllDevCards()
+	public List<List<DevCard>> getDevCardStacks()
 	{
-		return allDevCards;
+		return devCardStacks;
 	}
 
-	public void setAllDevCards(List<DevCard> allDevCards)
+	public void setDevCardStacks(List<List<DevCard>> devCardStacks)
 	{
-		this.allDevCards = allDevCards;
+		this.devCardStacks = devCardStacks;
 	}
 }

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.NetworkHandler;
-import it.polimi.ingsw.client.view.localserver.LocalServer;
+import it.polimi.ingsw.client.localserver.LocalServer;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.server.messages.Message;
 

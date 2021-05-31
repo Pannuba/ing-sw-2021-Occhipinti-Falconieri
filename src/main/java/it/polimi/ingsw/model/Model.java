@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Model extends Observable		/* Observed by the views to create the new gamestate */
 {

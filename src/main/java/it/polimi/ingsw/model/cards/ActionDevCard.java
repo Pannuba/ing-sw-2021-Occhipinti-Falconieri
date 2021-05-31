@@ -19,27 +19,30 @@ public class ActionDevCard extends ActionToken
 	public void doAction()			/* Remove 2 devcards of color from market starting from the lowest level */
 	{
 		System.out.println("Activating action of ActionDevCard");
-		List<DevCard> devCards = devCardsMarket.getDevCards();		/* Put this here or outside removeDevCards? */
+		List<List<DevCard>> devCardStacks = devCardsMarket.getDevCardStacks();		/* Put this here or outside removeDevCards? */
 		int cardsToRemove = 2;
 
 		/* Scan all cards looking for the ones with the color we want, then delete them */
 
-		for (int i = 0; i < 3; i++)		/* Check all 3 levels starting from 1 */
+		for (int i = 0; i < 3; i++)		/* Check all 3 levels starting from 1 (i+1 in check) */
 		{
-			for (int j = 0; j < devCards.size(); j++)
+			for (int j = 0; j < devCardStacks.size(); j++)		/* 12 */
 			{
-				if (devCards.get(j).getColor() == color && devCards.get(j).getLevel() == (i + 1) && cardsToRemove != 0)
+				for (int k = 0; k < devCardStacks.get(j).size(); k++)
 				{
-					devCards.remove(j);
-					cardsToRemove--;
-					j--;	/* Thanks IntelliJ I love you */
+					if (devCardStacks.get(j).get(k).getColor() == color && devCardStacks.get(j).get(k).getLevel() == (i + 1) && cardsToRemove != 0)
+					{
+						devCardStacks.get(j).remove(k);
+						cardsToRemove--;
+						k--;    /* Thanks IntelliJ I love you */
+					}
 				}
 			}
 		}
 
 		/* TODO: if cardsToRemove != 0 error? */
 
-		devCardsMarket.setDevCards(devCards);
+		devCardsMarket.setDevCardStacks(devCardStacks);
 	}
 
 	public DevCardColor getColor()

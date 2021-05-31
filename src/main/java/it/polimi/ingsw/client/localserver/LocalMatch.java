@@ -1,4 +1,4 @@
-package it.polimi.ingsw.client.view.localserver;
+package it.polimi.ingsw.client.localserver;
 
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Player;

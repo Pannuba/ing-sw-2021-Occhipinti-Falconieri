@@ -50,7 +50,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 				break;
 
 			case "SkillStorage":
-				System.out.println(	"\nLeadercard skill: additional storage"																										+
+				System.out.println(	"Leadercard skill: additional storage"																										+
 									"\nAdditional storage resource: " + convertResTypeToString(((SkillStorage) card).getAdditionalStorage().getShelfResource().getResourceType())	+
 									"\nRequirements: " + ((SkillStorage) card).getRequirements().getQuantity() + " "																+
 									convertResTypeToString(((SkillStorage) card).getRequirements().getResourceType())																);
@@ -84,20 +84,9 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 	{
 		System.out.println("Dev cards market:\n\n");
 
-		for (int i = 0; i < market.getDevCards().size(); i++)
-			printDevCard(market.getDevCards().get(i));
+		for (int i = 0; i < market.getDevCardStacks().size(); i++)
+			printDevCard(market.getDevCardStacks().get(i).get(0));
 
-	}
-
-	public static void printDevCardsMarketLevel(DevCardsMarket market, int level)
-	{
-		System.out.print("Dev cards in market with level = " + level + ":\n\n");
-
-		for (int i = 0; i < market.getDevCards().size(); i++)
-		{
-			if (market.getDevCards().get(i).getLevel() == level)
-				printDevCard(market.getDevCards().get(i));
-		}
 	}
 
 	public static void printDevCard(DevCard devCard)		/* Cost and requirements are actually the opposite! */
