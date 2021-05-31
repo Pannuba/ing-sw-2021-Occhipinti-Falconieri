@@ -1,9 +1,6 @@
 package it.polimi.ingsw.model.cards;
 
 import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.model.board.Dashboard;
-import it.polimi.ingsw.model.board.Storage;
-import it.polimi.ingsw.model.board.Vault;
 
 import java.io.Serializable;
 import java.util.ArrayList;

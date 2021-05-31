@@ -11,7 +11,6 @@ public class CLI extends Observable implements Observer
 {
 	private final Scanner input;
 	private final ActionExecutor action;
-	private final MessageDecoder messageDecoder;
 	private NetworkHandler networkHandler;
 	private GameState gameState;
 	private String username;
@@ -24,7 +23,6 @@ public class CLI extends Observable implements Observer
 
 		new Thread(networkHandler).start();		/* Start listening for messages or gamestate updates from server */
 		action = new ActionExecutor(this);		/* Pass CLI to ActionExecutor for the NetworkHandler and input instance, gamestate and username */
-		messageDecoder = new MessageDecoder(action);
 	}
 
 	private void gameStart()
@@ -71,7 +69,7 @@ public class CLI extends Observable implements Observer
 	public void update(Observable obs, Object obj)
 	{
 		if (obj instanceof Message)
-			((Message) obj).process(messageDecoder);		/* Calls method in cli specified in the message */
+			((Message) obj).process(action);		/* Calls method in cli specified in the message */
 
 		if (obj instanceof GameState)
 		{

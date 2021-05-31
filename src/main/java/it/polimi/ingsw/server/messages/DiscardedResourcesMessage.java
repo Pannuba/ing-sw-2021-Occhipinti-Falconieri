@@ -1,6 +1,6 @@
 package it.polimi.ingsw.server.messages;
 
-import it.polimi.ingsw.client.view.cli.MessageDecoder;
+import it.polimi.ingsw.client.view.cli.ActionExecutor;
 
 import java.io.Serializable;
 
@@ -16,8 +16,8 @@ public class DiscardedResourcesMessage implements Message, Serializable
 	}
 
 	@Override
-	public void process(MessageDecoder decoder)
+	public void process(ActionExecutor action)
 	{
-		decoder.getDiscardedResources(discardedResNum, playerWhoDiscarded);
+		action.getDiscardedResources(discardedResNum, playerWhoDiscarded);
 	}
 }

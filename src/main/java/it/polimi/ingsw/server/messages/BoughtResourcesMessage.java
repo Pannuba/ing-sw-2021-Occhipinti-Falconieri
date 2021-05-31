@@ -1,6 +1,6 @@
 package it.polimi.ingsw.server.messages;
 
-import it.polimi.ingsw.client.view.cli.MessageDecoder;
+import it.polimi.ingsw.client.view.cli.ActionExecutor;
 import it.polimi.ingsw.model.Resource;
 
 import java.io.Serializable;
@@ -16,8 +16,8 @@ public class BoughtResourcesMessage implements Message, Serializable
 	}
 
 	@Override
-	public void process(MessageDecoder decoder)
+	public void process(ActionExecutor action)
 	{
-		decoder.getBoughtResources(boughtResources);
+		action.getBoughtResources(boughtResources);
 	}
 }

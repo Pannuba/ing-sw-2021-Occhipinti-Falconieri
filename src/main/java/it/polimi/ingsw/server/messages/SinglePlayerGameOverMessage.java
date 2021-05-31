@@ -1,6 +1,6 @@
 package it.polimi.ingsw.server.messages;
 
-import it.polimi.ingsw.client.view.cli.MessageDecoder;
+import it.polimi.ingsw.client.view.cli.ActionExecutor;
 
 import java.io.Serializable;
 
@@ -19,8 +19,8 @@ public class SinglePlayerGameOverMessage implements Message, Serializable
 	}
 
 	@Override
-	public void process(MessageDecoder decoder)
+	public void process(ActionExecutor action)
 	{
-		decoder.singlePlayerGameOver(message);
+		action.singlePlayerGameOver(message);
 	}
 }

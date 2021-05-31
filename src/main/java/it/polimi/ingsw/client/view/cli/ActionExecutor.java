@@ -3,18 +3,19 @@ package it.polimi.ingsw.client.view.cli;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.cards.LeaderCard;
-import it.polimi.ingsw.model.cards.SkillMarble;
-import it.polimi.ingsw.model.cards.SkillProduction;
-import it.polimi.ingsw.util.Pair;
+import it.polimi.ingsw.model.Resource;
+import it.polimi.ingsw.model.cards.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/* Make the same file with the same action but GUI-style */
+/*	Idea: make ActionExecutor an abstract class in the client package, with methods like "abstract void firstPlayer(boolean isFirstPlayer)"...
+	then make ActionCLI and ActionGUI classes that extend ActionExecutor in the cli and gui package respectively, and put the @Override methods there
+	MessageDecoder has an instance variable of ActionExecutor, it should still work.
 
-/* Package with a class for each action? This file is pretty big */
+	On a separate note, I should put the code for each action in its own class...
+*/
 
 public class ActionExecutor		/* Has methods that perform actions such as buying resources, to avoid cluttering the CLI. Interface? */
 {
@@ -38,6 +39,11 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 			System.out.print("Total players: ");
 			networkHandler.send(input.nextLine());
 		}
+	}
+
+	public void startMatch()
+	{
+		System.out.println("Starting match\n\nMasters of the Renaissance!");
 	}
 
 	public void chooseAction()
@@ -255,6 +261,11 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		command.clear();
 	}
 
+	public void getBoughtResources(List<Resource> boughtResources)
+	{
+		System.out.print("Received the following resources: " + PrintMethods.convertResListToString(boughtResources) + "\n");
+	}
+
 	public void buyDevCard()
 	{
 		int devCardAreaIndex, targetAreaLayer;
@@ -295,6 +306,12 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 	/*	Check for resources. Here or server? SERVER		LocalModel class? NO
 		If client-side check, send new vault, storage and devcard market. If server-side check, send messages. I think server side is better. YES */
+	}
+
+	public void getBoughtDevCard(DevCard boughtCard)
+	{
+		System.out.print("Received the following devcard:\n");
+		PrintMethods.printDevCard(boughtCard);
 	}
 
 	public void activateProduction()		/* How many times can a production be repeated? See rules */
@@ -379,6 +396,20 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		command.clear();
 	}
 
+	public void getOperationResultMessage(String message, boolean isFailed)
+	{
+		System.out.println(message);
+
+		if (isFailed)
+			chooseAction();		/* Client can repeat the round for failed actions */
+	}
+
+	public void getActionToken(ActionToken token)
+	{
+		System.out.print("Received action token: ");
+		PrintMethods.printActionToken(token);
+	}
+
 	public void vaticanReport(int popeBoxNum, List<Player> players)
 	{
 		Player localPlayer = new Player("temp");		/* Otherwise IntelliJ gives an annoying warning */
@@ -428,7 +459,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		}
 	}
 
-	public void discardedResources(int discardedResNum, String playerWhoDiscarded)
+	public void getDiscardedResources(int discardedResNum, String playerWhoDiscarded)
 	{
 		if (!playerWhoDiscarded.equals(cli.getUsername()))
 			System.out.println(playerWhoDiscarded + " discarded " + discardedResNum + " resources, so you gained " + discardedResNum + " faith points!");

@@ -50,7 +50,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 	private void createLeaderCards()
 	{
-		System.out.println("Model: creating leadercards...");
+		System.out.println("Creating leadercards...");
 
 		allLeaderCards = new ArrayList<>();		/* Necessary? YES */
 		LeaderCard cardToAdd = null;

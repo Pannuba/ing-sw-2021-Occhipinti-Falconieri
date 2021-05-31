@@ -1,6 +1,6 @@
 package it.polimi.ingsw.server.messages;
 
-import it.polimi.ingsw.client.view.cli.MessageDecoder;
+import it.polimi.ingsw.client.view.cli.ActionExecutor;
 import it.polimi.ingsw.model.Player;
 
 import java.io.Serializable;
@@ -18,8 +18,8 @@ public class MatchOverMessage implements Message, Serializable		/* Sent to clien
 	}
 
 	@Override
-	public void process(MessageDecoder decoder)
+	public void process(ActionExecutor action)
 	{
-		decoder.matchOver(winnerName, players);
+		action.matchOver(winnerName, players);
 	}
 }

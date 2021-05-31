@@ -5,9 +5,10 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.cards.ActionToken;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
-import it.polimi.ingsw.util.Pair;
 
 /* Call an action everytime to allow for an abstract class for CLI and GUI? CLIAction and GUIAction */
+
+/* Remove MessageDecoder and make Message call a function in ActionExecutor? */
 
 import java.util.List;
 
@@ -22,12 +23,12 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 
 	public void firstPlayer(boolean isFirstPlayer)
 	{
-		action.firstPlayer(isFirstPlayer);	/* Very simple, bundle action here? */
+		action.firstPlayer(isFirstPlayer);
 	}
 
 	public void startMatch()
 	{
-		System.out.println("Starting match\n\nMasters of the Renaissance!");
+		action.startMatch();
 	}
 
 	public void chooseLeaderCards(List<LeaderCard> leaderCards)		/* Call function in ActionExecutor directly from the message? */
@@ -42,26 +43,22 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 
 	public void getOperationResultMessage(String message, boolean isFailed)
 	{
-		System.out.println(message);
-
-		if (isFailed)
-			action.chooseAction();		/* Client can repeat the round for failed actions */
+		action.getOperationResultMessage(message, isFailed);
 	}
 
 	public void getBoughtResources(List<Resource> boughtResources)
 	{
-		System.out.print("Received the following resources: " + PrintMethods.convertResListToString(boughtResources) + "\n");
+		action.getBoughtResources(boughtResources);
 	}
 
 	public void getBoughtDevCard(DevCard boughtCard)
 	{
-		System.out.print("Received the following devcard:\n");
-		PrintMethods.printDevCard(boughtCard);
+		action.getBoughtDevCard(boughtCard);
 	}
 
 	public void getDiscardedResources(int discardedResNum, String playerWhoDiscarded)
 	{
-		action.discardedResources(discardedResNum, playerWhoDiscarded);
+		action.getDiscardedResources(discardedResNum, playerWhoDiscarded);
 	}
 
 	public void vaticanReport(int popeBoxNum, List<Player> players)
@@ -71,8 +68,7 @@ public class MessageDecoder		/* Reads Message objects sent by server and runs th
 
 	public void getActionToken(ActionToken token)
 	{
-		System.out.print("Received action token: ");
-		PrintMethods.printActionToken(token);
+		action.getActionToken(token);
 	}
 
 	public void matchOver(String winner, List<Player> players)
