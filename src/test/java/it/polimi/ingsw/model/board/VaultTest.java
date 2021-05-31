@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.board;
 
+import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import org.junit.Test;
 
@@ -9,14 +10,18 @@ import static org.junit.Assert.*;
 
 public class VaultTest {
 
-	private Vault vault = new Vault();
-	private HashMap<ResourceType, Integer> resourceAmounts = new HashMap<>();
+	private Vault vault;
+	private HashMap<ResourceType, Integer> resourceAmounts;
+	private HashMap<ResourceType, Integer> resourceAmounts2;
+	private Resource resourceToRemove;
 
 	@Test
 	public void addResource1()
 	{
+		vault = new Vault();
 		vault.addResource(ResourceType.BLUE);
 		vault.addResource(ResourceType.BLUE);
+		resourceAmounts = new HashMap<>();
 		resourceAmounts.put(ResourceType.BLUE,	 2);
 		resourceAmounts.put(ResourceType.GREY,	 0);
 		resourceAmounts.put(ResourceType.YELLOW, 0);
@@ -27,8 +32,10 @@ public class VaultTest {
 	@Test
 	public void addResource2()
 	{
+		vault = new Vault();
 		vault.addResource(ResourceType.BLUE);
 		vault.addResource(ResourceType.PURPLE);
+		resourceAmounts = new HashMap<>();
 		resourceAmounts.put(ResourceType.BLUE,	 1);
 		resourceAmounts.put(ResourceType.GREY,	 0);
 		resourceAmounts.put(ResourceType.YELLOW, 0);
@@ -39,20 +46,73 @@ public class VaultTest {
 	@Test
 	public void addResource3()
 	{
+		vault = new Vault();
+		resourceAmounts = new HashMap<>();
+		resourceAmounts.put(ResourceType.BLUE,	 1);
+		resourceAmounts.put(ResourceType.GREY,	 2);
+		resourceAmounts.put(ResourceType.YELLOW, 1);
+		resourceAmounts.put(ResourceType.PURPLE, 15);
+		vault.setResourceAmounts(resourceAmounts);
 		vault.addResource(ResourceType.BLUE);
 		vault.addResource(ResourceType.GREY);
 		vault.addResource(ResourceType.YELLOW);
 		vault.addResource(ResourceType.PURPLE);
-		resourceAmounts.put(ResourceType.BLUE,	 1);
-		resourceAmounts.put(ResourceType.GREY,	 1);
-		resourceAmounts.put(ResourceType.YELLOW, 1);
-		resourceAmounts.put(ResourceType.PURPLE, 1);
-		assertEquals("Error",resourceAmounts, vault.getResourceAmounts());
+		resourceAmounts2 = new HashMap<>();
+		resourceAmounts2.put(ResourceType.BLUE,	 2);
+		resourceAmounts2.put(ResourceType.GREY,	 3);
+		resourceAmounts2.put(ResourceType.YELLOW, 2);
+		resourceAmounts2.put(ResourceType.PURPLE, 16);
+		assertEquals("Error",resourceAmounts2, vault.getResourceAmounts());
+	}
+
+	@Test
+	public void removeResource1()
+	{
+		vault = new Vault();
+		resourceAmounts = new HashMap<>();
+		resourceAmounts.put(ResourceType.BLUE,	 10);
+		resourceAmounts.put(ResourceType.GREY,	 5);
+		resourceAmounts.put(ResourceType.YELLOW, 2);
+		resourceAmounts.put(ResourceType.PURPLE, 15);
+		vault.setResourceAmounts(resourceAmounts);
+		resourceToRemove = new Resource();
+		resourceToRemove.setResourceType(ResourceType.PURPLE);
+		resourceToRemove.setQuantity(5);
+		resourceAmounts2 = new HashMap<>();
+		resourceAmounts2.put(ResourceType.BLUE,	 10);
+		resourceAmounts2.put(ResourceType.GREY,	 5);
+		resourceAmounts2.put(ResourceType.YELLOW, 2);
+		resourceAmounts2.put(ResourceType.PURPLE, 10);
+		assertEquals("Error", 5, vault.removeResource(resourceToRemove));
+		assertEquals("Error", resourceAmounts2, vault.getResourceAmounts());
+	}
+
+	@Test
+	public void removeResource2()
+	{
+		vault = new Vault();
+		resourceAmounts = new HashMap<>();
+		resourceAmounts.put(ResourceType.BLUE,	 10);
+		resourceAmounts.put(ResourceType.GREY,	 5);
+		resourceAmounts.put(ResourceType.YELLOW, 2);
+		resourceAmounts.put(ResourceType.PURPLE, 15);
+		vault.setResourceAmounts(resourceAmounts);
+		resourceToRemove = new Resource();
+		resourceToRemove.setResourceType(ResourceType.YELLOW);
+		resourceToRemove.setQuantity(3);
+		resourceAmounts2 = new HashMap<>();
+		resourceAmounts2.put(ResourceType.BLUE,	 10);
+		resourceAmounts2.put(ResourceType.GREY,	 5);
+		resourceAmounts2.put(ResourceType.YELLOW, 0);
+		resourceAmounts2.put(ResourceType.PURPLE, 15);
+		assertEquals("Error", 2, vault.removeResource(resourceToRemove));
+		assertEquals("Error", resourceAmounts2, vault.getResourceAmounts());
 	}
 
 	@Test
 	public void getTotalResources()
 	{
+		vault = new Vault();
 		vault.setResourceAmounts(resourceAmounts);
 		resourceAmounts.put(ResourceType.BLUE,	 7);
 		resourceAmounts.put(ResourceType.GREY,	10);
