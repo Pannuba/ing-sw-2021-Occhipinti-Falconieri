@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.board.Vault;
 import it.polimi.ingsw.util.Pair;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /*	Parameter editor has to edit leadercard requirements. For simplicity's sake, and order to keep symmetry with the original game,
@@ -32,13 +33,18 @@ public abstract class LeaderCard implements Serializable		/* Can't do new Leader
 	public boolean checkRequirements(Dashboard playerBoard)		/* True if requirements are satisfied. Here or Model? */
 	{
 		List<DevCard> devCards = playerBoard.getAllDevCards();
+		List<DevCardColor> colorRequirements = new ArrayList<>();		/* SkillMarble and SkillDiscount have the same requirement type */
+
+		if (this.getClass().getSimpleName().equals("SkillMarble"))
+			colorRequirements = ((SkillMarble) this).getRequirements();
+
+		if (this.getClass().getSimpleName().equals("SkillDiscount"))
+			colorRequirements = ((SkillDiscount) this).getRequirements();
 
 		switch (this.getClass().getSimpleName())		/* Works! "this" is black magic I swear */
 		{
 			case "SkillDiscount":		/* Player has to have x devcards of any level */
 			case "SkillMarble":
-
-				List<DevCardColor> colorRequirements = ((SkillDiscount) this).getRequirements();
 
 				for (int i = 0; i < devCards.size(); i++)
 				{
