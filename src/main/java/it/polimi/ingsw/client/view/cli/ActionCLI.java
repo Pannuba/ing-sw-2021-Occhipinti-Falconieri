@@ -16,6 +16,8 @@ import java.util.Scanner;
 	MessageDecoder has an instance variable of ActionExecutor, it should still work.
 
 	On a separate note, I should put the code for each action in its own class...
+
+	Put everything here or only the functions called by server messages?
 */
 
 public class ActionCLI extends ActionExecutor	/* Has methods that perform actions such as buying resources, to avoid cluttering the CLI. Interface? */
@@ -33,6 +35,7 @@ public class ActionCLI extends ActionExecutor	/* Has methods that perform action
 		command = new ArrayList<>();
 	}
 
+	@Override
 	public void firstPlayer(boolean isFirstPlayer)
 	{
 		if (isFirstPlayer)
@@ -42,56 +45,22 @@ public class ActionCLI extends ActionExecutor	/* Has methods that perform action
 		}
 	}
 
-	public void startMatch()
+	@Override
+	public void startMatch()		/* Simple actions like this one don't need their own class */
 	{
 		System.out.println("Starting match\n\nMasters of the Renaissance!");
 	}
 
+	@Override
 	public void chooseLeaderCards(List<LeaderCard> fourLeaderCards)
 	{
 		new ChooseLeaderCards(fourLeaderCards, input, command, networkHandler);
 	}
 
+	@Override
 	public void chooseResources(int playerID)			/* 1st player: nothing; 2nd: 1 resource; 3rd: 1 resource + 1 faithPoint; 4th: 2 resources + 1 faithPoint */
 	{
-		String chosenResources = "";			/* Will be converted to ResourceType in server controller */
-		String initialFaithPoints = "";
-
-		switch (playerID)
-		{
-			case 0:
-				System.out.println("You're the first player, so you get nothing!");
-				break;
-
-			case 1:
-				System.out.print("Choose 1 starting resource (B)lue, (G)rey, (Y)ellow, (P)urple: ");		/* Check for input */
-				chosenResources += input.nextLine();
-				break;
-
-			case 2:
-				System.out.print("Choose 1 starting resource (B)lue, (G)rey, (Y)ellow, (P)urple: ");
-				chosenResources += input.nextLine();
-				initialFaithPoints = "1";			/* Add server-side check? */
-				break;
-
-			case 3:
-				System.out.print("Choose 2 starting resources (B)lue, (G)rey, (Y)ellow, (P)urple\nResource 1: ");
-				chosenResources += input.nextLine();
-				System.out.print("Resource 2: ");
-				chosenResources += input.nextLine();
-				initialFaithPoints = "2";
-				break;
-
-			default:
-				System.out.println("Something bad happened");
-
-		}
-
-		command.add("INITIAL_RESOURCES");
-		command.add(chosenResources);
-		command.add(initialFaithPoints);
-		networkHandler.send(command);
-		command.clear();
+		new ChooseResources(playerID, input, command, networkHandler);
 	}
 
 	public void leaderChoice()
@@ -162,12 +131,12 @@ public class ActionCLI extends ActionExecutor	/* Has methods that perform action
 		System.out.print("Received the following resources: " + PrintMethods.convertResListToString(boughtResources) + "\n");
 	}
 
-	@Override
 	public void buyDevCard()
 	{
 		new BuyDevCard(input, command, networkHandler, cli);
 	}
 
+	@Override
 	public void getBoughtDevCard(DevCard boughtCard)
 	{
 		System.out.print("Received the following devcard:\n");
@@ -179,6 +148,7 @@ public class ActionCLI extends ActionExecutor	/* Has methods that perform action
 		new ActivateProduction(input, command, networkHandler, cli);
 	}
 
+	@Override
 	public void getOperationResultMessage(String message, boolean isFailed)
 	{
 		System.out.println(message);
@@ -187,17 +157,20 @@ public class ActionCLI extends ActionExecutor	/* Has methods that perform action
 			cli.chooseAction();		/* Client can repeat the round for failed actions */
 	}
 
+	@Override
 	public void getActionToken(ActionToken token)
 	{
 		System.out.print("Received action token: ");
 		PrintMethods.printActionToken(token);
 	}
 
+	@Override
 	public void vaticanReport(int popeBoxNum, List<Player> players)
 	{
 		new VaticanReport(popeBoxNum, players, cli);
 	}
 
+	@Override
 	public void getDiscardedResources(int discardedResNum, String playerWhoDiscarded)
 	{
 		if (!playerWhoDiscarded.equals(cli.getUsername()))
@@ -207,6 +180,7 @@ public class ActionCLI extends ActionExecutor	/* Has methods that perform action
 			System.out.println(discardedResNum + " resources couldn't fit in the storage, so they have been discarded");
 	}
 
+	@Override
 	public void singlePlayerGameOver(String message)		/* When the player has lost, print the game over message and close the client */
 	{
 		System.out.println(message);
@@ -223,6 +197,7 @@ public class ActionCLI extends ActionExecutor	/* Has methods that perform action
 			networkHandler.shutdown();
 	}
 
+	@Override
 	public void matchOver(String winner, List<Player> players)
 	{
 		if (cli.getUsername().equals(winner))

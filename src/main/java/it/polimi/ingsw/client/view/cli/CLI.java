@@ -65,7 +65,7 @@ public class CLI extends Observable implements Observer
 		networkHandler.send(username);
 	}
 
-	public void chooseAction()
+	public void chooseAction()			/* Here or ActionCLI? */
 	{
 		System.out.print("What do you want to do?\nBuy from market (0), buy devcards (1), activate production (2), view cards (3), view board (4), view markets (5): ");
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.messages;
 
+import it.polimi.ingsw.client.view.ActionExecutor;
 import it.polimi.ingsw.client.view.cli.ActionCLI;
 import it.polimi.ingsw.model.Player;
 
@@ -18,8 +19,8 @@ public class MatchOverMessage implements Message, Serializable		/* Sent to clien
 	}
 
 	@Override
-	public void process(ActionCLI action)
+	public void process(ActionExecutor action)
 	{
-		action.matchOver(winnerName, players);
+		action.matchOver(winnerName, players);		/* TODO: find better method name(?) */
 	}
 }

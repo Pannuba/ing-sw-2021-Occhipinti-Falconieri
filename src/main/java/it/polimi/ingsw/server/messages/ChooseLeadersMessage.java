@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.messages;
 
+import it.polimi.ingsw.client.view.ActionExecutor;
 import it.polimi.ingsw.client.view.cli.ActionCLI;
 import it.polimi.ingsw.model.cards.LeaderCard;
 
@@ -16,7 +17,7 @@ public class ChooseLeadersMessage implements Message, Serializable
 	}
 
 	@Override
-	public void process(ActionCLI action)
+	public void process(ActionExecutor action)
 	{
 		action.chooseLeaderCards(leaderCards);
 	}

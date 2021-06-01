@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.messages;
 
+import it.polimi.ingsw.client.view.ActionExecutor;
 import it.polimi.ingsw.client.view.cli.ActionCLI;
 
 import java.io.Serializable;
@@ -14,7 +15,7 @@ public class InitialResourcesMessage implements Message, Serializable
 	}
 
 	@Override
-	public void process(ActionCLI action)
+	public void process(ActionExecutor action)
 	{
 		action.chooseResources(playerID);
 	}

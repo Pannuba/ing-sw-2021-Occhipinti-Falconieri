@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.messages;
 
+import it.polimi.ingsw.client.view.ActionExecutor;
 import it.polimi.ingsw.client.view.cli.ActionCLI;
 import it.polimi.ingsw.model.cards.DevCard;
 
@@ -15,7 +16,7 @@ public class BoughtDevCardMessage implements Message, Serializable
 	}
 
 	@Override
-	public void process(ActionCLI action)
+	public void process(ActionExecutor action)
 	{
 		action.getBoughtDevCard(boughtCard);
 	}
