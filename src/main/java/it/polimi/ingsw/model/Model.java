@@ -19,7 +19,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	private final int numPlayers;
 	private Track track;
 	private final MarblesMarket marblesMarket;
-	private final DevCardsMarket devCardsMarket;
+	private DevCardsMarket devCardsMarket;
 	private List<Player> players;
 	private List<LeaderCard> allLeaderCards;		/* All 16 leadercards, each player picks 2 out of 4 */
 	private List<ActionToken> actionTokens;
@@ -326,6 +326,8 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	{
 		return devCardsMarket;
 	}
+
+	public void setDevCardsMarket (DevCardsMarket devCardsMarket) { this.devCardsMarket = devCardsMarket; }
 
 	public List<Player> getPlayers()
 	{

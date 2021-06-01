@@ -43,9 +43,9 @@ public class ModelTest {
 	private Resource r1 = new Resource();
 	private Resource r2 = new Resource();
 	private Resource r3 = new Resource();
-	private Resource resourceToAdd = new Resource();
 	private Shelf[] shelves = new Shelf[3];
 	private final PopeToken[] popeTokens = new PopeToken[3];
+	private DevCardsMarket devCardsMarket = new DevCardsMarket();
 
 	@Test
 	public void vaticanReport1()		/* First pope box has been reached */
@@ -252,6 +252,127 @@ public class ModelTest {
 		model = new Model(players);
 		model.setTrack(track);
 		assertFalse("Error", model.isMatchOver());
+	}
+
+	@Test
+	public void isSinglePlayerMatchLost1()			/* no more green devCard */
+	{
+		p1 = new Player("pippo");
+		players = new ArrayList<>();
+		players.add(p1);
+		model = new Model(players);
+		devCardsMarket.buyCardFromMarket(1);
+		devCardsMarket.buyCardFromMarket(5);
+		devCardsMarket.buyCardFromMarket(9);
+		devCardsMarket.buyCardFromMarket(13);
+		devCardsMarket.buyCardFromMarket(17);
+		devCardsMarket.buyCardFromMarket(21);
+		devCardsMarket.buyCardFromMarket(25);
+		devCardsMarket.buyCardFromMarket(29);
+		devCardsMarket.buyCardFromMarket(33);
+		devCardsMarket.buyCardFromMarket(37);
+		devCardsMarket.buyCardFromMarket(41);
+		devCardsMarket.buyCardFromMarket(45);
+		model.setDevCardsMarket(devCardsMarket);
+		assertEquals("Error", "You lose! There are no more green dev cards in the market.", model.isSinglePlayerMatchLost());
+	}
+
+	@Test
+	public void isSinglePlayerMatchLost2()			/* no more purple devCard */
+	{
+		p1 = new Player("pippo");
+		players = new ArrayList<>();
+		players.add(p1);
+		model = new Model(players);
+		devCardsMarket.buyCardFromMarket(2);
+		devCardsMarket.buyCardFromMarket(6);
+		devCardsMarket.buyCardFromMarket(10);
+		devCardsMarket.buyCardFromMarket(14);
+		devCardsMarket.buyCardFromMarket(18);
+		devCardsMarket.buyCardFromMarket(22);
+		devCardsMarket.buyCardFromMarket(26);
+		devCardsMarket.buyCardFromMarket(30);
+		devCardsMarket.buyCardFromMarket(34);
+		devCardsMarket.buyCardFromMarket(38);
+		devCardsMarket.buyCardFromMarket(42);
+		devCardsMarket.buyCardFromMarket(46);
+		model.setDevCardsMarket(devCardsMarket);
+		assertEquals("Error", "You lose! There are no more purple dev cards in the market.", model.isSinglePlayerMatchLost());
+	}
+
+	@Test
+	public void isSinglePlayerMatchLost3()			/* no more blue devCard */
+	{
+		p1 = new Player("pippo");
+		players = new ArrayList<>();
+		players.add(p1);
+		model = new Model(players);
+		devCardsMarket.buyCardFromMarket(3);
+		devCardsMarket.buyCardFromMarket(7);
+		devCardsMarket.buyCardFromMarket(11);
+		devCardsMarket.buyCardFromMarket(15);
+		devCardsMarket.buyCardFromMarket(19);
+		devCardsMarket.buyCardFromMarket(23);
+		devCardsMarket.buyCardFromMarket(27);
+		devCardsMarket.buyCardFromMarket(31);
+		devCardsMarket.buyCardFromMarket(35);
+		devCardsMarket.buyCardFromMarket(39);
+		devCardsMarket.buyCardFromMarket(43);
+		devCardsMarket.buyCardFromMarket(47);
+		model.setDevCardsMarket(devCardsMarket);
+		assertEquals("Error", "You lose! There are no more blue dev cards in the market.", model.isSinglePlayerMatchLost());
+	}
+
+	@Test
+	public void isSinglePlayerMatchLost4()			/* no more yellow devCard */
+	{
+		p1 = new Player("pippo");
+		players = new ArrayList<>();
+		players.add(p1);
+		model = new Model(players);
+		devCardsMarket.buyCardFromMarket(4);
+		devCardsMarket.buyCardFromMarket(8);
+		devCardsMarket.buyCardFromMarket(12);
+		devCardsMarket.buyCardFromMarket(16);
+		devCardsMarket.buyCardFromMarket(20);
+		devCardsMarket.buyCardFromMarket(24);
+		devCardsMarket.buyCardFromMarket(28);
+		devCardsMarket.buyCardFromMarket(32);
+		devCardsMarket.buyCardFromMarket(36);
+		devCardsMarket.buyCardFromMarket(40);
+		devCardsMarket.buyCardFromMarket(44);
+		devCardsMarket.buyCardFromMarket(48);
+		model.setDevCardsMarket(devCardsMarket);
+		assertEquals("Error", "You lose! There are no more yellow dev cards in the market.", model.isSinglePlayerMatchLost());
+	}
+
+	@Test
+	public void isSinglePlayerMatchLost5()			/* Lorenzo has reached the end of the Faith Track */
+	{
+		p1 = new Player("pippo");
+		players = new ArrayList<>();
+		players.add(p1);
+		track = new Track(players);
+		track.setBlackPawn(24);
+		model = new Model(players);
+		model.setTrack(track);
+		assertEquals("Error", "You lose! Lorenzo has reached the end of the Faith Track.", model.isSinglePlayerMatchLost());
+	}
+
+	@Test
+	public void isSinglePlayerMatchLost6()			/* no single player match lost */
+	{
+		p1 = new Player("pippo");
+		players = new ArrayList<>();
+		players.add(p1);
+		model = new Model(players);
+		devCardsMarket.buyCardFromMarket(4);
+		devCardsMarket.buyCardFromMarket(8);
+		track = new Track(players);
+		track.setBlackPawn(12);
+		model.setTrack(track);
+		model.setDevCardsMarket(devCardsMarket);
+		assertNull(model.isSinglePlayerMatchLost());
 	}
 
 	@Test
