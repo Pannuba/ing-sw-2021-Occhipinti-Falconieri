@@ -1,7 +1,6 @@
 package it.polimi.ingsw.server.messages;
 
 import it.polimi.ingsw.client.view.ActionExecutor;
-import it.polimi.ingsw.client.view.cli.ActionCLI;
 import it.polimi.ingsw.model.Resource;
 
 import java.io.Serializable;

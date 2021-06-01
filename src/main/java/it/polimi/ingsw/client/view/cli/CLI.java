@@ -122,20 +122,15 @@ public class CLI extends Observable implements Observer
 		if (obj instanceof GameState)
 		{
 			this.gameState = (GameState) obj;		/* Gamestate is needed in game loop, not during setup */
-			//System.out.println(gameState.getCurrPlayers().get(0).getUsername() + " is active? " + gameState.getCurrPlayers().get(0).isMyTurn());
-			//System.out.println(gameState.getCurrPlayers().get(1).getUsername() + " is active? " + gameState.getCurrPlayers().get(1).isMyTurn());
 
-			if (gameState.getCurrPlayerName() != null)
+			if (gameState.getPlayerByName(username).isMyTurn())
 			{
-				if (gameState.getPlayerByName(username).isMyTurn())
-				{
-					System.out.print("It's your turn! ");
-					chooseAction();
-				}
-
-				else
-					System.out.println("It's " + gameState.getCurrPlayerName() + "'s turn!");
+				System.out.print("It's your turn! ");
+				chooseAction();
 			}
+
+			else
+				System.out.println("It's " + gameState.getCurrPlayerName() + "'s turn!");
 		}
 	}
 

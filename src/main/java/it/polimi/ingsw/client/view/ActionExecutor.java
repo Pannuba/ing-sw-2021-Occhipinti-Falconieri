@@ -8,7 +8,9 @@ import it.polimi.ingsw.model.cards.LeaderCard;
 
 import java.util.List;
 
-/* Has the abstract definition of all methods called by messages sent by the server */
+/*	Has the abstract definition of all methods called by messages sent by the server
+	Put all possible actions here, or only server messages? If only server messages find a better class name. I think all actions is better
+	Maybe separate methods called by messages and "local" methods/actions with spaces or comments */
 
 public abstract class ActionExecutor
 {

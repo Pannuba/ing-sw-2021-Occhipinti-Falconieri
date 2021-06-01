@@ -65,60 +65,7 @@ public class ActionCLI extends ActionExecutor	/* Has methods that perform action
 
 	public void leaderChoice()
 	{
-		List<LeaderCard> leaderCards = cli.getGameState().getPlayerByName(cli.getUsername()).getLeaderCards();
-		List<LeaderCard> inactiveLeaders = new ArrayList<>();
-
-		for (int i = 0; i < leaderCards.size(); i++)
-		{
-			if (leaderCards.get(i).isDiscarded())
-			{
-				leaderCards.remove(i);		/* Discarded cards can't be activated nor discarded, so remove them */
-				i--;
-			}
-
-			if (!leaderCards.get(i).isActive())
-				inactiveLeaders.add(leaderCards.get(i));
-		}
-
-		if (leaderCards.isEmpty())
-			return;			/* If the player has no leadercards or they are both discarded, skip the choice */
-
-		System.out.print("Do you want to activate or discard a leader? A/D: ");
-
-		switch (input.nextLine().toUpperCase())
-		{
-			case "A":		/* TODO: check if inactiveLeaders is empty */
-				activateLeader(inactiveLeaders);		/* Only pass cards that can be activated */
-				break;
-
-			case "D":
-				discardLeader(leaderCards);				/* Only pass cards that can be discarded */
-				break;
-		}
-	}
-
-	private void activateLeader(List<LeaderCard> leaderCards)		/* Sends command to activate a leader, server checks resources and replies with another message */
-	{
-		PrintMethods.printPlayerLeaderCards(leaderCards);
-		System.out.print("Select card #" + leaderCards.get(0).getCardNumber() + " or #" + leaderCards.get(1).getCardNumber() + ": ");
-		String chosenCard = input.nextLine();
-
-		command.add("ACTIVATE_LEADER");
-		command.add(chosenCard);
-		networkHandler.send(command);
-		command.clear();
-	}
-
-	private void discardLeader(List<LeaderCard> leaderCards)
-	{
-		PrintMethods.printPlayerLeaderCards(leaderCards);
-		System.out.print("Select card #" + leaderCards.get(0).getCardNumber() + " or #" + leaderCards.get(1).getCardNumber() + ": ");
-		String chosenCard = input.nextLine();
-
-		command.add("DISCARD_LEADER");
-		command.add(chosenCard);
-		networkHandler.send(command);
-		command.clear();
+		new LeaderChoice(input, command, networkHandler, cli);
 	}
 
 	public void buyResources()
