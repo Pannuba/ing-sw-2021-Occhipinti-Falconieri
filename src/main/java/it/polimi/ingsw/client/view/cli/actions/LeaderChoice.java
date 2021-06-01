@@ -36,7 +36,13 @@ public class LeaderChoice
 
 		switch (input.nextLine().toUpperCase())
 		{
-			case "A":		/* Only pass cards that can be activated. TODO: check if inactiveLeaders is empty */
+			case "A":		/* Only pass cards that can be activated */
+
+				if (inactiveLeaders.isEmpty())
+				{
+					System.out.println("You don't have any leaders that can be activated!");
+					return;
+				}
 
 				PrintMethods.printPlayerLeaderCards(inactiveLeaders);
 				System.out.print("Select card #" + inactiveLeaders.get(0).getCardNumber() + " or #" + inactiveLeaders.get(1).getCardNumber() + ": ");
@@ -53,7 +59,7 @@ public class LeaderChoice
 				System.out.print("Select card #" + leaderCards.get(0).getCardNumber() + " or #" + leaderCards.get(1).getCardNumber() + ": ");
 				chosenCard = input.nextLine();
 
-				command.add("DISCARD_LEADER");		/* TODO: avoid repeating these lines, see other actions */
+				command.add("DISCARD_LEADER");
 				command.add(chosenCard);
 				networkHandler.send(command);
 				command.clear();

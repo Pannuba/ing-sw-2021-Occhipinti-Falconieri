@@ -10,7 +10,11 @@ import it.polimi.ingsw.server.messages.BoughtResourcesMessage;
 import it.polimi.ingsw.server.messages.OperationResultMessage;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
+/* Delete CommandProcessor and make a Class for each command? */
 
 public class CommandProcessor			/* Contains the code that runs when a certain command is received */
 {
@@ -146,6 +150,9 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 				resourcesToAdd.add(ResourceType.convertMarbleToResType(boughtMarbles.get(i)));
 		}
 
+		/* sort resourcesToAdd to put the resoruces in higher amount first [PURPLE, BLUE, YELLOW, BLUE] --> [BLUE, BLUE, PURPLE, YELLOW]. o(n^2) but so few elements it doesn't matter. (thanks SO) */
+		resourcesToAdd.sort(Comparator.comparing(i -> Collections.frequency(resourcesToAdd, i)).reversed());
+
 		List<ResourceType> resourcesToDiscard = new ArrayList<>();
 
 		for (int i = 0; i < resourcesToAdd.size(); i++)
@@ -172,7 +179,10 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 		if (!resourcesToDiscard.isEmpty())
 		{
 			if (model.getNumPlayers() == 1)		/* If singleplayer match, give Lorenzo #-discarded-resources points */
+			{
+				System.out.println("Giving Lorenzo " + resourcesToDiscard.size() + " faithpoints");
 				model.getTrack().setBlackPawn(model.getTrack().getBlackPawn() + resourcesToDiscard.size());
+			}
 
 			else								/* Otherwise give 1 faith point to everyone who's not the current user */
 			{

@@ -15,9 +15,10 @@ public class ChooseLeaderCards
 			PrintMethods.printLeaderCard(fourLeaderCards.get(i));
 
 		System.out.print(	"Choose leader card " + fourLeaderCards.get(0).getCardNumber() + ", " + fourLeaderCards.get(1).getCardNumber() +
-				", " + fourLeaderCards.get(2).getCardNumber() + ", " + fourLeaderCards.get(3).getCardNumber() + ": ");
+							", " + fourLeaderCards.get(2).getCardNumber() + ", " + fourLeaderCards.get(3).getCardNumber() + ": ");
 
-		String cardChoice1 = input.nextLine();					/* Has to be the leadercard number */
+		String cardChoice1 = input.nextLine();
+
 		System.out.print("Choose the second leader card: ");
 		String cardChoice2 = input.nextLine();
 
