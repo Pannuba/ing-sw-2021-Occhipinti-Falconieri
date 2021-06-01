@@ -7,21 +7,24 @@
 <?import javafx.scene.text.Font?>
 
 <!-- Removed stylesheets="@../css/style.css" and buttons folder. <styleClass> gets properties from .css such as layout and background image -->
+<!-- This was made exclusively in SceneBuilder, except I had to correct the controller's path by adding it.polimi.ingsw... -->
 
+<!-- Workflow: make xfml in SceneBuilder, set controller name (bottom left), set fx:id (under Code in top right) and for each control element (and On Action if needed), -->
+<!-- then View -> Show Sample Controller Skeleton and copy-paste it, correct the controller's path adding the project namespace, and finally write the On Action methods -->
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.LauncherController">
    <children>
-      <TextField promptText="IP Address">
+      <TextField fx:id="ipField" promptText="IP Address">
          <VBox.margin>
             <Insets left="100.0" right="100.0" top="100.0" />
          </VBox.margin>
       </TextField>
-      <TextField promptText="Port">
+      <TextField fx:id="portField" promptText="Port">
          <VBox.margin>
             <Insets left="100.0" right="100.0" top="50.0" />
          </VBox.margin>
       </TextField>
-      <Button mnemonicParsing="false" text="PLAY">
+      <Button mnemonicParsing="false" onAction="#connectToServer" text="PLAY">
          <VBox.margin>
             <Insets left="230.0" top="50.0" />
          </VBox.margin>
