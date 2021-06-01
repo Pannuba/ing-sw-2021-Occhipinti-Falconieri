@@ -3,6 +3,7 @@ package it.polimi.ingsw.server;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.server.messages.FirstPlayerMessage;
 import it.polimi.ingsw.server.view.ClientHandler;
+import it.polimi.ingsw.util.Ping;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -56,13 +57,18 @@ public class ServerListener
 					ois = new ObjectInputStream(socket.getInputStream());
 					oos = new ObjectOutputStream(socket.getOutputStream());
 					System.out.println("Incoming connection: " + socket);
-					username = (String) ois.readObject();
+					username = (String) ois.readObject();					/* Client sends username and starts NetworkHandler thread */
 					System.out.println("Username: " + username);
 
 					if (i == 0)		/* Get numPlayers from the first player who connects */
 					{
 						oos.writeObject(new FirstPlayerMessage(true));
-						numPlayers = Integer.parseInt((String) ois.readObject());        /* So the loop is repeated numPlayers times to get numPlayers players */
+						Object inputObj = ois.readObject();
+
+						while (inputObj instanceof Ping)		/* Ignore pings to avoid ClassCastException if client is slow */
+							inputObj = ois.readObject();
+
+						numPlayers = Integer.parseInt((String) inputObj);        /* So the loop is repeated numPlayers times to get numPlayers players */
 						System.out.println("numPlayers: " + numPlayers);
 					}
 

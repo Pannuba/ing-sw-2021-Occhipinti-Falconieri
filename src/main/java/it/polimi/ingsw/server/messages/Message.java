@@ -1,8 +1,8 @@
 package it.polimi.ingsw.server.messages;
 
-import it.polimi.ingsw.client.view.ActionExecutor;
+import it.polimi.ingsw.client.view.MessageExecutor;
 
 public interface Message
 {
-	void process(ActionExecutor action);
+	void process(MessageExecutor action);
 }

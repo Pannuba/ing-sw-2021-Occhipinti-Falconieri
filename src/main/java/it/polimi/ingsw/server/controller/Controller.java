@@ -27,7 +27,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 	public void parseInput(List<String> command)		/* Gets name from ClientHandler to change that player's stuff */
 	{
-		System.out.println("Username ID: " + model.getPlayerByUsername(username).getId());
+		//System.out.println("Username ID: " + model.getPlayerByUsername(username).getId());
 
 		switch (command.get(0))
 		{

@@ -97,6 +97,7 @@ public class NetworkHandler extends Observable implements Runnable		/* Observed 
 
 		try
 		{
+			sendPing.cancel();
 			heartbeat.cancel();
 			heartbeat.purge();
 

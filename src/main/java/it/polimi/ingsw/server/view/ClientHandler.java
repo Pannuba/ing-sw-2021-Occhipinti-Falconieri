@@ -15,6 +15,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 	private final ObjectInputStream ois;
 	private final ObjectOutputStream oos;
 	private final Timer heartbeat;
+	private final TimerTask sendPing;
 
 	public ClientHandler(Socket clientSocket, String username, ObjectInputStream ois, ObjectOutputStream oos)
 	{
@@ -25,7 +26,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 		this.ois = ois;			/* Can't create a I/O stream for a socket that already has one (created in ServerListener) */
 		this.oos = oos;
 
-		TimerTask sendPing = new TimerTask() {
+		sendPing = new TimerTask() {
 			public void run() {
 				send(new Ping()); } };
 
@@ -82,6 +83,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 
 		try
 		{
+			sendPing.cancel();
 			heartbeat.cancel();
 			heartbeat.purge();
 

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.server.messages;
 
-import it.polimi.ingsw.client.view.ActionExecutor;
+import it.polimi.ingsw.client.view.MessageExecutor;
 import it.polimi.ingsw.model.Player;
 
 import java.io.Serializable;
@@ -20,7 +20,7 @@ public class VaticanReportMessage implements Message, Serializable
 	}
 
 	@Override
-	public void process(ActionExecutor action)
+	public void process(MessageExecutor action)
 	{
 		action.vaticanReport(popeBoxNum, players);
 	}

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.NetworkHandler;
-import it.polimi.ingsw.client.view.ActionExecutor;
+import it.polimi.ingsw.client.view.MessageExecutor;
 import it.polimi.ingsw.client.view.cli.actions.*;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Resource;
@@ -15,12 +15,10 @@ import java.util.Scanner;
 	then make ActionCLI and ActionGUI classes that extend ActionExecutor in the cli and gui package respectively, and put the @Override methods there
 	MessageDecoder has an instance variable of ActionExecutor, it should still work.
 
-	On a separate note, I should put the code for each action in its own class...
-
-	Put everything here or only the functions called by server messages?
+	Put everything here or only the functions called by server messages? Make MessageCLI and ActionCLI
 */
 
-public class ActionCLI extends ActionExecutor	/* Has methods that perform actions such as buying resources, to avoid cluttering the CLI. Interface? */
+public class ActionCLI extends MessageExecutor    /* Has methods that perform actions such as buying resources, to avoid cluttering the CLI. Interface? */
 {
 	private final Scanner input;
 	private final CLI cli;
@@ -33,6 +31,26 @@ public class ActionCLI extends ActionExecutor	/* Has methods that perform action
 		this.input = cli.getInput();
 		this.networkHandler = cli.getNetworkHandler();
 		command = new ArrayList<>();
+	}
+
+	public void leaderChoice()
+	{
+		new LeaderChoice(input, command, networkHandler, cli);
+	}
+
+	public void buyResources()
+	{
+		new BuyResources(input, command, networkHandler, cli);
+	}
+
+	public void buyDevCard()
+	{
+		new BuyDevCard(input, command, networkHandler, cli);
+	}
+
+	public void activateProduction()		/* How many times can a production be repeated? See rules */
+	{
+		new ActivateProduction(input, command, networkHandler, cli);
 	}
 
 	@Override
@@ -63,24 +81,20 @@ public class ActionCLI extends ActionExecutor	/* Has methods that perform action
 		new ChooseResources(playerID, input, command, networkHandler);
 	}
 
-	public void leaderChoice()
-	{
-		new LeaderChoice(input, command, networkHandler, cli);
-	}
-
-	public void buyResources()
-	{
-		new BuyResources(input, command, networkHandler, cli);
-	}
-
+	@Override
 	public void getBoughtResources(List<Resource> boughtResources)
 	{
 		System.out.print("Received the following resources: " + PrintMethods.convertResListToString(boughtResources) + "\n");
 	}
 
-	public void buyDevCard()
+	@Override
+	public void getDiscardedResources(int discardedResNum, String playerWhoDiscarded)
 	{
-		new BuyDevCard(input, command, networkHandler, cli);
+		if (!playerWhoDiscarded.equals(cli.getUsername()))
+			System.out.println(playerWhoDiscarded + " discarded " + discardedResNum + " resources, so you gained " + discardedResNum + " faith points!");
+
+		else
+			System.out.println(discardedResNum + " resources couldn't fit in the storage, so they have been discarded");
 	}
 
 	@Override
@@ -88,11 +102,6 @@ public class ActionCLI extends ActionExecutor	/* Has methods that perform action
 	{
 		System.out.print("Received the following devcard:\n");
 		PrintMethods.printDevCard(boughtCard);
-	}
-
-	public void activateProduction()		/* How many times can a production be repeated? See rules */
-	{
-		new ActivateProduction(input, command, networkHandler, cli);
 	}
 
 	@Override
@@ -118,26 +127,16 @@ public class ActionCLI extends ActionExecutor	/* Has methods that perform action
 	}
 
 	@Override
-	public void getDiscardedResources(int discardedResNum, String playerWhoDiscarded)
-	{
-		if (!playerWhoDiscarded.equals(cli.getUsername()))
-			System.out.println(playerWhoDiscarded + " discarded " + discardedResNum + " resources, so you gained " + discardedResNum + " faith points!");
-
-		else
-			System.out.println(discardedResNum + " resources couldn't fit in the storage, so they have been discarded");
-	}
-
-	@Override
 	public void singlePlayerGameOver(String message)		/* When the player has lost, print the game over message and close the client */
 	{
 		System.out.println(message);
 
-		System.out.print("Do you want to play again? (Y/N) ");			/* TODO: test this */
+		System.out.print("Do you want to play again? (Y/N) ");			/* TODO: not working if Y */
 
 		if (input.nextLine().equalsIgnoreCase("Y"))
 		{
 			networkHandler.stop();
-			new CLI(cli.getInput());
+			new CLI(new Scanner(System.in));
 		}
 
 		else
