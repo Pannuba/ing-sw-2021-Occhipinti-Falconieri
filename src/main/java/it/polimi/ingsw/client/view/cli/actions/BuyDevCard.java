@@ -1,7 +1,7 @@
 package it.polimi.ingsw.client.view.cli.actions;
 
 import it.polimi.ingsw.client.NetworkHandler;
-import it.polimi.ingsw.client.view.cli.ActionExecutor;
+import it.polimi.ingsw.client.view.cli.ActionCLI;
 import it.polimi.ingsw.client.view.cli.CLI;
 import it.polimi.ingsw.client.view.cli.PrintMethods;
 
@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class BuyDevCard
 {
-	public BuyDevCard(ActionExecutor action, Scanner input, List<String> command, NetworkHandler networkHandler, CLI cli)
+	public BuyDevCard(Scanner input, List<String> command, NetworkHandler networkHandler, CLI cli)
 	{
 		int devCardAreaIndex, targetAreaLayer;
 		String choice, cardToBuyNum;
@@ -22,7 +22,7 @@ public class BuyDevCard
 
 		if (!choice.equals("1") && !choice.equals("2") && !choice.equals("3"))
 		{
-			action.chooseAction();
+			cli.chooseAction();
 			return;
 		}
 

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.client.view.cli.actions;
 
 import it.polimi.ingsw.client.NetworkHandler;
-import it.polimi.ingsw.client.view.cli.ActionExecutor;
+import it.polimi.ingsw.client.view.cli.ActionCLI;
 import it.polimi.ingsw.client.view.cli.CLI;
 import it.polimi.ingsw.client.view.cli.PrintMethods;
 import it.polimi.ingsw.model.cards.LeaderCard;
@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class ActivateProduction
 {
-	public ActivateProduction(ActionExecutor action, Scanner input, List<String> command, NetworkHandler networkHandler, CLI cli)
+	public ActivateProduction(Scanner input, List<String> command, NetworkHandler networkHandler, CLI cli)
 	{
 		System.out.println("This is your current storage and vault:");
 		PrintMethods.printStorage(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getStorage());
@@ -63,7 +63,7 @@ public class ActivateProduction
 				if (activeCardsWithProdSkill.isEmpty())
 				{
 					System.out.println("You don't have any active leaders that have a production skill!");
-					action.chooseAction();
+					cli.chooseAction();
 					return;
 				}
 
@@ -87,7 +87,7 @@ public class ActivateProduction
 				break;
 
 			default:
-				action.chooseAction();
+				cli.chooseAction();
 				return;
 		}
 

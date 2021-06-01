@@ -1,6 +1,6 @@
 package it.polimi.ingsw.server.messages;
 
-import it.polimi.ingsw.client.view.cli.ActionExecutor;
+import it.polimi.ingsw.client.view.cli.ActionCLI;
 
 import java.io.Serializable;
 
@@ -14,7 +14,7 @@ public class FirstPlayerMessage implements Message, Serializable
 	}
 
 	@Override
-	public void process(ActionExecutor action)
+	public void process(ActionCLI action)
 	{
 		action.firstPlayer(isFirstPlayer);
 	}

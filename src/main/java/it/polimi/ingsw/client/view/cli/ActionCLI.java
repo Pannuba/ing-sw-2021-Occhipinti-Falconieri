@@ -1,10 +1,8 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.NetworkHandler;
-import it.polimi.ingsw.client.view.cli.actions.ActivateProduction;
-import it.polimi.ingsw.client.view.cli.actions.BuyDevCard;
-import it.polimi.ingsw.client.view.cli.actions.BuyResources;
-import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.client.view.ActionExecutor;
+import it.polimi.ingsw.client.view.cli.actions.*;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.cards.*;
@@ -20,14 +18,14 @@ import java.util.Scanner;
 	On a separate note, I should put the code for each action in its own class...
 */
 
-public class ActionExecutor		/* Has methods that perform actions such as buying resources, to avoid cluttering the CLI. Interface? */
+public class ActionCLI extends ActionExecutor	/* Has methods that perform actions such as buying resources, to avoid cluttering the CLI. Interface? */
 {
 	private final Scanner input;
 	private final CLI cli;
 	private final NetworkHandler networkHandler;
 	private final List<String> command;
 
-	public ActionExecutor(CLI cli)		/* TODO: tidy parameters passed from CLI and to other actions */
+	public ActionCLI(CLI cli)		/* TODO: tidy parameters passed from CLI and to other actions */
 	{
 		this.cli = cli;
 		this.input = cli.getInput();
@@ -49,74 +47,9 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		System.out.println("Starting match\n\nMasters of the Renaissance!");
 	}
 
-	public void chooseAction()
-	{
-		GameState gameState = cli.getGameState();
-		System.out.print("What do you want to do?\nBuy from market (0), buy devcards (1), activate production (2), view cards (3), view board (4), view markets (5): ");
-
-		String choice = input.nextLine();
-
-		switch (choice)
-		{
-			case "0":
-				leaderChoice();
-				buyResources();
-				break;
-
-			case "1":
-				leaderChoice();
-				buyDevCard();
-				break;
-
-			case "2":
-				leaderChoice();
-				activateProduction();
-				break;
-
-			case "3":
-				PrintMethods.printPlayerLeaderCards(gameState.getPlayerByName(cli.getUsername()).getLeaderCards());
-				PrintMethods.printPlayerDevCards(gameState.getPlayerByName(cli.getUsername()).getDashboard().getAllDevCards());
-				break;
-
-			case "4":
-				PrintMethods.printTrack(gameState.getCurrTrack(), gameState.getCurrPlayers());
-				PrintMethods.printBoard(gameState.getPlayerByName(cli.getUsername()).getDashboard());
-				break;
-
-			case "5":
-				PrintMethods.printDevCardsMarket(gameState.getCurrDevCardsMarket());
-				PrintMethods.printMarblesMarket(gameState.getCurrMarblesMarket());
-				break;
-
-			default:
-				System.out.println("Invalid action number");
-				chooseAction();
-				return;
-		}
-
-		if (choice.equals("3") || choice.equals("4") || choice.equals("5"))			/* Player can choose again after viewing things */
-			chooseAction();
-	}
-
 	public void chooseLeaderCards(List<LeaderCard> fourLeaderCards)
 	{
-		for (int i = 0; i < 4; i++)
-			PrintMethods.printLeaderCard(fourLeaderCards.get(i));
-
-		System.out.print(	"Choose leader card " + fourLeaderCards.get(0).getCardNumber() + ", " + fourLeaderCards.get(1).getCardNumber() +
-							", " + fourLeaderCards.get(2).getCardNumber() + ", " + fourLeaderCards.get(3).getCardNumber() + ": ");
-
-		String cardChoice1 = input.nextLine();					/* Has to be the leadercard number */
-		System.out.print("Choose the second leader card: ");
-		String cardChoice2 = input.nextLine();
-
-		command.add("SELECT_LEADERCARDS");
-		command.add(cardChoice1);
-		command.add(cardChoice2);
-
-		System.out.println("Notifying observers (network handler)");
-		networkHandler.send(command);
-		command.clear();		/* So the same command List<String> instance can be used in all functions */
+		new ChooseLeaderCards(fourLeaderCards, input, command, networkHandler);
 	}
 
 	public void chooseResources(int playerID)			/* 1st player: nothing; 2nd: 1 resource; 3rd: 1 resource + 1 faithPoint; 4th: 2 resources + 1 faithPoint */
@@ -221,7 +154,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 	public void buyResources()
 	{
-		new BuyResources(this, input, command, networkHandler, cli);
+		new BuyResources(input, command, networkHandler, cli);
 	}
 
 	public void getBoughtResources(List<Resource> boughtResources)
@@ -229,9 +162,10 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		System.out.print("Received the following resources: " + PrintMethods.convertResListToString(boughtResources) + "\n");
 	}
 
+	@Override
 	public void buyDevCard()
 	{
-		new BuyDevCard(this, input, command, networkHandler, cli);
+		new BuyDevCard(input, command, networkHandler, cli);
 	}
 
 	public void getBoughtDevCard(DevCard boughtCard)
@@ -242,7 +176,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 	public void activateProduction()		/* How many times can a production be repeated? See rules */
 	{
-		new ActivateProduction(this, input, command, networkHandler, cli);
+		new ActivateProduction(input, command, networkHandler, cli);
 	}
 
 	public void getOperationResultMessage(String message, boolean isFailed)
@@ -250,7 +184,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 		System.out.println(message);
 
 		if (isFailed)
-			chooseAction();		/* Client can repeat the round for failed actions */
+			cli.chooseAction();		/* Client can repeat the round for failed actions */
 	}
 
 	public void getActionToken(ActionToken token)
@@ -261,51 +195,7 @@ public class ActionExecutor		/* Has methods that perform actions such as buying 
 
 	public void vaticanReport(int popeBoxNum, List<Player> players)
 	{
-		Player localPlayer = new Player("temp");		/* Otherwise IntelliJ gives an annoying warning */
-
-		System.out.println("Vatican report on box #" + popeBoxNum + "!");
-
-		for (int i = 0; i < players.size(); i++)
-		{
-			if (players.get(i).getUsername().equals(cli.getUsername()))
-				localPlayer = players.get(i);
-		}
-
-		switch (popeBoxNum)
-		{
-			case 8:
-
-				if (localPlayer.getPopeTokens()[0].isActive())
-					System.out.println("Gained " + localPlayer.getPopeTokens()[0].getPoints() + " victory points!");
-
-				else
-					System.out.println("Discarded first pope token");
-
-				break;
-
-			case 16:
-
-				if (localPlayer.getPopeTokens()[1].isActive())
-					System.out.println("Gained " + localPlayer.getPopeTokens()[1].getPoints() + " victory points!");
-
-				else
-					System.out.println("Discarded second pope token");
-
-				break;
-
-			case 24:
-
-				if (localPlayer.getPopeTokens()[2].isActive())
-					System.out.println("Gained " + localPlayer.getPopeTokens()[2].getPoints() + " victory points!");
-
-				else
-					System.out.println("Discarded third pope token");
-
-				break;
-
-			default:
-				System.out.println("This should never ever ever happen");
-		}
+		new VaticanReport(popeBoxNum, players, cli);
 	}
 
 	public void getDiscardedResources(int discardedResNum, String playerWhoDiscarded)

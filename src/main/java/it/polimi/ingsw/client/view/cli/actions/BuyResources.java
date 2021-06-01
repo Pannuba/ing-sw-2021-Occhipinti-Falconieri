@@ -1,7 +1,7 @@
 package it.polimi.ingsw.client.view.cli.actions;
 
 import it.polimi.ingsw.client.NetworkHandler;
-import it.polimi.ingsw.client.view.cli.ActionExecutor;
+import it.polimi.ingsw.client.view.cli.ActionCLI;
 import it.polimi.ingsw.client.view.cli.CLI;
 import it.polimi.ingsw.client.view.cli.PrintMethods;
 import it.polimi.ingsw.model.cards.SkillMarble;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class BuyResources		/* TODO: Action interface */
 {
-	public BuyResources(ActionExecutor action, Scanner input, List<String> command, NetworkHandler networkHandler, CLI cli)
+	public BuyResources(Scanner input, List<String> command, NetworkHandler networkHandler, CLI cli)
 	{
 		String rowOrCol, rowOrColNum, whiteMarbleRes = "", choice;
 
@@ -36,7 +36,7 @@ public class BuyResources		/* TODO: Action interface */
 				break;
 
 			default:
-				action.chooseAction();
+				cli.chooseAction();
 				return;		/* Without return it still sends a command after the recursion(?) which leads to chaos */
 		}
 

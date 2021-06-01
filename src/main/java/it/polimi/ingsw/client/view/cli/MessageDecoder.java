@@ -14,9 +14,9 @@ import java.util.List;
 
 public class MessageDecoder		/* Reads Message objects sent by server and runs the respective method */
 {
-	private final ActionExecutor action;
+	private final ActionCLI action;
 
-	public MessageDecoder(ActionExecutor action)
+	public MessageDecoder(ActionCLI action)
 	{
 		this.action = action;
 	}
