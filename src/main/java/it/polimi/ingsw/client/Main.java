@@ -13,8 +13,8 @@ public class Main		/* Starting point from which the user chooses to start the CL
 		String choice = "";
 
 		System.out.print("Start with CLI (1) or GUI (2)? ");
-		//choice = input.nextLine(); debug
-		choice = "1";
+		choice = input.nextLine();	/* debug */
+		//choice = "1";
 
 		while (!choice.equals("1") && !choice.equals("2"))
 		{
