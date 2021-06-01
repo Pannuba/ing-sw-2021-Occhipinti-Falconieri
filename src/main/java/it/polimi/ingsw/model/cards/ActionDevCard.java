@@ -6,8 +6,8 @@ import java.util.List;
 
 public class ActionDevCard extends ActionToken
 {
-	private final DevCardColor color;
-	private final DevCardsMarket devCardsMarket;
+	private DevCardColor color;
+	private DevCardsMarket devCardsMarket;
 
 	public ActionDevCard(DevCardColor color, DevCardsMarket devCardsMarket)
 	{
@@ -49,4 +49,10 @@ public class ActionDevCard extends ActionToken
 	{
 		return color;
 	}
+
+	public void setColor(DevCardColor color) { this.color = color; }
+
+	public DevCardsMarket getDevCardsMarket() { return devCardsMarket; }
+
+	public void setDevCardsMarket(DevCardsMarket devCardsMarket) { this.devCardsMarket = devCardsMarket; }
 }
