@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.board.*;
+import it.polimi.ingsw.model.cards.ActionToken;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.model.cards.PopeToken;
@@ -46,6 +47,7 @@ public class ModelTest {
 	private Shelf[] shelves = new Shelf[3];
 	private final PopeToken[] popeTokens = new PopeToken[3];
 	private DevCardsMarket devCardsMarket = new DevCardsMarket();
+	private List<ActionToken> actionTokens;
 
 	@Test
 	public void vaticanReport1()		/* First pope box has been reached */
@@ -446,5 +448,60 @@ public class ModelTest {
 		track.setRedPawns(redPawns);
 		model.setTrack(track);
 		assertEquals("Error", 47, model.calculatePoints(p1));
+	}
+
+	@Test
+	public void getNextActionToken()
+	{
+		p1 = new Player("pippo");
+		players = new ArrayList<>();
+		players.add(p1);
+		model = new Model(players);
+		actionTokens = new ArrayList<>();
+		actionTokens = model.getActionTokens();
+
+		/* flipped first ActionToken */
+		assertEquals("Error", actionTokens.get(0), model.getNextActionToken());
+		assertTrue("Error", model.getActionTokens().get(0).isFlipped());
+
+		/* flipped second ActionToken */
+		assertEquals("Error", actionTokens.get(1), model.getNextActionToken());
+		assertFalse("Error", model.getActionTokens().get(0).isFlipped());
+		assertTrue("Error", model.getActionTokens().get(1).isFlipped());
+
+		/* flipped third ActionToken */
+		assertEquals("Error", actionTokens.get(2), model.getNextActionToken());
+		assertFalse("Error", model.getActionTokens().get(0).isFlipped());
+		assertFalse("Error", model.getActionTokens().get(1).isFlipped());
+		assertTrue("Error", model.getActionTokens().get(2).isFlipped());
+
+		/* flipped fourth ActionToken */
+		assertEquals("Error", actionTokens.get(3), model.getNextActionToken());
+		assertFalse("Error", model.getActionTokens().get(0).isFlipped());
+		assertFalse("Error", model.getActionTokens().get(1).isFlipped());
+		assertFalse("Error", model.getActionTokens().get(2).isFlipped());
+		assertTrue("Error", model.getActionTokens().get(3).isFlipped());
+
+		/* flipped fifth ActionToken */
+		assertEquals("Error", actionTokens.get(4), model.getNextActionToken());
+		assertFalse("Error", model.getActionTokens().get(0).isFlipped());
+		assertFalse("Error", model.getActionTokens().get(1).isFlipped());
+		assertFalse("Error", model.getActionTokens().get(2).isFlipped());
+		assertFalse("Error", model.getActionTokens().get(3).isFlipped());
+		assertTrue("Error", model.getActionTokens().get(4).isFlipped());
+
+		/* flipped sixth ActionToken */
+		assertEquals("Error", actionTokens.get(5), model.getNextActionToken());
+		assertFalse("Error", model.getActionTokens().get(0).isFlipped());
+		assertFalse("Error", model.getActionTokens().get(1).isFlipped());
+		assertFalse("Error", model.getActionTokens().get(2).isFlipped());
+		assertFalse("Error", model.getActionTokens().get(3).isFlipped());
+		assertFalse("Error", model.getActionTokens().get(4).isFlipped());
+		assertTrue("Error", model.getActionTokens().get(5).isFlipped());
+
+		/* check that the seventh ActionTocken that not exist is not flipped and start again from the first */
+		assertEquals("Error", actionTokens.get(0), model.getNextActionToken());
+		assertFalse("Error", model.getActionTokens().get(5).isFlipped());
+		assertTrue("Error", model.getActionTokens().get(0).isFlipped());
 	}
 }
