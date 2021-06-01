@@ -4,6 +4,6 @@ public class GUI
 {
 	public GUI()
 	{
-		GUIStart.main(null);
+		Launcher.main(null);
 	}
 }

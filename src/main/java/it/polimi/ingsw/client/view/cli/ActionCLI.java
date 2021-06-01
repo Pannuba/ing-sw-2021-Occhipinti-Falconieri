@@ -66,7 +66,7 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 	@Override
 	public void startMatch()		/* Simple actions like this one don't need their own class */
 	{
-		System.out.println("Starting match\n\nMasters of the Renaissance!");
+		System.out.println("Starting match\n\nMasters of Renaissance!");
 	}
 
 	@Override
