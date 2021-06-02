@@ -29,10 +29,11 @@ public class LauncherController
 		networkHandler.connect();
 		networkHandler.send(nameField.getText());
 		new Thread(networkHandler).start();
-		//ActionGUI action = new ActionGUI(event, networkHandler);
 
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/scenes/mainview.fxml"));
+
+		ActionGUI action = new ActionGUI(networkHandler);		/* Pass all scenes? */
 
 		Parent root = loader.load();
 		Scene scene = new Scene(root);

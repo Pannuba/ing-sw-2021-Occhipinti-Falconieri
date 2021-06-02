@@ -78,6 +78,7 @@ public class NetworkHandler extends Observable implements Runnable		/* Observed 
 
 	public void send(Object obj)
 	{
+		System.out.println("Sending " + obj.getClass().getSimpleName() + " to server...");
 		try
 		{
 			oos.writeObject(obj);

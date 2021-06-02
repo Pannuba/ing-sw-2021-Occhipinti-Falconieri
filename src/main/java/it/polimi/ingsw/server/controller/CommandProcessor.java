@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/* Delete CommandProcessor and make a Class for each command? */
+/* TODO: make a separate class for big commands */
 
 public class CommandProcessor			/* Contains the code that runs when a certain command is received */
 {
@@ -239,7 +239,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 		controller.getView().send(new OperationResultMessage(message, isFailed));
 	}
 
-	public void activateProduction(List<String> command, String username)
+	public void activateProduction(List<String> command, String username)		/* TODO: add checks if client says something like AAAAAAAAAAAAA */
 	{
 		List<Resource> producedResources = new ArrayList<>();
 		List<Resource> cost = new ArrayList<>();

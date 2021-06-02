@@ -13,12 +13,10 @@ import java.util.List;
 
 public class ActionGUI extends MessageExecutor
 {
-	private ActionEvent event;
 	private final NetworkHandler networkHandler;
 
-	public ActionGUI(ActionEvent event, NetworkHandler networkHandler)
+	public ActionGUI(NetworkHandler networkHandler)
 	{
-		this.event = event;
 		this.networkHandler = networkHandler;
 	}
 

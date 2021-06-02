@@ -84,10 +84,16 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 	{
 		System.out.println("Dev cards market:\n\n");
 
-		for (int i = 0; i < market.getDevCardStacks().size(); i++)		/* Show "is empty" if size = 0? */
+		for (int i = 0; i < market.getDevCardStacks().size(); i++)
 		{
-			System.out.println("Dev card stack #" + (i + 1) + " has " + market.getDevCardStacks().get(i).size() + " cards");
-			printDevCard(market.getDevCardStacks().get(i).get(0));
+			if (market.getDevCardStacks().get(i).isEmpty())
+				System.out.println("Dev card stack #" + (i + 1) + " is empty!");
+
+			else
+			{
+				System.out.println("Dev card stack #" + (i + 1) + " has " + market.getDevCardStacks().get(i).size() + " cards");
+				printDevCard(market.getDevCardStacks().get(i).get(0));
+			}
 		}
 
 	}
