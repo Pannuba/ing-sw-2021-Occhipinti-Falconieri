@@ -14,6 +14,8 @@ import java.io.IOException;
 
 public class MarblesMarketController
 {
+	private Scene mainViewScene;
+
 	@FXML private ImageView marblesMarket;
 
 	@FXML private Button colOneButton;
@@ -41,18 +43,18 @@ public class MarblesMarketController
 	@FXML private Button backToBoardButton;
 
 	@FXML
-	void backToBoard(ActionEvent event) throws IOException
+	void backToBoard(ActionEvent event) throws IOException		/* Set the already existing scene, otherwise it resets everything. How to pass? */
 	{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/scenes/mainview.fxml"));
-
-		Parent root = loader.load();
-		Scene scene = new Scene(root);
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
 		mainStage.setTitle("Masters of Renaissance");
-		mainStage.setScene(scene);
+		mainStage.setScene(mainViewScene);
 		mainStage.sizeToScene();		/* ? */
 		mainStage.show();
+	}
+
+	public void setMainViewScene(Scene mainViewScene)
+	{
+		this.mainViewScene = mainViewScene;
 	}
 }

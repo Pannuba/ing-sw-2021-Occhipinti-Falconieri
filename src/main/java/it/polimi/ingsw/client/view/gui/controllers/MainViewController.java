@@ -17,6 +17,8 @@ import java.io.IOException;
 
 public class MainViewController
 {
+	private Scene marblesScene;
+
 	@FXML private ImageView dashboard;
 
 	@FXML private Button marblesMarketButton;
@@ -53,15 +55,10 @@ public class MainViewController
 	@FXML
 	void showMarblesMarket(ActionEvent event)  throws IOException
 	{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/scenes/marblesmarket.fxml"));
-
-		Parent root = loader.load();
-		Scene scene = new Scene(root);
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
 		mainStage.setTitle("Masters of Renaissance - Marbles Market");
-		mainStage.setScene(scene);
+		mainStage.setScene(marblesScene);
 		mainStage.sizeToScene();		/* ? */
 		mainStage.show();
 	}
@@ -90,5 +87,10 @@ public class MainViewController
 	public void setDashboard(ImageView dashboard)
 	{
 		this.dashboard = dashboard;
+	}
+
+	public void setMarblesScene(Scene marblesScene)
+	{
+		this.marblesScene = marblesScene;
 	}
 }
