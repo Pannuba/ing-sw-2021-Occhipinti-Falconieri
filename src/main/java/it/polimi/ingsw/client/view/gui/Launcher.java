@@ -28,7 +28,7 @@ public class Launcher extends Application
 		mainStage.setTitle("Masters of Renaissance Launcher");
 		mainStage.getIcons().add(new Image("/img/inkwell.png"));
 		mainStage.setScene(scene);
-		mainStage.setResizable(false);
+		//mainStage.setResizable(false);
 		mainStage.sizeToScene();		/* ? */
 		mainStage.show();
 	}

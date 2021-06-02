@@ -47,7 +47,7 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 
 		mainStage.setTitle("Masters of Renaissance");
 		mainStage.setScene(mainViewScene);
-		mainStage.setResizable(false);
+		//mainStage.setResizable(false);
 		mainStage.sizeToScene();		/* ? */
 		mainStage.show();
 	}

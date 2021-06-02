@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.view.gui;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.MessageExecutor;
 import it.polimi.ingsw.client.view.gui.controllers.MainViewController;
+import it.polimi.ingsw.client.view.gui.controllers.MarblesMarketController;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Resource;
@@ -31,10 +32,12 @@ public class ActionGUI extends MessageExecutor
 		this.marblesLoader = marblesLoader;
 	}
 
-	public void updateView(GameState gameState)
+	public void updateView(GameState gameState)		/* TODO: pass controllers, not loaders */
 	{
 		MainViewController mvc = mainViewLoader.getController();
 		mvc.updateStorage(gameState.getPlayerByName(gui.getUsername()).getDashboard().getStorage());
+		MarblesMarketController mmc = marblesLoader.getController();
+		mmc.updateMarket(gameState.getCurrMarblesMarket(), gameState.getPlayerByName(gui.getUsername()).isMyTurn());
 	}
 
 	@Override

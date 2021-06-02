@@ -18,8 +18,8 @@
       <Button fx:id="colThreeButton" disable="true" layoutX="634.0" layoutY="420.0" mnemonicParsing="false" prefHeight="105.0" prefWidth="45.0" visible="false" />
       <Button fx:id="colFourButton" disable="true" layoutX="698.0" layoutY="418.0" mnemonicParsing="false" prefHeight="105.0" prefWidth="45.0" visible="false" />
       <Button fx:id="rowOneButton" disable="true" layoutX="821.0" layoutY="172.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="74.0" visible="false" />
-      <Button fx:id="rowThreeButton" disable="true" layoutX="821.0" layoutY="236.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="74.0" visible="false" />
-      <Button fx:id="rowFourButton" disable="true" layoutX="821.0" layoutY="299.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="74.0" visible="false" />
+      <Button fx:id="rowTwoButton" disable="true" layoutX="821.0" layoutY="236.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="74.0" visible="false" />
+      <Button fx:id="rowThreeButton" disable="true" layoutX="821.0" layoutY="299.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="74.0" visible="false" />
       <ImageView fx:id="marble00" fitHeight="87.0" fitWidth="96.0" layoutX="481.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="marble01" fitHeight="87.0" fitWidth="96.0" layoutX="546.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="marble02" fitHeight="87.0" fitWidth="96.0" layoutX="609.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true" />
