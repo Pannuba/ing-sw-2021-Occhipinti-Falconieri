@@ -58,7 +58,7 @@ public class ActionGUI extends MessageExecutor
 	public void chooseResources(int playerID)
 	{
 		MainViewController mvc = mainViewLoader.getController();
-		mvc.getConsole().setText("You're the first player, so you get nothing!");
+		mvc.getConsole().setText("Player ID: " + playerID);
 	}
 
 	@Override

@@ -1,24 +1,25 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
+import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.ConvertMethods;
 import it.polimi.ingsw.model.Marble;
 import it.polimi.ingsw.model.MarblesMarket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.util.Arrays;
 
-public class MarblesMarketController
+
+public class MarblesMarketController		/* Send command directly from here? Get whiteMarbleResource from gamestate and keep it as instance variable? YES */
 {
 	private Scene mainViewScene;
+	private NetworkHandler networkHandler;
 
 	@FXML private ImageView marblesMarket;
 
@@ -59,9 +60,10 @@ public class MarblesMarketController
 
 	public void updateMarket(MarblesMarket market, boolean isMyTurn)
 	{
+		System.out.println("Updating marbles market... isMyTurn = " + isMyTurn);
 		Marble[][] marblesBoard = market.getMarblesBoard();
 
-		if (isMyTurn)
+		if (isMyTurn)		/* When it's the player's turn, make buttons pressable to send the command BUY_RESOURCES */
 		{
 			colOneButton.setDisable(false);
 			colTwoButton.setDisable(false);
@@ -70,9 +72,9 @@ public class MarblesMarketController
 
 			rowOneButton.setDisable(false);
 			rowTwoButton.setDisable(false);
-			colOneButton.setDisable(false);
+			rowThreeButton.setDisable(false);
 		}
-
+//the disable checkbox in scenebuilder disables the button permanently, meaning setdisable(false) wont work
 		else
 		{
 			colOneButton.setDisable(true);
@@ -82,7 +84,7 @@ public class MarblesMarketController
 
 			rowOneButton.setDisable(true);
 			rowTwoButton.setDisable(true);
-			colOneButton.setDisable(true);
+			rowThreeButton.setDisable(true);
 		}
 
 		marble00.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertMarbleTypeToPath(marblesBoard[0][0].getMarbleType()))));
@@ -101,8 +103,51 @@ public class MarblesMarketController
 		/* TODO: add spareMarble */
 	}
 
-	public void setMainViewScene(Scene mainViewScene)
+	@FXML
+	void selectRowOne(ActionEvent event)
+	{
+		networkHandler.send(Arrays.asList("BUY_RESOURCES", "ROW", "1"));
+	}
+
+	@FXML
+	void selectRowTwo(ActionEvent event)
+	{
+		networkHandler.send(Arrays.asList("BUY_RESOURCES", "ROW", "2"));
+	}
+
+	@FXML
+	void selectRowThree(ActionEvent event)
+	{
+		networkHandler.send(Arrays.asList("BUY_RESOURCES", "ROW", "3"));
+	}
+
+	@FXML
+	void selectColumnOne(ActionEvent event)
+	{
+		networkHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "1"));
+	}
+
+	@FXML
+	void selectColumnTwo(ActionEvent event)
+	{
+		networkHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "2"));
+	}
+
+	@FXML
+	void selectColumnThree(ActionEvent event)
+	{
+		networkHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "3"));
+	}
+
+	@FXML
+	void selectColumnFour(ActionEvent event)
+	{
+		networkHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "4"));
+	}
+
+	public void setup(Scene mainViewScene, NetworkHandler networkHandler)
 	{
 		this.mainViewScene = mainViewScene;
+		this.networkHandler = networkHandler;
 	}
 }

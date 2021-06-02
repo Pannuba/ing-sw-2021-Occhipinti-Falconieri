@@ -22,7 +22,7 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 	private String username;
 	private GameState gameState;				/* Local gamestate accessed by action and scenes through get method */
 
-	public GUIModel(String username, NetworkHandler networkHandler, Event event) throws IOException
+	public GUIModel(String username, NetworkHandler networkHandler, Event event) throws IOException		/* /a/14190310 on how to pass parameters to controllers */
 	{
 		this.username = username;
 
@@ -39,7 +39,7 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 		Scene marblesScene = new Scene(marblesRoot);
 
 		MarblesMarketController mmc = marblesLoader.getController();
-		mmc.setMainViewScene(mainViewScene);
+		mmc.setup(mainViewScene, networkHandler);						/* TODO: create setup() in all scene controllers */
 		MainViewController mvc = mainViewLoader.getController();
 		mvc.setMarblesScene(marblesScene);
 
