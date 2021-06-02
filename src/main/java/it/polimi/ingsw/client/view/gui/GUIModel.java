@@ -43,7 +43,7 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 		MainViewController mvc = mainViewLoader.getController();
 		mvc.setMarblesScene(marblesScene);
 
-		action = new ActionGUI(this, networkHandler, mainViewLoader, marblesLoader);		/* TODO: pass controllers, not loaders */
+		action = new ActionGUI(this, networkHandler, mvc, mmc);		/* TODO: pass controllers, not loaders */
 
 		mainStage.setTitle("Masters of Renaissance");
 		mainStage.setScene(mainViewScene);

@@ -19,31 +19,28 @@ public class ActionGUI extends MessageExecutor
 {
 	private final GUIModel gui;
 	private final NetworkHandler networkHandler;		/* To send commands to server */
-	private final FXMLLoader mainViewLoader;						/* To update the scenes when a new gamestate is received */
-	private final FXMLLoader marblesLoader;
+	private final MainViewController mvc;						/* To update the scenes when a new gamestate is received */
+	private final MarblesMarketController mmc;
 
 	/* TODO: add controller instance variables, get controllers from loaders in constructors */
 
-	public ActionGUI(GUIModel gui, NetworkHandler networkHandler, FXMLLoader mainViewLoader, FXMLLoader marblesLoader)
+	public ActionGUI(GUIModel gui, NetworkHandler networkHandler, MainViewController mvc, MarblesMarketController mmc)
 	{
 		this.gui = gui;
 		this.networkHandler = networkHandler;
-		this.mainViewLoader = mainViewLoader;		/* Pack all loaders in a hashmap? */
-		this.marblesLoader = marblesLoader;
+		this.mvc = mvc;		/* Pack all loaders in a hashmap? */
+		this.mmc = mmc;
 	}
 
 	public void updateView(GameState gameState)		/* TODO: pass controllers, not loaders */
 	{
-		MainViewController mvc = mainViewLoader.getController();
 		mvc.updateStorage(gameState.getPlayerByName(gui.getUsername()).getDashboard().getStorage());
-		MarblesMarketController mmc = marblesLoader.getController();
 		mmc.updateMarket(gameState.getCurrMarblesMarket(), gameState.getPlayerByName(gui.getUsername()).isMyTurn());
 	}
 
 	@Override
 	public void firstPlayer(boolean isFirstPlayer)
 	{
-		MainViewController mvc = mainViewLoader.getController();			/* IT WORKSSSSSSSSSSS */
 		mvc.getMiddleShelfResource1().setImage(new Image(getClass().getResourceAsStream("/img/resources/blue.png")));
 		mvc.getMiddleShelfResource1().setImage(null);		/* null works */
 	}
