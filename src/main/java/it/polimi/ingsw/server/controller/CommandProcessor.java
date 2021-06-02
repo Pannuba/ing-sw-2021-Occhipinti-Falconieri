@@ -36,10 +36,10 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 	{
 		List<LeaderCard> cards = new ArrayList<>();
 
-		for (int i = 0; i < 16; i++)
+		for (int i = 0; i < model.getAllLeaderCards().size(); i++)
 		{
 			if (String.valueOf(model.getAllLeaderCards().get(i).getCardNumber()).equals(command.get(1))			||
-					String.valueOf(model.getAllLeaderCards().get(i).getCardNumber()).equals(command.get(2))		)
+				String.valueOf(model.getAllLeaderCards().get(i).getCardNumber()).equals(command.get(2))			)
 				cards.add(model.getAllLeaderCards().get(i));
 		}
 

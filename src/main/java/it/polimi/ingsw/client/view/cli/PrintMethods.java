@@ -80,7 +80,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 				printDevCard(devCards.get(i));
 	}
 
-	public static void printDevCardsMarket(DevCardsMarket market)		// market size??
+	public static void printDevCardsMarket(DevCardsMarket market)
 	{
 		System.out.println("Dev cards market:\n\n");
 

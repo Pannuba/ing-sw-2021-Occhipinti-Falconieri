@@ -7,17 +7,21 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.cards.ActionToken;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
-import javafx.event.ActionEvent;
+import javafx.scene.Scene;
 
 import java.util.List;
 
 public class ActionGUI extends MessageExecutor
 {
-	private final NetworkHandler networkHandler;
+	private final NetworkHandler networkHandler;		/* To send commands to server */
+	private final Scene boardScene;						/* To update the scenes when a new gamestate is received */
+	private final Scene marblesScene;
 
-	public ActionGUI(NetworkHandler networkHandler)
+	public ActionGUI(NetworkHandler networkHandler, Scene boardScene, Scene marblesScene)
 	{
 		this.networkHandler = networkHandler;
+		this.boardScene = boardScene;
+		this.marblesScene = marblesScene;
 	}
 
 	@Override
