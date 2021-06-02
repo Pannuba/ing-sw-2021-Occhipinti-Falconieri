@@ -1,8 +1,12 @@
 package it.polimi.ingsw.client.view.gui;
 
+import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.server.messages.Message;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -11,9 +15,13 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 	private final ActionGUI action;				/* ActionGUI instance to pass it the commands received by the NetworkHandler */
 	private GameState gameState;				/* Local gamestate accessed by action and scenes through get method */
 
-	public GUIModel(ActionGUI action)
+	public GUIModel(NetworkHandler networkHandler, FXMLLoader mainViewLoader) throws IOException
 	{
-		this.action = action;
+		FXMLLoader marblesLoader = new FXMLLoader();
+		marblesLoader.setLocation(getClass().getResource("/scenes/marblesmarket.fxml"));		/* Put in createScenes()? */
+		Parent marblesRoot = marblesLoader.load();
+
+		action = new ActionGUI(this, networkHandler, mainViewLoader, marblesLoader);		/* ActionGUI runnable? */
 	}
 
 	@Override

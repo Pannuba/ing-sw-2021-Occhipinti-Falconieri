@@ -70,4 +70,25 @@ public class MainViewController
 	{
 
 	}
+
+
+	public ImageView getMiddleShelfResource1()
+	{
+		return middleShelfResource1;
+	}
+
+	public void setMiddleShelfResource1(ImageView middleShelfResource1)
+	{
+		this.middleShelfResource1 = middleShelfResource1;
+	}
+
+	public ImageView getDashboard()
+	{
+		return dashboard;
+	}
+
+	public void setDashboard(ImageView dashboard)
+	{
+		this.dashboard = dashboard;
+	}
 }

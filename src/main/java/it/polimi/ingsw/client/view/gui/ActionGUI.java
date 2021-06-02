@@ -2,32 +2,40 @@ package it.polimi.ingsw.client.view.gui;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.MessageExecutor;
+import it.polimi.ingsw.client.view.gui.controllers.MainViewController;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.cards.ActionToken;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
-import javafx.scene.Scene;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 import java.util.List;
 
 public class ActionGUI extends MessageExecutor
 {
+	private final GUIModel gui;
 	private final NetworkHandler networkHandler;		/* To send commands to server */
-	private final Scene boardScene;						/* To update the scenes when a new gamestate is received */
-	private final Scene marblesScene;
+	private final FXMLLoader mainViewLoader;						/* To update the scenes when a new gamestate is received */
+	private final FXMLLoader marblesLoader;
 
-	public ActionGUI(NetworkHandler networkHandler, Scene boardScene, Scene marblesScene)
+	/* TODO: add controller instance variables, get controllers from loaders in constructors */
+
+	public ActionGUI(GUIModel gui, NetworkHandler networkHandler, FXMLLoader mainViewLoader, FXMLLoader marblesLoader)
 	{
+		this.gui = gui;
 		this.networkHandler = networkHandler;
-		this.boardScene = boardScene;
-		this.marblesScene = marblesScene;
+		this.mainViewLoader = mainViewLoader;
+		this.marblesLoader = marblesLoader;
 	}
 
 	@Override
 	public void firstPlayer(boolean isFirstPlayer)
 	{
-
+		MainViewController mvc = mainViewLoader.getController();			/* IT WORKSSSSSSSSSSS */
+		mvc.getMiddleShelfResource1().setImage(new Image(getClass().getResourceAsStream("/img/resources/blue.png")));		/* file: ? */
 	}
 
 	@Override

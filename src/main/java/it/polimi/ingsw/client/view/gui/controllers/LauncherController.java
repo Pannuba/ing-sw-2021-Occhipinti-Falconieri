@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
 import it.polimi.ingsw.client.NetworkHandler;
-import it.polimi.ingsw.client.view.gui.ActionGUI;
 import it.polimi.ingsw.client.view.gui.GUIModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.InaccessibleObjectException;
 
 public class LauncherController
 {
@@ -26,33 +24,25 @@ public class LauncherController
 	@FXML
 	void connectToServer(ActionEvent event) throws IOException
 	{
-		FXMLLoader boardLoader = new FXMLLoader();
+		FXMLLoader mainViewLoader = new FXMLLoader();
 
-
-		boardLoader.setLocation(getClass().getResource("/scenes/mainview.fxml"));
-		Parent boardRoot = boardLoader.load();
-		Scene boardScene = new Scene(boardRoot);
-
-		FXMLLoader marblesLoader = new FXMLLoader();
-
-		marblesLoader.setLocation(getClass().getResource("/scenes/marblesmarket.fxml"));
-		Parent marblesRoot = marblesLoader.load();
-		Scene marblesScene = new Scene(marblesRoot);
+		mainViewLoader.setLocation(getClass().getResource("/scenes/mainview.fxml"));
+		Parent mainViewRoot = mainViewLoader.load();
+		Scene mainViewScene = new Scene(mainViewRoot);
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
 		NetworkHandler networkHandler = new NetworkHandler(ipField.getText(), Integer.parseInt(portField.getText()));
 
-		ActionGUI action = new ActionGUI(networkHandler, boardScene, marblesScene);		/* ActionGUI runnable? */
-		GUIModel gui = new GUIModel(action);
+		GUIModel gui = new GUIModel(networkHandler, mainViewLoader);
 
 		networkHandler.addObserver(gui);
 		networkHandler.connect();
 		networkHandler.send(nameField.getText());
+		networkHandler.send("1");				/* Always send numPlayers = 1 for debugging */
 		new Thread(networkHandler).start();
 
-		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
 		mainStage.setTitle("Masters of Renaissance");
-		mainStage.setScene(boardScene);
+		mainStage.setScene(mainViewScene);
 		mainStage.sizeToScene();		/* ? */
 		mainStage.show();
 	}
