@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,18 +17,18 @@ public class Launcher extends Application
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws IOException			/* Stage = window */
+	public void start(Stage mainStage) throws IOException			/* Stage = window */
 	{
-		Parent root;
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/scenes/launcher.fxml"));
-		root = loader.load();
+		Parent root = loader.load();
 
 		Scene scene = new Scene(root);
 
-		primaryStage.setTitle("Masters of Renaissance Launcher");
-		primaryStage.setScene(scene);
-		primaryStage.sizeToScene();		/* ? */
-		primaryStage.show();
+		mainStage.setTitle("Masters of Renaissance Launcher");
+		mainStage.getIcons().add(new Image("/img/inkwell.png"));
+		mainStage.setScene(scene);
+		mainStage.sizeToScene();		/* ? */
+		mainStage.show();
 	}
 }

@@ -2,8 +2,15 @@ package it.polimi.ingsw.client.view.gui.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class MarblesMarketController
 {
@@ -34,8 +41,18 @@ public class MarblesMarketController
 	@FXML private Button backToBoardButton;
 
 	@FXML
-	void backToBoard(ActionEvent event)
+	void backToBoard(ActionEvent event) throws IOException
 	{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/scenes/mainview.fxml"));
 
+		Parent root = loader.load();
+		Scene scene = new Scene(root);
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		mainStage.setTitle("Masters of Renaissance");
+		mainStage.setScene(scene);
+		mainStage.sizeToScene();		/* ? */
+		mainStage.show();
 	}
 }
