@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/* TODO: give choice to activate or discard twice */
+
 public class LeaderChoice
 {
 	public LeaderChoice(Scanner input, List<String> command, NetworkHandler networkHandler, CLI cli)

@@ -157,7 +157,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		String middleShelfResource = convertResTypeToString(storage.getShelves()[1].getShelfResourceType());
 		String bottomShelfResource = convertResTypeToString(storage.getShelves()[2].getShelfResourceType());
 
-		switch (storage.getShelves()[0].getShelfResource().getQuantity())
+		switch (storage.getShelves()[0].getShelfResourceQuantity())
 		{
 			case 0:
 				topShelf = "   " + ANSI.EMPTY + "   ";
@@ -168,7 +168,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 				break;
 		}
 
-		switch (storage.getShelves()[1].getShelfResource().getQuantity())
+		switch (storage.getShelves()[1].getShelfResourceQuantity())
 		{
 			case 0:
 				middleShelf = " " + ANSI.EMPTY + "   " + ANSI.EMPTY + " ";
@@ -183,7 +183,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 				break;
 		}
 
-		switch (storage.getShelves()[2].getShelfResource().getQuantity())
+		switch (storage.getShelves()[2].getShelfResourceQuantity())
 		{
 			case 0:
 				bottomShelf = ANSI.EMPTY + "  " + ANSI.EMPTY + "  " + ANSI.EMPTY;

@@ -14,6 +14,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 
+/* TODO: if isMatchOver = true, set matchOver boolean to true, keep going until the first player (id 0) is reached, then send MatchOverMessage */
+
 public class Model extends Observable		/* Observed by the views to create the new gamestate */
 {
 	private final int numPlayers;
@@ -135,7 +137,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 					track.getPopeTokens()[0].setDiscarded(true);		/* Discard the track's popeToken so no more vatican reports can be called for the same box */
 
 					if (track.getRedPawns().get(i) >= 5 && track.getRedPawns().get(i) <= 8)		/* If a player is inside the perimeter */
-						players.get(i).getPopeTokens()[0].setActive(true);
+						players.get(i).getPopeTokens()[0].setActive(true);			/* TODO: remove <= 8 also for other popeBoxNumbers, */
 
 					else
 						players.get(i).getPopeTokens()[0].setDiscarded(true);
@@ -243,13 +245,14 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		points += player.getPopeTokenPoints();		/* Points from activated popeTokens */
 
 		points += track.getFaithTrack()[track.getRedPawns().get(player.getId())].getVictoryPoints();	/* Points if the player's pawn is on a POINTS box */
+		/* TODO: also give points if the player is over the points box */
 
 		return points;
 	}
 
 	public void endMatch()		/* Pass reason why the match is over from isMatchOver */
 	{
-		String winnerName = "";
+		String winnerName = "";			/* TODO: if player are tied in score, the one with the most resources (storage, vault, leaders) wins */
 		int winnerPoints = 0;
 
 		for (int i = 0; i < numPlayers; i++)		/* Calculate victoryPoints for every player */

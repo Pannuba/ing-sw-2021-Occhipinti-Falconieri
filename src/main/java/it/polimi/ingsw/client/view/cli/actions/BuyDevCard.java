@@ -38,7 +38,7 @@ public class BuyDevCard
 		/* Print devcards of level targetAreaLayer + 1 (layer = level of top devcard. New card has to have a higher level) */
 		PrintMethods.printDevCardsMarket(cli.getGameState().getCurrDevCardsMarket());
 
-		System.out.print("Insert the card number you want to buy: ");
+		System.out.print("Insert the card number you want to buy: ");		/* TODO: check level of chosen card */
 		cardToBuyNum = input.nextLine();
 
 		command.add("BUY_DEVCARD");

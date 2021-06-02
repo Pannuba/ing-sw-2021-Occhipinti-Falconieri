@@ -25,10 +25,9 @@ public class LauncherController
 	void connectToServer(ActionEvent event) throws IOException
 	{
 
-
 		NetworkHandler networkHandler = new NetworkHandler(ipField.getText(), Integer.parseInt(portField.getText()));
 
-		GUIModel gui = new GUIModel(networkHandler, event);
+		GUIModel gui = new GUIModel(nameField.getText(), networkHandler, event);
 
 		networkHandler.addObserver(gui);
 		networkHandler.connect();

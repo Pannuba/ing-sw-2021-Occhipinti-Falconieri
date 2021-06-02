@@ -19,10 +19,13 @@ import java.util.Observer;
 public class GUIModel implements Observer        /* Has gamestate, action instance, observes NetworkHandler */
 {
 	private final ActionGUI action;				/* ActionGUI instance to pass it the commands received by the NetworkHandler */
+	private String username;
 	private GameState gameState;				/* Local gamestate accessed by action and scenes through get method */
 
-	public GUIModel(NetworkHandler networkHandler, Event event) throws IOException
+	public GUIModel(String username, NetworkHandler networkHandler, Event event) throws IOException
 	{
+		this.username = username;
+
 		FXMLLoader mainViewLoader = new FXMLLoader();
 		mainViewLoader.setLocation(getClass().getResource("/scenes/mainview.fxml"));
 		Parent mainViewRoot = mainViewLoader.load();
@@ -40,10 +43,11 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 		MainViewController mvc = mainViewLoader.getController();
 		mvc.setMarblesScene(marblesScene);
 
-		action = new ActionGUI(this, networkHandler, mainViewLoader, marblesLoader);		/* ActionGUI runnable? */
+		action = new ActionGUI(this, networkHandler, mainViewLoader, marblesLoader);		/* TODO: pass controllers, not loaders */
 
 		mainStage.setTitle("Masters of Renaissance");
 		mainStage.setScene(mainViewScene);
+		mainStage.setResizable(false);
 		mainStage.sizeToScene();		/* ? */
 		mainStage.show();
 	}
@@ -55,11 +59,19 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 			((Message) obj).process(action);		/* Calls method in cli specified in the message */
 
 		if (obj instanceof GameState)
+		{
 			this.gameState = (GameState) obj;		/* Gamestate is needed in game loop, not during setup */
+			action.updateView(gameState);		/* Or call updateTrack, updateStorage, updateMarkets... here? */
+		}
 	}
 
 	public GameState getGameState()
 	{
 		return gameState;
+	}
+
+	public String getUsername()
+	{
+		return username;
 	}
 }

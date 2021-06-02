@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.view.gui;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.MessageExecutor;
 import it.polimi.ingsw.client.view.gui.controllers.MainViewController;
+import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.cards.ActionToken;
@@ -10,7 +11,6 @@ import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
 
 import java.util.List;
 
@@ -27,15 +27,22 @@ public class ActionGUI extends MessageExecutor
 	{
 		this.gui = gui;
 		this.networkHandler = networkHandler;
-		this.mainViewLoader = mainViewLoader;
+		this.mainViewLoader = mainViewLoader;		/* Pack all loaders in a hashmap? */
 		this.marblesLoader = marblesLoader;
+	}
+
+	public void updateView(GameState gameState)
+	{
+		MainViewController mvc = mainViewLoader.getController();
+		mvc.updateStorage(gameState.getPlayerByName(gui.getUsername()).getDashboard().getStorage());
 	}
 
 	@Override
 	public void firstPlayer(boolean isFirstPlayer)
 	{
 		MainViewController mvc = mainViewLoader.getController();			/* IT WORKSSSSSSSSSSS */
-		mvc.getMiddleShelfResource1().setImage(new Image(getClass().getResourceAsStream("/img/resources/blue.png")));		/* file: ? */
+		mvc.getMiddleShelfResource1().setImage(new Image(getClass().getResourceAsStream("/img/resources/blue.png")));
+		mvc.getMiddleShelfResource1().setImage(null);		/* null works */
 	}
 
 	@Override
@@ -47,7 +54,8 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void chooseResources(int playerID)
 	{
-
+		MainViewController mvc = mainViewLoader.getController();
+		mvc.getConsole().setText("You're the first player, so you get nothing!");
 	}
 
 	@Override

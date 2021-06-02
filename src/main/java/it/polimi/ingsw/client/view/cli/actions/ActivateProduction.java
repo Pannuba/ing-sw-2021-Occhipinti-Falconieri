@@ -23,7 +23,7 @@ public class ActivateProduction
 		{
 			case "1":
 
-				String resourceToConvert, resourceToMake;
+				String resourceToConvert, resourceToMake;			/* TODO: 2 resources to convert, also different type */
 				System.out.print("Insert the resource type you want to convert (B/G/Y/P): ");
 				resourceToConvert = input.nextLine();
 				System.out.print("Insert the resource type you want to make (B/G/Y/P): ");
