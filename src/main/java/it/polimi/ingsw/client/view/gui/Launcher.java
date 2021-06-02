@@ -20,7 +20,7 @@ public class Launcher extends Application
 	{
 		Parent root;
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/scenes/launcher.fxml"));		/* TODO: launcher controller */
+		loader.setLocation(getClass().getResource("/scenes/launcher.fxml"));
 		root = loader.load();
 
 		Scene scene = new Scene(root);
