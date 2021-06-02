@@ -7,7 +7,6 @@ import javafx.scene.image.ImageView;
 
 public class MarblesMarketController
 {
-
 	@FXML private ImageView marblesMarket;
 
 	@FXML private Button colOneButton;
@@ -39,5 +38,4 @@ public class MarblesMarketController
 	{
 
 	}
-
 }

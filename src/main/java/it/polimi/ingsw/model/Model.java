@@ -117,6 +117,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		actionTokens.add(new ActionDevCard(DevCardColor.YELLOW, devCardsMarket));
 		actionTokens.add(new ActionBlack1(track, actionTokens));		/* Pass the list itself to shuffle it */
 		actionTokens.add(new ActionBlack2(track));
+		actionTokens.add(new ActionBlack2(track));
 
 		Collections.shuffle(actionTokens);
 	}
@@ -349,7 +350,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	public ActionToken getNextActionToken()		/* This method un-flips the current flipped token, flips the next one and returns it */
 	{
 		boolean noFlippedTokens = true;
-		int flippedTokenPos = 0, tokenToFlipPos;		/* Both are [0, 5] */
+		int flippedTokenPos = 0, tokenToFlipPos;		/* Both are [0, 6] */
 
 		for (int i = 0; i < actionTokens.size(); i++)		/* Checks if there is at least 1 flipped token. yes -> return the next one, no -> return 1 random */
 		{
