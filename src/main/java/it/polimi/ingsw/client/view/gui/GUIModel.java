@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view.gui;
 
 import it.polimi.ingsw.client.NetworkHandler;
+import it.polimi.ingsw.client.view.gui.controllers.GameStartController;
 import it.polimi.ingsw.client.view.gui.controllers.MainViewController;
 import it.polimi.ingsw.client.view.gui.controllers.MarketsController;
 import it.polimi.ingsw.model.GameState;
@@ -21,17 +22,24 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 	private final ActionGUI action;				/* ActionGUI instance to pass it the commands received by the NetworkHandler */
 	private final String username;
 	private GameState gameState;				/* Local gamestate accessed by action and scenes through get method */
+	private Event event;
 
 	public GUIModel(String username, NetworkHandler networkHandler, Event event) throws IOException		/* /a/14190310 on how to pass parameters to controllers */
 	{
 		this.username = username;
+		this.event = event;
+
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader gameStartLoader = new FXMLLoader();
+		gameStartLoader.setLocation(getClass().getResource("/scenes/gamestart.fxml"));
+		Parent gameStartRoot = gameStartLoader.load();
+		GameStartController gsc = gameStartLoader.getController();
+		Scene gameStartScene = new Scene(gameStartRoot);
 
 		FXMLLoader mainViewLoader = new FXMLLoader();
 		mainViewLoader.setLocation(getClass().getResource("/scenes/mainview.fxml"));
 		Parent mainViewRoot = mainViewLoader.load();
 		Scene mainViewScene = new Scene(mainViewRoot);
-
-		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
 		FXMLLoader marketsLoader = new FXMLLoader();
 		marketsLoader.setLocation(getClass().getResource("/scenes/markets.fxml"));		/* Put in createScenes()? */
@@ -40,23 +48,24 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 
 		MarketsController mc = marketsLoader.getController();
 		MainViewController mvc = mainViewLoader.getController();
+		gsc.setup(mainViewScene, mvc);
 		mc.setup(mainViewScene, mvc, networkHandler);						/* TODO: create setup() in all scene controllers */
 		mvc.setup(marketsScene, networkHandler);
 
-		action = new ActionGUI(this, networkHandler, mvc, mc);
+		action = new ActionGUI(this, networkHandler, gameStartScene, gsc, mvc, mc);
 
-		mainStage.setTitle("Masters of Renaissance");
+		/*mainStage.setTitle("Masters of Renaissance");
 		mainStage.setScene(mainViewScene);
 		mainStage.setWidth(1280);
 		mainStage.setHeight(720);
-		mainStage.show();
+		mainStage.show();*/
 	}
 
 	@Override
 	public void update(Observable obs, Object obj)
 	{
 		if (obj instanceof Message)
-			((Message) obj).process(action);		/* Calls method in cli specified in the message */
+			((Message) obj).process(action);		/* Calls method in ActionGUI specified in the message */
 
 		if (obj instanceof GameState)
 		{
@@ -73,5 +82,10 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 	public String getUsername()
 	{
 		return username;
+	}
+
+	public Event getEvent()
+	{
+		return event;
 	}
 }

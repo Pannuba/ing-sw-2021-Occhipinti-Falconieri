@@ -4,12 +4,7 @@ import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.GUIModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -32,7 +27,7 @@ public class LauncherController
 		networkHandler.addObserver(gui);
 		networkHandler.connect();
 		networkHandler.send(nameField.getText());
-		networkHandler.send("1");				/* Always send numPlayers = 1 for debugging */
+		networkHandler.send("1");				/* Always send numPlayers = 1 for now */
 		new Thread(networkHandler).start();
 	}
 }

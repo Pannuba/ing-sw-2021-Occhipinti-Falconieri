@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.view.gui;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.MessageExecutor;
+import it.polimi.ingsw.client.view.gui.controllers.GameStartController;
 import it.polimi.ingsw.client.view.gui.controllers.MainViewController;
 import it.polimi.ingsw.client.view.gui.controllers.MarketsController;
 import it.polimi.ingsw.model.GameState;
@@ -10,21 +11,32 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.cards.ActionToken;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ActionGUI extends MessageExecutor
 {
 	private final GUIModel gui;
 	private final NetworkHandler networkHandler;		/* To send commands to server */
+	private final Scene gameStartScene;
+	private final GameStartController gsc;
 	private final MainViewController mvc;						/* To update the scenes when a new gamestate is received */
 	private final MarketsController mmc;
 
-	public ActionGUI(GUIModel gui, NetworkHandler networkHandler, MainViewController mvc, MarketsController mmc)
+	public ActionGUI(GUIModel gui, NetworkHandler networkHandler, Scene gameStartScene, GameStartController gsc, MainViewController mvc, MarketsController mmc)
 	{
 		this.gui = gui;
 		this.networkHandler = networkHandler;
+		this.gameStartScene = gameStartScene;
+		this.gsc = gsc;
 		this.mvc = mvc;		/* Pack all loaders in a hashmap? */
 		this.mmc = mmc;
 	}
@@ -40,22 +52,28 @@ public class ActionGUI extends MessageExecutor
 	}
 
 	@Override
-	public void firstPlayer(boolean isFirstPlayer)
+	public void firstPlayer(boolean isFirstPlayer)	/* Open small window? */
 	{
-		mvc.getMiddleShelfResource1().setImage(new Image(getClass().getResourceAsStream("/img/resources/blue.png")));
-		mvc.getMiddleShelfResource1().setImage(null);		/* null works */
+
 	}
 
 	@Override
 	public void startMatch()
 	{
-		mvc.printToConsole("Match started");
+		Stage mainStage = (Stage) ((Node) gui.getEvent().getSource()).getScene().getWindow();
+
+		Platform.runLater(() ->
+		{
+			mainStage.setTitle("Masters of Renaissance - Setup");
+			mainStage.setScene(gameStartScene);
+			mainStage.show();
+		});
 	}
 
 	@Override
-	public void initialResources(int playerID)		/* TODO: make a scene with leaders choice and/or the initial resources choice */
+	public void initialResources(int playerID)
 	{
-		mvc.printToConsole("Player ID: " + playerID);		/* TODO: mvc.updateConsole("String") */
+		gsc.showResourcesMessage(playerID);
 	}
 
 	@Override
@@ -67,7 +85,7 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void chooseLeaderCards(List<LeaderCard> leaderCards)
 	{
-
+		gsc.setFourLeaderCards(leaderCards);
 	}
 
 	@Override
