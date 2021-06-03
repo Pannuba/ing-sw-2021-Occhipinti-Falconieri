@@ -1,14 +1,17 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
 import it.polimi.ingsw.client.view.gui.ConvertMethods;
+import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.board.DevCardArea;
 import it.polimi.ingsw.model.board.Storage;
 import it.polimi.ingsw.model.board.Track;
+import it.polimi.ingsw.model.board.Vault;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -37,20 +40,19 @@ public class MainViewController
 	@FXML private ImageView bottomShelfResource2;
 	@FXML private ImageView bottomShelfResource3;
 
+	@FXML private ImageView vaultResourceBlue;
+	@FXML private ImageView vaultResourcePurple;
+	@FXML private ImageView vaultResourceYellow;
+	@FXML private ImageView vaultResourceGrey;
+
+	@FXML private Label vaultBlueAmount;
+	@FXML private Label vaultPurpleAmount;
+	@FXML private Label vaultYellowAmount;
+	@FXML private Label vaultGreyAmount;
+
 	@FXML private ImageView devCardArea1;
 	@FXML private ImageView devCardArea2;
 	@FXML private ImageView devCardArea3;
-
-	@FXML
-	void showDevCardsMarket(ActionEvent event)
-	{
-		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-		mainStage.setTitle("Masters of Renaissance - Dev Cards Market");
-		//mainStage.setScene(devCardsMarketScene);
-		mainStage.sizeToScene();
-		mainStage.show();
-	}
 
 	@FXML
 	void showLeaderCards(ActionEvent event)
@@ -64,7 +66,7 @@ public class MainViewController
 	}
 
 	@FXML
-	void showMarblesMarket(ActionEvent event)
+	void showMarkets(ActionEvent event)
 	{
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
@@ -135,6 +137,14 @@ public class MainViewController
 				bottomShelfResource3.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertResTypeToPath(storage.getShelves()[2].getShelfResourceType()))));
 				break;
 		}
+	}
+
+	public void updateVault(Vault vault)
+	{
+		vaultBlueAmount.setText(vault.getResourceAmounts().get(ResourceType.BLUE).toString());
+		vaultYellowAmount.setText(vault.getResourceAmounts().get(ResourceType.YELLOW).toString());
+		vaultGreyAmount.setText(vault.getResourceAmounts().get(ResourceType.GREY).toString());
+		vaultPurpleAmount.setText(vault.getResourceAmounts().get(ResourceType.PURPLE).toString());
 	}
 
 	public void updateDevCardAreas(DevCardArea[] devCardAreas)

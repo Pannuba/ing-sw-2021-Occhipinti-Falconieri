@@ -2,10 +2,12 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.MainViewController">
    <children>
@@ -14,15 +16,11 @@
             <Image url="@../img/dashboard.png" />
          </image>
       </ImageView>
-      <Button fx:id="marblesMarketButton" layoutX="1053.0" layoutY="32.0" mnemonicParsing="false" onAction="#showMarblesMarket" prefHeight="55.0" prefWidth="184.0" text="Show Marbles Market">
+      <Button fx:id="marketsButton" layoutX="1053.0" layoutY="32.0" mnemonicParsing="false" onAction="#showMarkets" prefHeight="55.0" prefWidth="184.0" text="Show Markets">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="devCardsMarketButton" layoutX="1053.0" layoutY="117.0" mnemonicParsing="false" onAction="#showDevCardsMarket" prefHeight="55.0" prefWidth="184.0" text="Show Devcards Market">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="201.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="55.0" prefWidth="184.0" text="Show Leader Cards">
+      <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="123.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="55.0" prefWidth="184.0" text="Show Leader Cards">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor></Button>
@@ -33,6 +31,46 @@
       <ImageView fx:id="bottomShelfResource1" fitHeight="67.0" fitWidth="51.0" layoutX="65.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bottomShelfResource2" fitHeight="67.0" fitWidth="51.0" layoutX="104.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bottomShelfResource3" fitHeight="67.0" fitWidth="51.0" layoutX="142.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="vaultResourceBlue" fitHeight="67.0" fitWidth="51.0" layoutX="65.0" layoutY="548.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/resources/blue.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="vaultResourcePurple" fitHeight="67.0" fitWidth="51.0" layoutX="151.0" layoutY="548.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/resources/purple.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="vaultResourceYellow" fitHeight="67.0" fitWidth="51.0" layoutX="65.0" layoutY="603.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/resources/yellow.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="vaultResourceGrey" fitHeight="67.0" fitWidth="51.0" layoutX="151.0" layoutY="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/resources/grey.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="vaultBlueAmount" layoutX="44.0" layoutY="548.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="vaultPurpleAmount" layoutX="131.0" layoutY="547.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="vaultYellowAmount" layoutX="45.0" layoutY="601.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="vaultGreyAmount" layoutX="131.0" layoutY="600.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
       <ImageView fx:id="devCardArea1" fitHeight="317.0" fitWidth="176.0" layoutX="391.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="devCardArea2" fitHeight="317.0" fitWidth="176.0" layoutX="583.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="devCardArea3" fitHeight="317.0" fitWidth="176.0" layoutX="783.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true" />
