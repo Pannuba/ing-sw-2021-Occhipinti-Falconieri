@@ -499,9 +499,19 @@ public class ModelTest {
 		assertFalse("Error", model.getActionTokens().get(4).isFlipped());
 		assertTrue("Error", model.getActionTokens().get(5).isFlipped());
 
+		/* flipped seventh ActionToken */
+		assertEquals("Error", actionTokens.get(6), model.getNextActionToken());
+		assertFalse("Error", model.getActionTokens().get(0).isFlipped());
+		assertFalse("Error", model.getActionTokens().get(1).isFlipped());
+		assertFalse("Error", model.getActionTokens().get(2).isFlipped());
+		assertFalse("Error", model.getActionTokens().get(3).isFlipped());
+		assertFalse("Error", model.getActionTokens().get(4).isFlipped());
+		assertFalse("Error", model.getActionTokens().get(5).isFlipped());
+		assertTrue("Error", model.getActionTokens().get(6).isFlipped());
+
 		/* check that the seventh ActionTocken that not exist is not flipped and start again from the first */
 		assertEquals("Error", actionTokens.get(0), model.getNextActionToken());
-		assertFalse("Error", model.getActionTokens().get(5).isFlipped());
+		assertFalse("Error", model.getActionTokens().get(6).isFlipped());
 		assertTrue("Error", model.getActionTokens().get(0).isFlipped());
 	}
 }
