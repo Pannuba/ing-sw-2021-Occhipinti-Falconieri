@@ -89,6 +89,22 @@ public class Player implements Serializable
 		return null;
 	}
 
+	public int getTotalResources()		/* Used by calculatePoints in Model */
+	{
+		int totalResources = 0;
+
+		for (int i = 0; i < leaderCards.size(); i++)		/* Get resources from active SkillStorage cards, if any */
+		{
+			if (leaderCards.get(i).isActive() && leaderCards.get(i) instanceof SkillStorage)
+				totalResources += ((SkillStorage) leaderCards.get(i)).getAdditionalStorage().getShelfResourceQuantity();
+		}
+
+		totalResources += dashboard.getVault().getTotalResources();		/* Points from resources */
+		totalResources += dashboard.getStorage().getTotalResources();
+
+		return totalResources;
+	}
+
 	public int getPopeTokenPoints()
 	{
 		int popeTokenPoints = 0;

@@ -236,56 +236,37 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		for (int i = 0; i < devCards.size(); i++)			/* Points from devcards */
 			points += devCards.get(i).getPoints();
 
-		int totalResources = 0;
-		totalResources += player.getDashboard().getVault().getTotalResources();		/* Points from resources */
-		totalResources += player.getDashboard().getStorage().getTotalResources();
-
-		points += totalResources / 5;	/* 1 point every 5 resources, dividing integers only keeps the whole part of the number */
+		points += player.getTotalResources() / 5;	/* 1 point every 5 resources, dividing integers only keeps the whole part of the number */
 
 		points += player.getPopeTokenPoints();		/* Points from activated popeTokens */
 
 		/* Points if the player's pawn is on a POINTS box or after */
 		switch (track.getRedPawns().get(player.getId()))
 		{
-			case 0:
-			case 1:
-			case 2:
+			case 0: case 1: case 2:
 				break;
-			case 3:
-			case 4:
-			case 5:
-				points += track.getFaithTrack()[3].getVictoryPoints();
+
+			case 3: case 4: case 5:		points += track.getFaithTrack()[3].getVictoryPoints();
 				break;
-			case 6:
-			case 7:
-			case 8:
-				points += track.getFaithTrack()[6].getVictoryPoints();
+
+			case 6: case 7: case 8:		points += track.getFaithTrack()[6].getVictoryPoints();
 				break;
-			case 9:
-			case 10:
-			case 11:
-				points += track.getFaithTrack()[9].getVictoryPoints();
+
+			case 9: case 10: case 11:	points += track.getFaithTrack()[9].getVictoryPoints();
 				break;
-			case 12:
-			case 13:
-			case 14:
-				points += track.getFaithTrack()[12].getVictoryPoints();
+
+			case 12: case 13: case 14:	points += track.getFaithTrack()[12].getVictoryPoints();
 				break;
-			case 15:
-			case 16:
-			case 17:
-				points += track.getFaithTrack()[15].getVictoryPoints();
+
+			case 15: case 16: case 17:	points += track.getFaithTrack()[15].getVictoryPoints();
 				break;
-			case 18:
-			case 19:
-			case 20:
-				points += track.getFaithTrack()[18].getVictoryPoints();
+
+			case 18: case 19: case 20:	points += track.getFaithTrack()[18].getVictoryPoints();
 				break;
-			case 21:
-			case 22:
-			case 23:
-				points += track.getFaithTrack()[21].getVictoryPoints();
+
+			case 21: case 22: case 23:	points += track.getFaithTrack()[21].getVictoryPoints();
 				break;
+
 			default:
 				points += track.getFaithTrack()[24].getVictoryPoints();
 		}
