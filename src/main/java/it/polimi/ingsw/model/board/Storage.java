@@ -35,8 +35,6 @@ public class Storage implements Serializable
 			}
 		}
 
-		/* TODO: add check if middle shelf has 2 resources and bottom shelf only has 1, swap them */
-
 		if	((shelves[0].getShelfResourceType() == null && shelves[1].getShelfResourceType() == null) ||
 			( shelves[1].getShelfResourceType() == null && shelves[2].getShelfResourceType() == null) ||
 			( shelves[0].getShelfResourceType() == null && shelves[2].getShelfResourceType() == null))

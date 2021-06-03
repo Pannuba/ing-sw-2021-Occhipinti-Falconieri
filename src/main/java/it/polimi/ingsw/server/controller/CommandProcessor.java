@@ -134,12 +134,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 		for (int i = 0; i < boughtMarbles.size(); i++)
 		{
-			if (boughtMarbles.get(i) == MarbleType.RED)		/* TODO: tell player they bought red marbles */
-			{
-				controller.updatePlayerPosition(model.getPlayerByUsername(username).getId(), 1);
-			}
-
-			else if (boughtMarbles.get(i) == MarbleType.WHITE)
+			if (boughtMarbles.get(i) == MarbleType.WHITE)
 			{
 				if (whiteMarbleRes != null)
 					resourcesToAdd.add(whiteMarbleRes);
@@ -148,8 +143,13 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 					System.out.println(username + "has no active SkillMarble cards!");
 			}
 
-			else
+			else		/* If it's not a white marble */
+			{
 				resourcesToAdd.add(ResourceType.convertMarbleToResType(boughtMarbles.get(i)));
+
+				if (boughtMarbles.get(i) == MarbleType.RED)
+					controller.updatePlayerPosition(model.getPlayerByUsername(username).getId(), 1);
+			}
 		}
 
 		/* sort resourcesToAdd to put the resoruces in higher amount first [PURPLE, BLUE, YELLOW, BLUE] --> [BLUE, BLUE, PURPLE, YELLOW]. o(n^2) but so few elements it doesn't matter. (thanks SO) */

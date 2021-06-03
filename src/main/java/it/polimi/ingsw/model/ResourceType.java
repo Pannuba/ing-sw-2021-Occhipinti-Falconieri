@@ -6,6 +6,7 @@ import java.util.List;
 
 public enum ResourceType	/* TODO: add RED resource, remove TODOs scattered around the project about this issue */
 {
+	RED,
 	BLUE,
 	GREY,
 	YELLOW,
@@ -18,6 +19,9 @@ public enum ResourceType	/* TODO: add RED resource, remove TODOs scattered aroun
 
 		switch (str.toUpperCase())		/* So lowercase inputs like "g" are still valid */
 		{
+			case "R":
+				return ResourceType.RED;
+
 			case "G":
 				return ResourceType.GREY;
 
@@ -46,6 +50,9 @@ public enum ResourceType	/* TODO: add RED resource, remove TODOs scattered aroun
 			case WHITE:			/* White marbles have their separate function */
 				return null;
 
+			case RED:
+				return ResourceType.RED;
+
 			case GREY:
 				return ResourceType.GREY;
 
@@ -64,25 +71,11 @@ public enum ResourceType	/* TODO: add RED resource, remove TODOs scattered aroun
 		}
 	}
 
-	public static HashMap<ResourceType, Integer> convertResTypeListToHashMap(List<ResourceType> list)
-	{
-		HashMap<ResourceType, Integer> map = new HashMap<>();
-
-		map.put(BLUE, 0);
-		map.put(GREY, 0);
-		map.put(YELLOW, 0);
-		map.put(PURPLE, 0);
-
-		for (int i = 0; i < list.size(); i++)
-			map.put(list.get(i), map.get(list.get(i)) + 1);			/* Increase counter for "key" resource type */
-
-		return map;
-	}
-
 	public static List<Resource> convertResTypeListToResList(List<ResourceType> list)
 	{
 		List<Resource> resList = new ArrayList<>();
 
+		resList.add(new Resource(RED,	 0));
 		resList.add(new Resource(BLUE,	 0));
 		resList.add(new Resource(GREY,	 0));
 		resList.add(new Resource(YELLOW, 0));
@@ -92,20 +85,24 @@ public enum ResourceType	/* TODO: add RED resource, remove TODOs scattered aroun
 		{
 			switch (list.get(i))
 			{
-				case BLUE:
+				case RED:
 					resList.get(0).setQuantity(resList.get(0).getQuantity() + 1);
 					break;
 
+				case BLUE:
+					resList.get(1).setQuantity(resList.get(0).getQuantity() + 1);
+					break;
+
 				case GREY:
-					resList.get(1).setQuantity(resList.get(1).getQuantity() + 1);
+					resList.get(2).setQuantity(resList.get(1).getQuantity() + 1);
 					break;
 
 				case YELLOW:
-					resList.get(2).setQuantity(resList.get(2).getQuantity() + 1);
+					resList.get(3).setQuantity(resList.get(2).getQuantity() + 1);
 					break;
 
 				case PURPLE:
-					resList.get(3).setQuantity(resList.get(3).getQuantity() + 1);
+					resList.get(4).setQuantity(resList.get(3).getQuantity() + 1);
 					break;
 			}
 		}

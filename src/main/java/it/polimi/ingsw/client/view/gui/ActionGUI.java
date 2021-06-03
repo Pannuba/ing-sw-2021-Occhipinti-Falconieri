@@ -21,8 +21,6 @@ public class ActionGUI extends MessageExecutor
 	private final MainViewController mvc;						/* To update the scenes when a new gamestate is received */
 	private final MarblesMarketController mmc;
 
-	/* TODO: add controller instance variables, get controllers from loaders in constructors */
-
 	public ActionGUI(GUIModel gui, NetworkHandler networkHandler, MainViewController mvc, MarblesMarketController mmc)
 	{
 		this.gui = gui;

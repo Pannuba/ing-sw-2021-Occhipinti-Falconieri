@@ -270,6 +270,9 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 		switch (resourceType)
 		{
+			case RED:
+				return ANSI.RED	   + ANSI.RESOURCE.toString() + ANSI.RESET;
+
 			case YELLOW:
 				return ANSI.YELLOW + ANSI.RESOURCE.toString() + ANSI.RESET;
 
