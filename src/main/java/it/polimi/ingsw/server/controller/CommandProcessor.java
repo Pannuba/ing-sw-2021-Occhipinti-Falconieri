@@ -294,7 +294,6 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 		if (controller.checkResourceAmounts(model.getPlayerByUsername(username).getDashboard(), cost))
 		{
-			/* Update player position by 1 for each RED resource */
 			controller.spendResources(cost);
 
 			for (int i = 0; i < producedResources.size(); i++)			/* Add produced faith points to player track */

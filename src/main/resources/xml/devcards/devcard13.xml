@@ -38,9 +38,6 @@
     </object>
    </void>
   </void>
-  <void property="faithPoints">
-   <int>1</int>
-  </void>
   <void property="level">
    <int>1</int>
   </void>
@@ -57,6 +54,19 @@
       <object class="java.lang.Enum" id="ResourceType0" method="valueOf">
        <class>it.polimi.ingsw.model.ResourceType</class>
        <string>YELLOW</string>
+      </object>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="it.polimi.ingsw.model.Resource">
+     <void property="quantity">
+      <int>1</int>
+     </void>
+     <void property="resourceType">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>it.polimi.ingsw.model.ResourceType</class>
+       <string>RED</string>
       </object>
      </void>
     </object>

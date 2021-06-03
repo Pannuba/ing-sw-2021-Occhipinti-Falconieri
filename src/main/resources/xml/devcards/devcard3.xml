@@ -25,14 +25,26 @@
     </object>
    </void>
   </void>
-  <void property="faithPoints">
-   <int>1</int>
-  </void>
   <void property="level">
    <int>1</int>
   </void>
   <void property="points">
    <int>1</int>
+  </void>
+  <void property="product">
+   <void method="add">
+    <object class="it.polimi.ingsw.model.Resource">
+     <void property="quantity">
+      <int>1</int>
+     </void>
+     <void property="resourceType">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>it.polimi.ingsw.model.ResourceType</class>
+       <string>RED</string>
+      </object>
+     </void>
+    </object>
+   </void>
   </void>
   <void property="requirements">
    <void method="add">

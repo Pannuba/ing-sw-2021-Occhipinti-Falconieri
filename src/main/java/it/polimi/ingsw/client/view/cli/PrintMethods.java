@@ -104,7 +104,6 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 							"\nColor: " + convertDevCardColorToString(devCard.getColor())					+
 							"\nLevel: " + devCard.getLevel()												+
 							"\nVictory points: " + devCard.getPoints()										+
-							"\nFaith points: " + devCard.getFaithPoints()									+
 							"\nProduct: " + convertResListToString(devCard.getProduct())					+
 							"\nCost: " + convertResListToString(devCard.getCost())							+
 							"\nRequirements: " + convertResListToString(devCard.getRequirements()) + "\n\n"	);

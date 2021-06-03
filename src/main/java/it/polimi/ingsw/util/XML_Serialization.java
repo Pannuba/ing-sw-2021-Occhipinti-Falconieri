@@ -187,15 +187,9 @@ public class XML_Serialization
 						System.out.print("Category of product resource #" + (i + 1) + " (G/Y/B/P/R): ");
 						prodType = input.nextLine();
 
-						if (prodType.equals("R"))		/* If the card produced faith points, set the faithpoints value */
-							devCard.setFaithPoints(Integer.parseInt(prodQuantity));
-
-						else
-						{
-							product.add(new Resource());
-							product.get(i).setQuantity(Integer.parseInt(prodQuantity));
-							product.get(i).setResourceType(ResourceType.convertStringToResType(prodType));
-						}
+						product.add(new Resource());
+						product.get(i).setQuantity(Integer.parseInt(prodQuantity));
+						product.get(i).setResourceType(ResourceType.convertStringToResType(prodType));
 					}
 
 					devCard.setRequirements(requirements);

@@ -6,24 +6,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/*	TODO: remake serialization to add RED resources to product so the player sees a red circle in the CLI... and remake all devcards
-	keep faithpoints int so they're easily accessible when updating the player's position in the production command
-*/
-
 public class DevCard implements Serializable
 {
 	private int cardNumber;			/* To identify cards. If a devcard is bought from the market, the list size changes so it's impossible to order cards based on their index */
 	private DevCardColor color;
 	private int points;
 	private int level;
-	private int faithPoints;
 	private List<Resource> requirements;		/* At the top of each card */
 	private List<Resource> cost;				/* Left side */
-	private List<Resource> product;				/* Right side */
+	private List<Resource> product;				/* Right side. faithpoints are here */
 
 	public DevCard()
 	{
-		faithPoints = 0;
 		requirements = new ArrayList<>();
 		cost = new ArrayList<>();
 		product = new ArrayList<>();
@@ -67,16 +61,6 @@ public class DevCard implements Serializable
 	public void setLevel(int level)
 	{
 		this.level = level;
-	}
-
-	public int getFaithPoints()
-	{
-		return faithPoints;
-	}
-
-	public void setFaithPoints(int faithPoints)
-	{
-		this.faithPoints = faithPoints;
 	}
 
 	public List<Resource> getCost()
