@@ -122,7 +122,7 @@ public class MainViewController
 				topShelfResource.setImage(null);
 				break;
 
-			case 1:
+			case 1:									/* getResource vs getResourceAsStream? */
 				topShelfResource.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertResTypeToPath(storage.getShelves()[0].getShelfResourceType()))));
 		}
 
