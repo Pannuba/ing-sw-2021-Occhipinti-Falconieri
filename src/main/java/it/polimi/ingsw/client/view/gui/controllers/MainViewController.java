@@ -297,7 +297,7 @@ public class MainViewController
 	}
 
 	@FXML
-	void selectDevCardAreaOne(MouseEvent event)
+	void selectDevCardArea1(MouseEvent event)
 	{
 		networkHandler.send(Arrays.asList("BUY_DEVCARD", String.valueOf(devCardToBuy), String.valueOf(1)));
 		devCardArea1.setDisable(true);
@@ -309,13 +309,13 @@ public class MainViewController
 	}
 
 	@FXML
-	void selectDevCardAreaThree(MouseEvent event)
+	void selectDevCardArea3(MouseEvent event)
 	{
 
 	}
 
 	@FXML
-	void selectDevCardAreaTwo(MouseEvent event)
+	void selectDevCardArea2(MouseEvent event)
 	{
 
 	}
