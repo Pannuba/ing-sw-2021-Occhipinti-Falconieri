@@ -164,7 +164,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 			if (storageLeader != null && !storageLeader.getAdditionalStorage().isFull())				/* If possible, add the resources to storage leaders */
 				model.getPlayerByUsername(username).getStorageLeader(resourcesToAdd.get(i)).addOneResource();
 
-			else																						/* Otherwise add them to storage */
+			else if (resourcesToAdd.get(i) != ResourceType.RED)														/* Otherwise add them to storage */
 				resourcesToDiscard.add(model.getPlayerByUsername(username).getDashboard().getStorage().addResourceSmart(resourcesToAdd.get(i)));
 				/* Adds the return value of addResourceSmart to resourcesToAdd */
 		}

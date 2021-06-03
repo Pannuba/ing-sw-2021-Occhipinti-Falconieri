@@ -90,19 +90,19 @@ public enum ResourceType	/* TODO: add RED resource, remove TODOs scattered aroun
 					break;
 
 				case BLUE:
-					resList.get(1).setQuantity(resList.get(0).getQuantity() + 1);
+					resList.get(1).setQuantity(resList.get(1).getQuantity() + 1);
 					break;
 
 				case GREY:
-					resList.get(2).setQuantity(resList.get(1).getQuantity() + 1);
+					resList.get(2).setQuantity(resList.get(2).getQuantity() + 1);
 					break;
 
 				case YELLOW:
-					resList.get(3).setQuantity(resList.get(2).getQuantity() + 1);
+					resList.get(3).setQuantity(resList.get(3).getQuantity() + 1);
 					break;
 
 				case PURPLE:
-					resList.get(4).setQuantity(resList.get(3).getQuantity() + 1);
+					resList.get(4).setQuantity(resList.get(4).getQuantity() + 1);
 					break;
 			}
 		}
