@@ -75,7 +75,7 @@ public class ModelTest {
 	}
 
 	@Test
-	public void vaticanReport2()		/* First pope box has been reached */
+	public void vaticanReport2()		/* Second player has passed first pope box so vaticanReport is called */
 	{
 		p1 = new Player("pippo");
 		p2 = new Player("pluto");
@@ -94,7 +94,7 @@ public class ModelTest {
 		track = new Track(players);
 		redPawns = new HashMap<>();
 		redPawns.put(players.get(0).getId(), 5);
-		redPawns.put(players.get(1).getId(), 8);
+		redPawns.put(players.get(1).getId(), 10);
 		redPawns.put(players.get(2).getId(), 2);
 		redPawns.put(players.get(3).getId(), 3);
 		track.setRedPawns(redPawns);

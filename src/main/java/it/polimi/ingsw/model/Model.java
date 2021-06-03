@@ -136,8 +136,8 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 					track.getPopeTokens()[0].setDiscarded(true);		/* Discard the track's popeToken so no more vatican reports can be called for the same box */
 
-					if (track.getRedPawns().get(i) >= 5 && track.getRedPawns().get(i) <= 8)		/* If a player is inside the perimeter */
-						players.get(i).getPopeTokens()[0].setActive(true);			/* TODO: remove <= 8 also for other popeBoxNumbers, */
+					if (track.getRedPawns().get(i) >= 5)		/* If a player is inside the perimeter */
+						players.get(i).getPopeTokens()[0].setActive(true);
 
 					else
 						players.get(i).getPopeTokens()[0].setDiscarded(true);
@@ -148,7 +148,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 					track.getPopeTokens()[1].setDiscarded(true);
 
-					if (track.getRedPawns().get(i) >= 12 && track.getRedPawns().get(i) <= 16)
+					if (track.getRedPawns().get(i) >= 12)
 						players.get(i).getPopeTokens()[1].setActive(true);
 
 					else
@@ -160,7 +160,7 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 					track.getPopeTokens()[2].setDiscarded(true);
 
-					if (track.getRedPawns().get(i) >= 19 && track.getRedPawns().get(i) <= 24)
+					if (track.getRedPawns().get(i) >= 19)
 						players.get(i).getPopeTokens()[2].setActive(true);
 
 					else
