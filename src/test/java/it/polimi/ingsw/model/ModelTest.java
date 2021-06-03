@@ -433,7 +433,7 @@ public class ModelTest {
 		popeTokens[2] = new PopeToken(4);
 		popeTokens[0].setActive(true);
 		popeTokens[1].setActive(false);
-		popeTokens[2].setActive(true);
+		popeTokens[2].setActive(false);
 
 		p1 = new Player("pippo");
 		p1.setLeaderCards(leaderCards);
@@ -444,10 +444,10 @@ public class ModelTest {
 		model = new Model(players);
 		track = new Track(players);
 		redPawns = new HashMap<>();
-		redPawns.put(players.get(0).getId(), 24);
+		redPawns.put(players.get(0).getId(), 19);
 		track.setRedPawns(redPawns);
 		model.setTrack(track);
-		assertEquals("Error", 47, model.calculatePoints(p1));
+		assertEquals("Error", 35, model.calculatePoints(p1));
 	}
 
 	@Test
