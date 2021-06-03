@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.board.DevCardArea;
 import it.polimi.ingsw.model.board.Storage;
 import it.polimi.ingsw.model.board.Track;
 import it.polimi.ingsw.model.board.Vault;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -20,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class MainViewController
 {
 	private Scene marketsScene;
 	private NetworkHandler networkHandler;
+	private List<String> defaultProdRes;
 
 	private int devCardToBuy;
 
@@ -68,6 +71,58 @@ public class MainViewController
 	@FXML private ImageView devCardArea1;
 	@FXML private ImageView devCardArea2;
 	@FXML private ImageView devCardArea3;
+
+	@FXML
+	private Button defaultProductionButton;
+
+	@FXML
+	void defaultProduction(ActionEvent event)		/* Only did blue and purple */
+	{
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		mainStage.setTitle("Masters of Renaissance - Select 2 resources");
+		vaultResourceBlue.setDisable(false);
+		vaultResourcePurple.setDisable(false);
+		defaultProdRes = new ArrayList<>();
+	}
+
+	@FXML
+	void selectBlueResource(MouseEvent event)
+	{
+		defaultProdRes.add("B");
+
+		if (defaultProdRes.size() == 3)
+		{
+			networkHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "DEFAULT", defaultProdRes.get(0), defaultProdRes.get(1), defaultProdRes.get(2)));
+			vaultResourceBlue.setDisable(true);
+			vaultResourcePurple.setDisable(true);
+		}
+	}
+
+	@FXML
+	void selectPurpleResource(MouseEvent event)
+	{
+		defaultProdRes.add("P");
+
+		if (defaultProdRes.size() == 3)
+		{
+			networkHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "DEFAULT", defaultProdRes.get(0), defaultProdRes.get(1), defaultProdRes.get(2)));
+			vaultResourceBlue.setDisable(true);
+			vaultResourcePurple.setDisable(true);
+		}
+	}
+
+	@FXML
+	void selectYellowResource(MouseEvent event)
+	{
+
+	}
+
+	@FXML
+	void selectGreyResource(MouseEvent event)
+	{
+
+	}
 
 	@FXML
 	void showLeaderCards(ActionEvent event)
@@ -180,10 +235,11 @@ public class MainViewController
 
 	public void updateVault(Vault vault)
 	{
-		vaultBlueAmount.setText(vault.getResourceAmounts().get(ResourceType.BLUE).toString());
+		System.out.println("vault blue amount: " + vault.getResourceAmounts().get(ResourceType.BLUE));
+		Platform.runLater(() -> {vaultBlueAmount.setText(vault.getResourceAmounts().get(ResourceType.BLUE).toString());});
 		vaultYellowAmount.setText(vault.getResourceAmounts().get(ResourceType.YELLOW).toString());
 		vaultGreyAmount.setText(vault.getResourceAmounts().get(ResourceType.GREY).toString());
-		vaultPurpleAmount.setText(vault.getResourceAmounts().get(ResourceType.PURPLE).toString());
+		Platform.runLater(() -> {vaultPurpleAmount.setText(vault.getResourceAmounts().get(ResourceType.PURPLE).toString());});
 	}
 
 	public void updateDevCardAreas(DevCardArea[] devCardAreas)
@@ -319,6 +375,11 @@ public class MainViewController
 		return dashboard;
 	}
 
+	public void printToConsole(String message)
+	{
+		console.setText(console.getText() + "\n" + message);
+	}
+
 	public void setup(Scene marketsScene, NetworkHandler networkHandler)
 	{
 		this.marketsScene = marketsScene;
@@ -328,5 +389,10 @@ public class MainViewController
 	public void setDevCardToBuy(int devCardToBuy)
 	{
 		this.devCardToBuy = devCardToBuy;
+	}
+
+	public Button getDefaultProductionButton()
+	{
+		return defaultProductionButton;
 	}
 }

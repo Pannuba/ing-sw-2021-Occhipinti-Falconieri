@@ -35,6 +35,7 @@ public class ActionGUI extends MessageExecutor
 		mvc.updateVault(gameState.getPlayerByName(gui.getUsername()).getDashboard().getVault());
 		mvc.updateTrack(gameState.getCurrTrack(), gameState.getCurrPlayers(), gameState.getPlayerByName(gui.getUsername()).getId());
 		mvc.updateDevCardAreas(gameState.getPlayerByName(gui.getUsername()).getDashboard().getDevCardAreas());
+		mvc.getDefaultProductionButton().setDisable(false);
 		mmc.updateMarket(gameState.getCurrMarblesMarket(), gameState.getCurrDevCardsMarket(), gameState.getPlayerByName(gui.getUsername()).isMyTurn());
 	}
 
@@ -54,7 +55,7 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void initialResources(int playerID)		/* TODO: make a scene with leaders choice and/or the initial resources choice */
 	{
-		mvc.getConsole().setText(mvc.getConsole().getText() + "\nPlayer ID: " + playerID);		/* TODO: mvc.updateConsole("String") */
+		mvc.printToConsole("Player ID: " + playerID);		/* TODO: mvc.updateConsole("String") */
 	}
 
 	@Override

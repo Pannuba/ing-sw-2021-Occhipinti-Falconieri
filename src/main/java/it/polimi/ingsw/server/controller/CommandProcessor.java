@@ -259,7 +259,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 					cost.add(new Resource(ResourceType.convertStringToResType(command.get(3)), 1));
 				}
 
-				ResourceType productResType = ResourceType.convertStringToResType(command.get(3));
+				ResourceType productResType = ResourceType.convertStringToResType(command.get(4));
 				producedResources.add(new Resource(productResType, 1));		/* Convert ResourceType to Resource */
 
 				break;

@@ -56,25 +56,37 @@
       <ImageView fx:id="bottomShelfResource1" fitHeight="67.0" fitWidth="51.0" layoutX="65.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bottomShelfResource2" fitHeight="67.0" fitWidth="51.0" layoutX="104.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bottomShelfResource3" fitHeight="67.0" fitWidth="51.0" layoutX="142.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="vaultResourceBlue" fitHeight="67.0" fitWidth="51.0" layoutX="65.0" layoutY="548.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="vaultResourceBlue" disable="true" fitHeight="67.0" fitWidth="51.0" layoutX="65.0" layoutY="548.0" onMouseClicked="#selectBlueResource" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/resources/blue.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <ImageView fx:id="vaultResourcePurple" fitHeight="67.0" fitWidth="51.0" layoutX="151.0" layoutY="548.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="vaultResourcePurple" disable="true" fitHeight="67.0" fitWidth="51.0" layoutX="151.0" layoutY="548.0" onMouseClicked="#selectPurpleResource" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/resources/purple.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <ImageView fx:id="vaultResourceYellow" fitHeight="67.0" fitWidth="51.0" layoutX="65.0" layoutY="603.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="vaultResourceYellow" disable="true" fitHeight="67.0" fitWidth="51.0" layoutX="65.0" layoutY="603.0" onMouseClicked="#selectYellowResource" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/resources/yellow.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <ImageView fx:id="vaultResourceGrey" fitHeight="67.0" fitWidth="51.0" layoutX="151.0" layoutY="600.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="vaultResourceGrey" disable="true" fitHeight="67.0" fitWidth="51.0" layoutX="151.0" layoutY="600.0" onMouseClicked="#selectGreyResource" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/resources/grey.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <Label fx:id="vaultBlueAmount" layoutX="44.0" layoutY="548.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
          <font>
@@ -108,5 +120,10 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
+      <Button fx:id="defaultProductionButton" disable="true" layoutX="241.0" layoutY="481.0" mnemonicParsing="false" onAction="#defaultProduction" opacity="0.0" prefHeight="120.0" prefWidth="132.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </Pane>
