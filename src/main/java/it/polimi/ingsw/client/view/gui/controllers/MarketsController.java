@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.util.Arrays;
 
 
-public class MarblesMarketController		/* Send command directly from here? Get whiteMarbleResource from gamestate and keep it as instance variable? YES */
+public class MarketsController        /* Send command directly from here? Get whiteMarbleResource from gamestate and keep it as instance variable? YES */
 {
 	private Scene mainViewScene;
 	private NetworkHandler networkHandler;

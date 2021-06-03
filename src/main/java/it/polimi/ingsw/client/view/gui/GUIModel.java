@@ -2,7 +2,7 @@ package it.polimi.ingsw.client.view.gui;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.controllers.MainViewController;
-import it.polimi.ingsw.client.view.gui.controllers.MarblesMarketController;
+import it.polimi.ingsw.client.view.gui.controllers.MarketsController;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.server.messages.Message;
 import javafx.event.Event;
@@ -34,11 +34,11 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
 		FXMLLoader marblesLoader = new FXMLLoader();
-		marblesLoader.setLocation(getClass().getResource("/scenes/marblesmarket.fxml"));		/* Put in createScenes()? */
+		marblesLoader.setLocation(getClass().getResource("/scenes/markets.fxml"));		/* Put in createScenes()? */
 		Parent marblesRoot = marblesLoader.load();
 		Scene marblesScene = new Scene(marblesRoot);
 
-		MarblesMarketController mmc = marblesLoader.getController();
+		MarketsController mmc = marblesLoader.getController();
 		mmc.setup(mainViewScene, networkHandler);						/* TODO: create setup() in all scene controllers */
 		MainViewController mvc = mainViewLoader.getController();
 		mvc.setMarblesScene(marblesScene);

@@ -3,7 +3,7 @@ package it.polimi.ingsw.client.view.gui;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.MessageExecutor;
 import it.polimi.ingsw.client.view.gui.controllers.MainViewController;
-import it.polimi.ingsw.client.view.gui.controllers.MarblesMarketController;
+import it.polimi.ingsw.client.view.gui.controllers.MarketsController;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Resource;
@@ -19,9 +19,9 @@ public class ActionGUI extends MessageExecutor
 	private final GUIModel gui;
 	private final NetworkHandler networkHandler;		/* To send commands to server */
 	private final MainViewController mvc;						/* To update the scenes when a new gamestate is received */
-	private final MarblesMarketController mmc;
+	private final MarketsController mmc;
 
-	public ActionGUI(GUIModel gui, NetworkHandler networkHandler, MainViewController mvc, MarblesMarketController mmc)
+	public ActionGUI(GUIModel gui, NetworkHandler networkHandler, MainViewController mvc, MarketsController mmc)
 	{
 		this.gui = gui;
 		this.networkHandler = networkHandler;
