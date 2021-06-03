@@ -30,8 +30,11 @@ public class Vault implements Serializable		/* Has resources obtained through pr
 	{
 		for (int i = 0; i < resourcesToAdd.size(); i++)
 		{
-			for (int j = 0; j < resourcesToAdd.get(i).getQuantity(); j++)
-				addResource(resourcesToAdd.get(i).getResourceType());
+			if (resourcesToAdd.get(i).getResourceType() != ResourceType.RED)		/* Don't add red resources to vault */
+			{
+				for (int j = 0; j < resourcesToAdd.get(i).getQuantity(); j++)
+					addResource(resourcesToAdd.get(i).getResourceType());
+			}
 		}
 	}
 

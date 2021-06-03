@@ -23,15 +23,19 @@ public class ActivateProduction
 		{
 			case "1":
 
-				String resourceToConvert, resourceToMake;			/* TODO: 2 resources to convert, also different type */
-				System.out.print("Insert the resource type you want to convert (B/G/Y/P): ");
-				resourceToConvert = input.nextLine();
+				String firstResourceToConvert, secondResourceToConvert, resourceToMake;
+
+				System.out.print("Insert the first resource type you want to convert (B/G/Y/P): ");
+				firstResourceToConvert = input.nextLine();
+				System.out.print("Insert the second resource type you want to convert (B/G/Y/P): ");
+				secondResourceToConvert = input.nextLine();
 				System.out.print("Insert the resource type you want to make (B/G/Y/P): ");
 				resourceToMake = input.nextLine();
 
 				command.add("ACTIVATE_PRODUCTION");
 				command.add("DEFAULT");
-				command.add(resourceToConvert);
+				command.add(firstResourceToConvert);
+				command.add(secondResourceToConvert);
 				command.add(resourceToMake);
 				break;
 

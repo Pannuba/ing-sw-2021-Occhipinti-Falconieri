@@ -243,14 +243,21 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 	public void activateProduction(List<String> command, String username)		/* TODO: add checks if client says something like AAAAAAAAAAAAA */
 	{
-		List<Resource> producedResources = new ArrayList<>();					/* TODO: add faithpoints/red resources */
+		List<Resource> producedResources = new ArrayList<>();
 		List<Resource> cost = new ArrayList<>();
 
 		switch (command.get(1))
 		{
-			case "DEFAULT":				/* "ACTIVATE_PRODUCTION", "DEFAULT", "B", "Y" */
+			case "DEFAULT":				/* "ACTIVATE_PRODUCTION", "DEFAULT", "B", "B", "Y" */
 
-				cost.add(new Resource(ResourceType.convertStringToResType(command.get(2)), 2));	/* Get value from config for parameter editor! */
+				if (command.get(2).equals(command.get(3)))		/* If the resources to convert are the same */
+					cost.add(new Resource(ResourceType.convertStringToResType(command.get(2)), 2));	/* Get value from config for parameter editor! */
+
+				else
+				{
+					cost.add(new Resource(ResourceType.convertStringToResType(command.get(2)), 1));
+					cost.add(new Resource(ResourceType.convertStringToResType(command.get(3)), 1));
+				}
 
 				ResourceType productResType = ResourceType.convertStringToResType(command.get(3));
 				producedResources.add(new Resource(productResType, 1));		/* Convert ResourceType to Resource */
@@ -269,9 +276,10 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 				LeaderCard leaderCard = model.getPlayerByUsername(username).getLeaderCardByNumber(Integer.parseInt(command.get(2)));
 
-				if (leaderCard.isActive())		/* TODO: also gives faithpoints */
+				if (leaderCard.isActive())		/* Gives 1 chosen resource and "faithpoints" faith points (value set in xmls, default is 1) */
 				{
 					producedResources.add(new Resource(ResourceType.convertStringToResType(command.get(3)), 1));
+					producedResources.add(new Resource(ResourceType.RED, ((SkillProduction) leaderCard).getFaithPoints()));
 					cost.add(((SkillProduction) leaderCard).getCost());
 				}
 
@@ -288,8 +296,15 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 		{
 			/* Update player position by 1 for each RED resource */
 			controller.spendResources(cost);
-			model.getPlayerByUsername(username).getDashboard().getVault().addResourceList(producedResources);
-			message = "Production successful!";		/* Send BoughtResourcesMessage before or after OpResult? Another boolean? */
+
+			for (int i = 0; i < producedResources.size(); i++)			/* Add produced faith points to player track */
+			{
+				if (producedResources.get(i).getResourceType() == ResourceType.RED)
+					controller.updatePlayerPosition(model.getPlayerByUsername(username).getId(), producedResources.get(i).getQuantity());
+			}
+
+			model.getPlayerByUsername(username).getDashboard().getVault().addResourceList(producedResources);	/* Vault checks red resources */
+			message = "Production successful!";
 			isFailed = false;
 		}
 
