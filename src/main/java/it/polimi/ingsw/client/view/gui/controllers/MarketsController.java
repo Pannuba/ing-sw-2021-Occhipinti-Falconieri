@@ -47,6 +47,19 @@ public class MarketsController        /* Send command directly from here? Get wh
 
 	@FXML private Button backToBoardButton;
 
+	@FXML private ImageView devCard00;
+	@FXML private ImageView devCard10;
+	@FXML private ImageView devCard20;
+	@FXML private ImageView devCard01;
+	@FXML private ImageView devCard11;
+	@FXML private ImageView devCard21;
+	@FXML private ImageView devCard02;
+	@FXML private ImageView devCard12;
+	@FXML private ImageView devCard22;
+	@FXML private ImageView devCard03;
+	@FXML private ImageView devCard13;
+	@FXML private ImageView devCard23;
+
 	@FXML
 	void backToBoard(ActionEvent event)		/* Set the already existing scene, otherwise it resets everything. How to pass? */
 	{
