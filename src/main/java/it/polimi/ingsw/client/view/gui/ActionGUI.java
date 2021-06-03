@@ -49,7 +49,7 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void startMatch()
 	{
-
+		mvc.printToConsole("Match started");
 	}
 
 	@Override
@@ -73,42 +73,53 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void getBoughtResources(List<Resource> boughtResources)
 	{
-
+		mvc.printToConsole("Received " + boughtResources.size() + " resources");
 	}
 
 	@Override
 	public void getDiscardedResources(int discardedResNum, String playerWhoDiscarded)
 	{
+		if (!playerWhoDiscarded.equals(gui.getUsername()))
+			mvc.printToConsole(playerWhoDiscarded + " discarded " + discardedResNum + " resources, so you gained " + discardedResNum + " faith points!");
 
+		else
+			mvc.printToConsole(discardedResNum + " resources couldn't fit in the storage, so they have been discarded");
 	}
 
 	@Override
 	public void getBoughtDevCard(DevCard boughtCard)
 	{
-
+		mvc.printToConsole("Received dev card #" + boughtCard.getCardNumber());
 	}
 
 	@Override
 	public void getOperationResultMessage(String message, boolean isFailed)
 	{
-
+		mvc.printToConsole(message);
 	}
 
 	@Override
 	public void getActionToken(ActionToken token)
 	{
-
+		mvc.printToConsole("Flipped next action token");
 	}
 
 	@Override
 	public void matchOver(String winnerName, List<Player> players)
 	{
+		if (gui.getUsername().equals(winnerName))
+			mvc.printToConsole("You win! ");
 
+		else
+			mvc.printToConsole("Game over! The winner is " + winnerName);
+
+		for (int i = 0; i < players.size(); i++)
+			mvc.printToConsole(players.get(i).getUsername() + ": " + players.get(i).getVictoryPoints() + " points");
 	}
 
 	@Override
 	public void singlePlayerGameOver(String message)
 	{
-
+		mvc.printToConsole(message);
 	}
 }

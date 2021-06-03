@@ -65,7 +65,7 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 		}
 	}
 
-	public GameState getGameState()
+	public GameState getGameState()		/* Just pass the gamestate to ActionGUI */
 	{
 		return gameState;
 	}

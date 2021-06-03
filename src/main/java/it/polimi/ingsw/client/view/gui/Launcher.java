@@ -26,9 +26,9 @@ public class Launcher extends Application
 		Scene scene = new Scene(root);
 
 		mainStage.setTitle("Masters of Renaissance Launcher");
-		mainStage.getIcons().add(new Image("/img/inkwell.png"));
+		mainStage.getIcons().add(new Image("/img/inkwell.png"));		/* Check if it works from .jar */
 		mainStage.setScene(scene);
-		mainStage.setResizable(false);
+		//mainStage.setResizable(false);
 		mainStage.show();
 	}
 }

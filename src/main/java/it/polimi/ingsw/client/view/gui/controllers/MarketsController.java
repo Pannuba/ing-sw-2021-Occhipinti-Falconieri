@@ -15,7 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class MarketsController        /* Send command directly from here? Get whiteMarbleResource from gamestate and keep it as instance variable? YES */
@@ -148,8 +150,30 @@ public class MarketsController        /* Send command directly from here? Get wh
 		marble23.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertMarbleTypeToPath(marblesBoard[2][3].getMarbleType()))));
 
 		/* TODO: add spareMarble, order indexes of devcards/stacks/level... */
+		List<ImageView> devcards = new ArrayList<>();
+		devcards.add(devCard20);
+		devcards.add(devCard10);
+		devcards.add(devCard00);
+		devcards.add(devCard21);
+		devcards.add(devCard11);
+		devcards.add(devCard01);
+		devcards.add(devCard22);
+		devcards.add(devCard12);
+		devcards.add(devCard02);
+		devcards.add(devCard23);
+		devcards.add(devCard13);
+		devcards.add(devCard03);
 
-		devCard20.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(0).get(0).getCardNumber() + ".png")));
+		for (int i = 0; i < devcards.size(); i++)
+		{
+			if (devCardsMarket.getDevCardStacks().get(i).isEmpty())
+				devcards.get(i).setImage(null);
+
+			else
+				devcards.get(i).setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(i).get(0).getCardNumber() + ".png")));
+		}
+
+		/*devCard20.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(0).get(0).getCardNumber() + ".png")));
 		devCard10.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(1).get(0).getCardNumber() + ".png")));
 		devCard00.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(2).get(0).getCardNumber() + ".png")));
 		devCard21.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(3).get(0).getCardNumber() + ".png")));
@@ -160,8 +184,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 		devCard02.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(8).get(0).getCardNumber() + ".png")));
 		devCard23.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(9).get(0).getCardNumber() + ".png")));
 		devCard13.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(10).get(0).getCardNumber() + ".png")));
-		devCard03.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(11).get(0).getCardNumber() + ".png")));
-
+		devCard03.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(11).get(0).getCardNumber() + ".png")));*/
 	}
 
 	@FXML
