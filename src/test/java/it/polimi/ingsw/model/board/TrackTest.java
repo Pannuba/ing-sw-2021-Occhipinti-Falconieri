@@ -19,7 +19,7 @@ public class TrackTest {
 	private HashMap<Integer, Integer> redPawns = new HashMap<>();
 
 	@Test
-	public void checkVaticanReport1()
+	public void checkVaticanReport1()		/* vatican report for first pope token */
 	{
 		p1 = new Player("pippo");
 		p2 = new Player("pluto");
@@ -35,11 +35,14 @@ public class TrackTest {
 		redPawns.put(players.get(1).getId(), 3);
 		redPawns.put(players.get(2).getId(), 8);
 		track.setRedPawns(redPawns);
+		track.getPopeTokens()[0].setDiscarded(false);
+		track.getPopeTokens()[1].setDiscarded(false);
+		track.getPopeTokens()[2].setDiscarded(false);
 		assertEquals("Error", 8, track.checkVaticanReport());
 	}
 
 	@Test
-	public void checkVaticanReport2()
+	public void checkVaticanReport2()		/* vatican report for second pope token */
 	{
 		p1 = new Player("pippo");
 		p2 = new Player("pluto");
@@ -55,11 +58,14 @@ public class TrackTest {
 		redPawns.put(players.get(1).getId(), 16);
 		redPawns.put(players.get(2).getId(), 9);
 		track.setRedPawns(redPawns);
+		track.getPopeTokens()[0].setDiscarded(true);
+		track.getPopeTokens()[1].setDiscarded(false);
+		track.getPopeTokens()[2].setDiscarded(false);
 		assertEquals("Error", 16, track.checkVaticanReport());
 	}
 
 	@Test
-	public void checkVaticanReport3()
+	public void checkVaticanReport3()		/* vatican report for third pope token */
 	{
 		p1 = new Player("pippo");
 		p2 = new Player("pluto");
@@ -75,6 +81,25 @@ public class TrackTest {
 		redPawns.put(players.get(1).getId(), 15);
 		redPawns.put(players.get(2).getId(), 20);
 		track.setRedPawns(redPawns);
+		track.getPopeTokens()[0].setDiscarded(true);
+		track.getPopeTokens()[1].setDiscarded(true);
+		track.getPopeTokens()[2].setDiscarded(false);
+		assertEquals("Error", 24, track.checkVaticanReport());
+	}
+
+	@Test
+	public void checkVaticanReport4()		/* single player: black pawn trigger vatican report */
+	{
+		p1 = new Player("pippo");
+		p1.setId(0);
+		players.add(p1);
+		track = new Track(players);
+		redPawns.put(players.get(0).getId(), 16);
+		track.setBlackPawn(24);
+		track.setRedPawns(redPawns);
+		track.getPopeTokens()[0].setDiscarded(true);
+		track.getPopeTokens()[1].setDiscarded(true);
+		track.getPopeTokens()[2].setDiscarded(false);
 		assertEquals("Error", 24, track.checkVaticanReport());
 	}
 }

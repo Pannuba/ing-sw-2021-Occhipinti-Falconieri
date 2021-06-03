@@ -66,16 +66,14 @@ public class Track implements Serializable
 	{
 		for (int i = 0; i < numPlayers; i++)		/* redPawns.get(i) returns the position of player ID i */
 		{
-			if (redPawns.get(i) >= 24 && !popeTokens[2].isDiscarded())	return 24;
+			if ((redPawns.get(i) >= 24 || blackPawn >= 24) && !popeTokens[2].isDiscarded())	return 24;
 
-			if (redPawns.get(i) >= 16 && !popeTokens[1].isDiscarded())	return 16;
+			if ((redPawns.get(i) >= 16 || blackPawn >= 16) && !popeTokens[1].isDiscarded())	return 16;
 
-			if (redPawns.get(i) >= 8  && !popeTokens[0].isDiscarded())	return 8;
+			if ((redPawns.get(i) >= 8  || blackPawn >= 8)  && !popeTokens[0].isDiscarded())	return 8;
 		}
 
 		/* TODO: if we want to know which player triggered the vatican report, add a boolean to Player like didVaticanReport, and check in Model */
-
-		/* TODO: also check blackPawn */
 
 		return 0;
 	}
