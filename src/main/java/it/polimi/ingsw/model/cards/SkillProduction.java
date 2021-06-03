@@ -8,7 +8,7 @@ public class SkillProduction extends LeaderCard		/* Every card gives one faith p
 	private Pair<DevCardColor, Integer> requirements;		/* Pair of	(devcard color : devcard level) */
 	private Resource cost;									/* In base game, always 1 cost, 1 output resource (chosen by user), 1 faith point */
 	private Resource product;
-	private int faithPoints;
+	private int faithPoints;			/* Set in xmls */
 
 	public SkillProduction()		/* ResourceType of cost and product is assigned by the xmls */
 	{

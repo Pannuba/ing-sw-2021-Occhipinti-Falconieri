@@ -1,7 +1,9 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
 import it.polimi.ingsw.client.view.gui.ConvertMethods;
+import it.polimi.ingsw.model.board.DevCardArea;
 import it.polimi.ingsw.model.board.Storage;
+import it.polimi.ingsw.model.board.Track;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -72,6 +74,11 @@ public class MainViewController
 		mainStage.show();
 	}
 
+	public void updateTrack(Track track)	/* TODO: create an ImageView for each box */
+	{
+
+	}
+
 	public void updateStorage(Storage storage)
 	{
 		switch (storage.getShelves()[0].getShelfResourceQuantity())
@@ -130,6 +137,27 @@ public class MainViewController
 		}
 	}
 
+	public void updateDevCardAreas(DevCardArea[] devCardAreas)
+	{
+		if (devCardAreas[0] != null)
+			devCardArea1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[0].getTopDevCard().getCardNumber() + ".png")));
+
+		else
+			devCardArea1.setImage(null);
+
+		if (devCardAreas[1] != null)
+			devCardArea2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[1].getTopDevCard().getCardNumber() + ".png")));
+
+		else
+			devCardArea2.setImage(null);
+
+		if (devCardAreas[2] != null)
+			devCardArea3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[2].getTopDevCard().getCardNumber() + ".png")));
+
+		else
+			devCardArea3.setImage(null);
+	}
+
 	public TextArea getConsole()
 	{
 		return console;
@@ -184,7 +212,6 @@ public class MainViewController
 	{
 		return dashboard;
 	}
-
 
 	public void setMarblesScene(Scene marblesScene)
 	{

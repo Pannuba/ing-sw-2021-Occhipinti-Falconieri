@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/* TODO: make a separate class for big commands */
+/* TODO: remove CommandProcessor, make 3 classes for the 3 main actions, SetupCommands and LeaderCommands */
 
 public class CommandProcessor			/* Contains the code that runs when a certain command is received */
 {
@@ -135,7 +135,9 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 		for (int i = 0; i < boughtMarbles.size(); i++)
 		{
 			if (boughtMarbles.get(i) == MarbleType.RED)		/* TODO: tell player they bought red marbles */
+			{
 				controller.updatePlayerPosition(model.getPlayerByUsername(username).getId(), 1);
+			}
 
 			else if (boughtMarbles.get(i) == MarbleType.WHITE)
 			{
@@ -241,7 +243,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 	public void activateProduction(List<String> command, String username)		/* TODO: add checks if client says something like AAAAAAAAAAAAA */
 	{
-		List<Resource> producedResources = new ArrayList<>();
+		List<Resource> producedResources = new ArrayList<>();					/* TODO: add faithpoints/red resources */
 		List<Resource> cost = new ArrayList<>();
 
 		switch (command.get(1))
@@ -267,7 +269,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 				LeaderCard leaderCard = model.getPlayerByUsername(username).getLeaderCardByNumber(Integer.parseInt(command.get(2)));
 
-				if (leaderCard.isActive())
+				if (leaderCard.isActive())		/* TODO: also gives faithpoints */
 				{
 					producedResources.add(new Resource(ResourceType.convertStringToResType(command.get(3)), 1));
 					cost.add(((SkillProduction) leaderCard).getCost());
@@ -284,6 +286,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 		if (controller.checkResourceAmounts(model.getPlayerByUsername(username).getDashboard(), cost))
 		{
+			/* Update player position by 1 for each RED resource */
 			controller.spendResources(cost);
 			model.getPlayerByUsername(username).getDashboard().getVault().addResourceList(producedResources);
 			message = "Production successful!";		/* Send BoughtResourcesMessage before or after OpResult? Another boolean? */

@@ -348,7 +348,10 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		return allLeaderCards;
 	}
 
-	public List<ActionToken> getActionTokens() { return actionTokens; }
+	public List<ActionToken> getActionTokens()
+	{
+		return actionTokens;
+	}
 
 	public ActionToken getNextActionToken()		/* This method un-flips the current flipped token, flips the next one and returns it */
 	{

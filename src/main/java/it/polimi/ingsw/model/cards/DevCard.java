@@ -6,6 +6,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/*	TODO: remake serialization to add RED resources to product so the player sees a red circle in the CLI... and remake all devcards
+	keep faithpoints int so they're easily accessible when updating the player's position in the production command
+*/
+
 public class DevCard implements Serializable
 {
 	private int cardNumber;			/* To identify cards. If a devcard is bought from the market, the list size changes so it's impossible to order cards based on their index */

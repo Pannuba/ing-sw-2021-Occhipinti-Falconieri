@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public enum ResourceType
+public enum ResourceType	/* TODO: add RED resource, remove TODOs scattered around the project about this issue */
 {
 	BLUE,
 	GREY,

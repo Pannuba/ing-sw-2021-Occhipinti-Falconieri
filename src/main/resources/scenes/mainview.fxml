@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
@@ -13,9 +14,18 @@
             <Image url="@../img/dashboard.png" />
          </image>
       </ImageView>
-      <Button fx:id="marblesMarketButton" layoutX="1053.0" layoutY="32.0" mnemonicParsing="false" onAction="#showMarblesMarket" prefHeight="55.0" prefWidth="184.0" text="Show Marbles Market" />
-      <Button fx:id="devCardsMarketButton" layoutX="1053.0" layoutY="117.0" mnemonicParsing="false" onAction="#showDevCardsMarket" prefHeight="55.0" prefWidth="184.0" text="Show Devcards Market" />
-      <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="201.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="55.0" prefWidth="184.0" text="Show Leader Cards" />
+      <Button fx:id="marblesMarketButton" layoutX="1053.0" layoutY="32.0" mnemonicParsing="false" onAction="#showMarblesMarket" prefHeight="55.0" prefWidth="184.0" text="Show Marbles Market">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="devCardsMarketButton" layoutX="1053.0" layoutY="117.0" mnemonicParsing="false" onAction="#showDevCardsMarket" prefHeight="55.0" prefWidth="184.0" text="Show Devcards Market">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="201.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="55.0" prefWidth="184.0" text="Show Leader Cards">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></Button>
       <TextArea fx:id="console" editable="false" layoutX="1018.0" layoutY="298.0" prefHeight="414.0" prefWidth="254.0" wrapText="true" />
       <ImageView fx:id="topShelfResource" fitHeight="67.0" fitWidth="51.0" layoutX="110.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="middleShelfResource1" fitHeight="67.0" fitWidth="51.0" layoutX="83.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />

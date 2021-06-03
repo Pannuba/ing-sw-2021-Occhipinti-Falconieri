@@ -16,6 +16,6 @@ public class InitialResourcesMessage implements Message, Serializable
 	@Override
 	public void process(MessageExecutor action)
 	{
-		action.chooseResources(playerID);
+		action.initialResources(playerID);
 	}
 }

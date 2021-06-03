@@ -10,7 +10,6 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.cards.ActionToken;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 
 import java.util.List;
@@ -32,9 +31,11 @@ public class ActionGUI extends MessageExecutor
 		this.mmc = mmc;
 	}
 
-	public void updateView(GameState gameState)		/* TODO: pass controllers, not loaders */
+	public void updateView(GameState gameState)
 	{
 		mvc.updateStorage(gameState.getPlayerByName(gui.getUsername()).getDashboard().getStorage());
+		mvc.updateTrack(gameState.getCurrTrack());
+		mvc.updateDevCardAreas(gameState.getPlayerByName(gui.getUsername()).getDashboard().getDevCardAreas());
 		mmc.updateMarket(gameState.getCurrMarblesMarket(), gameState.getPlayerByName(gui.getUsername()).isMyTurn());
 	}
 
@@ -52,10 +53,9 @@ public class ActionGUI extends MessageExecutor
 	}
 
 	@Override
-	public void chooseResources(int playerID)
+	public void initialResources(int playerID)		/* TODO: make a scene with leaders choice and/or the initial resources choice */
 	{
-		MainViewController mvc = mainViewLoader.getController();
-		mvc.getConsole().setText("Player ID: " + playerID);
+		mvc.getConsole().setText(mvc.getConsole().getText() + "\nPlayer ID: " + playerID);		/* TODO: mvc.updateConsole("String") */
 	}
 
 	@Override
