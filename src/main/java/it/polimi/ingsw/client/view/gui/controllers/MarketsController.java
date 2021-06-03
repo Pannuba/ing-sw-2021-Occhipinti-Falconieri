@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.util.Arrays;
@@ -20,7 +21,10 @@ import java.util.Arrays;
 public class MarketsController        /* Send command directly from here? Get whiteMarbleResource from gamestate and keep it as instance variable? YES */
 {
 	private Scene mainViewScene;
+	private MainViewController mvc;
 	private NetworkHandler networkHandler;
+
+	private DevCardsMarket currDevCardsMarket;
 
 	@FXML private ImageView marblesMarket;
 
@@ -75,6 +79,9 @@ public class MarketsController        /* Send command directly from here? Get wh
 	public void updateMarket(MarblesMarket market, DevCardsMarket devCardsMarket, boolean isMyTurn)
 	{
 		System.out.println("Updating marbles market... isMyTurn = " + isMyTurn);
+
+		currDevCardsMarket = devCardsMarket;
+
 		Marble[][] marblesBoard = market.getMarblesBoard();
 
 		if (isMyTurn)		/* When it's the player's turn, make buttons pressable to send the command BUY_RESOURCES */
@@ -87,6 +94,19 @@ public class MarketsController        /* Send command directly from here? Get wh
 			rowOneButton.setDisable(false);
 			rowTwoButton.setDisable(false);
 			rowThreeButton.setDisable(false);
+
+			devCard00.setDisable(false);			/* Put them in a list, and enable/disable with a for? */
+			devCard01.setDisable(false);
+			devCard02.setDisable(false);
+			devCard03.setDisable(false);
+			devCard10.setDisable(false);
+			devCard11.setDisable(false);
+			devCard12.setDisable(false);
+			devCard13.setDisable(false);
+			devCard20.setDisable(false);
+			devCard21.setDisable(false);
+			devCard22.setDisable(false);
+			devCard23.setDisable(false);
 		}
 //the disable checkbox in scenebuilder disables the button permanently, meaning setdisable(false) wont work
 		else
@@ -99,6 +119,19 @@ public class MarketsController        /* Send command directly from here? Get wh
 			rowOneButton.setDisable(true);
 			rowTwoButton.setDisable(true);
 			rowThreeButton.setDisable(true);
+
+			devCard00.setDisable(true);			/* Put them in a list, and enable/disable with a for? */
+			devCard01.setDisable(true);
+			devCard02.setDisable(true);
+			devCard03.setDisable(true);
+			devCard10.setDisable(true);
+			devCard11.setDisable(true);
+			devCard12.setDisable(true);
+			devCard13.setDisable(true);
+			devCard20.setDisable(true);
+			devCard21.setDisable(true);
+			devCard22.setDisable(true);
+			devCard23.setDisable(true);
 		}
 
 		marble00.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertMarbleTypeToPath(marblesBoard[0][0].getMarbleType()))));
@@ -114,7 +147,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 		marble22.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertMarbleTypeToPath(marblesBoard[2][2].getMarbleType()))));
 		marble23.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertMarbleTypeToPath(marblesBoard[2][3].getMarbleType()))));
 
-		/* TODO: add spareMarble */
+		/* TODO: add spareMarble, order indexes of devcards/stacks/level... */
 
 		devCard20.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(0).get(0).getCardNumber() + ".png")));
 		devCard10.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(1).get(0).getCardNumber() + ".png")));
@@ -128,6 +161,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 		devCard23.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(9).get(0).getCardNumber() + ".png")));
 		devCard13.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(10).get(0).getCardNumber() + ".png")));
 		devCard03.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(11).get(0).getCardNumber() + ".png")));
+
 	}
 
 	@FXML
@@ -172,9 +206,42 @@ public class MarketsController        /* Send command directly from here? Get wh
 		networkHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "4"));
 	}
 
-	public void setup(Scene mainViewScene, NetworkHandler networkHandler)
+	@FXML
+	void selectDevCard00(MouseEvent event)
+	{
+		mvc.setDevCardToBuy(currDevCardsMarket.getDevCardStacks().get(2).get(0).getCardNumber());
+		mvc.getDevCardArea1().setDisable(false);
+		mvc.getDevCardArea2().setDisable(false);
+		mvc.getDevCardArea3().setDisable(false);
+
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		/* TODO: instance variable? */
+
+		mainStage.setTitle("Masters of Renaissance - Select Dev Card Area");
+		mainStage.setScene(mainViewScene);
+		mainStage.sizeToScene();		/* ? */
+		mainStage.show();
+	}
+
+	@FXML
+	void selectDevCard20(MouseEvent event)
+	{
+		mvc.setDevCardToBuy(currDevCardsMarket.getDevCardStacks().get(0).get(0).getCardNumber());
+		mvc.getDevCardArea1().setDisable(false);
+		mvc.getDevCardArea2().setDisable(false);
+		mvc.getDevCardArea3().setDisable(false);
+
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		/* TODO: instance variable? */
+
+		mainStage.setTitle("Masters of Renaissance - Select Dev Card Area");
+		mainStage.setScene(mainViewScene);
+		mainStage.sizeToScene();		/* ? */
+		mainStage.show();
+	}
+
+	public void setup(Scene mainViewScene, MainViewController mvc, NetworkHandler networkHandler)
 	{
 		this.mainViewScene = mainViewScene;
+		this.mvc = mvc;
 		this.networkHandler = networkHandler;
 	}
 }

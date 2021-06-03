@@ -19,7 +19,7 @@ import java.util.Observer;
 public class GUIModel implements Observer        /* Has gamestate, action instance, observes NetworkHandler */
 {
 	private final ActionGUI action;				/* ActionGUI instance to pass it the commands received by the NetworkHandler */
-	private String username;
+	private final String username;
 	private GameState gameState;				/* Local gamestate accessed by action and scenes through get method */
 
 	public GUIModel(String username, NetworkHandler networkHandler, Event event) throws IOException		/* /a/14190310 on how to pass parameters to controllers */
@@ -33,17 +33,17 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-		FXMLLoader marblesLoader = new FXMLLoader();
-		marblesLoader.setLocation(getClass().getResource("/scenes/markets.fxml"));		/* Put in createScenes()? */
-		Parent marblesRoot = marblesLoader.load();
-		Scene marblesScene = new Scene(marblesRoot);
+		FXMLLoader marketsLoader = new FXMLLoader();
+		marketsLoader.setLocation(getClass().getResource("/scenes/markets.fxml"));		/* Put in createScenes()? */
+		Parent marketsRoot = marketsLoader.load();
+		Scene marketsScene = new Scene(marketsRoot);
 
-		MarketsController mmc = marblesLoader.getController();
-		mmc.setup(mainViewScene, networkHandler);						/* TODO: create setup() in all scene controllers */
+		MarketsController mc = marketsLoader.getController();
 		MainViewController mvc = mainViewLoader.getController();
-		mvc.setMarblesScene(marblesScene);
+		mc.setup(mainViewScene, mvc, networkHandler);						/* TODO: create setup() in all scene controllers */
+		mvc.setup(marketsScene, networkHandler);
 
-		action = new ActionGUI(this, networkHandler, mvc, mmc);
+		action = new ActionGUI(this, networkHandler, mvc, mc);
 
 		mainStage.setTitle("Masters of Renaissance");
 		mainStage.setScene(mainViewScene);

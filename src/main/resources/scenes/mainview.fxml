@@ -96,8 +96,17 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <ImageView fx:id="devCardArea1" fitHeight="317.0" fitWidth="176.0" layoutX="391.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="devCardArea2" fitHeight="317.0" fitWidth="176.0" layoutX="583.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="devCardArea3" fitHeight="317.0" fitWidth="176.0" layoutX="783.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="devCardArea1" disable="true" fitHeight="317.0" fitWidth="176.0" layoutX="391.0" layoutY="334.0" onMouseClicked="#selectDevCardAreaOne" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="devCardArea2" disable="true" fitHeight="317.0" fitWidth="176.0" layoutX="583.0" layoutY="334.0" onMouseClicked="#selectDevCardAreaTwo" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="devCardArea3" disable="true" fitHeight="317.0" fitWidth="176.0" layoutX="783.0" layoutY="334.0" onMouseClicked="#selectDevCardAreaThree" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
    </children>
 </Pane>

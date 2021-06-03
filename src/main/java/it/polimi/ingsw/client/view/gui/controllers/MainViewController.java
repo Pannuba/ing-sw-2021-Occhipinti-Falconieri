@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
+import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.ConvertMethods;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.ResourceType;
@@ -16,15 +17,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.util.Arrays;
 import java.util.List;
 
 /* Empty images that are updated with image.setImage("...") each gamestate update */
 
 public class MainViewController
 {
-	private Scene marblesScene;
+	private Scene marketsScene;
+	private NetworkHandler networkHandler;
+
+	private int devCardToBuy;
 
 	@FXML private ImageView dashboard;
 
@@ -36,7 +42,7 @@ public class MainViewController
 	@FXML private ImageView redPawn;
 	@FXML private ImageView blackPawn;
 
-	@FXML private ImageView popeTokenOne;
+	@FXML private ImageView popeTokenOne;			/* Rename to 1, 2, 3 */
 	@FXML private ImageView popeTokenTwo;
 	@FXML private ImageView popeTokenThree;
 
@@ -79,8 +85,8 @@ public class MainViewController
 	{
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-		mainStage.setTitle("Masters of Renaissance - Marbles Market");
-		mainStage.setScene(marblesScene);
+		mainStage.setTitle("Masters of Renaissance - Markets");
+		mainStage.setScene(marketsScene);
 		mainStage.sizeToScene();		/* ? */
 		mainStage.show();
 	}
@@ -183,19 +189,19 @@ public class MainViewController
 	public void updateDevCardAreas(DevCardArea[] devCardAreas)
 	{
 		if (!devCardAreas[0].isEmpty())
-			devCardArea1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[0].getTopDevCard().getCardNumber() + ".png")));
+			devCardArea1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardAreas[0].getTopDevCard().getCardNumber() + ".png")));
 
 		else
 			devCardArea1.setImage(null);
 
 		if (!devCardAreas[1].isEmpty())
-			devCardArea2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[1].getTopDevCard().getCardNumber() + ".png")));
+			devCardArea2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardAreas[1].getTopDevCard().getCardNumber() + ".png")));
 
 		else
 			devCardArea2.setImage(null);
 
 		if (!devCardAreas[2].isEmpty())
-			devCardArea3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[2].getTopDevCard().getCardNumber() + ".png")));
+			devCardArea3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardAreas[2].getTopDevCard().getCardNumber() + ".png")));
 
 		else
 			devCardArea3.setImage(null);
@@ -232,6 +238,30 @@ public class MainViewController
 			case 24:
 			default: pawn.setLayoutX(910);	pawn.setLayoutY(15);	break;
 		}
+	}
+
+	@FXML
+	void selectDevCardAreaOne(MouseEvent event)
+	{
+		networkHandler.send(Arrays.asList("BUY_DEVCARD", String.valueOf(devCardToBuy), String.valueOf(1)));
+		devCardArea1.setDisable(true);
+		devCardArea2.setDisable(true);
+		devCardArea3.setDisable(true);
+
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		mainStage.setTitle("Masters of Renaissance");
+	}
+
+	@FXML
+	void selectDevCardAreaThree(MouseEvent event)
+	{
+
+	}
+
+	@FXML
+	void selectDevCardAreaTwo(MouseEvent event)
+	{
+
 	}
 
 	public TextArea getConsole()
@@ -289,8 +319,14 @@ public class MainViewController
 		return dashboard;
 	}
 
-	public void setMarblesScene(Scene marblesScene)
+	public void setup(Scene marketsScene, NetworkHandler networkHandler)
 	{
-		this.marblesScene = marblesScene;
+		this.marketsScene = marketsScene;
+		this.networkHandler = networkHandler;
+	}
+
+	public void setDevCardToBuy(int devCardToBuy)
+	{
+		this.devCardToBuy = devCardToBuy;
 	}
 }
