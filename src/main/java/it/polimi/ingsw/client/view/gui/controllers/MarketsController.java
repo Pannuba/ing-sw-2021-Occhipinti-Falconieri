@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.view.gui.controllers;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.ConvertMethods;
+import it.polimi.ingsw.model.DevCardsMarket;
 import it.polimi.ingsw.model.Marble;
 import it.polimi.ingsw.model.MarblesMarket;
 import javafx.event.ActionEvent;
@@ -71,7 +72,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 		mainStage.show();
 	}
 
-	public void updateMarket(MarblesMarket market, boolean isMyTurn)
+	public void updateMarket(MarblesMarket market, DevCardsMarket devCardsMarket, boolean isMyTurn)
 	{
 		System.out.println("Updating marbles market... isMyTurn = " + isMyTurn);
 		Marble[][] marblesBoard = market.getMarblesBoard();
@@ -114,6 +115,19 @@ public class MarketsController        /* Send command directly from here? Get wh
 		marble23.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertMarbleTypeToPath(marblesBoard[2][3].getMarbleType()))));
 
 		/* TODO: add spareMarble */
+
+		devCard20.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(0).get(0).getCardNumber() + ".png")));
+		devCard10.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(1).get(0).getCardNumber() + ".png")));
+		devCard00.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(2).get(0).getCardNumber() + ".png")));
+		devCard21.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(3).get(0).getCardNumber() + ".png")));
+		devCard11.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(4).get(0).getCardNumber() + ".png")));
+		devCard01.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(5).get(0).getCardNumber() + ".png")));
+		devCard22.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(6).get(0).getCardNumber() + ".png")));
+		devCard12.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(7).get(0).getCardNumber() + ".png")));
+		devCard02.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(8).get(0).getCardNumber() + ".png")));
+		devCard23.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(9).get(0).getCardNumber() + ".png")));
+		devCard13.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(10).get(0).getCardNumber() + ".png")));
+		devCard03.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(11).get(0).getCardNumber() + ".png")));
 	}
 
 	@FXML
