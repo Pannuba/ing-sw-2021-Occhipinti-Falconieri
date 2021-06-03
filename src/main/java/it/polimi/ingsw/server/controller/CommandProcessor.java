@@ -276,9 +276,9 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 
 				LeaderCard leaderCard = model.getPlayerByUsername(username).getLeaderCardByNumber(Integer.parseInt(command.get(2)));
 
-				if (leaderCard.isActive())		/* Gives 1 chosen resource and "faithpoints" faith points (value set in xmls, default is 1) */
+				if (leaderCard.isActive())		/* Gives "productAmount" of chosen resource and "faithpoints" faith points (values set in xmls, default is 1 for both) */
 				{
-					producedResources.add(new Resource(ResourceType.convertStringToResType(command.get(3)), 1));
+					producedResources.add(new Resource(ResourceType.convertStringToResType(command.get(3)), ((SkillProduction) leaderCard).getProductAmount()));
 					producedResources.add(new Resource(ResourceType.RED, ((SkillProduction) leaderCard).getFaithPoints()));
 					cost.add(((SkillProduction) leaderCard).getCost());
 				}

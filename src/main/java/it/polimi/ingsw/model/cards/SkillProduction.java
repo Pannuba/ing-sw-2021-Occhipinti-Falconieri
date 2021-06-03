@@ -7,13 +7,12 @@ public class SkillProduction extends LeaderCard		/* Every card gives one faith p
 {
 	private Pair<DevCardColor, Integer> requirements;		/* Pair of	(devcard color : devcard level) */
 	private Resource cost;									/* In base game, always 1 cost, 1 output resource (chosen by user), 1 faith point */
-	private Resource product;
+	private int productAmount;			/* Set in xmls */
 	private int faithPoints;			/* Set in xmls */
 
 	public SkillProduction()		/* ResourceType of cost and product is assigned by the xmls */
 	{
 		cost	= new Resource();
-		product	= new Resource();
 	}
 
 	public Pair<DevCardColor, Integer> getRequirements()
@@ -36,14 +35,14 @@ public class SkillProduction extends LeaderCard		/* Every card gives one faith p
 		this.cost = cost;
 	}
 
-	public Resource getProduct()
+	public void setProductAmount(int productAmount)
 	{
-		return product;
+		this.productAmount = productAmount;
 	}
 
-	public void setProduct(Resource product)
+	public int getProductAmount()
 	{
-		this.product = product;
+		return productAmount;
 	}
 
 	public int getFaithPoints()

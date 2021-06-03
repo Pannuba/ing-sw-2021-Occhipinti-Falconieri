@@ -43,7 +43,7 @@ public class XML_Serialization
 
 					System.out.print("LeaderCard number [1, 16]: ");
 					int leaderCardNumber = Integer.parseInt(input.nextLine());
-					filename = "src/main/resources/xml/leadercards/leadercardTEST" + leaderCardNumber + ".xml";
+					filename = "src/main/resources/xml/leadercards/leadercard" + leaderCardNumber + ".xml";
 
 					System.out.print("Skill (1 = discount, 2 = additional storage, 3 = white marble, 4 = additional production): ");
 
@@ -116,7 +116,7 @@ public class XML_Serialization
 							System.out.print("Resource needed for production (G/Y/B/P): ");
 							leaderCardFour.getCost().setResourceType(ResourceType.convertStringToResType(input.nextLine()));
 							leaderCardFour.getCost().setQuantity(1);
-							leaderCardFour.getProduct().setQuantity(1);			/* In xml so it can be changed by parameters editor */
+							leaderCardFour.setProductAmount(1);			/* In xml so it can be changed by parameters editor */
 							leaderCardFour.setFaithPoints(1);
 
 							serialize(leaderCardFour, filename);

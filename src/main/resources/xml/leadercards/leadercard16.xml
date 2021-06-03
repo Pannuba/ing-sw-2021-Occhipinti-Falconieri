@@ -21,10 +21,8 @@
   <void property="points">
    <int>4</int>
   </void>
-  <void property="product">
-   <void property="quantity">
-    <int>1</int>
-   </void>
+  <void property="productAmount">
+   <int>1</int>
   </void>
   <void property="requirements">
    <object class="it.polimi.ingsw.util.Pair">
