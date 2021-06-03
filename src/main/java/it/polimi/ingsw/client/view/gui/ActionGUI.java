@@ -33,7 +33,7 @@ public class ActionGUI extends MessageExecutor
 	{
 		mvc.updateStorage(gameState.getPlayerByName(gui.getUsername()).getDashboard().getStorage());
 		mvc.updateVault(gameState.getPlayerByName(gui.getUsername()).getDashboard().getVault());
-		mvc.updateTrack(gameState.getCurrTrack());
+		mvc.updateTrack(gameState.getCurrTrack(), gameState.getCurrPlayers(), gameState.getPlayerByName(gui.getUsername()).getId());
 		mvc.updateDevCardAreas(gameState.getPlayerByName(gui.getUsername()).getDashboard().getDevCardAreas());
 		mmc.updateMarket(gameState.getCurrMarblesMarket(), gameState.getPlayerByName(gui.getUsername()).isMyTurn());
 	}

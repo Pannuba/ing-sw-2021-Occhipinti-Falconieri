@@ -25,6 +25,16 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor></Button>
       <TextArea fx:id="console" editable="false" layoutX="1018.0" layoutY="298.0" prefHeight="414.0" prefWidth="254.0" wrapText="true" />
+      <ImageView fx:id="redPawn" fitHeight="78.0" fitWidth="124.0" layoutX="22.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/red-pawn.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="blackPawn" fitHeight="78.0" fitWidth="87.0" layoutX="22.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/black-pawn.png" />
+         </image>
+      </ImageView>
       <ImageView fx:id="topShelfResource" fitHeight="67.0" fitWidth="51.0" layoutX="110.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="middleShelfResource1" fitHeight="67.0" fitWidth="51.0" layoutX="83.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="middleShelfResource2" fitHeight="67.0" fitWidth="51.0" layoutX="126.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />

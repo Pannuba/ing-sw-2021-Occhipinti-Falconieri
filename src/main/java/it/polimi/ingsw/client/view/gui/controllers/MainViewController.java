@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
 import it.polimi.ingsw.client.view.gui.ConvertMethods;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.board.DevCardArea;
 import it.polimi.ingsw.model.board.Storage;
@@ -17,6 +18,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 /* Empty images that are updated with image.setImage("...") each gamestate update */
 
 public class MainViewController
@@ -30,6 +33,9 @@ public class MainViewController
 	@FXML private Button leaderCardsButton;
 
 	@FXML private TextArea console;
+
+	@FXML private ImageView redPawn;
+	@FXML private ImageView blackPawn;
 
 	@FXML private ImageView topShelfResource;
 
@@ -76,9 +82,12 @@ public class MainViewController
 		mainStage.show();
 	}
 
-	public void updateTrack(Track track)	/* TODO: create an ImageView for each box */
+	public void updateTrack(Track track, List<Player> players, int playerID)		/* Also print other players */
 	{
+		if (players.size() == 1)
+			movePawn(blackPawn, track.getBlackPawn());
 
+		movePawn(redPawn, track.getRedPawns().get(playerID));
 	}
 
 	public void updateStorage(Storage storage)
@@ -166,6 +175,39 @@ public class MainViewController
 
 		else
 			devCardArea3.setImage(null);
+	}
+
+	public void movePawn(ImageView pawn, int boxNumber)
+	{
+		switch (boxNumber)		/* setX vs setLayoutX? */
+		{
+			case 0:	 pawn.setLayoutX(22);	pawn.setLayoutY(112);	break;
+			case 1:  pawn.setLayoutX(72);	pawn.setLayoutY(112);	break;
+			case 2:	 pawn.setLayoutX(122);	pawn.setLayoutY(112);	break;
+			case 3:	 pawn.setLayoutX(122);	pawn.setLayoutY(64);	break;
+			case 4:	 pawn.setLayoutX(122);	pawn.setLayoutY(15);	break;
+			case 5:	 pawn.setLayoutX(170);	pawn.setLayoutY(15);	break;
+			case 6:	 pawn.setLayoutX(220);	pawn.setLayoutY(15);	break;
+			case 7:	 pawn.setLayoutX(269);	pawn.setLayoutY(15);	break;
+			case 8:	 pawn.setLayoutX(316);	pawn.setLayoutY(15);	break;
+			case 9:	 pawn.setLayoutX(367);	pawn.setLayoutY(15);	break;
+			case 10: pawn.setLayoutX(367);	pawn.setLayoutY(64);	break;
+			case 11: pawn.setLayoutX(367);	pawn.setLayoutY(113);	break;
+			case 12: pawn.setLayoutX(418);	pawn.setLayoutY(113);	break;
+			case 13: pawn.setLayoutX(466);	pawn.setLayoutY(113);	break;
+			case 14: pawn.setLayoutX(516);	pawn.setLayoutY(113);	break;
+			case 15: pawn.setLayoutX(565);	pawn.setLayoutY(113);	break;
+			case 16: pawn.setLayoutX(615);	pawn.setLayoutY(113);	break;
+			case 17: pawn.setLayoutX(615);	pawn.setLayoutY(64);	break;
+			case 18: pawn.setLayoutX(615);	pawn.setLayoutY(15);	break;
+			case 19: pawn.setLayoutX(663);	pawn.setLayoutY(15);	break;
+			case 20: pawn.setLayoutX(713);	pawn.setLayoutY(15);	break;
+			case 21: pawn.setLayoutX(762);	pawn.setLayoutY(15);	break;
+			case 22: pawn.setLayoutX(811);	pawn.setLayoutY(15);	break;
+			case 23: pawn.setLayoutX(860);	pawn.setLayoutY(15);	break;
+			case 24:
+			default: pawn.setLayoutX(910);	pawn.setLayoutY(15);	break;
+		}
 	}
 
 	public TextArea getConsole()
