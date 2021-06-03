@@ -30,12 +30,27 @@
             <Image url="@../img/red-pawn.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="blackPawn" fitHeight="78.0" fitWidth="87.0" layoutX="22.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="blackPawn" fitHeight="78.0" fitWidth="87.0" layoutX="22.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../img/black-pawn.png" />
          </image>
       </ImageView>
       <ImageView fx:id="topShelfResource" fitHeight="67.0" fitWidth="51.0" layoutX="110.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="popeTokenOne" fitHeight="78.0" fitWidth="78.0" layoutX="244.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/popetokens/pope-token-1-back.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="popeTokenTwo" fitHeight="78.0" fitWidth="78.0" layoutX="491.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/popetokens/pope-token-2-back.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="popeTokenThree" fitHeight="78.0" fitWidth="85.0" layoutX="787.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/popetokens/pope-token-3-back.png" />
+         </image>
+      </ImageView>
       <ImageView fx:id="middleShelfResource1" fitHeight="67.0" fitWidth="51.0" layoutX="83.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="middleShelfResource2" fitHeight="67.0" fitWidth="51.0" layoutX="126.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bottomShelfResource1" fitHeight="67.0" fitWidth="51.0" layoutX="65.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />

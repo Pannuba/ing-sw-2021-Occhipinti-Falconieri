@@ -60,7 +60,7 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void vaticanReport(int popeBoxNum, List<Player> players)
 	{
-
+		
 	}
 
 	@Override

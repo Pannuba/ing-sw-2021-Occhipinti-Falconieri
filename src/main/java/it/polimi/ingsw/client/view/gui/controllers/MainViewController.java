@@ -28,14 +28,17 @@ public class MainViewController
 
 	@FXML private ImageView dashboard;
 
-	@FXML private Button marblesMarketButton;
-	@FXML private Button devCardsMarketButton;
+	@FXML private Button marketsButton;
 	@FXML private Button leaderCardsButton;
 
 	@FXML private TextArea console;
 
 	@FXML private ImageView redPawn;
 	@FXML private ImageView blackPawn;
+
+	@FXML private ImageView popeTokenOne;
+	@FXML private ImageView popeTokenTwo;
+	@FXML private ImageView popeTokenThree;
 
 	@FXML private ImageView topShelfResource;
 
@@ -85,9 +88,30 @@ public class MainViewController
 	public void updateTrack(Track track, List<Player> players, int playerID)		/* Also print other players */
 	{
 		if (players.size() == 1)
+		{
+			blackPawn.setVisible(true);
 			movePawn(blackPawn, track.getBlackPawn());
+		}
 
 		movePawn(redPawn, track.getRedPawns().get(playerID));
+
+		if (players.get(playerID).getPopeTokens()[0].isActive())		/* Put popeTokens ImageView in a list and update them with a for loop? */
+			popeTokenOne.setImage(new Image(getClass().getResourceAsStream("/img/popetokens/pope-token-1-front.png")));
+
+		if (players.get(playerID).getPopeTokens()[0].isDiscarded())		/* Back tokens (not active nor discarded) are displayed by default in the scene's fxml */
+			popeTokenOne.setImage(null);
+
+		if (players.get(playerID).getPopeTokens()[1].isActive())
+			popeTokenTwo.setImage(new Image(getClass().getResourceAsStream("/img/popetokens/pope-token-2-front.png")));
+
+		if (players.get(playerID).getPopeTokens()[1].isDiscarded())
+			popeTokenTwo.setImage(null);
+
+		if (players.get(playerID).getPopeTokens()[2].isActive())
+			popeTokenThree.setImage(new Image(getClass().getResourceAsStream("/img/popetokens/pope-token-3-front.png")));
+
+		if (players.get(playerID).getPopeTokens()[2].isDiscarded())
+			popeTokenThree.setImage(null);
 	}
 
 	public void updateStorage(Storage storage)
