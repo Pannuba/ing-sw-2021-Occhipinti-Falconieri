@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.view.gui;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.controllers.GameStartController;
+import it.polimi.ingsw.client.view.gui.controllers.LeaderCardsController;
 import it.polimi.ingsw.client.view.gui.controllers.MainViewController;
 import it.polimi.ingsw.client.view.gui.controllers.MarketsController;
 import it.polimi.ingsw.model.GameState;
@@ -29,11 +30,9 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 		this.username = username;
 		this.event = event;
 
-		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader gameStartLoader = new FXMLLoader();
 		gameStartLoader.setLocation(getClass().getResource("/scenes/gamestart.fxml"));
 		Parent gameStartRoot = gameStartLoader.load();
-		GameStartController gsc = gameStartLoader.getController();
 		Scene gameStartScene = new Scene(gameStartRoot);
 
 		FXMLLoader mainViewLoader = new FXMLLoader();
@@ -46,13 +45,21 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 		Parent marketsRoot = marketsLoader.load();
 		Scene marketsScene = new Scene(marketsRoot);
 
+		FXMLLoader leaderCardsLoader = new FXMLLoader();
+		leaderCardsLoader.setLocation(getClass().getResource("/scenes/leaderCards.fxml"));
+		Parent leaderCardsRoot = leaderCardsLoader.load();
+		Scene leaderCardsScene = new Scene(leaderCardsRoot);
+
+		GameStartController gsc = gameStartLoader.getController();
+		LeaderCardsController lcc = leaderCardsLoader.getController();
 		MarketsController mc = marketsLoader.getController();
 		MainViewController mvc = mainViewLoader.getController();
 		gsc.setup(mainViewScene, mvc, networkHandler);
+		lcc.setup(mainViewScene, networkHandler);
 		mc.setup(mainViewScene, mvc, networkHandler);						/* TODO: create setup() in all scene controllers */
-		mvc.setup(marketsScene, networkHandler, username);
+		mvc.setup(marketsScene, leaderCardsScene, networkHandler, username);
 
-		action = new ActionGUI(this, networkHandler, gameStartScene, gsc, mvc, mc);
+		action = new ActionGUI(this, networkHandler, gameStartScene, gsc, lcc, mvc, mc);
 
 		/*mainStage.setTitle("Masters of Renaissance");
 		mainStage.setScene(mainViewScene);

@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.view.gui;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.MessageExecutor;
 import it.polimi.ingsw.client.view.gui.controllers.GameStartController;
+import it.polimi.ingsw.client.view.gui.controllers.LeaderCardsController;
 import it.polimi.ingsw.client.view.gui.controllers.MainViewController;
 import it.polimi.ingsw.client.view.gui.controllers.MarketsController;
 import it.polimi.ingsw.model.GameState;
@@ -28,15 +29,17 @@ public class ActionGUI extends MessageExecutor
 	private final NetworkHandler networkHandler;		/* To send commands to server */
 	private final Scene gameStartScene;
 	private final GameStartController gsc;
+	private final LeaderCardsController lcc;
 	private final MainViewController mvc;						/* To update the scenes when a new gamestate is received */
 	private final MarketsController mmc;
 
-	public ActionGUI(GUIModel gui, NetworkHandler networkHandler, Scene gameStartScene, GameStartController gsc, MainViewController mvc, MarketsController mmc)
+	public ActionGUI(GUIModel gui, NetworkHandler networkHandler, Scene gameStartScene, GameStartController gsc, LeaderCardsController lcc, MainViewController mvc, MarketsController mmc)
 	{
 		this.gui = gui;
 		this.networkHandler = networkHandler;
 		this.gameStartScene = gameStartScene;
 		this.gsc = gsc;
+		this.lcc = lcc;
 		this.mvc = mvc;		/* Pack all loaders in a hashmap? */
 		this.mmc = mmc;
 	}
@@ -44,7 +47,7 @@ public class ActionGUI extends MessageExecutor
 	public void updateView(GameState gameState)
 	{
 		mvc.update(gameState, gui.getUsername());
-		//lcc.update(gameState, gui.getUsername());
+		lcc.update(gameState.getPlayerByName(gui.getUsername()).getLeaderCards());
 		mmc.updateMarket(gameState.getCurrMarblesMarket(), gameState.getCurrDevCardsMarket(), gameState.getPlayerByName(gui.getUsername()).isMyTurn());
 	}
 

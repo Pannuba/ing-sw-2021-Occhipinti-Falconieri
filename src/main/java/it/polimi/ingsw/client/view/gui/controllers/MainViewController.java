@@ -31,6 +31,7 @@ import java.util.List;
 public class MainViewController
 {
 	private Scene marketsScene;
+	private Scene leaderCardsScene;
 	private NetworkHandler networkHandler;
 	private String username;
 	private GameState gameState;
@@ -158,7 +159,7 @@ public class MainViewController
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
 		mainStage.setTitle("Masters of Renaissance - Leader Cards");
-		//mainStage.setScene(leaderCardsScene);
+		mainStage.setScene(leaderCardsScene);
 		mainStage.sizeToScene();
 		mainStage.show();
 	}
@@ -417,10 +418,11 @@ public class MainViewController
 		console.setText(console.getText() + "\n" + message);
 	}
 
-	public void setup(Scene marketsScene, NetworkHandler networkHandler, String username)
+	public void setup(Scene marketsScene, Scene leaderCardsScene, NetworkHandler networkHandler, String username)
 	{
 		this.username = username;
 		this.marketsScene = marketsScene;
+		this.leaderCardsScene = leaderCardsScene;
 		this.networkHandler = networkHandler;
 	}
 
