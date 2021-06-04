@@ -51,6 +51,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 	@FXML private ImageView marble21;
 	@FXML private ImageView marble22;
 	@FXML private ImageView marble23;
+	@FXML private ImageView spareMarble;
 
 	@FXML private Button backToBoardButton;
 
@@ -85,6 +86,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 		currDevCardsMarket = devCardsMarket;
 
 		Marble[][] marblesBoard = market.getMarblesBoard();
+		Marble spare = market.getSpareMarble();
 
 		if (isMyTurn)		/* When it's the player's turn, make buttons pressable to send the command BUY_RESOURCES */
 		{
@@ -110,7 +112,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 			devCard22.setDisable(false);
 			devCard23.setDisable(false);
 		}
-//the disable checkbox in scenebuilder disables the button permanently, meaning setdisable(false) wont work
+		//the disable checkbox in scenebuilder disables the button permanently, meaning setdisable(false) wont work
 		else
 		{
 			colOneButton.setDisable(true);
@@ -148,6 +150,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 		marble21.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertMarbleTypeToPath(marblesBoard[2][1].getMarbleType()))));
 		marble22.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertMarbleTypeToPath(marblesBoard[2][2].getMarbleType()))));
 		marble23.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertMarbleTypeToPath(marblesBoard[2][3].getMarbleType()))));
+		spareMarble.setImage((new Image(getClass().getResourceAsStream(ConvertMethods.convertMarbleTypeToPath(spare.getMarbleType())))));
 
 		/* TODO: add spareMarble, order indexes of devcards/stacks/level... */
 		List<ImageView> devcards = new ArrayList<>();

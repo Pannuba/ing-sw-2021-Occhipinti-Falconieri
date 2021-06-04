@@ -110,5 +110,6 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
+      <ImageView fx:id="spareMarble" fitHeight="44.0" fitWidth="44.0" layoutX="382.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </Pane>

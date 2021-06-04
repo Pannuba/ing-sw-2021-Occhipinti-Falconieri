@@ -35,7 +35,7 @@
             <Image url="@../img/black-pawn.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="topShelfResource" fitHeight="67.0" fitWidth="51.0" layoutX="110.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="topShelfResource" fitHeight="45.0" fitWidth="51.0" layoutX="110.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="popeTokenOne" fitHeight="78.0" fitWidth="78.0" layoutX="244.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/popetokens/pope-token-1-back.png" />
@@ -51,11 +51,11 @@
             <Image url="@../img/popetokens/pope-token-3-back.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="middleShelfResource1" fitHeight="67.0" fitWidth="51.0" layoutX="83.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="middleShelfResource2" fitHeight="67.0" fitWidth="51.0" layoutX="126.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="bottomShelfResource1" fitHeight="67.0" fitWidth="51.0" layoutX="65.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="bottomShelfResource2" fitHeight="67.0" fitWidth="51.0" layoutX="104.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="bottomShelfResource3" fitHeight="67.0" fitWidth="51.0" layoutX="142.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="middleShelfResource1" fitHeight="45.0" fitWidth="51.0" layoutX="88.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="middleShelfResource2" fitHeight="45.0" fitWidth="51.0" layoutX="131.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="bottomShelfResource1" fitHeight="45.0" fitWidth="51.0" layoutX="65.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="bottomShelfResource2" fitHeight="45.0" fitWidth="51.0" layoutX="104.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="bottomShelfResource3" fitHeight="45.0" fitWidth="51.0" layoutX="142.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="vaultResourceBlue" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="65.0" layoutY="548.0" onMouseClicked="#selectBlueResource" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/resources/blue.png" />
