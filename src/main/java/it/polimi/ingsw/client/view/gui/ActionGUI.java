@@ -48,6 +48,7 @@ public class ActionGUI extends MessageExecutor
 		mvc.updateTrack(gameState.getCurrTrack(), gameState.getCurrPlayers(), gameState.getPlayerByName(gui.getUsername()).getId());
 		mvc.updateDevCardAreas(gameState.getPlayerByName(gui.getUsername()).getDashboard().getDevCardAreas());
 		mvc.getDefaultProductionButton().setDisable(false);
+		mvc.getDevCardArea1().setDisable(false);		/* For production using devcards */
 		mmc.updateMarket(gameState.getCurrMarblesMarket(), gameState.getCurrDevCardsMarket(), gameState.getPlayerByName(gui.getUsername()).isMyTurn());
 	}
 

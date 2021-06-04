@@ -236,10 +236,13 @@ public class MainViewController
 	public void updateVault(Vault vault)
 	{
 		System.out.println("vault blue amount: " + vault.getResourceAmounts().get(ResourceType.BLUE));
-		Platform.runLater(() -> {vaultBlueAmount.setText(vault.getResourceAmounts().get(ResourceType.BLUE).toString());});
-		vaultYellowAmount.setText(vault.getResourceAmounts().get(ResourceType.YELLOW).toString());
-		vaultGreyAmount.setText(vault.getResourceAmounts().get(ResourceType.GREY).toString());
-		Platform.runLater(() -> {vaultPurpleAmount.setText(vault.getResourceAmounts().get(ResourceType.PURPLE).toString());});
+
+		Platform.runLater(() -> {
+			vaultBlueAmount.setText(vault.getResourceAmounts().get(ResourceType.BLUE).toString());
+			vaultYellowAmount.setText(vault.getResourceAmounts().get(ResourceType.YELLOW).toString());
+			vaultGreyAmount.setText(vault.getResourceAmounts().get(ResourceType.GREY).toString());
+			vaultPurpleAmount.setText(vault.getResourceAmounts().get(ResourceType.PURPLE).toString());}
+		);
 	}
 
 	public void updateDevCardAreas(DevCardArea[] devCardAreas)
@@ -318,41 +321,6 @@ public class MainViewController
 	void selectDevCardArea2(MouseEvent event)
 	{
 
-	}
-
-	public TextArea getConsole()
-	{
-		return console;
-	}
-
-	public ImageView getTopShelfResource()
-	{
-		return topShelfResource;
-	}
-
-	public ImageView getMiddleShelfResource1()
-	{
-		return middleShelfResource1;
-	}
-
-	public ImageView getMiddleShelfResource2()
-	{
-		return middleShelfResource2;
-	}
-
-	public ImageView getBottomShelfResource1()
-	{
-		return bottomShelfResource1;
-	}
-
-	public ImageView getBottomShelfResource2()
-	{
-		return bottomShelfResource2;
-	}
-
-	public ImageView getBottomShelfResource3()
-	{
-		return bottomShelfResource3;
 	}
 
 	public ImageView getDevCardArea1()

@@ -49,11 +49,11 @@ public class CLI extends Observable implements Observer
 		else
 		{
 			System.out.print("Server IP: ");
-			//String ip = input.nextLine();		/* For debugging */
-			ip = "127.0.0.1";
+			ip = input.nextLine();		/* For debugging */
+			//ip = "127.0.0.1";
 			System.out.print("Server port: ");
-			//int port = Integer.parseInt(input.nextLine());
-			port = 2000;
+			port = Integer.parseInt(input.nextLine());
+			//port = 2000;
 		}
 
 		networkHandler = new NetworkHandler(ip, port);
