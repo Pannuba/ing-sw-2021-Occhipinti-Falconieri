@@ -62,7 +62,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 	{
 		int cardToActivateNum = Integer.parseInt(command.get(1));
 
-		LeaderCard cardToActivate = model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivateNum);
+		LeaderCard cardToActivate = model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivateNum);		/* TODO: add check if this action fails */
 
 		if (cardToActivate.checkRequirements(model.getPlayerByUsername(username).getDashboard()))
 		{

@@ -46,7 +46,7 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 		Scene marketsScene = new Scene(marketsRoot);
 
 		FXMLLoader leaderCardsLoader = new FXMLLoader();
-		leaderCardsLoader.setLocation(getClass().getResource("/scenes/leaderCards.fxml"));
+		leaderCardsLoader.setLocation(getClass().getResource("/scenes/leadercards.fxml"));
 		Parent leaderCardsRoot = leaderCardsLoader.load();
 		Scene leaderCardsScene = new Scene(leaderCardsRoot);
 

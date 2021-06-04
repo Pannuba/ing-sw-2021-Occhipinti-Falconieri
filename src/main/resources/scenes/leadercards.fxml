@@ -8,9 +8,9 @@
    <children>
       <ImageView fx:id="leaderCard1" fitHeight="230.0" fitWidth="152.0" layoutX="103.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" />
       <ImageView fx:id="leaderCard2" fitHeight="230.0" fitWidth="152.0" layoutX="348.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="100.0" />
-      <Button fx:id="playLeaderCard1" layoutX="156.0" layoutY="280.0" mnemonicParsing="false" text="Play" AnchorPane.leftAnchor="156.0" />
+      <Button fx:id="activateLeaderCard1" layoutX="156.0" layoutY="280.0" mnemonicParsing="false" text="Play" AnchorPane.leftAnchor="156.0" />
       <Button fx:id="discardLeaderCard1" layoutX="148.0" layoutY="324.0" mnemonicParsing="false" text="Discard" AnchorPane.leftAnchor="146.0" />
-      <Button fx:id="playLeaderCard2" layoutX="402.0" layoutY="283.0" mnemonicParsing="false" text="Play" AnchorPane.rightAnchor="156.0" />
+      <Button fx:id="activateLeaderCard2" layoutX="402.0" layoutY="283.0" mnemonicParsing="false" text="Play" AnchorPane.rightAnchor="156.0" />
       <Button fx:id="discardLeaderCard2" layoutX="394.0" layoutY="325.0" mnemonicParsing="false" text="Discard" AnchorPane.rightAnchor="147.0" />
       <Button fx:id="backToBoardButton" layoutX="256.0" layoutY="347.0" mnemonicParsing="false" onAction="#backToBoard" text="Back to Board" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" />
    </children>

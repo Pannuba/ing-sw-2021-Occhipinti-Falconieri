@@ -274,9 +274,9 @@ public class MarketsController        /* Send command directly from here? Get wh
 		buttons = new ArrayList<>();
 
 		Collections.addAll(	devCards,	devCard1, devCard2, devCard3,  devCard4,  devCard5, devCard6,		/* So much cleaner, no need to copypaste 12 lines every time */
-										devCard7, devCard8, devCard9, devCard10, devCard11, devCard12	);
+										devCard7, devCard8, devCard9, devCard10, devCard11, devCard12 );
 		Collections.addAll(	marbles,	marble00, marble01, marble02, marble03, marble10, marble11,
-										marble12, marble13, marble20, marble21, marble22, marble23	);
+										marble12, marble13, marble20, marble21, marble22, marble23 );
 		Collections.addAll(	buttons,	rowOneButton, rowTwoButton, rowThreeButton, colOneButton, colTwoButton, colThreeButton, colFourButton);
 	}
 }
