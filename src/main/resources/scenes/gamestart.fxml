@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.GameStartController">
    <children>
       <ImageView fx:id="leaderCard1" fitHeight="409.0" fitWidth="384.0" layoutX="48.0" layoutY="37.0" onMouseClicked="#selectLeaderCard1" pickOnBounds="true" preserveRatio="true">
@@ -30,7 +29,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="purpleResource" fitHeight="150.0" fitWidth="200.0" layoutX="698.0" layoutY="531.0" onMouseClicked="#choosePurpleResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="purpleResource" fitHeight="100.0" fitWidth="200.0" layoutX="698.0" layoutY="531.0" onMouseClicked="#choosePurpleResource" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/resources/purple.png" />
          </image>
@@ -38,7 +37,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="greyResource" fitHeight="150.0" fitWidth="200.0" layoutX="834.0" layoutY="531.0" onMouseClicked="#chooseGreyResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="greyResource" fitHeight="100.0" fitWidth="200.0" layoutX="834.0" layoutY="531.0" onMouseClicked="#chooseGreyResource" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/resources/grey.png" />
          </image>
@@ -46,7 +45,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="blueResource" fitHeight="150.0" fitWidth="200.0" layoutX="959.0" layoutY="531.0" onMouseClicked="#chooseBlueResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="blueResource" fitHeight="100.0" fitWidth="200.0" layoutX="977.0" layoutY="531.0" onMouseClicked="#chooseBlueResource" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/resources/blue.png" />
          </image>
@@ -54,7 +53,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="yellowResource" fitHeight="150.0" fitWidth="200.0" layoutX="1091.0" layoutY="531.0" onMouseClicked="#chooseYellowResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="yellowResource" fitHeight="100.0" fitWidth="200.0" layoutX="1091.0" layoutY="531.0" onMouseClicked="#chooseYellowResource" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/resources/yellow.png" />
          </image>
