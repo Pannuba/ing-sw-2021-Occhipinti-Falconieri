@@ -29,7 +29,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="purpleResource" fitHeight="100.0" fitWidth="200.0" layoutX="698.0" layoutY="531.0" onMouseClicked="#choosePurpleResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="purpleResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="698.0" layoutY="531.0" onMouseClicked="#choosePurpleResource" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/resources/purple.png" />
          </image>
@@ -37,7 +37,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="greyResource" fitHeight="100.0" fitWidth="200.0" layoutX="834.0" layoutY="531.0" onMouseClicked="#chooseGreyResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="greyResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="834.0" layoutY="531.0" onMouseClicked="#chooseGreyResource" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/resources/grey.png" />
          </image>
@@ -45,7 +45,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="blueResource" fitHeight="100.0" fitWidth="200.0" layoutX="977.0" layoutY="531.0" onMouseClicked="#chooseBlueResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="blueResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="977.0" layoutY="531.0" onMouseClicked="#chooseBlueResource" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/resources/blue.png" />
          </image>
@@ -53,7 +53,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fx:id="yellowResource" fitHeight="100.0" fitWidth="200.0" layoutX="1091.0" layoutY="531.0" onMouseClicked="#chooseYellowResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="yellowResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="1091.0" layoutY="531.0" onMouseClicked="#chooseYellowResource" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/resources/yellow.png" />
          </image>

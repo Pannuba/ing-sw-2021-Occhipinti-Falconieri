@@ -82,7 +82,7 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void chooseLeaderCards(List<LeaderCard> leaderCards)
 	{
-		gsc.setFourLeaderCards(leaderCards);
+		gsc.setLeaderCards(leaderCards);
 	}
 
 	@Override

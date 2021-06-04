@@ -89,13 +89,13 @@ public class MainViewController
 
 		if (gameState.getPlayerByName(username).isMyTurn())
 		{
-			console.setText("It's your turn! ");
+			printToConsole("It's your turn! ");
 			enableButtons();
 		}
 
 		else
 		{
-			console.setText("It's " + gameState.getCurrPlayerName() + "'s turn!");
+			printToConsole("It's " + gameState.getCurrPlayerName() + "'s turn!");
 			disableButtons();
 		}
 
@@ -184,7 +184,7 @@ public class MainViewController
 
 		for (int i = 0; i < players.size(); i++)
 		{
-			if (players.get(i).getUsername() != username)
+			if (!players.get(i).getUsername().equals(username))
 				printToConsole(players.get(i).getUsername() + " is at position " + track.getRedPawns().get(i) + "/24");
 		}
 
