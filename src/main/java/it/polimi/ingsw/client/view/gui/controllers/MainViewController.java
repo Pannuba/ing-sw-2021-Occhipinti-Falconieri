@@ -337,17 +337,34 @@ public class MainViewController
 	@FXML
 	void selectDevCardArea1(MouseEvent event)
 	{
+		selectDevCardArea(1, event);
+	}
+
+	@FXML
+	void selectDevCardArea2(MouseEvent event)
+	{
+		selectDevCardArea(2, event);
+	}
+
+	@FXML
+	void selectDevCardArea3(MouseEvent event)
+	{
+		selectDevCardArea(3, event);
+	}
+
+	void selectDevCardArea(int devCardAreaNum, MouseEvent event)
+	{
 		if (isBuyingDevcard)
-			networkHandler.send(Arrays.asList("BUY_DEVCARD", String.valueOf(devCardToBuy), String.valueOf(1)));
+			networkHandler.send(Arrays.asList("BUY_DEVCARD", String.valueOf(devCardToBuy), String.valueOf(devCardAreaNum)));
 
 		else		/* This way the server should never receive a null devcard number, also in CLI */
 		{
-			if (gameState.getPlayerByName(username).getDashboard().getDevCardAreas()[0].isEmpty())
+			if (gameState.getPlayerByName(username).getDashboard().getDevCardAreas()[devCardAreaNum - 1].isEmpty())
 				printToConsole("You don't have any dev cards in this area!");
 
 			else
 			{
-				int cardNum = gameState.getPlayerByName(username).getDashboard().getDevCardAreas()[0].getTopDevCard().getCardNumber();
+				int cardNum = gameState.getPlayerByName(username).getDashboard().getDevCardAreas()[devCardAreaNum - 1].getTopDevCard().getCardNumber();
 				networkHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "DEVCARD", String.valueOf(cardNum)));
 			}
 		}
@@ -356,18 +373,6 @@ public class MainViewController
 
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		mainStage.setTitle("Masters of Renaissance");
-	}
-
-	@FXML
-	void selectDevCardArea3(MouseEvent event)
-	{
-
-	}
-
-	@FXML
-	void selectDevCardArea2(MouseEvent event)
-	{
-
 	}
 
 	public void enableButtons()

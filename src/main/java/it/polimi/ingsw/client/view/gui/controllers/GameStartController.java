@@ -114,6 +114,7 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 			{
 				networkHandler.send(Arrays.asList("INITIAL_RESOURCES", "", ""));
 				Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				mainStage.setTitle("Masters of Renaissance");
 				mainStage.setScene(mainViewScene);
 				mainStage.show();
 			}
@@ -146,6 +147,7 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 			networkHandler.send(Arrays.asList("INITIAL_RESOURCES", chosenResources, initialFaithPoints));
 
 			Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			mainStage.setTitle("Masters of Renaissance");
 			mainStage.setScene(mainViewScene);
 			mainStage.show();
 		}
@@ -194,6 +196,7 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 		this.mvc = mvc;
 		this.networkHandler = networkHandler;
 		chosenLeaderCards = new ArrayList<>();
+		chosenResources = "";
 
 		selectedEffect = new ColorAdjust();
 		selectedEffect.setBrightness(-0.5);

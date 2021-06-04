@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.Marble;
 import it.polimi.ingsw.model.MarbleType;
 import it.polimi.ingsw.model.MarblesMarket;
 import it.polimi.ingsw.model.cards.DevCard;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -99,7 +100,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 			for (int i = 0; i < devCards.size(); i++)
 				devCards.get(i).setDisable(false);
 		}
-		//the disable checkbox in scenebuilder disables the button permanently, meaning setdisable(false) wont work
+		/* The disable checkbox in scenebuilder disables the button permanently, meaning setdisable(false) won't work */
 		else
 		{
 			for (int i = 0; i < buttons.size(); i++)

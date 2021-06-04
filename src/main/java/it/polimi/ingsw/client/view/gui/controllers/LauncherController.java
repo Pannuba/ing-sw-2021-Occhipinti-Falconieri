@@ -23,11 +23,12 @@ public class LauncherController
 	@FXML
 	void connectToServer(MouseEvent event) throws IOException
 	{
-		if (numPlayersField.isVisible())
+		if (numPlayersField.isVisible())		/* Temporary solution, but what do? */
 		{
-			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaa");
 			networkHandler.send(numPlayersField.getText());
+			return;
 		}
+
 		networkHandler = new NetworkHandler(ipField.getText(), Integer.parseInt(portField.getText()));
 
 		GUIModel gui = new GUIModel(nameField.getText(), this, networkHandler, event);
