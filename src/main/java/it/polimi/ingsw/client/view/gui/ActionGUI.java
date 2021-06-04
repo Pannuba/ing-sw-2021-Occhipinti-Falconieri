@@ -44,6 +44,7 @@ public class ActionGUI extends MessageExecutor
 	public void updateView(GameState gameState)
 	{
 		mvc.update(gameState, gui.getUsername());
+		//lcc.update(gameState, gui.getUsername());
 		mmc.updateMarket(gameState.getCurrMarblesMarket(), gameState.getCurrDevCardsMarket(), gameState.getPlayerByName(gui.getUsername()).isMyTurn());
 	}
 
@@ -75,7 +76,7 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void vaticanReport(int popeBoxNum, List<Player> players)
 	{
-
+		mvc.getConsole().setText("Vatican report on box #" + popeBoxNum + "!");
 	}
 
 	@Override
@@ -125,7 +126,7 @@ public class ActionGUI extends MessageExecutor
 	public void matchOver(String winnerName, List<Player> players)
 	{
 		if (gui.getUsername().equals(winnerName))
-			mvc.printToConsole("You win! ");
+			mvc.printToConsole("You win!");
 
 		else
 			mvc.printToConsole("Game over! The winner is " + winnerName);

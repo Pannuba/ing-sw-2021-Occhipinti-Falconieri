@@ -88,59 +88,68 @@ public class MainViewController
 		updateDevCardAreas(gameState.getPlayerByName(username).getDashboard().getDevCardAreas());
 
 		if (gameState.getPlayerByName(username).isMyTurn())
+		{
+			console.setText("It's your turn! ");
 			enableButtons();
+		}
 
 		else
+		{
+			console.setText("It's " + gameState.getCurrPlayerName() + "'s turn!");
 			disableButtons();
+		}
+
 	}
 
 	@FXML
-	void defaultProduction(ActionEvent event)		/* Only did blue and purple */
+	void startDefaultProduction(ActionEvent event)		/* Triggered by default production button */
 	{
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
 		mainStage.setTitle("Masters of Renaissance - Select 2 resources");
 		vaultResourceBlue.setDisable(false);
 		vaultResourcePurple.setDisable(false);
+		vaultResourceYellow.setDisable(false);
+		vaultResourceGrey.setDisable(false);
 		defaultProdRes = new ArrayList<>();
 	}
 
 	@FXML
 	void selectBlueResource(MouseEvent event)
 	{
-		defaultProdRes.add("B");
-
-		if (defaultProdRes.size() == 3)
-		{
-			networkHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "DEFAULT", defaultProdRes.get(0), defaultProdRes.get(1), defaultProdRes.get(2)));
-			vaultResourceBlue.setDisable(true);
-			vaultResourcePurple.setDisable(true);
-		}
+		defaultProduction("B");
 	}
 
 	@FXML
 	void selectPurpleResource(MouseEvent event)
 	{
-		defaultProdRes.add("P");
+		defaultProduction("P");
+	}
+
+	@FXML
+	void selectYellowResource(MouseEvent event)
+	{
+		defaultProduction("Y");
+	}
+
+	@FXML
+	void selectGreyResource(MouseEvent event)
+	{
+		defaultProduction("G");
+	}
+
+	private void defaultProduction(String resourceToAdd)
+	{
+		defaultProdRes.add(resourceToAdd);
 
 		if (defaultProdRes.size() == 3)
 		{
 			networkHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "DEFAULT", defaultProdRes.get(0), defaultProdRes.get(1), defaultProdRes.get(2)));
 			vaultResourceBlue.setDisable(true);
 			vaultResourcePurple.setDisable(true);
+			vaultResourceYellow.setDisable(true);
+			vaultResourceGrey.setDisable(true);
 		}
-	}
-
-	@FXML
-	void selectYellowResource(MouseEvent event)
-	{
-
-	}
-
-	@FXML
-	void selectGreyResource(MouseEvent event)
-	{
-
 	}
 
 	@FXML
@@ -171,6 +180,12 @@ public class MainViewController
 		{
 			blackPawn.setVisible(true);
 			movePawn(blackPawn, track.getBlackPawn());
+		}
+
+		for (int i = 0; i < players.size(); i++)
+		{
+			if (players.get(i).getUsername() != username)
+				printToConsole(players.get(i).getUsername() + " is at position " + track.getRedPawns().get(i) + "/24");
 		}
 
 		movePawn(redPawn, track.getRedPawns().get(playerID));
@@ -390,6 +405,11 @@ public class MainViewController
 	public ImageView getDashboard()
 	{
 		return dashboard;
+	}
+
+	public TextArea getConsole()
+	{
+		return console;
 	}
 
 	public void printToConsole(String message)
