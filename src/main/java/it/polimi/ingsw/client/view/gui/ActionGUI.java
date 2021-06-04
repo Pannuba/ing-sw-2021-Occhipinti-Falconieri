@@ -110,6 +110,9 @@ public class ActionGUI extends MessageExecutor
 	public void getOperationResultMessage(String message, boolean isFailed)
 	{
 		mvc.printToConsole(message);
+
+		if (!isFailed)		/* If the action fails the client doesn't receive a gamestate */
+			mvc.disableButtons();
 	}
 
 	@Override

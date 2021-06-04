@@ -76,8 +76,7 @@ public class MainViewController
 	@FXML private ImageView devCardArea2;
 	@FXML private ImageView devCardArea3;
 
-	@FXML
-	private Button defaultProductionButton;
+	@FXML private Button defaultProductionButton;
 
 	public void update(GameState gameState, String username)
 	{
@@ -88,7 +87,11 @@ public class MainViewController
 		updateTrack(gameState.getCurrTrack(), gameState.getCurrPlayers(), gameState.getPlayerByName(username).getId());
 		updateDevCardAreas(gameState.getPlayerByName(username).getDashboard().getDevCardAreas());
 
-		defaultProductionButton.setDisable(false);
+		if (gameState.getPlayerByName(username).isMyTurn())
+			enableButtons();
+
+		else
+			disableButtons();
 	}
 
 	@FXML
@@ -263,10 +266,6 @@ public class MainViewController
 
 	public void updateDevCardAreas(DevCardArea[] devCardAreas)
 	{
-		devCardArea1.setDisable(false);		/* For production using devcards */
-		devCardArea2.setDisable(false);
-		devCardArea3.setDisable(false);
-
 		if (!devCardAreas[0].isEmpty())
 			devCardArea1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardAreas[0].getTopDevCard().getCardNumber() + ".png")));
 
@@ -339,10 +338,6 @@ public class MainViewController
 
 		isBuyingDevcard = false;
 
-		devCardArea1.setDisable(true);
-		devCardArea2.setDisable(true);
-		devCardArea3.setDisable(true);
-
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		mainStage.setTitle("Masters of Renaissance");
 	}
@@ -357,6 +352,24 @@ public class MainViewController
 	void selectDevCardArea2(MouseEvent event)
 	{
 
+	}
+
+	public void enableButtons()
+	{
+		defaultProductionButton.setDisable(false);
+
+		devCardArea1.setDisable(false);		/* For production using devcards */
+		devCardArea2.setDisable(false);
+		devCardArea3.setDisable(false);
+	}
+
+	public void disableButtons()
+	{
+		defaultProductionButton.setDisable(true);
+
+		devCardArea1.setDisable(true);
+		devCardArea2.setDisable(true);
+		devCardArea3.setDisable(true);
 	}
 
 	public ImageView getDevCardArea1()
