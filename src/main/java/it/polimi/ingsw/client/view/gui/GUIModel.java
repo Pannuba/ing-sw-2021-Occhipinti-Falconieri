@@ -50,7 +50,7 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 		MainViewController mvc = mainViewLoader.getController();
 		gsc.setup(mainViewScene, mvc);
 		mc.setup(mainViewScene, mvc, networkHandler);						/* TODO: create setup() in all scene controllers */
-		mvc.setup(marketsScene, networkHandler);
+		mvc.setup(marketsScene, networkHandler, username);
 
 		action = new ActionGUI(this, networkHandler, gameStartScene, gsc, mvc, mc);
 

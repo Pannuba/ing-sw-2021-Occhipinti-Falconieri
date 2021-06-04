@@ -43,12 +43,7 @@ public class ActionGUI extends MessageExecutor
 
 	public void updateView(GameState gameState)
 	{
-		mvc.updateStorage(gameState.getPlayerByName(gui.getUsername()).getDashboard().getStorage());
-		mvc.updateVault(gameState.getPlayerByName(gui.getUsername()).getDashboard().getVault());
-		mvc.updateTrack(gameState.getCurrTrack(), gameState.getCurrPlayers(), gameState.getPlayerByName(gui.getUsername()).getId());
-		mvc.updateDevCardAreas(gameState.getPlayerByName(gui.getUsername()).getDashboard().getDevCardAreas());
-		mvc.getDefaultProductionButton().setDisable(false);
-		mvc.getDevCardArea1().setDisable(false);		/* For production using devcards */
+		mvc.update(gameState, gui.getUsername());
 		mmc.updateMarket(gameState.getCurrMarblesMarket(), gameState.getCurrDevCardsMarket(), gameState.getPlayerByName(gui.getUsername()).isMyTurn());
 	}
 

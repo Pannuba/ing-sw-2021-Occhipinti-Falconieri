@@ -37,10 +37,10 @@ public class NetworkHandler extends Observable implements Runnable		/* Observed 
 			{
 				//System.out.println("Waiting for new object from server");
 				Object inputObj = ois.readObject();
-				System.out.println("Received " + inputObj.getClass().getSimpleName());
 
 				if (!(inputObj instanceof Ping))		/* Don't care if it's a ping */
 				{
+					System.out.println("Received " + inputObj.getClass().getSimpleName());
 					setChanged();
 					notifyObservers(inputObj);
 				}
@@ -78,7 +78,9 @@ public class NetworkHandler extends Observable implements Runnable		/* Observed 
 
 	public void send(Object obj)
 	{
-		System.out.println("Sending " + obj.getClass().getSimpleName() + " to server...");
+		if (!(obj instanceof Ping))
+			System.out.println("Sending " + obj.getClass().getSimpleName() + " to server...");
+
 		try
 		{
 			oos.writeObject(obj);

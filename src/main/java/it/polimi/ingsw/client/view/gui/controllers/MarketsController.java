@@ -117,12 +117,10 @@ public class MarketsController        /* Send command directly from here? Get wh
 
 			if (k == 3)
 			{
-				k = 0;
-				j++;
+				k = 0;	j++;
 			}
 
-			else
-				k++;
+			else k++;
 		}
 
 		spareMarble.setImage((new Image(getClass().getResourceAsStream(ConvertMethods.convertMarbleTypeToPath(spare.getMarbleType())))));
@@ -255,6 +253,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 	private void buyDevCard(int cardToBuyNum, MouseEvent event)
 	{
 		mvc.setDevCardToBuy(cardToBuyNum);
+		mvc.setBuyingDevcard(true);
 		mvc.getDevCardArea1().setDisable(false);
 		mvc.getDevCardArea2().setDisable(false);
 		mvc.getDevCardArea3().setDisable(false);

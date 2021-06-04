@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.view.gui.controllers;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.ConvertMethods;
+import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.board.DevCardArea;
@@ -31,7 +32,10 @@ public class MainViewController
 {
 	private Scene marketsScene;
 	private NetworkHandler networkHandler;
+	private String username;
+	private GameState gameState;
 	private List<String> defaultProdRes;
+	private boolean isBuyingDevcard;
 
 	private int devCardToBuy;
 
@@ -74,6 +78,18 @@ public class MainViewController
 
 	@FXML
 	private Button defaultProductionButton;
+
+	public void update(GameState gameState, String username)
+	{
+		this.gameState = gameState;
+
+		updateStorage(gameState.getPlayerByName(username).getDashboard().getStorage());
+		updateVault(gameState.getPlayerByName(username).getDashboard().getVault());
+		updateTrack(gameState.getCurrTrack(), gameState.getCurrPlayers(), gameState.getPlayerByName(username).getId());
+		updateDevCardAreas(gameState.getPlayerByName(username).getDashboard().getDevCardAreas());
+
+		defaultProductionButton.setDisable(false);
+	}
 
 	@FXML
 	void defaultProduction(ActionEvent event)		/* Only did blue and purple */
@@ -247,6 +263,10 @@ public class MainViewController
 
 	public void updateDevCardAreas(DevCardArea[] devCardAreas)
 	{
+		devCardArea1.setDisable(false);		/* For production using devcards */
+		devCardArea2.setDisable(false);
+		devCardArea3.setDisable(false);
+
 		if (!devCardAreas[0].isEmpty())
 			devCardArea1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardAreas[0].getTopDevCard().getCardNumber() + ".png")));
 
@@ -302,7 +322,23 @@ public class MainViewController
 	@FXML
 	void selectDevCardArea1(MouseEvent event)
 	{
-		networkHandler.send(Arrays.asList("BUY_DEVCARD", String.valueOf(devCardToBuy), String.valueOf(1)));
+		if (isBuyingDevcard)
+			networkHandler.send(Arrays.asList("BUY_DEVCARD", String.valueOf(devCardToBuy), String.valueOf(1)));
+
+		else		/* This way the server should never receive a null devcard number, also in CLI */
+		{
+			if (gameState.getPlayerByName(username).getDashboard().getDevCardAreas()[0].isEmpty())
+				printToConsole("You don't have any dev cards in this area!");
+
+			else
+			{
+				int cardNum = gameState.getPlayerByName(username).getDashboard().getDevCardAreas()[0].getTopDevCard().getCardNumber();
+				networkHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "DEVCARD", String.valueOf(cardNum)));
+			}
+		}
+
+		isBuyingDevcard = false;
+
 		devCardArea1.setDisable(true);
 		devCardArea2.setDisable(true);
 		devCardArea3.setDisable(true);
@@ -348,8 +384,9 @@ public class MainViewController
 		console.setText(console.getText() + "\n" + message);
 	}
 
-	public void setup(Scene marketsScene, NetworkHandler networkHandler)
+	public void setup(Scene marketsScene, NetworkHandler networkHandler, String username)
 	{
+		this.username = username;
 		this.marketsScene = marketsScene;
 		this.networkHandler = networkHandler;
 	}
@@ -362,5 +399,10 @@ public class MainViewController
 	public Button getDefaultProductionButton()
 	{
 		return defaultProductionButton;
+	}
+
+	public void setBuyingDevcard(boolean buyingDevcard)
+	{
+		isBuyingDevcard = buyingDevcard;
 	}
 }

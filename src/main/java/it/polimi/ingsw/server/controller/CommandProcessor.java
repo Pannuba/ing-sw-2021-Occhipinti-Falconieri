@@ -267,6 +267,7 @@ public class CommandProcessor			/* Contains the code that runs when a certain co
 			case "DEVCARD":				/* "ACTIVATE_PRODUCTION", "DEVCARD", "5" */
 
 				DevCard devCard = model.getPlayerByUsername(username).getDashboard().getTopDevCardByNumber(Integer.parseInt(command.get(2)));
+				/* TODO: check if card is null, send OperationResultMessage */
 				cost = devCard.getCost();
 				producedResources = devCard.getProduct();
 

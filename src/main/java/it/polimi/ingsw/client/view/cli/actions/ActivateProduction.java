@@ -43,6 +43,7 @@ public class ActivateProduction
 
 				String cardNumber;
 				PrintMethods.printDevCardAreas(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas());
+				/* TODO: check if the player has no devcards */
 				System.out.print("Insert the devcard's # you want to use: ");
 				cardNumber = input.nextLine();
 
