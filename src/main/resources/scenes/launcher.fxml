@@ -3,7 +3,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <!-- Removed stylesheets="@../css/style.css" and buttons folder. <styleClass> gets properties from .css such as layout and background image -->
@@ -11,27 +14,33 @@
 <!-- Workflow: make xfml in SceneBuilder, set controller name (bottom left), set fx:id (under Code in top right) and for each control element (and On Action if needed), -->
 <!-- then View -> Show Sample Controller Skeleton and copy-paste it, correct the controller's path adding the project namespace, and finally write the On Action methods -->
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.LauncherController">
+
+<Pane prefHeight="720.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.LauncherController">
    <children>
-      <TextField fx:id="nameField" promptText="Name">
-         <VBox.margin>
-            <Insets left="100.0" right="100.0" top="80.0" />
-         </VBox.margin>
+      <ImageView fitHeight="720.0" fitWidth="540.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/launcher.png" />
+         </image>
+         <effect>
+            <GaussianBlur />
+         </effect>
+      </ImageView>
+      <TextField fx:id="nameField" layoutX="177.0" layoutY="247.0" prefHeight="30.0" prefWidth="200.0" promptText="Name">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="18.0" />
+         </font>
       </TextField>
-      <TextField fx:id="ipField" promptText="IP Address">
-         <VBox.margin>
-            <Insets left="100.0" right="100.0" top="50.0" />
-         </VBox.margin>
+      <TextField fx:id="ipField" layoutX="178.0" layoutY="324.0" prefHeight="30.0" prefWidth="200.0" promptText="IP Address">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="18.0" />
+         </font>
       </TextField>
-      <TextField fx:id="portField" promptText="Port">
-         <VBox.margin>
-            <Insets left="100.0" right="100.0" top="20.0" />
-         </VBox.margin>
+      <TextField fx:id="portField" layoutX="177.0" layoutY="361.0" prefHeight="30.0" prefWidth="200.0" promptText="Port">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="18.0" />
+         </font>
       </TextField>
-      <Button mnemonicParsing="false" onAction="#connectToServer" text="PLAY">
-         <VBox.margin>
-            <Insets left="230.0" top="50.0" />
-         </VBox.margin>
+      <Button layoutX="203.0" layoutY="506.0" mnemonicParsing="false" onAction="#connectToServer" text="PLAY">
          <padding>
             <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
          </padding>
@@ -40,4 +49,4 @@
          </font>
       </Button>
    </children>
-</VBox>
+</Pane>
