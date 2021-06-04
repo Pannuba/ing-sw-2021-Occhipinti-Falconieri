@@ -55,18 +55,18 @@ public class MarketsController        /* Send command directly from here? Get wh
 
 	@FXML private Button backToBoardButton;
 
-	@FXML private ImageView devCard00;
+	@FXML private ImageView devCard1;
+	@FXML private ImageView devCard2;
+	@FXML private ImageView devCard3;
+	@FXML private ImageView devCard4;
+	@FXML private ImageView devCard5;
+	@FXML private ImageView devCard6;
+	@FXML private ImageView devCard7;
+	@FXML private ImageView devCard8;
+	@FXML private ImageView devCard9;
 	@FXML private ImageView devCard10;
-	@FXML private ImageView devCard20;
-	@FXML private ImageView devCard01;
 	@FXML private ImageView devCard11;
-	@FXML private ImageView devCard21;
-	@FXML private ImageView devCard02;
 	@FXML private ImageView devCard12;
-	@FXML private ImageView devCard22;
-	@FXML private ImageView devCard03;
-	@FXML private ImageView devCard13;
-	@FXML private ImageView devCard23;
 
 	@FXML
 	void backToBoard(ActionEvent event)		/* Set the already existing scene, otherwise it resets everything. How to pass? */
@@ -99,18 +99,18 @@ public class MarketsController        /* Send command directly from here? Get wh
 			rowTwoButton.setDisable(false);
 			rowThreeButton.setDisable(false);
 
-			devCard00.setDisable(false);			/* Put them in a list, and enable/disable with a for? */
-			devCard01.setDisable(false);
-			devCard02.setDisable(false);
-			devCard03.setDisable(false);
+			devCard1.setDisable(false);			/* Put them in a list, and enable/disable with a for? */
+			devCard2.setDisable(false);
+			devCard3.setDisable(false);
+			devCard4.setDisable(false);
+			devCard5.setDisable(false);
+			devCard6.setDisable(false);
+			devCard7.setDisable(false);
+			devCard8.setDisable(false);
+			devCard9.setDisable(false);
 			devCard10.setDisable(false);
 			devCard11.setDisable(false);
 			devCard12.setDisable(false);
-			devCard13.setDisable(false);
-			devCard20.setDisable(false);
-			devCard21.setDisable(false);
-			devCard22.setDisable(false);
-			devCard23.setDisable(false);
 		}
 		//the disable checkbox in scenebuilder disables the button permanently, meaning setdisable(false) wont work
 		else
@@ -124,18 +124,18 @@ public class MarketsController        /* Send command directly from here? Get wh
 			rowTwoButton.setDisable(true);
 			rowThreeButton.setDisable(true);
 
-			devCard00.setDisable(true);			/* Put them in a list, and enable/disable with a for? */
-			devCard01.setDisable(true);
-			devCard02.setDisable(true);
-			devCard03.setDisable(true);
+			devCard1.setDisable(true);			/* Put them in a list, and enable/disable with a for? */
+			devCard2.setDisable(true);
+			devCard3.setDisable(true);
+			devCard4.setDisable(true);
+			devCard5.setDisable(true);
+			devCard6.setDisable(true);
+			devCard7.setDisable(true);
+			devCard8.setDisable(true);
+			devCard9.setDisable(true);
 			devCard10.setDisable(true);
 			devCard11.setDisable(true);
 			devCard12.setDisable(true);
-			devCard13.setDisable(true);
-			devCard20.setDisable(true);
-			devCard21.setDisable(true);
-			devCard22.setDisable(true);
-			devCard23.setDisable(true);
 		}
 
 		marble00.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertMarbleTypeToPath(marblesBoard[0][0].getMarbleType()))));
@@ -154,18 +154,18 @@ public class MarketsController        /* Send command directly from here? Get wh
 
 		/* TODO: add spareMarble, order indexes of devcards/stacks/level... */
 		List<ImageView> devcards = new ArrayList<>();
-		devcards.add(devCard20);
+		devcards.add(devCard1);
+		devcards.add(devCard2);
+		devcards.add(devCard3);
+		devcards.add(devCard4);
+		devcards.add(devCard5);
+		devcards.add(devCard6);
+		devcards.add(devCard7);
+		devcards.add(devCard8);
+		devcards.add(devCard9);
 		devcards.add(devCard10);
-		devcards.add(devCard00);
-		devcards.add(devCard21);
 		devcards.add(devCard11);
-		devcards.add(devCard01);
-		devcards.add(devCard22);
 		devcards.add(devCard12);
-		devcards.add(devCard02);
-		devcards.add(devCard23);
-		devcards.add(devCard13);
-		devcards.add(devCard03);
 
 		for (int i = 0; i < devcards.size(); i++)
 		{
@@ -233,7 +233,39 @@ public class MarketsController        /* Send command directly from here? Get wh
 	}
 
 	@FXML
-	void selectDevCard00(MouseEvent event)
+	void selectDevCard1(MouseEvent event)
+	{
+		mvc.setDevCardToBuy(currDevCardsMarket.getDevCardStacks().get(0).get(0).getCardNumber());
+		mvc.getDevCardArea1().setDisable(false);
+		mvc.getDevCardArea2().setDisable(false);
+		mvc.getDevCardArea3().setDisable(false);
+
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		/* TODO: instance variable? */
+
+		mainStage.setTitle("Masters of Renaissance - Select Dev Card Area");
+		mainStage.setScene(mainViewScene);
+		mainStage.sizeToScene();		/* ? */
+		mainStage.show();
+	}
+
+	@FXML
+	void selectDevCard2(MouseEvent event)
+	{
+		mvc.setDevCardToBuy(currDevCardsMarket.getDevCardStacks().get(1).get(0).getCardNumber());
+		mvc.getDevCardArea1().setDisable(false);
+		mvc.getDevCardArea2().setDisable(false);
+		mvc.getDevCardArea3().setDisable(false);
+
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		/* TODO: instance variable? */
+
+		mainStage.setTitle("Masters of Renaissance - Select Dev Card Area");
+		mainStage.setScene(mainViewScene);
+		mainStage.sizeToScene();		/* ? */
+		mainStage.show();
+	}
+
+	@FXML
+	void selectDevCard3(MouseEvent event)
 	{
 		mvc.setDevCardToBuy(currDevCardsMarket.getDevCardStacks().get(2).get(0).getCardNumber());
 		mvc.getDevCardArea1().setDisable(false);
@@ -249,9 +281,137 @@ public class MarketsController        /* Send command directly from here? Get wh
 	}
 
 	@FXML
-	void selectDevCard20(MouseEvent event)
+	void selectDevCard4(MouseEvent event)
 	{
-		mvc.setDevCardToBuy(currDevCardsMarket.getDevCardStacks().get(0).get(0).getCardNumber());
+		mvc.setDevCardToBuy(currDevCardsMarket.getDevCardStacks().get(3).get(0).getCardNumber());
+		mvc.getDevCardArea1().setDisable(false);
+		mvc.getDevCardArea2().setDisable(false);
+		mvc.getDevCardArea3().setDisable(false);
+
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		/* TODO: instance variable? */
+
+		mainStage.setTitle("Masters of Renaissance - Select Dev Card Area");
+		mainStage.setScene(mainViewScene);
+		mainStage.sizeToScene();		/* ? */
+		mainStage.show();
+	}
+
+	@FXML
+	void selectDevCard5(MouseEvent event)
+	{
+		mvc.setDevCardToBuy(currDevCardsMarket.getDevCardStacks().get(4).get(0).getCardNumber());
+		mvc.getDevCardArea1().setDisable(false);
+		mvc.getDevCardArea2().setDisable(false);
+		mvc.getDevCardArea3().setDisable(false);
+
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		/* TODO: instance variable? */
+
+		mainStage.setTitle("Masters of Renaissance - Select Dev Card Area");
+		mainStage.setScene(mainViewScene);
+		mainStage.sizeToScene();		/* ? */
+		mainStage.show();
+	}
+
+	@FXML
+	void selectDevCard6(MouseEvent event)
+	{
+		mvc.setDevCardToBuy(currDevCardsMarket.getDevCardStacks().get(5).get(0).getCardNumber());
+		mvc.getDevCardArea1().setDisable(false);
+		mvc.getDevCardArea2().setDisable(false);
+		mvc.getDevCardArea3().setDisable(false);
+
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		/* TODO: instance variable? */
+
+		mainStage.setTitle("Masters of Renaissance - Select Dev Card Area");
+		mainStage.setScene(mainViewScene);
+		mainStage.sizeToScene();		/* ? */
+		mainStage.show();
+	}
+
+	@FXML
+	void selectDevCard7(MouseEvent event)
+	{
+		mvc.setDevCardToBuy(currDevCardsMarket.getDevCardStacks().get(6).get(0).getCardNumber());
+		mvc.getDevCardArea1().setDisable(false);
+		mvc.getDevCardArea2().setDisable(false);
+		mvc.getDevCardArea3().setDisable(false);
+
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		/* TODO: instance variable? */
+
+		mainStage.setTitle("Masters of Renaissance - Select Dev Card Area");
+		mainStage.setScene(mainViewScene);
+		mainStage.sizeToScene();		/* ? */
+		mainStage.show();
+	}
+
+	@FXML
+	void selectDevCard8(MouseEvent event)
+	{
+		mvc.setDevCardToBuy(currDevCardsMarket.getDevCardStacks().get(7).get(0).getCardNumber());
+		mvc.getDevCardArea1().setDisable(false);
+		mvc.getDevCardArea2().setDisable(false);
+		mvc.getDevCardArea3().setDisable(false);
+
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		/* TODO: instance variable? */
+
+		mainStage.setTitle("Masters of Renaissance - Select Dev Card Area");
+		mainStage.setScene(mainViewScene);
+		mainStage.sizeToScene();		/* ? */
+		mainStage.show();
+	}
+
+	@FXML
+	void selectDevCard9(MouseEvent event)
+	{
+		mvc.setDevCardToBuy(currDevCardsMarket.getDevCardStacks().get(8).get(0).getCardNumber());
+		mvc.getDevCardArea1().setDisable(false);
+		mvc.getDevCardArea2().setDisable(false);
+		mvc.getDevCardArea3().setDisable(false);
+
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		/* TODO: instance variable? */
+
+		mainStage.setTitle("Masters of Renaissance - Select Dev Card Area");
+		mainStage.setScene(mainViewScene);
+		mainStage.sizeToScene();		/* ? */
+		mainStage.show();
+	}
+
+	@FXML
+	void selectDevCard10(MouseEvent event)
+	{
+		mvc.setDevCardToBuy(currDevCardsMarket.getDevCardStacks().get(9).get(0).getCardNumber());
+		mvc.getDevCardArea1().setDisable(false);
+		mvc.getDevCardArea2().setDisable(false);
+		mvc.getDevCardArea3().setDisable(false);
+
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		/* TODO: instance variable? */
+
+		mainStage.setTitle("Masters of Renaissance - Select Dev Card Area");
+		mainStage.setScene(mainViewScene);
+		mainStage.sizeToScene();		/* ? */
+		mainStage.show();
+	}
+
+	@FXML
+	void selectDevCard11(MouseEvent event)
+	{
+		mvc.setDevCardToBuy(currDevCardsMarket.getDevCardStacks().get(10).get(0).getCardNumber());
+		mvc.getDevCardArea1().setDisable(false);
+		mvc.getDevCardArea2().setDisable(false);
+		mvc.getDevCardArea3().setDisable(false);
+
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		/* TODO: instance variable? */
+
+		mainStage.setTitle("Masters of Renaissance - Select Dev Card Area");
+		mainStage.setScene(mainViewScene);
+		mainStage.sizeToScene();		/* ? */
+		mainStage.show();
+	}
+
+	@FXML
+	void selectDevCard12(MouseEvent event)
+	{
+		mvc.setDevCardToBuy(currDevCardsMarket.getDevCardStacks().get(11).get(0).getCardNumber());
 		mvc.getDevCardArea1().setDisable(false);
 		mvc.getDevCardArea2().setDisable(false);
 		mvc.getDevCardArea3().setDisable(false);

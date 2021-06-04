@@ -62,51 +62,51 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fx:id="devCard00" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="589.0" layoutY="1.0" onMouseClicked="#selectDevCard00" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCard3" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="589.0" layoutY="1.0" onMouseClicked="#selectDevCard3" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="devCard10" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="589.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCard2" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="589.0" layoutY="243.0" onMouseClicked="#selectDevCard2" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="devCard20" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="589.0" layoutY="484.0" onMouseClicked="#selectDevCard20" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCard1" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="589.0" layoutY="484.0" onMouseClicked="#selectDevCard1" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="devCard01" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="752.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCard6" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="752.0" layoutY="1.0" onMouseClicked="#selectDevCard6" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="devCard11" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="752.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCard5" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="752.0" layoutY="243.0" onMouseClicked="#selectDevCard5" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="devCard21" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="752.0" layoutY="484.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCard4" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="752.0" layoutY="484.0" onMouseClicked="#selectDevCard4" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="devCard02" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="915.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCard9" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="915.0" layoutY="1.0" onMouseClicked="#selectDevCard9" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="devCard12" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="915.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCard8" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="915.0" layoutY="243.0" onMouseClicked="#selectDevCard8" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="devCard22" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="915.0" layoutY="484.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCard7" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="915.0" layoutY="484.0" onMouseClicked="#selectDevCard7" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="devCard03" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="1078.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCard12" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="1078.0" layoutY="1.0" onMouseClicked="#selectDevCard12" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="devCard13" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="1078.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCard11" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="1078.0" layoutY="243.0" onMouseClicked="#selectDevCard11" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <ImageView fx:id="devCard23" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="1078.0" layoutY="484.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCard10" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="1078.0" layoutY="484.0" onMouseClicked="#selectDevCard10" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
