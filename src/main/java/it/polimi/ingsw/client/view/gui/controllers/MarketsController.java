@@ -254,9 +254,6 @@ public class MarketsController        /* Send command directly from here? Get wh
 	{
 		mvc.setDevCardToBuy(cardToBuyNum);
 		mvc.setBuyingDevcard(true);
-		mvc.getDevCardArea1().setDisable(false);
-		mvc.getDevCardArea2().setDisable(false);
-		mvc.getDevCardArea3().setDisable(false);
 
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		/* TODO: instance variable? */
 
@@ -280,6 +277,6 @@ public class MarketsController        /* Send command directly from here? Get wh
 										devCard7, devCard8, devCard9, devCard10, devCard11, devCard12	);
 		Collections.addAll(	marbles,	marble00, marble01, marble02, marble03, marble10, marble11,
 										marble12, marble13, marble20, marble21, marble22, marble23	);
-		Collections.addAll(	buttons,	rowOneButton, rowTwoButton, rowThreeButton, colOneButton, colTwoButton, colThreeButton);
+		Collections.addAll(	buttons,	rowOneButton, rowTwoButton, rowThreeButton, colOneButton, colTwoButton, colThreeButton, colFourButton);
 	}
 }
