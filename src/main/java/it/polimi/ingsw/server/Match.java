@@ -47,7 +47,7 @@ public class Match implements Runnable
 			views.get(i).send(new InitialResourcesMessage(i));		/* Because the player list in Model is sorted by ID. players[0] has ID 0 and so on */
 		}
 
-		model.update();		/* Send the first gamestate after the setup messages. Putting this here instead of the controller makes everything work */
+		//model.update();		/* Send the first gamestate after the setup messages. Putting this here instead of the controller makes everything work */
 	}
 
 	public void stop()		/* If I create a Match list in ServerListener and call stop() on every match on shutdown, it doesn't work */
