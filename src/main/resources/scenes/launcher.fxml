@@ -39,6 +39,7 @@
             <Font name="Times New Roman Bold Italic" size="18.0" />
          </font>
       </TextField>
+      <TextField fx:id="numPlayersField" layoutX="185.0" layoutY="417.0" promptText="Player number" visible="false" />
       <ImageView fx:id="startButton" accessibleRole="BUTTON" fitHeight="150.0" fitWidth="220.0" layoutX="161.0" layoutY="484.0" onMouseClicked="#connectToServer" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/writings/Start_inclinato.png" />

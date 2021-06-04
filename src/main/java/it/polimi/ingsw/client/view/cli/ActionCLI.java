@@ -78,7 +78,7 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 	@Override
 	public void initialResources(int playerID)			/* 1st player: nothing; 2nd: 1 resource; 3rd: 1 resource + 1 faithPoint; 4th: 2 resources + 1 faithPoint */
 	{
-		new ChooseResources(playerID, input, command, networkHandler);
+		new InitialResources(playerID, input, command, networkHandler);
 	}
 
 	@Override

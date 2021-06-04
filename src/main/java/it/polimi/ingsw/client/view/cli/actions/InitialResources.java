@@ -5,9 +5,9 @@ import it.polimi.ingsw.client.NetworkHandler;
 import java.util.List;
 import java.util.Scanner;
 
-public class ChooseResources
+public class InitialResources
 {
-	public ChooseResources(int playerID, Scanner input, List<String> command, NetworkHandler networkHandler)
+	public InitialResources(int playerID, Scanner input, List<String> command, NetworkHandler networkHandler)
 	{
 		String chosenResources = "";			/* Will be converted to ResourceType in server controller */
 		String initialFaithPoints = "";

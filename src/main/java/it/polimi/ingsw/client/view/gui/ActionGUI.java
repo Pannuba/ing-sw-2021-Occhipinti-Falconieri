@@ -2,10 +2,7 @@ package it.polimi.ingsw.client.view.gui;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.MessageExecutor;
-import it.polimi.ingsw.client.view.gui.controllers.GameStartController;
-import it.polimi.ingsw.client.view.gui.controllers.LeaderCardsController;
-import it.polimi.ingsw.client.view.gui.controllers.MainViewController;
-import it.polimi.ingsw.client.view.gui.controllers.MarketsController;
+import it.polimi.ingsw.client.view.gui.controllers.*;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Resource;
@@ -28,16 +25,18 @@ public class ActionGUI extends MessageExecutor
 	private final GUIModel gui;
 	private final NetworkHandler networkHandler;		/* To send commands to server */
 	private final Scene gameStartScene;
+	private final LauncherController lc;
 	private final GameStartController gsc;
 	private final LeaderCardsController lcc;
 	private final MainViewController mvc;						/* To update the scenes when a new gamestate is received */
 	private final MarketsController mmc;
 
-	public ActionGUI(GUIModel gui, NetworkHandler networkHandler, Scene gameStartScene, GameStartController gsc, LeaderCardsController lcc, MainViewController mvc, MarketsController mmc)
+	public ActionGUI(GUIModel gui, NetworkHandler networkHandler, Scene gameStartScene, LauncherController lc, GameStartController gsc, LeaderCardsController lcc, MainViewController mvc, MarketsController mmc)
 	{
 		this.gui = gui;
 		this.networkHandler = networkHandler;
 		this.gameStartScene = gameStartScene;
+		this.lc = lc;
 		this.gsc = gsc;
 		this.lcc = lcc;
 		this.mvc = mvc;		/* Pack all loaders in a hashmap? */
@@ -52,9 +51,10 @@ public class ActionGUI extends MessageExecutor
 	}
 
 	@Override
-	public void firstPlayer(boolean isFirstPlayer)	/* Open small window? */
+	public void firstPlayer(boolean isFirstPlayer)
 	{
-
+		if (isFirstPlayer)
+			lc.firstPlayer();
 	}
 
 	@Override
