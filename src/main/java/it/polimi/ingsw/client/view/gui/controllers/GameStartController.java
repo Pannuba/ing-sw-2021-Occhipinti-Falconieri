@@ -104,7 +104,7 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 
 		if (chosenLeaderCards.size() == 2)
 		{
-			networkHandler.send(Arrays.asList("CHOOSE_LEADERCARDS", chosenLeaderCards.get(0), chosenLeaderCards.get(1)));
+			networkHandler.send(Arrays.asList("SELECT_LEADERCARDS", chosenLeaderCards.get(0), chosenLeaderCards.get(1)));
 			purpleResource.setDisable(false);
 			greyResource.setDisable(false);
 			blueResource.setDisable(false);
@@ -112,6 +112,7 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 
 			if (playerID == 0)
 			{
+				networkHandler.send(Arrays.asList("INITIAL_RESOURCES", "", ""));
 				Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				mainStage.setScene(mainViewScene);
 				mainStage.show();
@@ -129,7 +130,7 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 
 			switch (playerID)
 			{
-				case 0:
+				case 0:		/* Never happens because the scene immediately changes after picking the 2 cards for singleplayer matches */
 				case 1:
 					break;
 
@@ -142,7 +143,7 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 					break;
 			}
 
-			networkHandler.send(Arrays.asList("CHOOSE_RESOURCES", chosenResources, initialFaithPoints));
+			networkHandler.send(Arrays.asList("INITIAL_RESOURCES", chosenResources, initialFaithPoints));
 
 			Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			mainStage.setScene(mainViewScene);

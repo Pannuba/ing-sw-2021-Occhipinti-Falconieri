@@ -27,6 +27,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 	public void parseInput(List<String> command)		/* Gets name from ClientHandler to change that player's stuff */
 	{
+		System.out.println("Received " + command + " from " + username);
 		switch (command.get(0))
 		{
 			case "SELECT_LEADERCARDS":							/* "SELECT_LEADERCARDS", "x", "y" */
@@ -36,7 +37,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 			case "INITIAL_RESOURCES":							/* "INITIAL_RESOURCES", "BY", "2" */
 				runCommand.initialResources(command, username);
 				GameState firstGameState = new GameState(model.getPlayers(), model.getCurrentPlayerName(), model.getTrack(), model.getMarblesMarket(), model.getDevCardsMarket());
-				view.send(firstGameState);
+				view.send(firstGameState);		/* This way the clients can immediately see the picked cards and resources, and the GUI doesn't freeze! */
 				return;
 
 			case "ACTIVATE_LEADER":								/* "ACTIVATE_LEADER", "4" */
