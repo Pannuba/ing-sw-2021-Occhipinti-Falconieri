@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -27,12 +28,14 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 	private String chosenResources;
 	private List<String> chosenLeaderCards;
 
+	private ColorAdjust selectedEffect;
+
 	@FXML private ImageView leaderCard1;
 	@FXML private ImageView leaderCard2;
 	@FXML private ImageView leaderCard3;
 	@FXML private ImageView leaderCard4;
 
-	@FXML private ImageView purpleResource;		/* TODO: color effect brightness -0.2 for selected resources */
+	@FXML private ImageView purpleResource;
 	@FXML private ImageView greyResource;
 	@FXML private ImageView blueResource;
 	@FXML private ImageView yellowResource;
@@ -66,24 +69,32 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 	@FXML
 	void selectLeaderCard1(MouseEvent event)
 	{
+		leaderCard1.setEffect(selectedEffect);
+		leaderCard1.setDisable(true);
 		chooseLeaderCard(leaderCards.get(0).getCardNumber(), event);
 	}
 
 	@FXML
 	void selectLeaderCard2(MouseEvent event)
 	{
+		leaderCard2.setEffect(selectedEffect);
+		leaderCard2.setDisable(true);
 		chooseLeaderCard(leaderCards.get(1).getCardNumber(), event);
 	}
 
 	@FXML
 	void selectLeaderCard3(MouseEvent event)
 	{
+		leaderCard3.setEffect(selectedEffect);
+		leaderCard3.setDisable(true);
 		chooseLeaderCard(leaderCards.get(2).getCardNumber(), event);
 	}
 
 	@FXML
 	void selectLeaderCard4(MouseEvent event)
 	{
+		leaderCard4.setEffect(selectedEffect);
+		leaderCard4.setDisable(true);
 		chooseLeaderCard(leaderCards.get(3).getCardNumber(), event);
 	}
 
@@ -182,5 +193,8 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 		this.mvc = mvc;
 		this.networkHandler = networkHandler;
 		chosenLeaderCards = new ArrayList<>();
+
+		selectedEffect = new ColorAdjust();
+		selectedEffect.setBrightness(-0.5);
 	}
 }
