@@ -2,9 +2,10 @@ package it.polimi.ingsw.client.view.gui.controllers;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.GUIModel;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -16,8 +17,10 @@ public class LauncherController
 
 	@FXML private TextField portField;
 
+	@FXML private ImageView startButton;
+
 	@FXML
-	void connectToServer(ActionEvent event) throws IOException
+	void connectToServer(MouseEvent event) throws IOException
 	{
 
 		NetworkHandler networkHandler = new NetworkHandler(ipField.getText(), Integer.parseInt(portField.getText()));

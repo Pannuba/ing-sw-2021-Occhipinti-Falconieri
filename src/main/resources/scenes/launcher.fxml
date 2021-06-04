@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.GaussianBlur?>
@@ -40,7 +39,7 @@
             <Font name="Times New Roman Bold Italic" size="18.0" />
          </font>
       </TextField>
-      <ImageView accessibleRole="BUTTON" fitHeight="150.0" fitWidth="220.0" layoutX="161.0" layoutY="484.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="startButton" accessibleRole="BUTTON" fitHeight="150.0" fitWidth="220.0" layoutX="161.0" layoutY="484.0" onMouseClicked="#connectToServer" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/writings/Start_inclinato.png" />
          </image>
@@ -51,6 +50,5 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Button layoutX="82.0" layoutY="497.0" mnemonicParsing="false" onAction="#connectToServer" text="start" />
    </children>
 </Pane>
