@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="720.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.EndGameController">
    <children>
@@ -19,13 +17,12 @@
             <GaussianBlur />
          </effect>
       </ImageView>
-      <ImageView fx:id="winOrLose" fitHeight="150.0" fitWidth="200.0" layoutX="170.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="winnerPoints" layoutX="94.0" layoutY="292.0" prefHeight="8.0" prefWidth="371.0" text="FirtstPlacePoints:" textFill="#0d0000">
+      <ImageView fx:id="winOrLose" fitHeight="218.0" fitWidth="333.0" layoutX="103.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="winnerPoints" layoutX="94.0" layoutY="292.0" prefHeight="8.0" prefWidth="371.0" text="FirstPlacePoints:" textFill="#0d0000">
          <font>
             <Font name="Times New Roman Bold Italic" size="25.0" />
          </font>
       </Label>
-      <Button fx:id="playAgain" layoutX="194.0" layoutY="534.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="151.0" text="Play Again" />
       <Label fx:id="secondPlacePoints" layoutX="95.0" layoutY="340.0" prefHeight="8.0" prefWidth="371.0" text="SecondPlacePoints:" textFill="#0d0000">
          <font>
             <Font name="Times New Roman Bold Italic" size="25.0" />
@@ -41,5 +38,10 @@
             <Font name="Times New Roman Bold Italic" size="25.0" />
          </font>
       </Label>
+      <ImageView fitHeight="187.0" fitWidth="297.0" layoutX="159.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/writings/Play_Again_inclinato.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
