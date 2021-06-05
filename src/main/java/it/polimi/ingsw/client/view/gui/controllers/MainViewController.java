@@ -213,7 +213,7 @@ public class MainViewController
 			popeTokenThree.setImage(null);
 	}
 
-	public void updateStorage(Storage storage)//topres1, midres1, mirdes2, botres1, botres2, botres3
+	public void updateStorage(Storage storage)
 	{
 
 		switch (storage.getShelves()[0].getShelfResourceQuantity())

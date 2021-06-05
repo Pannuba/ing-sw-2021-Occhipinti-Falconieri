@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.board.Dashboard;
 import it.polimi.ingsw.model.board.Storage;
 import it.polimi.ingsw.model.board.Vault;
 import it.polimi.ingsw.model.cards.*;
+import it.polimi.ingsw.server.controller.commands.*;
 import it.polimi.ingsw.server.messages.ActionTokenMessage;
 import it.polimi.ingsw.server.messages.SinglePlayerGameOverMessage;
 import it.polimi.ingsw.server.view.ClientHandler;
@@ -14,15 +15,14 @@ import java.util.*;
 public class Controller implements Observer			/* Observes view to get commands... View observes model */
 {
 	private final Model model;
-	private final CommandProcessor runCommand;
 	private String username;			/* Username of the player who sent the command */
 	private ClientHandler view;			/* ClientHandler instance of the view which sent the command. Used for send() method */
+	private boolean isTaskFailed;
 
 	public Controller(Model model)
 	{
 		System.out.println("Creating controller");
 		this.model = model;
-		this.runCommand = new CommandProcessor(model, this);		/* CommandProcessor edits the same model created in Match */
 	}
 
 	public void parseInput(List<String> command)		/* Gets name from ClientHandler to change that player's stuff */
@@ -31,38 +31,38 @@ public class Controller implements Observer			/* Observes view to get commands..
 		switch (command.get(0))
 		{
 			case "SELECT_LEADERCARDS":							/* "SELECT_LEADERCARDS", "x", "y" */
-				runCommand.selectLeaderCards(command, username);		/* model.update() here or in INITIAL_RESOURCES fricks everything up */
+				isTaskFailed = new SelectLeaderCardsCommand().run(this, command, username, model);
 				return;
 
 			case "INITIAL_RESOURCES":							/* "INITIAL_RESOURCES", "BY", "2" */
-				runCommand.initialResources(command, username);
+				isTaskFailed = new InitialResourcesCommand().run(this, command, username, model);
 				GameState firstGameState = new GameState(model.getPlayers(), model.getCurrentPlayerName(), model.getTrack(), model.getMarblesMarket(), model.getDevCardsMarket());
 				view.send(firstGameState);		/* This way the clients can immediately see the picked cards and resources, and the GUI doesn't freeze! */
 				return;
 
 			case "ACTIVATE_LEADER":								/* "ACTIVATE_LEADER", "4" */
-				runCommand.activateLeader(command, username);
+				isTaskFailed = new ActivateLeaderCommand().run(this, command, username, model);
 				break;
 
 			case "DISCARD_LEADER":								/* "DISCARD_LEADER", "13" */
-				runCommand.discardLeader(command, username);
+				isTaskFailed = new DiscardLeaderCommand().run(this, command, username, model);
 				break;
 
 			case "BUY_DEVCARD":									/* "BUY_DEVCARD", "card#", "devCardArea#" */
-				runCommand.buyDevCard(command, username);
+				isTaskFailed = new BuyDevCardCommand().run(this, command, username, model);
 				break;
 
 			case "ACTIVATE_PRODUCTION":
-				runCommand.activateProduction(command, username);
+				isTaskFailed = new ActivateProductionCommand().run(this, command, username, model);
 				break;
 
 			case "BUY_RESOURCES":								/* "BUY_RESOURCES", "ROW", "2" */
-				runCommand.buyResources(command, username);
+				isTaskFailed = new BuyResourcesCommand().run(this, command, username, model);
 				break;
 		}
 
 		if ((command.get(0).equals("BUY_RESOURCES") || command.get(0).equals("BUY_DEVCARD")	||
-			command.get(0).equals("ACTIVATE_PRODUCTION")) && !runCommand.isFailed())
+			command.get(0).equals("ACTIVATE_PRODUCTION")) && !isTaskFailed)
 		{
 			chooseNextPlayer();			/* Don't choose next player during setup or failed actions */
 			postRoundChecks();			/* Put in model as separate method, or in update()? */
