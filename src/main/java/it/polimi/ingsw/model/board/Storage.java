@@ -91,33 +91,6 @@ public class Storage implements Serializable
 		System.out.println("addResoruceSmart: adding " + resourceToAdd);
 		ResourceType excessResource = null;
 
-		if (!shelves[2].isEmpty() && !shelves[1].isEmpty() && !shelves[0].isEmpty())
-		{
-			if (shelves[2].getShelfResourceQuantity() == 1 && shelves[0].getShelfResourceType() == resourceToAdd)
-			{
-				ResourceType tempShelfResource = shelves[0].getShelfResourceType();
-				shelves[0].getShelfResource().setResourceType(shelves[2].getShelfResourceType());
-				shelves[2].getShelfResource().setResourceType(tempShelfResource);
-				addResource(resourceToAdd, 2);
-			}
-
-			if (shelves[1].getShelfResourceQuantity() == 1 && shelves[0].getShelfResourceType() == resourceToAdd)
-			{
-				ResourceType tempShelfResource = shelves[0].getShelfResourceType();
-				shelves[0].getShelfResource().setResourceType(shelves[1].getShelfResourceType());
-				shelves[1].getShelfResource().setResourceType(tempShelfResource);
-				addResource(resourceToAdd, 1);
-			}
-
-			if (shelves[2].getShelfResourceQuantity() == 2 && shelves[1].getShelfResourceQuantity() == 2 && shelves[1].getShelfResourceType() == resourceToAdd)
-			{
-				ResourceType tempShelfResource = shelves[1].getShelfResourceType();
-				shelves[1].getShelfResource().setResourceType(shelves[2].getShelfResourceType());
-				shelves[2].getShelfResource().setResourceType(tempShelfResource);
-				addResource(resourceToAdd, 2);
-			}
-		}
-
 		if	(shelves[2].isEmpty() && shelves[0].getShelfResourceType() == resourceToAdd && shelves[1].getShelfResourceType() != resourceToAdd)
 		{
 			System.out.println("A");
@@ -167,6 +140,33 @@ public class Storage implements Serializable
 		{
 			System.out.println("H");
 			addResource(resourceToAdd, 1);
+		}
+
+		else if (!shelves[2].isEmpty() && !shelves[1].isEmpty() && !shelves[0].isEmpty())
+		{
+			if (shelves[2].getShelfResourceQuantity() == 1 && shelves[0].getShelfResourceType() == resourceToAdd)
+			{
+				ResourceType tempShelfResource = shelves[0].getShelfResourceType();
+				shelves[0].getShelfResource().setResourceType(shelves[2].getShelfResourceType());
+				shelves[2].getShelfResource().setResourceType(tempShelfResource);
+				addResource(resourceToAdd, 3);
+			}
+
+			else if (shelves[1].getShelfResourceQuantity() == 1 && shelves[0].getShelfResourceType() == resourceToAdd)
+			{
+				ResourceType tempShelfResource = shelves[0].getShelfResourceType();
+				shelves[0].getShelfResource().setResourceType(shelves[1].getShelfResourceType());
+				shelves[1].getShelfResource().setResourceType(tempShelfResource);
+				addResource(resourceToAdd, 2);
+			}
+
+			else if (shelves[2].getShelfResourceQuantity() == 2 && shelves[1].getShelfResourceQuantity() == 2 && shelves[1].getShelfResourceType() == resourceToAdd)
+			{
+				ResourceType tempShelfResource = shelves[1].getShelfResourceType();
+				shelves[1].getShelfResource().setResourceType(shelves[2].getShelfResourceType());
+				shelves[2].getShelfResource().setResourceType(tempShelfResource);
+				addResource(resourceToAdd, 3);
+			}
 		}
 
 		else
