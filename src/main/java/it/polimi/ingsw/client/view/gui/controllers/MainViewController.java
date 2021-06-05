@@ -375,26 +375,30 @@ public class MainViewController
 
 		isBuyingDevcard = false;
 
-		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		mainStage.setTitle("Masters of Renaissance");
+		Platform.runLater(() -> {	/* Necessary here? Maybe only for buttons/ImageViews */
+			Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			mainStage.setTitle("Masters of Renaissance");
+		});
 	}
 
 	public void enableButtons()
 	{
-		defaultProductionButton.setDisable(false);
-
-		devCardArea1.setDisable(false);		/* For production using devcards */
-		devCardArea2.setDisable(false);
-		devCardArea3.setDisable(false);
+		Platform.runLater(() -> {
+			defaultProductionButton.setDisable(false);
+			devCardArea1.setDisable(false);        /* For production using devcards */
+			devCardArea2.setDisable(false);
+			devCardArea3.setDisable(false);
+		});
 	}
 
 	public void disableButtons()
 	{
-		defaultProductionButton.setDisable(true);
-
-		devCardArea1.setDisable(true);
-		devCardArea2.setDisable(true);
-		devCardArea3.setDisable(true);
+		Platform.runLater(() -> {
+			defaultProductionButton.setDisable(true);
+			devCardArea1.setDisable(true);
+			devCardArea2.setDisable(true);
+			devCardArea3.setDisable(true);
+		});
 	}
 
 	public ImageView getDashboard()
