@@ -35,8 +35,8 @@ public class LauncherController
 
 		networkHandler.addObserver(gui);
 		networkHandler.connect();
-		networkHandler.send(nameField.getText());		/* FIXME: SocketTimeoutException when not sending numPlayers for "timeout" seconds. Only GUI, CLI is fine */
-		new Thread(networkHandler).start();				/* I know why. */
+		networkHandler.send(nameField.getText());
+		new Thread(networkHandler).start();
 	}
 
 	public void firstPlayer()

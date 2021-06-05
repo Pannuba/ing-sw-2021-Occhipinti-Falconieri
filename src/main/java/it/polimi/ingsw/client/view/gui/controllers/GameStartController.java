@@ -69,37 +69,32 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 	@FXML
 	void selectLeaderCard1(MouseEvent event)
 	{
-		leaderCard1.setEffect(selectedEffect);
-		leaderCard1.setDisable(true);
-		chooseLeaderCard(leaderCards.get(0).getCardNumber(), event);
+		chooseLeaderCard(leaderCard1, leaderCards.get(0).getCardNumber(), event);
 	}
 
 	@FXML
 	void selectLeaderCard2(MouseEvent event)
 	{
-		leaderCard2.setEffect(selectedEffect);
-		leaderCard2.setDisable(true);
-		chooseLeaderCard(leaderCards.get(1).getCardNumber(), event);
+		chooseLeaderCard(leaderCard2, leaderCards.get(1).getCardNumber(), event);
 	}
 
 	@FXML
 	void selectLeaderCard3(MouseEvent event)
 	{
-		leaderCard3.setEffect(selectedEffect);
-		leaderCard3.setDisable(true);
-		chooseLeaderCard(leaderCards.get(2).getCardNumber(), event);
+		chooseLeaderCard(leaderCard3, leaderCards.get(2).getCardNumber(), event);
 	}
 
 	@FXML
 	void selectLeaderCard4(MouseEvent event)
 	{
-		leaderCard4.setEffect(selectedEffect);
-		leaderCard4.setDisable(true);
-		chooseLeaderCard(leaderCards.get(3).getCardNumber(), event);
+		chooseLeaderCard(leaderCard4, leaderCards.get(3).getCardNumber(), event);
 	}
 
-	private void chooseLeaderCard(int cardNum, MouseEvent event)
+	private void chooseLeaderCard(ImageView cardImg, int cardNum, MouseEvent event)
 	{
+		cardImg.setEffect(selectedEffect);
+		cardImg.setDisable(true);
+
 		chosenLeaderCards.add(String.valueOf(cardNum));
 
 		if (chosenLeaderCards.size() == 2)

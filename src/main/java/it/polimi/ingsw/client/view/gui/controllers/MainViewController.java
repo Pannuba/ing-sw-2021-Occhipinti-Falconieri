@@ -146,10 +146,13 @@ public class MainViewController
 		if (defaultProdRes.size() == 3)
 		{
 			networkHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "DEFAULT", defaultProdRes.get(0), defaultProdRes.get(1), defaultProdRes.get(2)));
-			vaultResourceBlue.setDisable(true);
-			vaultResourcePurple.setDisable(true);
-			vaultResourceYellow.setDisable(true);
-			vaultResourceGrey.setDisable(true);
+
+			Platform.runLater(() -> {
+				vaultResourceBlue.setDisable(true);
+				vaultResourcePurple.setDisable(true);
+				vaultResourceYellow.setDisable(true);
+				vaultResourceGrey.setDisable(true);
+			});
 		}
 	}
 
