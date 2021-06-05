@@ -306,32 +306,32 @@ public class MainViewController
 	{
 		switch (boxNumber)		/* setX vs setLayoutX? */
 		{
-			case 0:	 pawn.setLayoutX(22);	pawn.setLayoutY(112);	break;
-			case 1:  pawn.setLayoutX(72);	pawn.setLayoutY(112);	break;
-			case 2:	 pawn.setLayoutX(122);	pawn.setLayoutY(112);	break;
-			case 3:	 pawn.setLayoutX(122);	pawn.setLayoutY(64);	break;
-			case 4:	 pawn.setLayoutX(122);	pawn.setLayoutY(15);	break;
-			case 5:	 pawn.setLayoutX(170);	pawn.setLayoutY(15);	break;
-			case 6:	 pawn.setLayoutX(220);	pawn.setLayoutY(15);	break;
-			case 7:	 pawn.setLayoutX(269);	pawn.setLayoutY(15);	break;
-			case 8:	 pawn.setLayoutX(316);	pawn.setLayoutY(15);	break;
-			case 9:	 pawn.setLayoutX(367);	pawn.setLayoutY(15);	break;
-			case 10: pawn.setLayoutX(367);	pawn.setLayoutY(64);	break;
-			case 11: pawn.setLayoutX(367);	pawn.setLayoutY(113);	break;
-			case 12: pawn.setLayoutX(418);	pawn.setLayoutY(113);	break;
-			case 13: pawn.setLayoutX(466);	pawn.setLayoutY(113);	break;
-			case 14: pawn.setLayoutX(516);	pawn.setLayoutY(113);	break;
-			case 15: pawn.setLayoutX(565);	pawn.setLayoutY(113);	break;
-			case 16: pawn.setLayoutX(615);	pawn.setLayoutY(113);	break;
-			case 17: pawn.setLayoutX(615);	pawn.setLayoutY(64);	break;
-			case 18: pawn.setLayoutX(615);	pawn.setLayoutY(15);	break;
-			case 19: pawn.setLayoutX(663);	pawn.setLayoutY(15);	break;
-			case 20: pawn.setLayoutX(713);	pawn.setLayoutY(15);	break;
-			case 21: pawn.setLayoutX(762);	pawn.setLayoutY(15);	break;
-			case 22: pawn.setLayoutX(811);	pawn.setLayoutY(15);	break;
-			case 23: pawn.setLayoutX(860);	pawn.setLayoutY(15);	break;
+			case 0:	 pawn.setLayoutX(26);	pawn.setLayoutY(128);	break;
+			case 1:  pawn.setLayoutX(75);	pawn.setLayoutY(128);	break;
+			case 2:	 pawn.setLayoutX(124);	pawn.setLayoutY(128);	break;
+			case 3:	 pawn.setLayoutX(124);	pawn.setLayoutY(80);	break;
+			case 4:	 pawn.setLayoutX(124);	pawn.setLayoutY(29);	break;
+			case 5:	 pawn.setLayoutX(173);	pawn.setLayoutY(29);	break;
+			case 6:	 pawn.setLayoutX(223);	pawn.setLayoutY(29);	break;
+			case 7:	 pawn.setLayoutX(272);	pawn.setLayoutY(29);	break;
+			case 8:	 pawn.setLayoutX(320);	pawn.setLayoutY(29);	break;
+			case 9:	 pawn.setLayoutX(370);	pawn.setLayoutY(29);	break;
+			case 10: pawn.setLayoutX(370);	pawn.setLayoutY(79);	break;
+			case 11: pawn.setLayoutX(370);	pawn.setLayoutY(127);	break;
+			case 12: pawn.setLayoutX(420);	pawn.setLayoutY(127);	break;
+			case 13: pawn.setLayoutX(470);	pawn.setLayoutY(127);	break;
+			case 14: pawn.setLayoutX(520);	pawn.setLayoutY(127);	break;
+			case 15: pawn.setLayoutX(569);	pawn.setLayoutY(127);	break;
+			case 16: pawn.setLayoutX(617);	pawn.setLayoutY(127);	break;
+			case 17: pawn.setLayoutX(617);	pawn.setLayoutY(79);	break;
+			case 18: pawn.setLayoutX(617);	pawn.setLayoutY(29);	break;
+			case 19: pawn.setLayoutX(667);	pawn.setLayoutY(29);	break;
+			case 20: pawn.setLayoutX(717);	pawn.setLayoutY(29);	break;
+			case 21: pawn.setLayoutX(766);	pawn.setLayoutY(29);	break;
+			case 22: pawn.setLayoutX(815);	pawn.setLayoutY(29);	break;
+			case 23: pawn.setLayoutX(864);	pawn.setLayoutY(29);	break;
 			case 24:
-			default: pawn.setLayoutX(910);	pawn.setLayoutY(15);	break;
+			default: pawn.setLayoutX(914);	pawn.setLayoutY(15);	break;
 		}
 	}
 

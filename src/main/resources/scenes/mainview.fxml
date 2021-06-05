@@ -25,12 +25,12 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor></Button>
       <TextArea fx:id="console" editable="false" layoutX="1018.0" layoutY="298.0" prefHeight="414.0" prefWidth="254.0" wrapText="true" />
-      <ImageView fx:id="redPawn" fitHeight="78.0" fitWidth="124.0" layoutX="22.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="redPawn" fitHeight="70.0" fitWidth="87.0" layoutX="26.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/red-pawn.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="blackPawn" fitHeight="78.0" fitWidth="87.0" layoutX="22.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="blackPawn" fitHeight="76.0" fitWidth="95.0" layoutX="26.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../img/black-pawn.png" />
          </image>
@@ -56,37 +56,37 @@
       <ImageView fx:id="bottomShelfResource1" fitHeight="45.0" fitWidth="51.0" layoutX="65.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bottomShelfResource2" fitHeight="45.0" fitWidth="51.0" layoutX="104.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bottomShelfResource3" fitHeight="45.0" fitWidth="51.0" layoutX="142.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="vaultResourceBlue" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="65.0" layoutY="548.0" onMouseClicked="#selectBlueResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="vaultResourceBlue" accessibleRole="BUTTON" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="71.0" layoutY="550.0" onMouseClicked="#selectBlueResource" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
          <image>
             <Image url="@../img/resources/blue.png" />
          </image>
+      </ImageView>
+      <ImageView fx:id="vaultResourcePurple" accessibleRole="BUTTON" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="153.0" layoutY="552.0" onMouseClicked="#selectPurpleResource" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-      </ImageView>
-      <ImageView fx:id="vaultResourcePurple" disable="true" fitHeight="50.0" fitWidth="51.0" layoutX="151.0" layoutY="548.0" onMouseClicked="#selectPurpleResource" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/resources/purple.png" />
          </image>
+      </ImageView>
+      <ImageView fx:id="vaultResourceYellow" accessibleRole="BUTTON" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="67.0" layoutY="607.0" onMouseClicked="#selectYellowResource" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-      </ImageView>
-      <ImageView fx:id="vaultResourceYellow" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="65.0" layoutY="605.0" onMouseClicked="#selectYellowResource" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/resources/yellow.png" />
          </image>
+      </ImageView>
+      <ImageView fx:id="vaultResourceGrey" accessibleRole="BUTTON" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="152.0" layoutY="602.0" onMouseClicked="#selectGreyResource" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-      </ImageView>
-      <ImageView fx:id="vaultResourceGrey" disable="true" fitHeight="50.0" fitWidth="50.0" layoutX="151.0" layoutY="600.0" onMouseClicked="#selectGreyResource" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/resources/grey.png" />
          </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
       </ImageView>
       <Label fx:id="vaultBlueAmount" layoutX="44.0" layoutY="548.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
          <font>
