@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,11 +10,8 @@
    <children>
       <ImageView fitHeight="720.0" fitWidth="540.0" opacity="0.66" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/launcher.png" />
+            <Image url="@../img/launcher-blurred.png" />
          </image>
-         <effect>
-            <GaussianBlur />
-         </effect>
       </ImageView>
       <ImageView fx:id="winOrLose" fitHeight="218.0" fitWidth="333.0" layoutX="103.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="winnerPoints" layoutX="94.0" layoutY="292.0" prefHeight="8.0" prefWidth="371.0" text="FirstPlacePoints:" textFill="#0d0000">
@@ -40,7 +36,7 @@
       </Label>
       <ImageView fitHeight="187.0" fitWidth="297.0" layoutX="159.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/writings/Play_Again_inclinato.png" />
+            <Image url="@../img/writings/play-again.png" />
          </image>
       </ImageView>
    </children>

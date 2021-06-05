@@ -3,7 +3,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -18,11 +17,8 @@
    <children>
       <ImageView fitHeight="720.0" fitWidth="540.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/launcher.png" />
+            <Image url="@../img/launcher-blurred.png" />
          </image>
-         <effect>
-            <GaussianBlur />
-         </effect>
       </ImageView>
       <TextField fx:id="nameField" layoutX="177.0" layoutY="247.0" prefHeight="30.0" prefWidth="200.0" promptText="Name">
          <font>
@@ -45,7 +41,7 @@
          </font></TextField>
       <ImageView fx:id="startButton" accessibleRole="BUTTON" fitHeight="150.0" fitWidth="220.0" layoutX="161.0" layoutY="484.0" onMouseClicked="#connectToServer" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/writings/Start_inclinato.png" />
+            <Image url="@../img/writings/start.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />

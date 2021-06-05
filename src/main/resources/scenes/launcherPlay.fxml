@@ -15,7 +15,7 @@
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="45.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/writings/Play_Online_inclinato.png" />
+            <Image url="@../img/writings/play-online.png" />
          </image>
          <effect>
             <DropShadow />
@@ -26,7 +26,7 @@
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="286.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/writings/Play_Local_inclinato.png" />
+            <Image url="@../img/writings/play-local.png" />
          </image>
          <effect>
             <DropShadow />
