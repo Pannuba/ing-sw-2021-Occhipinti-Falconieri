@@ -99,15 +99,15 @@ public class MainViewController
 			printToConsole("It's " + gameState.getCurrPlayerName() + "'s turn!");
 			disableButtons();
 		}
-
 	}
 
-	@FXML
+	@FXML	/* TODO: add boolean isDoingDefaultProduction to disable by pressing the same button */
 	void startDefaultProduction(ActionEvent event)		/* Triggered by default production button */
 	{
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
 		mainStage.setTitle("Masters of Renaissance - Select 2 resources");
+		printToConsole("Click the 2 resources you want to convert, then the resource you want to make\n(Vault icons)");
 		vaultResourceBlue.setDisable(false);
 		vaultResourcePurple.setDisable(false);
 		vaultResourceYellow.setDisable(false);
@@ -210,8 +210,9 @@ public class MainViewController
 			popeTokenThree.setImage(null);
 	}
 
-	public void updateStorage(Storage storage)
+	public void updateStorage(Storage storage)//topres1, midres1, mirdes2, botres1, botres2, botres3
 	{
+
 		switch (storage.getShelves()[0].getShelfResourceQuantity())
 		{
 			case 0:
@@ -222,7 +223,7 @@ public class MainViewController
 				topShelfResource.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertResTypeToPath(storage.getShelves()[0].getShelfResourceType()))));
 		}
 
-		switch (storage.getShelves()[1].getShelfResource().getQuantity())
+		switch (storage.getShelves()[1].getShelfResourceQuantity())
 		{
 			case 0:
 				middleShelfResource1.setImage(null);
@@ -240,7 +241,7 @@ public class MainViewController
 				break;
 		}
 
-		switch (storage.getShelves()[2].getShelfResource().getQuantity())
+		switch (storage.getShelves()[2].getShelfResourceQuantity())
 		{
 			case 0:
 				bottomShelfResource1.setImage(null);
@@ -393,21 +394,6 @@ public class MainViewController
 		devCardArea3.setDisable(true);
 	}
 
-	public ImageView getDevCardArea1()
-	{
-		return devCardArea1;
-	}
-
-	public ImageView getDevCardArea2()
-	{
-		return devCardArea2;
-	}
-
-	public ImageView getDevCardArea3()
-	{
-		return devCardArea3;
-	}
-
 	public ImageView getDashboard()
 	{
 		return dashboard;
@@ -434,11 +420,6 @@ public class MainViewController
 	public void setDevCardToBuy(int devCardToBuy)
 	{
 		this.devCardToBuy = devCardToBuy;
-	}
-
-	public Button getDefaultProductionButton()
-	{
-		return defaultProductionButton;
 	}
 
 	public void setBuyingDevcard(boolean buyingDevcard)

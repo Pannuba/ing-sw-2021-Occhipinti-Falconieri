@@ -60,9 +60,12 @@ public class ServerListener
 					username = (String) ois.readObject();					/* Client sends username and starts NetworkHandler thread */
 					System.out.println("Username: " + username);
 
+					ClientHandler clientHandler = new ClientHandler(socket, username, ois, oos);		/* Start view thread that listens for commands from client */
+					views.add(clientHandler);
+
 					if (i == 0)		/* Get numPlayers from the first player who connects */
 					{
-						oos.writeObject(new FirstPlayerMessage(true));
+						clientHandler.send(new FirstPlayerMessage(true));
 						Object inputObj = ois.readObject();
 
 						while (inputObj instanceof Ping)		/* Ignore pings to avoid ClassCastException if client is slow */
@@ -73,8 +76,9 @@ public class ServerListener
 					}
 
 					else
-						oos.writeObject(new FirstPlayerMessage(false));
+						clientHandler.send(new FirstPlayerMessage(false));
 
+					new Thread(clientHandler).start();
 				}
 				catch (IOException | ClassNotFoundException e)
 				{
@@ -82,10 +86,6 @@ public class ServerListener
 				}
 
 				players.add(new Player(username));
-
-				ClientHandler clientHandler = new ClientHandler(socket, username, ois, oos);		/* Start view thread that listens for commands from client */
-				views.add(clientHandler);
-				new Thread(clientHandler).start();
 			}
 
 			Match m = new Match(players, views);		/* Start match, passes players and views */

@@ -258,6 +258,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		/* TODO: instance variable? */
 
+		mvc.printToConsole("Click the area where you want to put the card");
 		mainStage.setTitle("Masters of Renaissance - Select Dev Card Area");
 		mainStage.setScene(mainViewScene);
 		mainStage.sizeToScene();		/* ? */

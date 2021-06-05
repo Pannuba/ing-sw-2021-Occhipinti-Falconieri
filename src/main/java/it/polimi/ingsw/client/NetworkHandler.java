@@ -48,8 +48,8 @@ public class NetworkHandler extends Observable implements Runnable		/* Observed 
 			catch (IOException | ClassNotFoundException e)
 			{
 				System.out.println("Lost connection to server!");
-				shutdown();
 				e.printStackTrace();
+				shutdown();
 				break;
 			}
 		}

@@ -92,7 +92,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 			oos.close();
 
 			clientSocket.close();
-			Thread.currentThread().interrupt();
+			Thread.currentThread().interrupt();		/* Order of things? */
 		}
 		catch (IOException e)
 		{
@@ -101,7 +101,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 	}
 
 	@Override
-	public void update(Observable obs, Object obj)			/* Send gamestate received from model */
+	public void update(Observable obs, Object obj)			/* Send gamestate, match over and vatican report messages received from model */
 	{
 		send(obj);
 	}
