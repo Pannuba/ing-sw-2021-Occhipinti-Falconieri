@@ -268,23 +268,39 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 	public void endMatch()		/* Pass reason why the match is over from isMatchOver */
 	{
-		String winnerName = "";			/* TODO: if player are tied in score, the one with the most resources (storage, vault, leaders) wins */
+		String winnerName = "";
 		int winnerPoints = 0;
+		List<Integer> victoryPoints = new ArrayList<>();
 
 		for (int i = 0; i < numPlayers; i++)		/* Calculate victoryPoints for every player */
 		{
-			int victoryPoints = calculatePoints(players.get(i));
-			players.get(i).setVictoryPoints(victoryPoints);
+			victoryPoints.add(calculatePoints(players.get(i)));
+			players.get(i).setVictoryPoints(victoryPoints.get(i));
 
-			if (victoryPoints > winnerPoints)
+			if (victoryPoints.get(i) > winnerPoints)
 			{
-				winnerPoints = victoryPoints;
+				winnerPoints = victoryPoints.get(i);
 				winnerName = players.get(i).getUsername();
 			}
 		}
+
+		Collections.sort(victoryPoints);		/* Sort the list to make eventual equal values adjacent, and in case of multiple ties the last check is performed on the biggest one */
+
+		for (int i = 0; i < (victoryPoints.size() - 1); i++)	/* -1 to avoid NullPointerException when accessing list element 4 (3 + 1). Also skips singleplayer */
+		{
+			if (victoryPoints.get(i).equals(victoryPoints.get(i + 1)))		/* If two scores are the same, the winner is the one with the most resources */
+			{
+				if (players.get(i).getTotalResources() < players.get(i + 1).getTotalResources())
+					winnerName = players.get(i + 1).getUsername();
+
+				if (players.get(i).getTotalResources() == players.get(i + 1).getTotalResources())
+					winnerName = "";    /* Tie */
+			}
+		}
+
 		/* Send MatchOverMessage to everyone (notifyObservers) including a message of who won */
 		setChanged();
-		notifyObservers(new MatchOverMessage(winnerName, players));
+		notifyObservers(new MatchOverMessage(winnerName, players));		/* Add message for tie? */
 	}
 
 	public Player getPlayerByUsername(String username)		/* 	NullPointerException because the usernames taken in ServerListener are discarded when a new model is created in Match */

@@ -147,10 +147,13 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 	public void matchOver(String winnerName, List<Player> players)
 	{
 		if (cli.getUsername().equals(winnerName))
-			System.out.print("You win! ");
+			System.out.println("You win!");
+
+		if (winnerName.isEmpty())
+			System.out.println("Tie!");
 
 		else
-			System.out.print("Game over! The winner is " + winnerName);
+			System.out.println("You lose! The winner is " + winnerName);
 
 		for (int i = 0; i < players.size(); i++)
 			System.out.println(players.get(i).getUsername() + ": " + players.get(i).getVictoryPoints() + " points");

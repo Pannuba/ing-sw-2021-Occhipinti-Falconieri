@@ -99,7 +99,7 @@ public class Player implements Serializable
 				totalResources += ((SkillStorage) leaderCards.get(i)).getAdditionalStorage().getShelfResourceQuantity();
 		}
 
-		totalResources += dashboard.getVault().getTotalResources();		/* Points from resources */
+		totalResources += dashboard.getVault().getTotalResources();
 		totalResources += dashboard.getStorage().getTotalResources();
 
 		return totalResources;
