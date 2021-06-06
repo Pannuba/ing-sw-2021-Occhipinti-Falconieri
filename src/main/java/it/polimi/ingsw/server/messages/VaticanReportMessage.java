@@ -6,8 +6,6 @@ import it.polimi.ingsw.model.Player;
 import java.io.Serializable;
 import java.util.List;
 
-/* Send popeToken # (int) or the PopeToken itself? If int, client has to perform checks... */
-
 public class VaticanReportMessage implements Message, Serializable
 {
 	private final int popeBoxNum;

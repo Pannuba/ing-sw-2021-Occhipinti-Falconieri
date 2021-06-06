@@ -43,6 +43,8 @@ public class ServerListener
 		{
 			List<Player> players = new ArrayList<>();
 			List<ClientHandler> views = new ArrayList<>();
+			List<String> playerNames = new ArrayList<>();
+
 			String username = "";
 			int numPlayers = 1;
 
@@ -54,11 +56,23 @@ public class ServerListener
 				{
 					socket = serverSocket.accept();
 					socket.setSoTimeout(20000);
+
 					ois = new ObjectInputStream(socket.getInputStream());
 					oos = new ObjectOutputStream(socket.getOutputStream());
+
 					System.out.println("Incoming connection: " + socket);
 					username = (String) ois.readObject();					/* Client sends username and starts NetworkHandler thread */
+
 					System.out.println("Username: " + username);
+
+					if (isDuplicateUsername(playerNames, username))
+					{
+						System.out.println("Duplicate username detected: " + username);
+						i--;			/* If the username is duplicate, go back to the top of the loop without increasing i */
+						continue;
+					}
+
+					playerNames.add(username);
 
 					ClientHandler clientHandler = new ClientHandler(socket, username, ois, oos);		/* Start view thread that listens for commands from client */
 					views.add(clientHandler);
@@ -93,7 +107,18 @@ public class ServerListener
 		}
 	}
 
-	public void shutdown()
+	private boolean isDuplicateUsername(List<String> playerNames, String username)
+	{
+		for (int i = 0; i < playerNames.size(); i++)
+		{
+			if (playerNames.get(i).equals(username))		/* If the received username is already being used by someone else in this match */
+				return true;
+		}
+
+		return false;
+	}
+
+	private void shutdown()
 	{
 		try
 		{

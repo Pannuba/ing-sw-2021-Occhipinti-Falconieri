@@ -254,7 +254,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 	private void buyDevCard(int cardToBuyNum, MouseEvent event)
 	{
 		mvc.setDevCardToBuy(cardToBuyNum);
-		mvc.setBuyingDevcard(true);
+		mvc.setBuyingDevCard(true);
 
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		/* TODO: instance variable? */
 

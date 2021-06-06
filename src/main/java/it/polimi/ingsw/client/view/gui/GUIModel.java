@@ -19,6 +19,8 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 	private final String username;
 	private final Event event;
 
+	/* FIXME: create main view (and other views?) in game start to avoid NullPointerException if update() is called before a player chose the leader cards */
+
 	public GUIModel(String username, LauncherController lc, NetworkHandler networkHandler, Event event) throws IOException		/* /a/14190310 on how to pass parameters to controllers */
 	{
 		this.username = username;
