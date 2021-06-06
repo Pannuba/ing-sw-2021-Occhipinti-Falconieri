@@ -36,8 +36,8 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 			case "INITIAL_RESOURCES":
 				isTaskFailed = new InitialResourcesCommand().run(this, command, username, model);
-				GameState firstGameState = new GameState(model.getPlayers(), model.getCurrentPlayerName(), model.getTrack(), model.getMarblesMarket(), model.getDevCardsMarket());
-				view.send(firstGameState);		/* This way the clients can immediately see the picked cards and resources, and the GUI doesn't freeze! */
+				/* This way the clients can immediately see the picked cards and resources, and the GUI doesn't freeze! */
+				view.send(new GameState(model.getPlayers(), model.getCurrentPlayerName(), model.getTrack(), model.getMarblesMarket(), model.getDevCardsMarket()));
 				return;
 
 			case "ACTIVATE_LEADER":
@@ -117,7 +117,9 @@ public class Controller implements Observer			/* Observes view to get commands..
 		if (vaticanReportNum != 0)
 			model.vaticanReport(vaticanReportNum);
 
-		if (model.isMatchOver())		/* Clients perform a check. If victorypoints != 0, the match has ended */
+		model.checkMatchOver();
+
+		if (model.isMatchOver() && model.getPlayerByUsername(username).getId() == (model.getNumPlayers() - 1))		/* Run endMatch when the first player has been reached */
 			model.endMatch();
 	}
 

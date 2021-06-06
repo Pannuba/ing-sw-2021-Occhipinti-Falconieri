@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.cards.*;
 
 import it.polimi.ingsw.server.messages.DiscardedResourcesMessage;
 import it.polimi.ingsw.server.messages.MatchOverMessage;
+import it.polimi.ingsw.server.messages.OperationResultMessage;
 import it.polimi.ingsw.server.messages.VaticanReportMessage;
 import it.polimi.ingsw.util.XML_Serialization;
 
@@ -14,11 +15,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 
-/* TODO: if isMatchOver = true, set matchOver boolean to true, keep going until the first player (id 0) is reached, then send MatchOverMessage */
-
 public class Model extends Observable		/* Observed by the views to create the new gamestate */
 {
 	private final int numPlayers;
+	private boolean matchOver;
 	private Track track;
 	private final MarblesMarket marblesMarket;
 	private DevCardsMarket devCardsMarket;
@@ -38,6 +38,8 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		track = new Track(players);
 		marblesMarket = new MarblesMarket();
 		devCardsMarket = new DevCardsMarket();
+
+		matchOver = false;
 
 		if (numPlayers == 1)
 			createActionTokens();
@@ -183,18 +185,34 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		notifyObservers(new DiscardedResourcesMessage(discardedResNum, playerWhoDiscarded));
 	}
 
-	public boolean isMatchOver()
+	public void checkMatchOver()
 	{
-		for (int i = 0; i < numPlayers; i++)        /* Check for every player */
+		String message = "";
+
+		if (!matchOver)		/* If the match is not over, check. Otherwise do nothing */
 		{
-			if (track.getRedPawns().get(i) >= 24)
-				return true;
+			for (int i = 0; i < numPlayers; i++)        /* Check for every player */
+			{
+				if (track.getRedPawns().get(i) >= 24)
+				{
+					message = getPlayerByID(i).getUsername() + " has reached the end of the Faith Track!";
+					matchOver = true;
+				}
 
-			if (players.get(i).getDashboard().getTotalDevCardsNum() >= 7)
-				return true;
+				if (players.get(i).getDashboard().getTotalDevCardsNum() >= 7)
+				{
+					message = getPlayerByID(i).getUsername() + " has bought their seventh dev card!";
+					matchOver = true;
+				}
+			}
+
+			if (!message.isEmpty())		/* If an end condition has verified, send the message to everyone */
+			{
+				message += "\nThe match will end when " + getPlayerByID(numPlayers - 1).getUsername() + " finishes their turn!";
+				setChanged();
+				notifyObservers(new OperationResultMessage(message, false));	/* isFailed = false, no need to create a new message type */
+			}
 		}
-
-		return false;
 	}
 
 	public String isSinglePlayerMatchLost()		/* Returns a string if the player has lost, otherwise null */
@@ -364,6 +382,11 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	public void setPlayers(List<Player> players)
 	{
 		this.players = players;
+	}
+
+	public boolean isMatchOver()
+	{
+		return matchOver;
 	}
 
 	public List<LeaderCard> getAllLeaderCards()

@@ -36,7 +36,7 @@ public class MainViewController
 	private String username;
 	private GameState gameState;
 	private List<String> defaultProdRes;
-	private boolean isBuyingDevcard;
+	private boolean isBuyingDevCard;
 
 	private int devCardToBuy;
 
@@ -182,7 +182,6 @@ public class MainViewController
 
 	public void updateTrack(Track track, List<Player> players, int playerID)		/* Also print other players */
 	{
-		System.out.println("black pawn: " + track.getBlackPawn());
 		if (players.size() == 1)
 		{
 			blackPawn.setVisible(true);
@@ -277,8 +276,6 @@ public class MainViewController
 
 	public void updateVault(Vault vault)
 	{
-		System.out.println("vault blue amount: " + vault.getResourceAmounts().get(ResourceType.BLUE));
-
 		vaultBlueAmount.setText(vault.getResourceAmounts().get(ResourceType.BLUE).toString());
 		vaultYellowAmount.setText(vault.getResourceAmounts().get(ResourceType.YELLOW).toString());
 		vaultGreyAmount.setText(vault.getResourceAmounts().get(ResourceType.GREY).toString());
@@ -305,7 +302,7 @@ public class MainViewController
 
 	public void movePawn(ImageView pawn, int boxNumber)
 	{
-		switch (boxNumber)		/* setX vs setLayoutX? */
+		switch (boxNumber)
 		{
 			case 0:	 pawn.setLayoutX(26);	pawn.setLayoutY(128);	break;
 			case 1:  pawn.setLayoutX(75);	pawn.setLayoutY(128);	break;
@@ -356,7 +353,7 @@ public class MainViewController
 
 	void selectDevCardArea(int devCardAreaNum, MouseEvent event)
 	{
-		if (isBuyingDevcard)
+		if (isBuyingDevCard)
 			networkHandler.send(Arrays.asList("BUY_DEVCARD", String.valueOf(devCardToBuy), String.valueOf(devCardAreaNum)));
 
 		else		/* This way the server should never receive a null devcard number, also in CLI */
@@ -371,7 +368,7 @@ public class MainViewController
 			}
 		}
 
-		isBuyingDevcard = false;
+		isBuyingDevCard = false;
 
 		Platform.runLater(() -> {	/* Necessary here? Maybe only for buttons/ImageViews */
 			Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -381,22 +378,20 @@ public class MainViewController
 
 	public void enableButtons()
 	{
-		Platform.runLater(() -> {
-			defaultProductionButton.setDisable(false);
-			devCardArea1.setDisable(false);        /* For production using devcards */
-			devCardArea2.setDisable(false);
-			devCardArea3.setDisable(false);
-		});
+		defaultProductionButton.setDisable(false);
+
+		devCardArea1.setDisable(false);        /* For production using devcards */
+		devCardArea2.setDisable(false);
+		devCardArea3.setDisable(false);
 	}
 
 	public void disableButtons()
 	{
-		Platform.runLater(() -> {
-			defaultProductionButton.setDisable(true);
-			devCardArea1.setDisable(true);
-			devCardArea2.setDisable(true);
-			devCardArea3.setDisable(true);
-		});
+		defaultProductionButton.setDisable(true);
+
+		devCardArea1.setDisable(true);
+		devCardArea2.setDisable(true);
+		devCardArea3.setDisable(true);
 	}
 
 	public ImageView getDashboard()
@@ -429,8 +424,8 @@ public class MainViewController
 		this.devCardToBuy = devCardToBuy;
 	}
 
-	public void setBuyingDevcard(boolean buyingDevcard)
+	public void setBuyingDevCard(boolean buyingDevCard)
 	{
-		isBuyingDevcard = buyingDevcard;
+		isBuyingDevCard = buyingDevCard;
 	}
 }

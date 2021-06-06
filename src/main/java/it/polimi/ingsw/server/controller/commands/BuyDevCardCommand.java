@@ -28,7 +28,7 @@ public class BuyDevCardCommand implements Command		/* "BUY_DEVCARD", "card#", "d
 				requirements.get(i).setQuantity(requirements.get(i).getQuantity() - discountLeader.getDiscountNum());
 		}
 
-		if (model.getPlayerByUsername(username).getDashboard().getDevCardAreas()[devCardAreaIndex].getLayer() != cardToBuy.getLevel() - 1)
+		if (model.getPlayerByUsername(username).getDashboard().getDevCardAreas()[devCardAreaIndex].getLayer() != (cardToBuy.getLevel() - 1))
 		{
 			message = "Couldn't buy devcard: target area not compatible";
 			isFailed = true;
