@@ -104,14 +104,16 @@ public class MainViewController
 	@FXML	/* TODO: add boolean isDoingDefaultProduction to disable by pressing the same button */
 	void startDefaultProduction(ActionEvent event)		/* Triggered by default production button */
 	{
-		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		Platform.runLater(() -> {
+			Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			mainStage.setTitle("Masters of Renaissance - Select 2 resources");
+			printToConsole("Click the 2 resources you want to convert, then the resource you want to make\n(Vault icons)");
+			vaultResourceBlue.setDisable(false);
+			vaultResourcePurple.setDisable(false);
+			vaultResourceYellow.setDisable(false);
+			vaultResourceGrey.setDisable(false);
+		});
 
-		mainStage.setTitle("Masters of Renaissance - Select 2 resources");
-		printToConsole("Click the 2 resources you want to convert, then the resource you want to make\n(Vault icons)");
-		vaultResourceBlue.setDisable(false);
-		vaultResourcePurple.setDisable(false);
-		vaultResourceYellow.setDisable(false);
-		vaultResourceGrey.setDisable(false);
 		defaultProdRes = new ArrayList<>();
 	}
 
@@ -180,6 +182,7 @@ public class MainViewController
 
 	public void updateTrack(Track track, List<Player> players, int playerID)		/* Also print other players */
 	{
+		System.out.println("black pawn: " + track.getBlackPawn());
 		if (players.size() == 1)
 		{
 			blackPawn.setVisible(true);
@@ -276,12 +279,10 @@ public class MainViewController
 	{
 		System.out.println("vault blue amount: " + vault.getResourceAmounts().get(ResourceType.BLUE));
 
-		Platform.runLater(() -> {
-			vaultBlueAmount.setText(vault.getResourceAmounts().get(ResourceType.BLUE).toString());
-			vaultYellowAmount.setText(vault.getResourceAmounts().get(ResourceType.YELLOW).toString());
-			vaultGreyAmount.setText(vault.getResourceAmounts().get(ResourceType.GREY).toString());
-			vaultPurpleAmount.setText(vault.getResourceAmounts().get(ResourceType.PURPLE).toString());}
-		);
+		vaultBlueAmount.setText(vault.getResourceAmounts().get(ResourceType.BLUE).toString());
+		vaultYellowAmount.setText(vault.getResourceAmounts().get(ResourceType.YELLOW).toString());
+		vaultGreyAmount.setText(vault.getResourceAmounts().get(ResourceType.GREY).toString());
+		vaultPurpleAmount.setText(vault.getResourceAmounts().get(ResourceType.PURPLE).toString());
 	}
 
 	public void updateDevCardAreas(DevCardArea[] devCardAreas)
@@ -289,20 +290,17 @@ public class MainViewController
 		if (!devCardAreas[0].isEmpty())
 			devCardArea1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardAreas[0].getTopDevCard().getCardNumber() + ".png")));
 
-		else
-			devCardArea1.setImage(null);
+		else devCardArea1.setImage(null);
 
 		if (!devCardAreas[1].isEmpty())
 			devCardArea2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardAreas[1].getTopDevCard().getCardNumber() + ".png")));
 
-		else
-			devCardArea2.setImage(null);
+		else devCardArea2.setImage(null);
 
 		if (!devCardAreas[2].isEmpty())
 			devCardArea3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardAreas[2].getTopDevCard().getCardNumber() + ".png")));
 
-		else
-			devCardArea3.setImage(null);
+		else devCardArea3.setImage(null);
 	}
 
 	public void movePawn(ImageView pawn, int boxNumber)
@@ -413,7 +411,9 @@ public class MainViewController
 
 	public void printToConsole(String message)
 	{
-		console.setText(console.getText() + "\n" + message);
+		Platform.runLater(() -> {
+			console.setText(console.getText() + "\n" + message);
+		});
 	}
 
 	public void setup(Scene marketsScene, Scene leaderCardsScene, NetworkHandler networkHandler, String username)

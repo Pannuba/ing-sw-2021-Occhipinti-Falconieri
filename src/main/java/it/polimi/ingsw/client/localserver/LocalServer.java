@@ -24,7 +24,6 @@ public class LocalServer implements Runnable
 
 	public void run()
 	{
-
 		try
 		{
 			serverSocket = new ServerSocket(2000, 0, InetAddress.getByName(null));
@@ -57,8 +56,10 @@ public class LocalServer implements Runnable
 			username = (String) ois.readObject();
 			System.out.println("Username: " + username);
 
-			oos.writeObject(new FirstPlayerMessage(false));
-
+			ClientHandler clientHandler = new ClientHandler(socket, username, ois, oos);		/* Start view thread that listens for commands from client */
+			views.add(clientHandler);
+			clientHandler.send(new FirstPlayerMessage(false));
+			new Thread(clientHandler).start();
 		}
 		catch (IOException | ClassNotFoundException e)
 		{
@@ -66,10 +67,6 @@ public class LocalServer implements Runnable
 		}
 
 		players.add(new Player(username));
-
-		ClientHandler clientHandler = new ClientHandler(socket, username, ois, oos);		/* Start view thread that listens for commands from client */
-		views.add(clientHandler);
-		new Thread(clientHandler).start();
 
 		LocalMatch m = new LocalMatch(players, views);
 		new Thread(m).start();

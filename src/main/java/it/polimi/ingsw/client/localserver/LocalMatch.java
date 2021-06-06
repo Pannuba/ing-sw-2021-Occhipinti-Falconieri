@@ -37,8 +37,6 @@ public class LocalMatch implements Runnable
 
 		views.get(0).send(new ChooseLeadersMessage(leaderCardsLists.get(0)));
 		views.get(0).send(new InitialResourcesMessage(0));		/* Because the player list in Model is sorted by ID. players[0] has ID 0 and so on */
-
-		model.update();		/* Send the first gamestate after the setup messages. Putting this here instead of the controller makes everything work */
 	}
 
 	public void stop()		/* If I create a Match list in ServerListener and call stop() on every match on shutdown, it doesn't work */

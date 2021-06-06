@@ -10,7 +10,7 @@ import it.polimi.ingsw.server.messages.OperationResultMessage;
 
 import java.util.List;
 
-public class BuyDevCardCommand implements Command
+public class BuyDevCardCommand implements Command		/* TODO: add check if player wants to put a card in an area that's not compatible */
 {
 	@Override
 	public boolean run(Controller controller, List<String> command, String username, Model model)

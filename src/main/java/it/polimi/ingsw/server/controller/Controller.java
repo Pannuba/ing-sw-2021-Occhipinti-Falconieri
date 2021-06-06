@@ -103,14 +103,13 @@ public class Controller implements Observer			/* Observes view to get commands..
 	{
 		if (model.getNumPlayers() == 1)
 		{
+			flipActionToken();        /* Not in CommandProcessor because it's not a command sent by the client */
+
 			if (model.isSinglePlayerMatchLost() != null)		/* If the singleplayer has lost the game */
 			{
 				view.send(new SinglePlayerGameOverMessage(model.isSinglePlayerMatchLost()));
 				return;		/* Don't want to execute the other functions below if the match is over */
 			}
-
-			else
-				flipActionToken();        /* Not in CommandProcessor because it's not a command sent by the client */
 		}
 
 		int vaticanReportNum = model.getTrack().checkVaticanReport();

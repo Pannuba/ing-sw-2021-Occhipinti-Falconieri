@@ -90,14 +90,14 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 		chooseLeaderCard(leaderCard4, leaderCards.get(3).getCardNumber(), event);
 	}
 
-	private void chooseLeaderCard(ImageView cardImg, int cardNum, MouseEvent event)
+	private void chooseLeaderCard(ImageView cardImg, int cardNum, MouseEvent event)		/* TODO: player can't select more than 2 cards */
 	{
 		cardImg.setEffect(selectedEffect);
 		cardImg.setDisable(true);
 
 		chosenLeaderCards.add(String.valueOf(cardNum));
 
-		if (chosenLeaderCards.size() == 2)
+		if (chosenLeaderCards.size() == 2)	/* && hasSelectedTwoCards */
 		{
 			networkHandler.send(Arrays.asList("SELECT_LEADERCARDS", chosenLeaderCards.get(0), chosenLeaderCards.get(1)));
 			purpleResource.setDisable(false);

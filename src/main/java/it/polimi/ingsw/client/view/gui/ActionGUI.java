@@ -45,9 +45,11 @@ public class ActionGUI extends MessageExecutor
 
 	public void updateView(GameState gameState)
 	{
-		mvc.update(gameState, gui.getUsername());
-		lcc.update(gameState.getPlayerByName(gui.getUsername()).getLeaderCards(), gameState.getPlayerByName(gui.getUsername()).isMyTurn());
-		mmc.updateMarket(gameState.getCurrMarblesMarket(), gameState.getCurrDevCardsMarket(), gameState.getPlayerByName(gui.getUsername()).isMyTurn());
+		Platform.runLater(() -> {
+			mvc.update(gameState, gui.getUsername());
+			lcc.update(gameState.getPlayerByName(gui.getUsername()).getLeaderCards(), gameState.getPlayerByName(gui.getUsername()).isMyTurn());
+			mmc.updateMarket(gameState.getCurrMarblesMarket(), gameState.getCurrDevCardsMarket(), gameState.getPlayerByName(gui.getUsername()).isMyTurn());
+		});
 	}
 
 	@Override
