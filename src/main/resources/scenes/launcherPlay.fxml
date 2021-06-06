@@ -13,27 +13,27 @@
             <Image url="@../img/launcher.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="45.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="playOnline" accessibleRole="BUTTON" fitHeight="150.0" fitWidth="200.0" layoutX="45.0" layoutY="169.0" onMouseClicked="#playOnline" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/writings/play-online.png" />
          </image>
-         <effect>
-            <DropShadow />
-         </effect>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="286.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="playLocal" accessibleRole="BUTTON" fitHeight="150.0" fitWidth="200.0" layoutX="286.0" layoutY="469.0" onMouseClicked="#playLocal" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/writings/play-local.png" />
          </image>
-         <effect>
-            <DropShadow />
-         </effect>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
    </children>
 </AnchorPane>

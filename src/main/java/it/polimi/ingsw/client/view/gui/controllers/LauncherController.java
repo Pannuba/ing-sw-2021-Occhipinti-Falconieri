@@ -43,4 +43,8 @@ public class LauncherController
 	{
 		numPlayersField.setVisible(true);
 	}
+
+	public TextField getIpField() { return ipField; }
+
+	public TextField getPortField() { return portField; }
 }
