@@ -7,7 +7,7 @@ import it.polimi.ingsw.server.controller.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectLeaderCardsCommand implements Command
+public class SelectLeaderCardsCommand implements Command		/* "SELECT_LEADERCARDS", "x", "y" */
 {
 	@Override
 	public boolean run(Controller controller, List<String> command, String username, Model model)

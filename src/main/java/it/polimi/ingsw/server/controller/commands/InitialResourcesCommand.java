@@ -6,7 +6,7 @@ import it.polimi.ingsw.server.controller.Controller;
 
 import java.util.List;
 
-public class InitialResourcesCommand implements Command
+public class InitialResourcesCommand implements Command		/* "INITIAL_RESOURCES", "BY", "2" */
 {
 	@Override
 	public boolean run(Controller controller, List<String> command, String username, Model model)

@@ -28,8 +28,6 @@ public abstract class MessageExecutor
 
 	public abstract void getDiscardedResources(int discardedResNum, String playerWhoDiscarded);
 
-	public abstract void getBoughtDevCard(DevCard boughtCard);
-
 	public abstract void getOperationResultMessage(String message, boolean isFailed);
 
 	public abstract void getActionToken(ActionToken token);

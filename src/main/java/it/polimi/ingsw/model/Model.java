@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Observable;
 
 /* TODO: if isMatchOver = true, set matchOver boolean to true, keep going until the first player (id 0) is reached, then send MatchOverMessage */
-/* TODO: check number of resoures for each player if tie */
 
 public class Model extends Observable		/* Observed by the views to create the new gamestate */
 {
@@ -244,22 +243,14 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		/* Points if the player's pawn is on a POINTS box or after */
 		switch (track.getRedPawns().get(player.getId()))
 		{
-			case 0: case 1:	 case 2:															break;
-
-			case 3: case 4:  case 5:	points += track.getFaithTrack()[3].getVictoryPoints();	break;
-
-			case 6: case 7:	 case 8:	points += track.getFaithTrack()[6].getVictoryPoints();	break;
-
-			case 9: case 10: case 11:	points += track.getFaithTrack()[9].getVictoryPoints();	break;
-
+			case 0:  case 1:  case 2:															break;
+			case 3:  case 4:  case 5:	points += track.getFaithTrack()[3].getVictoryPoints();	break;
+			case 6:  case 7:  case 8:	points += track.getFaithTrack()[6].getVictoryPoints();	break;
+			case 9:  case 10: case 11:	points += track.getFaithTrack()[9].getVictoryPoints();	break;
 			case 12: case 13: case 14:	points += track.getFaithTrack()[12].getVictoryPoints();	break;
-
 			case 15: case 16: case 17:	points += track.getFaithTrack()[15].getVictoryPoints();	break;
-
 			case 18: case 19: case 20:	points += track.getFaithTrack()[18].getVictoryPoints();	break;
-
 			case 21: case 22: case 23:	points += track.getFaithTrack()[21].getVictoryPoints();	break;
-
 			default:					points += track.getFaithTrack()[24].getVictoryPoints();
 		}
 

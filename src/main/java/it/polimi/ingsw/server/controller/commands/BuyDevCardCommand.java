@@ -5,12 +5,11 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.SkillDiscount;
 import it.polimi.ingsw.server.controller.Controller;
-import it.polimi.ingsw.server.messages.BoughtDevCardMessage;
 import it.polimi.ingsw.server.messages.OperationResultMessage;
 
 import java.util.List;
 
-public class BuyDevCardCommand implements Command		/* TODO: add check if player wants to put a card in an area that's not compatible */
+public class BuyDevCardCommand implements Command		/* "BUY_DEVCARD", "card#", "devCardArea#" */
 {
 	@Override
 	public boolean run(Controller controller, List<String> command, String username, Model model)
@@ -29,22 +28,30 @@ public class BuyDevCardCommand implements Command		/* TODO: add check if player 
 				requirements.get(i).setQuantity(requirements.get(i).getQuantity() - discountLeader.getDiscountNum());
 		}
 
-		if (controller.checkResourceAmounts(model.getPlayerByUsername(username).getDashboard(), requirements))	/* If player has enough resources */
+		if (model.getPlayerByUsername(username).getDashboard().getDevCardAreas()[devCardAreaIndex].getLayer() != cardToBuy.getLevel() - 1)
 		{
-			controller.spendResources(requirements);
-
-			model.getDevCardsMarket().buyCardFromMarket(cardToBuyNum);		/* Finally buy the card and send it to the client */
-			model.getPlayerByUsername(username).getDashboard().addDevCardToArea(cardToBuy, devCardAreaIndex);	/* TODO: check if layer is compatible */
-			controller.getView().send(new BoughtDevCardMessage(cardToBuy));
-
-			message = "Card bought successfully!";
-			isFailed = false;
+			message = "Couldn't buy devcard: target area not compatible";
+			isFailed = true;
 		}
 
 		else
 		{
-			message = "Couldn't buy devcard: requirements not satisfied";
-			isFailed = true;
+			if (controller.checkResourceAmounts(model.getPlayerByUsername(username).getDashboard(), requirements))    /* If player has enough resources */
+			{
+				controller.spendResources(requirements);
+
+				model.getDevCardsMarket().buyCardFromMarket(cardToBuyNum);        /* Finally buy the card and send it to the client */
+				model.getPlayerByUsername(username).getDashboard().addDevCardToArea(cardToBuy, devCardAreaIndex);
+
+				message = "Card # " + cardToBuy.getCardNumber() + " bought successfully!";
+				isFailed = false;
+			}
+
+			else
+			{
+				message = "Couldn't buy devcard: requirements not satisfied";
+				isFailed = true;
+			}
 		}
 
 		controller.getView().send(new OperationResultMessage(message, isFailed));

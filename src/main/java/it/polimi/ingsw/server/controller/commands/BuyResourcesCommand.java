@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class BuyResourcesCommand implements Command
+public class BuyResourcesCommand implements Command		/* "BUY_RESOURCES", "ROW", "2" */
 {
 	@Override
 	public boolean run(Controller controller, List<String> command, String username, Model model)

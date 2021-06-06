@@ -107,12 +107,6 @@ public class ActionGUI extends MessageExecutor
 	}
 
 	@Override
-	public void getBoughtDevCard(DevCard boughtCard)
-	{
-		mvc.printToConsole("Received dev card #" + boughtCard.getCardNumber());
-	}
-
-	@Override
 	public void getOperationResultMessage(String message, boolean isFailed)
 	{
 		mvc.printToConsole(message);

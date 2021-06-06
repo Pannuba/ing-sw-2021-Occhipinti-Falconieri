@@ -7,7 +7,7 @@ import it.polimi.ingsw.server.messages.OperationResultMessage;
 
 import java.util.List;
 
-public class ActivateLeaderCommand implements Command
+public class ActivateLeaderCommand implements Command		/* "ACTIVATE_LEADER", "4" */
 {
 	@Override
 	public boolean run(Controller controller, List<String> command, String username, Model model)

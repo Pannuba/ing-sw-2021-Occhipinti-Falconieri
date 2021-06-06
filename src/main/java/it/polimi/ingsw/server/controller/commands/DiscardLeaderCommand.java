@@ -7,7 +7,7 @@ import it.polimi.ingsw.server.messages.OperationResultMessage;
 
 import java.util.List;
 
-public class DiscardLeaderCommand implements Command
+public class DiscardLeaderCommand implements Command		/* "DISCARD_LEADER", "13" */
 {
 	@Override
 	public boolean run(Controller controller, List<String> command, String username, Model model)

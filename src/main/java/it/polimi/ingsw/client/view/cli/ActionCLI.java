@@ -98,13 +98,6 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 	}
 
 	@Override
-	public void getBoughtDevCard(DevCard boughtCard)
-	{
-		System.out.print("Received the following devcard:\n");
-		PrintMethods.printDevCard(boughtCard);
-	}
-
-	@Override
 	public void getOperationResultMessage(String message, boolean isFailed)
 	{
 		System.out.println(message);

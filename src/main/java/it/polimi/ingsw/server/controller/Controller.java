@@ -30,25 +30,25 @@ public class Controller implements Observer			/* Observes view to get commands..
 		System.out.println("Received " + command + " from " + username);
 		switch (command.get(0))
 		{
-			case "SELECT_LEADERCARDS":							/* "SELECT_LEADERCARDS", "x", "y" */
+			case "SELECT_LEADERCARDS":
 				isTaskFailed = new SelectLeaderCardsCommand().run(this, command, username, model);
 				return;
 
-			case "INITIAL_RESOURCES":							/* "INITIAL_RESOURCES", "BY", "2" */
+			case "INITIAL_RESOURCES":
 				isTaskFailed = new InitialResourcesCommand().run(this, command, username, model);
 				GameState firstGameState = new GameState(model.getPlayers(), model.getCurrentPlayerName(), model.getTrack(), model.getMarblesMarket(), model.getDevCardsMarket());
 				view.send(firstGameState);		/* This way the clients can immediately see the picked cards and resources, and the GUI doesn't freeze! */
 				return;
 
-			case "ACTIVATE_LEADER":								/* "ACTIVATE_LEADER", "4" */
+			case "ACTIVATE_LEADER":
 				isTaskFailed = new ActivateLeaderCommand().run(this, command, username, model);
 				break;
 
-			case "DISCARD_LEADER":								/* "DISCARD_LEADER", "13" */
+			case "DISCARD_LEADER":
 				isTaskFailed = new DiscardLeaderCommand().run(this, command, username, model);
 				break;
 
-			case "BUY_DEVCARD":									/* "BUY_DEVCARD", "card#", "devCardArea#" */
+			case "BUY_DEVCARD":
 				isTaskFailed = new BuyDevCardCommand().run(this, command, username, model);
 				break;
 
@@ -56,7 +56,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 				isTaskFailed = new ActivateProductionCommand().run(this, command, username, model);
 				break;
 
-			case "BUY_RESOURCES":								/* "BUY_RESOURCES", "ROW", "2" */
+			case "BUY_RESOURCES":
 				isTaskFailed = new BuyResourcesCommand().run(this, command, username, model);
 				break;
 		}
