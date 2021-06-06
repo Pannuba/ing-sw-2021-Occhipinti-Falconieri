@@ -45,7 +45,13 @@ public class ActivateProductionCommand implements Command
 			case "DEVCARD":				/* "ACTIVATE_PRODUCTION", "DEVCARD", "5" */
 
 				DevCard devCard = model.getPlayerByUsername(username).getDashboard().getTopDevCardByNumber(Integer.parseInt(command.get(2)));
-				/* TODO: check if card is null, send OperationResultMessage */
+
+				if (devCard == null)
+				{
+					controller.getView().send(new OperationResultMessage("You don't own that dev card, or it's not on the top of your areas!", true));
+					return true;
+				}
+
 				cost = devCard.getCost();
 				producedResources = devCard.getProduct();
 

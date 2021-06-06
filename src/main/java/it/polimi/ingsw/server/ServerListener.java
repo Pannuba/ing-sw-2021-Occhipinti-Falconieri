@@ -31,13 +31,13 @@ public class ServerListener
 				shutdown(); } });
 	}
 
-	public void start()
+	public void start() throws IOException, ClassNotFoundException
 	{
 		System.out.println("Server started");
 
-		Socket socket = null;
-		ObjectInputStream ois = null;
-		ObjectOutputStream oos = null;
+		Socket socket;
+		ObjectInputStream ois;
+		ObjectOutputStream oos;
 
 		while (!serverSocket.isClosed())
 		{
@@ -52,52 +52,45 @@ public class ServerListener
 			{
 				System.out.println("Waiting for player " + (i + 1) + "...");
 
-				try
+				socket = serverSocket.accept();
+				socket.setSoTimeout(20000);
+
+				ois = new ObjectInputStream(socket.getInputStream());
+				oos = new ObjectOutputStream(socket.getOutputStream());
+
+				System.out.println("Incoming connection: " + socket);
+				username = (String) ois.readObject();					/* Client sends username and starts NetworkHandler thread */
+
+				System.out.println("Username: " + username);
+
+				if (isDuplicateUsername(playerNames, username))		/* TODO: send LoginErrorMessage? */
 				{
-					socket = serverSocket.accept();
-					socket.setSoTimeout(20000);
-
-					ois = new ObjectInputStream(socket.getInputStream());
-					oos = new ObjectOutputStream(socket.getOutputStream());
-
-					System.out.println("Incoming connection: " + socket);
-					username = (String) ois.readObject();					/* Client sends username and starts NetworkHandler thread */
-
-					System.out.println("Username: " + username);
-
-					if (isDuplicateUsername(playerNames, username))
-					{
-						System.out.println("Duplicate username detected: " + username);
-						i--;			/* If the username is duplicate, go back to the top of the loop without increasing i */
-						continue;
-					}
-
-					playerNames.add(username);
-
-					ClientHandler clientHandler = new ClientHandler(socket, username, ois, oos);		/* Start view thread that listens for commands from client */
-					views.add(clientHandler);
-
-					if (i == 0)		/* Get numPlayers from the first player who connects */
-					{
-						clientHandler.send(new FirstPlayerMessage(true));
-						Object inputObj = ois.readObject();
-
-						while (inputObj instanceof Ping)		/* Ignore pings to avoid ClassCastException if client is slow */
-							inputObj = ois.readObject();
-
-						numPlayers = Integer.parseInt((String) inputObj);        /* So the loop is repeated numPlayers times to get numPlayers players */
-						System.out.println("numPlayers: " + numPlayers);
-					}
-
-					else
-						clientHandler.send(new FirstPlayerMessage(false));
-
-					new Thread(clientHandler).start();
+					System.out.println("Duplicate username detected: " + username);
+					i--;			/* If the username is duplicate, go back to the top of the loop without increasing i */
+					continue;
 				}
-				catch (IOException | ClassNotFoundException e)
+
+				playerNames.add(username);
+
+				ClientHandler clientHandler = new ClientHandler(socket, username, ois, oos);		/* Start view thread that listens for commands from client */
+				views.add(clientHandler);
+
+				if (i == 0)		/* Get numPlayers from the first player who connects */
 				{
-					e.printStackTrace();
+					clientHandler.send(new FirstPlayerMessage(true));
+					Object inputObj = ois.readObject();
+
+					while (inputObj instanceof Ping)		/* Ignore pings to avoid ClassCastException if client is slow */
+						inputObj = ois.readObject();
+
+					numPlayers = Integer.parseInt((String) inputObj);        /* So the loop is repeated numPlayers times to get numPlayers players */
+					System.out.println("numPlayers: " + numPlayers);
 				}
+
+				else
+					clientHandler.send(new FirstPlayerMessage(false));
+
+				new Thread(clientHandler).start();
 
 				players.add(new Player(username));
 			}
