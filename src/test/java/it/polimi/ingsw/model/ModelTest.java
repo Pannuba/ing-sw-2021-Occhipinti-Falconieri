@@ -162,7 +162,7 @@ public class ModelTest {
 	}
 
 	@Test
-	public void isMatchOver1()   /* match over: track */
+	public void checkMatchOver1()   /* match over: track */
 	{
 		p1 = new Player("pippo");
 		p2 = new Player("pluto");
@@ -178,11 +178,12 @@ public class ModelTest {
 		track.setRedPawns(redPawns);
 		model = new Model(players);
 		model.setTrack(track);
+		model.checkMatchOver();
 		assertTrue("Error", model.isMatchOver());
 	}
 
 	@Test
-	public void isMatchOver2()    /*  match over: a player has 7 devCards */
+	public void checkMatchOver2()    /*  match over: a player has 7 devCards */
 	{
 		card1.setLevel(1);
 		card2.setLevel(2);
@@ -218,12 +219,13 @@ public class ModelTest {
 		track.setRedPawns(redPawns);
 		model = new Model(players);
 		model.setTrack(track);
+		model.checkMatchOver();
 		assertEquals("Error", 7, p1.getDashboard().getTotalDevCardsNum());
 		assertTrue("Error", model.isMatchOver());
 	}
 
 	@Test
-	public void isMatchOver3()   /* no match over */
+	public void checkMatchOver3()   /* no match over */
 	{
 		card1.setLevel(1);
 		card2.setLevel(2);
@@ -253,6 +255,7 @@ public class ModelTest {
 		track.setRedPawns(redPawns);
 		model = new Model(players);
 		model.setTrack(track);
+		model.checkMatchOver();
 		assertFalse("Error", model.isMatchOver());
 	}
 
