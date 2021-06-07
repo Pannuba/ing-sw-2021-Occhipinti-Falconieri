@@ -9,6 +9,11 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.GameStartController">
    <children>
+      <ImageView fitHeight="723.0" fitWidth="1283.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/background.jpg" />
+         </image>
+      </ImageView>
       <ImageView fx:id="leaderCard1" fitHeight="409.0" fitWidth="384.0" layoutX="48.0" layoutY="37.0" onMouseClicked="#selectLeaderCard1" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
