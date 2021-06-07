@@ -13,6 +13,10 @@ import it.polimi.ingsw.server.messages.OperationResultMessage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Giulio Occhipinti
+ */
+
 public class ActivateProductionCommand implements Command
 {
 	@Override

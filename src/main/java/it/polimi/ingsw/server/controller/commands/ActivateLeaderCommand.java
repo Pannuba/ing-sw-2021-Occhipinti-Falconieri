@@ -7,6 +7,10 @@ import it.polimi.ingsw.server.messages.OperationResultMessage;
 
 import java.util.List;
 
+/**
+ * @author Giulio Occhipinti
+ */
+
 public class ActivateLeaderCommand implements Command		/* "ACTIVATE_LEADER", "4" */
 {
 	@Override

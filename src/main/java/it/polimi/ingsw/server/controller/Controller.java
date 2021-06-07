@@ -12,6 +12,11 @@ import it.polimi.ingsw.server.view.ClientHandler;
 
 import java.util.*;
 
+/**
+ * Controller class
+ * @author Giulio Occhipinti
+ */
+
 public class Controller implements Observer			/* Observes view to get commands... View observes model */
 {
 	private final Model model;
@@ -25,6 +30,10 @@ public class Controller implements Observer			/* Observes view to get commands..
 		this.model = model;
 	}
 
+	/**
+	 * The main function that calls the commands
+	 * @param command the command received by the ClientHandler
+	 */
 	public void parseInput(List<String> command)		/* Gets name from ClientHandler to change that player's stuff */
 	{
 		System.out.println("Received " + command + " from " + username);
@@ -70,6 +79,10 @@ public class Controller implements Observer			/* Observes view to get commands..
 		}
 	}
 
+	/**
+	 * If the action performed by the client is successful, this method is executed.
+	 */
+
 	private void chooseNextPlayer()		/* In model? Turns alternate by player ID: 0 -> 1 -> 2 -> 3 */
 	{
 		if (model.getNumPlayers() == 1)
@@ -89,6 +102,12 @@ public class Controller implements Observer			/* Observes view to get commands..
 		System.out.println("Next player is " + model.getPlayerByID(activePlayerID).getUsername());
 	}
 
+	/**
+	 * Called whenever the player gains faith points
+	 * @param ID the player's ID, used as key to get their pawn in the Track's redPawns hashmap
+	 * @param faithPoints the number of places to move the pawn
+	 */
+
 	public void updatePlayerPosition(int ID, int faithPoints)		/* To be called when the player buys red marbles, or...? */
 	{
 		System.out.println("Updating position for " + model.getPlayerByID(ID).getUsername() + " by " + faithPoints + " faithpoint(s)");
@@ -98,6 +117,10 @@ public class Controller implements Observer			/* Observes view to get commands..
 		newRedPawns.put(ID, model.getTrack().getRedPawns().get(ID) + faithPoints);
 		model.getTrack().setRedPawns(newRedPawns);
 	}
+
+	/**
+	 * Called when the client's action is successful. Checks for vatican reports, match-ending conditions and flips the next ActionToken for singleplayer matches
+	 */
 
 	private void postRoundChecks()		/* What should be in model and controller? */
 	{
@@ -122,6 +145,13 @@ public class Controller implements Observer			/* Observes view to get commands..
 		if (model.isMatchOver() && model.getPlayerByUsername(username).getId() == (model.getNumPlayers() - 1))		/* Run endMatch when the first player has been reached */
 			model.endMatch();
 	}
+
+	/**
+	 * Checks if the player's storage, vault and SkillStorage cards (if any) have enough resources before buying a devcard or activating the production
+	 * @param player the player who is spending the resources
+	 * @param requirements the resources that have to be spent
+	 * @return true if the requirements are satisfied, false otherwise
+	 */
 
 	public boolean checkResourceAmounts(Player player, List<Resource> requirements)		/* Checks without spending anything */
 	{
@@ -150,6 +180,11 @@ public class Controller implements Observer			/* Observes view to get commands..
 		return true;
 	}
 
+	/**
+	 * Called when checkResourceAmounts returns true, this method actually removes the required resources from the player's deposits
+	 * @param resourcesToSpend the resources that need to be spent. Same as "requirements" in checkResourceAmounts
+	 */
+
 	public void spendResources(List<Resource> resourcesToSpend)		/* Only called when a player has enough resources */
 	{
 		int reqAmount = 0;
@@ -173,6 +208,10 @@ public class Controller implements Observer			/* Observes view to get commands..
 		System.out.println("spendResources: reqAmount = " + reqAmount + " (SHOULD BE ZERO)");
 	}
 
+	/**
+	 * This method is called in singleplayer matches, it gets the next action token from the Model, activates it and sends it to the Client
+	 */
+
 	private void flipActionToken()
 	{
 		ActionToken token = model.getNextActionToken();
@@ -193,5 +232,8 @@ public class Controller implements Observer			/* Observes view to get commands..
 		return view;
 	}
 
-	public void setUsername(String username) { this.username = username; }
+	public void setUsername(String username)
+	{
+		this.username = username;
+	}
 }

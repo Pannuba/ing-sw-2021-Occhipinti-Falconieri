@@ -6,6 +6,10 @@ import it.polimi.ingsw.server.controller.Controller;
 
 import java.util.List;
 
+/**
+ * @author Giulio Occhipinti
+ */
+
 public class InitialResourcesCommand implements Command		/* "INITIAL_RESOURCES", "BY", "2" */
 {
 	@Override

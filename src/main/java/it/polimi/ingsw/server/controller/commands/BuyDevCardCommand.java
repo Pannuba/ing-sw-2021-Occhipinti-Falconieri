@@ -9,6 +9,10 @@ import it.polimi.ingsw.server.messages.OperationResultMessage;
 
 import java.util.List;
 
+/**
+ * @author Giulio Occhipinti
+ */
+
 public class BuyDevCardCommand implements Command		/* "BUY_DEVCARD", "card#", "devCardArea#" */
 {
 	@Override

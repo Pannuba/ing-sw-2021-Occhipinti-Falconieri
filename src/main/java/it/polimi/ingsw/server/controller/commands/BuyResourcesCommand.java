@@ -13,6 +13,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * @author Giulio Occhipinti
+ */
+
 public class BuyResourcesCommand implements Command		/* "BUY_RESOURCES", "ROW", "2" */
 {
 	@Override

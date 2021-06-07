@@ -7,6 +7,10 @@ import it.polimi.ingsw.server.controller.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Giulio Occhipinti
+ */
+
 public class SelectLeaderCardsCommand implements Command		/* "SELECT_LEADERCARDS", "x", "y" */
 {
 	@Override

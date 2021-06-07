@@ -7,6 +7,10 @@ import it.polimi.ingsw.server.messages.OperationResultMessage;
 
 import java.util.List;
 
+/**
+ * @author Giulio Occhipinti
+ */
+
 public class DiscardLeaderCommand implements Command		/* "DISCARD_LEADER", "13" */
 {
 	@Override
