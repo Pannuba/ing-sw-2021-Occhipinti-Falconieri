@@ -13,7 +13,10 @@
             <Image url="@../img/launcher-blurred.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="winOrLose" fitHeight="218.0" fitWidth="333.0" layoutX="103.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="win" fitHeight="218.0" fitWidth="333.0" layoutX="103.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="103.0" AnchorPane.topAnchor="64.0">
+         <image>
+            <Image url="@../img/writings/win!.png" />
+         </image></ImageView>
       <Label fx:id="winnerPoints" layoutX="94.0" layoutY="292.0" prefHeight="8.0" prefWidth="371.0" text="FirstPlacePoints:" textFill="#0d0000">
          <font>
             <Font name="Times New Roman Bold Italic" size="25.0" />
@@ -34,9 +37,14 @@
             <Font name="Times New Roman Bold Italic" size="25.0" />
          </font>
       </Label>
-      <ImageView fitHeight="187.0" fitWidth="297.0" layoutX="159.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="playAgain" accessibleRole="BUTTON" fitHeight="187.0" fitWidth="297.0" layoutX="159.0" layoutY="491.0" onMouseClicked="#playAgain" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/writings/play-again.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="lose" fitHeight="183.0" fitWidth="409.0" layoutX="76.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="70.0">
+         <image>
+            <Image url="@../img/writings/lose...png" />
          </image>
       </ImageView>
    </children>
