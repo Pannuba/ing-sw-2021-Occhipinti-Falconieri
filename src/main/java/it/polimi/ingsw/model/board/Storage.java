@@ -178,6 +178,12 @@ public class Storage implements Serializable
 			}
 		}
 
+		else
+		{
+			System.out.println("addResourceSmart: discarding " + resourceToAdd);
+			excessResource = resourceToAdd;
+		}
+
 		return excessResource;
 	}
 
