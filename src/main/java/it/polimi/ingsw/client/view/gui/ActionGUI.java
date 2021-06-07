@@ -17,16 +17,16 @@ import java.util.List;
 
 public class ActionGUI extends MessageExecutor
 {
-	private final GUIModel gui;
+	private final GUI gui;
 	private final NetworkHandler networkHandler;		/* To send commands to server */
 	private final Scene gameStartScene;
-	private final LauncherController lc;
+	private final LoginController lc;
 	private final GameStartController gsc;
 	private final LeaderCardsController lcc;
 	private final MainViewController mvc;						/* To update the scenes when a new gamestate is received */
 	private final MarketsController mmc;
 
-	public ActionGUI(GUIModel gui, NetworkHandler networkHandler, Scene gameStartScene, LauncherController lc,
+	public ActionGUI(GUI gui, NetworkHandler networkHandler, Scene gameStartScene, LoginController lc,
 					 GameStartController gsc, LeaderCardsController lcc, MainViewController mvc, MarketsController mmc)
 	{
 		this.gui = gui;

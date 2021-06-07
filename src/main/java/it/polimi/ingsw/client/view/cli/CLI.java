@@ -12,8 +12,6 @@ import it.polimi.ingsw.server.messages.Message;
 
 import java.util.*;
 
-/* Abstract class View, CLI extends view? */
-
 public class CLI extends View
 {
 	private final Scanner input;

@@ -1,55 +1,60 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
-import it.polimi.ingsw.client.NetworkHandler;
-import it.polimi.ingsw.client.view.gui.GUIModel;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
 public class LauncherController
 {
-	private NetworkHandler networkHandler;
-
-	@FXML private TextField nameField;
-	@FXML private TextField ipField;
-	@FXML private TextField portField;
-	@FXML private TextField numPlayersField;
-
-	@FXML private ImageView startButton;
 
 	@FXML
-	void connectToServer(MouseEvent event) throws IOException
+	private ImageView playOnline;
+
+	@FXML
+	private ImageView playLocal;
+
+	private Scene launcherScene;
+	private LoginController lc;
+
+	@FXML
+	void playLocal(MouseEvent event) throws IOException
 	{
-		if (numPlayersField.isVisible())		/* Temporary solution, but what do? */
-		{
-			networkHandler.send(numPlayersField.getText());
-			return;
-		}
-		GUIModel gui = new GUIModel(nameField.getText(), this, event);
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-		networkHandler = new NetworkHandler(gui, ipField.getText(), Integer.parseInt(portField.getText()));
-		networkHandler.connect();
-		networkHandler.send(nameField.getText());
-
-		gui.setNetworkHandler(networkHandler);
-		gui.createScenes();
+		lc.getIpField().setVisible(false);
+		lc.getPortField().setVisible(false);
+		mainStage.setTitle("Masters of Renaissance - Local Game");
+		mainStage.setScene(launcherScene);
+		mainStage.sizeToScene();
+		mainStage.show();
 	}
 
-	public void firstPlayer()
+	@FXML
+	void playOnline(MouseEvent event) throws IOException
 	{
-		numPlayersField.setVisible(true);
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		mainStage.setTitle("Masters of Renaissance - Online Game");
+		mainStage.setScene(launcherScene);
+		mainStage.sizeToScene();
+		mainStage.show();
+
 	}
 
-	public TextField getIpField()
-	{
-		return ipField;
-	}
+	public void setup() throws IOException {
+		FXMLLoader launcherLoader = new FXMLLoader();
+		launcherLoader.setLocation(getClass().getResource("/scenes/login.fxml"));
+		Parent launcherRoot = launcherLoader.load();
+		launcherScene = new Scene(launcherRoot);
 
-	public TextField getPortField()
-	{
-		return portField;
+		lc = launcherLoader.getController();
+
 	}
 }
