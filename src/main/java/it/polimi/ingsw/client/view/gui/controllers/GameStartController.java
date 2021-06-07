@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
+import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.GUI;
 import it.polimi.ingsw.model.cards.LeaderCard;
@@ -21,7 +22,7 @@ import java.util.List;
 public class GameStartController		/* The player selects 2 leadercards first, then the resources */
 {
 	private Stage mainStage;
-	private NetworkHandler networkHandler;
+	private MessageIO messageHandler;
 	private Scene mainViewScene;
 	private MainViewController mvc;
 	private int playerID;
@@ -101,7 +102,7 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 
 		if (chosenLeaderCards.size() == 2)	/* && hasSelectedTwoCards */
 		{
-			networkHandler.send(Arrays.asList("SELECT_LEADERCARDS", chosenLeaderCards.get(0), chosenLeaderCards.get(1)));
+			messageHandler.send(Arrays.asList("SELECT_LEADERCARDS", chosenLeaderCards.get(0), chosenLeaderCards.get(1)));
 			purpleResource.setDisable(false);
 			greyResource.setDisable(false);
 			blueResource.setDisable(false);
@@ -109,7 +110,7 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 
 			if (playerID == 0)
 			{
-				networkHandler.send(Arrays.asList("INITIAL_RESOURCES", "", ""));
+				messageHandler.send(Arrays.asList("INITIAL_RESOURCES", "", ""));
 
 				mainStage.setTitle("Masters of Renaissance");
 				mainStage.setScene(mainViewScene);
@@ -142,7 +143,7 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 					break;
 			}
 
-			networkHandler.send(Arrays.asList("INITIAL_RESOURCES", chosenResources, initialFaithPoints));
+			messageHandler.send(Arrays.asList("INITIAL_RESOURCES", chosenResources, initialFaithPoints));
 
 			mainStage.setTitle("Masters of Renaissance");
 			mainStage.setScene(mainViewScene);
@@ -193,7 +194,7 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 		this.mainStage = gui.getMainStage();
 		this.mainViewScene = mainViewScene;
 		this.mvc = mvc;
-		this.networkHandler = gui.getNetworkHandler();
+		this.messageHandler = gui.getMessageHandler();
 		chosenLeaderCards = new ArrayList<>();
 		chosenResources = "";
 

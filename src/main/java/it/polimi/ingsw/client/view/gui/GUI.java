@@ -1,9 +1,15 @@
 package it.polimi.ingsw.client.view.gui;
 
+import it.polimi.ingsw.client.LocalMatchIO;
+import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
+import it.polimi.ingsw.client.localmatch.LocalMatch;
+import it.polimi.ingsw.client.localmatch.LocalModel;
+import it.polimi.ingsw.client.localmatch.controller.LocalController;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.gui.controllers.*;
 import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.server.messages.Message;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +25,7 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 	private ActionGUI action;				/* ActionGUI instance to pass it the commands received by the NetworkHandler */
 	private final String username;
 	private final LoginController lc;
-	private NetworkHandler networkHandler;
+	private MessageIO messageHandler;
 	private final Stage mainStage;
 
 	/* FIXME: create main view (and other views?) in game start to avoid NullPointerException if update() is called before a player chose the leader cards */
@@ -73,23 +79,35 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 		MarketsController mc = marketsLoader.getController();
 		MainViewController mvc = mainViewLoader.getController();
 
+		action = new ActionGUI(this, gameStartScene, endGameScene, lc, gsc, egc, lcc, mvc, mc);
+
+		if (lc.isLocalMatch())
+		{
+			Player player = new Player(username);
+			LocalModel model = new LocalModel(player, this);
+			LocalController lc = new LocalController(model, this);
+			messageHandler = new LocalMatchIO(lc);
+			LocalMatch match = new LocalMatch(model, this, lc);		/* M, V, C */
+			new Thread(match).start();
+		}
+
+		else
+			new Thread((Runnable) messageHandler).start();
+
 		gsc.setup(this, mainViewScene, mvc);		/* Only pass "this", pass mvc and mainViewScene through getters? */
 		lcc.setup(this, mainViewScene);
 		mc.setup(this, mainViewScene, mvc);
 		mvc.setup(this, marketsScene, leaderCardsScene);
-
-		action = new ActionGUI(this, gameStartScene, endGameScene, lc, gsc, egc, lcc, mvc, mc);
-		new Thread(networkHandler).start();
 	}
 
-	public NetworkHandler getNetworkHandler()
+	public MessageIO getMessageHandler()
 	{
-		return networkHandler;
+		return messageHandler;
 	}
 
-	public void setNetworkHandler(NetworkHandler networkHandler)
+	public void setMessageHandler(MessageIO messageHandler)
 	{
-		this.networkHandler = networkHandler;
+		this.messageHandler = messageHandler;
 	}
 
 	public String getUsername()

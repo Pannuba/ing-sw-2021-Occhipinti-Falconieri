@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
+import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.ConvertMethods;
 import it.polimi.ingsw.client.view.gui.GUI;
@@ -34,7 +35,7 @@ public class MainViewController
 	private Stage mainStage;
 	private Scene marketsScene;
 	private Scene leaderCardsScene;
-	private NetworkHandler networkHandler;
+	private MessageIO messageHandler;
 	private String username;
 	private GameState gameState;
 	private List<String> defaultProdRes;
@@ -151,7 +152,7 @@ public class MainViewController
 
 		if (defaultProdRes.size() == 3)
 		{
-			networkHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "DEFAULT", defaultProdRes.get(0), defaultProdRes.get(1), defaultProdRes.get(2)));
+			messageHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "DEFAULT", defaultProdRes.get(0), defaultProdRes.get(1), defaultProdRes.get(2)));
 
 			Platform.runLater(() -> {
 				vaultResourceBlue.setDisable(true);
@@ -363,7 +364,7 @@ public class MainViewController
 	void selectDevCardArea(int devCardAreaNum, MouseEvent event)
 	{
 		if (isBuyingDevCard)
-			networkHandler.send(Arrays.asList("BUY_DEVCARD", String.valueOf(devCardToBuy), String.valueOf(devCardAreaNum)));
+			messageHandler.send(Arrays.asList("BUY_DEVCARD", String.valueOf(devCardToBuy), String.valueOf(devCardAreaNum)));
 
 		else		/* This way the server should never receive a null devcard number, also in CLI */
 		{
@@ -373,7 +374,7 @@ public class MainViewController
 			else
 			{
 				int cardNum = gameState.getPlayerByName(username).getDashboard().getDevCardAreas()[devCardAreaNum - 1].getTopDevCard().getCardNumber();
-				networkHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "DEVCARD", String.valueOf(cardNum)));
+				messageHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "DEVCARD", String.valueOf(cardNum)));
 			}
 		}
 
@@ -425,7 +426,7 @@ public class MainViewController
 		this.mainStage = gui.getMainStage();
 		this.marketsScene = marketsScene;
 		this.leaderCardsScene = leaderCardsScene;
-		this.networkHandler = gui.getNetworkHandler();
+		this.messageHandler = gui.getMessageHandler();
 	}
 
 	public void setDevCardToBuy(int devCardToBuy)

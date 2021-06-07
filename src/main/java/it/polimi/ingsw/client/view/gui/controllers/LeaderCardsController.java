@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
+import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.GUI;
 import it.polimi.ingsw.model.cards.LeaderCard;
@@ -22,7 +23,7 @@ public class LeaderCardsController		/* TODO: add resources ImageViews in both le
 	private Stage mainStage;
 	private Scene mainViewScene;
 	private MainViewController mvc;
-	private NetworkHandler networkHandler;
+	private MessageIO messageHandler;
 	private List<LeaderCard> leaderCards;
 	private List<Button> buttons;
 
@@ -39,25 +40,25 @@ public class LeaderCardsController		/* TODO: add resources ImageViews in both le
 	@FXML
 	void activateLeaderCard1(ActionEvent event)
 	{
-		networkHandler.send(Arrays.asList("ACTIVATE_LEADER", String.valueOf(leaderCards.get(0).getCardNumber())));
+		messageHandler.send(Arrays.asList("ACTIVATE_LEADER", String.valueOf(leaderCards.get(0).getCardNumber())));
 	}
 
 	@FXML
 	void activateLeaderCard2(ActionEvent event)
 	{
-		networkHandler.send(Arrays.asList("ACTIVATE_LEADER", String.valueOf(leaderCards.get(1).getCardNumber())));
+		messageHandler.send(Arrays.asList("ACTIVATE_LEADER", String.valueOf(leaderCards.get(1).getCardNumber())));
 	}
 
 	@FXML
 	void discardLeaderCard1(ActionEvent event)
 	{
-		networkHandler.send(Arrays.asList("DISCARD_LEADER", String.valueOf(leaderCards.get(0).getCardNumber())));
+		messageHandler.send(Arrays.asList("DISCARD_LEADER", String.valueOf(leaderCards.get(0).getCardNumber())));
 	}
 
 	@FXML
 	void discardLeaderCard2(ActionEvent event)
 	{
-		networkHandler.send(Arrays.asList("DISCARD_LEADER", String.valueOf(leaderCards.get(0).getCardNumber())));
+		messageHandler.send(Arrays.asList("DISCARD_LEADER", String.valueOf(leaderCards.get(0).getCardNumber())));
 	}
 
 	@FXML
@@ -90,7 +91,7 @@ public class LeaderCardsController		/* TODO: add resources ImageViews in both le
 		this.mainViewScene = mainViewScene;
 		this.mainStage = gui.getMainStage();
 		//this.mvc = mvc;
-		this.networkHandler = gui.getNetworkHandler();
+		this.messageHandler = gui.getMessageHandler();
 
 		buttons = new ArrayList<>();
 		Collections.addAll(buttons, activateLeaderOneButton, activateLeaderTwoButton, discardLeaderOneButton, discardLeaderTwoButton);

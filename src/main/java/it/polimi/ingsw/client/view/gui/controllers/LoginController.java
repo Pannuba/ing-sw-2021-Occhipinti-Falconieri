@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
+import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.GUI;
 import javafx.fxml.FXML;
@@ -13,7 +14,8 @@ import java.io.IOException;
 
 public class LoginController
 {
-	private NetworkHandler networkHandler;
+	private boolean isLocalMatch;
+	private MessageIO messageHandler;
 
 	@FXML private TextField nameField;
 	@FXML private TextField ipField;
@@ -27,7 +29,7 @@ public class LoginController
 	{
 		if (numPlayersField.isVisible())		/* Temporary solution, but what do? */
 		{
-			networkHandler.send(numPlayersField.getText());		/* TODO: check if field is not empty */
+			messageHandler.send(numPlayersField.getText());		/* TODO: check if field is not empty */
 			return;
 		}
 
@@ -35,11 +37,14 @@ public class LoginController
 
 		GUI gui = new GUI(nameField.getText(), this, mainStage);
 
-		networkHandler = new NetworkHandler(gui, ipField.getText(), Integer.parseInt(portField.getText()));
-		networkHandler.connect();
-		networkHandler.send(nameField.getText());
+		if (!isLocalMatch)
+		{
+			messageHandler = new NetworkHandler(gui, ipField.getText(), Integer.parseInt(portField.getText()));
+			messageHandler.connect();
+			messageHandler.send(nameField.getText());
+		}
 
-		gui.setNetworkHandler(networkHandler);
+		gui.setMessageHandler(messageHandler);
 		gui.createScenes();
 	}
 
@@ -56,5 +61,15 @@ public class LoginController
 	public TextField getPortField()
 	{
 		return portField;
+	}
+
+	public boolean isLocalMatch()
+	{
+		return isLocalMatch;
+	}
+
+	public void setLocalMatch(boolean localMatch)
+	{
+		isLocalMatch = localMatch;
 	}
 }

@@ -28,7 +28,7 @@ public class CLI extends View
 		this.input = input;
 
 		gameStart();
-		System.out.println("CREATING ACTIONCLI");
+
 		action = new ActionCLI(this);		/* Pass CLI to ActionExecutor for the NetworkHandler and input instance, gamestate and username */
 	}
 

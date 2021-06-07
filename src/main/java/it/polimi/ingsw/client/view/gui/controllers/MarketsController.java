@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
+import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.ConvertMethods;
 import it.polimi.ingsw.client.view.gui.GUI;
@@ -27,7 +28,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 	private Stage mainStage;
 	private Scene mainViewScene;
 	private MainViewController mvc;
-	private NetworkHandler networkHandler;
+	private MessageIO messageHandler;
 
 	private DevCardsMarket currDevCardsMarket;
 	private List<ImageView> devCards;
@@ -139,43 +140,43 @@ public class MarketsController        /* Send command directly from here? Get wh
 	@FXML
 	void selectRowOne(ActionEvent event)
 	{
-		networkHandler.send(Arrays.asList("BUY_RESOURCES", "ROW", "1"));
+		messageHandler.send(Arrays.asList("BUY_RESOURCES", "ROW", "1"));
 	}
 
 	@FXML
 	void selectRowTwo(ActionEvent event)
 	{
-		networkHandler.send(Arrays.asList("BUY_RESOURCES", "ROW", "2"));
+		messageHandler.send(Arrays.asList("BUY_RESOURCES", "ROW", "2"));
 	}
 
 	@FXML
 	void selectRowThree(ActionEvent event)
 	{
-		networkHandler.send(Arrays.asList("BUY_RESOURCES", "ROW", "3"));
+		messageHandler.send(Arrays.asList("BUY_RESOURCES", "ROW", "3"));
 	}
 
 	@FXML
 	void selectColumnOne(ActionEvent event)
 	{
-		networkHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "1"));
+		messageHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "1"));
 	}
 
 	@FXML
 	void selectColumnTwo(ActionEvent event)
 	{
-		networkHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "2"));
+		messageHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "2"));
 	}
 
 	@FXML
 	void selectColumnThree(ActionEvent event)
 	{
-		networkHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "3"));
+		messageHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "3"));
 	}
 
 	@FXML
 	void selectColumnFour(ActionEvent event)
 	{
-		networkHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "4"));
+		messageHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "4"));
 	}
 
 	@FXML
@@ -269,7 +270,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 		this.mainStage = gui.getMainStage();
 		this.mainViewScene = mainViewScene;
 		this.mvc = mvc;
-		this.networkHandler = gui.getNetworkHandler();
+		this.messageHandler = gui.getMessageHandler();
 
 		devCards = new ArrayList<>();
 		marbles = new ArrayList<>();

@@ -14,22 +14,22 @@ import java.io.IOException;
 public class LauncherController
 {
 
-	@FXML
-	private ImageView playOnline;
+	@FXML private ImageView playOnline;		/* TODO: change name */
 
-	@FXML
-	private ImageView playLocal;
+	@FXML private ImageView playLocal;
 
 	private Scene launcherScene;
 	private LoginController lc;
 
 	@FXML
-	void playLocal(MouseEvent event) throws IOException
+	void playLocal(MouseEvent event)
 	{
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
 		lc.getIpField().setVisible(false);
 		lc.getPortField().setVisible(false);
+		lc.setLocalMatch(true);
+
 		mainStage.setTitle("Masters of Renaissance - Local Game");
 		mainStage.setScene(launcherScene);
 		mainStage.sizeToScene();
@@ -37,7 +37,7 @@ public class LauncherController
 	}
 
 	@FXML
-	void playOnline(MouseEvent event) throws IOException
+	void playOnline(MouseEvent event)
 	{
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
@@ -48,13 +48,13 @@ public class LauncherController
 
 	}
 
-	public void setup() throws IOException {
+	public void setup() throws IOException
+	{
 		FXMLLoader launcherLoader = new FXMLLoader();
 		launcherLoader.setLocation(getClass().getResource("/scenes/login.fxml"));
 		Parent launcherRoot = launcherLoader.load();
 		launcherScene = new Scene(launcherRoot);
 
 		lc = launcherLoader.getController();
-
 	}
 }
