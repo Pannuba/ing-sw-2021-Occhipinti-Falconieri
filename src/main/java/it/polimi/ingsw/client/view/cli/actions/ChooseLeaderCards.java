@@ -15,12 +15,26 @@ public class ChooseLeaderCards
 			PrintMethods.printLeaderCard(fourLeaderCards.get(i));
 
 		System.out.print(	"Choose leader card " + fourLeaderCards.get(0).getCardNumber() + ", " + fourLeaderCards.get(1).getCardNumber() +
-							", " + fourLeaderCards.get(2).getCardNumber() + ", " + fourLeaderCards.get(3).getCardNumber() + ": ");
+				", " + fourLeaderCards.get(2).getCardNumber() + ", " + fourLeaderCards.get(3).getCardNumber() + ": ");
 
 		String cardChoice1 = input.nextLine();
 
+		while (!cardChoice1.equals(String.valueOf(fourLeaderCards.get(0).getCardNumber())) && !cardChoice1.equals(String.valueOf(fourLeaderCards.get(1).getCardNumber())) && !cardChoice1.equals(String.valueOf(fourLeaderCards.get(2).getCardNumber())) && !cardChoice1.equals(String.valueOf(fourLeaderCards.get(3).getCardNumber())))
+		{
+			System.out.println("You entered the incorrect leaderCard");
+			System.out.print("Choose the first leader card: ");
+			cardChoice1 = input.nextLine();
+		}
+
 		System.out.print("Choose the second leader card: ");
 		String cardChoice2 = input.nextLine();
+
+		while (!cardChoice2.equals(String.valueOf(fourLeaderCards.get(0).getCardNumber())) && !cardChoice2.equals(String.valueOf(fourLeaderCards.get(1).getCardNumber())) && !cardChoice2.equals(String.valueOf(fourLeaderCards.get(2).getCardNumber())) && !cardChoice2.equals(String.valueOf(fourLeaderCards.get(3).getCardNumber())) || cardChoice1.equals(cardChoice2))
+		{
+			System.out.println("You entered the incorrect leaderCard");
+			System.out.print("Choose the second leader card: ");
+			cardChoice2 = input.nextLine();
+		}
 
 		command.add("SELECT_LEADERCARDS");
 		command.add(cardChoice1);
