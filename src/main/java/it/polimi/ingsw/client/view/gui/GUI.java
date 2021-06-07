@@ -95,9 +95,9 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 			new Thread((Runnable) messageHandler).start();
 
 		gsc.setup(this, mainViewScene, mvc);		/* Only pass "this", pass mvc and mainViewScene through getters? */
-		lcc.setup(this, mainViewScene);
+		lcc.setup(this, mainViewScene);		/* TODO: remove mainViewScene, use getter */
 		mc.setup(this, mainViewScene, mvc);
-		mvc.setup(this, marketsScene, leaderCardsScene);
+		mvc.setup(this, mainViewScene, marketsScene, leaderCardsScene);
 	}
 
 	public MessageIO getMessageHandler()

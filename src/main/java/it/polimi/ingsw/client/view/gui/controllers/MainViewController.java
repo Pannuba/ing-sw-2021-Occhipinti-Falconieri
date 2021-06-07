@@ -36,6 +36,7 @@ import java.util.List;
 public class MainViewController
 {
 	private Stage mainStage;
+	private Scene mainViewScene;
 	private Scene marketsScene;
 	private Scene leaderCardsScene;
 	private MessageIO messageHandler;
@@ -428,8 +429,8 @@ public class MainViewController
 				playerToShow = gameState.getCurrPlayers().get(i).getUsername();
 		}
 
+		obc.setup(mainViewScene, mainStage, username);
 		obc.update(gameState, playerToShow);
-		mainStage.setTitle("Masters of Renaissance - " + playerToShow + "'s Board");
 		mainStage.setScene(otherBoardsScene);
 		mainStage.sizeToScene();
 		mainStage.show();
@@ -453,10 +454,11 @@ public class MainViewController
 		});
 	}
 
-	public void setup(GUI gui, Scene marketsScene, Scene leaderCardsScene)
+	public void setup(GUI gui, Scene mainViewScene, Scene marketsScene, Scene leaderCardsScene)
 	{
 		this.username = gui.getUsername();
 		this.mainStage = gui.getMainStage();
+		this.mainViewScene = mainViewScene;
 		this.marketsScene = marketsScene;
 		this.leaderCardsScene = leaderCardsScene;
 		this.messageHandler = gui.getMessageHandler();

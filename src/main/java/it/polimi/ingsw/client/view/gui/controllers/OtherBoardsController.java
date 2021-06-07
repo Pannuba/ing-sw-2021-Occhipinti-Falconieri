@@ -8,18 +8,27 @@ import it.polimi.ingsw.model.board.DevCardArea;
 import it.polimi.ingsw.model.board.Storage;
 import it.polimi.ingsw.model.board.Track;
 import it.polimi.ingsw.model.board.Vault;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.util.List;
 
 public class OtherBoardsController
 {
+	private GameState gameState;
+	private Scene mainViewScene;
+	private Stage mainStage;
+	private String myUsername;
+	private int currentID;
+
 	@FXML private ImageView dashboard;
 
 	@FXML private TextArea console;
@@ -52,8 +61,53 @@ public class OtherBoardsController
 	@FXML private ImageView devCardArea2;
 	@FXML private ImageView devCardArea3;
 
+	@FXML private Button nextButton;
+
+	@FXML private Button backButton;
+
+	@FXML private Label usernameLabel;
+
+	@FXML
+	void backToBoard(ActionEvent event)
+	{
+		mainStage.setTitle("Masters of Renaissance");
+		mainStage.setScene(mainViewScene);
+		mainStage.show();
+	}
+
+	@FXML
+	void showNextBoard(ActionEvent event)
+	{
+		String nextUsername = null;
+		int nextID;
+
+		do
+		{
+			if (currentID == 3)
+				nextID = 0;
+
+			else
+				nextID = currentID + 1;
+
+		} while (!gameState.getCurrPlayers().get(nextID).getUsername().equals(myUsername));
+
+		for (int i = 0; i < gameState.getCurrPlayers().size(); i++)
+		{
+			if (gameState.getCurrPlayers().get(i).getId() == nextID)
+				nextUsername = gameState.getCurrPlayers().get(i).getUsername();
+		}
+
+		update(gameState, nextUsername);
+	}
+
 	public void update(GameState gameState, String username)
 	{
+		this.gameState = gameState;
+		currentID = gameState.getPlayerByName(username).getId();
+
+		mainStage.setTitle("Masters of Renaissance - " + username + "'s Board");
+		usernameLabel.setText(username + "'s Board");
+
 		updateStorage(gameState.getPlayerByName(username).getDashboard().getStorage());
 		updateVault(gameState.getPlayerByName(username).getDashboard().getVault());
 		updateTrack(gameState.getCurrTrack(), gameState.getCurrPlayers(), gameState.getPlayerByName(username).getId());
@@ -199,5 +253,12 @@ public class OtherBoardsController
 			case 24:
 			default: pawn.setLayoutX(914);	pawn.setLayoutY(15);	break;
 		}
+	}
+
+	public void setup(Scene mainViewScene, Stage mainStage, String myUsername)
+	{
+		this.mainViewScene = mainViewScene;
+		this.mainStage = mainStage;
+		this.myUsername = myUsername;
 	}
 }

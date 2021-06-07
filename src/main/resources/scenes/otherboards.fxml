@@ -112,9 +112,9 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <Button layoutX="1033.0" layoutY="176.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="102.0" text="Next" />
-      <Button layoutX="1145.0" layoutY="198.0" mnemonicParsing="false" text="Back to Board" />
-      <Label layoutX="1018.0" layoutY="22.0" prefHeight="59.0" prefWidth="260.0" text="Username's board" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Button fx:id="nextButton" layoutX="1033.0" layoutY="176.0" mnemonicParsing="false" onAction="#showNextBoard" prefHeight="45.0" prefWidth="102.0" text="Next" />
+      <Button fx:id="backButton" layoutX="1145.0" layoutY="198.0" mnemonicParsing="false" onAction="#backToBoard" text="Back to Board" />
+      <Label fx:id="usernameLabel" layoutX="1018.0" layoutY="22.0" prefHeight="59.0" prefWidth="260.0" text="Username's board" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold Italic" size="21.0" />
          </font>
