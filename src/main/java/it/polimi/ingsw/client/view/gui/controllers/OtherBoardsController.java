@@ -1,9 +1,6 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
-import it.polimi.ingsw.client.MessageIO;
-import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.ConvertMethods;
-import it.polimi.ingsw.client.view.gui.GUI;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.ResourceType;
@@ -11,60 +8,32 @@ import it.polimi.ingsw.model.board.DevCardArea;
 import it.polimi.ingsw.model.board.Storage;
 import it.polimi.ingsw.model.board.Track;
 import it.polimi.ingsw.model.board.Vault;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-/* Empty images that are updated with image.setImage("...") each gamestate update */
-
-public class MainViewController
+public class OtherBoardsController
 {
-	private Stage mainStage;
-	private Scene marketsScene;
-	private Scene leaderCardsScene;
-	private MessageIO messageHandler;
-	private String username;
-	private GameState gameState;
-	private List<String> defaultProdRes;
-	private boolean isBuyingDevCard;
-
-	private int devCardToBuy;
-
 	@FXML private ImageView dashboard;
-
-	@FXML private Button marketsButton;
-	@FXML private Button leaderCardsButton;
 
 	@FXML private TextArea console;
 
 	@FXML private ImageView redPawn;
-	@FXML private ImageView blackPawn;
-
-	@FXML private ImageView popeTokenOne;			/* Rename to 1, 2, 3 */
-	@FXML private ImageView popeTokenTwo;
-	@FXML private ImageView popeTokenThree;
 
 	@FXML private ImageView topShelfResource;
 
+	@FXML private ImageView popeTokenOne;
+	@FXML private ImageView popeTokenTwo;
+	@FXML private ImageView popeTokenThree;
+
 	@FXML private ImageView middleShelfResource1;
 	@FXML private ImageView middleShelfResource2;
-
 	@FXML private ImageView bottomShelfResource1;
 	@FXML private ImageView bottomShelfResource2;
 	@FXML private ImageView bottomShelfResource3;
@@ -83,126 +52,16 @@ public class MainViewController
 	@FXML private ImageView devCardArea2;
 	@FXML private ImageView devCardArea3;
 
-	@FXML private ImageView actionTokenFront;
-	@FXML private ImageView actionTokenBack;
-
-	@FXML private Button defaultProductionButton;
-
-	@FXML private Button otherPlayersButton;
-
 	public void update(GameState gameState, String username)
 	{
-		this.gameState = gameState;
-
-		if (gameState.getCurrPlayers().size() == 1)
-			otherPlayersButton.setVisible(false);
-
 		updateStorage(gameState.getPlayerByName(username).getDashboard().getStorage());
 		updateVault(gameState.getPlayerByName(username).getDashboard().getVault());
 		updateTrack(gameState.getCurrTrack(), gameState.getCurrPlayers(), gameState.getPlayerByName(username).getId());
 		updateDevCardAreas(gameState.getPlayerByName(username).getDashboard().getDevCardAreas());
-
-		if (gameState.getPlayerByName(username).isMyTurn())
-		{
-			printToConsole("It's your turn! ");
-			enableButtons();
-		}
-
-		else
-		{
-			printToConsole("It's " + gameState.getCurrPlayerName() + "'s turn!");
-			disableButtons();
-		}
-	}
-
-	@FXML	/* TODO: add boolean isDoingDefaultProduction to disable by pressing the same button */
-	void startDefaultProduction(ActionEvent event)		/* Triggered by default production button */
-	{
-		Platform.runLater(() -> {
-			mainStage.setTitle("Masters of Renaissance - Select 2 resources");
-			printToConsole("Click the 2 resources you want to convert, then the resource you want to make\n(Vault icons)");
-			vaultResourceBlue.setDisable(false);
-			vaultResourcePurple.setDisable(false);
-			vaultResourceYellow.setDisable(false);
-			vaultResourceGrey.setDisable(false);
-		});
-
-		defaultProdRes = new ArrayList<>();
-	}
-
-	@FXML
-	void selectBlueResource(MouseEvent event)
-	{
-		defaultProduction("B");
-	}
-
-	@FXML
-	void selectPurpleResource(MouseEvent event)
-	{
-		defaultProduction("P");
-	}
-
-	@FXML
-	void selectYellowResource(MouseEvent event)
-	{
-		defaultProduction("Y");
-	}
-
-	@FXML
-	void selectGreyResource(MouseEvent event)
-	{
-		defaultProduction("G");
-	}
-
-	private void defaultProduction(String resourceToAdd)
-	{
-		defaultProdRes.add(resourceToAdd);
-
-		if (defaultProdRes.size() == 3)
-		{
-			messageHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "DEFAULT", defaultProdRes.get(0), defaultProdRes.get(1), defaultProdRes.get(2)));
-
-			Platform.runLater(() -> {
-				vaultResourceBlue.setDisable(true);
-				vaultResourcePurple.setDisable(true);
-				vaultResourceYellow.setDisable(true);
-				vaultResourceGrey.setDisable(true);
-			});
-		}
-	}
-
-	@FXML
-	void showLeaderCards(ActionEvent event)
-	{
-		mainStage.setTitle("Masters of Renaissance - Leader Cards");
-		mainStage.setScene(leaderCardsScene);
-		mainStage.sizeToScene();
-		mainStage.show();
-	}
-
-	@FXML
-	void showMarkets(ActionEvent event)
-	{
-		mainStage.setTitle("Masters of Renaissance - Markets");
-		mainStage.setScene(marketsScene);
-		mainStage.sizeToScene();		/* ? */
-		mainStage.show();
 	}
 
 	public void updateTrack(Track track, List<Player> players, int playerID)		/* Also print other players */
 	{
-		if (players.size() == 1)
-		{
-			blackPawn.setVisible(true);
-			movePawn(blackPawn, track.getBlackPawn());
-		}
-
-		for (int i = 0; i < players.size(); i++)
-		{
-			if (!players.get(i).getUsername().equals(username))
-				printToConsole(players.get(i).getUsername() + " is at position " + track.getRedPawns().get(i) + "/24");
-		}
-
 		movePawn(redPawn, track.getRedPawns().get(playerID));
 
 		if (players.get(playerID).getPopeTokens()[0].isActive())		/* Put popeTokens ImageView in a list and update them with a for loop? */
@@ -309,15 +168,6 @@ public class MainViewController
 		else devCardArea3.setImage(null);
 	}
 
-	public void updateActionToken(List<Player> players)
-	{
-		if (players.size() == 1)
-		{
-			actionTokenFront.setVisible(true);
-			actionTokenBack.setVisible(true);
-		}
-	}
-
 	public void movePawn(ImageView pawn, int boxNumber)
 	{
 		switch (boxNumber)
@@ -349,126 +199,5 @@ public class MainViewController
 			case 24:
 			default: pawn.setLayoutX(914);	pawn.setLayoutY(15);	break;
 		}
-	}
-
-	@FXML
-	void selectDevCardArea1(MouseEvent event)
-	{
-		selectDevCardArea(1, event);
-	}
-
-	@FXML
-	void selectDevCardArea2(MouseEvent event)
-	{
-		selectDevCardArea(2, event);
-	}
-
-	@FXML
-	void selectDevCardArea3(MouseEvent event)
-	{
-		selectDevCardArea(3, event);
-	}
-
-	void selectDevCardArea(int devCardAreaNum, MouseEvent event)
-	{
-		if (isBuyingDevCard)
-			messageHandler.send(Arrays.asList("BUY_DEVCARD", String.valueOf(devCardToBuy), String.valueOf(devCardAreaNum)));
-
-		else		/* This way the server should never receive a null devcard number, also in CLI */
-		{
-			if (gameState.getPlayerByName(username).getDashboard().getDevCardAreas()[devCardAreaNum - 1].isEmpty())
-				printToConsole("You don't have any dev cards in this area!");
-
-			else
-			{
-				int cardNum = gameState.getPlayerByName(username).getDashboard().getDevCardAreas()[devCardAreaNum - 1].getTopDevCard().getCardNumber();
-				messageHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "DEVCARD", String.valueOf(cardNum)));
-			}
-		}
-
-		isBuyingDevCard = false;
-
-		Platform.runLater(() -> {	/* Necessary here? Maybe only for buttons/ImageViews */
-			mainStage.setTitle("Masters of Renaissance");
-		});
-	}
-
-	public void enableButtons()
-	{
-		defaultProductionButton.setDisable(false);
-
-		devCardArea1.setDisable(false);        /* For production using devcards */
-		devCardArea2.setDisable(false);
-		devCardArea3.setDisable(false);
-	}
-
-	public void disableButtons()
-	{
-		defaultProductionButton.setDisable(true);
-
-		devCardArea1.setDisable(true);
-		devCardArea2.setDisable(true);
-		devCardArea3.setDisable(true);
-	}
-
-	@FXML
-	void showOtherPlayers(ActionEvent event) throws IOException
-	{
-		FXMLLoader otherBoardsLoader = new FXMLLoader();
-		otherBoardsLoader.setLocation(getClass().getResource("/scenes/otherboards.fxml"));
-		Parent otherBoardsRoot = otherBoardsLoader.load();
-		Scene otherBoardsScene = new Scene(otherBoardsRoot);
-		OtherBoardsController obc = otherBoardsLoader.getController();
-
-		String playerToShow = null;
-
-		for (int i = 0; i < gameState.getCurrPlayers().size(); i++)
-		{
-			if (!gameState.getCurrPlayers().get(i).getUsername().equals(username))		/* If it's not my username */
-				playerToShow = gameState.getCurrPlayers().get(i).getUsername();
-		}
-
-		obc.update(gameState, playerToShow);
-		mainStage.setTitle("Masters of Renaissance - " + playerToShow + "'s Board");
-		mainStage.setScene(otherBoardsScene);
-		mainStage.sizeToScene();
-		mainStage.show();
-	}
-
-
-	public ImageView getDashboard()
-	{
-		return dashboard;
-	}
-
-	public TextArea getConsole()
-	{
-		return console;
-	}
-
-	public void printToConsole(String message)
-	{
-		Platform.runLater(() -> {
-			console.setText(console.getText() + "\n" + message);
-		});
-	}
-
-	public void setup(GUI gui, Scene marketsScene, Scene leaderCardsScene)
-	{
-		this.username = gui.getUsername();
-		this.mainStage = gui.getMainStage();
-		this.marketsScene = marketsScene;
-		this.leaderCardsScene = leaderCardsScene;
-		this.messageHandler = gui.getMessageHandler();
-	}
-
-	public void setDevCardToBuy(int devCardToBuy)
-	{
-		this.devCardToBuy = devCardToBuy;
-	}
-
-	public void setBuyingDevCard(boolean buyingDevCard)
-	{
-		isBuyingDevCard = buyingDevCard;
 	}
 }
