@@ -61,7 +61,13 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 		Parent leaderCardsRoot = leaderCardsLoader.load();
 		Scene leaderCardsScene = new Scene(leaderCardsRoot);
 
+		FXMLLoader endGameLoader = new FXMLLoader();
+		endGameLoader.setLocation(getClass().getResource("/scenes/endgame.fxml"));
+		Parent endGameRoot = endGameLoader.load();
+		Scene endGameScene = new Scene(endGameRoot);
+
 		GameStartController gsc = gameStartLoader.getController();
+		EndGameController egc = endGameLoader.getController();
 		LeaderCardsController lcc = leaderCardsLoader.getController();
 		MarketsController mc = marketsLoader.getController();
 		MainViewController mvc = mainViewLoader.getController();
@@ -71,7 +77,7 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 		mc.setup(this, mainViewScene, mvc);
 		mvc.setup(this, marketsScene, leaderCardsScene);
 
-		action = new ActionGUI(this, gameStartScene, lc, gsc, lcc, mvc, mc);
+		action = new ActionGUI(this, gameStartScene, endGameScene, lc, gsc, egc, lcc, mvc, mc);
 		new Thread(networkHandler).start();
 	}
 

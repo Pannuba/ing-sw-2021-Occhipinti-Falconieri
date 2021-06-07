@@ -113,6 +113,7 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 
 				mainStage.setTitle("Masters of Renaissance");
 				mainStage.setScene(mainViewScene);
+				mainStage.centerOnScreen();
 				mainStage.show();
 			}
 		}
@@ -145,6 +146,7 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 
 			mainStage.setTitle("Masters of Renaissance");
 			mainStage.setScene(mainViewScene);
+			mainStage.centerOnScreen();
 			mainStage.show();
 		}
 	}

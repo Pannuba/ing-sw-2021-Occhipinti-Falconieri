@@ -22,23 +22,25 @@ public class ActionGUI extends MessageExecutor
 {
 	private final GUI gui;
 	private final Stage mainStage;
-	private final NetworkHandler networkHandler;		/* To send commands to server */
 	private final Scene gameStartScene;
+	private final Scene endGameScene;
 	private final LoginController lc;
 	private final GameStartController gsc;
+	private final EndGameController egc;
 	private final LeaderCardsController lcc;
 	private final MainViewController mvc;						/* To update the scenes when a new gamestate is received */
 	private final MarketsController mmc;
 
-	public ActionGUI(GUI gui, Scene gameStartScene, LoginController lc,
-					 GameStartController gsc, LeaderCardsController lcc, MainViewController mvc, MarketsController mmc)
+	public ActionGUI(GUI gui, Scene gameStartScene, Scene endGameScene, LoginController lc,
+					 GameStartController gsc, EndGameController egc, LeaderCardsController lcc, MainViewController mvc, MarketsController mmc)
 	{
 		this.gui = gui;
 		mainStage = gui.getMainStage();
-		this.networkHandler = gui.getNetworkHandler();
 		this.gameStartScene = gameStartScene;
+		this.endGameScene = endGameScene;
 		this.lc = lc;
 		this.gsc = gsc;
+		this.egc = egc;
 		this.lcc = lcc;
 		this.mvc = mvc;		/* Pack all loaders in a hashmap? */
 		this.mmc = mmc;
@@ -61,7 +63,7 @@ public class ActionGUI extends MessageExecutor
 	}
 
 	@Override
-	public void startMatch()		/* TODO: create scene here, remove gameStartScene from constructor */
+	public void startMatch()
 	{
 		Platform.runLater(() ->
 		{
@@ -123,21 +125,6 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void matchOver(String winnerName, List<Player> players)
 	{
-		FXMLLoader endGameLoader = new FXMLLoader();
-		endGameLoader.setLocation(getClass().getResource("/scenes/endgame.fxml"));
-		Parent endGameRoot = null;
-
-		try
-		{
-			endGameRoot = endGameLoader.load();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
-		Scene endGameScene = new Scene(endGameRoot);
-
 		Platform.runLater(() -> {
 			mainStage.setTitle("Masters of Renaissance - Game Over");
 			mainStage.setScene(endGameScene);
@@ -149,25 +136,13 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void singlePlayerGameOver(String message)
 	{
-		FXMLLoader endGameLoader = new FXMLLoader();
-		endGameLoader.setLocation(getClass().getResource("/scenes/endgame.fxml"));
-		Parent endGameRoot = null;
-
-		try
-		{
-			endGameRoot = endGameLoader.load();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
-		Scene endGameScene = new Scene(endGameRoot);
+		//egc.set message.....
 
 		Platform.runLater(() -> {
 			mainStage.setTitle("Masters of Renaissance - Game Over");
 			mainStage.setScene(endGameScene);
 			mainStage.sizeToScene();
+			mainStage.centerOnScreen();
 			mainStage.show();
 		});
 	}
