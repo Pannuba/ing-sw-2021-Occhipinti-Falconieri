@@ -5,13 +5,26 @@ import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.cli.CLI;
 import it.polimi.ingsw.client.view.cli.PrintMethods;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class BuyDevCard
 {
-	public BuyDevCard(Scanner input, List<String> command, MessageIO messageHandler, CLI cli)
+	private Scanner input;
+	private CLI cli;
+
+	public BuyDevCard(Scanner input, CLI cli)
 	{
+		this.input = input;
+		this.cli = cli;
+	/*	Check for resources. Here or server? SERVER		LocalModel class? NO
+		If client-side check, send new vault, storage and devcard market. If server-side check, send messages. I think server side is better. YES */
+	}
+
+	public List<String> run()
+	{
+		List<String> command = new ArrayList<>();
 		int devCardAreaIndex, targetAreaLayer;
 		String choice, cardToBuyNum;
 
@@ -23,7 +36,7 @@ public class BuyDevCard
 		if (!choice.equals("1") && !choice.equals("2") && !choice.equals("3"))
 		{
 			cli.chooseAction();
-			return;
+			return null;
 		}
 
 		devCardAreaIndex = Integer.parseInt(choice);											/* - 1 because arrays are zero-indexed */
@@ -45,10 +58,6 @@ public class BuyDevCard
 		command.add("BUY_DEVCARD");
 		command.add(cardToBuyNum);
 		command.add(Integer.toString(devCardAreaIndex));
-		messageHandler.send(command);
-		command.clear();
-
-	/*	Check for resources. Here or server? SERVER		LocalModel class? NO
-		If client-side check, send new vault, storage and devcard market. If server-side check, send messages. I think server side is better. YES */
+		return command;		/* TODO: use Arrays.asList or whatever */
 	}
 }

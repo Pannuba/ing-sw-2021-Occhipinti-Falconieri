@@ -14,8 +14,9 @@ import java.util.Scanner;
 
 public class LeaderChoice
 {
-	public LeaderChoice(Scanner input, List<String> command, MessageIO messageHandler, CLI cli)
+	public LeaderChoice(Scanner input, MessageIO messageHandler, CLI cli)
 	{
+		List<String> command = new ArrayList<>();
 		List<LeaderCard> leaderCards = cli.getGameState().getPlayerByName(cli.getUsername()).getLeaderCards();
 		List<LeaderCard> canBeActivated = new ArrayList<>();
 		List<LeaderCard> canBeDiscarded = new ArrayList<>();
@@ -82,7 +83,7 @@ public class LeaderChoice
 			System.out.print("Activate or discard another leader? (Y/N) ");
 
 			if (input.nextLine().equalsIgnoreCase("Y"))
-				new LeaderChoice(input, command, messageHandler, cli);
+				new LeaderChoice(input, messageHandler, cli);
 		}
 	}
 }

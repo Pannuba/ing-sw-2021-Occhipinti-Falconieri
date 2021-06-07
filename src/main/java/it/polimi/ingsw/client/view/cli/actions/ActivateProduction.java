@@ -13,8 +13,18 @@ import java.util.Scanner;
 
 public class ActivateProduction
 {
-	public ActivateProduction(Scanner input, List<String> command, MessageIO messageHandler, CLI cli)
+	private final Scanner input;
+	private final CLI cli;
+
+	public ActivateProduction(Scanner input, CLI cli)
 	{
+		this.input = input;
+		this.cli = cli;
+	}
+
+	public List<String> run()
+	{
+		List<String> command = new ArrayList<>();
 		System.out.println("This is your current storage and vault:");
 		PrintMethods.printStorage(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getStorage());
 		PrintMethods.printVault(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getVault());
@@ -69,7 +79,7 @@ public class ActivateProduction
 				{
 					System.out.println("You don't have any active leaders that have a production skill!");
 					cli.chooseAction();
-					return;
+					return null;
 				}
 
 				else
@@ -93,10 +103,9 @@ public class ActivateProduction
 
 			default:
 				cli.chooseAction();
-				return;
+				return null;
 		}
 
-		messageHandler.send(command);
-		command.clear();
+		return command;
 	}
 }

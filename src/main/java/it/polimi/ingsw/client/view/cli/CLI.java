@@ -70,18 +70,18 @@ public class CLI extends View
 		switch (choice)
 		{
 			case "0":
-				new LeaderChoice(input, command, messageHandler, this);
-				new BuyResources(input, command, messageHandler, this);
+				new LeaderChoice(input, messageHandler, this);		/* Pass the messageHandler in case the user wants to activate/discard twice */
+				command = new BuyResources(input, this).run();
 				break;
 
 			case "1":
-				new LeaderChoice(input, command, messageHandler, this);
-				new BuyDevCard(input, command, messageHandler, this);
+				new LeaderChoice(input, messageHandler, this);
+				command = new BuyDevCard(input, this).run();
 				break;
 
 			case "2":
-				new LeaderChoice(input, command, messageHandler, this);
-				new ActivateProduction(input, command, messageHandler, this);
+				new LeaderChoice(input, messageHandler, this);
+				command = new ActivateProduction(input, this).run();
 				break;
 
 			case "3":
@@ -107,6 +107,9 @@ public class CLI extends View
 
 		if (choice.equals("3") || choice.equals("4") || choice.equals("5"))			/* Player can choose again after viewing things */
 			chooseAction();
+
+		else if (command != null)
+			messageHandler.send(command);
 	}
 
 	@Override

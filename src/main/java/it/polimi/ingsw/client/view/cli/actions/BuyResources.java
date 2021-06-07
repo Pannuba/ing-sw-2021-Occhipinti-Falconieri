@@ -6,13 +6,24 @@ import it.polimi.ingsw.client.view.cli.CLI;
 import it.polimi.ingsw.client.view.cli.PrintMethods;
 import it.polimi.ingsw.model.cards.SkillMarble;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class BuyResources		/* TODO: Action interface */
 {
-	public BuyResources(Scanner input, List<String> command, MessageIO messageHandler, CLI cli)
+	private Scanner input;
+	private CLI cli;
+
+	public BuyResources(Scanner input, CLI cli)
 	{
+		this.input = input;
+		this.cli = cli;
+	}
+
+	public List<String> run()
+	{
+		List<String> command = new ArrayList<>();
 		String rowOrCol, rowOrColNum, whiteMarbleRes = "", choice;
 
 		System.out.print("This is the current marbles market:\n\n");
@@ -37,7 +48,7 @@ public class BuyResources		/* TODO: Action interface */
 
 			default:
 				cli.chooseAction();
-				return;		/* Without return it still sends a command after the recursion(?) which leads to chaos */
+				return null;		/* Without return it still sends a command after the recursion(?) which leads to chaos */
 		}
 
 		List<SkillMarble> marbleLeaders = cli.getGameState().getPlayerByName(cli.getUsername()).getMarbleLeaders();
@@ -52,7 +63,6 @@ public class BuyResources		/* TODO: Action interface */
 		command.add(rowOrCol);
 		command.add(rowOrColNum);
 		command.add(whiteMarbleRes);
-		messageHandler.send(command);
-		command.clear();
+		return command;
 	}
 }
