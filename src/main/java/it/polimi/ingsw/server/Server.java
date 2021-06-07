@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 
+/**
+ * Main server class, creates the server's socket and starts a ServerListener thread
+ * @author Giulio Occhipinti
+ */
+
 public class Server
 {
 

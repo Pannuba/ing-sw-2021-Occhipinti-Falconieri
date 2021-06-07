@@ -5,6 +5,10 @@ import it.polimi.ingsw.model.cards.ActionToken;
 
 import java.io.Serializable;
 
+/**
+ * @author Giulio Occhipinti
+ */
+
 public class ActionTokenMessage implements Message, Serializable
 {
 	private final ActionToken token;

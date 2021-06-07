@@ -4,6 +4,10 @@ import it.polimi.ingsw.client.view.MessageExecutor;
 
 import java.io.Serializable;
 
+/**
+ * @author Giulio Occhipinti
+ */
+
 public class FirstPlayerMessage implements Message, Serializable
 {
 	private final boolean isFirstPlayer;

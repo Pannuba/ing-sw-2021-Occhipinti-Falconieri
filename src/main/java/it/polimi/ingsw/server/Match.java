@@ -11,11 +11,22 @@ import it.polimi.ingsw.server.view.ClientHandler;
 
 import java.util.List;
 
+/**
+ * Match thread created by the ServerListener
+ * @author Giulio Occhipinti
+ */
+
 public class Match implements Runnable
 {
 	private final int numPlayers;
 	private final List<ClientHandler> views;
 	private final Model model;
+
+	/**
+	 * Constructor. Creates the match's Model and Controller
+	 * @param players the list of players created in ServerListener, used to initialize the Model
+	 * @param views ClientHandler list created in ServerListener, they observe the model to get GameStates and messages, and are observed by the controller to get the clients' commands
+	 */
 
 	public Match(List<Player> players, List<ClientHandler> views)
 	{
@@ -31,6 +42,10 @@ public class Match implements Runnable
 			model.addObserver(views.get(i));			/* Views observe the model to send the client the new gamestate */
 		}
 	}
+
+	/**
+	 * Thread started in the ServerListener, sends the initial messages (MatchStart, ChooseLeaders, InitialResources) to the views
+	 */
 
 	public void run()		/* Create model and controller, send "start match" message and then start the match */
 	{

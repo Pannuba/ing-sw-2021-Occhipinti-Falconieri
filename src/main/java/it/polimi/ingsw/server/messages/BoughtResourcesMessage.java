@@ -6,6 +6,10 @@ import it.polimi.ingsw.model.Resource;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author Giulio Occhipinti
+ */
+
 public class BoughtResourcesMessage implements Message, Serializable
 {
 	private final List<Resource> boughtResources;

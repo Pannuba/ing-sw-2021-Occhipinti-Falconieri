@@ -11,10 +11,10 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-/*	When a new clients connects to the server it sends the username and then either NEW_GAME or JOIN_GAME.
-	After that, another thread is created for each socket, waiting for messages coming from that user.
-*/
-
+/**
+ * Listens for incoming connections through the serverSocket and creates a new Match with (0 < n < 5) players
+ * @author Giulio Occhipinti
+ */
 
 public class ServerListener
 {
@@ -30,6 +30,13 @@ public class ServerListener
 			public void run() {		/* Runs when the program receives an interrupt signal like CTRL+C */
 				shutdown(); } });
 	}
+
+	/**
+	 * Creates a list of n ClientHandlers (n = the number of players sent by the first client) and passes it to a newly created Match
+	 * After creating a match it starts listening for another first player and creates a new Match thread, and so on
+	 * @throws IOException if the I/O operation on the server and client sockets fail
+	 * @throws ClassNotFoundException if the class of a serialized object cannot be found
+	 */
 
 	public void start() throws IOException, ClassNotFoundException
 	{
@@ -99,6 +106,13 @@ public class ServerListener
 			new Thread(m).start();
 		}
 	}
+
+	/**
+	 * Checks if the newly connected client has sent a username already picked by a client which connected before
+	 * @param playerNames the list of player usernames in the match about to be created
+	 * @param username the new username that has to be checked
+	 * @return true if the username is already in playerNames, false otherwise
+	 */
 
 	private boolean isDuplicateUsername(List<String> playerNames, String username)
 	{

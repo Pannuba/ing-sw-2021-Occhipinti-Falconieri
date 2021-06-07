@@ -6,6 +6,10 @@ import it.polimi.ingsw.model.cards.LeaderCard;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author Giulio Occhipinti
+ */
+
 public class ChooseLeadersMessage implements Message, Serializable
 {
 	List<LeaderCard> leaderCards;

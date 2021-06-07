@@ -8,6 +8,11 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.*;
 
+/**
+ * Server view class. Receives commands sent by the clients and sends them to the Controller, and sends Messages and GameStates to the clients
+ * @author Giulio Occhipinti
+ */
+
 public class ClientHandler extends Observable implements Runnable, Observer		/* Observes model waiting for changes, observed by controller */
 {
 	private final Socket clientSocket;
@@ -16,6 +21,14 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 	private final ObjectOutputStream oos;
 	private final Timer heartbeat;
 	private final TimerTask sendPing;
+
+	/**
+	 * Constructor. Starts the heartbeat that sends pings every 20 seconds using a Timer and TimerTask
+	 * @param clientSocket the socket created in ServerListener that sends and receives game data
+	 * @param username the username used by the socket's client. Used for debugging
+	 * @param ois the socket's input stream created in ServerListener
+	 * @param oos the socket's output stream created in ServerListener
+	 */
 
 	public ClientHandler(Socket clientSocket, String username, ObjectInputStream ois, ObjectOutputStream oos)
 	{
@@ -33,6 +46,10 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 		heartbeat = new Timer();
 		heartbeat.scheduleAtFixedRate(sendPing, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
 	}
+
+	/**
+	 * Thread waiting for new commands from the clientSocket. Forwards the messages received to the Controller through the Observer pattern
+	 */
 
 	public void run()		/* Activates after the setup phase has ended */
 	{
@@ -62,6 +79,11 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 		}
 	}
 
+	/**
+	 * Used by other server classes to send object to clients
+	 * @param obj the object to send to the client. Either a Ping, a Message, or a GameState
+	 */
+
 	public void send(Object obj)
 	{
 		if (!obj.getClass().getSimpleName().equals("Ping"))		/* Pings are really annoying */
@@ -76,6 +98,10 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Executed when the socket's timeout expires or an exception happens. Stops the heartbeat, closes the I/O streams and the socket
+	 */
 
 	public void close()
 	{

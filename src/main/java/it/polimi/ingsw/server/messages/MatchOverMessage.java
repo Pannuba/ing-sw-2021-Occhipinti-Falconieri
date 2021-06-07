@@ -6,6 +6,10 @@ import it.polimi.ingsw.model.Player;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author Giulio Occhipinti
+ */
+
 public class MatchOverMessage implements Message, Serializable		/* Sent to client when isMatchOver() returns true */
 {
 	private final String winnerName;

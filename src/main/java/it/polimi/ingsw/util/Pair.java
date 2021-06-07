@@ -2,10 +2,16 @@ package it.polimi.ingsw.util;
 
 import java.io.Serializable;
 
-public class Pair<Object1, Object2> implements Serializable            /* Used by SkillProduction for requirements */
+/**
+ * Pair class used by SkillProduction leader cards for their requirements
+ * @param <Object1> the first element of the pair
+ * @param <Object2> the second element
+ */
+
+public class Pair<Object1, Object2> implements Serializable
 {
-	private Object1 obj1;
-	private Object2 obj2;
+	private final Object1 obj1;
+	private final Object2 obj2;
 
 	public Pair()			/* InstantiationException during serialization without empty constructor */
 	{
@@ -27,15 +33,5 @@ public class Pair<Object1, Object2> implements Serializable            /* Used b
 	public Object2 getObj2()
 	{
 		return obj2;
-	}
-
-	public void setObj1(Object1 obj1)
-	{
-		this.obj1 = obj1;
-	}
-
-	public void setObj2(Object2 obj2)
-	{
-		this.obj2 = obj2;
 	}
 }

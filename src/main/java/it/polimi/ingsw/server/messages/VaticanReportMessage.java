@@ -6,6 +6,10 @@ import it.polimi.ingsw.model.Player;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author Giulio Occhipinti
+ */
+
 public class VaticanReportMessage implements Message, Serializable
 {
 	private final int popeBoxNum;

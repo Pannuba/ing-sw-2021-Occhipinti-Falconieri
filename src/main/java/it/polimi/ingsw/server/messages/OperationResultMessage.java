@@ -4,6 +4,10 @@ import it.polimi.ingsw.client.view.MessageExecutor;
 
 import java.io.Serializable;
 
+/**
+ * @author Giulio Occhipinti
+ */
+
 /*	This message is sent after (nearly?) every action the client performs. If the boolean is true the action has failed, so the
 	controller doesn't progress the game by sending a new gamestate and choosing the next player (and flipping the next actiontoken
 	for singleplayer matches) so that the client can perform another action in the same round.
