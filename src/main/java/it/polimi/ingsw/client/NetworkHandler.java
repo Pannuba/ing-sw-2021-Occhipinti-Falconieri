@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client;
 
+import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.util.Ping;
 
 import java.io.*;
@@ -7,18 +8,20 @@ import java.util.*;
 
 import java.net.Socket;
 
-public class NetworkHandler extends Observable implements Runnable		/* Observed by CLI to send it the newest gamestate */
+public class NetworkHandler implements Runnable		/* Observed by CLI to send it the newest gamestate */
 {
 	private Socket clientSocket;
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
 	private final Timer heartbeat;
 	private final TimerTask sendPing;
+	private final View view;
 	private final String ip;
 	private final int port;
 
-	public NetworkHandler(String ip, int port)
+	public NetworkHandler(View view, String ip, int port)
 	{
+		this.view = view;
 		this.ip = ip;
 		this.port = port;
 
@@ -29,7 +32,7 @@ public class NetworkHandler extends Observable implements Runnable		/* Observed 
 		heartbeat = new Timer();
 	}
 
-	public void run()
+	public synchronized void run()
 	{
 		while (!clientSocket.isClosed())
 		{
@@ -41,8 +44,7 @@ public class NetworkHandler extends Observable implements Runnable		/* Observed 
 				if (!(inputObj instanceof Ping))		/* Don't care if it's a ping */
 				{
 					System.out.println("Received " + inputObj.getClass().getSimpleName());
-					setChanged();
-					notifyObservers(inputObj);
+					view.update(inputObj);
 				}
 			}
 			catch (IOException | ClassNotFoundException e)

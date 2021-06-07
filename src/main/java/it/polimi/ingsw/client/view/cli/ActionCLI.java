@@ -33,26 +33,6 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 		command = new ArrayList<>();
 	}
 
-	public void leaderChoice()
-	{
-		new LeaderChoice(input, command, networkHandler, cli);
-	}
-
-	public void buyResources()
-	{
-		new BuyResources(input, command, networkHandler, cli);
-	}
-
-	public void buyDevCard()
-	{
-		new BuyDevCard(input, command, networkHandler, cli);
-	}
-
-	public void activateProduction()		/* How many times can a production be repeated? See rules */
-	{
-		new ActivateProduction(input, command, networkHandler, cli);
-	}
-
 	@Override
 	public void firstPlayer(boolean isFirstPlayer)
 	{

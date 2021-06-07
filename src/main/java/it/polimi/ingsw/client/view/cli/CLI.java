@@ -2,6 +2,11 @@ package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.localserver.LocalServer;
+import it.polimi.ingsw.client.view.View;
+import it.polimi.ingsw.client.view.cli.actions.ActivateProduction;
+import it.polimi.ingsw.client.view.cli.actions.BuyDevCard;
+import it.polimi.ingsw.client.view.cli.actions.BuyResources;
+import it.polimi.ingsw.client.view.cli.actions.LeaderChoice;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.server.messages.Message;
 
@@ -9,11 +14,9 @@ import java.util.*;
 
 /* Abstract class View, CLI extends view? */
 
-public class CLI extends Observable implements Observer
+public class CLI extends View
 {
 	private final Scanner input;
-	private final ActionCLI action;
-	private NetworkHandler networkHandler;
 	private GameState gameState;
 	private String username;
 
@@ -56,9 +59,8 @@ public class CLI extends Observable implements Observer
 			//port = 2000;
 		}
 
-		networkHandler = new NetworkHandler(ip, port);
+		networkHandler = new NetworkHandler(this, ip, port);
 		System.out.println("Created network handler");
-		networkHandler.addObserver(this);		/* CLI observes the networkHandler to get gamestates and messages */
 		networkHandler.connect();
 
 		System.out.println("Sending username to server...");
@@ -71,21 +73,23 @@ public class CLI extends Observable implements Observer
 
 		String choice = input.nextLine();
 
+		List<String> command = new ArrayList<>();
+
 		switch (choice)
 		{
 			case "0":
-				action.leaderChoice();
-				action.buyResources();
+				new LeaderChoice(input, command, networkHandler, this);
+				new BuyResources(input, command, networkHandler, this);
 				break;
 
 			case "1":
-				action.leaderChoice();
-				action.buyDevCard();
+				new LeaderChoice(input, command, networkHandler, this);
+				new BuyDevCard(input, command, networkHandler, this);
 				break;
 
 			case "2":
-				action.leaderChoice();
-				action.activateProduction();
+				new LeaderChoice(input, command, networkHandler, this);
+				new ActivateProduction(input, command, networkHandler, this);
 				break;
 
 			case "3":
@@ -113,8 +117,7 @@ public class CLI extends Observable implements Observer
 			chooseAction();
 	}
 
-	@Override
-	public void update(Observable obs, Object obj)
+	public synchronized void update(Object obj)
 	{
 		if (obj instanceof Message)
 			((Message) obj).process(action);		/* Calls method in cli specified in the message */

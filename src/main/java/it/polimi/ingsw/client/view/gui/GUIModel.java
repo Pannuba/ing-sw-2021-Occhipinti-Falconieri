@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view.gui;
 
 import it.polimi.ingsw.client.NetworkHandler;
+import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.gui.controllers.*;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.server.messages.Message;
@@ -10,22 +11,35 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
-import java.util.Observable;
-import java.util.Observer;
 
-public class GUIModel implements Observer        /* Has gamestate, action instance, observes NetworkHandler */
+public class GUIModel extends View        /* Has gamestate, action instance, observes NetworkHandler */
 {
-	private final ActionGUI action;				/* ActionGUI instance to pass it the commands received by the NetworkHandler */
+	private ActionGUI action;				/* ActionGUI instance to pass it the commands received by the NetworkHandler */
 	private final String username;
+	private final LauncherController lc;
+	private NetworkHandler networkHandler;
 	private final Event event;
 
 	/* FIXME: create main view (and other views?) in game start to avoid NullPointerException if update() is called before a player chose the leader cards */
 
-	public GUIModel(String username, LauncherController lc, NetworkHandler networkHandler, Event event) throws IOException		/* /a/14190310 on how to pass parameters to controllers */
+	public GUIModel(String username, LauncherController lc, Event event)		/* /a/14190310 on how to pass parameters to controllers */
 	{
 		this.username = username;
+		this.lc = lc;
 		this.event = event;
+	}
 
+	public synchronized void update(Object obj)
+	{
+		if (obj instanceof Message)
+			((Message) obj).process(action);		/* Calls method in ActionGUI specified in the message */
+
+		if (obj instanceof GameState)
+			action.updateView((GameState) obj);		/* Or call updateTrack, updateStorage, updateMarkets... here? */
+	}
+
+	public void createScenes() throws IOException
+	{
 		FXMLLoader gameStartLoader = new FXMLLoader();
 		gameStartLoader.setLocation(getClass().getResource("/scenes/gamestart.fxml"));
 		Parent gameStartRoot = gameStartLoader.load();
@@ -37,7 +51,7 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 		Scene mainViewScene = new Scene(mainViewRoot);
 
 		FXMLLoader marketsLoader = new FXMLLoader();
-		marketsLoader.setLocation(getClass().getResource("/scenes/markets.fxml"));		/* Put in createScenes()? */
+		marketsLoader.setLocation(getClass().getResource("/scenes/markets.fxml"));
 		Parent marketsRoot = marketsLoader.load();
 		Scene marketsScene = new Scene(marketsRoot);
 
@@ -57,16 +71,12 @@ public class GUIModel implements Observer        /* Has gamestate, action instan
 		mvc.setup(marketsScene, leaderCardsScene, networkHandler, username);
 
 		action = new ActionGUI(this, networkHandler, gameStartScene, lc, gsc, lcc, mvc, mc);
+		new Thread(networkHandler).start();
 	}
 
-	@Override
-	public void update(Observable obs, Object obj)
+	public void setNetworkHandler(NetworkHandler networkHandler)
 	{
-		if (obj instanceof Message)
-			((Message) obj).process(action);		/* Calls method in ActionGUI specified in the message */
-
-		if (obj instanceof GameState)
-			action.updateView((GameState) obj);		/* Or call updateTrack, updateStorage, updateMarkets... here? */
+		this.networkHandler = networkHandler;
 	}
 
 	public String getUsername()

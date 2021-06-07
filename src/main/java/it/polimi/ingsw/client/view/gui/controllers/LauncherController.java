@@ -28,15 +28,14 @@ public class LauncherController
 			networkHandler.send(numPlayersField.getText());
 			return;
 		}
+		GUIModel gui = new GUIModel(nameField.getText(), this, event);
 
-		networkHandler = new NetworkHandler(ipField.getText(), Integer.parseInt(portField.getText()));
-
-		GUIModel gui = new GUIModel(nameField.getText(), this, networkHandler, event);
-
-		networkHandler.addObserver(gui);
+		networkHandler = new NetworkHandler(gui, ipField.getText(), Integer.parseInt(portField.getText()));
 		networkHandler.connect();
 		networkHandler.send(nameField.getText());
-		new Thread(networkHandler).start();
+
+		gui.setNetworkHandler(networkHandler);
+		gui.createScenes();
 	}
 
 	public void firstPlayer()
@@ -44,7 +43,13 @@ public class LauncherController
 		numPlayersField.setVisible(true);
 	}
 
-	public TextField getIpField() { return ipField; }
+	public TextField getIpField()
+	{
+		return ipField;
+	}
 
-	public TextField getPortField() { return portField; }
+	public TextField getPortField()
+	{
+		return portField;
+	}
 }

@@ -26,7 +26,8 @@ public class ActionGUI extends MessageExecutor
 	private final MainViewController mvc;						/* To update the scenes when a new gamestate is received */
 	private final MarketsController mmc;
 
-	public ActionGUI(GUIModel gui, NetworkHandler networkHandler, Scene gameStartScene, LauncherController lc, GameStartController gsc, LeaderCardsController lcc, MainViewController mvc, MarketsController mmc)
+	public ActionGUI(GUIModel gui, NetworkHandler networkHandler, Scene gameStartScene, LauncherController lc,
+					 GameStartController gsc, LeaderCardsController lcc, MainViewController mvc, MarketsController mmc)
 	{
 		this.gui = gui;
 		this.networkHandler = networkHandler;
