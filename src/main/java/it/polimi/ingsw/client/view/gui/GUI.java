@@ -9,6 +9,7 @@ import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -18,15 +19,15 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 	private final String username;
 	private final LoginController lc;
 	private NetworkHandler networkHandler;
-	private final Event event;
+	private final Stage mainStage;
 
 	/* FIXME: create main view (and other views?) in game start to avoid NullPointerException if update() is called before a player chose the leader cards */
 
-	public GUI(String username, LoginController lc, Event event)		/* /a/14190310 on how to pass parameters to controllers */
+	public GUI(String username, LoginController lc, Stage mainStage)		/* /a/14190310 on how to pass parameters to controllers */
 	{
+		this.mainStage = mainStage;
 		this.username = username;
 		this.lc = lc;
-		this.event = event;
 	}
 
 	public synchronized void update(Object obj)
@@ -65,13 +66,18 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 		MarketsController mc = marketsLoader.getController();
 		MainViewController mvc = mainViewLoader.getController();
 
-		gsc.setup(mainViewScene, mvc, networkHandler);
-		lcc.setup(mainViewScene, networkHandler);
-		mc.setup(mainViewScene, mvc, networkHandler);
-		mvc.setup(marketsScene, leaderCardsScene, networkHandler, username);
+		gsc.setup(this, mainViewScene, mvc);		/* Only pass "this", pass mvc and mainViewScene through getters? */
+		lcc.setup(this, mainViewScene);
+		mc.setup(this, mainViewScene, mvc);
+		mvc.setup(this, marketsScene, leaderCardsScene);
 
-		action = new ActionGUI(this, networkHandler, gameStartScene, lc, gsc, lcc, mvc, mc);
+		action = new ActionGUI(this, gameStartScene, lc, gsc, lcc, mvc, mc);
 		new Thread(networkHandler).start();
+	}
+
+	public NetworkHandler getNetworkHandler()
+	{
+		return networkHandler;
 	}
 
 	public void setNetworkHandler(NetworkHandler networkHandler)
@@ -84,8 +90,8 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 		return username;
 	}
 
-	public Event getEvent()
+	public Stage getMainStage()
 	{
-		return event;
+		return mainStage;
 	}
 }

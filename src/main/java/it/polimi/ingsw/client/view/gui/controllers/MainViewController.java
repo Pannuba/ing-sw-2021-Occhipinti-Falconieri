@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.view.gui.controllers;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.ConvertMethods;
+import it.polimi.ingsw.client.view.gui.GUI;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.ResourceType;
@@ -30,6 +31,7 @@ import java.util.List;
 
 public class MainViewController
 {
+	private Stage mainStage;
 	private Scene marketsScene;
 	private Scene leaderCardsScene;
 	private NetworkHandler networkHandler;
@@ -105,7 +107,6 @@ public class MainViewController
 	void startDefaultProduction(ActionEvent event)		/* Triggered by default production button */
 	{
 		Platform.runLater(() -> {
-			Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			mainStage.setTitle("Masters of Renaissance - Select 2 resources");
 			printToConsole("Click the 2 resources you want to convert, then the resource you want to make\n(Vault icons)");
 			vaultResourceBlue.setDisable(false);
@@ -161,8 +162,6 @@ public class MainViewController
 	@FXML
 	void showLeaderCards(ActionEvent event)
 	{
-		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
 		mainStage.setTitle("Masters of Renaissance - Leader Cards");
 		mainStage.setScene(leaderCardsScene);
 		mainStage.sizeToScene();
@@ -172,8 +171,6 @@ public class MainViewController
 	@FXML
 	void showMarkets(ActionEvent event)
 	{
-		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
 		mainStage.setTitle("Masters of Renaissance - Markets");
 		mainStage.setScene(marketsScene);
 		mainStage.sizeToScene();		/* ? */
@@ -371,7 +368,6 @@ public class MainViewController
 		isBuyingDevCard = false;
 
 		Platform.runLater(() -> {	/* Necessary here? Maybe only for buttons/ImageViews */
-			Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			mainStage.setTitle("Masters of Renaissance");
 		});
 	}
@@ -411,12 +407,13 @@ public class MainViewController
 		});
 	}
 
-	public void setup(Scene marketsScene, Scene leaderCardsScene, NetworkHandler networkHandler, String username)
+	public void setup(GUI gui, Scene marketsScene, Scene leaderCardsScene)
 	{
-		this.username = username;
+		this.username = gui.getUsername();
+		this.mainStage = gui.getMainStage();
 		this.marketsScene = marketsScene;
 		this.leaderCardsScene = leaderCardsScene;
-		this.networkHandler = networkHandler;
+		this.networkHandler = gui.getNetworkHandler();
 	}
 
 	public void setDevCardToBuy(int devCardToBuy)

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
 import it.polimi.ingsw.client.NetworkHandler;
+import it.polimi.ingsw.client.view.gui.GUI;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class LeaderCardsController		/* TODO: add resources ImageViews in both leader card areas that are set for SkillStorage cards */
 {
+	private Stage mainStage;
 	private Scene mainViewScene;
 	private MainViewController mvc;
 	private NetworkHandler networkHandler;
@@ -83,11 +85,12 @@ public class LeaderCardsController		/* TODO: add resources ImageViews in both le
 		}
 	}
 
-	public void setup(Scene mainViewScene, NetworkHandler networkHandler)
+	public void setup(GUI gui, Scene mainViewScene)
 	{
 		this.mainViewScene = mainViewScene;
+		this.mainStage = gui.getMainStage();
 		//this.mvc = mvc;
-		this.networkHandler = networkHandler;
+		this.networkHandler = gui.getNetworkHandler();
 
 		buttons = new ArrayList<>();
 		Collections.addAll(buttons, activateLeaderOneButton, activateLeaderTwoButton, discardLeaderOneButton, discardLeaderTwoButton);

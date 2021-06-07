@@ -9,15 +9,19 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.cards.ActionToken;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ActionGUI extends MessageExecutor
 {
 	private final GUI gui;
+	private final Stage mainStage;
 	private final NetworkHandler networkHandler;		/* To send commands to server */
 	private final Scene gameStartScene;
 	private final LoginController lc;
@@ -26,11 +30,12 @@ public class ActionGUI extends MessageExecutor
 	private final MainViewController mvc;						/* To update the scenes when a new gamestate is received */
 	private final MarketsController mmc;
 
-	public ActionGUI(GUI gui, NetworkHandler networkHandler, Scene gameStartScene, LoginController lc,
+	public ActionGUI(GUI gui, Scene gameStartScene, LoginController lc,
 					 GameStartController gsc, LeaderCardsController lcc, MainViewController mvc, MarketsController mmc)
 	{
 		this.gui = gui;
-		this.networkHandler = networkHandler;
+		mainStage = gui.getMainStage();
+		this.networkHandler = gui.getNetworkHandler();
 		this.gameStartScene = gameStartScene;
 		this.lc = lc;
 		this.gsc = gsc;
@@ -56,10 +61,8 @@ public class ActionGUI extends MessageExecutor
 	}
 
 	@Override
-	public void startMatch()
+	public void startMatch()		/* TODO: create scene here, remove gameStartScene from constructor */
 	{
-		Stage mainStage = (Stage) ((Node) gui.getEvent().getSource()).getScene().getWindow();
-
 		Platform.runLater(() ->
 		{
 			mainStage.setTitle("Masters of Renaissance - Setup");
@@ -120,19 +123,52 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void matchOver(String winnerName, List<Player> players)
 	{
-		if (gui.getUsername().equals(winnerName))
-			mvc.printToConsole("You win!");
+		FXMLLoader endGameLoader = new FXMLLoader();
+		endGameLoader.setLocation(getClass().getResource("/scenes/endgame.fxml"));
+		Parent endGameRoot = null;
 
-		else
-			mvc.printToConsole("Game over! The winner is " + winnerName);
+		try
+		{
+			endGameRoot = endGameLoader.load();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 
-		for (int i = 0; i < players.size(); i++)
-			mvc.printToConsole(players.get(i).getUsername() + ": " + players.get(i).getVictoryPoints() + " points");
+		Scene endGameScene = new Scene(endGameRoot);
+
+		Platform.runLater(() -> {
+			mainStage.setTitle("Masters of Renaissance - Game Over");
+			mainStage.setScene(endGameScene);
+			mainStage.sizeToScene();
+			mainStage.show();
+		});
 	}
 
 	@Override
 	public void singlePlayerGameOver(String message)
 	{
-		mvc.printToConsole(message);
+		FXMLLoader endGameLoader = new FXMLLoader();
+		endGameLoader.setLocation(getClass().getResource("/scenes/endgame.fxml"));
+		Parent endGameRoot = null;
+
+		try
+		{
+			endGameRoot = endGameLoader.load();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		Scene endGameScene = new Scene(endGameRoot);
+
+		Platform.runLater(() -> {
+			mainStage.setTitle("Masters of Renaissance - Game Over");
+			mainStage.setScene(endGameScene);
+			mainStage.sizeToScene();
+			mainStage.show();
+		});
 	}
 }

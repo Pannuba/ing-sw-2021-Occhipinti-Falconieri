@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
 import it.polimi.ingsw.client.NetworkHandler;
+import it.polimi.ingsw.client.view.gui.GUI;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import java.util.List;
 
 public class GameStartController		/* The player selects 2 leadercards first, then the resources */
 {
+	private Stage mainStage;
 	private NetworkHandler networkHandler;
 	private Scene mainViewScene;
 	private MainViewController mvc;
@@ -108,7 +110,7 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 			if (playerID == 0)
 			{
 				networkHandler.send(Arrays.asList("INITIAL_RESOURCES", "", ""));
-				Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
 				mainStage.setTitle("Masters of Renaissance");
 				mainStage.setScene(mainViewScene);
 				mainStage.show();
@@ -141,7 +143,6 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 
 			networkHandler.send(Arrays.asList("INITIAL_RESOURCES", chosenResources, initialFaithPoints));
 
-			Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			mainStage.setTitle("Masters of Renaissance");
 			mainStage.setScene(mainViewScene);
 			mainStage.show();
@@ -185,11 +186,12 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 		}
 	}
 
-	public void setup(Scene mainViewScene, MainViewController mvc, NetworkHandler networkHandler)
+	public void setup(GUI gui, Scene mainViewScene, MainViewController mvc)
 	{
+		this.mainStage = gui.getMainStage();
 		this.mainViewScene = mainViewScene;
 		this.mvc = mvc;
-		this.networkHandler = networkHandler;
+		this.networkHandler = gui.getNetworkHandler();
 		chosenLeaderCards = new ArrayList<>();
 		chosenResources = "";
 

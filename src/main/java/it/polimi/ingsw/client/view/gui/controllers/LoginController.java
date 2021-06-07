@@ -3,9 +3,11 @@ package it.polimi.ingsw.client.view.gui.controllers;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.GUI;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -28,7 +30,10 @@ public class LoginController
 			networkHandler.send(numPlayersField.getText());
 			return;
 		}
-		GUI gui = new GUI(nameField.getText(), this, event);
+
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		GUI gui = new GUI(nameField.getText(), this, mainStage);
 
 		networkHandler = new NetworkHandler(gui, ipField.getText(), Integer.parseInt(portField.getText()));
 		networkHandler.connect();

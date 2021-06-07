@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.view.gui.controllers;
 
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.ConvertMethods;
+import it.polimi.ingsw.client.view.gui.GUI;
 import it.polimi.ingsw.model.DevCardsMarket;
 import it.polimi.ingsw.model.Marble;
 import it.polimi.ingsw.model.MarbleType;
@@ -23,6 +24,7 @@ import java.util.*;
 
 public class MarketsController        /* Send command directly from here? Get whiteMarbleResource from gamestate and keep it as instance variable? YES */
 {
+	private Stage mainStage;
 	private Scene mainViewScene;
 	private MainViewController mvc;
 	private NetworkHandler networkHandler;
@@ -75,8 +77,6 @@ public class MarketsController        /* Send command directly from here? Get wh
 	@FXML
 	void backToBoard(ActionEvent event)		/* Set the already existing scene, otherwise it resets everything. How to pass? */
 	{
-		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
 		mainStage.setTitle("Masters of Renaissance");
 		mainStage.setScene(mainViewScene);
 		mainStage.sizeToScene();		/* ? */
@@ -256,20 +256,20 @@ public class MarketsController        /* Send command directly from here? Get wh
 		mvc.setDevCardToBuy(cardToBuyNum);
 		mvc.setBuyingDevCard(true);
 
-		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();		/* TODO: instance variable? */
-
 		mvc.printToConsole("Click the area where you want to put the card");
+
 		mainStage.setTitle("Masters of Renaissance - Select Dev Card Area");
 		mainStage.setScene(mainViewScene);
 		mainStage.sizeToScene();		/* ? */
 		mainStage.show();
 	}
 
-	public void setup(Scene mainViewScene, MainViewController mvc, NetworkHandler networkHandler)
+	public void setup(GUI gui, Scene mainViewScene, MainViewController mvc)
 	{
+		this.mainStage = gui.getMainStage();
 		this.mainViewScene = mainViewScene;
 		this.mvc = mvc;
-		this.networkHandler = networkHandler;
+		this.networkHandler = gui.getNetworkHandler();
 
 		devCards = new ArrayList<>();
 		marbles = new ArrayList<>();
