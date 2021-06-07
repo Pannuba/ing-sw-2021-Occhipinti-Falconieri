@@ -123,16 +123,24 @@ public class Controller implements Observer			/* Observes view to get commands..
 			model.endMatch();
 	}
 
-	public boolean checkResourceAmounts(Dashboard playerBoard, List<Resource> requirements)		/* Checks without spending anything */
+	public boolean checkResourceAmounts(Player player, List<Resource> requirements)		/* Checks without spending anything */
 	{
-		Storage storage = playerBoard.getStorage();
-		Vault vault = playerBoard.getVault();
+		Storage storage = player.getDashboard().getStorage();
+		Vault vault = player.getDashboard().getVault();
 
 		for (int i = 0; i < requirements.size(); i++)
 		{
 			int requiredResAmount = 0;
 			requiredResAmount += storage.findResourceByType(requirements.get(i).getResourceType());
-			/* TODO: add SkillStorage!! */
+
+			SkillStorage storageLeader = player.getStorageLeader(requirements.get(i).getResourceType());
+
+			if (storageLeader != null)		/* If the player has an active SkillStorage of that resource type */
+				requiredResAmount += storageLeader.getAdditionalStorage().getShelfResourceQuantity();
+
+			else
+				System.out.println(player.getUsername() + " has no active " + requirements.get(i).getResourceType() + " SkillStorage cards!");
+
 			requiredResAmount += vault.getResourceAmounts().get(requirements.get(i).getResourceType());
 
 			if (requiredResAmount < requirements.get(i).getQuantity())		/* If only 1 resource (type and quantity) isn't satisfied, return false */

@@ -36,7 +36,7 @@ public class BuyDevCardCommand implements Command		/* "BUY_DEVCARD", "card#", "d
 
 		else
 		{
-			if (controller.checkResourceAmounts(model.getPlayerByUsername(username).getDashboard(), requirements))    /* If player has enough resources */
+			if (controller.checkResourceAmounts(model.getPlayerByUsername(username), requirements))    /* If player has enough resources */
 			{
 				controller.spendResources(requirements);
 

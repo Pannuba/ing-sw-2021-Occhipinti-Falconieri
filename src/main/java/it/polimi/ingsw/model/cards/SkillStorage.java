@@ -30,6 +30,9 @@ public class SkillStorage extends LeaderCard		/* "final" keyword in instance var
 				additionalStorage.getShelfResource().setQuantity(additionalStorage.getShelfResourceQuantity() - 1);
 				removedResNum++;
 			}
+
+			else
+				System.out.println("SkillStorage: tried to remove a resource when the shelf was empty!");
 		}
 
 		System.out.println("SkillStorage removeResources: removed " + removedResNum + " " + additionalStorage.getShelfResourceType());
@@ -51,5 +54,8 @@ public class SkillStorage extends LeaderCard		/* "final" keyword in instance var
 		return additionalStorage;
 	}
 
-	public void setAdditionalStorage(Shelf shelf) { this.additionalStorage = shelf; }
+	public void setAdditionalStorage(Shelf shelf)
+	{
+		this.additionalStorage = shelf;
+	}
 }

@@ -71,13 +71,13 @@ public class ActivateProductionCommand implements Command
 				else
 				{
 					controller.getView().send(new OperationResultMessage("Can't activate production: leader not active", true));
-					return false;
+					return true;
 				}
 
 				break;
 		}
 
-		if (controller.checkResourceAmounts(model.getPlayerByUsername(username).getDashboard(), cost))
+		if (controller.checkResourceAmounts(model.getPlayerByUsername(username), cost))
 		{
 			controller.spendResources(cost);
 
