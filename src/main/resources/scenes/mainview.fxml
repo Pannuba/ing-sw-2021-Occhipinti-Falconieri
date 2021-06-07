@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -11,6 +12,11 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.MainViewController">
    <children>
+      <ImageView fitHeight="723.0" fitWidth="1282.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/background.jpg" />
+         </image>
+      </ImageView>
       <ImageView fx:id="dashboard" fitHeight="720.0" fitWidth="1007.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/dashboard.png" />
@@ -19,12 +25,24 @@
       <Button fx:id="marketsButton" layoutX="1053.0" layoutY="32.0" mnemonicParsing="false" onAction="#showMarkets" prefHeight="55.0" prefWidth="184.0" text="Show Markets">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
+         </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font name="Times New Roman Italic" size="19.0" />
+         </font></Button>
       <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="123.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="55.0" prefWidth="184.0" text="Show Leader Cards">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
-         </cursor></Button>
-      <TextArea fx:id="console" editable="false" layoutX="1018.0" layoutY="298.0" prefHeight="414.0" prefWidth="254.0" wrapText="true" />
+         </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font name="Times New Roman Italic" size="19.0" />
+         </font></Button>
+      <TextArea fx:id="console" editable="false" layoutX="1018.0" layoutY="359.0" prefHeight="350.0" prefWidth="254.0" wrapText="true" />
       <ImageView fx:id="redPawn" fitHeight="70.0" fitWidth="87.0" layoutX="26.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/red-pawn.png" />
@@ -125,5 +143,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <ImageView fx:id="actionTokenFront" fitHeight="100.0" fitWidth="100.0" layoutX="1034.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="actionTokenBack" fitHeight="100.0" fitWidth="100.0" layoutX="1155.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../img/actiontokens/back.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

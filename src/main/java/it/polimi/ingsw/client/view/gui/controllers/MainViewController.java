@@ -79,6 +79,9 @@ public class MainViewController
 	@FXML private ImageView devCardArea2;
 	@FXML private ImageView devCardArea3;
 
+	@FXML private ImageView actionTokenFront;
+	@FXML private ImageView actionTokenBack;
+
 	@FXML private Button defaultProductionButton;
 
 	public void update(GameState gameState, String username)
@@ -295,6 +298,15 @@ public class MainViewController
 			devCardArea3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardAreas[2].getTopDevCard().getCardNumber() + ".png")));
 
 		else devCardArea3.setImage(null);
+	}
+
+	public void updateActionToken(List<Player> players)
+	{
+		if (players.size() == 1)
+		{
+			actionTokenFront.setVisible(true);
+			actionTokenBack.setVisible(true);
+		}
 	}
 
 	public void movePawn(ImageView pawn, int boxNumber)
