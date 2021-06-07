@@ -192,4 +192,6 @@ public class Controller implements Observer			/* Observes view to get commands..
 	{
 		return view;
 	}
+
+	public void setUsername(String username) { this.username = username; }
 }
