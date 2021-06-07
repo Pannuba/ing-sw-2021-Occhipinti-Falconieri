@@ -5,12 +5,11 @@ import it.polimi.ingsw.client.MessageIO;
 import java.util.Observable;
 import java.util.Observer;
 
-public abstract class View implements Observer
+public abstract class View		/* Add username */
 {
 	protected MessageExecutor action;
 
 	protected MessageIO messageHandler;
 
-	@Override
-	public abstract void update(Observable obs, Object obj);
+	public abstract void update(Object obj);
 }

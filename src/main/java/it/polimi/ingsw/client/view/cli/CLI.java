@@ -1,13 +1,18 @@
 package it.polimi.ingsw.client.view.cli;
 
+import it.polimi.ingsw.client.LocalMatchIO;
 import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
+import it.polimi.ingsw.client.localmatch.LocalMatch;
+import it.polimi.ingsw.client.localmatch.LocalModel;
+import it.polimi.ingsw.client.localmatch.controller.LocalController;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.cli.actions.ActivateProduction;
 import it.polimi.ingsw.client.view.cli.actions.BuyDevCard;
 import it.polimi.ingsw.client.view.cli.actions.BuyResources;
 import it.polimi.ingsw.client.view.cli.actions.LeaderChoice;
 import it.polimi.ingsw.model.GameState;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.server.messages.Message;
 
 import java.util.*;
@@ -23,14 +28,14 @@ public class CLI extends View
 		this.input = input;
 
 		gameStart();
-
+		System.out.println("CREATING ACTIONCLI");
 		action = new ActionCLI(this);		/* Pass CLI to ActionExecutor for the NetworkHandler and input instance, gamestate and username */
 	}
 
 	private void gameStart()
 	{
-		String ip = "";
-		int port = 0;
+		String ip;
+		int port;
 
 		System.out.print("Username: ");
 		username = input.nextLine();
@@ -39,7 +44,12 @@ public class CLI extends View
 
 		if (input.nextLine().equalsIgnoreCase("Y"))
 		{
-
+			Player player = new Player(username);
+			LocalModel model = new LocalModel(player, this);
+			LocalController lc = new LocalController(model, this);
+			messageHandler = new LocalMatchIO(lc);
+			LocalMatch match = new LocalMatch(model, this, lc);		/* M, V, C */
+			new Thread(match).start();
 		}
 
 		else
@@ -48,15 +58,13 @@ public class CLI extends View
 			ip = input.nextLine();
 			System.out.print("Server port: ");
 			port = Integer.parseInt(input.nextLine());
-			messageHandler = new NetworkHandler(ip, port);
-			messageHandler.addObserver(this);
+			messageHandler = new NetworkHandler(this, ip, port);
 			System.out.println("Created network handler");
 			messageHandler.connect();
 			new Thread((Runnable) messageHandler).start();		/* Start listening for messages or gamestate updates from server */
+			System.out.println("Sending username to server...");
+			messageHandler.send(username);
 		}
-
-		System.out.println("Sending username to server...");
-		messageHandler.send(username);
 	}
 
 	public void chooseAction()			/* Here or ActionCLI? */
@@ -112,9 +120,9 @@ public class CLI extends View
 			messageHandler.send(command);
 	}
 
-	@Override
-	public void update(Observable obs, Object obj)
+	public synchronized void update(Object obj)
 	{
+		System.out.println("received " + obj.getClass().getSimpleName());
 		if (obj instanceof Message)
 			((Message) obj).process(action);		/* Calls method in cli specified in the message */
 

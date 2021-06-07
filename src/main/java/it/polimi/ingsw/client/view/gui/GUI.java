@@ -31,8 +31,7 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 		this.lc = lc;
 	}
 
-	@Override
-	public void update(Observable obs, Object obj)
+	public synchronized void update(Object obj)
 	{
 		if (obj instanceof Message)
 			((Message) obj).process(action);		/* Calls method in ActionGUI specified in the message */

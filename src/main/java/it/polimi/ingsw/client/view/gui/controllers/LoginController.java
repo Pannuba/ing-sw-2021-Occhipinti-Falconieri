@@ -35,8 +35,7 @@ public class LoginController
 
 		GUI gui = new GUI(nameField.getText(), this, mainStage);
 
-		networkHandler = new NetworkHandler(ipField.getText(), Integer.parseInt(portField.getText()));
-		networkHandler.addObserver(gui);
+		networkHandler = new NetworkHandler(gui, ipField.getText(), Integer.parseInt(portField.getText()));
 		networkHandler.connect();
 		networkHandler.send(nameField.getText());
 
