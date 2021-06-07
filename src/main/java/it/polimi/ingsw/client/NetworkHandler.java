@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client;
 
-import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.util.Ping;
 
 import java.io.*;
@@ -8,7 +7,7 @@ import java.util.*;
 
 import java.net.Socket;
 
-public class NetworkHandler extends Observable implements Runnable		/* Observed by CLI to send it the newest gamestate */
+public class NetworkHandler extends MessageIO implements Runnable		/* Observed by CLI to send it the newest gamestate */
 {
 	private Socket clientSocket;
 	private ObjectInputStream ois;
@@ -30,6 +29,7 @@ public class NetworkHandler extends Observable implements Runnable		/* Observed 
 		heartbeat = new Timer();
 	}
 
+	@Override
 	public void run()
 	{
 		while (!clientSocket.isClosed())
@@ -77,6 +77,7 @@ public class NetworkHandler extends Observable implements Runnable		/* Observed 
 		heartbeat.scheduleAtFixedRate(sendPing, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
 	}
 
+	@Override
 	public void send(Object obj)
 	{
 		if (!(obj instanceof Ping))

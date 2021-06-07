@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.cli.actions;
 
+import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.cli.CLI;
 import it.polimi.ingsw.client.view.cli.PrintMethods;
@@ -12,7 +13,7 @@ import java.util.Scanner;
 
 public class ActivateProduction
 {
-	public ActivateProduction(Scanner input, List<String> command, NetworkHandler networkHandler, CLI cli)
+	public ActivateProduction(Scanner input, List<String> command, MessageIO messageHandler, CLI cli)
 	{
 		System.out.println("This is your current storage and vault:");
 		PrintMethods.printStorage(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getStorage());
@@ -95,7 +96,7 @@ public class ActivateProduction
 				return;
 		}
 
-		networkHandler.send(command);
+		messageHandler.send(command);
 		command.clear();
 	}
 }

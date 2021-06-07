@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.cli.actions;
 
+import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.Scanner;
 
 public class InitialResources
 {
-	public InitialResources(int playerID, Scanner input, List<String> command, NetworkHandler networkHandler)
+	public InitialResources(int playerID, Scanner input, List<String> command, MessageIO messageHandler)
 	{
 		String chosenResources = "";			/* Will be converted to ResourceType in server controller */
 		String initialFaithPoints = "";
@@ -45,7 +46,7 @@ public class InitialResources
 		command.add("INITIAL_RESOURCES");
 		command.add(chosenResources);
 		command.add(initialFaithPoints);
-		networkHandler.send(command);
+		messageHandler.send(command);
 		command.clear();
 	}
 }

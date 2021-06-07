@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.cli;
 
+import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.MessageExecutor;
 import it.polimi.ingsw.client.view.cli.actions.*;
@@ -22,14 +23,14 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 {
 	private final Scanner input;
 	private final CLI cli;
-	private final NetworkHandler networkHandler;
+	private final MessageIO messageHandler;
 	private final List<String> command;
 
 	public ActionCLI(CLI cli)		/* TODO: tidy parameters passed from CLI and to other actions */
 	{
 		this.cli = cli;
 		this.input = cli.getInput();
-		this.networkHandler = cli.getNetworkHandler();
+		this.messageHandler = cli.getMessageHandler();
 		command = new ArrayList<>();
 	}
 
@@ -39,7 +40,7 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 		if (isFirstPlayer)
 		{
 			System.out.print("Total players: ");
-			networkHandler.send(input.nextLine());
+			messageHandler.send(input.nextLine());
 		}
 	}
 
@@ -52,13 +53,13 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 	@Override
 	public void chooseLeaderCards(List<LeaderCard> fourLeaderCards)
 	{
-		new ChooseLeaderCards(fourLeaderCards, input, command, networkHandler);
+		new ChooseLeaderCards(fourLeaderCards, input, command, messageHandler);
 	}
 
 	@Override
 	public void initialResources(int playerID)			/* 1st player: nothing; 2nd: 1 resource; 3rd: 1 resource + 1 faithPoint; 4th: 2 resources + 1 faithPoint */
 	{
-		new InitialResources(playerID, input, command, networkHandler);
+		new InitialResources(playerID, input, command, messageHandler);
 	}
 
 	@Override
@@ -108,12 +109,12 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 
 		if (input.nextLine().equalsIgnoreCase("Y"))
 		{
-			networkHandler.stop();
+			messageHandler.stop();
 			new CLI(new Scanner(System.in));
 		}
 
 		else
-			networkHandler.shutdown();
+			messageHandler.shutdown();
 	}
 
 	@Override
@@ -135,11 +136,11 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 
 		if (input.nextLine().equalsIgnoreCase("Y"))
 		{
-			networkHandler.stop();
+			messageHandler.stop();
 			new CLI(cli.getInput());
 		}
 
 		else
-			networkHandler.shutdown();
+			messageHandler.shutdown();
 	}
 }

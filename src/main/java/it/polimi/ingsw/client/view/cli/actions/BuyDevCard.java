@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.cli.actions;
 
+import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.cli.CLI;
 import it.polimi.ingsw.client.view.cli.PrintMethods;
@@ -9,7 +10,7 @@ import java.util.Scanner;
 
 public class BuyDevCard
 {
-	public BuyDevCard(Scanner input, List<String> command, NetworkHandler networkHandler, CLI cli)
+	public BuyDevCard(Scanner input, List<String> command, MessageIO messageHandler, CLI cli)
 	{
 		int devCardAreaIndex, targetAreaLayer;
 		String choice, cardToBuyNum;
@@ -44,7 +45,7 @@ public class BuyDevCard
 		command.add("BUY_DEVCARD");
 		command.add(cardToBuyNum);
 		command.add(Integer.toString(devCardAreaIndex));
-		networkHandler.send(command);
+		messageHandler.send(command);
 		command.clear();
 
 	/*	Check for resources. Here or server? SERVER		LocalModel class? NO

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.client.view.cli.actions;
 
+import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
-import it.polimi.ingsw.client.localserver.LocalServer;
 import it.polimi.ingsw.client.view.cli.CLI;
 import it.polimi.ingsw.client.view.cli.PrintMethods;
 import it.polimi.ingsw.model.cards.LeaderCard;
@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class LeaderChoice
 {
-	public LeaderChoice(Scanner input, List<String> command, NetworkHandler networkHandler, CLI cli)
+	public LeaderChoice(Scanner input, List<String> command, MessageIO messageHandler, CLI cli)
 	{
 		List<LeaderCard> leaderCards = cli.getGameState().getPlayerByName(cli.getUsername()).getLeaderCards();
 		List<LeaderCard> canBeActivated = new ArrayList<>();
@@ -51,7 +51,7 @@ public class LeaderChoice
 
 				command.add("ACTIVATE_LEADER");
 				command.add(chosenCard);
-				networkHandler.send(command);		/* Server checks resources and replies with another message */
+				messageHandler.send(command);		/* Server checks resources and replies with another message */
 				command.clear();
 				break;
 
@@ -69,7 +69,7 @@ public class LeaderChoice
 
 				command.add("DISCARD_LEADER");
 				command.add(chosenCard);
-				networkHandler.send(command);
+				messageHandler.send(command);
 				command.clear();
 				break;
 
@@ -82,7 +82,7 @@ public class LeaderChoice
 			System.out.print("Activate or discard another leader? (Y/N) ");
 
 			if (input.nextLine().equalsIgnoreCase("Y"))
-				new LeaderChoice(input, command, networkHandler, cli);
+				new LeaderChoice(input, command, messageHandler, cli);
 		}
 	}
 }

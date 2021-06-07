@@ -1,7 +1,7 @@
 package it.polimi.ingsw.client.view.cli;
 
+import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
-import it.polimi.ingsw.client.localserver.LocalServer;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.cli.actions.ActivateProduction;
 import it.polimi.ingsw.client.view.cli.actions.BuyDevCard;
@@ -24,7 +24,6 @@ public class CLI extends View
 
 		gameStart();
 
-		new Thread(networkHandler).start();		/* Start listening for messages or gamestate updates from server */
 		action = new ActionCLI(this);		/* Pass CLI to ActionExecutor for the NetworkHandler and input instance, gamestate and username */
 	}
 
@@ -40,30 +39,24 @@ public class CLI extends View
 
 		if (input.nextLine().equalsIgnoreCase("Y"))
 		{
-			ip = "127.0.0.1";
-			port = 2000;
 
-			LocalServer localServer = new LocalServer();
-			new Thread(localServer).start();
 		}
 
 		else
 		{
 			System.out.print("Server IP: ");
-			ip = input.nextLine();		/* For debugging */
-			//ip = "127.0.0.1";
+			ip = input.nextLine();
 			System.out.print("Server port: ");
 			port = Integer.parseInt(input.nextLine());
-			//port = 2000;
+			messageHandler = new NetworkHandler(ip, port);
+			messageHandler.addObserver(this);
+			System.out.println("Created network handler");
+			messageHandler.connect();
+			new Thread((Runnable) messageHandler).start();		/* Start listening for messages or gamestate updates from server */
 		}
 
-		networkHandler = new NetworkHandler(ip, port);
-		networkHandler.addObserver(this);
-		System.out.println("Created network handler");
-		networkHandler.connect();
-
 		System.out.println("Sending username to server...");
-		networkHandler.send(username);
+		messageHandler.send(username);
 	}
 
 	public void chooseAction()			/* Here or ActionCLI? */
@@ -77,18 +70,18 @@ public class CLI extends View
 		switch (choice)
 		{
 			case "0":
-				new LeaderChoice(input, command, networkHandler, this);
-				new BuyResources(input, command, networkHandler, this);
+				new LeaderChoice(input, command, messageHandler, this);
+				new BuyResources(input, command, messageHandler, this);
 				break;
 
 			case "1":
-				new LeaderChoice(input, command, networkHandler, this);
-				new BuyDevCard(input, command, networkHandler, this);
+				new LeaderChoice(input, command, messageHandler, this);
+				new BuyDevCard(input, command, messageHandler, this);
 				break;
 
 			case "2":
-				new LeaderChoice(input, command, networkHandler, this);
-				new ActivateProduction(input, command, networkHandler, this);
+				new LeaderChoice(input, command, messageHandler, this);
+				new ActivateProduction(input, command, messageHandler, this);
 				break;
 
 			case "3":
@@ -137,9 +130,9 @@ public class CLI extends View
 		}
 	}
 
-	public NetworkHandler getNetworkHandler()
+	public MessageIO getMessageHandler()
 	{
-		return networkHandler;
+		return messageHandler;
 	}
 
 	public Scanner getInput()

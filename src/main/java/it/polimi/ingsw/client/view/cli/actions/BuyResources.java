@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.cli.actions;
 
+import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.cli.CLI;
 import it.polimi.ingsw.client.view.cli.PrintMethods;
@@ -10,7 +11,7 @@ import java.util.Scanner;
 
 public class BuyResources		/* TODO: Action interface */
 {
-	public BuyResources(Scanner input, List<String> command, NetworkHandler networkHandler, CLI cli)
+	public BuyResources(Scanner input, List<String> command, MessageIO messageHandler, CLI cli)
 	{
 		String rowOrCol, rowOrColNum, whiteMarbleRes = "", choice;
 
@@ -51,7 +52,7 @@ public class BuyResources		/* TODO: Action interface */
 		command.add(rowOrCol);
 		command.add(rowOrColNum);
 		command.add(whiteMarbleRes);
-		networkHandler.send(command);
+		messageHandler.send(command);
 		command.clear();
 	}
 }

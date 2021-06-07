@@ -1,12 +1,3 @@
-/**
- * This is a standalone program that converts Java objects to XML files. It is used to set the parameters of every DevCard and LeaderCard without hardcoding them.
- * In order to find a good balance between freedom of customization and practicality, the tool automatically sets some fields based on the base game's cards. For example, it automatically sets "points = 5" for leadercards with the marble skill or the produced faithpoints in SkillProduction cards to 1 instead of asking for user input.
- * These values are still included in the xmls so they can be edited manually by the user or with the parameters editor.
- * There are still some limitations as to what can be customized, because too much freedom leads to chaos and excessive complexity. For example, leadercard requirements depend on the card's skill.
- * For SkillProduction cards, only the card's level and color can be changed and not the amount of cards, or the type (resources instead of devcards), because adding a list or changing the type would be a mess.
- * @author Giulio Occhipinti
-*/
-
 package it.polimi.ingsw.util;
 
 import it.polimi.ingsw.model.ResourceType;
@@ -21,7 +12,11 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Interactive program that facilitates the creation of xml files containing every card's parameters
+ * This is a standalone program that converts Java objects to XML files. It is used to set the parameters of every DevCard and LeaderCard without hardcoding them.
+ * In order to find a good balance between freedom of customization and practicality, the tool automatically sets some fields based on the base game's cards. For example, it automatically sets "points = 5" for leadercards with the marble skill or the produced faithpoints in SkillProduction cards to 1 instead of asking for user input.
+ * These values are still included in the xmls so they can be edited manually by the user or with the parameters editor.
+ * There are still some limitations as to what can be customized, because too much freedom leads to chaos and excessive complexity. For example, leadercard requirements depend on the card's skill.
+ * For SkillProduction cards, only the card's level and color can be changed and not the amount of cards, or the type (resources instead of devcards), because adding a list or changing the type would be a mess.
  * @author Giulio Occhipinti
  */
 
