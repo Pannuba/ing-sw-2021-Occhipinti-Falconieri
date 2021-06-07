@@ -21,10 +21,10 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		System.out.println("Card number: " + ((LeaderCard) card).getCardNumber());
 		System.out.println("Points: " + ((LeaderCard) card).getPoints());
 
-		//if (((LeaderCard) card).isActive())			/* Active cards can't be discarded, and vice versa. Will remove this check for debugging */
+		if (((LeaderCard) card).isActive())			/* Active cards can't be discarded, and vice versa */
 			System.out.println("Active: " + ((LeaderCard) card).isActive());
 
-		//else
+		else
 			System.out.println("Discarded: " + ((LeaderCard) card).isDiscarded());
 
 		switch (card.getClass().getSimpleName())

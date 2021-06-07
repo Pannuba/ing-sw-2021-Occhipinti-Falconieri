@@ -8,20 +8,18 @@ import java.util.*;
 
 import java.net.Socket;
 
-public class NetworkHandler implements Runnable		/* Observed by CLI to send it the newest gamestate */
+public class NetworkHandler extends Observable implements Runnable		/* Observed by CLI to send it the newest gamestate */
 {
 	private Socket clientSocket;
 	private ObjectInputStream ois;
 	private ObjectOutputStream oos;
 	private final Timer heartbeat;
 	private final TimerTask sendPing;
-	private final View view;
 	private final String ip;
 	private final int port;
 
-	public NetworkHandler(View view, String ip, int port)
+	public NetworkHandler(String ip, int port)
 	{
-		this.view = view;
 		this.ip = ip;
 		this.port = port;
 
@@ -32,7 +30,7 @@ public class NetworkHandler implements Runnable		/* Observed by CLI to send it t
 		heartbeat = new Timer();
 	}
 
-	public synchronized void run()
+	public void run()
 	{
 		while (!clientSocket.isClosed())
 		{
@@ -44,7 +42,8 @@ public class NetworkHandler implements Runnable		/* Observed by CLI to send it t
 				if (!(inputObj instanceof Ping))		/* Don't care if it's a ping */
 				{
 					System.out.println("Received " + inputObj.getClass().getSimpleName());
-					view.update(inputObj);
+					setChanged();
+					notifyObservers(inputObj);
 				}
 			}
 			catch (IOException | ClassNotFoundException e)

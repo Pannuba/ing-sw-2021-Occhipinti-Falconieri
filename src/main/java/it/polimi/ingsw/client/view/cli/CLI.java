@@ -57,7 +57,8 @@ public class CLI extends View
 			//port = 2000;
 		}
 
-		networkHandler = new NetworkHandler(this, ip, port);
+		networkHandler = new NetworkHandler(ip, port);
+		networkHandler.addObserver(this);
 		System.out.println("Created network handler");
 		networkHandler.connect();
 
@@ -115,7 +116,8 @@ public class CLI extends View
 			chooseAction();
 	}
 
-	public synchronized void update(Object obj)
+	@Override
+	public void update(Observable obs, Object obj)
 	{
 		if (obj instanceof Message)
 			((Message) obj).process(action);		/* Calls method in cli specified in the message */

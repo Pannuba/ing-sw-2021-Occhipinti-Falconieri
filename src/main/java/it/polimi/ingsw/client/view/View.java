@@ -2,11 +2,15 @@ package it.polimi.ingsw.client.view;
 
 import it.polimi.ingsw.client.NetworkHandler;
 
-public abstract class View
+import java.util.Observable;
+import java.util.Observer;
+
+public abstract class View implements Observer
 {
 	protected MessageExecutor action;
 
 	protected NetworkHandler networkHandler;
 
-	public abstract void update(Object obj);
+	@Override
+	public abstract void update(Observable obs, Object obj);
 }

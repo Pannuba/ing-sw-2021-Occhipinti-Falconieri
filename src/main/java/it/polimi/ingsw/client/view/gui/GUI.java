@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Observable;
 
 public class GUI extends View        /* Has gamestate, action instance, observes NetworkHandler */
 {
@@ -30,7 +31,8 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 		this.lc = lc;
 	}
 
-	public synchronized void update(Object obj)
+	@Override
+	public void update(Observable obs, Object obj)
 	{
 		if (obj instanceof Message)
 			((Message) obj).process(action);		/* Calls method in ActionGUI specified in the message */

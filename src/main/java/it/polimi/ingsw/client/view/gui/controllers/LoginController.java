@@ -27,7 +27,7 @@ public class LoginController
 	{
 		if (numPlayersField.isVisible())		/* Temporary solution, but what do? */
 		{
-			networkHandler.send(numPlayersField.getText());
+			networkHandler.send(numPlayersField.getText());		/* TODO: check if field is not empty */
 			return;
 		}
 
@@ -35,7 +35,8 @@ public class LoginController
 
 		GUI gui = new GUI(nameField.getText(), this, mainStage);
 
-		networkHandler = new NetworkHandler(gui, ipField.getText(), Integer.parseInt(portField.getText()));
+		networkHandler = new NetworkHandler(ipField.getText(), Integer.parseInt(portField.getText()));
+		networkHandler.addObserver(gui);
 		networkHandler.connect();
 		networkHandler.send(nameField.getText());
 
