@@ -304,7 +304,7 @@ public class MainViewController
 		else devCardArea1.setImage(null);
 
 		if (!devCardAreas[1].isEmpty())
-			devCardArea2.setImage(new Image(getClass().getResourceAsStream("/img/devcards" + devCardAreas[1].getTopDevCard().getCardNumber() + ".png")));
+			devCardArea2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[1].getTopDevCard().getCardNumber() + ".png")));
 
 		else devCardArea2.setImage(null);
 
