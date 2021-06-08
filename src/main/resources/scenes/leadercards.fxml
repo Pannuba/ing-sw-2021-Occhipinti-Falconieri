@@ -14,8 +14,8 @@
             <Image url="@../img/background.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="leaderCard1" fitHeight="547.0" fitWidth="440.0" layoutX="279.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="35.0" />
-      <ImageView fx:id="leaderCard2" fitHeight="547.0" fitWidth="440.0" layoutX="742.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="35.0" />
+      <ImageView fx:id="leaderCard1" fitHeight="547.0" fitWidth="440.0" layoutX="279.0" layoutY="31.0" onMouseClicked="#activeProduction1" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="35.0" />
+      <ImageView fx:id="leaderCard2" fitHeight="547.0" fitWidth="440.0" layoutX="742.0" layoutY="14.0" onMouseClicked="#activeProduction2" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="35.0" />
       <Button fx:id="activateLeaderOneButton" layoutX="50.0" layoutY="247.0" mnemonicParsing="false" onAction="#activateLeaderCard1" prefHeight="90.0" prefWidth="170.0" text="Activate" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="240.0">
          <font>
             <Font name="Times New Roman Bold Italic" size="30.0" />

@@ -4,9 +4,11 @@ import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.view.gui.ConvertMethods;
 import it.polimi.ingsw.client.view.gui.GUI;
 import it.polimi.ingsw.model.cards.LeaderCard;
+import it.polimi.ingsw.model.cards.SkillProduction;
 import it.polimi.ingsw.model.cards.SkillStorage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +16,7 @@ import javafx.scene.effect.Effect;
 import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -91,23 +94,45 @@ public class LeaderCardsController		/* TODO: add resources ImageViews in both le
 		mainStage.show();
 	}
 
-	public void update(List<LeaderCard> leaderCards, boolean isMyTurn)
+	@FXML
+	void activeProduction1(MouseEvent event)
 	{
+		messageHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "LEADER_SKILL", String.valueOf(leaderCards.get(0).getCardNumber())));
+	}
+
+	@FXML
+	void activeProduction2(MouseEvent event)
+	{
+		messageHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "LEADER_SKILL", String.valueOf(leaderCards.get(1).getCardNumber())));
+	}
+
+	public void update(List<LeaderCard> leaderCards, boolean isMyTurn) {
 		this.leaderCards = leaderCards;
 
 		leaderCard1.setImage(new Image(getClass().getResourceAsStream("/img/leadercards/" + leaderCards.get(0).getCardNumber() + ".png")));
 		leaderCard2.setImage(new Image(getClass().getResourceAsStream("/img/leadercards/" + leaderCards.get(1).getCardNumber() + ".png")));
+		leaderCard1.setDisable(false);
+		leaderCard2.setDisable(false);
 
-		if (leaderCards.get(0).isActive())
-		{
+		if (leaderCards.get(0).isActive()) {
 			activateLeaderOneButton.setVisible(false);
 			discardLeaderOneButton.setVisible(false);
 		}
 
-		if (leaderCards.get(1).isActive())
-		{
+		if (leaderCards.get(1).isActive()) {
 			activateLeaderTwoButton.setVisible(false);
 			discardLeaderTwoButton.setVisible(false);
+		}
+
+		if (leaderCards.get(0) instanceof SkillProduction && leaderCards.get(0).isActive()) {
+			leaderCard1.setDisable(true);
+			leaderCard1.setCursor(Cursor.HAND);
+		}
+
+		if (leaderCards.get(1) instanceof SkillProduction && leaderCards.get(1).isActive())
+		{
+			leaderCard2.setDisable(true);
+			leaderCard2.setCursor(Cursor.HAND);
 		}
 
 		if (leaderCards.get(0) instanceof SkillStorage && leaderCards.get(0).isActive())
