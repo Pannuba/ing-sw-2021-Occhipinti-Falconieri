@@ -1,8 +1,10 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
 import it.polimi.ingsw.client.MessageIO;
+import it.polimi.ingsw.client.view.gui.ConvertMethods;
 import it.polimi.ingsw.client.view.gui.GUI;
 import it.polimi.ingsw.model.cards.LeaderCard;
+import it.polimi.ingsw.model.cards.SkillStorage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -39,10 +41,10 @@ public class LeaderCardsController		/* TODO: add resources ImageViews in both le
 
 	@FXML private Button backToBoardButton;
 
-	@FXML private ImageView cardL1;
-	@FXML private ImageView cardL2;
-	@FXML private ImageView cardR1;
-	@FXML private ImageView cardR2;
+	@FXML private ImageView resL1;
+	@FXML private ImageView resL2;
+	@FXML private ImageView resR1;
+	@FXML private ImageView resR2;
 
 	@FXML
 	void activateLeaderCard1(ActionEvent event)
@@ -106,6 +108,54 @@ public class LeaderCardsController		/* TODO: add resources ImageViews in both le
 		{
 			activateLeaderTwoButton.setVisible(false);
 			discardLeaderTwoButton.setVisible(false);
+		}
+
+		if (leaderCards.get(0) instanceof SkillStorage && leaderCards.get(0).isActive())
+		{
+			resL1.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertResTypeToPath(((SkillStorage) leaderCards.get(0)).getAdditionalStorage().getShelfResourceType()))));
+			resL2.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertResTypeToPath(((SkillStorage) leaderCards.get(0)).getAdditionalStorage().getShelfResourceType()))));
+
+			if (((SkillStorage) leaderCards.get(0)).getAdditionalStorage().getShelfResourceQuantity() == 0)
+			{
+				resL1.setVisible(false);
+				resL2.setVisible(false);
+			}
+
+			else if (((SkillStorage) leaderCards.get(0)).getAdditionalStorage().getShelfResourceQuantity() == 1)
+			{
+				resL1.setVisible(true);
+				resL2.setVisible(false);
+			}
+
+			else if (((SkillStorage) leaderCards.get(0)).getAdditionalStorage().getShelfResourceQuantity() == 2)
+			{
+				resL1.setVisible(true);
+				resL2.setVisible(true);
+			}
+		}
+
+		if (leaderCards.get(1) instanceof SkillStorage && leaderCards.get(1).isActive())
+		{
+			resR1.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertResTypeToPath(((SkillStorage) leaderCards.get(1)).getAdditionalStorage().getShelfResourceType()))));
+			resR2.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertResTypeToPath(((SkillStorage) leaderCards.get(1)).getAdditionalStorage().getShelfResourceType()))));
+
+			if (((SkillStorage) leaderCards.get(1)).getAdditionalStorage().getShelfResourceQuantity() == 0)
+			{
+				resR1.setVisible(false);
+				resR2.setVisible(false);
+			}
+
+			else if (((SkillStorage) leaderCards.get(1)).getAdditionalStorage().getShelfResourceQuantity() == 1)
+			{
+				resR1.setVisible(true);
+				resR2.setVisible(false);
+			}
+
+			else if (((SkillStorage) leaderCards.get(1)).getAdditionalStorage().getShelfResourceQuantity() == 2)
+			{
+				resR1.setVisible(true);
+				resR2.setVisible(true);
+			}
 		}
 
 		if (!isMyTurn)
