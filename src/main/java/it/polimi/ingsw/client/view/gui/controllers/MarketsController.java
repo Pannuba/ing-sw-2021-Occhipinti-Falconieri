@@ -128,7 +128,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 				devCards.get(i).setImage(null);
 
 			else
-				devCards.get(i).setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardsMarket.getDevCardStacks().get(i).get(0).getCardNumber() + ".png")));
+				devCards.get(i).setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardsMarket.getDevCardStacks().get(i).get(0).getCardNumber() + ".png")));
 		}
 	}
 
