@@ -112,11 +112,17 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ImageView>
-      <Button fx:id="nextButton" layoutX="1033.0" layoutY="176.0" mnemonicParsing="false" onAction="#showNextBoard" prefHeight="45.0" prefWidth="102.0" text="Next" />
-      <Button fx:id="backButton" layoutX="1145.0" layoutY="198.0" mnemonicParsing="false" onAction="#backToBoard" text="Back to Board" />
-      <Label fx:id="usernameLabel" layoutX="1018.0" layoutY="22.0" prefHeight="59.0" prefWidth="260.0" text="Username's board" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Button fx:id="nextButton" layoutX="1094.0" layoutY="156.0" mnemonicParsing="false" onAction="#showNextBoard" prefHeight="45.0" prefWidth="102.0" text="Next">
          <font>
-            <Font name="System Bold Italic" size="21.0" />
+            <Font name="Times New Roman Italic" size="25.0" />
+         </font></Button>
+      <Button fx:id="backButton" layoutX="1078.0" layoutY="216.0" mnemonicParsing="false" onAction="#backToBoard" prefHeight="45.0" prefWidth="134.0" text="Back to Board">
+         <font>
+            <Font name="Times New Roman Italic" size="18.0" />
+         </font></Button>
+      <Label fx:id="usernameLabel" layoutX="1018.0" layoutY="22.0" prefHeight="59.0" prefWidth="260.0" text="Username's board" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="30.0" />
          </font>
       </Label>
    </children>

@@ -57,22 +57,22 @@ public class EndGameController {
 		switch (players.size())
 		{
 			case 1:
-				nameAndPoint.setText(players.get(0).getUsername() + ": " + players.get(0).getVictoryPoints() + " points/n");
+				nameAndPoint.setText(players.get(0).getUsername() + ": " + players.get(0).getVictoryPoints() + " points\n");
 				break;
 			case 2:
-				nameAndPoint.setText(players.get(0).getUsername() + ": " + players.get(0).getVictoryPoints() + " points/n"
-									+ players.get(1).getUsername() + ": " + players.get(1).getVictoryPoints() + " points/n");
+				nameAndPoint.setText(players.get(0).getUsername() + ": " + players.get(0).getVictoryPoints() + " points\n"
+									+ players.get(1).getUsername() + ": " + players.get(1).getVictoryPoints() + " points\n");
 				break;
 			case 3:
-				nameAndPoint.setText(players.get(0).getUsername() + ": " + players.get(0).getVictoryPoints() + " points/n"
-									+ players.get(1).getUsername() + ": " + players.get(1).getVictoryPoints() + " points/n"
-									+ players.get(2).getUsername() + ": " + players.get(2).getVictoryPoints() + " points/n");
+				nameAndPoint.setText(players.get(0).getUsername() + ": " + players.get(0).getVictoryPoints() + " points\n"
+									+ players.get(1).getUsername() + ": " + players.get(1).getVictoryPoints() + " points\n"
+									+ players.get(2).getUsername() + ": " + players.get(2).getVictoryPoints() + " points\n");
 				break;
 			case 4:
-				nameAndPoint.setText(players.get(0).getUsername() + ": " + players.get(0).getVictoryPoints() + " points/n"
-									+ players.get(1).getUsername() + ": " + players.get(1).getVictoryPoints() + " points/n"
-									+ players.get(2).getUsername() + ": " + players.get(2).getVictoryPoints() + " points/n"
-									+ players.get(3).getUsername() + ": " + players.get(3).getVictoryPoints() + " points/n");
+				nameAndPoint.setText(players.get(0).getUsername() + ": " + players.get(0).getVictoryPoints() + " points\n"
+									+ players.get(1).getUsername() + ": " + players.get(1).getVictoryPoints() + " points\n"
+									+ players.get(2).getUsername() + ": " + players.get(2).getVictoryPoints() + " points\n"
+									+ players.get(3).getUsername() + ": " + players.get(3).getVictoryPoints() + " points\n");
 				break;
 		}
 	}

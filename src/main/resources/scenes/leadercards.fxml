@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,27 +14,37 @@
             <Image url="@../img/background.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="leaderCard1" fitHeight="400.0" fitWidth="265.0" layoutX="125.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="132.0" AnchorPane.topAnchor="17.0" />
-      <ImageView fx:id="leaderCard2" fitHeight="400.0" fitWidth="265.0" layoutX="946.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="17.0" />
-      <Button fx:id="activateLeaderOneButton" layoutX="178.0" layoutY="398.0" mnemonicParsing="false" onAction="#activateLeaderCard1" prefHeight="90.0" prefWidth="170.0" text="Activate" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="180.0">
+      <ImageView fx:id="leaderCard1" fitHeight="547.0" fitWidth="440.0" layoutX="279.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="35.0" />
+      <ImageView fx:id="leaderCard2" fitHeight="547.0" fitWidth="440.0" layoutX="742.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="35.0" />
+      <Button fx:id="activateLeaderOneButton" layoutX="50.0" layoutY="247.0" mnemonicParsing="false" onAction="#activateLeaderCard1" prefHeight="90.0" prefWidth="170.0" text="Activate" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="240.0">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="30.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="discardLeaderOneButton" layoutX="43.0" layoutY="399.0" mnemonicParsing="false" onAction="#discardLeaderCard1" prefHeight="90.0" prefWidth="170.0" text="Discard" AnchorPane.bottomAnchor="240.0" AnchorPane.leftAnchor="30.0">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="30.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="activateLeaderTwoButton" layoutX="402.0" layoutY="283.0" mnemonicParsing="false" onAction="#activateLeaderCard2" prefHeight="90.0" prefWidth="170.0" text="Activate" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="240.0">
          <font>
             <Font name="Times New Roman Bold Italic" size="30.0" />
          </font></Button>
-      <Button fx:id="discardLeaderOneButton" layoutX="176.0" layoutY="534.0" mnemonicParsing="false" onAction="#discardLeaderCard1" prefHeight="90.0" prefWidth="170.0" text="Discard" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="180.0">
+      <Button fx:id="discardLeaderTwoButton" layoutX="1005.0" layoutY="598.0" mnemonicParsing="false" onAction="#discardLeaderCard2" prefHeight="90.0" prefWidth="170.0" text="Discard" AnchorPane.bottomAnchor="240.0" AnchorPane.rightAnchor="30.0">
          <font>
             <Font name="Times New Roman Bold Italic" size="30.0" />
          </font></Button>
-      <Button fx:id="activateLeaderTwoButton" layoutX="402.0" layoutY="283.0" mnemonicParsing="false" onAction="#activateLeaderCard2" prefHeight="90.0" prefWidth="170.0" text="Activate" AnchorPane.bottomAnchor="200.0" AnchorPane.rightAnchor="180.0">
-         <font>
-            <Font name="Times New Roman Bold Italic" size="30.0" />
-         </font></Button>
-      <Button fx:id="discardLeaderTwoButton" layoutX="1005.0" layoutY="598.0" mnemonicParsing="false" onAction="#discardLeaderCard2" prefHeight="90.0" prefWidth="170.0" text="Discard" AnchorPane.bottomAnchor="90.0" AnchorPane.rightAnchor="180.0">
-         <font>
-            <Font name="Times New Roman Bold Italic" size="30.0" />
-         </font></Button>
-      <Button fx:id="backToBoardButton" layoutX="511.0" layoutY="550.0" mnemonicParsing="false" onAction="#backToBoard" prefHeight="111.0" prefWidth="273.0" text="Back to Board" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0">
+      <Button fx:id="backToBoardButton" layoutX="511.0" layoutY="587.0" mnemonicParsing="false" onAction="#backToBoard" prefHeight="74.0" prefWidth="280.0" text="Back to Board" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0">
          <font>
             <Font name="Times New Roman Bold Italic" size="35.0" />
          </font></Button>
+      <ImageView fx:id="cardL1" fitHeight="96.0" fitWidth="96.0" layoutX="318.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="167.0" AnchorPane.leftAnchor="318.0" AnchorPane.rightAnchor="866.0" AnchorPane.topAnchor="457.0" />
+      <ImageView fx:id="cardL2" fitHeight="96.0" fitWidth="96.0" layoutX="454.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="167.0" AnchorPane.leftAnchor="454.0" AnchorPane.rightAnchor="730.0" AnchorPane.topAnchor="457.0" />
+      <ImageView fx:id="cardR1" fitHeight="96.0" fitWidth="96.0" layoutX="745.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="cardR2" fitHeight="96.0" fitWidth="96.0" layoutX="881.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true" visible="false" />
    </children>
 </AnchorPane>
