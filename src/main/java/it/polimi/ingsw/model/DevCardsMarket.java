@@ -14,6 +14,11 @@ public class DevCardsMarket implements Serializable
 
 	public DevCardsMarket()
 	{
+
+	}
+
+	public void create()
+	{
 		System.out.println("Creating devcards...");
 		List<DevCard> allDevCards = new ArrayList<>();
 		devCardStacks = new ArrayList<>();

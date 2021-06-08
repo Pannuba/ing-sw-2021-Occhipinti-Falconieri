@@ -13,9 +13,14 @@ public class Player implements Serializable
 	private boolean isMyTurn;
 	private int victoryPoints;				/* Value assigned at the end of the match */
 	private List<LeaderCard> leaderCards;
-	private final String username;
+	private String username;
 	private Dashboard dashboard;
 	private PopeToken[] popeTokens = new PopeToken[3];			/* Discarded or turned/activated depending on pawn position during vatican report */
+
+	public Player()
+	{
+
+	}
 
 	public Player(String username)
 	{
@@ -145,6 +150,11 @@ public class Player implements Serializable
 		return username;
 	}
 
+	public void setUsername(String username)
+	{
+		this.username = username;
+	}
+
 	public boolean isMyTurn()
 	{
 		return isMyTurn;
@@ -160,7 +170,10 @@ public class Player implements Serializable
 		return dashboard;
 	}
 
-	public void setDashboard (Dashboard dashboard) { this.dashboard = dashboard; }
+	public void setDashboard (Dashboard dashboard)
+	{
+		this.dashboard = dashboard;
+	}
 
 	public int getVictoryPoints()
 	{
@@ -187,5 +200,8 @@ public class Player implements Serializable
 		return popeTokens;
 	}
 
-	public void setPopeTokens(PopeToken[] popeTokens) { this.popeTokens = popeTokens; }
+	public void setPopeTokens(PopeToken[] popeTokens)
+	{
+		this.popeTokens = popeTokens;
+	}
 }

@@ -1,5 +1,6 @@
-package it.polimi.ingsw.client;
+package it.polimi.ingsw.client.localmatch;
 
+import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.localmatch.controller.LocalController;
 
 import java.util.List;

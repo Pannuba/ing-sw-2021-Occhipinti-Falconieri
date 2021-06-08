@@ -4,7 +4,12 @@ import it.polimi.ingsw.model.board.Track;
 
 public class ActionBlack2 extends ActionToken
 {
-	private final Track track;
+	private Track track;
+
+	public ActionBlack2()
+	{
+
+	}
 
 	public ActionBlack2(Track track)
 	{

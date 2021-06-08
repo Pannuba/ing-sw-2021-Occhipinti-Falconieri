@@ -1,7 +1,5 @@
 package it.polimi.ingsw.client.view.cli.actions;
 
-import it.polimi.ingsw.client.MessageIO;
-import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.cli.CLI;
 import it.polimi.ingsw.client.view.cli.PrintMethods;
 import it.polimi.ingsw.model.cards.LeaderCard;

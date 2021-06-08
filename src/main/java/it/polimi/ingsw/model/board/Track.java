@@ -14,8 +14,13 @@ public class Track implements Serializable
 	private final Box[] faithTrack = new Box[25];
 	private final PopeToken[] popeTokens = new PopeToken[3];		/* Track has 3 popetokens, discarded when a player calls a vatican report for each token */
 	private HashMap<Integer, Integer> redPawns;				/* Key: ID, value: position */
-	private final int numPlayers;
+	private int numPlayers;
 	private int blackPawn;
+
+	public Track()
+	{
+
+	}
 
 	public Track(List<Player> players)
 	{

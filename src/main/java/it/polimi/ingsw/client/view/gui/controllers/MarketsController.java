@@ -1,18 +1,13 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
 import it.polimi.ingsw.client.MessageIO;
-import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.ConvertMethods;
 import it.polimi.ingsw.client.view.gui.GUI;
 import it.polimi.ingsw.model.DevCardsMarket;
 import it.polimi.ingsw.model.Marble;
-import it.polimi.ingsw.model.MarbleType;
 import it.polimi.ingsw.model.MarblesMarket;
-import it.polimi.ingsw.model.cards.DevCard;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;

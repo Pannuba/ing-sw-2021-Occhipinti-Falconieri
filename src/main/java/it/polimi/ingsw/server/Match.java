@@ -18,6 +18,7 @@ import java.util.List;
 
 public class Match implements Runnable
 {
+	private final boolean isRecoveredMatch;
 	private final int numPlayers;
 	private final List<ClientHandler> views;
 	private final Model model;
@@ -30,6 +31,7 @@ public class Match implements Runnable
 
 	public Match(List<Player> players, List<ClientHandler> views)
 	{
+		isRecoveredMatch = false;
 		this.numPlayers = players.size();
 		this.views = views;
 
@@ -43,6 +45,23 @@ public class Match implements Runnable
 		}
 	}
 
+	public Match(Model recoveredModel, List<ClientHandler> views)
+	{
+		isRecoveredMatch = true;
+		this.numPlayers = recoveredModel.getNumPlayers();
+		this.views = views;
+		model = recoveredModel;
+		Controller controller = new Controller(recoveredModel);
+
+		for (int i = 0; i < views.size(); i++)
+		{
+			views.get(i).addObserver(controller);		/* Controller observes the views to get the command */
+			recoveredModel.addObserver(views.get(i));			/* Views observe the model to send the client the new gamestate */
+		}
+
+		model.update();
+	}
+
 	/**
 	 * Thread started in the ServerListener, sends the initial messages (MatchStart, ChooseLeaders, InitialResources) to the views
 	 */
@@ -51,23 +70,30 @@ public class Match implements Runnable
 	{
 		System.out.println("Match thread started");
 
-		for (int i = 0; i < numPlayers; i++)			/* When all players are connected */
-			views.get(i).send(new MatchStartMessage());
-
-		List<List<LeaderCard>> leaderCardsLists = model.createLeaderCardsLists();
-
-		for (int i = 0; i < numPlayers; i++)
+		if (!isRecoveredMatch)
 		{
-			views.get(i).send(new ChooseLeadersMessage(leaderCardsLists.get(i)));
-			views.get(i).send(new InitialResourcesMessage(i));		/* Because the player list in Model is sorted by ID. players[0] has ID 0 and so on */
-		}
 
-		//model.update();		/* Send the first gamestate after the setup messages. Putting this here instead of the controller makes everything work */
+			for (int i = 0; i < numPlayers; i++)			/* When all players are connected */
+				views.get(i).send(new MatchStartMessage());
+
+			List<List<LeaderCard>> leaderCardsLists = model.createLeaderCardsLists();
+
+			for (int i = 0; i < numPlayers; i++)
+			{
+				views.get(i).send(new ChooseLeadersMessage(leaderCardsLists.get(i)));
+				views.get(i).send(new InitialResourcesMessage(i));			/* Because the player list in Model is sorted by ID. players[0] has ID 0 and so on */
+			}
+		}
 	}
 
 	public void stop()		/* If I create a Match list in ServerListener and call stop() on every match on shutdown, it doesn't work */
 	{
 		for (int i = 0; i < views.size(); i++)		/* Close views in this match */
 			views.get(i).close();
+	}
+
+	public Model getModel()
+	{
+		return model;
 	}
 }

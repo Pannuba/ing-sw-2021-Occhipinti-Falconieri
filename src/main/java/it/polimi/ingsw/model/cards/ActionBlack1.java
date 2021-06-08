@@ -7,8 +7,13 @@ import java.util.List;
 
 public class ActionBlack1 extends ActionToken		/* I can also do an instanceof check in the controller, and if it's an ActionBlack1 manually shuffle the tokens... we'll see */
 {													/* but then it doesn't really make sense to use an abstract method, either do one thing or the other, no inbetweens */
-	private final Track track;
-	private final List<ActionToken> tokens;
+	private Track track;
+	private List<ActionToken> tokens;
+
+	public ActionBlack1()
+	{
+
+	}
 
 	public ActionBlack1(Track track, List<ActionToken> tokens)
 	{

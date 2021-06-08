@@ -1,8 +1,7 @@
 package it.polimi.ingsw.client.view.gui;
 
-import it.polimi.ingsw.client.LocalMatchIO;
+import it.polimi.ingsw.client.localmatch.LocalMatchIO;
 import it.polimi.ingsw.client.MessageIO;
-import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.localmatch.LocalMatch;
 import it.polimi.ingsw.client.localmatch.LocalModel;
 import it.polimi.ingsw.client.localmatch.controller.LocalController;
@@ -11,14 +10,12 @@ import it.polimi.ingsw.client.view.gui.controllers.*;
 import it.polimi.ingsw.model.GameState;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.server.messages.Message;
-import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Observable;
 
 public class GUI extends View        /* Has gamestate, action instance, observes NetworkHandler */
 {

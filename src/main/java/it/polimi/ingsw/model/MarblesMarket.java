@@ -27,10 +27,15 @@ import java.util.List;
 
 public class MarblesMarket implements Serializable
 {
-	private final Marble[][] marblesBoard = new Marble[3][4];
+	private Marble[][] marblesBoard = new Marble[3][4];
 	private Marble spareMarble;
 
 	public MarblesMarket()
+	{
+
+	}
+
+	public void create()
 	{
 		System.out.println("Creating marbles market...");
 
@@ -94,8 +99,18 @@ public class MarblesMarket implements Serializable
 		return marblesBoard;
 	}
 
+	public void setMarblesBoard(Marble[][] marblesBoard)		/* For deserialization when matches are recovered */
+	{
+		this.marblesBoard = marblesBoard;
+	}
+
 	public Marble getSpareMarble()
 	{
 		return spareMarble;
+	}
+
+	public void setSpareMarble(Marble spareMarble)
+	{
+		this.spareMarble = spareMarble;
 	}
 }

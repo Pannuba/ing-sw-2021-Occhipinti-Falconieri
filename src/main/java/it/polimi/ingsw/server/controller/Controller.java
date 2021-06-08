@@ -1,7 +1,6 @@
 package it.polimi.ingsw.server.controller;
 
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.model.board.Dashboard;
 import it.polimi.ingsw.model.board.Storage;
 import it.polimi.ingsw.model.board.Vault;
 import it.polimi.ingsw.model.cards.*;
@@ -71,10 +70,14 @@ public class Controller implements Observer			/* Observes view to get commands..
 		}
 
 		if ((command.get(0).equals("BUY_RESOURCES") || command.get(0).equals("BUY_DEVCARD")	||
-			command.get(0).equals("ACTIVATE_PRODUCTION")) && !isTaskFailed)
+			command.get(0).equals("ACTIVATE_PRODUCTION") || command.get(0).equals("DISCARD_LEADER")) && !isTaskFailed)
 		{
-			chooseNextPlayer();			/* Don't choose next player during setup or failed actions */
-			postRoundChecks();			/* Put in model as separate method, or in update()? */
+			if (!command.get(0).equals("DISCARD_LEADER"))
+			{
+				chooseNextPlayer();            /* Don't choose next player during setup, failed actions or "discard leader" actions */
+				postRoundChecks();            /* Put in model as separate method, or in update()? */
+			}
+
 			model.update();				/* Send new gamestate to everyone */
 		}
 	}

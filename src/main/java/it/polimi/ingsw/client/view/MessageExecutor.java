@@ -3,7 +3,6 @@ package it.polimi.ingsw.client.view;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.cards.ActionToken;
-import it.polimi.ingsw.model.cards.DevCard;
 import it.polimi.ingsw.model.cards.LeaderCard;
 
 import java.util.List;

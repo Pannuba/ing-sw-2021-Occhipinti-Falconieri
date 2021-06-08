@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.MessageIO;
-import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.MessageExecutor;
 import it.polimi.ingsw.client.view.cli.actions.*;
 import it.polimi.ingsw.model.Player;

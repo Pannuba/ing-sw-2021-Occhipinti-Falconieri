@@ -8,6 +8,11 @@ public class PopeToken implements Serializable
 	private boolean isActive;			/* True when a player is inside the perimeter when a vatican report is called */
 	private boolean isDiscarded;		/* True when a player is outside the perimeter or when the vatican report for that token is called */
 
+	public PopeToken()
+	{
+
+	}
+
 	public PopeToken(int points)
 	{
 		this.points = points;

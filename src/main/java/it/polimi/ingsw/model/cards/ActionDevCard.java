@@ -9,6 +9,11 @@ public class ActionDevCard extends ActionToken
 	private DevCardColor color;
 	private DevCardsMarket devCardsMarket;
 
+	public ActionDevCard()
+	{
+
+	}
+
 	public ActionDevCard(DevCardColor color, DevCardsMarket devCardsMarket)
 	{
 		this.color = color;

@@ -3,12 +3,9 @@ package it.polimi.ingsw.client.localmatch.controller.commands;
 import it.polimi.ingsw.client.localmatch.LocalModel;
 import it.polimi.ingsw.client.localmatch.controller.LocalController;
 import it.polimi.ingsw.model.MarbleType;
-import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.cards.SkillStorage;
-import it.polimi.ingsw.server.controller.Controller;
-import it.polimi.ingsw.server.controller.commands.Command;
 import it.polimi.ingsw.server.messages.BoughtResourcesMessage;
 
 import java.util.ArrayList;

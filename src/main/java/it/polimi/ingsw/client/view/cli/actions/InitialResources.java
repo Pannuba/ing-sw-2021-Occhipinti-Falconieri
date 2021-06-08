@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client.view.cli.actions;
 
 import it.polimi.ingsw.client.MessageIO;
-import it.polimi.ingsw.client.NetworkHandler;
 
 import java.util.List;
 import java.util.Scanner;

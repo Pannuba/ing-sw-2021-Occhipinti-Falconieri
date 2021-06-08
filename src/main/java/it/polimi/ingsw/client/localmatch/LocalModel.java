@@ -9,8 +9,6 @@ import it.polimi.ingsw.model.cards.*;
 
 import it.polimi.ingsw.server.messages.DiscardedResourcesMessage;
 import it.polimi.ingsw.server.messages.MatchOverMessage;
-import it.polimi.ingsw.server.messages.OperationResultMessage;
-import it.polimi.ingsw.server.messages.VaticanReportMessage;
 import it.polimi.ingsw.util.XML_Serialization;
 
 import java.io.IOException;
@@ -250,8 +248,9 @@ public class LocalModel extends Observable        /* Observed by the views to cr
 		player.setVictoryPoints(calculatePoints(player));
 
 		/* Send MatchOverMessage to everyone (notifyObservers) including a message of who won */
-		setChanged();
-		//notifyObservers(new MatchOverMessage(winnerName, players));		/* Add message for tie? */
+		List<Player> playerInList = new ArrayList<>();
+		playerInList.add(player);
+		view.update(new MatchOverMessage(player.getUsername(), playerInList));		/* If the player didn't lose, they won */
 	}
 
 	public Track getTrack()

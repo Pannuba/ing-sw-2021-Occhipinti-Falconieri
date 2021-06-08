@@ -2,10 +2,7 @@ package it.polimi.ingsw.client.localmatch.controller.commands;
 
 import it.polimi.ingsw.client.localmatch.LocalModel;
 import it.polimi.ingsw.client.localmatch.controller.LocalController;
-import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.cards.LeaderCard;
-import it.polimi.ingsw.server.controller.Controller;
-import it.polimi.ingsw.server.controller.commands.Command;
 
 import java.util.ArrayList;
 import java.util.List;

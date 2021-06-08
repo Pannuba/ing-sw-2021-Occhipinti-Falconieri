@@ -1,9 +1,7 @@
 package it.polimi.ingsw.client.localmatch.controller;
 
 import it.polimi.ingsw.client.localmatch.LocalModel;
-import it.polimi.ingsw.client.localmatch.controller.commands.BuyResourcesCommand;
-import it.polimi.ingsw.client.localmatch.controller.commands.InitialResourcesCommand;
-import it.polimi.ingsw.client.localmatch.controller.commands.SelectLeaderCardsCommand;
+import it.polimi.ingsw.client.localmatch.controller.commands.*;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.board.Storage;
@@ -47,19 +45,19 @@ public class LocalController extends Observable			/* Observes view to get comman
 				return;
 
 			case "ACTIVATE_LEADER":
-				//isTaskFailed = new ActivateLeaderCommand().run(this, command, username, model);
+				isTaskFailed = new ActivateLeaderCommand().run(this, command, username, model);
 				break;
 
 			case "DISCARD_LEADER":
-				//isTaskFailed = new DiscardLeaderCommand().run(this, command, username, model);
+				isTaskFailed = new DiscardLeaderCommand().run(this, command, username, model);
 				break;
 
 			case "BUY_DEVCARD":
-				//isTaskFailed = new BuyDevCardCommand().run(this, command, username, model);
+				isTaskFailed = new BuyDevCardCommand().run(this, command, username, model);
 				break;
 
 			case "ACTIVATE_PRODUCTION":
-				//isTaskFailed = new ActivateProductionCommand().run(this, command, username, model);
+				isTaskFailed = new ActivateProductionCommand().run(this, command, username, model);
 				break;
 
 			case "BUY_RESOURCES":
@@ -68,9 +66,11 @@ public class LocalController extends Observable			/* Observes view to get comman
 		}
 
 		if ((command.get(0).equals("BUY_RESOURCES") || command.get(0).equals("BUY_DEVCARD")	||
-				command.get(0).equals("ACTIVATE_PRODUCTION")) && !isTaskFailed)
+			command.get(0).equals("ACTIVATE_PRODUCTION") || command.get(0).equals("DISCARD_LEADER")) && !isTaskFailed)
 		{
-			postRoundChecks();			/* Put in model as separate method, or in update()? */
+			if (!command.get(0).equals("DISCARD_LEADER"))
+				postRoundChecks();			/* Put in model as separate method, or in update()? */
+
 			model.update();				/* Send new gamestate to everyone */
 		}
 	}

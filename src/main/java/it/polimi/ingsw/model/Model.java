@@ -15,16 +15,21 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 
-public class Model extends Observable		/* Observed by the views to create the new gamestate */
+public class Model extends Observable        /* Observed by the views to create the new gamestate */
 {
-	private final int numPlayers;
+	private int numPlayers;
 	private boolean matchOver;
 	private Track track;
-	private final MarblesMarket marblesMarket;
+	private MarblesMarket marblesMarket;
 	private DevCardsMarket devCardsMarket;
 	private List<Player> players;
 	private List<LeaderCard> allLeaderCards;		/* All 16 leadercards, each player picks 2 out of 4 */
 	private List<ActionToken> actionTokens;
+
+	public Model()
+	{
+
+	}
 
 	public Model(List<Player> players)
 	{
@@ -37,7 +42,9 @@ public class Model extends Observable		/* Observed by the views to create the ne
 
 		track = new Track(players);
 		marblesMarket = new MarblesMarket();
+		marblesMarket.create();
 		devCardsMarket = new DevCardsMarket();
+		devCardsMarket.create();
 
 		matchOver = false;
 
@@ -367,12 +374,20 @@ public class Model extends Observable		/* Observed by the views to create the ne
 		return marblesMarket;
 	}
 
+	public void setMarblesMarket(MarblesMarket marblesMarket)
+	{
+		this.marblesMarket = marblesMarket;
+	}
+
 	public DevCardsMarket getDevCardsMarket()
 	{
 		return devCardsMarket;
 	}
 
-	public void setDevCardsMarket (DevCardsMarket devCardsMarket) { this.devCardsMarket = devCardsMarket; }
+	public void setDevCardsMarket (DevCardsMarket devCardsMarket)
+	{
+		this.devCardsMarket = devCardsMarket;
+	}
 
 	public List<Player> getPlayers()
 	{
@@ -397,6 +412,11 @@ public class Model extends Observable		/* Observed by the views to create the ne
 	public List<ActionToken> getActionTokens()
 	{
 		return actionTokens;
+	}
+
+	public void setActionTokens(List<ActionToken> actionTokens)
+	{
+		this.actionTokens = actionTokens;
 	}
 
 	public ActionToken getNextActionToken()		/* This method un-flips the current flipped token, flips the next one and returns it */

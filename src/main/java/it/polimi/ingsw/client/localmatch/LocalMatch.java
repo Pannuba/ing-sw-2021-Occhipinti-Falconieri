@@ -1,10 +1,7 @@
 package it.polimi.ingsw.client.localmatch;
 
-import it.polimi.ingsw.client.LocalMatchIO;
-import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.localmatch.controller.LocalController;
 import it.polimi.ingsw.client.view.View;
-import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.server.messages.ChooseLeadersMessage;
 import it.polimi.ingsw.server.messages.InitialResourcesMessage;

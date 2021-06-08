@@ -1,9 +1,12 @@
 package it.polimi.ingsw.server;
 
+import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.server.messages.FirstPlayerMessage;
 import it.polimi.ingsw.server.view.ClientHandler;
 import it.polimi.ingsw.util.Ping;
+import it.polimi.ingsw.util.XML_Serialization;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -19,12 +22,42 @@ import java.util.List;
 public class ServerListener
 {
 	private final ServerSocket serverSocket;
+	private final List<Model> recoveredMatches;
+	private List<Model> currentMatches;
 
 	/* Static method to get name/choice from client? So Match can use them */
 
 	public ServerListener(ServerSocket serverSocket)
 	{
 		this.serverSocket = serverSocket;
+		recoveredMatches = new ArrayList<>();
+
+		File xmlpath = new File("out/");
+		int matchcount = 0;
+
+		for (int i = 0; i < xmlpath.list().length; i++)
+		{
+			if (xmlpath.list()[i].endsWith(".xml"))
+				matchcount++;
+		}
+
+		System.out.println("there are " + matchcount + " files in /out");
+
+		Model matchToAdd = null;
+
+		for (int i = 0; i < matchcount; i++)
+		{
+			try
+			{
+				matchToAdd = (Model) XML_Serialization.deserialize("out/match" + (i + 1) + ".xml");
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+
+			recoveredMatches.add(matchToAdd);
+		}
 
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {		/* Runs when the program receives an interrupt signal like CTRL+C */
@@ -42,6 +75,7 @@ public class ServerListener
 	{
 		System.out.println("Server started");
 
+		currentMatches = new ArrayList<>();
 		Socket socket;
 		ObjectInputStream ois;
 		ObjectOutputStream oos;
@@ -102,8 +136,20 @@ public class ServerListener
 				players.add(new Player(username));
 			}
 
-			Match m = new Match(players, views);		/* Start match, passes players and views */
-			new Thread(m).start();
+			if (arePlayersReconnecting(players) != -1)
+			{
+				System.out.println("OMGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+				Match recoveredMatch = new Match(recoveredMatches.get(arePlayersReconnecting(players)), views);
+				recoveredMatches.remove(arePlayersReconnecting(players));
+				new Thread(recoveredMatch).start();
+			}
+
+			else
+			{
+				Match newMatch = new Match(players, views);        /* Start match, passes players and views */
+				new Thread(newMatch).start();
+				currentMatches.add(newMatch.getModel());
+			}
 		}
 	}
 
@@ -125,12 +171,47 @@ public class ServerListener
 		return false;
 	}
 
+	private int arePlayersReconnecting(List<Player> players) throws IOException
+	{
+		System.out.println("players size: " + players.size());
+
+		for (int i = 0; i < recoveredMatches.size(); i++)
+		{
+			List<Player> recoveredMatchPlayers = recoveredMatches.get(i).getPlayers();
+			int counter = 0;
+
+			for (int j = 0; j < recoveredMatchPlayers.size(); j++)
+			{
+				System.out.println("counter : " + counter + ", recMatchPlayerSize: " + recoveredMatchPlayers.size());
+
+
+				for (int k = 0; k < players.size(); k++)
+				{
+					System.out.println("comparing recovered username " + recoveredMatchPlayers.get(j).getUsername() + " to " + players.get(k).getUsername());
+					if (recoveredMatchPlayers.get(j).getUsername().equals(players.get(k).getUsername()))
+						counter++;
+				}
+
+				if (counter == recoveredMatchPlayers.size())
+				{
+					System.out.println("RETURNING " + i);
+					return i;
+				}
+			}
+		}
+
+		return -1;
+	}
+
 	private void shutdown()
 	{
 		try
 		{
 			System.out.println("Shutting down...");
 			serverSocket.close();
+
+			for (int i = 0; i < currentMatches.size(); i++)
+				XML_Serialization.serialize(currentMatches.get(i), "out/match" + (i + 1) + ".xml");
 		}
 		catch (IOException e)
 		{
