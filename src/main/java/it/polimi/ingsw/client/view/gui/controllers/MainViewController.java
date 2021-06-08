@@ -299,17 +299,17 @@ public class MainViewController
 	public void updateDevCardAreas(DevCardArea[] devCardAreas)
 	{
 		if (!devCardAreas[0].isEmpty())
-			devCardArea1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardAreas[0].getTopDevCard().getCardNumber() + ".png")));
+			devCardArea1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[0].getTopDevCard().getCardNumber() + ".png")));
 
 		else devCardArea1.setImage(null);
 
 		if (!devCardAreas[1].isEmpty())
-			devCardArea2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardAreas[1].getTopDevCard().getCardNumber() + ".png")));
+			devCardArea2.setImage(new Image(getClass().getResourceAsStream("/img/devcards" + devCardAreas[1].getTopDevCard().getCardNumber() + ".png")));
 
 		else devCardArea2.setImage(null);
 
 		if (!devCardAreas[2].isEmpty())
-			devCardArea3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/front/" + devCardAreas[2].getTopDevCard().getCardNumber() + ".png")));
+			devCardArea3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[2].getTopDevCard().getCardNumber() + ".png")));
 
 		else devCardArea3.setImage(null);
 	}
