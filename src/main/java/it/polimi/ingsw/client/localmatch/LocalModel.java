@@ -66,7 +66,7 @@ public class LocalModel extends Observable        /* Observed by the views to cr
 		{
 			try
 			{
-				cardToAdd = (LeaderCard) XML_Serialization.deserialize("src/main/resources/xml/leadercards/leadercard" + (i + 1) + ".xml");
+				cardToAdd = (LeaderCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/leadercards/leadercard" + (i + 1) + ".xml"));
 			}
 			catch (IOException e)
 			{

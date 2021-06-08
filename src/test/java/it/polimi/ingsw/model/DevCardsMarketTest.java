@@ -14,6 +14,7 @@ public class DevCardsMarketTest {
 	public void buyCardFromMarket()
 	{
 		devCardsMarket = new DevCardsMarket();
+		devCardsMarket.create();
 		card = new DevCard();
 		card = devCardsMarket.getDevCardByNumber(27);
 		assertEquals("Error", card, devCardsMarket.buyCardFromMarket(27));

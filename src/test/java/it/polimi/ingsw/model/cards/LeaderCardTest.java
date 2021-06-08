@@ -41,8 +41,8 @@ public class LeaderCardTest {
 		devCard2 = new DevCard();
 		try
 		{
-			devCard1 = (DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard1.xml");
-			devCard2 = (DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard8.xml");
+			devCard1 = (DevCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/devcards/devcard1.xml"));
+			devCard2 = (DevCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/devcards/devcard8.xml"));
 		}
 		catch (Exception e)
 		{
@@ -53,7 +53,7 @@ public class LeaderCardTest {
 		leaderCards = new ArrayList<>();
 		try
 		{
-			leaderCards.add((LeaderCard) XML_Serialization.deserialize("src/main/resources/xml/leadercards/leadercard1.xml"));
+			leaderCards.add((LeaderCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/leadercards/leadercard1.xml")));
 		}
 		catch (Exception e)
 		{
@@ -75,9 +75,9 @@ public class LeaderCardTest {
 		devCard3 = new DevCard();
 		try
 		{
-			devCard1 = (DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard1.xml");
-			devCard2 = (DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard2.xml");
-			devCard3 = (DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard17.xml");
+			devCard1 = (DevCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/devcards/devcard1.xml"));
+			devCard2 = (DevCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/devcards/devcard2.xml"));
+			devCard3 = (DevCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/devcards/devcard17.xml"));
 		}
 		catch (Exception e)
 		{
@@ -89,7 +89,7 @@ public class LeaderCardTest {
 		leaderCards = new ArrayList<>();
 		try
 		{
-			leaderCards.add((LeaderCard) XML_Serialization.deserialize("src/main/resources/xml/leadercards/leadercard10.xml"));
+			leaderCards.add((LeaderCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/leadercards/leadercard10.xml")));
 		}
 		catch (Exception e)
 		{
@@ -111,9 +111,9 @@ public class LeaderCardTest {
 		devCard3 = new DevCard();
 		try
 		{
-			devCard1 = (DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard1.xml");
-			devCard2 = (DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard24.xml");
-			devCard3 = (DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard41.xml");
+			devCard1 = (DevCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/devcards/devcard1.xml"));
+			devCard2 = (DevCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/devcards/devcard24.xml"));
+			devCard3 = (DevCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/devcards/devcard41.xml"));
 		}
 		catch (Exception e)
 		{
@@ -125,7 +125,7 @@ public class LeaderCardTest {
 		leaderCards = new ArrayList<>();
 		try
 		{
-			leaderCards.add((LeaderCard) XML_Serialization.deserialize("src/main/resources/xml/leadercards/leadercard14.xml"));
+			leaderCards.add((LeaderCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/leadercards/leadercard14.xml")));
 		}
 		catch (Exception e)
 		{
@@ -167,7 +167,7 @@ public class LeaderCardTest {
 		leaderCards = new ArrayList<>();
 		try
 		{
-			leaderCards.add((LeaderCard) XML_Serialization.deserialize("src/main/resources/xml/leadercards/leadercard5.xml"));
+			leaderCards.add((LeaderCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/leadercards/leadercard5.xml")));
 		}
 		catch (Exception e)
 		{

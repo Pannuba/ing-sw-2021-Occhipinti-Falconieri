@@ -40,7 +40,7 @@ public class DevCardsMarket implements Serializable
 		{
 			try
 			{
-				allDevCards.add((DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard" + (i + 1) + ".xml"));
+				allDevCards.add((DevCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/devcards/devcard" + (i + 1) + ".xml")));
 			}
 			catch (Exception e)
 			{

@@ -32,7 +32,8 @@ public class ServerListener
 		this.serverSocket = serverSocket;
 		recoveredMatches = new ArrayList<>();
 
-		File xmlpath = new File("out/");
+		new File("savedmatches/").mkdir();
+		File xmlpath = new File("savedmatches/");
 		int matchcount = 0;
 
 		for (int i = 0; i < xmlpath.list().length; i++)
@@ -41,7 +42,7 @@ public class ServerListener
 				matchcount++;
 		}
 
-		System.out.println("there are " + matchcount + " files in /out");
+		System.out.println("there are " + matchcount + " restored matches");
 
 		Model matchToAdd = null;
 
@@ -49,7 +50,7 @@ public class ServerListener
 		{
 			try
 			{
-				matchToAdd = (Model) XML_Serialization.deserialize("out/match" + (i + 1) + ".xml");
+				matchToAdd = (Model) XML_Serialization.deserialize(getClass().getResourceAsStream("/savedmatches" + (i + 1) + ".xml"));
 			}
 			catch (IOException e)
 			{
@@ -210,7 +211,7 @@ public class ServerListener
 			serverSocket.close();
 
 			for (int i = 0; i < currentMatches.size(); i++)
-				XML_Serialization.serialize(currentMatches.get(i), "out/match" + (i + 1) + ".xml");
+				XML_Serialization.serialize(currentMatches.get(i), "savedmatches/match" + (i + 1) + ".xml");
 		}
 		catch (IOException e)
 		{

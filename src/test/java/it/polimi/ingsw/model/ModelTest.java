@@ -262,6 +262,7 @@ public class ModelTest {
 	@Test
 	public void isSinglePlayerMatchLost1()			/* no more green devCard */
 	{
+		devCardsMarket.create();
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
 		players.add(p1);
@@ -285,6 +286,7 @@ public class ModelTest {
 	@Test
 	public void isSinglePlayerMatchLost2()			/* no more purple devCard */
 	{
+		devCardsMarket.create();
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
 		players.add(p1);
@@ -308,6 +310,7 @@ public class ModelTest {
 	@Test
 	public void isSinglePlayerMatchLost3()			/* no more blue devCard */
 	{
+		devCardsMarket.create();
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
 		players.add(p1);
@@ -331,6 +334,7 @@ public class ModelTest {
 	@Test
 	public void isSinglePlayerMatchLost4()			/* no more yellow devCard */
 	{
+		devCardsMarket.create();
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
 		players.add(p1);
@@ -367,6 +371,7 @@ public class ModelTest {
 	@Test
 	public void isSinglePlayerMatchLost6()			/* no single player match lost */
 	{
+		devCardsMarket.create();
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
 		players.add(p1);
@@ -387,10 +392,10 @@ public class ModelTest {
 
 		try
 		{
-			leaderCards.add((LeaderCard) XML_Serialization.deserialize("src/main/resources/xml/leadercards/leadercard1.xml"));
-			leaderCards.add((LeaderCard) XML_Serialization.deserialize("src/main/resources/xml/leadercards/leadercard8.xml"));
-			card1 = (DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard5.xml");
-			card2 = (DevCard) XML_Serialization.deserialize("src/main/resources/xml/devcards/devcard30.xml");
+			leaderCards.add((LeaderCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/leadercards/leadercard1.xml")));
+			leaderCards.add((LeaderCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/leadercards/leadercard8.xml")));
+			card1 = (DevCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/devcards/devcard5.xml"));
+			card2 = (DevCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/devcards/devcard30.xml"));
 		}
 		catch (IOException e)
 		{

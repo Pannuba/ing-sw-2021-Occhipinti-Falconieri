@@ -19,6 +19,7 @@ public class MarblesMarketTest {
 	public void buyMarblesRow()
 	{
 		marblesMarket = new MarblesMarket();
+		marblesMarket.create();
 		marblesBoard = marblesMarket.getMarblesBoard();
 		for (int i = 0; i < 4; i++)
 			boughtMarbles.add(marblesBoard[0][i].getMarbleType());
@@ -35,6 +36,7 @@ public class MarblesMarketTest {
 	public void buyMarblesCol()
 	{
 		marblesMarket = new MarblesMarket();
+		marblesMarket.create();
 		marblesBoard = marblesMarket.getMarblesBoard();
 		for (int i = 0; i < 3; i++)
 			boughtMarbles.add(marblesBoard[i][3].getMarbleType());

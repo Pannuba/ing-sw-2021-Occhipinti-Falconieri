@@ -81,7 +81,7 @@ public class Model extends Observable        /* Observed by the views to create 
 		{
 			try
 			{
-				cardToAdd = (LeaderCard) XML_Serialization.deserialize("src/main/resources/xml/leadercards/leadercard" + (i + 1) + ".xml");
+				cardToAdd = (LeaderCard) XML_Serialization.deserialize(getClass().getResourceAsStream("/xml/leadercards/leadercard" + (i + 1) + ".xml"));
 			}
 			catch (IOException e)
 			{

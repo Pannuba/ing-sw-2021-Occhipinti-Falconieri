@@ -231,13 +231,11 @@ public class XML_Serialization
 	 * @throws IOException if the file is not found or can't be accessed
 	 */
 
-	public static Object deserialize(String filename) throws IOException	/* Works! println output is the same before and after serialization */
+	public static Object deserialize(InputStream toSerialize) throws IOException	/* Works! println output is the same before and after serialization */
 	{
-		FileInputStream fis = new FileInputStream(filename);
-		XMLDecoder decoder = new XMLDecoder(fis);
+		XMLDecoder decoder = new XMLDecoder(toSerialize);
 		Object decodedObject = decoder.readObject();
 		decoder.close();
-		fis.close();
 		return decodedObject;
 	}
 }

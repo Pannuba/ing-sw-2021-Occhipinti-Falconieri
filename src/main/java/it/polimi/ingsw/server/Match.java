@@ -7,6 +7,7 @@ import it.polimi.ingsw.server.controller.Controller;
 import it.polimi.ingsw.server.messages.ChooseLeadersMessage;
 import it.polimi.ingsw.server.messages.InitialResourcesMessage;
 import it.polimi.ingsw.server.messages.MatchStartMessage;
+import it.polimi.ingsw.server.messages.OperationResultMessage;
 import it.polimi.ingsw.server.view.ClientHandler;
 
 import java.util.List;
@@ -57,6 +58,7 @@ public class Match implements Runnable
 		{
 			views.get(i).addObserver(controller);		/* Controller observes the views to get the command */
 			recoveredModel.addObserver(views.get(i));			/* Views observe the model to send the client the new gamestate */
+			views.get(i).send(new OperationResultMessage("Restored saved match!", false));
 		}
 
 		model.update();
