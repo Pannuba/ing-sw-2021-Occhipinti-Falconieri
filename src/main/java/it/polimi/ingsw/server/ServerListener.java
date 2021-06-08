@@ -138,7 +138,6 @@ public class ServerListener
 
 			if (arePlayersReconnecting(players) != -1)
 			{
-				System.out.println("OMGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
 				Match recoveredMatch = new Match(recoveredMatches.get(arePlayersReconnecting(players)), views);
 				recoveredMatches.remove(arePlayersReconnecting(players));
 				new Thread(recoveredMatch).start();

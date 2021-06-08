@@ -2,11 +2,9 @@ package it.polimi.ingsw.model;
 
 import java.io.Serializable;
 
-/*	Stone --> grey ---> 0
-	Coin --> yellow --> 1
-	Shield --> blue --> 2
-	Slave --> purple -> 3
-	Cross --> red ----> 4  (faith points)
+/**
+ * Marble class, used by MarblesMarket and BuyResourcesCommand in Controller. Like resources, it only has a type and quantity instance variable
+ * @author Giulio Occhipinti
  */
 
 public class Marble implements Serializable

@@ -1,5 +1,10 @@
 package it.polimi.ingsw.model;
 
+/**
+ * MarbleType enumeration, contains the six possible colors marble can have
+ * @author Giulio Occhipinti
+ */
+
 public enum MarbleType
 {
 	RED,
@@ -9,12 +14,16 @@ public enum MarbleType
 	YELLOW,
 	PURPLE;
 
+	/**
+	 * Converts a string to a MarbleType. Used by MarblesMarket's create() method
+	 * @param str the string is to be converted
+	 * @return the converted MarbleType
+	 */
+
 	public static MarbleType convertStringToMarbleType(String str)
 	{
 		if (str == null)
-		{
 			return null;
-		}
 
 		switch (str.toUpperCase())		/* So lowercase inputs like "g" are still valid */
 		{

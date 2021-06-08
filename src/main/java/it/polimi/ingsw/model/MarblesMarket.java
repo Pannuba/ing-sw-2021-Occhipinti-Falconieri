@@ -9,9 +9,6 @@ import java.util.List;
 /*	13 total marbles, 12 in matrix and 1 spare:
 	4 white, 2 blue, 2 grey, 2 yellow, 2 purple, 1 red
 
-	Hardcode or xml file for marble amounts? Need to change grid size if so
-
-
 	O O O O <		Spare marble is pushed from the end of rows and columns
 	O O O O <
 	O O O O	<		[row][col]
@@ -22,18 +19,32 @@ import java.util.List;
 	[1][0]	[1][1]	[1][2]	[1][3]
 
 	[2][0]	[2][1]	[2][2]	[2][3]
-
 */
+
+/**
+ * The MarblesMarket created in Model
+ * @author Giulio Occhipinti
+ */
 
 public class MarblesMarket implements Serializable
 {
 	private Marble[][] marblesBoard = new Marble[3][4];
 	private Marble spareMarble;
 
+	/**
+	 * Empty constructor required by the "persistence" advanced feature
+	 */
+
 	public MarblesMarket()
 	{
 
 	}
+
+	/**
+	 * Creates the marbles grid and spare marble. Uses a list of strings where each character corresponds to a MarbleType.
+	 * The list is shuffled and then iterated by two nested for loops which assign the converted MarbleTypes to each slot in the matrix.
+	 * The strings are converted to MarbleType by using MarbleType's method convertStringToMarbleType
+	 */
 
 	public void create()
 	{
@@ -58,6 +69,12 @@ public class MarblesMarket implements Serializable
 		}
 	}
 
+	/**
+	 * Called by the controller when the user wants to buy from the MarblesMarket and selects a row
+	 * @param row the chosen row's number (1-indexed, between 1 and 3)
+	 * @return the list of MarbleTypes that were on the selected row
+	 */
+
 	public List<MarbleType> buyMarblesRow(int row)			/* Returns a list of marbletypes to the controller, which then acts for each marble */
 	{
 		List<MarbleType> boughtMarbles = new ArrayList<>();			/* Can be significantly simplified with a hashmap */
@@ -75,6 +92,12 @@ public class MarblesMarket implements Serializable
 
 		return boughtMarbles;
 	}
+
+	/**
+	 * Called by the controller when the user wants to buy from the MarblesMarket and selects a column
+	 * @param col the chosen row's number (1-indexed, between 1 and 4)
+	 * @return the list of MarbleTypes that were on the selected column
+	 */
 
 	public List<MarbleType> buyMarblesCol(int col)
 	{

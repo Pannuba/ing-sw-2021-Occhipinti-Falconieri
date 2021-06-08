@@ -5,7 +5,10 @@ import it.polimi.ingsw.model.board.Track;
 import java.io.Serializable;
 import java.util.List;
 
-/*	Every turn, the server sends a GameState object to all clients so the client view reads it and updates everything */
+/**
+ * Every turn, if the client's action has not failed, the server sends a GameState object to all clients so the client view reads it and updates everything
+ * @author Giulio Occhipinti
+ */
 
 public class GameState implements Serializable
 {
@@ -14,6 +17,15 @@ public class GameState implements Serializable
 	private final Track currTrack;
 	private final MarblesMarket currMarblesMarket;
 	private final DevCardsMarket currDevCardsMarket;
+
+	/**
+	 * Constructor called by the Model and Controller
+	 * @param currPlayers the current list of players
+	 * @param currPlayerName the current player's name
+	 * @param currTrack the current Track
+	 * @param currMarblesMarket the current MarblesMarket
+	 * @param currDevCardsMarket the current DevCardsMarket
+	 */
 
 	public GameState(List<Player> currPlayers, String currPlayerName, Track currTrack, MarblesMarket currMarblesMarket, DevCardsMarket currDevCardsMarket)
 	{

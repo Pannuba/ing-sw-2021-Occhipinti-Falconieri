@@ -15,6 +15,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 
+/**
+ * Model main class. Contains all the information of a Match (players and their dashboard, markets, track, actiontokens...)
+ * Created by Match in server
+ * @author Giulio Occhipinti
+ * @author Chiara Falconieri
+ */
+
 public class Model extends Observable        /* Observed by the views to create the new gamestate */
 {
 	private int numPlayers;
@@ -25,6 +32,10 @@ public class Model extends Observable        /* Observed by the views to create 
 	private List<Player> players;
 	private List<LeaderCard> allLeaderCards;		/* All 16 leadercards, each player picks 2 out of 4 */
 	private List<ActionToken> actionTokens;
+
+	/**
+	 * Empty constructor required by XMLEncoder for the "persistence" advanced feature
+	 */
 
 	public Model()
 	{

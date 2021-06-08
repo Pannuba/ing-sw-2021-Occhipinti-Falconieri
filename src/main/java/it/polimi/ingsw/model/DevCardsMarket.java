@@ -8,14 +8,27 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * The game's DevCardsMarket. It has a list of 12 sub-lists with 4 DevCards each, divided by color like in the original game.
+ * @author Giulio Occhipinti
+ */
+
 public class DevCardsMarket implements Serializable
 {
 	private List<List<DevCard>> devCardStacks;
+
+	/**
+	 * Empty constructor required by XMLEncoder to serialize the DevCardsMarket for the "persistence" feature
+	 */
 
 	public DevCardsMarket()
 	{
 
 	}
+
+	/**
+	 * Creates the 48 cards by deserializing the .xmls and creates the "list-of-lists" devCardStacks
+	 */
 
 	public void create()
 	{
@@ -92,6 +105,12 @@ public class DevCardsMarket implements Serializable
 		for (int i = 0; i < devCardStacks.size(); i++)			/* Shuffle each stack */
 			Collections.shuffle(devCardStacks.get(i));
 	}
+
+	/**
+	 * Searches through devCardsStacks for the card with the passed card number and removes it
+	 * @param boughtCardNum the number of the card that has to be bought (removed)
+	 * @return the bought dev card
+	 */
 
 	public DevCard buyCardFromMarket(int boughtCardNum)
 	{
