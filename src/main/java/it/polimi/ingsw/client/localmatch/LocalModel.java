@@ -38,8 +38,10 @@ public class LocalModel extends Observable        /* Observed by the views to cr
 		playerInList.add(player);
 
 		devCardsMarket = new DevCardsMarket();
+		devCardsMarket.create();
 		track = new Track(playerInList);
 		marblesMarket = new MarblesMarket();
+		marblesMarket.create();
 
 		createLeaderCards();
 		createActionTokens();
