@@ -76,7 +76,7 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 		MarketsController mc = marketsLoader.getController();
 		MainViewController mvc = mainViewLoader.getController();
 
-		action = new ActionGUI(this, gameStartScene, endGameScene, lc, gsc, egc, lcc, mvc, mc);
+		action = new ActionGUI(this, gameStartScene, mainViewScene, endGameScene, lc, gsc, egc, lcc, mvc, mc);
 
 		if (lc.isLocalMatch())
 		{
@@ -116,4 +116,5 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 	{
 		return mainStage;
 	}
+
 }

@@ -50,6 +50,12 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 	}
 
 	@Override
+	public void startRecoveredMatch()
+	{
+		System.out.println("Restored saved match!");
+	}
+
+	@Override
 	public void chooseLeaderCards(List<LeaderCard> fourLeaderCards)
 	{
 		new ChooseLeaderCards(fourLeaderCards, input, command, messageHandler);

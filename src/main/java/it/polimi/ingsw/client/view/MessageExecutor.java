@@ -17,6 +17,8 @@ public abstract class MessageExecutor
 
 	public abstract void startMatch();
 
+	public abstract void startRecoveredMatch();
+
 	public abstract void initialResources(int playerID);
 
 	public abstract void vaticanReport(int popeBoxNum, List<Player> players);

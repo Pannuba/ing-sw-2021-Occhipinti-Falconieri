@@ -141,6 +141,7 @@ public class ServerListener
 			{
 				Match recoveredMatch = new Match(recoveredMatches.get(arePlayersReconnecting(players)), views);
 				recoveredMatches.remove(arePlayersReconnecting(players));
+				/* TODO: also delete file */
 				new Thread(recoveredMatch).start();
 			}
 

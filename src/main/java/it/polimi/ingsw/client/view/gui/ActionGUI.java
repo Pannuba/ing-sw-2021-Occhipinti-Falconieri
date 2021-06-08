@@ -18,6 +18,7 @@ public class ActionGUI extends MessageExecutor
 	private final GUI gui;
 	private final Stage mainStage;
 	private final Scene gameStartScene;
+	private final Scene mainViewScene;
 	private final Scene endGameScene;
 	private final LoginController lc;
 	private final GameStartController gsc;
@@ -26,12 +27,13 @@ public class ActionGUI extends MessageExecutor
 	private final MainViewController mvc;						/* To update the scenes when a new gamestate is received */
 	private final MarketsController mmc;
 
-	public ActionGUI(GUI gui, Scene gameStartScene, Scene endGameScene, LoginController lc,
+	public ActionGUI(GUI gui, Scene gameStartScene, Scene mainViewScene, Scene endGameScene, LoginController lc,
 					 GameStartController gsc, EndGameController egc, LeaderCardsController lcc, MainViewController mvc, MarketsController mmc)
 	{
 		this.gui = gui;
 		mainStage = gui.getMainStage();
 		this.gameStartScene = gameStartScene;
+		this.mainViewScene = mainViewScene;
 		this.endGameScene = endGameScene;
 		this.lc = lc;
 		this.gsc = gsc;
@@ -60,10 +62,20 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void startMatch()
 	{
-		Platform.runLater(() ->
-		{
+		Platform.runLater(() -> {
 			mainStage.setTitle("Masters of Renaissance - Setup");
 			mainStage.setScene(gameStartScene);
+			mainStage.show();
+		});
+	}
+
+	@Override
+	public void startRecoveredMatch()
+	{
+		Platform.runLater(() -> {
+			mvc.printToConsole("Restored saved match!");
+			mainStage.setTitle("Masters of Renaissance");
+			mainStage.setScene(mainViewScene);
 			mainStage.show();
 		});
 	}

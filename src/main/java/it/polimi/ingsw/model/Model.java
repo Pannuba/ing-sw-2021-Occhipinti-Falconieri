@@ -370,6 +370,11 @@ public class Model extends Observable        /* Observed by the views to create 
 		return numPlayers;
 	}
 
+	public void setNumPlayers(int numPlayers)		/* For the persistence feature */
+	{
+		this.numPlayers = numPlayers;
+	}
+
 	public Track getTrack()
 	{
 		return track;

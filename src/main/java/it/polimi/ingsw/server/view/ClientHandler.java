@@ -40,7 +40,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 		this.oos = oos;
 
 		sendPing = new TimerTask() {
-			public void run() {
+			public synchronized void run() {
 				send(new Ping()); } };
 
 		heartbeat = new Timer();
@@ -84,7 +84,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 	 * @param obj the object to send to the client. Either a Ping, a Message, or a GameState
 	 */
 
-	public void send(Object obj)
+	public synchronized void send(Object obj)		/* Maybe synchronized here and in pings fixes those weird "stream active" exceptions? */
 	{
 		if (!obj.getClass().getSimpleName().equals("Ping"))		/* Pings are really annoying */
 			System.out.println("Sending " + obj.getClass().getSimpleName() + " to " + username);
