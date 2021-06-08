@@ -22,4 +22,14 @@ public class ActionBlack2 extends ActionToken
 		System.out.println("Activating action of ActionBlack2");
 		track.setBlackPawn(track.getBlackPawn() + 2);
 	}
+
+	public Track getTrack()
+	{
+		return track;
+	}
+
+	public void setTrack(Track track)
+	{
+		this.track = track;
+	}
 }

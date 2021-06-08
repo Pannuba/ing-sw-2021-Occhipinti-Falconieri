@@ -55,9 +55,18 @@ public class ActionDevCard extends ActionToken
 		return color;
 	}
 
-	public void setColor(DevCardColor color) { this.color = color; }
+	public void setColor(DevCardColor color)
+	{
+		this.color = color;
+	}
 
-	public DevCardsMarket getDevCardsMarket() { return devCardsMarket; }
+	public DevCardsMarket getDevCardsMarket()
+	{
+		return devCardsMarket;
+	}
 
-	public void setDevCardsMarket(DevCardsMarket devCardsMarket) { this.devCardsMarket = devCardsMarket; }
+	public void setDevCardsMarket(DevCardsMarket devCardsMarket)
+	{
+		this.devCardsMarket = devCardsMarket;
+	}
 }

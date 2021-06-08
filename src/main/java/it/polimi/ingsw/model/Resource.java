@@ -12,7 +12,6 @@ public class Resource implements Serializable
 {
 	private ResourceType resourceType;				/* Can be null, see DevCard serialization */
 	private int quantity;
-	private boolean isInVault;
 
 	public Resource (ResourceType resourceType, int quantity)
 	{
@@ -24,7 +23,6 @@ public class Resource implements Serializable
 	{
 		resourceType = null;
 		quantity = 0;
-		isInVault = false;
 	}
 
 	public ResourceType getResourceType()
@@ -45,15 +43,5 @@ public class Resource implements Serializable
 	public void setQuantity(int quantity)
 	{
 		this.quantity = quantity;
-	}
-
-	public boolean isInVault()
-	{
-		return isInVault;
-	}
-
-	public void setInVault(boolean inVault)
-	{
-		isInVault = inVault;
 	}
 }
