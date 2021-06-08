@@ -10,6 +10,8 @@ import it.polimi.ingsw.model.board.DevCardArea;
 import it.polimi.ingsw.model.board.Storage;
 import it.polimi.ingsw.model.board.Track;
 import it.polimi.ingsw.model.board.Vault;
+import it.polimi.ingsw.model.cards.ActionDevCard;
+import it.polimi.ingsw.model.cards.ActionToken;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -94,7 +96,11 @@ public class MainViewController
 		this.gameState = gameState;
 
 		if (gameState.getCurrPlayers().size() == 1)
+		{
 			otherPlayersButton.setVisible(false);
+			actionTokenFront.setVisible(true);
+			actionTokenBack.setVisible(true);
+		}
 
 		updateStorage(gameState.getPlayerByName(username).getDashboard().getStorage());
 		updateVault(gameState.getPlayerByName(username).getDashboard().getVault());
@@ -308,12 +314,33 @@ public class MainViewController
 		else devCardArea3.setImage(null);
 	}
 
-	public void updateActionToken(List<Player> players)
+	public void updateActionToken(ActionToken token)
 	{
-		if (players.size() == 1)
+		switch (token.getClass().getSimpleName())
 		{
-			actionTokenFront.setVisible(true);
-			actionTokenBack.setVisible(true);
+			case "ActionBlack1":
+				actionTokenFront.setImage(new Image(getClass().getResourceAsStream("/img/actiontokens/action-black-1.png")));
+				break;
+			case "ActionBlack2":
+				actionTokenFront.setImage(new Image(getClass().getResourceAsStream("/img/actiontokens/action-black-2.png")));
+				break;
+			case  "ActionDevCard":
+				switch (((ActionDevCard) token).getColor())
+				{
+					case GREEN:
+						actionTokenFront.setImage(new Image(getClass().getResourceAsStream("/img/actiontokens/action-dev-card-green.png")));
+						break;
+					case BLUE:
+						actionTokenFront.setImage(new Image(getClass().getResourceAsStream("/img/actiontokens/action-dev-card-blue.png")));
+						break;
+					case PURPLE:
+						actionTokenFront.setImage(new Image(getClass().getResourceAsStream("/img/actiontokens/action-dev-card-purple.png")));
+						break;
+					case YELLOW:
+						actionTokenFront.setImage(new Image(getClass().getResourceAsStream("/img/actiontokens/action-dev-card-yellow.png")));
+						break;
+				}
+				break;
 		}
 	}
 

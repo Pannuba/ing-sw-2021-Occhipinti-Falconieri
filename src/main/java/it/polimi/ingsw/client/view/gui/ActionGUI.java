@@ -115,6 +115,7 @@ public class ActionGUI extends MessageExecutor
 	public void getActionToken(ActionToken token)
 	{
 		mvc.printToConsole("Flipped next action token");
+		mvc.updateActionToken(token);
 	}
 
 	@Override
