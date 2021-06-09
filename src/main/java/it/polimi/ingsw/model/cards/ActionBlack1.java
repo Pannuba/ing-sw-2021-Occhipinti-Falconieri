@@ -40,4 +40,14 @@ public class ActionBlack1 extends ActionToken		/* I can also do an instanceof ch
 	{
 		this.track = track;
 	}
+
+	public List<ActionToken> getTokens()
+	{
+		return tokens;
+	}
+
+	public void setTokens(List<ActionToken> tokens)
+	{
+		this.tokens = tokens;
+	}
 }
