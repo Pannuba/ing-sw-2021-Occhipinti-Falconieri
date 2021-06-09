@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.board.DevCardArea;
 import it.polimi.ingsw.model.board.Storage;
 import it.polimi.ingsw.model.board.Track;
 import it.polimi.ingsw.model.board.Vault;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -78,28 +79,27 @@ public class OtherBoardsController
 	void showNextBoard(ActionEvent event)
 	{
 		String nextUsername = null;
-		int nextID;
 
 		do
 		{
-			if (currentID == 3)
-				nextID = 0;
+			if (currentID == gameState.getCurrPlayers().size() - 1)
+				currentID = 0;
 
 			else
-				nextID = currentID + 1;
+				currentID += 1;
 
-		} while (!gameState.getCurrPlayers().get(nextID).getUsername().equals(myUsername));
+		} while (gameState.getCurrPlayers().get(currentID).getUsername().equals(myUsername));
 
 		for (int i = 0; i < gameState.getCurrPlayers().size(); i++)
 		{
-			if (gameState.getCurrPlayers().get(i).getId() == nextID)
+			if (gameState.getCurrPlayers().get(i).getId() == currentID)
 				nextUsername = gameState.getCurrPlayers().get(i).getUsername();
 		}
 
 		update(gameState, nextUsername);
 	}
 
-	public void update(GameState gameState, String username)
+	public void update(GameState gameState, String username)		/* Username of the player to show */
 	{
 		this.gameState = gameState;
 		currentID = gameState.getPlayerByName(username).getId();

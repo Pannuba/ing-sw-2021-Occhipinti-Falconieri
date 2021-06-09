@@ -419,7 +419,7 @@ public class MainViewController
 		});
 	}
 
-	public void enableButtons()
+	public void enableButtons()		/* TODO: also add leader buttons */
 	{
 		defaultProductionButton.setDisable(false);
 

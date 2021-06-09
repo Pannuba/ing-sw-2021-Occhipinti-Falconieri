@@ -122,7 +122,6 @@ public class CLI extends View
 
 	public synchronized void update(Object obj)
 	{
-		System.out.println("received " + obj.getClass().getSimpleName());
 		if (obj instanceof Message)
 			((Message) obj).process(action);		/* Calls method in cli specified in the message */
 

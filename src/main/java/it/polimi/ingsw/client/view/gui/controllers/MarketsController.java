@@ -81,8 +81,6 @@ public class MarketsController        /* Send command directly from here? Get wh
 
 	public void updateMarket(MarblesMarket market, DevCardsMarket devCardsMarket, boolean isMyTurn)
 	{
-		System.out.println("Updating marbles market... isMyTurn = " + isMyTurn);
-
 		currDevCardsMarket = devCardsMarket;
 
 		Marble[][] marblesBoard = market.getMarblesBoard();
