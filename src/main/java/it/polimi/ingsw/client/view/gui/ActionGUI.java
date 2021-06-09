@@ -134,7 +134,7 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void matchOver(String winnerName, List<Player> players)
 	{
-		egc.setup(winnerName, players, gui.getUsername());
+		egc.setup(winnerName, players, gui.getUsername(), mainStage);
 		Platform.runLater(() -> {
 			mainStage.setTitle("Masters of Renaissance - Game Over");
 			mainStage.setScene(endGameScene);
@@ -146,7 +146,7 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void singlePlayerGameOver(String message)
 	{
-		egc.setupSingle(message);
+		egc.setupSingle(message, mainStage);
 		Platform.runLater(() -> {
 			mainStage.setTitle("Masters of Renaissance - Game Over");
 			mainStage.setScene(endGameScene);

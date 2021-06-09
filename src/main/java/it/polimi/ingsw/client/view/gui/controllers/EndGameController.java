@@ -3,16 +3,22 @@ package it.polimi.ingsw.client.view.gui.controllers;
 import it.polimi.ingsw.client.view.gui.ActionGUI;
 import it.polimi.ingsw.model.Player;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
 
-public class EndGameController {
+public class EndGameController
+{
+	private Stage mainStage;
 
 	@FXML
 	private ImageView matchOutcome;
@@ -24,24 +30,33 @@ public class EndGameController {
 	private ImageView playAgain;
 
 	@FXML
-	void playAgain(MouseEvent event)
+	void playAgain(MouseEvent event) throws IOException
 	{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/scenes/launcher.fxml"));
+		Parent root = loader.load();
 
+		LauncherController lpc = loader.getController();
+		lpc.setup();
+
+		Scene scene = new Scene(root);
+
+		mainStage.setTitle("Masters of Renaissance Launcher");
+		mainStage.getIcons().add(new Image("/img/inkwell.png"));		/* Check if it works from .jar */
+		mainStage.setScene(scene);
+		//mainStage.setResizable(false);
+		mainStage.show();
 	}
 
-	public void setup(String winnerName, List<Player> players, String username)
+	public void setup(String winnerName, List<Player> players, String username, Stage mainStage)
 	{
+		this.mainStage = mainStage;
+
 		if (username.equals(winnerName))
-		{
 			matchOutcome.setImage(new Image(getClass().getResourceAsStream("/img/writings/win!.png")));
-			matchOutcome.setVisible(true);
-		}
 
 		if (winnerName.isEmpty())
-		{
 			matchOutcome.setImage(new Image(getClass().getResourceAsStream("/img/writings/Tie!.png")));
-			matchOutcome.setVisible(true);
-		}
 
 		else
 		{
@@ -51,7 +66,6 @@ public class EndGameController {
 			AnchorPane.setRightAnchor(matchOutcome, 76.0);
 			AnchorPane.setTopAnchor(matchOutcome, 70.0);
 			matchOutcome.setImage(new Image(getClass().getResourceAsStream("/img/writings/lose...png")));
-			matchOutcome.setVisible(true);
 		}
 
 		switch (players.size())
@@ -77,8 +91,9 @@ public class EndGameController {
 		}
 	}
 
-	public void setupSingle(String message)
+	public void setupSingle(String message, Stage mainStage)
 	{
+		this.mainStage = mainStage;
 		matchOutcome.setFitWidth(409);
 		matchOutcome.setFitHeight(183);
 		AnchorPane.setLeftAnchor(matchOutcome, 76.0);
@@ -87,6 +102,7 @@ public class EndGameController {
 		matchOutcome.setImage(new Image(getClass().getResourceAsStream("/img/writings/lose...png")));
 		matchOutcome.setVisible(true);
 
+		message = message.substring(10);
 		nameAndPoint.setText(message);
 	}
 

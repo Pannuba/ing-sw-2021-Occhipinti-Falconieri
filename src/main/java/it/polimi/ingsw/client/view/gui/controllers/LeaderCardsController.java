@@ -111,12 +111,16 @@ public class LeaderCardsController		/* TODO: add resources ImageViews in both le
 	void activateLeaderCard1(ActionEvent event)
 	{
 		messageHandler.send(Arrays.asList("ACTIVATE_LEADER", String.valueOf(leaderCards.get(0).getCardNumber())));
+		activateLeaderOneButton.setVisible(false);
+		discardLeaderOneButton.setVisible(false);
 	}
 
 	@FXML
 	void activateLeaderCard2(ActionEvent event)
 	{
 		messageHandler.send(Arrays.asList("ACTIVATE_LEADER", String.valueOf(leaderCards.get(1).getCardNumber())));
+		activateLeaderTwoButton.setVisible(false);
+		discardLeaderTwoButton.setVisible(false);
 	}
 
 	@FXML
@@ -134,8 +138,8 @@ public class LeaderCardsController		/* TODO: add resources ImageViews in both le
 	void discardLeaderCard2(ActionEvent event)
 	{
 		messageHandler.send(Arrays.asList("DISCARD_LEADER", String.valueOf(leaderCards.get(0).getCardNumber())));
-		activateLeaderOneButton.setVisible(false);
-		discardLeaderOneButton.setVisible(false);
+		activateLeaderTwoButton.setVisible(false);
+		discardLeaderTwoButton.setVisible(false);
 		lighting.setDiffuseConstant(0.5);
 		lighting.setSpecularConstant(0.0);
 		leaderCard2.setEffect(lighting);
@@ -198,6 +202,18 @@ public class LeaderCardsController		/* TODO: add resources ImageViews in both le
 		leaderCard2.setImage(new Image(getClass().getResourceAsStream("/img/leadercards/" + leaderCards.get(1).getCardNumber() + ".png")));
 		leaderCard1.setDisable(true);
 		leaderCard2.setDisable(true);
+
+		if (!leaderCards.get(0).isActive())
+		{
+			activateLeaderOneButton.setVisible(true);
+			discardLeaderOneButton.setVisible(true);
+		}
+
+		if (!leaderCards.get(1).isActive())
+		{
+			activateLeaderTwoButton.setVisible(true);
+			discardLeaderTwoButton.setVisible(true);
+		}
 
 		if (leaderCards.get(0).isActive())
 		{
