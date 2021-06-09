@@ -37,7 +37,7 @@ public class MarblesMarket implements Serializable
 
 	public MarblesMarket()
 	{
-
+		create();
 	}
 
 	/**

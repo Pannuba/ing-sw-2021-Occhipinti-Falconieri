@@ -8,7 +8,6 @@ import it.polimi.ingsw.model.board.DevCardArea;
 import it.polimi.ingsw.model.board.Storage;
 import it.polimi.ingsw.model.board.Track;
 import it.polimi.ingsw.model.board.Vault;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;

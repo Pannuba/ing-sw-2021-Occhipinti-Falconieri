@@ -262,7 +262,6 @@ public class ModelTest {
 	@Test
 	public void isSinglePlayerMatchLost1()			/* no more green devCard */
 	{
-		devCardsMarket.create();
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
 		players.add(p1);
@@ -286,7 +285,6 @@ public class ModelTest {
 	@Test
 	public void isSinglePlayerMatchLost2()			/* no more purple devCard */
 	{
-		devCardsMarket.create();
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
 		players.add(p1);
@@ -310,7 +308,6 @@ public class ModelTest {
 	@Test
 	public void isSinglePlayerMatchLost3()			/* no more blue devCard */
 	{
-		devCardsMarket.create();
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
 		players.add(p1);
@@ -334,7 +331,6 @@ public class ModelTest {
 	@Test
 	public void isSinglePlayerMatchLost4()			/* no more yellow devCard */
 	{
-		devCardsMarket.create();
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
 		players.add(p1);
@@ -371,7 +367,6 @@ public class ModelTest {
 	@Test
 	public void isSinglePlayerMatchLost6()			/* no single player match lost */
 	{
-		devCardsMarket.create();
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
 		players.add(p1);

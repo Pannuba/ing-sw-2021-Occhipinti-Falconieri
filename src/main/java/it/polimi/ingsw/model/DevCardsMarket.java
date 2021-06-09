@@ -23,14 +23,14 @@ public class DevCardsMarket implements Serializable
 
 	public DevCardsMarket()
 	{
-
+		create();
 	}
 
 	/**
 	 * Creates the 48 cards by deserializing the .xmls and creates the "list-of-lists" devCardStacks
 	 */
 
-	public void create()
+	public void create()		/* TODO: change in private */
 	{
 		System.out.println("Creating devcards...");
 		List<DevCard> allDevCards = new ArrayList<>();

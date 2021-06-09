@@ -53,9 +53,7 @@ public class Model extends Observable        /* Observed by the views to create 
 
 		track = new Track(players);
 		marblesMarket = new MarblesMarket();
-		marblesMarket.create();
 		devCardsMarket = new DevCardsMarket();
-		devCardsMarket.create();
 
 		matchOver = false;
 
