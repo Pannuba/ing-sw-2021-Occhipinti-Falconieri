@@ -14,8 +14,8 @@
             <Image url="@../img/background.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="leaderCard1" fitHeight="547.0" fitWidth="440.0" layoutX="279.0" layoutY="31.0" onMouseClicked="#activeProduction1" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="35.0" />
-      <ImageView fx:id="leaderCard2" fitHeight="547.0" fitWidth="440.0" layoutX="742.0" layoutY="14.0" onMouseClicked="#activeProduction2" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="35.0" />
+      <ImageView fx:id="leaderCard1" fitHeight="547.0" fitWidth="440.0" layoutX="279.0" layoutY="31.0" onMouseClicked="#startActiveProduction1" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="35.0" />
+      <ImageView fx:id="leaderCard2" fitHeight="547.0" fitWidth="440.0" layoutX="742.0" layoutY="14.0" onMouseClicked="#startActiveProduction2" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="35.0" />
       <Button fx:id="activateLeaderOneButton" layoutX="50.0" layoutY="247.0" mnemonicParsing="false" onAction="#activateLeaderCard1" prefHeight="90.0" prefWidth="170.0" text="Activate" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="240.0">
          <font>
             <Font name="Times New Roman Bold Italic" size="30.0" />
@@ -46,5 +46,69 @@
       <ImageView fx:id="resL2" fitHeight="96.0" fitWidth="96.0" layoutX="454.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="167.0" AnchorPane.leftAnchor="454.0" AnchorPane.rightAnchor="730.0" AnchorPane.topAnchor="457.0" />
       <ImageView fx:id="resR1" fitHeight="96.0" fitWidth="96.0" layoutX="745.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true" visible="false" />
       <ImageView fx:id="resR2" fitHeight="96.0" fitWidth="96.0" layoutX="881.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="productionPL" disable="true" fitHeight="96.0" fitWidth="96.0" layoutX="70.0" layoutY="149.0" onMouseClicked="#selectPurpleResource1" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="140.0">
+         <image>
+            <Image url="@../img/resources/purple.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="productionYL" disable="true" fitHeight="96.0" fitWidth="96.0" layoutX="72.0" layoutY="272.0" onMouseClicked="#selectYellowResource1" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="260.0">
+         <image>
+            <Image url="@../img/resources/yellow.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="productionGL" disable="true" fitHeight="96.0" fitWidth="96.0" layoutX="74.0" layoutY="396.0" onMouseClicked="#selectGreyResource1" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="260.0" AnchorPane.leftAnchor="70.0">
+         <image>
+            <Image url="@../img/resources/grey.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="productionBL" disable="true" fitHeight="96.0" fitWidth="96.0" layoutX="82.0" layoutY="508.0" onMouseClicked="#selectBlueResource1" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="80.0">
+         <image>
+            <Image url="@../img/resources/blue.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="productionPR" disable="true" fitHeight="96.0" fitWidth="96.0" layoutX="1121.0" layoutY="133.0" onMouseClicked="#selectPurpleResource2" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="140.0">
+         <image>
+            <Image url="@../img/resources/purple.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="productionYR" disable="true" fitHeight="96.0" fitWidth="96.0" layoutX="1123.0" layoutY="256.0" onMouseClicked="#selectYellowResource2" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="260.0">
+         <image>
+            <Image url="@../img/resources/yellow.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="productionGR" disable="true" fitHeight="96.0" fitWidth="96.0" layoutX="1125.0" layoutY="380.0" onMouseClicked="#selectGreyResource2" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="260.0" AnchorPane.rightAnchor="70.0">
+         <image>
+            <Image url="@../img/resources/grey.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="productionBR" disable="true" fitHeight="96.0" fitWidth="96.0" layoutX="1133.0" layoutY="492.0" onMouseClicked="#selectBlueResource2" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="130.0" AnchorPane.rightAnchor="80.0">
+         <image>
+            <Image url="@../img/resources/blue.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </AnchorPane>
