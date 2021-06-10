@@ -6,6 +6,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Development cards, the variables are taken from the xml files
+ * @author Giulio Occhipinti
+ */
+
 public class DevCard implements Serializable
 {
 	private int cardNumber;			/* To identify cards. If a devcard is bought from the market, the list size changes so it's impossible to order cards based on their index */
@@ -16,6 +21,10 @@ public class DevCard implements Serializable
 	private List<Resource> requirements;		/* At the top of each card */
 	private List<Resource> cost;				/* Left side */
 	private List<Resource> product;				/* Right side. faithpoints are here */
+
+	/**
+	 * Creates devCard
+	 */
 
 	public DevCard()
 	{

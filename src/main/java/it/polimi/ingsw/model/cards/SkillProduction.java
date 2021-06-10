@@ -3,7 +3,14 @@ package it.polimi.ingsw.model.cards;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.util.Pair;
 
-public class SkillProduction extends LeaderCard		/* Every card gives one faith point and one product that can be chosen */
+/**
+ * Specify the skill of the leader card: production
+ * Requires one devCard of level two
+ * Every card gives one faith point and one product that can be chosen
+ * @author Giulio Occhipinti
+ */
+
+public class SkillProduction extends LeaderCard
 {
 	private boolean isUsedForProduction;
 	private Pair<DevCardColor, Integer> requirements;		/* Pair of	(devcard color : devcard level) */

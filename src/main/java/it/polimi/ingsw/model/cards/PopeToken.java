@@ -2,11 +2,22 @@ package it.polimi.ingsw.model.cards;
 
 import java.io.Serializable;
 
+/**
+ * Pope tokens: use in track
+ * @author Giulio Occhipinti
+ */
+
 public class PopeToken implements Serializable
 {
+	/**
+	 * @param points if the pope token is active, it gives points at the end of the game
+	 * @param isActive true when a player is inside the perimeter when a vatican report is called
+	 * @param isDiscarded true when a player is outside the perimeter or when the vatican report for that token is called
+	 */
+
 	private int points;
-	private boolean isActive;			/* True when a player is inside the perimeter when a vatican report is called */
-	private boolean isDiscarded;		/* True when a player is outside the perimeter or when the vatican report for that token is called */
+	private boolean isActive;
+	private boolean isDiscarded;
 
 	public PopeToken()
 	{

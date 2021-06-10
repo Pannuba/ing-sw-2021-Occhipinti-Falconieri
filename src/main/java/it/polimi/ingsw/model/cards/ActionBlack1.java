@@ -5,6 +5,12 @@ import it.polimi.ingsw.model.board.Track;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Action black 1: extends Action Token
+ * Use in single game
+ * @author Giulio Occhipinti
+ */
+
 public class ActionBlack1 extends ActionToken		/* I can also do an instanceof check in the controller, and if it's an ActionBlack1 manually shuffle the tokens... we'll see */
 {													/* but then it doesn't really make sense to use an abstract method, either do one thing or the other, no inbetweens */
 	private Track track;
@@ -15,11 +21,21 @@ public class ActionBlack1 extends ActionToken		/* I can also do an instanceof ch
 
 	}
 
+	/**
+	 * Creates the token
+	 * @param track
+	 * @param tokens list of all Action Tokens
+	 */
+
 	public ActionBlack1(Track track, List<ActionToken> tokens)
 	{
 		this.track = track;
 		this.tokens = tokens;
 	}
+
+	/**
+	 * Activate the action: advances the blackPawn one box and shuffles all action tokens
+	 */
 
 	@Override
 	public void doAction()

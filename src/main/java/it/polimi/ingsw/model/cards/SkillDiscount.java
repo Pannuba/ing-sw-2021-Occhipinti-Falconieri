@@ -5,6 +5,12 @@ import it.polimi.ingsw.model.ResourceType;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Specify the skill of the leader card: discount
+ * Requires two devCards of different color
+ * @author Giulio Occhipinti
+ */
+
 public class SkillDiscount extends LeaderCard
 {
 	private int discountNum;

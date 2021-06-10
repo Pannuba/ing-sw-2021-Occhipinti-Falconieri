@@ -10,11 +10,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/*	Parameter editor has to edit leadercard requirements. For simplicity's sake, and order to keep symmetry with the original game,
-	the type of requirement cannot be changed (devcards, resources).
-
-	Every round, the player can either play the leadercard and it stays active for the rest of the match, giving the victory points
-	in calculatePoints() OR discard the leadercard and gain 1 faithPoint, with no victory points at the end of the round
+/**
+ * Abstract class for leader cards
+ *
+ * Parameter editor has to edit leaderCard requirements. For simplicity's sake, and order to keep symmetry with the original game,
+ * the type of requirement cannot be changed (devCards, resources).
+ *
+ * Every round, the player can either play the leaderCard and it stays active for the rest of the match, giving the victory points
+ * in calculatePoints() OR discard the leaderCard and gain one faithPoint, with no victory points at the end of the round
+ *
+ * @author Giulio Occhipinti
 */
 
 public abstract class LeaderCard implements Serializable		/* Can't do new LeaderCard(); because it's abstract */
@@ -29,6 +34,12 @@ public abstract class LeaderCard implements Serializable		/* Can't do new Leader
 		isDiscarded = false;
 		isActive = false;
 	}
+
+	/**
+	 * Check if the leader card can be activated
+	 * @param playerBoard used to take the requirements from the player board to activate the card
+	 * @return true if requirements are satisfied
+	 */
 
 	public boolean checkRequirements(Dashboard playerBoard)		/* True if requirements are satisfied. Here or Model? */
 	{

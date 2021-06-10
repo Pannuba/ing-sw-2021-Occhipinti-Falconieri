@@ -2,6 +2,12 @@ package it.polimi.ingsw.model.cards;
 
 import it.polimi.ingsw.model.board.Track;
 
+/**
+ * Action black 2: extends Action Token
+ * Use in single game
+ * @author Giulio Occhipinti
+ */
+
 public class ActionBlack2 extends ActionToken
 {
 	private Track track;
@@ -11,10 +17,18 @@ public class ActionBlack2 extends ActionToken
 
 	}
 
+	/**
+	 * Creates the token
+	 */
+
 	public ActionBlack2(Track track)
 	{
 		this.track = track;
 	}
+
+	/**
+	 * Activate the action: advances the blackPawn two box
+	 */
 
 	@Override
 	public void doAction()			/* Where is this function called? In model, probably. No, controller! */

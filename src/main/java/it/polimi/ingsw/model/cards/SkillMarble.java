@@ -5,6 +5,12 @@ import it.polimi.ingsw.model.ResourceType;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Specify the skill of the leader card: marble
+ * Requires three devCards: two of same color and one of different color
+ * @author Giulio Occhipinti
+ */
+
 public class SkillMarble extends LeaderCard
 {
 	private ResourceType whiteMarble;
