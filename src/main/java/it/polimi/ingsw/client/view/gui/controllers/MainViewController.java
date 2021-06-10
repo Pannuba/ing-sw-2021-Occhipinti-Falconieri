@@ -532,11 +532,11 @@ public class MainViewController
 		});
 	}
 
-	public void setup(GUI gui, Scene mainViewScene, Scene marketsScene, Scene leaderCardsScene)
+	public void setup(GUI gui, Scene marketsScene, Scene leaderCardsScene)
 	{
 		this.username = gui.getUsername();
 		this.mainStage = gui.getMainStage();
-		this.mainViewScene = mainViewScene;
+		this.mainViewScene = gui.getMainViewScene();
 		this.marketsScene = marketsScene;
 		this.leaderCardsScene = leaderCardsScene;
 		this.messageHandler = gui.getMessageHandler();

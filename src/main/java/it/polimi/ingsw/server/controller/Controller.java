@@ -39,47 +39,47 @@ public class Controller implements Observer			/* Observes view to get commands..
 		switch (command.get(0))
 		{
 			case "SELECT_LEADERCARDS":
-				isTaskFailed = new SelectLeaderCardsCommand().run(this, command, username, model);
+				isTaskFailed = new SelectLeaderCardsCommand(this).run(command);
 				return;
 
 			case "INITIAL_RESOURCES":
-				isTaskFailed = new InitialResourcesCommand().run(this, command, username, model);
+				isTaskFailed = new InitialResourcesCommand(this).run(command);
 				/* This way the clients can immediately see the picked cards and resources, and the GUI doesn't freeze! */
 				view.send(new GameState(model.getPlayers(), model.getCurrentPlayerName(), model.getTrack(), model.getMarblesMarket(), model.getDevCardsMarket()));
 				return;
 
 			case "ACTIVATE_LEADER":
-				isTaskFailed = new ActivateLeaderCommand().run(this, command, username, model);
+				isTaskFailed = new ActivateLeaderCommand(this).run(command);
 				break;
 
 			case "DISCARD_LEADER":
-				isTaskFailed = new DiscardLeaderCommand().run(this, command, username, model);
+				isTaskFailed = new DiscardLeaderCommand(this).run(command);
 				break;
 
 			case "BUY_DEVCARD":
-				isTaskFailed = new BuyDevCardCommand().run(this, command, username, model);
+				isTaskFailed = new BuyDevCardCommand(this).run(command);
 				break;
 
 			case "ACTIVATE_PRODUCTION":
-				isTaskFailed = new ActivateProductionCommand().run(this, command, username, model);
+				isTaskFailed = new ActivateProductionCommand(this).run(command);
 				break;
 
 			case "STOP_PRODUCTION":
-				isTaskFailed = new StopProductionCommand().run(this, command, username, model);
+				isTaskFailed = new StopProductionCommand(this).run(command);
 				break;
 
 			case "BUY_RESOURCES":
-				isTaskFailed = new BuyResourcesCommand().run(this, command, username, model);
+				isTaskFailed = new BuyResourcesCommand(this).run(command);
 				break;
 		}
 
 		if ((command.get(0).equals("BUY_RESOURCES") || command.get(0).equals("BUY_DEVCARD")	||
 			command.get(0).equals("STOP_PRODUCTION") || command.get(0).equals("DISCARD_LEADER")) && !isTaskFailed)
 		{
-			if (!command.get(0).equals("DISCARD_LEADER"))
+			if (!command.get(0).equals("DISCARD_LEADER"))	/* Don't progress rounds if the player discarded a leader, but update gamestate to show other players the new position */
 			{
-				chooseNextPlayer();            /* Don't choose next player during setup, failed actions or "discard leader" actions */
-				postRoundChecks();            /* Put in model as separate method, or in update()? */
+				chooseNextPlayer();				/* Don't choose next player during setup, failed actions or "discard leader" actions */
+				postRoundChecks();				/* Put in model as separate method, or in update()? */
 			}
 
 			model.update();				/* Send new gamestate to everyone */
@@ -237,6 +237,16 @@ public class Controller implements Observer			/* Observes view to get commands..
 	public ClientHandler getView()
 	{
 		return view;
+	}
+
+	public Model getModel()
+	{
+		return model;
+	}
+
+	public String getUsername()
+	{
+		return username;
 	}
 
 	public void setUsername(String username)

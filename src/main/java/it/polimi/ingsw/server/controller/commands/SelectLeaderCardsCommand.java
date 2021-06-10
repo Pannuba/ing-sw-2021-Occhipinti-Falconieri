@@ -13,8 +13,19 @@ import java.util.List;
 
 public class SelectLeaderCardsCommand implements Command		/* "SELECT_LEADERCARDS", "x", "y" */
 {
+	private final Model model;
+	private final Controller controller;
+	private final String username;
+
+	public SelectLeaderCardsCommand(Controller controller)
+	{
+		this.controller = controller;
+		model = controller.getModel();
+		username = controller.getUsername();
+	}
+
 	@Override
-	public boolean run(Controller controller, List<String> command, String username, Model model)
+	public boolean run(List<String> command)
 	{
 		String message = "";
 		boolean isFailed = false;

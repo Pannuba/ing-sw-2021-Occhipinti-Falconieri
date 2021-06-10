@@ -187,10 +187,10 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 		}
 	}
 
-	public void setup(GUI gui, Scene mainViewScene, MainViewController mvc)
+	public void setup(GUI gui, MainViewController mvc)
 	{
 		this.mainStage = gui.getMainStage();
-		this.mainViewScene = mainViewScene;
+		this.mainViewScene = gui.getMainViewScene();
 		this.mvc = mvc;
 		this.messageHandler = gui.getMessageHandler();
 		chosenLeaderCards = new ArrayList<>();

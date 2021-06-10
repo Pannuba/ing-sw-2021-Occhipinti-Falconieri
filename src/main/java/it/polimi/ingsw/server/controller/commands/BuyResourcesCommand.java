@@ -19,8 +19,19 @@ import java.util.List;
 
 public class BuyResourcesCommand implements Command		/* "BUY_RESOURCES", "ROW", "2" */
 {
+	private final Model model;
+	private final Controller controller;
+	private final String username;
+
+	public BuyResourcesCommand(Controller controller)
+	{
+		this.controller = controller;
+		model = controller.getModel();
+		username = controller.getUsername();
+	}
+
 	@Override
-	public boolean run(Controller controller, List<String> command, String username, Model model)
+	public boolean run(List<String> command)
 	{
 		String message = "";
 		boolean isFailed = false;		/* How can this action fail? When resources don't fit? */

@@ -21,6 +21,7 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 {
 	private ActionGUI action;				/* ActionGUI instance to pass it the commands received by the NetworkHandler */
 	private final String username;
+	private Scene mainViewScene;
 	private final LoginController lc;
 	private MessageIO messageHandler;
 	private final Stage mainStage;
@@ -53,7 +54,7 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 		FXMLLoader mainViewLoader = new FXMLLoader();
 		mainViewLoader.setLocation(getClass().getResource("/scenes/mainview.fxml"));
 		Parent mainViewRoot = mainViewLoader.load();
-		Scene mainViewScene = new Scene(mainViewRoot);
+		mainViewScene = new Scene(mainViewRoot);
 
 		FXMLLoader marketsLoader = new FXMLLoader();
 		marketsLoader.setLocation(getClass().getResource("/scenes/markets.fxml"));
@@ -91,10 +92,10 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 		else
 			new Thread((Runnable) messageHandler).start();
 
-		gsc.setup(this, mainViewScene, mvc);		/* Only pass "this", pass mvc and mainViewScene through getters? */
-		lcc.setup(this, mainViewScene);		/* TODO: remove mainViewScene, use getter */
-		mc.setup(this, mainViewScene, mvc);
-		mvc.setup(this, mainViewScene, marketsScene, leaderCardsScene);
+		gsc.setup(this, mvc);
+		lcc.setup(this);
+		mc.setup(this, mvc);
+		mvc.setup(this, marketsScene, leaderCardsScene);
 	}
 
 	public MessageIO getMessageHandler()
@@ -110,6 +111,11 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 	public String getUsername()
 	{
 		return username;
+	}
+
+	public Scene getMainViewScene()
+	{
+		return mainViewScene;
 	}
 
 	public Stage getMainStage()

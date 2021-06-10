@@ -258,10 +258,10 @@ public class MarketsController        /* Send command directly from here? Get wh
 		mainStage.show();
 	}
 
-	public void setup(GUI gui, Scene mainViewScene, MainViewController mvc)
+	public void setup(GUI gui, MainViewController mvc)
 	{
 		this.mainStage = gui.getMainStage();
-		this.mainViewScene = mainViewScene;
+		this.mainViewScene = gui.getMainViewScene();
 		this.mvc = mvc;
 		this.messageHandler = gui.getMessageHandler();
 

@@ -15,8 +15,19 @@ import java.util.List;
 
 public class BuyDevCardCommand implements Command		/* "BUY_DEVCARD", "card#", "devCardArea#" */
 {
+	private final Model model;
+	private final Controller controller;
+	private final String username;
+
+	public BuyDevCardCommand(Controller controller)
+	{
+		this.controller = controller;
+		model = controller.getModel();
+		username = controller.getUsername();
+	}
+
 	@Override
-	public boolean run(Controller controller, List<String> command, String username, Model model)
+	public boolean run(List<String> command)
 	{
 		String message; boolean isFailed;		/* TODO: check if player wants to buy card # 9327082 */
 		int cardToBuyNum = Integer.parseInt(command.get(1));

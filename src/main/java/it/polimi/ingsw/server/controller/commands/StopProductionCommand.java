@@ -13,8 +13,19 @@ import java.util.List;
 
 public class StopProductionCommand implements Command
 {
+	private final Model model;
+	private final Controller controller;
+	private final String username;
+
+	public StopProductionCommand(Controller controller)
+	{
+		this.controller = controller;
+		model = controller.getModel();
+		username = controller.getUsername();
+	}
+
 	@Override
-	public boolean run(Controller controller, List<String> command, String username, Model model)
+	public boolean run(List<String> command)
 	{
 		if (model.getPlayerByUsername(username).isDoingDefaultProduction())
 			model.getPlayerByUsername(username).setDoingDefaultProduction(false);

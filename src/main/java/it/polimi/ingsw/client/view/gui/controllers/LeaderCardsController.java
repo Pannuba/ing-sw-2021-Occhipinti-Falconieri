@@ -310,11 +310,10 @@ public class LeaderCardsController		/* TODO: add resources ImageViews in both le
 		}
 	}
 
-	public void setup(GUI gui, Scene mainViewScene)
+	public void setup(GUI gui)
 	{
-		this.mainViewScene = mainViewScene;
+		this.mainViewScene = gui.getMainViewScene();
 		this.mainStage = gui.getMainStage();
-		//this.mvc = mvc;
 		this.messageHandler = gui.getMessageHandler();
 
 		buttons = new ArrayList<>();
