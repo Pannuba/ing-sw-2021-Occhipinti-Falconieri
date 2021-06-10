@@ -9,6 +9,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Track tests
+ * @author Chiara Falconieri
+ */
+
 public class TrackTest {
 
 	private Player p1;
@@ -18,8 +23,13 @@ public class TrackTest {
 	private Track track;
 	private HashMap<Integer, Integer> redPawns = new HashMap<>();
 
+	/**
+	 * Vatican report for first pope token
+	 * checkVaticanReport method
+	 */
+
 	@Test
-	public void checkVaticanReport1()		/* vatican report for first pope token */
+	public void checkVaticanReport1()
 	{
 		p1 = new Player("pippo");
 		p2 = new Player("pluto");
@@ -41,8 +51,13 @@ public class TrackTest {
 		assertEquals("Error", 8, track.checkVaticanReport());
 	}
 
+	/**
+	 * Vatican report for second pope token
+	 * checkVaticanReport method
+	 */
+
 	@Test
-	public void checkVaticanReport2()		/* vatican report for second pope token */
+	public void checkVaticanReport2()
 	{
 		p1 = new Player("pippo");
 		p2 = new Player("pluto");
@@ -64,8 +79,13 @@ public class TrackTest {
 		assertEquals("Error", 16, track.checkVaticanReport());
 	}
 
+	/**
+	 * Vatican report for third pope token
+	 * checkVaticanReport method
+	 */
+
 	@Test
-	public void checkVaticanReport3()		/* vatican report for third pope token */
+	public void checkVaticanReport3()
 	{
 		p1 = new Player("pippo");
 		p2 = new Player("pluto");
@@ -87,8 +107,13 @@ public class TrackTest {
 		assertEquals("Error", 24, track.checkVaticanReport());
 	}
 
+	/**
+	 * Single player: black pawn trigger vatican report
+	 * checkVaticanReport method
+	 */
+
 	@Test
-	public void checkVaticanReport4()		/* single player: black pawn trigger vatican report */
+	public void checkVaticanReport4()
 	{
 		p1 = new Player("pippo");
 		p1.setId(0);

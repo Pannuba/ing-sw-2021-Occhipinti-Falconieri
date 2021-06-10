@@ -9,6 +9,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Action Black 1 tests
+ * @author Chiara Falconieri
+ */
+
 public class ActionBlack1Test {
 
 	private ActionToken actionToken;
@@ -16,6 +21,11 @@ public class ActionBlack1Test {
 	private Track track;
 	private List<Player> players;
 	private Player p1;
+
+	/**
+	 * Check that blackPawn has advanced one box
+	 * doAction method
+	 */
 
 	@Test
 	public void doAction()

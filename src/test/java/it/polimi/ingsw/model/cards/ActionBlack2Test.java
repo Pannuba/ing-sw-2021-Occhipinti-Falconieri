@@ -9,12 +9,22 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Action Black 2 tests
+ * @author Chiara Falconieri
+ */
+
 public class ActionBlack2Test {
 
 	private ActionToken actionToken;
 	private Track track;
 	private List<Player> players;
 	private Player p1;
+
+	/**
+	 * Check that blackPawn has advanced two box
+	 * doAction method
+	 */
 
 	@Test
 	public void doAction()

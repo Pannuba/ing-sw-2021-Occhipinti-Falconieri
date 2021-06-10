@@ -7,6 +7,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * MarbleMarket test
+ * @author Chiara Falconieri
+ */
+
 public class MarblesMarketTest {
 
 	private MarblesMarket marblesMarket;
@@ -14,6 +19,11 @@ public class MarblesMarketTest {
 	private Marble[][] marblesBoard = new Marble[3][4];
 	private Marble spareMarble;
 	private Marble oldSpareMarble;
+
+	/**
+	 * Buy first row and check bought marbles, old spare marble and new spare marble
+	 * buyMarbleRow method
+	 */
 
 	@Test
 	public void buyMarblesRow()
@@ -30,6 +40,12 @@ public class MarblesMarketTest {
 		assertEquals("Error", spareMarble, marblesMarket.getSpareMarble());
 		assertEquals("Error", oldSpareMarble, marblesBoard[0][3]);
 	}
+
+	/**
+	 * Buy fourth column and check bought marbles, old spare marble and new spare marble
+	 * buyMarbleCol method
+	 */
+
 
 	@Test
 	public void buyMarblesCol()

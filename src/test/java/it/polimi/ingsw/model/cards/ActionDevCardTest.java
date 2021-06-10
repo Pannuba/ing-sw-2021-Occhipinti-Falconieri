@@ -8,12 +8,22 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Action devCard area tests
+ * @author Chiara Falconieri
+ */
+
 public class ActionDevCardTest {
 
 	private DevCardsMarket devCardsMarket;
 	private List<DevCard> devCards;
 	private List<DevCard> devCards2;
 	private ActionDevCard actionDevCard;
+
+	/**
+	 * Check that the action token has removed the green devCards
+	 * doAction method
+	 */
 
 	@Test
 	public void doAction1()
@@ -36,6 +46,11 @@ public class ActionDevCardTest {
 		assertTrue("Error", devCardsMarket.getDevCardStacks().get(0).isEmpty());
 	}
 
+	/**
+	 * Check that the action token has removed the green devCards and the devCard stacks is empty
+	 * doAction method
+	 */
+
 	@Test
 	public void doAction2()
 	{
@@ -45,6 +60,11 @@ public class ActionDevCardTest {
 		actionDevCard.doAction();
 		assertTrue("Error", devCardsMarket.getDevCardStacks().get(0).isEmpty());
 	}
+
+	/**
+	 * Check that the action token has removed the blu devCards
+	 * doAction method
+	 */
 
 	@Test
 	public void doAction3()
@@ -67,6 +87,11 @@ public class ActionDevCardTest {
 		assertTrue("Error", devCardsMarket.getDevCardStacks().get(3).isEmpty());
 	}
 
+	/**
+	 * Check that the action token has removed the yellow devCards and the devCard stacks is empty
+	 * doAction method
+	 */
+
 	@Test
 	public void doAction4()
 	{
@@ -76,6 +101,11 @@ public class ActionDevCardTest {
 		actionDevCard.doAction();
 		assertTrue("Error", devCardsMarket.getDevCardStacks().get(9).isEmpty());
 	}
+
+	/**
+	 * Check that the action token has removed the purple devCards and all the devCard stacks (purple) is empty
+	 * doAction method
+	 */
 
 	@Test
 	public void doAction5()

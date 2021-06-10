@@ -9,6 +9,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * DevCard area tests
+ * @author Chiara Falconieri
+ */
+
 public class DevCardAreaTest {
 
 	private DevCardArea devCardArea = new DevCardArea();
@@ -23,12 +28,22 @@ public class DevCardAreaTest {
 		assertNotNull(devCardArea);
 	}
 
+	/**
+	 * Check that the layer of devCard area is greater than zero
+	 * checkDevCardArea method
+	 */
+
 	@Test
 	public void checkDevCardArea1()
 	{
 		devCardArea.setLayer(-1);
 		assertFalse("Error", devCardArea.checkDevCardArea());
 	}
+
+	/**
+	 * Check that the layer of devCard area is less than three
+	 * checkDevCardArea method
+	 */
 
 	@Test
 	public void checkDevCardArea2()
@@ -37,6 +52,11 @@ public class DevCardAreaTest {
 		assertFalse("Error", devCardArea.checkDevCardArea());
 	}
 
+	/**
+	 * Check that the layer of devCard area is correct
+	 * checkDevCardArea method
+	 */
+
 	@Test
 	public void checkDevCardArea3()
 	{
@@ -44,8 +64,13 @@ public class DevCardAreaTest {
 		assertTrue("Error", devCardArea.checkDevCardArea());
 	}
 
+	/**
+	 * Card is correct added and check that the cards have really been added
+	 * addDevCard method
+	 */
+
 	@Test
-	public void addDevCard1()    /* Card is correct added */
+	public void addDevCard1()
 	{
 		devCards.add(card1);
 		devCards.add(card2);
@@ -55,24 +80,39 @@ public class DevCardAreaTest {
 		assertTrue(devCardArea.addDevCard(card2));
 		assertEquals("Error", 2, devCardArea.getLayer());
 		assertFalse(devCardArea.isEmpty());
-		assertEquals("Error", devCards, devCardArea.getDevCards());   /* check that the cards have really been added  */
+		assertEquals("Error", devCards, devCardArea.getDevCards());
 	}
 
+	/**
+	 *  Dev card area is full
+	 *  addDevCard method
+	 */
+
 	@Test
-	public void addDevCard2()  /* Dev card area is full */
+	public void addDevCard2()
 	{
 		devCardArea.setLayer(3);
 		card1.setLevel(2);
 		assertFalse(devCardArea.addDevCard(card1));
 	}
 
+	/**
+	 * Card to be added is not compatible with current dev card area
+	 * addDevCard method
+	 */
+
 	@Test
-	public void addDevCard3()   /* Card to be added is not compatible with current dev card area */
+	public void addDevCard3()
 	{
 		devCardArea.setLayer(2);
 		card1.setLevel(2);
 		assertFalse(devCardArea.addDevCard(card1));
 	}
+
+	/**
+	 * Check that really return the top devCard
+	 * getTopDevCard method
+	 */
 
 	@Test
 	public void getTopDevCard1()
@@ -85,6 +125,11 @@ public class DevCardAreaTest {
 		devCardArea.addDevCard(card2);
 		assertEquals("Error", card2, devCardArea.getTopDevCard());
 	}
+
+	/**
+	 * Check that really return the top devCard
+	 * getTopDevCard method
+	 */
 
 	@Test
 	public void getTopDevCard2()

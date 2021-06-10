@@ -16,6 +16,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * LeaderCard tests
+ * @author Chiara Falconieri
+ */
+
 public class LeaderCardTest {
 
 	private Player p1;
@@ -32,8 +37,13 @@ public class LeaderCardTest {
 	private Resource r2 = new Resource();
 	private Resource r3 = new Resource();
 
+	/**
+	 * Check requirements for SkillDiscount -> activated card
+	 * checkRequirements method
+	 */
+
 	@Test
-	public void checkRequirements1()			/* SkillDiscount -> true */
+	public void checkRequirements1()
 	{
 		p1 = new Player("pippo");
 		dashboard = new Dashboard();
@@ -65,8 +75,13 @@ public class LeaderCardTest {
 		assertTrue(leaderCards.get(0).checkRequirements(p1.getDashboard()));
 	}
 
+	/**
+	 * Check requirements for SkillMarble -> activated card
+	 * checkRequirements method
+	 */
+
 	@Test
-	public void checkRequirements2()			/* SkillMarble -> true */
+	public void checkRequirements2()
 	{
 		p1 = new Player("pippo");
 		dashboard = new Dashboard();
@@ -101,8 +116,13 @@ public class LeaderCardTest {
 		assertTrue(leaderCards.get(0).checkRequirements(p1.getDashboard()));
 	}
 
+	/**
+	 * Check requirements for SkillProduction -> card not activated
+	 * checkRequirements method
+	 */
+
 	@Test
-	public void checkRequirements3()		/* SkillProduction -> false */
+	public void checkRequirements3()
 	{
 		p1 = new Player("pippo");
 		dashboard = new Dashboard();
@@ -137,8 +157,13 @@ public class LeaderCardTest {
 		assertFalse(leaderCards.get(0).checkRequirements(p1.getDashboard()));
 	}
 
+	/**
+	 * Check requirements for SkillStorage -> card not activated
+	 * checkRequirements method
+	 */
+
 	@Test
-	public void checkRequirements4()			/* SkillStorage -> false */
+	public void checkRequirements4()
 	{
 		p1 = new Player("pippo");
 		vault = new Vault();

@@ -8,12 +8,22 @@ import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
+/**
+ * Vault tests
+ * @author Chiara Falconieri
+ */
+
 public class VaultTest {
 
 	private Vault vault;
 	private HashMap<ResourceType, Integer> resourceAmounts;
 	private HashMap<ResourceType, Integer> resourceAmounts2;
 	private Resource resourceToRemove;
+
+	/**
+	 * Add two blue resources into an empty vault
+	 * addResource method
+	 */
 
 	@Test
 	public void addResource1()
@@ -29,6 +39,11 @@ public class VaultTest {
 		assertEquals("Error",resourceAmounts, vault.getResourceAmounts());
 	}
 
+	/**
+	 * Add one blue and one purple resources into an empty vault
+	 * addResource method
+	 */
+
 	@Test
 	public void addResource2()
 	{
@@ -42,6 +57,11 @@ public class VaultTest {
 		resourceAmounts.put(ResourceType.PURPLE, 1);
 		assertEquals("Error",resourceAmounts, vault.getResourceAmounts());
 	}
+
+	/**
+	 * Add one blue, one grey, one yellow and one purple resources
+	 * addResource method
+	 */
 
 	@Test
 	public void addResource3()
@@ -65,6 +85,11 @@ public class VaultTest {
 		assertEquals("Error",resourceAmounts2, vault.getResourceAmounts());
 	}
 
+	/**
+	 * Remove five purple resources
+	 * removeResource method
+	 */
+
 	@Test
 	public void removeResource1()
 	{
@@ -87,6 +112,11 @@ public class VaultTest {
 		assertEquals("Error", resourceAmounts2, vault.getResourceAmounts());
 	}
 
+	/**
+	 * Remove three yellow resources
+	 * removeResource method
+	 */
+
 	@Test
 	public void removeResource2()
 	{
@@ -108,6 +138,11 @@ public class VaultTest {
 		assertEquals("Error", 2, vault.removeResource(resourceToRemove));
 		assertEquals("Error", resourceAmounts2, vault.getResourceAmounts());
 	}
+
+	/**
+	 * Check that returns the correct number of total resources of vault
+	 * getTotalResources method
+	 */
 
 	@Test
 	public void getTotalResources()

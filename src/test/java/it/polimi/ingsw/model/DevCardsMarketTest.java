@@ -5,10 +5,20 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * DevCardMarket tests
+ * @author Chiara Falconieri
+ */
+
 public class DevCardsMarketTest {
 
 	private DevCardsMarket devCardsMarket;
 	private DevCard card;
+
+	/**
+	 * Removes two cards and check that the cards have really been removed
+	 * buyCardFromMarket method
+	 */
 
 	@Test
 	public void buyCardFromMarket()
@@ -19,7 +29,7 @@ public class DevCardsMarketTest {
 		assertEquals("Error", card, devCardsMarket.buyCardFromMarket(27));
 		card = devCardsMarket.getDevCardByNumber(30);
 		assertEquals("Error", card, devCardsMarket.buyCardFromMarket(30));
-		assertNull("Error", devCardsMarket.getDevCardByNumber(27));				/* check that the card has really been removed */
+		assertNull("Error", devCardsMarket.getDevCardByNumber(27));
 		assertNull("Error", devCardsMarket.getDevCardByNumber(30));
 	}
 }

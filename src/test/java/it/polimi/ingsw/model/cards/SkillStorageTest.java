@@ -7,11 +7,21 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * SkillStorage test
+ * @author Chiara Falconieri
+ */
+
 public class SkillStorageTest {
 
 	private SkillStorage skillStorage = new SkillStorage();
 	private Shelf shelf = new Shelf();
 	private Resource resource = new Resource();
+
+	/**
+	 * Check that he added two purple resources in the additional storage
+	 * addOneResource method
+	 */
 
 	@Test
 	public void addOneResource()
@@ -24,6 +34,11 @@ public class SkillStorageTest {
 		assertEquals("Error", 2, skillStorage.getAdditionalStorage().getShelfResourceQuantity());
 		assertEquals("Error", ResourceType.PURPLE, skillStorage.getAdditionalStorage().getShelfResourceType());
 	}
+
+	/**
+	 * Check that he removed two yellow resources from the additional storage
+	 * removeResources method
+	 */
 
 	@Test
 	public void removeResources()

@@ -15,6 +15,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Model tests
+ * @author Chiara Falconieri
+ */
+
 public class ModelTest {
 
 	private Player p1;
@@ -49,8 +54,13 @@ public class ModelTest {
 	private DevCardsMarket devCardsMarket = new DevCardsMarket();
 	private List<ActionToken> actionTokens;
 
+	/**
+	 * First pope box has been reached
+	 * vaticanReport method
+	 */
+
 	@Test
-	public void vaticanReport1()		/* First pope box has been reached */
+	public void vaticanReport1()
 	{
 		p1 = new Player("pippo");
 		p2 = new Player("pluto");
@@ -74,8 +84,13 @@ public class ModelTest {
 		assertFalse("Error", players.get(1).getPopeTokens()[0].isDiscarded());
 	}
 
+	/**
+	 * Second player has passed first pope box so vaticanReport is called
+	 * vaticanReport method
+	 */
+
 	@Test
-	public void vaticanReport2()		/* Second player has passed first pope box so vaticanReport is called */
+	public void vaticanReport2()
 	{
 		p1 = new Player("pippo");
 		p2 = new Player("pluto");
@@ -111,8 +126,13 @@ public class ModelTest {
 		assertTrue("Error", players.get(3).getPopeTokens()[0].isDiscarded());
 	}
 
+	/**
+	 * Second pope box has been reached
+	 * vaticanReport method
+	 */
+
 	@Test
-	public void vaticanReport3()		/* Second pope box has been reached */
+	public void vaticanReport3()
 	{
 		p1 = new Player("pippo");
 		p2 = new Player("pluto");
@@ -136,8 +156,13 @@ public class ModelTest {
 		assertFalse("Error", players.get(1).getPopeTokens()[1].isDiscarded());
 	}
 
+	/**
+	 * Third pope box has been reached
+	 * vaticanReport method
+	 */
+
 	@Test
-	public void vaticanReport4()		/* Third pope box has been reached */
+	public void vaticanReport4()
 	{
 		p1 = new Player("pippo");
 		p2 = new Player("pluto");
@@ -161,8 +186,13 @@ public class ModelTest {
 		assertFalse("Error", players.get(1).getPopeTokens()[2].isDiscarded());
 	}
 
+	/**
+	 * Match over caused by the track
+	 * checkMatchOver method
+	 */
+
 	@Test
-	public void checkMatchOver1()   /* match over: track */
+	public void checkMatchOver1()
 	{
 		p1 = new Player("pippo");
 		p2 = new Player("pluto");
@@ -182,8 +212,13 @@ public class ModelTest {
 		assertTrue("Error", model.isMatchOver());
 	}
 
+	/**
+	 * Match over caused by a player who bought the seventh devCard
+	 * checkMatchOver method
+	 */
+
 	@Test
-	public void checkMatchOver2()    /*  match over: a player has 7 devCards */
+	public void checkMatchOver2()
 	{
 		card1.setLevel(1);
 		card2.setLevel(2);
@@ -224,8 +259,13 @@ public class ModelTest {
 		assertTrue("Error", model.isMatchOver());
 	}
 
+	/**
+	 * No match over
+	 * checkMatchOver method
+	 */
+
 	@Test
-	public void checkMatchOver3()   /* no match over */
+	public void checkMatchOver3()
 	{
 		card1.setLevel(1);
 		card2.setLevel(2);
@@ -259,8 +299,13 @@ public class ModelTest {
 		assertFalse("Error", model.isMatchOver());
 	}
 
+	/**
+	 * No more green devCard
+	 * isSinglePlayerMatchLost method
+	 */
+
 	@Test
-	public void isSinglePlayerMatchLost1()			/* no more green devCard */
+	public void isSinglePlayerMatchLost1()
 	{
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
@@ -282,8 +327,13 @@ public class ModelTest {
 		assertEquals("Error", "You lose! There are no more green dev cards in the market.", model.isSinglePlayerMatchLost());
 	}
 
+	/**
+	 * No more purple devCard
+	 * isSinglePlayerMatchLost method
+	 */
+
 	@Test
-	public void isSinglePlayerMatchLost2()			/* no more purple devCard */
+	public void isSinglePlayerMatchLost2()
 	{
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
@@ -305,8 +355,13 @@ public class ModelTest {
 		assertEquals("Error", "You lose! There are no more purple dev cards in the market.", model.isSinglePlayerMatchLost());
 	}
 
+	/**
+	 * No more blue devCard
+	 * isSinglePlayerMatchLost method
+	 */
+
 	@Test
-	public void isSinglePlayerMatchLost3()			/* no more blue devCard */
+	public void isSinglePlayerMatchLost3()
 	{
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
@@ -328,8 +383,13 @@ public class ModelTest {
 		assertEquals("Error", "You lose! There are no more blue dev cards in the market.", model.isSinglePlayerMatchLost());
 	}
 
+	/**
+	 * No more yellow devCard
+	 * isSinglePlayerMatchLost method
+	 */
+
 	@Test
-	public void isSinglePlayerMatchLost4()			/* no more yellow devCard */
+	public void isSinglePlayerMatchLost4()
 	{
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
@@ -351,8 +411,13 @@ public class ModelTest {
 		assertEquals("Error", "You lose! There are no more yellow dev cards in the market.", model.isSinglePlayerMatchLost());
 	}
 
+	/**
+	 * Lorenzo has reached the end of the Faith Track
+	 * isSinglePlayerMatchLost method
+	 */
+
 	@Test
-	public void isSinglePlayerMatchLost5()			/* Lorenzo has reached the end of the Faith Track */
+	public void isSinglePlayerMatchLost5()
 	{
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
@@ -364,8 +429,13 @@ public class ModelTest {
 		assertEquals("Error", "You lose! Lorenzo has reached the end of the Faith Track.", model.isSinglePlayerMatchLost());
 	}
 
+	/**
+	 * No single player match lost
+	 * isSinglePlayerMatchLost method
+	 */
+
 	@Test
-	public void isSinglePlayerMatchLost6()			/* no single player match lost */
+	public void isSinglePlayerMatchLost6()
 	{
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
@@ -379,6 +449,12 @@ public class ModelTest {
 		model.setDevCardsMarket(devCardsMarket);
 		assertNull(model.isSinglePlayerMatchLost());
 	}
+
+	/**
+	 * Check that the points calculation is correct
+	 * Check that the seventh ActionToken that not exist is not flipped and start again from the first
+	 * calculatePoints method
+	 */
 
 	@Test
 	public void calculatePoints()
@@ -453,6 +529,11 @@ public class ModelTest {
 		assertEquals("Error", 35, model.calculatePoints(p1));
 	}
 
+	/**
+	 * Check that the action tokens have been flipped
+	 * getNextActionToken method
+	 */
+
 	@Test
 	public void getNextActionToken()
 	{
@@ -512,7 +593,7 @@ public class ModelTest {
 		assertFalse("Error", model.getActionTokens().get(5).isFlipped());
 		assertTrue("Error", model.getActionTokens().get(6).isFlipped());
 
-		/* check that the seventh ActionTocken that not exist is not flipped and start again from the first */
+		/* check that the seventh ActionToken that not exist is not flipped and start again from the first */
 		assertEquals("Error", actionTokens.get(0), model.getNextActionToken());
 		assertFalse("Error", model.getActionTokens().get(6).isFlipped());
 		assertTrue("Error", model.getActionTokens().get(0).isFlipped());

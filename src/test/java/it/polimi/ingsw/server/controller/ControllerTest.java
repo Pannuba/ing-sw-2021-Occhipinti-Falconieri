@@ -12,6 +12,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Controller test
+ * @author Chiara Falconieri
+ */
+
 public class ControllerTest {
 
 	private Player p1;
@@ -31,6 +36,11 @@ public class ControllerTest {
 	private Model model;
 	private Controller controller;
 	private List<Resource> requirements;
+
+	/**
+	 * Check that the player has five purple resources by checking the vault and storage
+	 * checkResourceAmounts method
+	 */
 
 	@Test
 	public void checkResourceAmounts1()
@@ -67,6 +77,11 @@ public class ControllerTest {
 		requirements.add(r4);
 		assertFalse(controller.checkResourceAmounts(players.get(0), requirements));
 	}
+
+	/**
+	 * Check that the player has one yellow, one blue and one grey resources by checking the vault and storage
+	 * checkResourceAmounts method
+	 */
 
 	@Test
 	public void checkResourceAmounts2()
@@ -110,6 +125,11 @@ public class ControllerTest {
 		assertTrue(controller.checkResourceAmounts(players.get(0), requirements));
 	}
 
+	/**
+	 * Check that the player has three purple and two blue resources by checking the vault and storage
+	 * checkResourceAmounts method
+	 */
+
 	@Test
 	public void checkResourceAmounts3()
 	{
@@ -148,6 +168,12 @@ public class ControllerTest {
 		requirements.add(r5);
 		assertFalse(controller.checkResourceAmounts(players.get(0), requirements));
 	}
+
+	/**
+	 * Check that it has removed three purple and two blue resources
+	 * The resources are first removed from the storage and then, if not all have already been removed, it removes them from the vault
+	 * spendResources method
+	 */
 
 	@Test
 	public void spendResources()

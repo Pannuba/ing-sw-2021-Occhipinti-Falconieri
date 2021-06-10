@@ -8,6 +8,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * GameState tests
+ * @author Chiara Falconieri
+ */
+
 public class GameStateTest {
 
 	private Player p1 = new Player("pippo");
@@ -19,14 +24,24 @@ public class GameStateTest {
 	private DevCardsMarket devCardsMarket = new DevCardsMarket();
 	private GameState gameState = new GameState(players, "pluto",track,marblesMarket,devCardsMarket);
 
+	/**
+	 * Check that return the name of the current player of the gameState
+	 * getPlayerByName method
+	 */
+
 	@Test
-	public void getPlayerByName1()
+	public void getPlayerByName()
 	{
 		players.add(p1);
 		players.add(p2);
 		players.add(p3);
 		assertEquals("Error", p2, gameState.getPlayerByName(gameState.getCurrPlayerName()));
 	}
+
+	/**
+	 * Check that return the list of the current players
+	 * getCurrPlayers method
+	 */
 
 	@Test
 	public void getCurrPlayers()

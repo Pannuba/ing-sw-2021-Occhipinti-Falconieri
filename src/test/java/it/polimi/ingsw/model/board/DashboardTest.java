@@ -8,6 +8,11 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Dashboard tests
+ * @author Chiara Falconieri
+ */
+
 public class DashboardTest {
 
 	private Dashboard dashboard = new Dashboard();
@@ -21,8 +26,12 @@ public class DashboardTest {
 	private DevCard card4 = new DevCard();
 	private List<DevCard> allDevCards = new ArrayList<>();
 
+	/**
+	 * Check getAllDevCards and getAllDevCardsNum methods
+	 */
+
 	@Test
-	public void getAllDevCards()  /* check also getAllDevCardsNum method */
+	public void getAllDevCards()
 	{
 		card1.setLevel(1);
 		card2.setLevel(2);

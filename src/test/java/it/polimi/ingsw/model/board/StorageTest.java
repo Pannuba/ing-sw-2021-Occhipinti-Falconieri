@@ -7,6 +7,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Storage tests
+ * @author Chiara Falconieri
+ */
+
 public class StorageTest
 {
 	private Storage storage = new Storage();
@@ -17,9 +22,13 @@ public class StorageTest
 	private Resource resourceToRemove = new Resource();
 	private Shelf[] shelves = new Shelf[3];
 
+	/**
+	 *  Test for incorrect amount of resources
+	 *  checkShelves method
+	 */
 
 	@Test
-	public void checkShelves1()    /* Test for incorrect amount of resources */
+	public void checkShelves1()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -36,8 +45,13 @@ public class StorageTest
 		assertFalse("Error", storage.checkShelves());
 	}
 
+	/**
+	 *  Test for the same type of resources in different shelves
+	 *  checkShelves method
+	 */
+
 	@Test
-	public void checkShelves2()    /* Test for the same type of resources in different shelves */
+	public void checkShelves2()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -54,8 +68,13 @@ public class StorageTest
 		assertFalse("Error", storage.checkShelves());
 	}
 
+	/**
+	 * Test for entering correct parameters
+	 * checkShelves method
+	 */
+
 	@Test
-	public void checkShelves3()    /* Test for entering correct parameters */
+	public void checkShelves3()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -72,8 +91,13 @@ public class StorageTest
 		assertTrue("Error", storage.checkShelves());
 	}
 
+	/**
+	 * Test for entering correct parameters
+	 * addResource method
+	 */
+
 	@Test
-	public void addResource1()     /* Test for entering correct parameters */
+	public void addResource1()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -92,8 +116,13 @@ public class StorageTest
 		assertEquals("Error", 2, shelves[1].getShelfResourceQuantity());
 	}
 
+	/**
+	 * Test for entering correct parameters
+	 * addResource method
+	 */
+
 	@Test
-	public void addResource2()    /* Test for entering correct parameters */
+	public void addResource2()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -111,8 +140,13 @@ public class StorageTest
 		assertEquals("Error", ResourceType.BLUE, shelves[0].getShelfResourceType());
 	}
 
+	/**
+	 * Destination shelf and resource to add have different resource types
+	 * addResource method
+	 */
+
 	@Test
-	public void addResource3()        /* destination shelf and resource to add have different resource types */
+	public void addResource3()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -130,8 +164,13 @@ public class StorageTest
 		assertFalse(storage.addResource(resourceToAdd.getResourceType(), 2));
 	}
 
+	/**
+	 * Not enough space on the destination shelf
+	 * addResource method
+	 */
+
 	@Test
-	public void addResource4()        /* not enough space on the destination shelf */
+	public void addResource4()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -151,8 +190,13 @@ public class StorageTest
 		assertFalse(storage.addResource(resourceToAdd.getResourceType(), 1));
 	}
 
+	/**
+	 * Third shelf is empty and first shelf have the same type of resourceToAdd
+	 * addResourceSmart method
+	 */
+
 	@Test
-	public void addResourceSmart1()   /* third shelf is empty and first shelf have the same type of resourceToAdd */
+	public void addResourceSmart1()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -170,8 +214,13 @@ public class StorageTest
 		assertEquals("Error", ResourceType.PURPLE, shelves[2].getShelfResourceType());
 	}
 
+	/**
+	 * Third shelf is empty and second shelf have the same type of resourceToAdd
+	 * addResourceSmart method
+	 */
+
 	@Test
-	public void addResourceSmart2()   /* third shelf is empty and second shelf have the same type of resourceToAdd */
+	public void addResourceSmart2()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -189,8 +238,13 @@ public class StorageTest
 		assertEquals("Error", ResourceType.GREY, shelves[2].getShelfResourceType());
 	}
 
+	/**
+	 * Second shelf is empty and first shelf have the same type of resourceToAdd
+	 * addResourceSmart method
+	 */
+
 	@Test
-	public void addResourceSmart3()   /* second shelf is empty and first shelf have the same type of resourceToAdd */
+	public void addResourceSmart3()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -208,8 +262,13 @@ public class StorageTest
 		assertEquals("Error", ResourceType.PURPLE, shelves[1].getShelfResourceType());
 	}
 
+	/**
+	 * Second shelf is not full and have the same type of resourceToAdd
+	 * addResourceSmart method
+	 */
+
 	@Test
-	public void addResourceSmart4()		/* second shelf is not full and have the same type of resourceToAdd */
+	public void addResourceSmart4()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -229,8 +288,13 @@ public class StorageTest
 		assertEquals("Error", ResourceType.GREY, shelves[1].getShelfResourceType());
 	}
 
+	/**
+	 * All shelves have resources, swap first and second shelf
+	 * addResourceSmart method
+	 */
+
 	@Test
-	public void addResourceSmart5()   /* all shelves have resources, swap first and second shelf */
+	public void addResourceSmart5()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -252,8 +316,13 @@ public class StorageTest
 		assertEquals("Error", ResourceType.GREY, shelves[0].getShelfResourceType());
 	}
 
+	/**
+	 * All shelves have resources, swap first and third shelf
+	 * addResourceSmart method
+	 */
+
 	@Test
-	public void addResourceSmart6()   /* all shelves have resources, swap first and third shelf */
+	public void addResourceSmart6()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -275,8 +344,13 @@ public class StorageTest
 		assertEquals("Error", ResourceType.BLUE, shelves[0].getShelfResourceType());
 	}
 
+	/**
+	 * All shelves have resources, swap first and second shelf
+	 * addResourceSmart method
+	 */
+
 	@Test
-	public void addResourceSmart7()   /* all shelves have resources, swap first and second shelf */
+	public void addResourceSmart7()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -298,8 +372,13 @@ public class StorageTest
 		assertEquals("Error", ResourceType.BLUE, shelves[1].getShelfResourceType());
 	}
 
+	/**
+	 * All shelves have resources, swap second and third shelf and change quantity
+	 * addResourceSmart method
+	 */
+
 	@Test
-	public void addResourceSmart8()		/* all shelves have resources, swap second and third shelf and change quantity */
+	public void addResourceSmart8()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -321,8 +400,13 @@ public class StorageTest
 		assertEquals("Error", ResourceType.BLUE, shelves[1].getShelfResourceType());
 	}
 
+	/**
+	 * Remove from first shelf
+	 * removeResource method
+	 */
+
 	@Test
-	public void removeResource1()		/* remove from first shelf */
+	public void removeResource1()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -343,8 +427,13 @@ public class StorageTest
 		assertEquals("Error", 0, shelves[0].getShelfResourceQuantity());
 	}
 
+	/**
+	 * Remove from second shelf
+	 * removeResource method
+	 */
+
 	@Test
-	public void removeResource2()		/* remove from second shelf */
+	public void removeResource2()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -365,8 +454,13 @@ public class StorageTest
 		assertEquals("Error", 1, shelves[1].getShelfResourceQuantity());
 	}
 
+	/**
+	 * Remove from third shelf
+	 * removeResource method
+	 */
+
 	@Test
-	public void removeResource3()		/* remove from third shelf */
+	public void removeResource3()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -387,9 +481,13 @@ public class StorageTest
 		assertEquals("Error", 0, shelves[2].getShelfResourceQuantity());
 	}
 
+	/**
+	 * Destination shelf is not empty
+	 * moveResources method
+	 */
 
 	@Test
-	public void moveResources1()     /* destination shelf is not empty */
+	public void moveResources1()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -406,8 +504,13 @@ public class StorageTest
 		assertFalse(storage.moveResources(1,2));
 	}
 
+	/**
+	 * Correct parameters
+	 * moveResources method
+	 */
+
 	@Test
-	public void moveResources2()     /* correct parameters */
+	public void moveResources2()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -426,8 +529,13 @@ public class StorageTest
 		assertEquals("Error", ResourceType.PURPLE, shelves[1].getShelfResourceType());
 	}
 
+	/**
+	 * Not enough space on destination shelf
+	 * moveResources method
+	 */
+
 	@Test
-	public void moveResources3()     /* not enough space on destination shelf */
+	public void moveResources3()
 	{
 		for (int i=0; i<3; i++)
 			shelves[i] = new Shelf(i+1);
@@ -441,6 +549,10 @@ public class StorageTest
 		storage.setShelves(shelves);
 		assertFalse(storage.moveResources(3,2));
 	}
+
+	/**
+	 * findResourceByType method
+	 */
 
 	@Test
 	public void findResourceByType()
@@ -463,6 +575,10 @@ public class StorageTest
 		assertEquals("Error", 0, storage.findResourceByType(ResourceType.PURPLE));
 	}
 
+	/**
+	 * convertIndexToShelf
+	 */
+
 	@Test
 	public void convertIndexToShelf()
 	{
@@ -473,6 +589,11 @@ public class StorageTest
 		assertEquals("Error", shelves[1], storage.convertIndexToShelf(2));
 		assertEquals("Error", shelves[2], storage.convertIndexToShelf(3));
 	}
+
+	/**
+	 * Check that returns the correct number of total resources of storage
+	 * getTotalResources method
+	 */
 
 	@Test
 	public void getTotalResources()
