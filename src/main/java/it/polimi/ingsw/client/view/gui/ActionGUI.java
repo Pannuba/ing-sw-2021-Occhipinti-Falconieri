@@ -100,6 +100,12 @@ public class ActionGUI extends MessageExecutor
 	}
 
 	@Override
+	public void productionResult(Player player)
+	{
+
+	}
+
+	@Override
 	public void getBoughtResources(List<Resource> boughtResources)
 	{
 		mvc.printToConsole("Received " + boughtResources.size() + " resources");

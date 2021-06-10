@@ -127,6 +127,7 @@ public class ActivateProductionCommand implements Command			/* TODO: update loca
 
 		else
 		{
+			controller.getView().send(new ProductionResultMessage(model.getPlayerByUsername(username)));	/* Also send ProductionResultMessage if the production fails */
 			message = "Couldn't activate production: requirements not satisfied.";
 			isFailed = true;
 		}

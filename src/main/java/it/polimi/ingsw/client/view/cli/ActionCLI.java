@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.cards.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -64,7 +65,26 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 	@Override
 	public void productionResult(Player player)
 	{
+		PrintMethods.printStorage(player.getDashboard().getStorage());
+		System.out.print("Choose another production: default production (1), devcard (2), SkillProduction leader card (3), stop production (4): ");
 
+		switch (input.nextLine())
+		{
+			case "0":
+				new ActivateProduction(cli.getInput(), cli).defaultProduction();
+				break;
+
+			case "1":
+				new ActivateProduction(cli.getInput(), cli).devCardProduction();
+				break;
+
+			case "3":
+				new ActivateProduction(cli.getInput(), cli).leaderProduction();
+				break;
+
+			default:
+				messageHandler.send(Arrays.asList("STOP_PRODUCTION"));
+		}
 	}
 
 	@Override

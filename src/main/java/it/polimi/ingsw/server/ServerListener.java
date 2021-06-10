@@ -192,6 +192,12 @@ public class ServerListener
 					if (recoveredMatchPlayers.get(j).getUsername().equals(players.get(k).getUsername()))
 						counter++;
 				}
+
+				if (counter == recoveredMatchPlayers.size())
+				{
+					System.out.println("RETURNING " + i);
+					return i;
+				}
 			}
 		}
 

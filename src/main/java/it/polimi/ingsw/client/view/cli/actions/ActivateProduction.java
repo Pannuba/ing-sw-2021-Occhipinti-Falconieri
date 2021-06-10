@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.model.cards.SkillProduction;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,7 +23,7 @@ public class ActivateProduction
 
 	public List<String> run()
 	{
-		List<String> command = new ArrayList<>();
+		List<String> command;
 		System.out.println("This is your current storage and vault:");
 		PrintMethods.printStorage(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getStorage());
 		PrintMethods.printVault(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getVault());
@@ -31,72 +32,15 @@ public class ActivateProduction
 		switch (input.nextLine())
 		{
 			case "1":
-
-				String firstResourceToConvert, secondResourceToConvert, resourceToMake;
-
-				System.out.print("Insert the first resource type you want to convert (B/G/Y/P): ");
-				firstResourceToConvert = input.nextLine();
-				System.out.print("Insert the second resource type you want to convert (B/G/Y/P): ");
-				secondResourceToConvert = input.nextLine();
-				System.out.print("Insert the resource type you want to make (B/G/Y/P): ");
-				resourceToMake = input.nextLine();
-
-				command.add("ACTIVATE_PRODUCTION");
-				command.add("DEFAULT");
-				command.add(firstResourceToConvert);
-				command.add(secondResourceToConvert);
-				command.add(resourceToMake);
+				command = defaultProduction();
 				break;
 
 			case "2":
-
-				String cardNumber;
-				PrintMethods.printDevCardAreas(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas());
-				/* TODO: check if the player has no devcards */
-				System.out.print("Insert the devcard's # you want to use: ");
-				cardNumber = input.nextLine();
-
-				command.add("ACTIVATE_PRODUCTION");
-				command.add("DEVCARD");
-				command.add(cardNumber);
+				command = devCardProduction();
 				break;
 
 			case "3":	/* Checks are both server side (to prevent cheating) and client side (to avoid useless server load and message exchange) */
-
-				List<LeaderCard> leaderCards = cli.getGameState().getPlayerByName(cli.getUsername()).getLeaderCards();
-				List<LeaderCard> activeCardsWithProdSkill = new ArrayList<>();
-				String chosenCardNum, resourceToMakeLeader;
-
-				for (int i = 0; i < leaderCards.size(); i++)
-				{
-					if (leaderCards.get(i) instanceof SkillProduction && leaderCards.get(i).isActive())
-						activeCardsWithProdSkill.add(leaderCards.get(i));
-				}
-
-				if (activeCardsWithProdSkill.isEmpty())
-				{
-					System.out.println("You don't have any active leaders that have a production skill!");
-					cli.chooseAction();
-					return null;
-				}
-
-				else
-				{
-					for (int i = 0; i < activeCardsWithProdSkill.size(); i++)			/* For the rare chance that the player has both cards SkillProduction */
-						PrintMethods.printLeaderCard(activeCardsWithProdSkill.get(i));
-
-					System.out.print("Which card do you want to use? ");
-					chosenCardNum = input.nextLine();
-
-					System.out.print("Insert the resource you want to make (B/G/Y/P)");
-					resourceToMakeLeader = input.nextLine();
-
-					command.add("ACTIVATE_PRODUCTION");
-					command.add("LEADER_SKILL");
-					command.add(chosenCardNum);
-					command.add(resourceToMakeLeader);
-				}
-
+				command = leaderProduction();
 				break;
 
 			default:
@@ -105,5 +49,64 @@ public class ActivateProduction
 		}
 
 		return command;
+	}
+
+	public List<String> defaultProduction()
+	{
+		String firstResourceToConvert, secondResourceToConvert, resourceToMake;
+
+		System.out.print("Insert the first resource type you want to convert (B/G/Y/P): ");
+		firstResourceToConvert = input.nextLine();
+		System.out.print("Insert the second resource type you want to convert (B/G/Y/P): ");
+		secondResourceToConvert = input.nextLine();
+		System.out.print("Insert the resource type you want to make (B/G/Y/P): ");
+		resourceToMake = input.nextLine();
+
+		return Arrays.asList("ACTIVATE_PRODUCTION", "DEFAULT", firstResourceToConvert, secondResourceToConvert, resourceToMake);
+	}
+
+	public List<String> devCardProduction()
+	{
+		String cardNumber;
+		PrintMethods.printDevCardAreas(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas());
+		/* TODO: check if the player has no devcards */
+		System.out.print("Insert the devcard's # you want to use: ");
+		cardNumber = input.nextLine();
+
+		return Arrays.asList("ACTIVATE_PRODUCTION", "DEVCARD", cardNumber);
+	}
+
+	public List<String> leaderProduction()
+	{
+		List<LeaderCard> leaderCards = cli.getGameState().getPlayerByName(cli.getUsername()).getLeaderCards();
+		List<LeaderCard> activeCardsWithProdSkill = new ArrayList<>();
+		String chosenCardNum, resourceToMakeLeader;
+
+		for (int i = 0; i < leaderCards.size(); i++)
+		{
+			if (leaderCards.get(i) instanceof SkillProduction && leaderCards.get(i).isActive())
+				activeCardsWithProdSkill.add(leaderCards.get(i));
+		}
+
+		if (activeCardsWithProdSkill.isEmpty())
+		{
+			System.out.println("You don't have any active leaders that have a production skill!");
+			cli.chooseAction();
+			return null;
+		}
+
+		else
+		{
+			for (int i = 0; i < activeCardsWithProdSkill.size(); i++)			/* For the rare chance that the player has both cards SkillProduction */
+				PrintMethods.printLeaderCard(activeCardsWithProdSkill.get(i));
+
+			System.out.print("Which card do you want to use? ");
+			chosenCardNum = input.nextLine();
+
+			System.out.print("Insert the resource you want to make (B/G/Y/P)");
+			resourceToMakeLeader = input.nextLine();
+
+			return Arrays.asList("ACTIVATE_PRODUCTION", "LEADER_SKILL", chosenCardNum, resourceToMakeLeader);
+		}
 	}
 }

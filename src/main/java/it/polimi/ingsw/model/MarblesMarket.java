@@ -37,7 +37,7 @@ public class MarblesMarket implements Serializable
 
 	public MarblesMarket()
 	{
-		create();
+
 	}
 
 	/**
@@ -48,8 +48,6 @@ public class MarblesMarket implements Serializable
 
 	public void create()
 	{
-		System.out.println("Creating marbles market...");
-
 		List<String> marblesToAssign = Arrays.asList("W", "W", "W", "W", "B", "B", "G", "G", "P", "P", "Y", "Y", "R");
 		Collections.shuffle(marblesToAssign);
 

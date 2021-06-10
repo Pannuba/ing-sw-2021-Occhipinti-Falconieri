@@ -23,7 +23,7 @@ public class DevCardsMarket implements Serializable
 
 	public DevCardsMarket()
 	{
-		create();
+
 	}
 
 	/**
@@ -32,7 +32,6 @@ public class DevCardsMarket implements Serializable
 
 	public void create()		/* TODO: change in private */
 	{
-		System.out.println("Creating devcards...");
 		List<DevCard> allDevCards = new ArrayList<>();
 		devCardStacks = new ArrayList<>();
 
