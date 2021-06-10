@@ -12,20 +12,20 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 	public static void printBoard(Dashboard board)		/* Could get both from gamestate but this is simpler */
 	{
 		printVault(board.getVault());
-		printStorage(board.getStorage());			/* TODO: add SkillStorage */
+		printStorage(board.getStorage());
 		printDevCardAreas(board.getDevCardAreas());
 	}
 
-	public static void printLeaderCard(Object card)		/* Can't access skill variables from LeaderCard because it's abstract */
+	public static void printLeaderCard(LeaderCard card)		/* Can't access skill variables from LeaderCard because it's abstract */
 	{
-		System.out.println("Card number: " + ((LeaderCard) card).getCardNumber());
-		System.out.println("Points: " + ((LeaderCard) card).getPoints());
+		System.out.println("Card number: " + card.getCardNumber());
+		System.out.println("Points: " + card.getPoints());
 
-		if (((LeaderCard) card).isActive())			/* Active cards can't be discarded, and vice versa */
-			System.out.println("Active: " + ((LeaderCard) card).isActive());
+		if (card.isActive())			/* Active cards can't be discarded, and vice versa */
+			System.out.println("Active: " + card.isActive());
 
 		else
-			System.out.println("Discarded: " + ((LeaderCard) card).isDiscarded());
+			System.out.println("Discarded: " + card.isDiscarded());
 
 		switch (card.getClass().getSimpleName())
 		{
@@ -50,10 +50,15 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 				break;
 
 			case "SkillStorage":
-				System.out.println(	"Leadercard skill: additional storage"																										+
+				System.out.println(	"Leadercard skill: additional storage"																											+
 									"\nAdditional storage resource: " + convertResTypeToString(((SkillStorage) card).getAdditionalStorage().getShelfResource().getResourceType())	+
 									"\nRequirements: " + ((SkillStorage) card).getRequirements().getQuantity() + " "																+
 									convertResTypeToString(((SkillStorage) card).getRequirements().getResourceType())																);
+
+				if (!((SkillStorage) card).getAdditionalStorage().isEmpty())
+					System.out.println(	"Additional storage has " + ((SkillStorage) card).getAdditionalStorage().getShelfResourceQuantity()		+
+										" "	+ convertResTypeToString(((SkillStorage) card).getAdditionalStorage().getShelfResourceType())		);
+
 				break;
 		}
 
