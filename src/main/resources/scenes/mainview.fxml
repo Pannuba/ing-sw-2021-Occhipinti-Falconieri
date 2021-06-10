@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
+
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.MainViewController">
    <children>
       <ImageView fitHeight="723.0" fitWidth="1282.0" pickOnBounds="true" preserveRatio="true">
@@ -31,7 +32,8 @@
          </effect>
          <font>
             <Font name="Times New Roman Italic" size="19.0" />
-         </font></Button>
+         </font>
+      </Button>
       <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="123.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="55.0" prefWidth="184.0" text="Show Leader Cards">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
@@ -41,7 +43,8 @@
          </effect>
          <font>
             <Font name="Times New Roman Italic" size="19.0" />
-         </font></Button>
+         </font>
+      </Button>
       <TextArea fx:id="console" editable="false" layoutX="1018.0" layoutY="359.0" prefHeight="350.0" prefWidth="254.0" wrapText="true" />
       <ImageView fx:id="redPawn" fitHeight="70.0" fitWidth="87.0" layoutX="26.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -74,6 +77,42 @@
       <ImageView fx:id="bottomShelfResource1" fitHeight="45.0" fitWidth="51.0" layoutX="65.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bottomShelfResource2" fitHeight="45.0" fitWidth="51.0" layoutX="104.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="bottomShelfResource3" fitHeight="45.0" fitWidth="51.0" layoutX="142.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="vaultBlueAmount" layoutX="44.0" layoutY="548.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="vaultPurpleAmount" layoutX="131.0" layoutY="547.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="vaultYellowAmount" layoutX="45.0" layoutY="601.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="vaultGreyAmount" layoutX="131.0" layoutY="600.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Button fx:id="defaultProductionButton" disable="true" layoutX="241.0" layoutY="481.0" mnemonicParsing="false" onAction="#startDefaultProduction" opacity="0.0" prefHeight="120.0" prefWidth="132.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fx:id="actionTokenFront" fitHeight="100.0" fitWidth="100.0" layoutX="1034.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="actionTokenBack" fitHeight="100.0" fitWidth="100.0" layoutX="1155.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../img/actiontokens/back.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="otherPlayersButton" layoutX="1050.0" layoutY="215.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="76.0" prefWidth="190.0" text="Show Other Players' Boards" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
       <ImageView fx:id="vaultResourceBlue" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="71.0" layoutY="550.0" onMouseClicked="#selectBlueResource" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -106,53 +145,65 @@
             <Image url="@../img/resources/grey.png" />
          </image>
       </ImageView>
-      <Label fx:id="vaultBlueAmount" layoutX="44.0" layoutY="548.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="30.0" />
-         </font>
-      </Label>
-      <Label fx:id="vaultPurpleAmount" layoutX="131.0" layoutY="547.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="30.0" />
-         </font>
-      </Label>
-      <Label fx:id="vaultYellowAmount" layoutX="45.0" layoutY="601.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="30.0" />
-         </font>
-      </Label>
-      <Label fx:id="vaultGreyAmount" layoutX="131.0" layoutY="600.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="30.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="devCardArea1" disable="true" fitHeight="317.0" fitWidth="176.0" layoutX="391.0" layoutY="334.0" onMouseClicked="#selectDevCardArea1" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCardAreaOne1" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="389.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></ImageView>
-      <ImageView fx:id="devCardArea2" disable="true" fitHeight="317.0" fitWidth="176.0" layoutX="583.0" layoutY="334.0" onMouseClicked="#selectDevCardArea2" pickOnBounds="true" preserveRatio="true">
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="devCardAreaTwo1" disable="true" fitHeight="267.0" fitWidth="178.0" layoutX="581.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></ImageView>
-      <ImageView fx:id="devCardArea3" disable="true" fitHeight="317.0" fitWidth="176.0" layoutX="783.0" layoutY="334.0" onMouseClicked="#selectDevCardArea3" pickOnBounds="true" preserveRatio="true">
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="devCardAreaThree1" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="780.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></ImageView>
-      <Button fx:id="defaultProductionButton" disable="true" layoutX="241.0" layoutY="481.0" mnemonicParsing="false" onAction="#startDefaultProduction" opacity="0.0" prefHeight="120.0" prefWidth="132.0">
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="devCardAreaOne2" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="389.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="devCardAreaTwo2" disable="true" fitHeight="267.0" fitWidth="178.0" layoutX="581.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="devCardAreaThree2" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="780.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="devCardAreaOne3" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="389.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="devCardAreaTwo3" disable="true" fitHeight="267.0" fitWidth="178.0" layoutX="581.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="devCardAreaThree3" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="780.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Button fx:id="productionDevCardArea1" disable="true" layoutX="384.0" layoutY="284.0" mnemonicParsing="false" onAction="#selectDevCardArea1" opacity="0.0" prefHeight="371.0" prefWidth="184.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fx:id="actionTokenFront" fitHeight="100.0" fitWidth="100.0" layoutX="1034.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="actionTokenBack" fitHeight="100.0" fitWidth="100.0" layoutX="1155.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../img/actiontokens/back.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="otherPlayersButton" layoutX="1050.0" layoutY="215.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="76.0" prefWidth="190.0" text="Show Other Players' Boards" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font size="20.0" />
-         </font>
+      <Button fx:id="productionDevCardArea2" disable="true" layoutX="578.0" layoutY="284.0" mnemonicParsing="false" onAction="#selectDevCardArea2" opacity="0.0" prefHeight="371.0" prefWidth="184.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="productionDevCardArea3" disable="true" layoutX="777.0" layoutY="284.0" mnemonicParsing="false" onAction="#selectDevCardArea3" opacity="0.0" prefHeight="371.0" prefWidth="184.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
    </children>
 </Pane>
