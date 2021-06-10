@@ -14,15 +14,33 @@ import java.io.Serializable;			/* Has resources bought from the marbles market *
 	_______
 */
 
+/**
+ * Storage of each dashboard
+ * @author Giulio Occhipinti
+ * @author Chiara Falconieri
+ */
+
 public class Storage implements Serializable
 {
-	private Shelf[] shelves = new Shelf[3];		/* Static array because there are always 3 shelves, no more no less */
+	/**
+	 * @param shelves Static array because there are always 3 shelves, no more no less
+	 */
+
+	private Shelf[] shelves = new Shelf[3];
+
+	/**
+	 * Creates storage and initialize shelves passing i + 1 as shelf size
+	 */
 
 	public Storage()
 	{
 		for (int i = 0; i < 3; i++)
-			shelves[i] = new Shelf(i + 1);		/* Initialize shelves passing i + 1 as shelf size */
+			shelves[i] = new Shelf(i + 1);
 	}
+
+	/**
+	 * Check that shelves have the right amount of resources and that one shelf hasn't the same type of resource of another shelf
+	 */
 
 	public boolean checkShelves()
 	{
@@ -52,7 +70,12 @@ public class Storage implements Serializable
 			return true;
 	}
 
-	public boolean addResource(ResourceType resourceToAdd, int shelfNumber)		/* Add 1 resource to a specified shelf. Called by addResourceSmart */
+	/**
+	 * Add one resource to a specified shelf
+	 * Called by addResourceSmart
+	 */
+
+	public boolean addResource(ResourceType resourceToAdd, int shelfNumber)
 	{
 		Shelf destinationShelf = convertIndexToShelf(shelfNumber);
 		System.out.println("addResource: adding 1 " + resourceToAdd + " to shelf " + shelfNumber);
@@ -85,7 +108,15 @@ public class Storage implements Serializable
 		}
 	}
 
-	public ResourceType addResourceSmart(ResourceType resourceToAdd)	/* Adds a resource without having to specify the shelf number. Checks the smaller shelf first */
+	/**
+	 * Adds a resource without having to specify the shelf number but only the type
+	 * First calls checkShelves
+	 * Make all checks to add the resource
+	 * Discards the resource only if there is no more space or the type is different from the resources that are in the three shelves
+	 * @return the resource if it cannot be added to storage, else null
+	 */
+
+	public ResourceType addResourceSmart(ResourceType resourceToAdd)
 	{
 		checkShelves();
 		System.out.println("addResoruceSmart: adding " + resourceToAdd);
@@ -238,11 +269,16 @@ public class Storage implements Serializable
 		return excessResource;
 	}
 
-	public int removeResource(Resource resourceToRemove)			/* Returns the number of removed resources. [4, YELLOW] */
+	/**
+	 * Removes multiple resources of the same type one at a time
+	 * @return number of removed resources
+	 */
+
+	public int removeResource(Resource resourceToRemove)
 	{
 		int removedResNum = 0;
 
-		for (int i = 0; i < resourceToRemove.getQuantity(); i++)		/* Remove 1 resource every iteration */
+		for (int i = 0; i < resourceToRemove.getQuantity(); i++)
 		{
 
 			if (shelves[0].getShelfResourceType() == resourceToRemove.getResourceType() && shelves[0].getShelfResourceQuantity() == 1)	/* Second check is redundant */
@@ -277,9 +313,14 @@ public class Storage implements Serializable
 		return removedResNum;
 	}
 
-	public boolean moveResources(int shelfFromNum, int shelfToNum)			/* Can't have 2 shelves with the same resource according to the rules, */
-	{																		/* so this function can only move resources to an empty shelf */
-		Shelf shelfFrom = convertIndexToShelf(shelfFromNum);				/* and the source shelf has to be empty afterwards */
+	/**
+	 * Move resources to an empty shelf and the source shelf has to be empty afterwards
+	 * Can't have two shelves with the same resource according to the rules
+	 */
+
+	public boolean moveResources(int shelfFromNum, int shelfToNum)
+	{
+		Shelf shelfFrom = convertIndexToShelf(shelfFromNum);
 		Shelf shelfTo = convertIndexToShelf(shelfToNum);
 		int amount = shelfFrom.getShelfResourceQuantity();
 		System.out.println("moveResources: moving from shelf " + shelfFromNum + " to shelf " + shelfToNum);
@@ -310,7 +351,12 @@ public class Storage implements Serializable
 		}
 	}
 
-	public int findResourceByType(ResourceType resourceToFind)		/* Returns the number of resources of passed type. Used to check cards requirements */
+	/**
+	 * Returns the number of resources of passed type
+	 * Used to check cards requirements
+	 */
+
+	public int findResourceByType(ResourceType resourceToFind)
 	{
 		int counter = 0;
 
@@ -322,6 +368,11 @@ public class Storage implements Serializable
 
 		return counter;
 	}
+
+	/**
+	 * Returns the total number of resources
+	 * Used to calculate the final score, to activate a leaderCard or to purchase a devCard
+	 */
 
 	public int getTotalResources()
 	{

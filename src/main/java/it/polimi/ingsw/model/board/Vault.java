@@ -7,9 +7,22 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
-public class Vault implements Serializable		/* Has resources obtained through production */
+/**
+ * Vault of each dashboard
+ * Has resources obtained through production
+ * @author Giulio Ochhipinti
+ */
+
+public class Vault implements Serializable
 {
+	/**
+	 * @param resourceAmounts contains the number of all resources in the vault divided by resource type
+	 */
 	private HashMap<ResourceType, Integer> resourceAmounts;
+
+	/**
+	 * Creates the hashMap of all resources and set the quantity to 0
+	 */
 
 	public Vault()
 	{
@@ -21,10 +34,18 @@ public class Vault implements Serializable		/* Has resources obtained through pr
 		resourceAmounts.put(ResourceType.PURPLE, 0);
 	}
 
+	/**
+	 * Adds a resource based on its type
+	 */
+
 	public void addResource(ResourceType resourceToAdd)
 	{
 		resourceAmounts.put(resourceToAdd, resourceAmounts.get(resourceToAdd) + 1);
 	}
+
+	/**
+	 * Adds a resource list even several by calling the addResource function for each resource to be added
+	 */
 
 	public void addResourceList(List<Resource> resourcesToAdd)
 	{
@@ -38,11 +59,16 @@ public class Vault implements Serializable		/* Has resources obtained through pr
 		}
 	}
 
+	/**
+	 * Removes multiple resources of the same type one at a time
+	 * @return number of removed resources
+	 */
+
 	public int removeResource(Resource resourceToRemove)
 	{
 		int removedResNum = 0;
 
-		for (int i = 0; i < resourceToRemove.getQuantity(); i++)		/* Remove resources one at a time */
+		for (int i = 0; i < resourceToRemove.getQuantity(); i++)
 		{
 			if (resourceAmounts.get(resourceToRemove.getResourceType()) > 0)
 			{
@@ -54,6 +80,11 @@ public class Vault implements Serializable		/* Has resources obtained through pr
 		System.out.println("Vault removeResource: removed " + removedResNum + " " + resourceToRemove.getResourceType());
 		return removedResNum;
 	}
+
+	/**
+	 * Returns the total number of resources
+	 * Used to calculate the final score, to activate a leaderCard or to purchase a devCard
+	 */
 
 	public int getTotalResources()
 	{

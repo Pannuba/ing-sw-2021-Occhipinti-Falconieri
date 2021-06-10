@@ -7,13 +7,26 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
-/* One track shared among all players */
+/**
+ * Faith track
+ * One track shared among all players
+ * @author Giulio Occhipinti
+ * @author Chiara Falconieri
+ */
 
 public class Track implements Serializable
 {
+	/**
+	 * @param faithTrack array of 25 boxes
+	 * @param popeTokens Track has 3 popeTokens, discarded when a player calls a vatican report for each token
+	 * @param redPawns one for each player, is HashMap <player ID, position>
+	 * @param numPlayers number of players in the game
+	 * @param blackPawn used only in single game
+	 */
+
 	private final Box[] faithTrack = new Box[25];
-	private final PopeToken[] popeTokens = new PopeToken[3];		/* Track has 3 popetokens, discarded when a player calls a vatican report for each token */
-	private HashMap<Integer, Integer> redPawns;				/* Key: ID, value: position */
+	private final PopeToken[] popeTokens = new PopeToken[3];
+	private HashMap<Integer, Integer> redPawns;
 	private int numPlayers;
 	private int blackPawn;
 
@@ -21,6 +34,11 @@ public class Track implements Serializable
 	{
 
 	}
+
+	/**
+	 * Creates the track by setting all parameters
+	 * @param players used to create a redPawn for each player
+	 */
 
 	public Track(List<Player> players)
 	{
@@ -67,7 +85,11 @@ public class Track implements Serializable
 		faithTrack[24] = new Box(BoxType.POPE,   20);
 	}
 
-	public int checkVaticanReport()		/* Returns the number of the pope box that triggered the vatican report. 0 if no vatican report */
+	/**
+	 * Returns the number of the pope box that triggered the vatican report. 0 if no vatican report
+	 */
+
+	public int checkVaticanReport()
 	{
 		for (int i = 0; i < numPlayers; i++)		/* redPawns.get(i) returns the position of player ID i */
 		{

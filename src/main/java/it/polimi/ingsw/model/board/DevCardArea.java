@@ -6,17 +6,35 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Single devCard area of the dashboard
+ * @author Giulio Occhipinti
+ */
+
 public class DevCardArea implements Serializable			/* Devcards can't be removed once added */
 {
+	/**
+	 * @param isEmpty true if there is no devCard
+	 * @param devCards list of devCards of that area
+	 * @param layer 0 if there is no devCard, 1 if there is devCard of level 1, 2 if there is devCard of level 2, 3 if there is devCard of level 3
+	 */
 	private boolean isEmpty;
 	private List<DevCard> devCards = new ArrayList<>();
 	private int layer;
+
+	/**
+	 * Creates an empty area
+	 */
 
 	public DevCardArea()
 	{
 		isEmpty = true;
 		layer = 0;
 	}
+
+	/**
+	 * Check that there are no fewer than zero cards or more than three
+	 */
 
 	public boolean checkDevCardArea()			/* Layer is 0 if there are no devcards, 3 if there are 3 devcards */
 	{
@@ -29,6 +47,13 @@ public class DevCardArea implements Serializable			/* Devcards can't be removed 
 		else
 			return true;
 	}
+
+	/**
+	 * Add the devCard to the area and check that the area does not already have three cards or that the card to add is compatible
+	 * If layer is 0 we can add a card of level 1
+	 * If layer is 1 we can add a card of level 2
+	 * If layer is 2 we can add a card of level 3
+	 */
 
 	public boolean addDevCard(DevCard cardToAdd)	/* changed from void to boolean for testing */
 	{
@@ -56,7 +81,12 @@ public class DevCardArea implements Serializable			/* Devcards can't be removed 
 		}
 	}
 
-	public DevCard getTopDevCard()			/* The devcard of highest level is the most important */
+	/**
+	 * Returns the highest card of the area
+	 * The devCard of highest level is the most important
+	 */
+
+	public DevCard getTopDevCard()
 	{
 		return devCards.get(layer - 1);		/* If layer is 3, the third devcard has index 2: [0, 1, 2] */
 	}

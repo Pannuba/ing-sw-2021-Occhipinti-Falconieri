@@ -6,8 +6,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Each player's dashboard
+ * @author Giulio Occhipinti
+ */
+
 public class Dashboard implements Serializable
 {
+	/**
+	 * Creates the three devCard areas, the vault and the storage
+	 */
+
 	private Vault vault;
 	private Storage storage;
 	private DevCardArea[] devCardAreas = new DevCardArea[3];
@@ -20,6 +29,11 @@ public class Dashboard implements Serializable
 		vault = new Vault();
 		storage = new Storage();
 	}
+
+	/**
+	 * Player's devCards
+	 * @return all devCards the player owns
+	 */
 
 	public List<DevCard> getAllDevCards()
 	{
@@ -37,10 +51,22 @@ public class Dashboard implements Serializable
 		return allDevCards;
 	}
 
+	/**
+	 * Adds the purchased card to the chosen devCard area
+	 * @param cardToAdd purchased card
+	 * @param areaIndex devCard area number
+	 */
+
 	public void addDevCardToArea(DevCard cardToAdd, int areaIndex)		/* Find the devCardArea where cardToAdd can be added, then adds it */
 	{
 		devCardAreas[areaIndex].addDevCard(cardToAdd);		/* Need to trust the client that it chose a compatible area... add checks in controller? */
 	}
+
+	/**
+	 * Returns the highest card based on the entered area devCard number
+	 * @param number devCard area number
+	 * @return top card of the chosen devCard area
+	 */
 
 	public DevCard getTopDevCardByNumber(int number)
 	{
@@ -56,6 +82,11 @@ public class Dashboard implements Serializable
 		System.out.println("getTopDevCardByNumber: card not found!");
 		return null;
 	}
+
+	/**
+	 * Returns the number of devCards the player owns
+	 * Used to calculate the sum of layers in all areas
+	 */
 
 	public int getTotalDevCardsNum()		/* Used to calculate the sum of layers in all areas, but it's simply getAllDevCards().size() */
 	{
