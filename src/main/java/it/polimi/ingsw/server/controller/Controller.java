@@ -64,13 +64,17 @@ public class Controller implements Observer			/* Observes view to get commands..
 				isTaskFailed = new ActivateProductionCommand().run(this, command, username, model);
 				break;
 
+			case "STOP_PRODUCTION":
+				isTaskFailed = new StopProductionCommand().run(this, command, username, model);
+				break;
+
 			case "BUY_RESOURCES":
 				isTaskFailed = new BuyResourcesCommand().run(this, command, username, model);
 				break;
 		}
 
 		if ((command.get(0).equals("BUY_RESOURCES") || command.get(0).equals("BUY_DEVCARD")	||
-			command.get(0).equals("ACTIVATE_PRODUCTION") || command.get(0).equals("DISCARD_LEADER")) && !isTaskFailed)
+			command.get(0).equals("STOP_PRODUCTION") || command.get(0).equals("DISCARD_LEADER")) && !isTaskFailed)
 		{
 			if (!command.get(0).equals("DISCARD_LEADER"))
 			{

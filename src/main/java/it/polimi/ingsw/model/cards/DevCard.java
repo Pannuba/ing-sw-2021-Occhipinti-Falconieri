@@ -12,12 +12,15 @@ public class DevCard implements Serializable
 	private DevCardColor color;
 	private int points;
 	private int level;
+	private boolean usedForProduction;			/* To prevent clients from using the same card more than once in the same round */
 	private List<Resource> requirements;		/* At the top of each card */
 	private List<Resource> cost;				/* Left side */
 	private List<Resource> product;				/* Right side. faithpoints are here */
 
 	public DevCard()
 	{
+		usedForProduction = false;
+
 		requirements = new ArrayList<>();
 		cost = new ArrayList<>();
 		product = new ArrayList<>();
@@ -61,6 +64,16 @@ public class DevCard implements Serializable
 	public void setLevel(int level)
 	{
 		this.level = level;
+	}
+
+	public boolean isUsedForProduction()
+	{
+		return usedForProduction;
+	}
+
+	public void setUsedForProduction(boolean usedForProduction)
+	{
+		this.usedForProduction = usedForProduction;
 	}
 
 	public List<Resource> getCost()

@@ -25,6 +25,8 @@ public abstract class MessageExecutor
 
 	public abstract void chooseLeaderCards(List<LeaderCard> leaderCards);
 
+	public abstract void productionResult(Player player);
+
 	public abstract void getBoughtResources(List<Resource> boughtResources);
 
 	public abstract void getDiscardedResources(int discardedResNum, String playerWhoDiscarded);

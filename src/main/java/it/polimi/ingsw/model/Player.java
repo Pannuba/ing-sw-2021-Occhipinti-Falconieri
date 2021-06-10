@@ -11,6 +11,7 @@ public class Player implements Serializable
 {
 	private int id;							/* Set randomly in model. 0, 1, 2, 3 to manage turns, pawns and so on */
 	private boolean isMyTurn;
+	private boolean isDoingDefaultProduction;
 	private int victoryPoints;				/* Value assigned at the end of the match */
 	private List<LeaderCard> leaderCards;
 	private String username;
@@ -26,6 +27,7 @@ public class Player implements Serializable
 	{
 		this.username = username;
 		isMyTurn = false;
+		isDoingDefaultProduction = false;
 		victoryPoints = 0;
 
 		popeTokens[0] = new PopeToken(2);
@@ -163,6 +165,16 @@ public class Player implements Serializable
 	public void setMyTurn(boolean myTurn)
 	{
 		isMyTurn = myTurn;
+	}
+
+	public boolean isDoingDefaultProduction()
+	{
+		return isDoingDefaultProduction;
+	}
+
+	public void setDoingDefaultProduction(boolean doingDefaultProduction)
+	{
+		isDoingDefaultProduction = doingDefaultProduction;
 	}
 
 	public Dashboard getDashboard()

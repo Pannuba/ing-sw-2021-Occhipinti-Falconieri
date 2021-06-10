@@ -105,7 +105,7 @@ public class ServerListener
 
 				System.out.println("Username: " + username);
 
-				if (isDuplicateUsername(playerNames, username))		/* TODO: send LoginErrorMessage? */
+				if (isDuplicateUsername(playerNames, username))		/* TODO: send LoginErrorMessage? Yes, client only has to enter a new username */
 				{
 					System.out.println("Duplicate username detected: " + username);
 					i--;			/* If the username is duplicate, go back to the top of the loop without increasing i */
@@ -172,7 +172,7 @@ public class ServerListener
 		return false;
 	}
 
-	private int arePlayersReconnecting(List<Player> players) throws IOException
+	private int arePlayersReconnecting(List<Player> players)
 	{
 		System.out.println("players size: " + players.size());
 
@@ -181,7 +181,7 @@ public class ServerListener
 			List<Player> recoveredMatchPlayers = recoveredMatches.get(i).getPlayers();
 			int counter = 0;
 
-			for (int j = 0; j < recoveredMatchPlayers.size(); j++)
+			for (int j = 0; j < recoveredMatchPlayers.size(); j++)		/* TODO: find more efficient way to compare lists */
 			{
 				System.out.println("counter : " + counter + ", recMatchPlayerSize: " + recoveredMatchPlayers.size());
 
@@ -191,12 +191,6 @@ public class ServerListener
 					System.out.println("comparing recovered username " + recoveredMatchPlayers.get(j).getUsername() + " to " + players.get(k).getUsername());
 					if (recoveredMatchPlayers.get(j).getUsername().equals(players.get(k).getUsername()))
 						counter++;
-				}
-
-				if (counter == recoveredMatchPlayers.size())
-				{
-					System.out.println("RETURNING " + i);
-					return i;
 				}
 			}
 		}

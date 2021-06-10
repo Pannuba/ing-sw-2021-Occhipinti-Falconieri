@@ -21,6 +21,11 @@ public class Match implements Runnable
 	private final List<ClientHandler> views;
 	private final Model model;
 
+/*	isFinished boolean, pass match ("this") to model, when the game is finished the model sets isFinished to true,
+	the match's thread checks every 60 seconds or so if the match is finished, when it is it removes the match (this) from the currentMatches list
+	in ServerListener with serverListener.setCurrentMatches(serverListener.getCurrentMatches().remove(this))
+ */
+
 	/**
 	 * Constructor. Creates the match's Model and Controller
 	 * @param players the list of players created in ServerListener, used to initialize the Model

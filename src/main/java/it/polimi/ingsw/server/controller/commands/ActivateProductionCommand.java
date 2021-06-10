@@ -9,6 +9,7 @@ import it.polimi.ingsw.model.cards.SkillProduction;
 import it.polimi.ingsw.server.controller.Controller;
 import it.polimi.ingsw.server.messages.BoughtResourcesMessage;
 import it.polimi.ingsw.server.messages.OperationResultMessage;
+import it.polimi.ingsw.server.messages.ProductionResultMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +18,13 @@ import java.util.List;
  * @author Giulio Occhipinti
  */
 
-public class ActivateProductionCommand implements Command
+public class ActivateProductionCommand implements Command			/* TODO: update local controller to support multiple productions */
 {
 	@Override
 	public boolean run(Controller controller, List<String> command, String username, Model model)
 	{
 		String message = "";
-		boolean isFailed = false;
+		boolean isFailed;
 
 		List<Resource> producedResources = new ArrayList<>();
 		List<Resource> cost = new ArrayList<>();
@@ -32,17 +33,28 @@ public class ActivateProductionCommand implements Command
 		{
 			case "DEFAULT":				/* "ACTIVATE_PRODUCTION", "DEFAULT", "B", "B", "Y" */
 
-				if (command.get(2).equals(command.get(3)))		/* If the resources to convert are the same */
-					cost.add(new Resource(ResourceType.convertStringToResType(command.get(2)), 2));	/* Get value from config for parameter editor! */
+				if (model.getPlayerByUsername(username).isDoingDefaultProduction())
+				{
+					controller.getView().send(new OperationResultMessage("You have already used the default production this round!", true));
+					return true;
+				}
 
 				else
 				{
-					cost.add(new Resource(ResourceType.convertStringToResType(command.get(2)), 1));
-					cost.add(new Resource(ResourceType.convertStringToResType(command.get(3)), 1));
-				}
+					model.getPlayerByUsername(username).setDoingDefaultProduction(true);
 
-				ResourceType productResType = ResourceType.convertStringToResType(command.get(4));
-				producedResources.add(new Resource(productResType, 1));		/* Convert ResourceType to Resource */
+					if (command.get(2).equals(command.get(3)))		/* If the resources to convert are the same */
+						cost.add(new Resource(ResourceType.convertStringToResType(command.get(2)), 2));    /* Get value from config for parameter editor! */
+
+					else
+					{
+						cost.add(new Resource(ResourceType.convertStringToResType(command.get(2)), 1));
+						cost.add(new Resource(ResourceType.convertStringToResType(command.get(3)), 1));
+					}
+
+					ResourceType productResType = ResourceType.convertStringToResType(command.get(4));
+					producedResources.add(new Resource(productResType, 1));		/* Convert ResourceType to Resource */
+				}
 
 				break;
 
@@ -56,14 +68,30 @@ public class ActivateProductionCommand implements Command
 					return true;
 				}
 
-				cost = devCard.getCost();
-				producedResources = devCard.getProduct();
+				if (devCard.isUsedForProduction())
+				{
+					controller.getView().send(new OperationResultMessage("You have already used this dev card in this round!", true));
+					return true;
+				}
+
+				else
+				{
+					model.getPlayerByUsername(username).getDashboard().getTopDevCardByNumber(Integer.parseInt(command.get(2))).setUsedForProduction(true);
+					cost = devCard.getCost();
+					producedResources = devCard.getProduct();
+				}
 
 				break;
 
-			case "LEADER_SKILL":		/* "ACTIVATE_PRODUCTION", "LEADER_SKILL", "13", "B" */
+			case "LEADER_SKILL":		/* "ACTIVATE_PRODUCTION", "LEADER_SKILL", "13", "B". This assumes the leader card is a SkillProduction. Add check? */
 
 				LeaderCard leaderCard = model.getPlayerByUsername(username).getLeaderCardByNumber(Integer.parseInt(command.get(2)));
+
+				if (((SkillProduction) leaderCard).isUsedForProduction())
+				{
+					controller.getView().send(new OperationResultMessage("You have already used this leader this round!", true));
+					return true;
+				}
 
 				if (leaderCard.isActive())		/* Gives "productAmount" of chosen resource and "faithpoints" faith points (values set in xmls, default is 1 for both) */
 				{
@@ -91,6 +119,7 @@ public class ActivateProductionCommand implements Command
 					controller.updatePlayerPosition(model.getPlayerByUsername(username).getId(), producedResources.get(i).getQuantity());
 			}
 
+			controller.getView().send(new ProductionResultMessage(model.getPlayerByUsername(username)));	/* Send new player without the added resources */
 			model.getPlayerByUsername(username).getDashboard().getVault().addResourceList(producedResources);	/* Vault checks red resources */
 			message = "Production successful!";
 			isFailed = false;
