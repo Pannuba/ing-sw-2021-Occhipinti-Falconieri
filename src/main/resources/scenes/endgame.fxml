@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,7 +15,10 @@
             <Image url="@../img/launcher-blurred.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="matchOutcome" fitHeight="218.0" fitWidth="333.0" layoutX="103.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="103.0" AnchorPane.topAnchor="64.0" />
+      <ImageView fx:id="matchOutcome" fitHeight="218.0" fitWidth="333.0" layoutX="103.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="103.0" AnchorPane.rightAnchor="103.0" AnchorPane.topAnchor="64.0">
+         <effect>
+            <DropShadow />
+         </effect></ImageView>
       <Label fx:id="nameAndPoint" layoutX="94.0" layoutY="292.0" prefHeight="187.0" prefWidth="371.0" wrapText="true">
          <font>
             <Font name="Times New Roman Bold Italic" size="25.0" />
@@ -27,6 +31,9 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
    </children>
 </AnchorPane>

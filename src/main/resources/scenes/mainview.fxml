@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.MainViewController">
    <children>
       <ImageView fitHeight="723.0" fitWidth="1282.0" pickOnBounds="true" preserveRatio="true">
@@ -50,13 +49,22 @@
          <image>
             <Image url="@../img/red-pawn.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="blackPawn" fitHeight="76.0" fitWidth="95.0" layoutX="26.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../img/black-pawn.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
-      <ImageView fx:id="topShelfResource" fitHeight="45.0" fitWidth="51.0" layoutX="110.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="topShelfResource" fitHeight="45.0" fitWidth="51.0" layoutX="110.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <DropShadow />
+         </effect></ImageView>
       <ImageView fx:id="popeTokenOne" fitHeight="78.0" fitWidth="78.0" layoutX="244.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/popetokens/pope-token-1-back.png" />
@@ -72,11 +80,26 @@
             <Image url="@../img/popetokens/pope-token-3-back.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="middleShelfResource1" fitHeight="45.0" fitWidth="51.0" layoutX="88.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="middleShelfResource2" fitHeight="45.0" fitWidth="51.0" layoutX="131.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="bottomShelfResource1" fitHeight="45.0" fitWidth="51.0" layoutX="65.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="bottomShelfResource2" fitHeight="45.0" fitWidth="51.0" layoutX="104.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="bottomShelfResource3" fitHeight="45.0" fitWidth="51.0" layoutX="142.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="middleShelfResource1" fitHeight="45.0" fitWidth="51.0" layoutX="88.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <DropShadow />
+         </effect></ImageView>
+      <ImageView fx:id="middleShelfResource2" fitHeight="45.0" fitWidth="51.0" layoutX="131.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <DropShadow />
+         </effect></ImageView>
+      <ImageView fx:id="bottomShelfResource1" fitHeight="45.0" fitWidth="51.0" layoutX="65.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <DropShadow />
+         </effect></ImageView>
+      <ImageView fx:id="bottomShelfResource2" fitHeight="45.0" fitWidth="51.0" layoutX="104.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <DropShadow />
+         </effect></ImageView>
+      <ImageView fx:id="bottomShelfResource3" fitHeight="45.0" fitWidth="51.0" layoutX="142.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <DropShadow />
+         </effect></ImageView>
       <Label fx:id="vaultBlueAmount" layoutX="44.0" layoutY="548.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="30.0" />
@@ -110,8 +133,14 @@
       </ImageView>
       <Button fx:id="otherPlayersButton" layoutX="1050.0" layoutY="215.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="76.0" prefWidth="190.0" text="Show Other Players' Boards" textAlignment="CENTER" wrapText="true">
          <font>
-            <Font size="20.0" />
+            <Font name="Times New Roman Italic" size="20.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </Button>
       <ImageView fx:id="vaultResourceBlue" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="71.0" layoutY="550.0" onMouseClicked="#selectBlueResource" pickOnBounds="true" preserveRatio="true">
          <cursor>
@@ -120,6 +149,9 @@
          <image>
             <Image url="@../img/resources/blue.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="vaultResourcePurple" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="153.0" layoutY="552.0" onMouseClicked="#selectPurpleResource" pickOnBounds="true" preserveRatio="true">
          <cursor>
@@ -128,6 +160,9 @@
          <image>
             <Image url="@../img/resources/purple.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="vaultResourceYellow" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="67.0" layoutY="607.0" onMouseClicked="#selectYellowResource" pickOnBounds="true" preserveRatio="true">
          <cursor>
@@ -136,6 +171,9 @@
          <image>
             <Image url="@../img/resources/yellow.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="vaultResourceGrey" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="152.0" layoutY="602.0" onMouseClicked="#selectGreyResource" pickOnBounds="true" preserveRatio="true">
          <cursor>
@@ -144,51 +182,81 @@
          <image>
             <Image url="@../img/resources/grey.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="devCardAreaOne1" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="389.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="devCardAreaTwo1" disable="true" fitHeight="267.0" fitWidth="178.0" layoutX="581.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="devCardAreaThree1" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="780.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="devCardAreaOne2" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="389.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="devCardAreaTwo2" disable="true" fitHeight="267.0" fitWidth="178.0" layoutX="581.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="devCardAreaThree2" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="780.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="devCardAreaOne3" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="389.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="devCardAreaTwo3" disable="true" fitHeight="267.0" fitWidth="178.0" layoutX="581.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="devCardAreaThree3" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="780.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <Button fx:id="productionDevCardArea1" disable="true" layoutX="384.0" layoutY="284.0" mnemonicParsing="false" onAction="#selectDevCardArea1" opacity="0.0" prefHeight="371.0" prefWidth="184.0">
          <cursor>

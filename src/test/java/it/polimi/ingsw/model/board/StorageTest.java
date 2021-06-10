@@ -299,6 +299,29 @@ public class StorageTest
 	}
 
 	@Test
+	public void addResourceSmart8()		/* all shelves have resources, swap second and third shelf and change quantity */
+	{
+		for (int i=0; i<3; i++)
+			shelves[i] = new Shelf(i+1);
+		r1.setQuantity(1);
+		r1.setResourceType(ResourceType.PURPLE);
+		r2.setQuantity(2);
+		r2.setResourceType(ResourceType.YELLOW);
+		r3.setQuantity(1);
+		r3.setResourceType(ResourceType.BLUE);
+		shelves[0].setShelfResource(r1);
+		shelves[1].setShelfResource(r2);
+		shelves[2].setShelfResource(r3);
+		storage.setShelves(shelves);
+		resourceToAdd.setResourceType(ResourceType.YELLOW);
+		storage.addResourceSmart(resourceToAdd.getResourceType());
+		assertEquals("Error", 3, shelves[2].getShelfResourceQuantity());
+		assertEquals("Error", ResourceType.YELLOW, shelves[2].getShelfResourceType());
+		assertEquals("Error", 1, shelves[1].getShelfResourceQuantity());
+		assertEquals("Error", ResourceType.BLUE, shelves[1].getShelfResourceType());
+	}
+
+	@Test
 	public void removeResource1()		/* remove from first shelf */
 	{
 		for (int i=0; i<3; i++)

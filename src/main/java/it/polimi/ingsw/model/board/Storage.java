@@ -169,11 +169,23 @@ public class Storage implements Serializable
 			addResource(resourceToAdd, 2);
 		}
 
+		else if (shelves[0].isEmpty() && shelves[2].getShelfResourceQuantity() == 1 && shelves[1].getShelfResourceQuantity() == 2 && shelves[1].getShelfResourceType() == resourceToAdd)
+		{
+			System.out.println("L");
+			ResourceType tempShelfResource = shelves[1].getShelfResourceType();
+			int tempQuantity = shelves[1].getShelfResourceQuantity();
+			shelves[1].getShelfResource().setResourceType(shelves[2].getShelfResourceType());
+			shelves[2].getShelfResource().setResourceType(tempShelfResource);
+			shelves[1].getShelfResource().setQuantity(shelves[2].getShelfResourceQuantity());
+			shelves[2].getShelfResource().setQuantity(tempQuantity);
+			addResource(resourceToAdd, 3);
+		}
+
 		else if (!shelves[2].isEmpty() && !shelves[1].isEmpty() && !shelves[0].isEmpty())
 		{
 			if (shelves[2].getShelfResourceQuantity() == 1 && shelves[0].getShelfResourceType() == resourceToAdd)
 			{
-				System.out.println("L");
+				System.out.println("M");
 				ResourceType tempShelfResource = shelves[0].getShelfResourceType();
 				shelves[0].getShelfResource().setResourceType(shelves[2].getShelfResourceType());
 				shelves[2].getShelfResource().setResourceType(tempShelfResource);
@@ -182,7 +194,7 @@ public class Storage implements Serializable
 
 			else if (shelves[1].getShelfResourceQuantity() == 1 && shelves[0].getShelfResourceType() == resourceToAdd)
 			{
-				System.out.println("M");
+				System.out.println("N");
 				ResourceType tempShelfResource = shelves[0].getShelfResourceType();
 				shelves[0].getShelfResource().setResourceType(shelves[1].getShelfResourceType());
 				shelves[1].getShelfResource().setResourceType(tempShelfResource);
@@ -191,10 +203,22 @@ public class Storage implements Serializable
 
 			else if (shelves[2].getShelfResourceQuantity() == 2 && shelves[1].getShelfResourceQuantity() == 2 && shelves[1].getShelfResourceType() == resourceToAdd)
 			{
-				System.out.println("N");
+				System.out.println("O");
 				ResourceType tempShelfResource = shelves[1].getShelfResourceType();
 				shelves[1].getShelfResource().setResourceType(shelves[2].getShelfResourceType());
 				shelves[2].getShelfResource().setResourceType(tempShelfResource);
+				addResource(resourceToAdd, 3);
+			}
+
+			else if (shelves[2].getShelfResourceQuantity() == 1 && shelves[1].getShelfResourceQuantity() == 2 && shelves[1].getShelfResourceType() == resourceToAdd)
+			{
+				System.out.println("P");
+				ResourceType tempShelfResource = shelves[1].getShelfResourceType();
+				int tempQuantity = shelves[1].getShelfResourceQuantity();
+				shelves[1].getShelfResource().setResourceType(shelves[2].getShelfResourceType());
+				shelves[1].getShelfResource().setQuantity(shelves[2].getShelfResourceQuantity());
+				shelves[2].getShelfResource().setResourceType(tempShelfResource);
+				shelves[2].getShelfResource().setQuantity(tempQuantity);
 				addResource(resourceToAdd, 3);
 			}
 
@@ -204,19 +228,6 @@ public class Storage implements Serializable
 				excessResource = resourceToAdd;
 			}
 		}
-
-
-		else if (shelves[2].getShelfResourceQuantity() == 1 && shelves[1].getShelfResourceQuantity() == 2 && shelves[1].getShelfResourceType() == resourceToAdd)
-		{
-			System.out.println("O");
-			ResourceType tempShelfResource = shelves[1].getShelfResourceType();
-			shelves[1].getShelfResource().setResourceType(shelves[2].getShelfResourceType());
-			shelves[2].getShelfResource().setResourceType(tempShelfResource);
-			shelves[1].getShelfResource().setQuantity(1);
-			shelves[2].getShelfResource().setQuantity(2);
-			addResource(resourceToAdd, 3);
-		}
-
 
 		else
 		{
