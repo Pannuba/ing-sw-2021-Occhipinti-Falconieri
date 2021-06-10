@@ -80,9 +80,20 @@ public class MainViewController
 	@FXML private Label vaultYellowAmount;
 	@FXML private Label vaultGreyAmount;
 
-	@FXML private ImageView devCardArea1;
-	@FXML private ImageView devCardArea2;
-	@FXML private ImageView devCardArea3;
+	@FXML private ImageView devCardAreaOne1;
+	@FXML private ImageView devCardAreaTwo1;
+	@FXML private ImageView devCardAreaThree1;
+	@FXML private ImageView devCardAreaOne2;
+	@FXML private ImageView devCardAreaTwo2;
+	@FXML private ImageView devCardAreaThree2;
+	@FXML private ImageView devCardAreaOne3;
+	@FXML private ImageView devCardAreaTwo3;
+	@FXML private ImageView devCardAreaThree3;
+
+
+	@FXML private Button productionDevCardArea1;
+	@FXML private Button productionDevCardArea2;
+	@FXML private Button productionDevCardArea3;
 
 	@FXML private ImageView actionTokenFront;
 	@FXML private ImageView actionTokenBack;
@@ -299,19 +310,61 @@ public class MainViewController
 	public void updateDevCardAreas(DevCardArea[] devCardAreas)
 	{
 		if (!devCardAreas[0].isEmpty())
-			devCardArea1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[0].getTopDevCard().getCardNumber() + ".png")));
+		{
+			productionDevCardArea1.setDisable(false);
 
-		else devCardArea1.setImage(null);
+			switch (devCardAreas[0].getLayer()) {
+				case 1:
+					devCardAreaOne1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[0].getDevCards().get(0).getCardNumber() + ".png")));
+					break;
+
+				case 2:
+					devCardAreaOne2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[0].getDevCards().get(1).getCardNumber() + ".png")));
+					break;
+
+				case 3:
+					devCardAreaOne3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[0].getDevCards().get(2).getCardNumber() + ".png")));
+					break;
+			}
+		}
 
 		if (!devCardAreas[1].isEmpty())
-			devCardArea2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[1].getTopDevCard().getCardNumber() + ".png")));
+		{
+			productionDevCardArea2.setDisable(false);
 
-		else devCardArea2.setImage(null);
+			switch (devCardAreas[1].getLayer()) {
+				case 1:
+					devCardAreaTwo1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[1].getDevCards().get(0).getCardNumber() + ".png")));
+					break;
+
+				case 2:
+					devCardAreaTwo2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[1].getDevCards().get(1).getCardNumber() + ".png")));
+					break;
+
+				case 3:
+					devCardAreaTwo3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[1].getDevCards().get(2).getCardNumber() + ".png")));
+					break;
+			}
+		}
 
 		if (!devCardAreas[2].isEmpty())
-			devCardArea3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[2].getTopDevCard().getCardNumber() + ".png")));
+		{
+			productionDevCardArea3.setDisable(false);
 
-		else devCardArea3.setImage(null);
+			switch (devCardAreas[2].getLayer()) {
+				case 1:
+					devCardAreaThree1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[2].getDevCards().get(0).getCardNumber() + ".png")));
+					break;
+
+				case 2:
+					devCardAreaThree2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[2].getDevCards().get(1).getCardNumber() + ".png")));
+					break;
+
+				case 3:
+					devCardAreaThree3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[2].getDevCards().get(2).getCardNumber() + ".png")));
+					break;
+			}
+		}
 	}
 
 	public void updateActionToken(ActionToken token)
@@ -378,24 +431,24 @@ public class MainViewController
 	}
 
 	@FXML
-	void selectDevCardArea1(MouseEvent event)
+	void selectDevCardArea1(ActionEvent event)
 	{
 		selectDevCardArea(1, event);
 	}
 
 	@FXML
-	void selectDevCardArea2(MouseEvent event)
+	void selectDevCardArea2(ActionEvent event)
 	{
 		selectDevCardArea(2, event);
 	}
 
 	@FXML
-	void selectDevCardArea3(MouseEvent event)
+	void selectDevCardArea3(ActionEvent event)
 	{
 		selectDevCardArea(3, event);
 	}
 
-	void selectDevCardArea(int devCardAreaNum, MouseEvent event)
+	void selectDevCardArea(int devCardAreaNum, ActionEvent event)
 	{
 		if (isBuyingDevCard)
 			messageHandler.send(Arrays.asList("BUY_DEVCARD", String.valueOf(devCardToBuy), String.valueOf(devCardAreaNum)));
@@ -423,18 +476,18 @@ public class MainViewController
 	{
 		defaultProductionButton.setDisable(false);
 
-		devCardArea1.setDisable(false);        /* For production using devcards */
-		devCardArea2.setDisable(false);
-		devCardArea3.setDisable(false);
+		productionDevCardArea1.setDisable(false);        /* For production using devcards */
+		productionDevCardArea2.setDisable(false);
+		productionDevCardArea3.setDisable(false);
 	}
 
 	public void disableButtons()
 	{
 		defaultProductionButton.setDisable(true);
 
-		devCardArea1.setDisable(true);
-		devCardArea2.setDisable(true);
-		devCardArea3.setDisable(true);
+		productionDevCardArea1.setDisable(true);
+		productionDevCardArea2.setDisable(true);
+		productionDevCardArea3.setDisable(true);
 	}
 
 	@FXML

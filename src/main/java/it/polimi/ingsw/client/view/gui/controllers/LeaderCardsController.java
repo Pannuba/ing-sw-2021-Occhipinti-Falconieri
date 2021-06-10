@@ -13,6 +13,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.Effect;
 import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
@@ -58,6 +59,9 @@ public class LeaderCardsController		/* TODO: add resources ImageViews in both le
 	@FXML private ImageView productionYR;
 	@FXML private ImageView productionGR;
 	@FXML private ImageView productionBR;
+
+	@FXML private Label chooseResource1;
+	@FXML private Label chooseResource2;
 
 	@FXML
 	void selectBlueResource1(MouseEvent event)
@@ -163,6 +167,7 @@ public class LeaderCardsController		/* TODO: add resources ImageViews in both le
 		productionPL.setDisable(false);
 		productionGL.setDisable(false);
 		productionBL.setDisable(false);
+		chooseResource1.setVisible(true);
 	}
 
 	@FXML
@@ -172,6 +177,7 @@ public class LeaderCardsController		/* TODO: add resources ImageViews in both le
 		productionPR.setDisable(false);
 		productionGR.setDisable(false);
 		productionBR.setDisable(false);
+		chooseResource2.setVisible(true);
 	}
 
 	private void activeProduction1(String resourceToAdd)
@@ -182,6 +188,7 @@ public class LeaderCardsController		/* TODO: add resources ImageViews in both le
 		productionGL.setDisable(true);
 		productionPL.setDisable(true);
 		productionYL.setDisable(true);
+		chooseResource1.setVisible(false);
 	}
 
 	private void activeProduction2(String resourceToAdd)
@@ -192,6 +199,7 @@ public class LeaderCardsController		/* TODO: add resources ImageViews in both le
 		productionGR.setDisable(true);
 		productionPR.setDisable(true);
 		productionYR.setDisable(true);
+		chooseResource2.setVisible(false);
 	}
 
 	public void update(List<LeaderCard> leaderCards, boolean isMyTurn)
