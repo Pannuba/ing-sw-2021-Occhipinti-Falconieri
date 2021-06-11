@@ -6,8 +6,18 @@ import it.polimi.ingsw.model.cards.*;
 
 import java.util.List;
 
+/**
+ * Methods to print the dashboard and cards' information
+ * @author Giulio Occhipinti
+ */
+
 public class PrintMethods			/* Static methods so we can avoid "PrintMethods printMethods = new PrintMethods()" in CLI.java */
 {
+
+	/**
+	 * Prints the information about the board's storage, vault and dev card areas
+	 * @param board the current dashboard
+	 */
 
 	public static void printBoard(Dashboard board)		/* Could get both from gamestate but this is simpler */
 	{
@@ -15,6 +25,12 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		printStorage(board.getStorage());
 		printDevCardAreas(board.getDevCardAreas());
 	}
+
+	/**
+	 * Prints a leadercard's parameters. It prints additional information based on the card's skill
+	 * Shows a list of resources/dev card colors using convertResListToString and convertDevCardColorToString
+	 * @param card the leader card to print
+	 */
 
 	public static void printLeaderCard(LeaderCard card)		/* Can't access skill variables from LeaderCard because it's abstract */
 	{
@@ -34,7 +50,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 									"\nDiscounted resource: " + convertResTypeToString(((SkillDiscount) card).getDiscountedResource())			+
 									"\nRequirements: " + convertDevColorListToString(((SkillDiscount) card).getRequirements()) + " dev cards"	);
 				break;
-												/* TODO: separate symbol for devCards/devCardColor? */
+
 			case "SkillMarble":
 				System.out.println(	"Leadercard skill: white marble"																		+
 									"\nWhite marble resource: " + convertResTypeToString(((SkillMarble) card).getWhiteMarble())				+
@@ -65,6 +81,11 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		System.out.print("\n");
 	}
 
+	/**
+	 * Prints all the player's leader cards using the printLeaderCard method
+	 * @param leaderCards the player's leader cards
+	 */
+
 	public static void printPlayerLeaderCards(List<LeaderCard> leaderCards)
 	{
 		System.out.print("Player leader cards:\n\n");
@@ -73,7 +94,12 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 			printLeaderCard(leaderCards.get(i));
 	}
 
-	public static void printPlayerDevCards(List<DevCard> devCards)		/* Used to print ALL devcards got with getAllDevCards in Dashboard */
+	/**
+	 * Prints all the player's dev cards using the printDevCard method
+	 * @param devCards the player's dev cards
+	 */
+
+	public static void printPlayerDevCards(List<DevCard> devCards)
 	{
 		System.out.print("These are your dev cards:\n\n");
 
@@ -84,6 +110,11 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 			for (int i = 0; i < devCards.size(); i++)
 				printDevCard(devCards.get(i));
 	}
+
+	/**
+	 * Prints the current dev cards market using the printDevCard method
+	 * @param market the current dev cards market
+	 */
 
 	public static void printDevCardsMarket(DevCardsMarket market)
 	{
@@ -103,6 +134,11 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 	}
 
+	/**
+	 * Prints a dev card's information. Shows a list of resources/dev card colors using convertResListToString and convertDevCardColorToString
+	 * @param devCard the card to print
+	 */
+
 	public static void printDevCard(DevCard devCard)		/* Cost and requirements are actually the opposite! */
 	{
 		System.out.print(	"Card number: " + devCard.getCardNumber()										+
@@ -113,6 +149,11 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 							"\nCost: " + convertResListToString(devCard.getCost())							+
 							"\nRequirements: " + convertResListToString(devCard.getRequirements()) + "\n\n"	);
 	}
+
+	/**
+	 * Prints the current marbles market using convertMarbleToString
+	 * @param market the marbles market to print
+	 */
 
 	public static void printMarblesMarket(MarblesMarket market)		/* private? */
 	{
@@ -129,6 +170,12 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 		System.out.println("Spare marble: " + convertMarbleToString(market.getSpareMarble()));
 	}
+
+	/**
+	 * Prints the position of each player on the track
+	 * @param track the track to print, used to get the positions from the redPawns hashmap
+	 * @param players the list of players, used to get each user's name
+	 */
 
 	public static void printTrack(Track track, List<Player> players)		/* Players are ordered by ID in model after randomly generating IDs */
 	{
@@ -316,6 +363,12 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		return null;
 	}
 
+	/**
+	 * Converts a list of devcard colors to a string. Used to print the requirements of leadercards with a discount or "white marble" skill
+	 * @param colors the list of dev cards to convert to a string
+	 * @return the converted string
+	 */
+
 	public static String convertDevColorListToString(List<DevCardColor> colors)		/* [BLUE, GREEN, BLUE, YELLOW] -> 2B, 1G, 1Y */
 	{
 		String strColors = "";
@@ -330,6 +383,13 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 
 		return strColors;
 	}
+
+	/**
+	 * Converts a list of resources to a string that uses ANSI codes to display the resource's color and symbol
+	 * It's used to print the acquired resources through production and the marbles market, and a card's requirements, product and cost
+	 * @param resources the list of resources to convert to a string
+	 * @return the string that represents the passed list of resources
+	 */
 
 	public static String convertResListToString(List<Resource> resources)		/* [BLUE, 2], [YELLOW, 3], [PURPLE, 1] */
 	{
@@ -346,12 +406,16 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 		return strResources;
 	}
 
+	/**
+	 * Prints information about the newly-flipped action token
+	 * @param token the new action token to print
+	 */
+
 	public static void printActionToken(ActionToken token)
 	{
 		switch (token.getClass().getSimpleName())
 		{
 			case "ActionDevCard":
-
 				System.out.println("discard 2 " + convertDevCardColorToString(((ActionDevCard) token).getColor()) + " dev cards");
 				/* Print new devCardsMarket? */
 				break;

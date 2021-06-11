@@ -35,6 +35,13 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 	}
 
 	@Override
+	public void duplicateName()
+	{
+		System.out.print("This name has already been chosen by someone else! Enter a different name: ");
+		messageHandler.send(input.nextLine());
+	}
+
+	@Override
 	public void firstPlayer(boolean isFirstPlayer)
 	{
 		if (isFirstPlayer)

@@ -2,8 +2,6 @@ package it.polimi.ingsw.server.messages;
 
 import it.polimi.ingsw.client.view.MessageExecutor;
 
-import java.io.Serializable;
-
 /**
  * This message is sent after (nearly?) every action the client performs
  * The boolean is true if the action has failed, so the controller doesn't progress the game by sending a new gamestate and choosing the next player
@@ -11,7 +9,7 @@ import java.io.Serializable;
  * @author Giulio Occhipinti
  */
 
-public class OperationResultMessage implements Message, Serializable
+public class OperationResultMessage implements Message
 {
 	private final String message;
 	private final boolean isFailed;

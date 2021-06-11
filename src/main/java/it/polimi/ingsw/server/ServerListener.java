@@ -3,6 +3,7 @@ package it.polimi.ingsw.server;
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.cards.LeaderCard;
+import it.polimi.ingsw.server.messages.DuplicateNameMessage;
 import it.polimi.ingsw.server.messages.FirstPlayerMessage;
 import it.polimi.ingsw.server.view.ClientHandler;
 import it.polimi.ingsw.util.Ping;
@@ -103,14 +104,15 @@ public class ServerListener
 				System.out.println("Incoming connection: " + socket);
 				username = (String) ois.readObject();					/* Client sends username and starts NetworkHandler thread */
 
-				System.out.println("Username: " + username);
-
-				if (isDuplicateUsername(playerNames, username))		/* TODO: send LoginErrorMessage? Yes, client only has to enter a new username */
+				while (isDuplicateUsername(playerNames, username))
 				{
 					System.out.println("Duplicate username detected: " + username);
-					i--;			/* If the username is duplicate, go back to the top of the loop without increasing i */
-					continue;
+					oos.writeObject(new DuplicateNameMessage());
+					oos.reset();
+					username = (String) ois.readObject();					/* Client sends username and starts NetworkHandler thread */
 				}
+
+				System.out.println("Username: " + username);
 
 				playerNames.add(username);
 
@@ -174,8 +176,6 @@ public class ServerListener
 
 	private int arePlayersReconnecting(List<Player> players)
 	{
-		System.out.println("players size: " + players.size());
-
 		for (int i = 0; i < recoveredMatches.size(); i++)
 		{
 			List<Player> recoveredMatchPlayers = recoveredMatches.get(i).getPlayers();
@@ -183,21 +183,14 @@ public class ServerListener
 
 			for (int j = 0; j < recoveredMatchPlayers.size(); j++)		/* TODO: find more efficient way to compare lists */
 			{
-				System.out.println("counter : " + counter + ", recMatchPlayerSize: " + recoveredMatchPlayers.size());
-
-
 				for (int k = 0; k < players.size(); k++)
 				{
-					System.out.println("comparing recovered username " + recoveredMatchPlayers.get(j).getUsername() + " to " + players.get(k).getUsername());
 					if (recoveredMatchPlayers.get(j).getUsername().equals(players.get(k).getUsername()))
 						counter++;
 				}
 
 				if (counter == recoveredMatchPlayers.size())
-				{
-					System.out.println("RETURNING " + i);
 					return i;
-				}
 			}
 		}
 

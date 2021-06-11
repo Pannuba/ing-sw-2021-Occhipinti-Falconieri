@@ -3,14 +3,13 @@ package it.polimi.ingsw.server.messages;
 import it.polimi.ingsw.client.view.MessageExecutor;
 import it.polimi.ingsw.model.Resource;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author Giulio Occhipinti
  */
 
-public class BoughtResourcesMessage implements Message, Serializable
+public class BoughtResourcesMessage implements Message
 {
 	private final List<Resource> boughtResources;
 

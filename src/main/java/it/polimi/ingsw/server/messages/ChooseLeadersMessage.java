@@ -3,14 +3,13 @@ package it.polimi.ingsw.server.messages;
 import it.polimi.ingsw.client.view.MessageExecutor;
 import it.polimi.ingsw.model.cards.LeaderCard;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author Giulio Occhipinti
  */
 
-public class ChooseLeadersMessage implements Message, Serializable
+public class ChooseLeadersMessage implements Message
 {
 	List<LeaderCard> leaderCards;
 

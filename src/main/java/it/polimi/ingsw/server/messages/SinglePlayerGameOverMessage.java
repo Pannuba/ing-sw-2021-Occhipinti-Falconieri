@@ -2,8 +2,6 @@ package it.polimi.ingsw.server.messages;
 
 import it.polimi.ingsw.client.view.MessageExecutor;
 
-import java.io.Serializable;
-
 /**
  * @author Giulio Occhipinti
  */
@@ -13,7 +11,7 @@ import java.io.Serializable;
 	If a singleplayer match doesn't lose, a MatchOverMessage will be sent instead and the player will see their score.
  */
 
-public class SinglePlayerGameOverMessage implements Message, Serializable
+public class SinglePlayerGameOverMessage implements Message
 {
 	private final String message;
 

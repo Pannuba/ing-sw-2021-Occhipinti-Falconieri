@@ -2,13 +2,11 @@ package it.polimi.ingsw.server.messages;
 
 import it.polimi.ingsw.client.view.MessageExecutor;
 
-import java.io.Serializable;
-
 /**
  * @author Giulio Occhipinti
  */
 
-public class DiscardedResourcesMessage implements Message, Serializable
+public class DiscardedResourcesMessage implements Message
 {
 	private final int discardedResNum;
 	private final String playerWhoDiscarded;

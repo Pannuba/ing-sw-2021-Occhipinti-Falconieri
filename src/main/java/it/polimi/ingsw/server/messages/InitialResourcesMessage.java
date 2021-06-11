@@ -2,13 +2,11 @@ package it.polimi.ingsw.server.messages;
 
 import it.polimi.ingsw.client.view.MessageExecutor;
 
-import java.io.Serializable;
-
 /**
  * @author Giulio Occhipinti
  */
 
-public class InitialResourcesMessage implements Message, Serializable
+public class InitialResourcesMessage implements Message
 {
 	private final int playerID;		/* Included in message to avoid sending an additional gamestate that screws everything up */
 

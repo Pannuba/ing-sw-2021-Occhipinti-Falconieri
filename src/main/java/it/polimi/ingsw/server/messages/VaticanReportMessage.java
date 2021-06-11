@@ -3,14 +3,13 @@ package it.polimi.ingsw.server.messages;
 import it.polimi.ingsw.client.view.MessageExecutor;
 import it.polimi.ingsw.model.Player;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author Giulio Occhipinti
  */
 
-public class VaticanReportMessage implements Message, Serializable
+public class VaticanReportMessage implements Message
 {
 	private final int popeBoxNum;
 	private final List<Player> players;

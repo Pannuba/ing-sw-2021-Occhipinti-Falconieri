@@ -53,6 +53,12 @@ public class ActionGUI extends MessageExecutor
 	}
 
 	@Override
+	public void duplicateName()
+	{
+		/* Show "Duplicate name detected, enter a different username" in login controller */
+	}
+
+	@Override
 	public void firstPlayer(boolean isFirstPlayer)
 	{
 		if (isFirstPlayer)

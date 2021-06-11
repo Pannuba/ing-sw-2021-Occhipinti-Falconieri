@@ -2,13 +2,11 @@ package it.polimi.ingsw.server.messages;
 
 import it.polimi.ingsw.client.view.MessageExecutor;
 
-import java.io.Serializable;
-
 /**
  * @author Giulio Occhipinti
  */
 
-public class FirstPlayerMessage implements Message, Serializable
+public class FirstPlayerMessage implements Message
 {
 	private final boolean isFirstPlayer;
 
