@@ -21,6 +21,9 @@
          <image>
             <Image url="@../img/dashboard.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <Button fx:id="marketsButton" layoutX="1053.0" layoutY="32.0" mnemonicParsing="false" onAction="#showMarkets" prefHeight="55.0" prefWidth="184.0" text="Show Markets">
          <cursor>
@@ -69,16 +72,25 @@
          <image>
             <Image url="@../img/popetokens/pope-token-1-back.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="popeTokenTwo" fitHeight="78.0" fitWidth="78.0" layoutX="491.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/popetokens/pope-token-2-back.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="popeTokenThree" fitHeight="78.0" fitWidth="85.0" layoutX="787.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/popetokens/pope-token-3-back.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="middleShelfResource1" fitHeight="45.0" fitWidth="51.0" layoutX="88.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true">
          <effect>
@@ -100,36 +112,54 @@
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <Label fx:id="vaultBlueAmount" layoutX="44.0" layoutY="548.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
+      <Label fx:id="vaultBlueAmount" layoutX="44.0" layoutY="548.0" prefHeight="51.0" prefWidth="20.0" text="0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Label>
-      <Label fx:id="vaultPurpleAmount" layoutX="131.0" layoutY="547.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
+      <Label fx:id="vaultPurpleAmount" layoutX="131.0" layoutY="547.0" prefHeight="51.0" prefWidth="20.0" text="0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Label>
-      <Label fx:id="vaultYellowAmount" layoutX="45.0" layoutY="601.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
+      <Label fx:id="vaultYellowAmount" layoutX="45.0" layoutY="601.0" prefHeight="51.0" prefWidth="20.0" text="0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Label>
-      <Label fx:id="vaultGreyAmount" layoutX="131.0" layoutY="600.0" prefHeight="51.0" prefWidth="44.0" text="0" textFill="WHITE">
+      <Label fx:id="vaultGreyAmount" layoutX="131.0" layoutY="600.0" prefHeight="51.0" prefWidth="20.0" text="0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Label>
       <Button fx:id="defaultProductionButton" disable="true" layoutX="241.0" layoutY="481.0" mnemonicParsing="false" onAction="#startDefaultProduction" opacity="0.0" prefHeight="120.0" prefWidth="132.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fx:id="actionTokenFront" fitHeight="100.0" fitWidth="100.0" layoutX="1034.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="actionTokenFront" fitHeight="100.0" fitWidth="100.0" layoutX="1034.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <DropShadow />
+         </effect></ImageView>
       <ImageView fx:id="actionTokenBack" fitHeight="100.0" fitWidth="100.0" layoutX="1155.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../img/actiontokens/back.png" />
          </image>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <Button fx:id="otherPlayersButton" layoutX="1050.0" layoutY="215.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="76.0" prefWidth="190.0" text="Show Other Players' Boards" textAlignment="CENTER" wrapText="true">
          <font>

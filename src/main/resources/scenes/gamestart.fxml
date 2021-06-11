@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -14,25 +15,37 @@
             <Image url="@../img/background.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="leaderCard1" fitHeight="409.0" fitWidth="384.0" layoutX="48.0" layoutY="37.0" onMouseClicked="#selectLeaderCard1" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leaderCard1" fitHeight="409.0" fitWidth="270.0" layoutX="44.0" layoutY="37.0" onMouseClicked="#selectLeaderCard1" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
-      <ImageView fx:id="leaderCard2" fitHeight="409.0" fitWidth="384.0" layoutX="357.0" layoutY="37.0" onMouseClicked="#selectLeaderCard2" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leaderCard2" fitHeight="409.0" fitWidth="270.0" layoutX="353.0" layoutY="37.0" onMouseClicked="#selectLeaderCard2" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
-      <ImageView fx:id="leaderCard3" fitHeight="409.0" fitWidth="384.0" layoutX="666.0" layoutY="37.0" onMouseClicked="#selectLeaderCard3" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leaderCard3" fitHeight="409.0" fitWidth="270.0" layoutX="662.0" layoutY="37.0" onMouseClicked="#selectLeaderCard3" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
-      <ImageView fx:id="leaderCard4" fitHeight="409.0" fitWidth="384.0" layoutX="974.0" layoutY="37.0" onMouseClicked="#selectLeaderCard4" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leaderCard4" fitHeight="409.0" fitWidth="270.0" layoutX="970.0" layoutY="37.0" onMouseClicked="#selectLeaderCard4" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="purpleResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="698.0" layoutY="531.0" onMouseClicked="#choosePurpleResource" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -41,6 +54,9 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="greyResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="834.0" layoutY="531.0" onMouseClicked="#chooseGreyResource" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -49,6 +65,9 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="blueResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="977.0" layoutY="531.0" onMouseClicked="#chooseBlueResource" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -57,6 +76,9 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <ImageView fx:id="yellowResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="1091.0" layoutY="531.0" onMouseClicked="#chooseYellowResource" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -65,6 +87,9 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
       </ImageView>
       <Label layoutX="50.0" layoutY="490.0" prefHeight="82.0" prefWidth="397.0" text="Select two leader cards">
          <font>

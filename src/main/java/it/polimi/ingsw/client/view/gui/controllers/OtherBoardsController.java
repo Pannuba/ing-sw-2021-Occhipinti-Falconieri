@@ -56,9 +56,15 @@ public class OtherBoardsController
 	@FXML private Label vaultYellowAmount;
 	@FXML private Label vaultGreyAmount;
 
-	@FXML private ImageView devCardArea1;
-	@FXML private ImageView devCardArea2;
-	@FXML private ImageView devCardArea3;
+	@FXML private ImageView devCardAreaOne1;
+	@FXML private ImageView devCardAreaTwo1;
+	@FXML private ImageView devCardAreaThree1;
+	@FXML private ImageView devCardAreaOne2;
+	@FXML private ImageView devCardAreaTwo2;
+	@FXML private ImageView devCardAreaThree2;
+	@FXML private ImageView devCardAreaOne3;
+	@FXML private ImageView devCardAreaTwo3;
+	@FXML private ImageView devCardAreaThree3;
 
 	@FXML private Button nextButton;
 
@@ -205,19 +211,55 @@ public class OtherBoardsController
 	public void updateDevCardAreas(DevCardArea[] devCardAreas)
 	{
 		if (!devCardAreas[0].isEmpty())
-			devCardArea1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[0].getTopDevCard().getCardNumber() + ".png")));
+		{
+			switch (devCardAreas[0].getLayer()) {
+				case 1:
+					devCardAreaOne1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[0].getDevCards().get(0).getCardNumber() + ".png")));
+					break;
 
-		else devCardArea1.setImage(null);
+				case 2:
+					devCardAreaOne2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[0].getDevCards().get(1).getCardNumber() + ".png")));
+					break;
+
+				case 3:
+					devCardAreaOne3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[0].getDevCards().get(2).getCardNumber() + ".png")));
+					break;
+			}
+		}
 
 		if (!devCardAreas[1].isEmpty())
-			devCardArea2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[1].getTopDevCard().getCardNumber() + ".png")));
+		{
+			switch (devCardAreas[1].getLayer()) {
+				case 1:
+					devCardAreaTwo1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[1].getDevCards().get(0).getCardNumber() + ".png")));
+					break;
 
-		else devCardArea2.setImage(null);
+				case 2:
+					devCardAreaTwo2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[1].getDevCards().get(1).getCardNumber() + ".png")));
+					break;
+
+				case 3:
+					devCardAreaTwo3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[1].getDevCards().get(2).getCardNumber() + ".png")));
+					break;
+			}
+		}
 
 		if (!devCardAreas[2].isEmpty())
-			devCardArea3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[2].getTopDevCard().getCardNumber() + ".png")));
+		{
+			switch (devCardAreas[2].getLayer()) {
+				case 1:
+					devCardAreaThree1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[2].getDevCards().get(0).getCardNumber() + ".png")));
+					break;
 
-		else devCardArea3.setImage(null);
+				case 2:
+					devCardAreaThree2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[2].getDevCards().get(1).getCardNumber() + ".png")));
+					break;
+
+				case 3:
+					devCardAreaThree3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[2].getDevCards().get(2).getCardNumber() + ".png")));
+					break;
+			}
+		}
 	}
 
 	public void movePawn(ImageView pawn, int boxNumber)
