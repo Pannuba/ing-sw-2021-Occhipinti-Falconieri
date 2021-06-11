@@ -36,7 +36,7 @@
             <Font name="Times New Roman Italic" size="19.0" />
          </font>
       </Button>
-      <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="123.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="55.0" prefWidth="184.0" text="Show Leader Cards">
+      <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="119.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="55.0" prefWidth="184.0" text="Show Leader Cards">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -47,7 +47,10 @@
             <Font name="Times New Roman Italic" size="19.0" />
          </font>
       </Button>
-      <TextArea fx:id="console" editable="false" layoutX="1018.0" layoutY="359.0" prefHeight="350.0" prefWidth="254.0" wrapText="true" />
+      <TextArea fx:id="console" editable="false" layoutX="1018.0" layoutY="392.0" prefHeight="317.0" prefWidth="254.0" wrapText="true">
+         <effect>
+            <DropShadow />
+         </effect></TextArea>
       <ImageView fx:id="redPawn" fitHeight="70.0" fitWidth="87.0" layoutX="26.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/red-pawn.png" />
@@ -149,11 +152,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fx:id="actionTokenFront" fitHeight="100.0" fitWidth="100.0" layoutX="1034.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="actionTokenFront" fitHeight="100.0" fitWidth="100.0" layoutX="1034.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="actionTokenBack" fitHeight="100.0" fitWidth="100.0" layoutX="1155.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="actionTokenBack" fitHeight="100.0" fitWidth="100.0" layoutX="1155.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../img/actiontokens/back.png" />
          </image>
@@ -161,7 +164,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Button fx:id="otherPlayersButton" layoutX="1050.0" layoutY="215.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="76.0" prefWidth="190.0" text="Show Other Players' Boards" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="otherPlayersButton" layoutX="1053.0" layoutY="206.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="76.0" prefWidth="184.0" text="Show Other Players' Boards" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Times New Roman Italic" size="20.0" />
          </font>
@@ -302,6 +305,14 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+      </Button>
+      <Button fx:id="stopProduction" layoutX="1053.0" layoutY="318.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="184.0" text="Stop production" visible="false">
+         <font>
+            <Font name="Times New Roman Italic" size="23.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Button>
    </children>
 </Pane>
