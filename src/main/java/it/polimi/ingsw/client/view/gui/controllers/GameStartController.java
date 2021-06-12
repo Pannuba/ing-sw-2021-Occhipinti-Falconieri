@@ -17,7 +17,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GameStartController		/* The player selects 2 leadercards first, then the resources */
+/**
+ * Scene controller to choose the leader cards among the four received
+ * In case of multiplayer allows you to choose the resource to receive
+ * @author Giulio Ochhipinti
+ * @author Chiara Falconieri
+ */
+
+public class GameStartController		/* The player selects 2 leaderCards first, then the resources */
 {
 	private Stage mainStage;
 	private MessageIO messageHandler;
@@ -42,6 +49,7 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 	@FXML private ImageView yellowResource;
 
 	@FXML private Label resourcesMessage;
+	@FXML private Label selectLeaderCards;
 
 	@FXML
 	void chooseBlueResource(MouseEvent event)
@@ -91,7 +99,12 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 		chooseLeaderCard(leaderCard4, leaderCards.get(3).getCardNumber(), event);
 	}
 
-	private void chooseLeaderCard(ImageView cardImg, int cardNum, MouseEvent event)		/* TODO: player can't select more than 2 cards */
+	/**
+	 * Send the two chosen cards to the controller, deactivate the MouseEvent of the cards and activate that of the resources
+	 * If single game calls the game start scene directly (mainView scene)
+	 */
+
+	private void chooseLeaderCard(ImageView cardImg, int cardNum, MouseEvent event)
 	{
 		cardImg.setEffect(selectedEffect);
 		cardImg.setDisable(true);
@@ -116,7 +129,21 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 				mainStage.show();
 			}
 		}
+
+		if (chosenLeaderCards.size() >= 2)
+		{
+			leaderCard1.setDisable(true);
+			leaderCard2.setDisable(true);
+			leaderCard3.setDisable(true);
+			leaderCard4.setDisable(true);
+			selectLeaderCards.setVisible(false);
+		}
 	}
+
+	/**
+	 * In case of two or more players it allows to choose the starting resources and to assign the faith points
+	 * After calls the game start scene (mainView scene)
+	 */
 
 	private void chooseResource(String resType, MouseEvent event)
 	{
@@ -150,7 +177,11 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 		}
 	}
 
-	public void setLeaderCards(List<LeaderCard> leaderCards)		/* Display leadercards */
+	/**
+	 * Set the leaderCards ImageView images based on those that have been randomly assigned to the player
+	 */
+
+	public void setLeaderCards(List<LeaderCard> leaderCards)		/* Display leaderCards */
 	{
 		this.leaderCards = leaderCards;
 
@@ -159,6 +190,10 @@ public class GameStartController		/* The player selects 2 leadercards first, the
 		leaderCard3.setImage(new Image(getClass().getResourceAsStream("/img/leadercards/" + leaderCards.get(2).getCardNumber() + ".png")));
 		leaderCard4.setImage(new Image(getClass().getResourceAsStream("/img/leadercards/" + leaderCards.get(3).getCardNumber() + ".png")));
 	}
+
+	/**
+	 * Shows the message of how many resources to select based on the player ID
+	 */
 
 	public void showResourcesMessage(int playerID)
 	{

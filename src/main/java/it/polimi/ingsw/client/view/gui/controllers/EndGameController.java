@@ -1,6 +1,5 @@
 package it.polimi.ingsw.client.view.gui.controllers;
 
-import it.polimi.ingsw.client.view.gui.ActionGUI;
 import it.polimi.ingsw.model.Player;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +15,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Scene controller for the end of the game
+ * Called from mainViewController if end-of-game conditions occur
+ * Shows if the player has won, lost or tied, the names and points of all players and a button to start a new game
+ * @author Giulio Occhipinti
+ * @author Chiara Falconieri
+ */
+
 public class EndGameController
 {
 	private Stage mainStage;
@@ -28,6 +35,10 @@ public class EndGameController
 
 	@FXML
 	private ImageView playAgain;
+
+	/**
+	 * Start a new game, call the launcher scene
+	 */
 
 	@FXML
 	void playAgain(MouseEvent event) throws IOException
@@ -47,6 +58,10 @@ public class EndGameController
 		//mainStage.setResizable(false);
 		mainStage.show();
 	}
+
+	/**
+	 * Set images of win, tie or loss and the names and points of all players
+	 */
 
 	public void setup(String winnerName, List<Player> players, String username, Stage mainStage)
 	{
@@ -90,6 +105,10 @@ public class EndGameController
 				break;
 		}
 	}
+
+	/**
+	 * Set loss image in single game and show why he lost
+	 */
 
 	public void setupSingle(String message, Stage mainStage)
 	{

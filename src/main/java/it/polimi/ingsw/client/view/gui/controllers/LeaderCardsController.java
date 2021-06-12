@@ -26,7 +26,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class LeaderCardsController		/* TODO: add resources ImageViews in both leader card areas that are set for SkillStorage cards */
+/**
+ * Scene controller to see your leader cards and to activate or discard them
+ * @author Giulio Occhipinti
+ * @author Chiara Falconieri
+ */
+
+public class LeaderCardsController
 {
 	private Stage mainStage;
 	private Scene mainViewScene;

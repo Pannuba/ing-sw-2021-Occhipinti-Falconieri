@@ -94,6 +94,7 @@ public class MainViewController
 	@FXML private Button productionDevCardArea1;
 	@FXML private Button productionDevCardArea2;
 	@FXML private Button productionDevCardArea3;
+	@FXML private Button stopProduction;
 
 	@FXML private ImageView actionTokenFront;
 	@FXML private ImageView actionTokenBack;

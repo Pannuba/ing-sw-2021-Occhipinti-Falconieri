@@ -11,10 +11,16 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
+/**
+ * Controller of the game's opening scene that allows you to choose whether to play online or locally
+ * @author Giulio Occhipinti
+ * @author Chiara Falconieri
+ */
+
 public class LauncherController
 {
 
-	@FXML private ImageView playOnline;		/* TODO: change name */
+	@FXML private ImageView playOnline;
 
 	@FXML private ImageView playLocal;
 
