@@ -307,6 +307,7 @@ public class ModelTest {
 	@Test
 	public void isSinglePlayerMatchLost1()
 	{
+		devCardsMarket.create();
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
 		players.add(p1);
@@ -335,6 +336,7 @@ public class ModelTest {
 	@Test
 	public void isSinglePlayerMatchLost2()
 	{
+		devCardsMarket.create();
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
 		players.add(p1);
@@ -363,6 +365,7 @@ public class ModelTest {
 	@Test
 	public void isSinglePlayerMatchLost3()
 	{
+		devCardsMarket.create();
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
 		players.add(p1);
@@ -391,6 +394,7 @@ public class ModelTest {
 	@Test
 	public void isSinglePlayerMatchLost4()
 	{
+		devCardsMarket.create();
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
 		players.add(p1);
@@ -437,6 +441,7 @@ public class ModelTest {
 	@Test
 	public void isSinglePlayerMatchLost6()
 	{
+		devCardsMarket.create();
 		p1 = new Player("pippo");
 		players = new ArrayList<>();
 		players.add(p1);

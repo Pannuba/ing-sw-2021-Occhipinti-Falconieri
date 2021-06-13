@@ -30,7 +30,7 @@ public class DevCardsMarket implements Serializable
 	 * Creates the 48 cards by deserializing the .xmls and creates the "list-of-lists" devCardStacks
 	 */
 
-	public void create()		/* TODO: change in private */
+	public void create()
 	{
 		List<DevCard> allDevCards = new ArrayList<>();
 		devCardStacks = new ArrayList<>();

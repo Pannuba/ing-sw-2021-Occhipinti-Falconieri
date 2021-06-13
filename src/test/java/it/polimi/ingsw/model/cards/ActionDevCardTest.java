@@ -29,6 +29,7 @@ public class ActionDevCardTest {
 	public void doAction1()
 	{
 		devCardsMarket = new DevCardsMarket();
+		devCardsMarket.create();
 		devCards = new ArrayList<>();
 		devCards2 = new ArrayList<>();
 		devCards = devCardsMarket.getDevCardStacks().get(0);
@@ -55,6 +56,7 @@ public class ActionDevCardTest {
 	public void doAction2()
 	{
 		devCardsMarket = new DevCardsMarket();
+		devCardsMarket.create();
 		actionDevCard = new ActionDevCard(DevCardColor.GREEN, devCardsMarket);
 		actionDevCard.doAction();
 		actionDevCard.doAction();
@@ -70,6 +72,7 @@ public class ActionDevCardTest {
 	public void doAction3()
 	{
 		devCardsMarket = new DevCardsMarket();
+		devCardsMarket.create();
 		devCards = new ArrayList<>();
 		devCards2 = new ArrayList<>();
 		devCards = devCardsMarket.getDevCardStacks().get(3);
@@ -96,6 +99,7 @@ public class ActionDevCardTest {
 	public void doAction4()
 	{
 		devCardsMarket = new DevCardsMarket();
+		devCardsMarket.create();
 		actionDevCard = new ActionDevCard(DevCardColor.YELLOW, devCardsMarket);
 		actionDevCard.doAction();
 		actionDevCard.doAction();
@@ -111,6 +115,7 @@ public class ActionDevCardTest {
 	public void doAction5()
 	{
 		devCardsMarket = new DevCardsMarket();
+		devCardsMarket.create();
 		actionDevCard = new ActionDevCard(DevCardColor.PURPLE, devCardsMarket);
 		actionDevCard.doAction();
 		actionDevCard.doAction();
