@@ -4,7 +4,10 @@ import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.GUI;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -24,6 +27,7 @@ public class LoginController
 {
 	private boolean isLocalMatch;
 	private MessageIO messageHandler;
+	private Scene launcherScene;
 
 	@FXML private TextField nameField;
 	@FXML private TextField ipField;
@@ -32,6 +36,18 @@ public class LoginController
 	@FXML private Label errorLabel;
 
 	@FXML private ImageView startButton;
+	@FXML private ImageView indicator;
+
+	@FXML
+	void backToLauncher(MouseEvent event)
+	{
+		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+		mainStage.setTitle("Masters of Renaissance Launcher");
+		mainStage.setScene(launcherScene);
+		mainStage.sizeToScene();		/* ? */
+		mainStage.show();
+	}
 
 	@FXML
 	void connectToServer(MouseEvent event) throws IOException
@@ -85,5 +101,13 @@ public class LoginController
 	public void setLocalMatch(boolean localMatch)
 	{
 		isLocalMatch = localMatch;
+	}
+
+	public void setup() throws IOException
+	{
+		FXMLLoader loginLoader = new FXMLLoader();
+		loginLoader.setLocation(getClass().getResource("/scenes/launcher.fxml"));
+		Parent loginRoot = loginLoader.load();
+		launcherScene = new Scene(loginRoot);
 	}
 }

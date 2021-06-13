@@ -56,5 +56,16 @@
             <Font name="Times New Roman Italic" size="18.0" />
          </font>
       </Label>
+      <ImageView fx:id="indicator" fitHeight="82.0" fitWidth="125.0" layoutX="26.0" layoutY="28.0" onMouseClicked="#backToLauncher" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/indicator.png" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </Pane>
