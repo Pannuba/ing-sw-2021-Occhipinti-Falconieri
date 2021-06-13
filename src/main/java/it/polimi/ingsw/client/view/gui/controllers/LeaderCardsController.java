@@ -147,7 +147,7 @@ public class LeaderCardsController
 	@FXML
 	void discardLeaderCard2(ActionEvent event)
 	{
-		messageHandler.send(Arrays.asList("DISCARD_LEADER", String.valueOf(leaderCards.get(0).getCardNumber())));
+		messageHandler.send(Arrays.asList("DISCARD_LEADER", String.valueOf(leaderCards.get(1).getCardNumber())));
 		activateLeaderTwoButton.setVisible(false);
 		discardLeaderTwoButton.setVisible(false);
 		lighting.setDiffuseConstant(0.5);
@@ -186,6 +186,10 @@ public class LeaderCardsController
 		chooseResource2.setVisible(true);
 	}
 
+	/**
+	 * If left leader card is a skillProduction it activates the production
+	 */
+
 	private void activeProduction1(String resourceToAdd)
 	{
 		messageHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "LEADER_SKILL", String.valueOf(leaderCards.get(0).getCardNumber()), resourceToAdd));
@@ -197,6 +201,10 @@ public class LeaderCardsController
 		chooseResource1.setVisible(false);
 	}
 
+	/**
+	 * If right leader card is a skillProduction it activates the production
+	 */
+
 	private void activeProduction2(String resourceToAdd)
 	{
 		messageHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "LEADER_SKILL", String.valueOf(leaderCards.get(1).getCardNumber()), resourceToAdd));
@@ -207,6 +215,12 @@ public class LeaderCardsController
 		productionYR.setDisable(true);
 		chooseResource2.setVisible(false);
 	}
+
+	/**
+	 * Updates the scene when a leader card is activated or discarded
+	 * If it is a leader card with production skill and it has been activated, it shows the four resources to be able to choose which one to receive from production
+	 * If it is a leader card with storage skill and has been activated, it makes the resources in its storage visible
+	 */
 
 	public void update(List<LeaderCard> leaderCards, boolean isMyTurn)
 	{
@@ -313,6 +327,9 @@ public class LeaderCardsController
 		{
 			for (int i = 0; i < buttons.size(); i++)
 				buttons.get(i).setDisable(true);
+
+			leaderCard1.setDisable(true);
+			leaderCard2.setDisable(true);
 		}
 	}
 

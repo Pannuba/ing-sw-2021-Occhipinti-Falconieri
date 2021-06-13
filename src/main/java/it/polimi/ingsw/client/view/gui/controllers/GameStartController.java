@@ -100,7 +100,7 @@ public class GameStartController		/* The player selects 2 leaderCards first, the
 	}
 
 	/**
-	 * Send the two chosen cards to the controller, deactivate the MouseEvent of the cards and activate that of the resources
+	 * Send a message to the networkHandler with the two chosen cards, deactivate the MouseEvent of the cards and activate that of the resources
 	 * If single game calls the game start scene directly (mainView scene)
 	 */
 

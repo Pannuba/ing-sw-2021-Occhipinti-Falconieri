@@ -5,12 +5,20 @@ import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.GUI;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+/**
+ * Scene controller for the login, allows you to enter username and the number of players
+ * If it is an online game, it allows you to enter the ip address and port
+ * @author Giulio Occhipinti
+ * @author Chiara Falconieri
+ */
 
 public class LoginController
 {
@@ -21,6 +29,7 @@ public class LoginController
 	@FXML private TextField ipField;
 	@FXML private TextField portField;
 	@FXML private TextField numPlayersField;
+	@FXML private Label errorLabel;
 
 	@FXML private ImageView startButton;
 
@@ -29,7 +38,12 @@ public class LoginController
 	{
 		if (numPlayersField.isVisible())		/* Temporary solution, but what do? */
 		{
-			messageHandler.send(numPlayersField.getText());		/* TODO: check if field is not empty */
+			numPlayersField.getText();
+			if (Integer.parseInt(numPlayersField.getText()) > 0 && Integer.parseInt(numPlayersField.getText()) < 5)
+				messageHandler.send(numPlayersField.getText());
+			else
+				errorLabel.setText("Wrong number of players: re-enter the number");
+
 			return;
 		}
 

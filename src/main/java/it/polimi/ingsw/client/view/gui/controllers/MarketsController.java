@@ -17,6 +17,11 @@ import javafx.stage.Stage;
 
 import java.util.*;
 
+/**
+ * Scene controller for marbles and devCars markets
+ * @author Giulio Occhipinti
+ * @author Chiara Falconieri
+ */
 
 public class MarketsController        /* Send command directly from here? Get whiteMarbleResource from gamestate and keep it as instance variable? YES */
 {
@@ -79,6 +84,10 @@ public class MarketsController        /* Send command directly from here? Get wh
 		mainStage.show();
 	}
 
+	/**
+	 * Updates markets when resources are bought from the market or when a card is bought from the devCard market
+	 */
+
 	public void updateMarket(MarblesMarket market, DevCardsMarket devCardsMarket, boolean isMyTurn)
 	{
 		currDevCardsMarket = devCardsMarket;
@@ -94,7 +103,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 			for (int i = 0; i < devCards.size(); i++)
 				devCards.get(i).setDisable(false);
 		}
-		/* The disable checkbox in scenebuilder disables the button permanently, meaning setdisable(false) won't work */
+		/* The disable checkbox in sceneBuilder disables the button permanently, meaning setDisable(false) won't work */
 		else
 		{
 			for (int i = 0; i < buttons.size(); i++)
@@ -244,6 +253,10 @@ public class MarketsController        /* Send command directly from here? Get wh
 		buyDevCard(currDevCardsMarket.getDevCardStacks().get(11).get(0).getCardNumber(), event);
 
 	}
+
+	/**
+	 * When you buy a card from the devCard market it returns to the mainView scene to place the card in a devCard area
+	 */
 
 	private void buyDevCard(int cardToBuyNum, MouseEvent event)
 	{

@@ -31,7 +31,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* Empty images that are updated with image.setImage("...") each gamestate update */
+/**
+ * Scene controller for main view: there is its own dashboard, button to see the markets, button to see your leader cards and a console
+ * In single game there are action tokens, while in multiplayer there is a button to see the dashboards of other players
+ * @author Giulio Occhipinti
+ * @author Chiara Falconieri
+ */
 
 public class MainViewController
 {
@@ -57,9 +62,9 @@ public class MainViewController
 	@FXML private ImageView redPawn;
 	@FXML private ImageView blackPawn;
 
-	@FXML private ImageView popeTokenOne;			/* Rename to 1, 2, 3 */
-	@FXML private ImageView popeTokenTwo;
-	@FXML private ImageView popeTokenThree;
+	@FXML private ImageView popeToken1;
+	@FXML private ImageView popeToken2;
+	@FXML private ImageView popeToken3;
 
 	@FXML private ImageView topShelfResource;
 
@@ -103,6 +108,14 @@ public class MainViewController
 
 	@FXML private Button otherPlayersButton;
 
+	/**
+	 * Updates the dashboard of the player received as a parameter
+	 * Updates the storage, vault, track and devCard areas
+	 * In the case of single player, it makes the action tokens visible and the button to see the dashboards of the other players not visible
+	 * @param gameState
+	 * @param username
+	 */
+
 	public void update(GameState gameState, String username)
 	{
 		this.gameState = gameState;
@@ -132,8 +145,12 @@ public class MainViewController
 		}
 	}
 
+	/**
+	 * Triggered by default production button
+	 */
+
 	@FXML	/* TODO: add boolean isDoingDefaultProduction to disable by pressing the same button */
-	void startDefaultProduction(ActionEvent event)		/* Triggered by default production button */
+	void startDefaultProduction(ActionEvent event)
 	{
 		Platform.runLater(() -> {
 			mainStage.setTitle("Masters of Renaissance - Select 2 resources");
@@ -171,6 +188,10 @@ public class MainViewController
 		defaultProduction("G");
 	}
 
+	/**
+	 * After the resources have been selected, send a message to the networkHandler for activate the default production
+	 */
+
 	private void defaultProduction(String resourceToAdd)
 	{
 		defaultProdRes.add(resourceToAdd);
@@ -188,6 +209,11 @@ public class MainViewController
 		}
 	}
 
+	/**
+	 * Button to see your leader cards
+	 * Change the scene by switching to that of the leader cards
+	 */
+
 	@FXML
 	void showLeaderCards(ActionEvent event)
 	{
@@ -196,6 +222,11 @@ public class MainViewController
 		mainStage.sizeToScene();
 		mainStage.show();
 	}
+
+	/**
+	 * Button to see the markets
+	 * Change the scene by switching to that of the markets
+	 */
 
 	@FXML
 	void showMarkets(ActionEvent event)
@@ -206,7 +237,15 @@ public class MainViewController
 		mainStage.show();
 	}
 
-	public void updateTrack(Track track, List<Player> players, int playerID)		/* Also print other players */
+	/**
+	 * Updates the track and pope tokens every time an action is performed
+	 * Also print other players
+	 * @param track
+	 * @param players
+	 * @param playerID
+	 */
+
+	public void updateTrack(Track track, List<Player> players, int playerID)
 	{
 		if (players.size() == 1)
 		{
@@ -223,23 +262,28 @@ public class MainViewController
 		movePawn(redPawn, track.getRedPawns().get(playerID));
 
 		if (players.get(playerID).getPopeTokens()[0].isActive())		/* Put popeTokens ImageView in a list and update them with a for loop? */
-			popeTokenOne.setImage(new Image(getClass().getResourceAsStream("/img/popetokens/pope-token-1-front.png")));
+			popeToken1.setImage(new Image(getClass().getResourceAsStream("/img/popetokens/pope-token-1-front.png")));
 
 		if (players.get(playerID).getPopeTokens()[0].isDiscarded())		/* Back tokens (not active nor discarded) are displayed by default in the scene's fxml */
-			popeTokenOne.setImage(null);
+			popeToken1.setImage(null);
 
 		if (players.get(playerID).getPopeTokens()[1].isActive())
-			popeTokenTwo.setImage(new Image(getClass().getResourceAsStream("/img/popetokens/pope-token-2-front.png")));
+			popeToken2.setImage(new Image(getClass().getResourceAsStream("/img/popetokens/pope-token-2-front.png")));
 
 		if (players.get(playerID).getPopeTokens()[1].isDiscarded())
-			popeTokenTwo.setImage(null);
+			popeToken2.setImage(null);
 
 		if (players.get(playerID).getPopeTokens()[2].isActive())
-			popeTokenThree.setImage(new Image(getClass().getResourceAsStream("/img/popetokens/pope-token-3-front.png")));
+			popeToken3.setImage(new Image(getClass().getResourceAsStream("/img/popetokens/pope-token-3-front.png")));
 
 		if (players.get(playerID).getPopeTokens()[2].isDiscarded())
-			popeTokenThree.setImage(null);
+			popeToken3.setImage(null);
 	}
+
+	/**
+	 * Update the storage every time resources are added or removed by setting the image based on the type of resources of each shelf or to null if the resource is not there
+	 * @param storage
+	 */
 
 	public void updateStorage(Storage storage)
 	{
@@ -300,6 +344,10 @@ public class MainViewController
 		}
 	}
 
+	/**
+	 * Update the vault
+	 */
+
 	public void updateVault(Vault vault)
 	{
 		vaultBlueAmount.setText(vault.getResourceAmounts().get(ResourceType.BLUE).toString());
@@ -307,6 +355,10 @@ public class MainViewController
 		vaultGreyAmount.setText(vault.getResourceAmounts().get(ResourceType.GREY).toString());
 		vaultPurpleAmount.setText(vault.getResourceAmounts().get(ResourceType.PURPLE).toString());
 	}
+
+	/**
+	 * Update the devCard areas, setting the images according to the cards that have been bought
+	 */
 
 	public void updateDevCardAreas(DevCardArea[] devCardAreas)
 	{
@@ -368,6 +420,10 @@ public class MainViewController
 		}
 	}
 
+	/**
+	 * Update action token images based on what's active
+	 */
+
 	public void updateActionToken(ActionToken token)
 	{
 		switch (token.getClass().getSimpleName())
@@ -397,6 +453,12 @@ public class MainViewController
 				break;
 		}
 	}
+
+	/**
+	 * Coordinates of the pawn for each box on the track
+	 * @param pawn
+	 * @param boxNumber
+	 */
 
 	public void movePawn(ImageView pawn, int boxNumber)
 	{
@@ -449,6 +511,10 @@ public class MainViewController
 		selectDevCardArea(3, event);
 	}
 
+	/**
+	 * When you press the button it checks if you are buying a card or activating a production and sends a message to the networkHandler according to the case
+	 */
+
 	void selectDevCardArea(int devCardAreaNum, ActionEvent event)
 	{
 		if (isBuyingDevCard)
@@ -490,6 +556,11 @@ public class MainViewController
 		productionDevCardArea2.setDisable(true);
 		productionDevCardArea3.setDisable(true);
 	}
+
+	/**
+	 * Button to see other players' dashboards
+	 * Change scene by switching to another player's
+	 */
 
 	@FXML
 	void showOtherPlayers(ActionEvent event) throws IOException

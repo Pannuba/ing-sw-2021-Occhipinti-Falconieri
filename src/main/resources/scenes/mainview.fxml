@@ -71,7 +71,7 @@
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="popeTokenOne" fitHeight="78.0" fitWidth="78.0" layoutX="244.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="popeToken1" fitHeight="78.0" fitWidth="78.0" layoutX="244.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/popetokens/pope-token-1-back.png" />
          </image>
@@ -79,7 +79,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="popeTokenTwo" fitHeight="78.0" fitWidth="78.0" layoutX="491.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="popeToken2" fitHeight="78.0" fitWidth="78.0" layoutX="491.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/popetokens/pope-token-2-back.png" />
          </image>
@@ -87,7 +87,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="popeTokenThree" fitHeight="78.0" fitWidth="85.0" layoutX="787.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="popeToken3" fitHeight="78.0" fitWidth="85.0" layoutX="787.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/popetokens/pope-token-3-back.png" />
          </image>

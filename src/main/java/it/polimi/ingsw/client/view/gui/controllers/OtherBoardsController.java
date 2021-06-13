@@ -20,6 +20,12 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
+/**
+ * Scene controller to show other players' dashboard
+ * @author Giulio Occhipinti
+ * @author Chiara Falconieri
+ */
+
 public class OtherBoardsController
 {
 	private GameState gameState;
