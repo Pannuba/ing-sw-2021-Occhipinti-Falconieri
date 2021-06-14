@@ -104,6 +104,8 @@ public class MainViewController
 	@FXML private ImageView actionTokenFront;
 	@FXML private ImageView actionTokenBack;
 
+	@FXML private ImageView inkwell;
+
 	@FXML private Button defaultProductionButton;
 
 	@FXML private Button otherPlayersButton;
@@ -143,6 +145,9 @@ public class MainViewController
 			printToConsole("It's " + gameState.getCurrPlayerName() + "'s turn!");
 			disableButtons();
 		}
+
+		if (gameState.getPlayerByName(username).getId() == 0)
+			inkwell.setVisible(true);
 	}
 
 	/**

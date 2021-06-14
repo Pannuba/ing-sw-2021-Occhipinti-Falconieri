@@ -314,5 +314,13 @@
             <DropShadow />
          </effect>
       </Button>
+      <ImageView fx:id="inkwell" fitHeight="89.0" fitWidth="87.0" layoutX="17.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../img/inkwell.png" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
    </children>
 </Pane>
