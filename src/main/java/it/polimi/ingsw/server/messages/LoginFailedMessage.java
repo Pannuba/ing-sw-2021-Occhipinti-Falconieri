@@ -7,11 +7,18 @@ import it.polimi.ingsw.client.view.MessageExecutor;
  * @author Giulio Occhipinti
  */
 
-public class DuplicateNameMessage implements Message
+public class LoginFailedMessage implements Message
 {
+	private final String message;
+
+	public LoginFailedMessage(String message)
+	{
+		this.message = message;
+	}
+
 	@Override
 	public void process(MessageExecutor action)
 	{
-		action.duplicateName();
+		action.loginFailed(message);
 	}
 }

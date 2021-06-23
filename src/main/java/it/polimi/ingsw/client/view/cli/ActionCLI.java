@@ -35,9 +35,9 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 	}
 
 	@Override
-	public void duplicateName()
+	public void loginFailed(String message)
 	{
-		System.out.print("This name has already been chosen by someone else! Enter a different name: ");
+		System.out.print(message);		/* Switch/case for other error types? */
 		messageHandler.send(input.nextLine());
 	}
 
@@ -72,26 +72,35 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 	@Override
 	public void productionResult(Player player)
 	{
-		PrintMethods.printStorage(player.getDashboard().getStorage());
-		System.out.print("Choose another production: default production (1), devcard (2), SkillProduction leader card (3), stop production (4): ");
+		PrintMethods.printStorage(player.getDashboard().getStorage());	/* TODO: also print vault? Leadercards? */
+		System.out.print("Choose another production: default production (0), devcard (1), SkillProduction leader card (2), stop production (4): ");
+
+		List<String> command = new ArrayList<>();
 
 		switch (input.nextLine())
 		{
 			case "0":
-				new ActivateProduction(cli.getInput(), cli).defaultProduction();
+				command = new ActivateProduction(cli.getInput(), cli).defaultProduction();
 				break;
 
 			case "1":
-				new ActivateProduction(cli.getInput(), cli).devCardProduction();
+				command = new ActivateProduction(cli.getInput(), cli).devCardProduction();
 				break;
 
 			case "3":
-				new ActivateProduction(cli.getInput(), cli).leaderProduction();
+				command = new ActivateProduction(cli.getInput(), cli).leaderProduction();
 				break;
 
 			default:
 				messageHandler.send(Arrays.asList("STOP_PRODUCTION"));
+				return;		/* Otherwise it will send the command twice */
 		}
+
+		if (command != null)
+			messageHandler.send(command);
+
+		else	/* If the command has failed */
+			messageHandler.send(Arrays.asList("STOP_PRODUCTION"));
 	}
 
 	@Override
@@ -119,7 +128,7 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 	@Override
 	public void getOperationResultMessage(String message, boolean isFailed)
 	{
-		System.out.println(message);
+		System.out.println(message);	/* If the default production fails there's a desync problem because the CLI receives an OperationResultMessage and a ProductionResultMessage */
 
 		if (isFailed)
 			cli.chooseAction();		/* Client can repeat the round for failed actions */

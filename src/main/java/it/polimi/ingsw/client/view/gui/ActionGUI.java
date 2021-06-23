@@ -53,9 +53,9 @@ public class ActionGUI extends MessageExecutor
 	}
 
 	@Override
-	public void duplicateName()
+	public void loginFailed(String message)
 	{
-		/* Show "Duplicate name detected, enter a different username" in login controller */
+		/* Show message in login controller label */
 	}
 
 	@Override

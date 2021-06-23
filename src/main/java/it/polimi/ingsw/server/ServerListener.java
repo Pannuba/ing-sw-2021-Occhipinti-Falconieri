@@ -2,8 +2,7 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.model.Model;
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.cards.LeaderCard;
-import it.polimi.ingsw.server.messages.DuplicateNameMessage;
+import it.polimi.ingsw.server.messages.LoginFailedMessage;
 import it.polimi.ingsw.server.messages.FirstPlayerMessage;
 import it.polimi.ingsw.server.view.ClientHandler;
 import it.polimi.ingsw.util.Ping;
@@ -107,7 +106,7 @@ public class ServerListener
 				while (isDuplicateUsername(playerNames, username))
 				{
 					System.out.println("Duplicate username detected: " + username);
-					oos.writeObject(new DuplicateNameMessage());
+					oos.writeObject(new LoginFailedMessage("This name has already been chosen by someone else! Enter a different name"));
 					oos.reset();
 					username = (String) ois.readObject();					/* Client sends username and starts NetworkHandler thread */
 				}

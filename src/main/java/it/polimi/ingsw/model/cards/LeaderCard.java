@@ -41,6 +41,8 @@ public abstract class LeaderCard implements Serializable		/* Can't do new Leader
 	 * @return true if requirements are satisfied
 	 */
 
+	/* TODO: add checkRequirements to each Skill.... class? */
+
 	public boolean checkRequirements(Dashboard playerBoard)		/* True if requirements are satisfied. Here or Model? */
 	{
 		List<DevCard> devCards = playerBoard.getAllDevCards();

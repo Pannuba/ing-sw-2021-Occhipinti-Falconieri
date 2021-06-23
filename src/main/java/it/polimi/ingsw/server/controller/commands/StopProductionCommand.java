@@ -31,7 +31,10 @@ public class StopProductionCommand implements Command
 			model.getPlayerByUsername(username).setDoingDefaultProduction(false);
 
 		for (int i = 0; i < model.getPlayerByUsername(username).getDashboard().getDevCardAreas().length; i++)	/* For each dev card area */
-			model.getPlayerByUsername(username).getDashboard().getDevCardAreas()[i].getTopDevCard().setUsedForProduction(false);
+		{
+			if (!model.getPlayerByUsername(username).getDashboard().getDevCardAreas()[i].isEmpty())		/* IndexOutOfBoundsException if we don't check if the area is empty */
+				model.getPlayerByUsername(username).getDashboard().getDevCardAreas()[i].getTopDevCard().setUsedForProduction(false);
+		}
 
 		List<LeaderCard> leaderCards = model.getPlayerByUsername(username).getLeaderCards();
 

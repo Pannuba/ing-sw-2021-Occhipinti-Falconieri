@@ -69,7 +69,11 @@ public class ActivateProduction
 	{
 		String cardNumber;
 		PrintMethods.printDevCardAreas(cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getDevCardAreas());
-		/* TODO: check if the player has no devcards */
+
+		/* If the player has no cards, still send a command and get the server's response. Returning null stops the production action, which we don't want */
+		if (cli.getGameState().getPlayerByName(cli.getUsername()).getDashboard().getTotalDevCardsNum() == 0)
+			return Arrays.asList("ACTIVATE_PRODUCTION", "DEVCARD", "0");
+
 		System.out.print("Insert the devcard's # you want to use: ");
 		cardNumber = input.nextLine();
 
@@ -95,18 +99,15 @@ public class ActivateProduction
 			return null;
 		}
 
-		else
-		{
-			for (int i = 0; i < activeCardsWithProdSkill.size(); i++)			/* For the rare chance that the player has both cards SkillProduction */
-				PrintMethods.printLeaderCard(activeCardsWithProdSkill.get(i));
+		for (int i = 0; i < activeCardsWithProdSkill.size(); i++)			/* For the rare chance that the player has both cards SkillProduction */
+			PrintMethods.printLeaderCard(activeCardsWithProdSkill.get(i));
 
-			System.out.print("Which card do you want to use? ");
-			chosenCardNum = input.nextLine();
+		System.out.print("Which card do you want to use? ");
+		chosenCardNum = input.nextLine();
 
-			System.out.print("Insert the resource you want to make (B/G/Y/P)");
-			resourceToMakeLeader = input.nextLine();
+		System.out.print("Insert the resource you want to make (B/G/Y/P)");
+		resourceToMakeLeader = input.nextLine();
 
-			return Arrays.asList("ACTIVATE_PRODUCTION", "LEADER_SKILL", chosenCardNum, resourceToMakeLeader);
-		}
+		return Arrays.asList("ACTIVATE_PRODUCTION", "LEADER_SKILL", chosenCardNum, resourceToMakeLeader);
 	}
 }

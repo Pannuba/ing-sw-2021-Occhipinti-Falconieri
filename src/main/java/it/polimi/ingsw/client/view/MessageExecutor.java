@@ -13,7 +13,7 @@ import java.util.List;
 
 public abstract class MessageExecutor
 {
-	public abstract void duplicateName();
+	public abstract void loginFailed(String message);
 
 	public abstract void firstPlayer(boolean isFirstPlayer);
 

@@ -30,8 +30,9 @@ public class ActivateProductionCommand implements Command			/* TODO: update loca
 		model = controller.getModel();
 		username = controller.getUsername();
 	}
+
 	@Override
-	public boolean run(List<String> command)
+	public boolean run(List<String> command)	/* The return value is pointless, the server only cares about STOP_PRODUCTION commands */
 	{
 		String message = "";
 		boolean isFailed;
@@ -46,6 +47,7 @@ public class ActivateProductionCommand implements Command			/* TODO: update loca
 				if (model.getPlayerByUsername(username).isDoingDefaultProduction())
 				{
 					controller.getView().send(new OperationResultMessage("You have already used the default production this round!", true));
+					controller.getView().send(new ProductionResultMessage(model.getPlayerByUsername(username)));
 					return true;
 				}
 
@@ -74,13 +76,15 @@ public class ActivateProductionCommand implements Command			/* TODO: update loca
 
 				if (devCard == null)
 				{
-					controller.getView().send(new OperationResultMessage("You don't own that dev card, or it's not on the top of your areas!", true));
+					controller.getView().send(new OperationResultMessage("You don't own that dev card, or it's not on the top of your areas!", false));
+					controller.getView().send(new ProductionResultMessage(model.getPlayerByUsername(username)));
 					return true;
 				}
 
 				if (devCard.isUsedForProduction())
 				{
-					controller.getView().send(new OperationResultMessage("You have already used this dev card in this round!", true));
+					controller.getView().send(new OperationResultMessage("You have already used this dev card in this round!", false));
+					controller.getView().send(new ProductionResultMessage(model.getPlayerByUsername(username)));
 					return true;
 				}
 
@@ -99,7 +103,8 @@ public class ActivateProductionCommand implements Command			/* TODO: update loca
 
 				if (((SkillProduction) leaderCard).isUsedForProduction())
 				{
-					controller.getView().send(new OperationResultMessage("You have already used this leader this round!", true));
+					controller.getView().send(new OperationResultMessage("You have already used this leader this round!", false));
+					controller.getView().send(new ProductionResultMessage(model.getPlayerByUsername(username)));
 					return true;
 				}
 
@@ -129,23 +134,19 @@ public class ActivateProductionCommand implements Command			/* TODO: update loca
 					controller.updatePlayerPosition(model.getPlayerByUsername(username).getId(), producedResources.get(i).getQuantity());
 			}
 
+			controller.getView().send(new OperationResultMessage("Production successful!", false));
+			controller.getView().send(new BoughtResourcesMessage(producedResources));
 			controller.getView().send(new ProductionResultMessage(model.getPlayerByUsername(username)));	/* Send new player without the added resources */
 			model.getPlayerByUsername(username).getDashboard().getVault().addResourceList(producedResources);	/* Vault checks red resources */
-			message = "Production successful!";
 			isFailed = false;
 		}
 
 		else
-		{
+		{	/* OperationResultMessage is false because otherwise the CLI would lock, the return value of ActivateProducitionCommand is ignored in any case */
+			controller.getView().send(new OperationResultMessage("Couldn't activate production: requirements not satisfied.", false));
 			controller.getView().send(new ProductionResultMessage(model.getPlayerByUsername(username)));	/* Also send ProductionResultMessage if the production fails */
-			message = "Couldn't activate production: requirements not satisfied.";
 			isFailed = true;
 		}
-
-		controller.getView().send(new OperationResultMessage(message, isFailed));
-
-		if (!isFailed)
-			controller.getView().send(new BoughtResourcesMessage(producedResources));
 
 		return isFailed;
 	}
