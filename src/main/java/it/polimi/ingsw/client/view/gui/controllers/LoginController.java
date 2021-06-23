@@ -103,11 +103,8 @@ public class LoginController
 		isLocalMatch = localMatch;
 	}
 
-	public void setup() throws IOException
+	public void setup(Scene launcherScene) throws IOException
 	{
-		FXMLLoader loginLoader = new FXMLLoader();
-		loginLoader.setLocation(getClass().getResource("/scenes/launcher.fxml"));
-		Parent loginRoot = loginLoader.load();
-		launcherScene = new Scene(loginRoot);
+		this.launcherScene = launcherScene;
 	}
 }

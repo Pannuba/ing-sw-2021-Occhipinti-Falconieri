@@ -28,14 +28,13 @@ public class LauncherController
 	private LoginController lc;
 
 	@FXML
-	void playLocal(MouseEvent event) throws IOException
+	void playLocal(MouseEvent event)
 	{
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
 		lc.getIpField().setVisible(false);
 		lc.getPortField().setVisible(false);
 		lc.setLocalMatch(true);
-		lc.setup();
 
 		mainStage.setTitle("Masters of Renaissance - Local Game");
 		mainStage.setScene(loginScene);
@@ -44,25 +43,23 @@ public class LauncherController
 	}
 
 	@FXML
-	void playOnline(MouseEvent event) throws IOException
+	void playOnline(MouseEvent event)
 	{
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-		lc.setup();
 		mainStage.setTitle("Masters of Renaissance - Online Game");
 		mainStage.setScene(loginScene);
 		mainStage.sizeToScene();
 		mainStage.show();
-
 	}
 
-	public void setup() throws IOException
+	public void setup(Scene launcherScene) throws IOException
 	{
-		FXMLLoader launcherLoader = new FXMLLoader();
-		launcherLoader.setLocation(getClass().getResource("/scenes/login.fxml"));
-		Parent launcherRoot = launcherLoader.load();
-		loginScene = new Scene(launcherRoot);
+		FXMLLoader loginLoader = new FXMLLoader();
+		loginLoader.setLocation(getClass().getResource("/scenes/login.fxml"));
+		Parent loginRoot = loginLoader.load();
+		loginScene = new Scene(loginRoot);
 
-		lc = launcherLoader.getController();
+		lc = loginLoader.getController();
+		lc.setup(launcherScene);
 	}
 }

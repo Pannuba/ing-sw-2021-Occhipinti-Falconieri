@@ -23,15 +23,14 @@ public class Launcher extends Application
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/scenes/launcher.fxml"));
 		Parent root = loader.load();
+		Scene launcherScene = new Scene(root);
 
 		LauncherController lpc = loader.getController();
-		lpc.setup();
-
-		Scene scene = new Scene(root);
+		lpc.setup(launcherScene);
 
 		mainStage.setTitle("Masters of Renaissance Launcher");
 		mainStage.getIcons().add(new Image("/img/inkwell.png"));		/* Check if it works from .jar */
-		mainStage.setScene(scene);
+		mainStage.setScene(launcherScene);
 		//mainStage.setResizable(false);
 		mainStage.show();
 	}
