@@ -22,7 +22,7 @@ public class ActivateLeaderCommand			/* "ACTIVATE_LEADER", "4" */
 
 		LeaderCard cardToActivate = model.getPlayer().getLeaderCardByNumber(cardToActivateNum);		/* TODO: add check if this action fails */
 
-		if (cardToActivate.checkRequirements(model.getPlayer().getDashboard()))
+		if (cardToActivate.checkRequirements(model.getPlayer()))
 		{
 			if (!cardToActivate.isDiscarded())			/* Discarded leadercards can't be activated */
 			{

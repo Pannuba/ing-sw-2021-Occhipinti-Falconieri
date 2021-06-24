@@ -60,6 +60,7 @@ public class CLI extends View
 			port = Integer.parseInt(input.nextLine());
 			messageHandler = new NetworkHandler(this, ip, port);
 			System.out.println("Created network handler");
+			/* Try/catch if connection fails? */
 			messageHandler.connect();
 			new Thread((Runnable) messageHandler).start();		/* Start listening for messages or gamestate updates from server */
 			System.out.println("Sending username to server...");

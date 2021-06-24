@@ -4,9 +4,7 @@ import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.GUI;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -55,8 +53,11 @@ public class LoginController
 		if (numPlayersField.isVisible())		/* Temporary solution, but what do? */
 		{
 			numPlayersField.getText();
+
 			if (Integer.parseInt(numPlayersField.getText()) > 0 && Integer.parseInt(numPlayersField.getText()) < 5)
+				/* TODO: try/catch if connection fails? */
 				messageHandler.send(numPlayersField.getText());
+
 			else
 				errorLabel.setText("Wrong number of players: re-enter the number");
 
@@ -103,7 +104,7 @@ public class LoginController
 		isLocalMatch = localMatch;
 	}
 
-	public void setup(Scene launcherScene) throws IOException
+	public void setup(Scene launcherScene) throws IOException		/* Get GUI from launcher, set username and messageHandler in startMatch? Using getters */
 	{
 		this.launcherScene = launcherScene;
 	}

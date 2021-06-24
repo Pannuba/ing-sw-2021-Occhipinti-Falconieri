@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.cards;
 
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.ResourceType;
 
 import java.util.ArrayList;
@@ -20,6 +21,31 @@ public class SkillDiscount extends LeaderCard
 	public SkillDiscount()
 	{
 		requirements = new ArrayList<>();
+	}
+
+	@Override
+	public boolean checkRequirements(Player player)		/* Player has to have x devcards of any level */
+	{
+		List<DevCard> devCards = player.getDashboard().getAllDevCards();
+		List<DevCardColor> colorRequirements = this.getRequirements();
+
+		for (int i = 0; i < devCards.size(); i++)
+		{
+			for (int j = 0; j < colorRequirements.size(); j++)
+			{
+				if (devCards.get(i).getColor() == colorRequirements.get(j))
+				{
+					colorRequirements.remove(j);		/* Remove a requirement for every card that satisfies it */
+					j--;
+				}
+			}
+		}
+
+		if (colorRequirements.isEmpty())				/* If there are no more requirements left, it means they're all satisfied */
+			return true;
+
+		else
+			return false;
 	}
 
 	public int getDiscountNum()

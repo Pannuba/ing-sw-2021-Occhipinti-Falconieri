@@ -34,7 +34,7 @@ public class ActivateLeaderCommand implements Command		/* "ACTIVATE_LEADER", "4"
 
 		LeaderCard cardToActivate = model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivateNum);		/* TODO: add check if this action fails */
 
-		if (cardToActivate.checkRequirements(model.getPlayerByUsername(username).getDashboard()))
+		if (cardToActivate.checkRequirements(model.getPlayerByUsername(username)))
 		{
 			if (!cardToActivate.isDiscarded())			/* Discarded leadercards can't be activated */
 			{
@@ -43,7 +43,7 @@ public class ActivateLeaderCommand implements Command		/* "ACTIVATE_LEADER", "4"
 				isFailed = false;
 			}
 
-			/* else? */
+			/* Else? should never be possible I think */
 		}
 
 		else

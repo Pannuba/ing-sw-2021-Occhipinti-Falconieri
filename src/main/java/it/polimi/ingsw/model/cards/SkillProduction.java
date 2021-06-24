@@ -1,7 +1,11 @@
 package it.polimi.ingsw.model.cards;
 
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.util.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Specify the skill of the leader card: production
@@ -22,6 +26,21 @@ public class SkillProduction extends LeaderCard
 	{
 		isUsedForProduction = false;
 		cost = new Resource();
+	}
+
+	@Override
+	public boolean checkRequirements(Player player)		/* Player has to have 1 devcard of color x and level y */
+	{
+		List<DevCard> devCards = player.getDashboard().getAllDevCards();
+		Pair<DevCardColor, Integer> prodRequirements = this.getRequirements();
+
+		for (int i = 0; i < devCards.size(); i++)
+		{
+			if (devCards.get(i).getColor() == prodRequirements.getObj1() && devCards.get(i).getLevel() == prodRequirements.getObj2())
+				return true;
+		}
+
+		return false;
 	}
 
 	public boolean isUsedForProduction()

@@ -72,7 +72,7 @@ public class LeaderCardTest {
 
 		p1.setLeaderCards(leaderCards);
 		p1.setDashboard(dashboard);
-		assertTrue(leaderCards.get(0).checkRequirements(p1.getDashboard()));
+		assertTrue(leaderCards.get(0).checkRequirements(p1));
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class LeaderCardTest {
 
 		p1.setLeaderCards(leaderCards);
 		p1.setDashboard(dashboard);
-		assertTrue(leaderCards.get(0).checkRequirements(p1.getDashboard()));
+		assertTrue(leaderCards.get(0).checkRequirements(p1));
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class LeaderCardTest {
 
 		p1.setLeaderCards(leaderCards);
 		p1.setDashboard(dashboard);
-		assertFalse(leaderCards.get(0).checkRequirements(p1.getDashboard()));
+		assertFalse(leaderCards.get(0).checkRequirements(p1));
 	}
 
 	/**
@@ -200,6 +200,6 @@ public class LeaderCardTest {
 		}
 		p1.setLeaderCards(leaderCards);
 		p1.setDashboard(dashboard);
-		assertFalse(leaderCards.get(0).checkRequirements(p1.getDashboard()));
+		assertFalse(leaderCards.get(0).checkRequirements(p1));
 	}
 }
