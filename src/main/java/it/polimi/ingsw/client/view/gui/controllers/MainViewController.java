@@ -49,6 +49,7 @@ public class MainViewController
 	private GameState gameState;
 	private List<String> defaultProdRes;
 	private boolean isBuyingDevCard;
+	private boolean isDoingProduction;
 
 	private int devCardToBuy;
 
@@ -99,7 +100,7 @@ public class MainViewController
 	@FXML private Button productionDevCardArea1;
 	@FXML private Button productionDevCardArea2;
 	@FXML private Button productionDevCardArea3;
-	@FXML private Button stopProduction;
+	@FXML private Button stopProductionButton;
 
 	@FXML private ImageView actionTokenFront;
 	@FXML private ImageView actionTokenBack;
@@ -157,6 +158,8 @@ public class MainViewController
 	@FXML	/* TODO: add boolean isDoingDefaultProduction to disable by pressing the same button */
 	void startDefaultProduction(ActionEvent event)
 	{
+		isDoingProduction = true;
+
 		Platform.runLater(() -> {
 			mainStage.setTitle("Masters of Renaissance - Select 2 resources");
 			printToConsole("Click the 2 resources you want to convert, then the resource you want to make\n(Vault icons)");
@@ -212,6 +215,13 @@ public class MainViewController
 				vaultResourceGrey.setDisable(true);
 			});
 		}
+	}
+
+	@FXML
+	void stopProduction(ActionEvent event)
+	{
+		isDoingProduction = false;
+		messageHandler.send(Arrays.asList("STOP_PRODUCTION"));
 	}
 
 	/**
@@ -527,7 +537,9 @@ public class MainViewController
 
 		else		/* This way the server should never receive a null devcard number, also in CLI */
 		{
-			if (gameState.getPlayerByName(username).getDashboard().getDevCardAreas()[devCardAreaNum - 1].isEmpty())
+			isDoingProduction = true;		/* TODO: if (!isDoingProduction) -> true, deactivate buttons that can't be used during production? */
+
+			if (gameState.getPlayerByName(username).getDashboard().getDevCardAreas()[devCardAreaNum - 1].isEmpty())		/* Server already checks for this */
 				printToConsole("You don't have any dev cards in this area!");
 
 			else

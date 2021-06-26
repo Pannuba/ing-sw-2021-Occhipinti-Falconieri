@@ -37,6 +37,7 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 
 	public synchronized void update(Object obj)
 	{
+		System.out.println("Received " + obj.getClass().getSimpleName());
 		if (obj instanceof Message)
 			((Message) obj).process(action);		/* Calls method in ActionGUI specified in the message */
 
