@@ -43,6 +43,8 @@ public class MainViewController
 	private Stage mainStage;
 	private Scene mainViewScene;
 	private Scene marketsScene;
+	private MarketsController mc;
+	private LeaderCardsController lcc;
 	private Scene leaderCardsScene;
 	private MessageIO messageHandler;
 	private String username;
@@ -158,7 +160,7 @@ public class MainViewController
 	@FXML	/* TODO: add boolean isDoingDefaultProduction to disable by pressing the same button */
 	void startDefaultProduction(ActionEvent event)
 	{
-		isDoingProduction = true;
+		startProduction();
 
 		Platform.runLater(() -> {
 			mainStage.setTitle("Masters of Renaissance - Select 2 resources");
@@ -221,6 +223,8 @@ public class MainViewController
 	void stopProduction(ActionEvent event)
 	{
 		isDoingProduction = false;
+		stopProductionButton.setVisible(false);
+		enableButtonsAfterProduction();
 		messageHandler.send(Arrays.asList("STOP_PRODUCTION"));
 	}
 
@@ -446,21 +450,26 @@ public class MainViewController
 			case "ActionBlack1":
 				actionTokenFront.setImage(new Image(getClass().getResourceAsStream("/img/actiontokens/action-black-1.png")));
 				break;
+
 			case "ActionBlack2":
 				actionTokenFront.setImage(new Image(getClass().getResourceAsStream("/img/actiontokens/action-black-2.png")));
 				break;
+
 			case  "ActionDevCard":
 				switch (((ActionDevCard) token).getColor())
 				{
 					case GREEN:
 						actionTokenFront.setImage(new Image(getClass().getResourceAsStream("/img/actiontokens/action-dev-card-green.png")));
 						break;
+
 					case BLUE:
 						actionTokenFront.setImage(new Image(getClass().getResourceAsStream("/img/actiontokens/action-dev-card-blue.png")));
 						break;
+
 					case PURPLE:
 						actionTokenFront.setImage(new Image(getClass().getResourceAsStream("/img/actiontokens/action-dev-card-purple.png")));
 						break;
+
 					case YELLOW:
 						actionTokenFront.setImage(new Image(getClass().getResourceAsStream("/img/actiontokens/action-dev-card-yellow.png")));
 						break;
@@ -537,13 +546,17 @@ public class MainViewController
 
 		else		/* This way the server should never receive a null devcard number, also in CLI */
 		{
-			isDoingProduction = true;		/* TODO: if (!isDoingProduction) -> true, deactivate buttons that can't be used during production? */
-
 			if (gameState.getPlayerByName(username).getDashboard().getDevCardAreas()[devCardAreaNum - 1].isEmpty())		/* Server already checks for this */
+			{
 				printToConsole("You don't have any dev cards in this area!");
+				return;
+			}
 
 			else
 			{
+				if (!isDoingProduction)
+					startProduction();
+
 				int cardNum = gameState.getPlayerByName(username).getDashboard().getDevCardAreas()[devCardAreaNum - 1].getTopDevCard().getCardNumber();
 				messageHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "DEVCARD", String.valueOf(cardNum)));
 			}
@@ -556,7 +569,7 @@ public class MainViewController
 		});
 	}
 
-	public void enableButtons()		/* TODO: also add leader buttons */
+	public void enableButtons()		/* TODO: also add leader buttons!! */
 	{
 		defaultProductionButton.setDisable(false);
 
@@ -572,6 +585,18 @@ public class MainViewController
 		productionDevCardArea1.setDisable(true);
 		productionDevCardArea2.setDisable(true);
 		productionDevCardArea3.setDisable(true);
+	}
+
+	public void enableButtonsAfterProduction()
+	{
+		mc.enableButtons();
+		lcc.enableButtonsForProduction();
+	}
+
+	public void disableButtonsBeforeProduction()
+	{
+		mc.disableButtons();
+		lcc.disableButtonsForProduction();
 	}
 
 	/**
@@ -621,13 +646,22 @@ public class MainViewController
 		});
 	}
 
-	public void setup(GUI gui, Scene marketsScene, Scene leaderCardsScene)
+	void startProduction()		/* Disables all the buttons that can't be interacted with while the player is doing the production */
+	{
+		isDoingProduction = true;
+		disableButtonsBeforeProduction();
+		stopProductionButton.setVisible(true);
+	}
+
+	public void setup(GUI gui, Scene marketsScene, Scene leaderCardsScene, MarketsController mc, LeaderCardsController lcc)
 	{
 		this.username = gui.getUsername();
 		this.mainStage = gui.getMainStage();
 		this.mainViewScene = gui.getMainViewScene();
 		this.marketsScene = marketsScene;
+		this.mc = mc;
 		this.leaderCardsScene = leaderCardsScene;
+		this.lcc = lcc;
 		this.messageHandler = gui.getMessageHandler();
 	}
 

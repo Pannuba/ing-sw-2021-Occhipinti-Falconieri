@@ -44,7 +44,7 @@
             <DropShadow />
          </effect>
          <font>
-            <Font name="Times New Roman Italic" size="19.0" />
+            <Font size="15.0" />
          </font>
       </Button>
       <Button fx:id="otherPlayersButton" layoutX="1053.0" layoutY="206.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="76.0" prefWidth="184.0" text="Show Other Players' Boards" textAlignment="CENTER" wrapText="true">
@@ -58,9 +58,9 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="stopProductionButton" layoutX="1053.0" layoutY="318.0" mnemonicParsing="false" onAction="#stopProduction" prefHeight="55.0" prefWidth="184.0" text="Stop Production" visible="false">
+      <Button fx:id="stopProductionButton" layoutX="1053.0" layoutY="314.0" mnemonicParsing="false" onAction="#stopProduction" prefHeight="55.0" prefWidth="184.0" text="Stop Production" visible="false">
          <font>
-            <Font name="Times New Roman Italic" size="23.0" />
+            <Font size="19.0" />
          </font>
          <effect>
             <DropShadow />

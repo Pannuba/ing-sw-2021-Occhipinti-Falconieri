@@ -96,7 +96,7 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 		gsc.setup(this, mvc);
 		lcc.setup(this);
 		mc.setup(this, mvc);
-		mvc.setup(this, marketsScene, leaderCardsScene);
+		mvc.setup(this, marketsScene, leaderCardsScene, mc, lcc);
 	}
 
 	public MessageIO getMessageHandler()

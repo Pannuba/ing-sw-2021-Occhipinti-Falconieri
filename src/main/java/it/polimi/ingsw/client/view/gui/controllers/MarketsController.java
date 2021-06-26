@@ -96,22 +96,10 @@ public class MarketsController        /* Send command directly from here? Get wh
 		Marble spare = market.getSpareMarble();
 
 		if (isMyTurn)		/* When it's the player's turn, make buttons pressable to send the command BUY_RESOURCES */
-		{
-			for (int i = 0; i < buttons.size(); i++)
-				buttons.get(i).setDisable(false);
-
-			for (int i = 0; i < devCards.size(); i++)
-				devCards.get(i).setDisable(false);
-		}
+			enableButtons();
 		/* The disable checkbox in sceneBuilder disables the button permanently, meaning setDisable(false) won't work */
 		else
-		{
-			for (int i = 0; i < buttons.size(); i++)
-				buttons.get(i).setDisable(true);
-
-			for (int i = 0; i < devCards.size(); i++)
-				devCards.get(i).setDisable(true);
-		}
+			disableButtons();
 
 		int j = 0, k = 0;
 
@@ -269,6 +257,24 @@ public class MarketsController        /* Send command directly from here? Get wh
 		mainStage.setScene(mainViewScene);
 		mainStage.sizeToScene();		/* ? */
 		mainStage.show();
+	}
+
+	public void enableButtons()
+	{
+		for (int i = 0; i < buttons.size(); i++)
+			buttons.get(i).setDisable(false);
+
+		for (int i = 0; i < devCards.size(); i++)
+			devCards.get(i).setDisable(false);
+	}
+
+	public void disableButtons()
+	{
+		for (int i = 0; i < buttons.size(); i++)
+			buttons.get(i).setDisable(true);
+
+		for (int i = 0; i < devCards.size(); i++)
+			devCards.get(i).setDisable(true);
 	}
 
 	public void setup(GUI gui, MainViewController mvc)

@@ -6,7 +6,6 @@ import it.polimi.ingsw.client.view.gui.GUI;
 import it.polimi.ingsw.model.cards.LeaderCard;
 import it.polimi.ingsw.model.cards.SkillProduction;
 import it.polimi.ingsw.model.cards.SkillStorage;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -14,7 +13,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Effect;
 import javafx.scene.effect.Lighting;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -331,6 +329,38 @@ public class LeaderCardsController
 			leaderCard1.setDisable(true);
 			leaderCard2.setDisable(true);
 		}
+	}
+
+	public void enableButtonsForProduction()
+	{
+		activateLeaderOneButton.setVisible(true);
+		discardLeaderOneButton.setVisible(true);
+		activateLeaderTwoButton.setVisible(true);
+		discardLeaderTwoButton.setVisible(true);
+		productionBL.setVisible(true);
+		productionGL.setVisible(true);
+		productionPL.setVisible(true);
+		productionYL.setVisible(true);
+		productionBR.setVisible(true);
+		productionGR.setVisible(true);
+		productionPR.setVisible(true);
+		productionYR.setVisible(true);
+	}
+
+	public void disableButtonsForProduction()
+	{
+		activateLeaderOneButton.setVisible(false);
+		discardLeaderOneButton.setVisible(false);
+		activateLeaderTwoButton.setVisible(false);
+		discardLeaderTwoButton.setVisible(false);
+		productionBL.setVisible(false);
+		productionGL.setVisible(false);
+		productionPL.setVisible(false);
+		productionYL.setVisible(false);
+		productionBR.setVisible(false);
+		productionGR.setVisible(false);
+		productionPR.setVisible(false);
+		productionYR.setVisible(false);
 	}
 
 	public void setup(GUI gui)
