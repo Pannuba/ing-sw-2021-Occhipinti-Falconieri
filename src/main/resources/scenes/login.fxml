@@ -31,16 +31,16 @@
             <Font name="Times New Roman Bold Italic" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="portField" layoutX="177.0" layoutY="361.0" prefHeight="30.0" prefWidth="200.0" promptText="Port">
+      <TextField fx:id="portField" layoutX="177.0" layoutY="361.0" onAction="#connectToServerEnter" prefHeight="30.0" prefWidth="200.0" promptText="Port">
          <font>
             <Font name="Times New Roman Bold Italic" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="numPlayersField" layoutX="177.0" layoutY="417.0" prefHeight="30.0" prefWidth="200.0" promptText="Player number" visible="false">
+      <TextField fx:id="numPlayersField" layoutX="177.0" layoutY="417.0" onAction="#connectToServerEnter" prefHeight="30.0" prefWidth="200.0" promptText="Player number" visible="false">
          <font>
             <Font name="Times New Roman Bold Italic" size="18.0" />
          </font></TextField>
-      <ImageView fx:id="startButton" accessibleRole="BUTTON" fitHeight="150.0" fitWidth="220.0" layoutX="161.0" layoutY="484.0" onMouseClicked="#connectToServer" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="startButton" accessibleRole="BUTTON" fitHeight="150.0" fitWidth="220.0" layoutX="161.0" layoutY="484.0" onMouseClicked="#connectToServerMouse" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/writings/start.png" />
          </image>

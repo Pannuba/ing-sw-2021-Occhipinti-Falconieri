@@ -3,6 +3,8 @@ package it.polimi.ingsw.client.view.gui.controllers;
 import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.NetworkHandler;
 import it.polimi.ingsw.client.view.gui.GUI;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -48,14 +50,25 @@ public class LoginController
 	}
 
 	@FXML
-	void connectToServer(MouseEvent event) throws IOException
+	void connectToServerMouse(MouseEvent event) throws IOException
+	{
+		connectToServer(event);
+	}
+
+	@FXML
+	public void connectToServerEnter(ActionEvent event) throws IOException
+	{
+		connectToServer(event);
+	}
+
+	public void connectToServer(Event event) throws IOException
 	{
 		if (numPlayersField.isVisible())		/* Temporary solution, but what do? */
 		{
 			numPlayersField.getText();
 
 			if (Integer.parseInt(numPlayersField.getText()) > 0 && Integer.parseInt(numPlayersField.getText()) < 5)
-				/* TODO: try/catch if connection fails? */
+				/* TODO: try/catch if connection fails? Bad IP/port? And show error label with the respective message */
 				messageHandler.send(numPlayersField.getText());
 
 			else
