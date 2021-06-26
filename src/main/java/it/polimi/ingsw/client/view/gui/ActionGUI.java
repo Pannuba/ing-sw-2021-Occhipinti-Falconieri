@@ -55,7 +55,7 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void loginFailed(String message)
 	{
-		/* Show message in login controller label */
+		/* TODO: Show message in login controller label */
 	}
 
 	@Override
@@ -108,7 +108,11 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void productionResult(Player player)
 	{
-
+		Platform.runLater(() -> {
+			mvc.enableButtons();
+			mvc.updateStorage(player.getDashboard().getStorage());
+			/* TODO: if (the player has SkillStorage cards) lcc.updateSkillStorageCards() */
+		});
 	}
 
 	@Override

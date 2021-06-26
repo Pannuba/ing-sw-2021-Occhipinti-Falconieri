@@ -138,6 +138,8 @@ public class ActivateProductionCommand implements Command			/* TODO: update loca
 			controller.getView().send(new BoughtResourcesMessage(producedResources));
 			controller.getView().send(new ProductionResultMessage(model.getPlayerByUsername(username)));	/* Send new player without the added resources */
 			model.getPlayerByUsername(username).getDashboard().getVault().addResourceList(producedResources);	/* Vault checks red resources */
+			/*	Resources are added after sending the message because the player can't use the same resources they get in the same round to use other for other productions.
+				So after each production the player sees the new storage (with fewer resources than before) but only sees the new vault after sending the STOP_PRODUCTION command */
 			isFailed = false;
 		}
 

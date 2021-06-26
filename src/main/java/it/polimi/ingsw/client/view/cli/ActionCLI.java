@@ -72,10 +72,10 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 	@Override
 	public void productionResult(Player player)
 	{
-		PrintMethods.printStorage(player.getDashboard().getStorage());	/* TODO: also print vault? Leadercards? */
+		PrintMethods.printStorage(player.getDashboard().getStorage());	/* TODO: also print vault? Leadercards? No, see ActivateProductionCommand */
 		System.out.print("Choose another production: default production (0), devcard (1), SkillProduction leader card (2), stop production (4): ");
 
-		List<String> command = new ArrayList<>();
+		List<String> command;
 
 		switch (input.nextLine())
 		{

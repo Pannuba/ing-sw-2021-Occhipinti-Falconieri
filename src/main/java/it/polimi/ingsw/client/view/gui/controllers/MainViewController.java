@@ -160,6 +160,12 @@ public class MainViewController
 	@FXML	/* TODO: add boolean isDoingDefaultProduction to disable by pressing the same button */
 	void startDefaultProduction(ActionEvent event)
 	{
+		if (gameState.getPlayerByName(username).isDoingDefaultProduction())
+		{
+			printToConsole("You have already used the default production this round!");
+			return;
+		}
+
 		startProduction();
 
 		Platform.runLater(() -> {
@@ -580,6 +586,7 @@ public class MainViewController
 
 	public void disableButtons()
 	{
+		System.out.println("disableButtons colld");
 		defaultProductionButton.setDisable(true);
 
 		productionDevCardArea1.setDisable(true);
@@ -673,5 +680,10 @@ public class MainViewController
 	public void setBuyingDevCard(boolean buyingDevCard)
 	{
 		isBuyingDevCard = buyingDevCard;
+	}
+
+	public void setGameState(GameState gameState)
+	{
+		this.gameState = gameState;
 	}
 }
