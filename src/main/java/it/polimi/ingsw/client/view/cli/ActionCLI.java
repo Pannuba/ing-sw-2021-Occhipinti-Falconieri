@@ -157,7 +157,7 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 		if (input.nextLine().equalsIgnoreCase("Y"))
 		{
 			messageHandler.stop();
-			new CLI(new Scanner(System.in));
+			new CLI();
 		}
 
 		else
@@ -184,7 +184,7 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 		if (input.nextLine().equalsIgnoreCase("Y"))
 		{
 			messageHandler.stop();
-			new CLI(cli.getInput());
+			new CLI();
 		}
 
 		else

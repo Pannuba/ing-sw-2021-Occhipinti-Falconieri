@@ -23,9 +23,9 @@ public class CLI extends View
 	private GameState gameState;
 	private String username;
 
-	public CLI(Scanner input)
+	public CLI()
 	{
-		this.input = input;
+		this.input = new Scanner(System.in);
 
 		gameStart();
 
