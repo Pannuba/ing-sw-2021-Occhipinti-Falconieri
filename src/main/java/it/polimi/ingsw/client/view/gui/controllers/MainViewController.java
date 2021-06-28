@@ -125,6 +125,11 @@ public class MainViewController
 	{
 		this.gameState = gameState;
 
+		updateStorage(gameState.getPlayerByName(username).getDashboard().getStorage());
+		updateVault(gameState.getPlayerByName(username).getDashboard().getVault());
+		updateTrack(gameState.getCurrTrack(), gameState.getCurrPlayers(), gameState.getPlayerByName(username).getId());
+		updateDevCardAreas(gameState.getPlayerByName(username).getDashboard().getDevCardAreas());
+
 		if (gameState.getCurrPlayers().size() == 1)
 		{
 			otherPlayersButton.setVisible(false);
@@ -132,20 +137,15 @@ public class MainViewController
 			actionTokenBack.setVisible(true);
 		}
 
-		updateStorage(gameState.getPlayerByName(username).getDashboard().getStorage());
-		updateVault(gameState.getPlayerByName(username).getDashboard().getVault());
-		updateTrack(gameState.getCurrTrack(), gameState.getCurrPlayers(), gameState.getPlayerByName(username).getId());
-		updateDevCardAreas(gameState.getPlayerByName(username).getDashboard().getDevCardAreas());
-
 		if (gameState.getPlayerByName(username).isMyTurn())
 		{
-			console.setText("It's your turn!");
+			printToConsole("It's your turn!");
 			enableButtons();
 		}
 
 		else
 		{
-			console.setText("It's " + gameState.getCurrPlayerName() + "'s turn!");
+			printToConsole("It's " + gameState.getCurrPlayerName() + "'s turn!");
 			disableButtons();
 		}
 
@@ -157,7 +157,7 @@ public class MainViewController
 	 * Triggered by default production button
 	 */
 
-	@FXML	/* TODO: add boolean isDoingDefaultProduction to disable by pressing the same button */
+	@FXML
 	void startDefaultProduction(ActionEvent event)
 	{
 		if (gameState.getPlayerByName(username).isDoingDefaultProduction())
@@ -166,7 +166,8 @@ public class MainViewController
 			return;
 		}
 
-		startProduction();
+		if (!isDoingProduction)
+			startProduction();
 
 		Platform.runLater(() -> {
 			mainStage.setTitle("Masters of Renaissance - Select 2 resources");
@@ -222,6 +223,8 @@ public class MainViewController
 				vaultResourceYellow.setDisable(true);
 				vaultResourceGrey.setDisable(true);
 			});
+
+			mainStage.setTitle("Masters of Renaissance");
 		}
 	}
 
@@ -586,7 +589,6 @@ public class MainViewController
 
 	public void disableButtons()
 	{
-		System.out.println("disableButtons colld");
 		defaultProductionButton.setDisable(true);
 
 		productionDevCardArea1.setDisable(true);
@@ -653,7 +655,7 @@ public class MainViewController
 		});
 	}
 
-	void startProduction()		/* Disables all the buttons that can't be interacted with while the player is doing the production */
+	public void startProduction()		/* Disables all the buttons that can't be interacted with while the player is doing the production */
 	{
 		isDoingProduction = true;
 		disableButtonsBeforeProduction();
@@ -680,6 +682,11 @@ public class MainViewController
 	public void setBuyingDevCard(boolean buyingDevCard)
 	{
 		isBuyingDevCard = buyingDevCard;
+	}
+
+	public boolean isDoingProduction()
+	{
+		return isDoingProduction;
 	}
 
 	public void setGameState(GameState gameState)

@@ -163,38 +163,18 @@ public class LeaderCardsController
 		mainStage.show();
 	}
 
-	@FXML
-	void startActiveProduction1(MouseEvent event)
-	{
-		productionYL.setDisable(false);
-		productionPL.setDisable(false);
-		productionGL.setDisable(false);
-		productionBL.setDisable(false);
-		chooseResource1.setVisible(true);
-	}
-
-	@FXML
-	void startActiveProduction2(MouseEvent event)
-	{
-		productionYR.setDisable(false);
-		productionPR.setDisable(false);
-		productionGR.setDisable(false);
-		productionBR.setDisable(false);
-		chooseResource2.setVisible(true);
-	}
-
 	/**
 	 * If left leader card is a skillProduction it activates the production
 	 */
 
 	private void activeProduction1(String resourceToAdd)
 	{
+		if (!mvc.isDoingProduction())
+			mvc.startProduction();
+
 		messageHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "LEADER_SKILL", String.valueOf(leaderCards.get(0).getCardNumber()), resourceToAdd));
 
-		productionBL.setDisable(true);
-		productionGL.setDisable(true);
-		productionPL.setDisable(true);
-		productionYL.setDisable(true);
+		setLeftProductionImagesDisabled(true);
 		chooseResource1.setVisible(false);
 	}
 
@@ -204,12 +184,12 @@ public class LeaderCardsController
 
 	private void activeProduction2(String resourceToAdd)
 	{
+		if (!mvc.isDoingProduction())
+			mvc.startProduction();
+
 		messageHandler.send(Arrays.asList("ACTIVATE_PRODUCTION", "LEADER_SKILL", String.valueOf(leaderCards.get(1).getCardNumber()), resourceToAdd));
 
-		productionBR.setDisable(true);
-		productionGR.setDisable(true);
-		productionPR.setDisable(true);
-		productionYR.setDisable(true);
+		setRightProductionImagesDisabled(true);
 		chooseResource2.setVisible(false);
 	}
 
@@ -230,14 +210,6 @@ public class LeaderCardsController
 		{
 			activateLeaderOneButton.setVisible(false);
 			discardLeaderOneButton.setVisible(false);
-
-			if (leaderCards.get(0).isActive() && leaderCards.get(0) instanceof SkillProduction)
-			{
-				productionBL.setVisible(true);
-				productionGL.setVisible(true);
-				productionPL.setVisible(true);
-				productionYL.setVisible(true);
-			}
 
 			if (leaderCards.get(0).isActive() && leaderCards.get(0) instanceof SkillStorage)
 			{
@@ -269,14 +241,6 @@ public class LeaderCardsController
 			activateLeaderTwoButton.setVisible(false);
 			discardLeaderTwoButton.setVisible(false);
 
-			if (leaderCards.get(1).isActive() && leaderCards.get(1) instanceof SkillProduction)
-			{
-				productionBR.setVisible(true);
-				productionGR.setVisible(true);
-				productionPR.setVisible(true);
-				productionYR.setVisible(true);
-			}
-
 			if (leaderCards.get(1).isActive() && leaderCards.get(1) instanceof SkillStorage)
 			{
 				resR1.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertResTypeToPath(((SkillStorage) leaderCards.get(1)).getAdditionalStorage().getShelfResourceType()))));
@@ -302,22 +266,24 @@ public class LeaderCardsController
 			}
 		}
 
-		if (!isMyTurn)
+		checkSkillProduction();		/* Checks if the player has any active SkillProduction cards, if so makes the resource images visible */
+
+		if (!isMyTurn)		/* Need to check card type and if it's active, to prevent the client from sending a command when they don't have a SkillProduction */
 		{
 			for (int i = 0; i < buttons.size(); i++)
 				buttons.get(i).setDisable(true);
 
-			leaderCard1.setDisable(true);
-			leaderCard2.setDisable(true);
+			setLeftProductionImagesDisabled(true);
+			setRightProductionImagesDisabled(true);
 		}
 
-		else
+		else	/* It's my turn */
 		{
 			for (int i = 0; i < buttons.size(); i++)
 				buttons.get(i).setDisable(false);
 
-			leaderCard1.setDisable(false);
-			leaderCard2.setDisable(false);
+			setLeftProductionImagesDisabled(false);
+			setRightProductionImagesDisabled(false);
 		}
 	}
 
@@ -335,21 +301,7 @@ public class LeaderCardsController
 			discardLeaderTwoButton.setVisible(true);
 		}
 
-		if (leaderCards.get(0).isActive() && leaderCards.get(0) instanceof SkillProduction)
-		{
-			productionBL.setVisible(true);
-			productionGL.setVisible(true);
-			productionPL.setVisible(true);
-			productionYL.setVisible(true);
-		}
-
-		if (leaderCards.get(1).isActive() && leaderCards.get(1) instanceof SkillProduction)
-		{
-			productionBR.setVisible(true);
-			productionGR.setVisible(true);
-			productionPR.setVisible(true);
-			productionYR.setVisible(true);
-		}
+		checkSkillProduction();
 	}
 
 	public void disableButtonsForProduction()
@@ -358,19 +310,59 @@ public class LeaderCardsController
 		discardLeaderOneButton.setVisible(false);
 		activateLeaderTwoButton.setVisible(false);
 		discardLeaderTwoButton.setVisible(false);
-		productionBL.setVisible(false);
-		productionGL.setVisible(false);
-		productionPL.setVisible(false);
-		productionYL.setVisible(false);
-		productionBR.setVisible(false);
-		productionGR.setVisible(false);
-		productionPR.setVisible(false);
-		productionYR.setVisible(false);
 	}
 
-	public void setup(GUI gui)
+	public void checkSkillProduction()
+	{
+		if (leaderCards.get(0).isActive() && leaderCards.get(0) instanceof SkillProduction)
+			setLeftProductionImagesVisible(true);
+
+		else
+			setLeftProductionImagesVisible(false);
+
+		if (leaderCards.get(1).isActive() && leaderCards.get(1) instanceof SkillProduction)
+			setRightProductionImagesVisible(true);
+
+		else
+			setRightProductionImagesVisible(false);
+	}
+
+	public void setLeftProductionImagesVisible(boolean visible)
+	{
+		productionBL.setVisible(visible);
+		productionGL.setVisible(visible);
+		productionPL.setVisible(visible);
+		productionYL.setVisible(visible);
+	}
+
+	public void setRightProductionImagesVisible(boolean visible)
+	{
+		productionBR.setVisible(visible);
+		productionGR.setVisible(visible);
+		productionPR.setVisible(visible);
+		productionYR.setVisible(visible);
+	}
+
+	public void setLeftProductionImagesDisabled(boolean disabled)
+	{
+		productionBL.setDisable(disabled);
+		productionGL.setDisable(disabled);
+		productionPL.setDisable(disabled);
+		productionYL.setDisable(disabled);
+	}
+
+	public void setRightProductionImagesDisabled(boolean disabled)
+	{
+		productionBR.setDisable(disabled);
+		productionGR.setDisable(disabled);
+		productionPR.setDisable(disabled);
+		productionYR.setDisable(disabled);
+	}
+
+	public void setup(GUI gui, MainViewController mvc)
 	{
 		this.mainViewScene = gui.getMainViewScene();
+		this.mvc = mvc;
 		this.mainStage = gui.getMainStage();
 		this.messageHandler = gui.getMessageHandler();
 
