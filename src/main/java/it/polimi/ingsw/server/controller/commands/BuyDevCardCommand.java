@@ -42,6 +42,7 @@ public class BuyDevCardCommand implements Command		/* "BUY_DEVCARD", "card#", "d
 			if (discountLeader != null)		/* No need to worry about cards being used multiple times because of resource type in requirements */
 			{
 				System.out.println(username + " is using the active SkillDiscount card's ability!");
+				/* TODO: send OperationResultMessage to notify the client the SkillDiscount has been used? */
 				requirements.get(i).setQuantity(requirements.get(i).getQuantity() - discountLeader.getDiscountNum());
 			}
 

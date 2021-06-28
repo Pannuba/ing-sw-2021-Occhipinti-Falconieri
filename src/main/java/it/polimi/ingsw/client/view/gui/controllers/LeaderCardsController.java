@@ -8,7 +8,6 @@ import it.polimi.ingsw.model.cards.SkillProduction;
 import it.polimi.ingsw.model.cards.SkillStorage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -226,97 +225,79 @@ public class LeaderCardsController
 
 		leaderCard1.setImage(new Image(getClass().getResourceAsStream("/img/leadercards/" + leaderCards.get(0).getCardNumber() + ".png")));
 		leaderCard2.setImage(new Image(getClass().getResourceAsStream("/img/leadercards/" + leaderCards.get(1).getCardNumber() + ".png")));
-		leaderCard1.setDisable(true);
-		leaderCard2.setDisable(true);
 
-		if (!leaderCards.get(0).isActive())
-		{
-			activateLeaderOneButton.setVisible(true);
-			discardLeaderOneButton.setVisible(true);
-		}
-
-		if (!leaderCards.get(1).isActive())
-		{
-			activateLeaderTwoButton.setVisible(true);
-			discardLeaderTwoButton.setVisible(true);
-		}
-
-		if (leaderCards.get(0).isActive())
+		if (leaderCards.get(0).isActive() || leaderCards.get(0).isDiscarded())
 		{
 			activateLeaderOneButton.setVisible(false);
 			discardLeaderOneButton.setVisible(false);
 
-			if (leaderCards.get(0) instanceof SkillProduction)
+			if (leaderCards.get(0).isActive() && leaderCards.get(0) instanceof SkillProduction)
 			{
-				leaderCard1.setDisable(false);
-				leaderCard1.setCursor(Cursor.HAND);
 				productionBL.setVisible(true);
 				productionGL.setVisible(true);
 				productionPL.setVisible(true);
 				productionYL.setVisible(true);
 			}
 
-			if (leaderCards.get(0) instanceof SkillStorage)
+			if (leaderCards.get(0).isActive() && leaderCards.get(0) instanceof SkillStorage)
 			{
 				resL1.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertResTypeToPath(((SkillStorage) leaderCards.get(0)).getAdditionalStorage().getShelfResourceType()))));
 				resL2.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertResTypeToPath(((SkillStorage) leaderCards.get(0)).getAdditionalStorage().getShelfResourceType()))));
 
-				if (((SkillStorage) leaderCards.get(0)).getAdditionalStorage().getShelfResourceQuantity() == 0)
+				switch (((SkillStorage) leaderCards.get(0)).getAdditionalStorage().getShelfResourceQuantity())
 				{
-					resL1.setVisible(false);
-					resL2.setVisible(false);
-				}
+					case 0:
+						resL1.setVisible(false);
+						resL2.setVisible(false);
+						break;
 
-				else if (((SkillStorage) leaderCards.get(0)).getAdditionalStorage().getShelfResourceQuantity() == 1)
-				{
-					resL1.setVisible(true);
-					resL2.setVisible(false);
-				}
+					case 1:
+						resL1.setVisible(true);
+						resL2.setVisible(false);
+						break;
 
-				else if (((SkillStorage) leaderCards.get(0)).getAdditionalStorage().getShelfResourceQuantity() == 2)
-				{
-					resL1.setVisible(true);
-					resL2.setVisible(true);
+					case 2:
+						resL1.setVisible(true);
+						resL2.setVisible(true);
+						break;
 				}
 			}
 		}
 
-		if (leaderCards.get(1).isActive())
+		if (leaderCards.get(1).isActive() || leaderCards.get(1).isDiscarded())
 		{
 			activateLeaderTwoButton.setVisible(false);
 			discardLeaderTwoButton.setVisible(false);
 
-			if (leaderCards.get(1) instanceof SkillProduction)
+			if (leaderCards.get(1).isActive() && leaderCards.get(1) instanceof SkillProduction)
 			{
-				leaderCard2.setDisable(false);
-				leaderCard2.setCursor(Cursor.HAND);
 				productionBR.setVisible(true);
 				productionGR.setVisible(true);
 				productionPR.setVisible(true);
 				productionYR.setVisible(true);
 			}
 
-			if (leaderCards.get(1) instanceof SkillStorage)
+			if (leaderCards.get(1).isActive() && leaderCards.get(1) instanceof SkillStorage)
 			{
 				resR1.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertResTypeToPath(((SkillStorage) leaderCards.get(1)).getAdditionalStorage().getShelfResourceType()))));
 				resR2.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertResTypeToPath(((SkillStorage) leaderCards.get(1)).getAdditionalStorage().getShelfResourceType()))));
 
-				if (((SkillStorage) leaderCards.get(1)).getAdditionalStorage().getShelfResourceQuantity() == 0)
+				switch (((SkillStorage) leaderCards.get(1)).getAdditionalStorage().getShelfResourceQuantity())
 				{
-					resR1.setVisible(false);
-					resR2.setVisible(false);
-				}
+					case 0:
+						resR1.setVisible(false);
+						resR2.setVisible(false);
+						break;
 
-				else if (((SkillStorage) leaderCards.get(1)).getAdditionalStorage().getShelfResourceQuantity() == 1)
-				{
-					resR1.setVisible(true);
-					resR2.setVisible(false);
-				}
+					case 1:
+						resR1.setVisible(true);
+						resR2.setVisible(false);
+						break;
 
-				else if (((SkillStorage) leaderCards.get(1)).getAdditionalStorage().getShelfResourceQuantity() == 2)
-				{
-					resR1.setVisible(true);
-					resR2.setVisible(true);
+					case 2:
+						resR1.setVisible(true);
+						resR2.setVisible(true);
+						break;
 				}
 			}
 		}
@@ -329,22 +310,46 @@ public class LeaderCardsController
 			leaderCard1.setDisable(true);
 			leaderCard2.setDisable(true);
 		}
+
+		else
+		{
+			for (int i = 0; i < buttons.size(); i++)
+				buttons.get(i).setDisable(false);
+
+			leaderCard1.setDisable(false);
+			leaderCard2.setDisable(false);
+		}
 	}
 
-	public void enableButtonsForProduction()
+	public void enableButtonsForProduction()		/* Don't care about SkillProduction resources, always keep them visibile since they're not buttons */
 	{
-		activateLeaderOneButton.setVisible(true);
-		discardLeaderOneButton.setVisible(true);
-		activateLeaderTwoButton.setVisible(true);
-		discardLeaderTwoButton.setVisible(true);
-		productionBL.setVisible(true);
-		productionGL.setVisible(true);
-		productionPL.setVisible(true);
-		productionYL.setVisible(true);
-		productionBR.setVisible(true);
-		productionGR.setVisible(true);
-		productionPR.setVisible(true);
-		productionYR.setVisible(true);
+		if (!leaderCards.get(0).isActive() && !leaderCards.get(0).isDiscarded())
+		{
+			activateLeaderOneButton.setVisible(true);
+			discardLeaderOneButton.setVisible(true);
+		}
+
+		if (!leaderCards.get(1).isActive() && !leaderCards.get(1).isDiscarded())
+		{
+			activateLeaderTwoButton.setVisible(true);
+			discardLeaderTwoButton.setVisible(true);
+		}
+
+		if (leaderCards.get(0).isActive() && leaderCards.get(0) instanceof SkillProduction)
+		{
+			productionBL.setVisible(true);
+			productionGL.setVisible(true);
+			productionPL.setVisible(true);
+			productionYL.setVisible(true);
+		}
+
+		if (leaderCards.get(1).isActive() && leaderCards.get(1) instanceof SkillProduction)
+		{
+			productionBR.setVisible(true);
+			productionGR.setVisible(true);
+			productionPR.setVisible(true);
+			productionYR.setVisible(true);
+		}
 	}
 
 	public void disableButtonsForProduction()

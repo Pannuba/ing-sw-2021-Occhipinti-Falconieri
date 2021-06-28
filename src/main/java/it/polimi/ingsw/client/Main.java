@@ -3,7 +3,7 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.client.view.cli.CLI;
 import it.polimi.ingsw.client.view.gui.GUILoader;
 
-public class Main		/* Starting point from which the user chooses to start the CLI or the GUI */
+public class Main		/* If no launch arguments are specified, start the GUI. Only start the CLI with the -cli arg */
 {
 	public static void main(String[] args)
 	{
