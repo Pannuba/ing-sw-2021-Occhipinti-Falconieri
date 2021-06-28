@@ -11,10 +11,31 @@ import java.net.ServerSocket;
 public class Server
 {
 
-	public static void main(String[] args) throws IOException, ClassNotFoundException		/* TODO: port number in config file, use ConfigParser */
+	public static void main(String[] args) throws IOException, ClassNotFoundException
 	{
-		//final ServerSocket serverSocket = new ServerSocket(2000, 0, InetAddress.getByName(null));		/* Port has to be > 1024 in order to work without root permissions */
-		final ServerSocket serverSocket = new ServerSocket(2000);
+		final int port;
+
+		if (args[0].equals("-p") && args.length == 2)
+		{
+			try
+			{
+				port = Integer.parseInt(args[1]);
+			}
+			catch (NumberFormatException e)
+			{
+				System.out.println("Invalid port number!");
+				return;
+			}
+		}
+
+		else
+		{
+			System.out.println("Port number not specified, defaulting to 2000");
+			port = 2000;
+		}
+
+		System.out.println("Starting server on port " + port);
+		final ServerSocket serverSocket = new ServerSocket(port);
 		ServerListener serverListener = new ServerListener(serverSocket);
 		serverListener.start();
 	}
