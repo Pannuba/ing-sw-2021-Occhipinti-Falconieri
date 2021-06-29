@@ -13,9 +13,12 @@ public class Server
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException
 	{
-		final int port;
+		int port = 2000;
 
-		if (args[0].equals("-p") && args.length == 2)
+		if (args.length == 0)
+			System.out.println("Port number not specified, defaulting to 2000");
+
+		else if (args.length == 2 && args[0].equals("-p"))
 		{
 			try
 			{
@@ -26,12 +29,6 @@ public class Server
 				System.out.println("Invalid port number!");
 				return;
 			}
-		}
-
-		else
-		{
-			System.out.println("Port number not specified, defaulting to 2000");
-			port = 2000;
 		}
 
 		System.out.println("Starting server on port " + port);
