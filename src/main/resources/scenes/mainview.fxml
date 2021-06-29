@@ -25,7 +25,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Button fx:id="marketsButton" layoutX="1053.0" layoutY="32.0" mnemonicParsing="false" onAction="#showMarkets" prefHeight="55.0" prefWidth="184.0" text="Markets">
+      <Button fx:id="marketsButton" layoutX="1053.0" layoutY="28.0" mnemonicParsing="false" onAction="#showMarkets" prefHeight="55.0" prefWidth="184.0" text="Markets">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -33,23 +33,23 @@
             <DropShadow />
          </effect>
          <font>
-            <Font name="Times New Roman Italic" size="25.0" />
+            <Font size="32.0" />
          </font>
       </Button>
-      <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="119.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="55.0" prefWidth="184.0" text="Leader Cards">
+      <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="117.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="66.0" prefWidth="184.0" text="Leader Cards">
          <cursor>
-            <Cursor fx:constant="DEFAULT" />
+            <Cursor fx:constant="HAND" />
          </cursor>
          <effect>
             <DropShadow />
          </effect>
          <font>
-            <Font size="25.0" />
+            <Font size="26.0" />
          </font>
       </Button>
-      <Button fx:id="otherPlayersButton" layoutX="1053.0" layoutY="206.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="76.0" prefWidth="184.0" text="Other Players' Boards" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="otherPlayersButton" layoutX="1053.0" layoutY="206.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="66.0" prefWidth="184.0" text="Other Boards" textAlignment="CENTER" wrapText="true">
          <font>
-            <Font name="Times New Roman Italic" size="21.0" />
+            <Font size="26.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -69,7 +69,10 @@
       <TextArea fx:id="console" editable="false" layoutX="1018.0" layoutY="392.0" prefHeight="317.0" prefWidth="254.0" wrapText="true">
          <effect>
             <DropShadow />
-         </effect></TextArea>
+         </effect>
+         <font>
+            <Font size="16.0" />
+         </font></TextArea>
       <ImageView fx:id="redPawn" fitHeight="70.0" fitWidth="87.0" layoutX="26.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/red-pawn.png" />

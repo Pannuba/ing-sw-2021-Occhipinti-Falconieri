@@ -106,7 +106,7 @@
          </effect></ImageView>
       <Button fx:id="backToBoardButton" layoutX="316.0" layoutY="638.0" mnemonicParsing="false" onAction="#backToBoard" prefHeight="45.0" prefWidth="193.0" text="Back to Board">
          <font>
-            <Font name="Times New Roman Italic" size="28.0" />
+            <Font size="28.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />

@@ -1,13 +1,12 @@
+@font-face
+{
+    src: url('CharpentierRenRed-Normal.ttf');
+}
+
 .play:hover
 {
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
-}
-
-@font-face
-{
-    font-family: renaissance;
-    src: url("renaissance.ttf");
 }
 
 .button
@@ -16,14 +15,22 @@
     -fx-border-color: #DAA520;
     -fx-border-width: 4;
     -fx-text-fill: #DAA520;
-    -fx-font-family: renaissance;
+    -fx-font-family: "Charpentier Renaissance Reduced Normal";
 }
 
+.button:hover
+{
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+}
+
+/*
 .button:hover
 {
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
 }
+*/
 
 .production:hover
 {
@@ -32,15 +39,15 @@
 
 .label
 {
-    -fx-font-family: renaissance;
+    -fx-font-family: "Charpentier Renaissance Reduced Normal";
 }
 
 .text-field
 {
-    -fx-font-family: renaissance;
+    -fx-font-family: "Charpentier Renaissance Reduced Normal";
 }
 
 .text-area
 {
-    -fx-font-family: renaissance;
+    -fx-font-family: "Charpentier Renaissance Reduced Normal";
 }

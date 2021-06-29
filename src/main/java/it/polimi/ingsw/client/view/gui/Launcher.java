@@ -21,7 +21,7 @@ public class Launcher extends Application
 	@Override
 	public void start(Stage mainStage) throws IOException			/* Stage = window */
 	{
-		Font.loadFont(getClass().getResourceAsStream("/renaissance.ttf"), 15);
+		Font.loadFont(getClass().getResourceAsStream("/CharpentierRenRed-Normal.ttf"), 15);
 
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/scenes/launcher.fxml"));
