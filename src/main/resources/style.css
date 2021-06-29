@@ -1,0 +1,46 @@
+.play:hover
+{
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+@font-face
+{
+    font-family: renaissance;
+    src: url("renaissance.ttf");
+}
+
+.button
+{
+    -fx-background-color: #2F4F4F;
+    -fx-border-color: #DAA520;
+    -fx-border-width: 4;
+    -fx-text-fill: #DAA520;
+    -fx-font-family: renaissance;
+}
+
+.button:hover
+{
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.production:hover
+{
+    -fx-opacity: 0.7;
+}
+
+.label
+{
+    -fx-font-family: renaissance;
+}
+
+.text-field
+{
+    -fx-font-family: renaissance;
+}
+
+.text-area
+{
+    -fx-font-family: renaissance;
+}

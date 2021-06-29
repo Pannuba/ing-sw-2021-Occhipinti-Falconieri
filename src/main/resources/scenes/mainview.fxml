@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.MainViewController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.MainViewController">
    <children>
       <ImageView fitHeight="723.0" fitWidth="1282.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -25,7 +25,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Button fx:id="marketsButton" layoutX="1053.0" layoutY="32.0" mnemonicParsing="false" onAction="#showMarkets" prefHeight="55.0" prefWidth="184.0" text="Show Markets">
+      <Button fx:id="marketsButton" layoutX="1053.0" layoutY="32.0" mnemonicParsing="false" onAction="#showMarkets" prefHeight="55.0" prefWidth="184.0" text="Markets">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -33,10 +33,10 @@
             <DropShadow />
          </effect>
          <font>
-            <Font name="Times New Roman Italic" size="19.0" />
+            <Font name="Times New Roman Italic" size="25.0" />
          </font>
       </Button>
-      <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="119.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="55.0" prefWidth="184.0" text="Show Leader Cards">
+      <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="119.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="55.0" prefWidth="184.0" text="Leader Cards">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -44,12 +44,12 @@
             <DropShadow />
          </effect>
          <font>
-            <Font size="15.0" />
+            <Font size="25.0" />
          </font>
       </Button>
-      <Button fx:id="otherPlayersButton" layoutX="1053.0" layoutY="206.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="76.0" prefWidth="184.0" text="Show Other Players' Boards" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="otherPlayersButton" layoutX="1053.0" layoutY="206.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="76.0" prefWidth="184.0" text="Other Players' Boards" textAlignment="CENTER" wrapText="true">
          <font>
-            <Font name="Times New Roman Italic" size="20.0" />
+            <Font name="Times New Roman Italic" size="21.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -60,7 +60,7 @@
       </Button>
       <Button fx:id="stopProductionButton" layoutX="1053.0" layoutY="314.0" mnemonicParsing="false" onAction="#stopProduction" prefHeight="55.0" prefWidth="184.0" text="Stop Production" visible="false">
          <font>
-            <Font size="19.0" />
+            <Font size="22.0" />
          </font>
          <effect>
             <DropShadow />
@@ -183,7 +183,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="vaultResourceBlue" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="71.0" layoutY="550.0" onMouseClicked="#selectBlueResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="vaultResourceBlue" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="71.0" layoutY="550.0" onMouseClicked="#selectBlueResource" pickOnBounds="true" preserveRatio="true" styleClass="production">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -194,7 +194,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="vaultResourcePurple" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="153.0" layoutY="552.0" onMouseClicked="#selectPurpleResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="vaultResourcePurple" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="153.0" layoutY="552.0" onMouseClicked="#selectPurpleResource" pickOnBounds="true" preserveRatio="true" styleClass="production">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -205,7 +205,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="vaultResourceYellow" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="67.0" layoutY="607.0" onMouseClicked="#selectYellowResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="vaultResourceYellow" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="67.0" layoutY="607.0" onMouseClicked="#selectYellowResource" pickOnBounds="true" preserveRatio="true" styleClass="production">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -216,7 +216,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="vaultResourceGrey" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="152.0" layoutY="602.0" onMouseClicked="#selectGreyResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="vaultResourceGrey" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="152.0" layoutY="602.0" onMouseClicked="#selectGreyResource" pickOnBounds="true" preserveRatio="true" styleClass="production">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

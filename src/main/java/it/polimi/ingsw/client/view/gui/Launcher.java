@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,6 +21,8 @@ public class Launcher extends Application
 	@Override
 	public void start(Stage mainStage) throws IOException			/* Stage = window */
 	{
+		Font.loadFont(getClass().getResourceAsStream("/renaissance.ttf"), 15);
+
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/scenes/launcher.fxml"));
 		Parent root = loader.load();

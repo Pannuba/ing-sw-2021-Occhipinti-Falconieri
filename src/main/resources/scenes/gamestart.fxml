@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.GameStartController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.GameStartController">
    <children>
       <ImageView fitHeight="723.0" fitWidth="1283.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/background.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="leaderCard1" fitHeight="409.0" fitWidth="270.0" layoutX="44.0" layoutY="37.0" onMouseClicked="#selectLeaderCard1" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leaderCard1" fitHeight="409.0" fitWidth="270.0" layoutX="44.0" layoutY="37.0" onMouseClicked="#selectLeaderCard1" pickOnBounds="true" preserveRatio="true" styleClass="play">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -23,7 +23,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="leaderCard2" fitHeight="409.0" fitWidth="270.0" layoutX="353.0" layoutY="37.0" onMouseClicked="#selectLeaderCard2" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leaderCard2" fitHeight="409.0" fitWidth="270.0" layoutX="353.0" layoutY="37.0" onMouseClicked="#selectLeaderCard2" pickOnBounds="true" preserveRatio="true" styleClass="play">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -31,7 +31,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="leaderCard3" fitHeight="409.0" fitWidth="270.0" layoutX="662.0" layoutY="37.0" onMouseClicked="#selectLeaderCard3" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leaderCard3" fitHeight="409.0" fitWidth="270.0" layoutX="662.0" layoutY="37.0" onMouseClicked="#selectLeaderCard3" pickOnBounds="true" preserveRatio="true" styleClass="play">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -39,7 +39,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="leaderCard4" fitHeight="409.0" fitWidth="270.0" layoutX="970.0" layoutY="37.0" onMouseClicked="#selectLeaderCard4" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leaderCard4" fitHeight="409.0" fitWidth="270.0" layoutX="970.0" layoutY="37.0" onMouseClicked="#selectLeaderCard4" pickOnBounds="true" preserveRatio="true" styleClass="play">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -47,7 +47,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="purpleResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="698.0" layoutY="531.0" onMouseClicked="#choosePurpleResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="purpleResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="698.0" layoutY="531.0" onMouseClicked="#choosePurpleResource" pickOnBounds="true" preserveRatio="true" styleClass="play">
          <image>
             <Image url="@../img/resources/purple.png" />
          </image>
@@ -58,7 +58,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="greyResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="834.0" layoutY="531.0" onMouseClicked="#chooseGreyResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="greyResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="834.0" layoutY="531.0" onMouseClicked="#chooseGreyResource" pickOnBounds="true" preserveRatio="true" styleClass="play">
          <image>
             <Image url="@../img/resources/grey.png" />
          </image>
@@ -69,7 +69,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="blueResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="977.0" layoutY="531.0" onMouseClicked="#chooseBlueResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="blueResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="977.0" layoutY="531.0" onMouseClicked="#chooseBlueResource" pickOnBounds="true" preserveRatio="true" styleClass="play">
          <image>
             <Image url="@../img/resources/blue.png" />
          </image>
@@ -80,7 +80,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="yellowResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="1091.0" layoutY="531.0" onMouseClicked="#chooseYellowResource" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="yellowResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="1091.0" layoutY="531.0" onMouseClicked="#chooseYellowResource" pickOnBounds="true" preserveRatio="true" styleClass="play">
          <image>
             <Image url="@../img/resources/yellow.png" />
          </image>
@@ -93,12 +93,12 @@
       </ImageView>
       <Label fx:id="selectLeaderCards" layoutX="50.0" layoutY="490.0" prefHeight="82.0" prefWidth="397.0" text="Select two leader cards">
          <font>
-            <Font name="Times New Roman Bold Italic" size="30.0" />
+            <Font name="Times New Roman Bold Italic" size="45.0" />
          </font>
       </Label>
       <Label fx:id="resourcesMessage" layoutX="48.0" layoutY="565.0" prefHeight="82.0" prefWidth="618.0">
          <font>
-            <Font name="Times New Roman Bold Italic" size="30.0" />
+            <Font name="Times New Roman Bold Italic" size="35.0" />
          </font>
       </Label>
    </children>

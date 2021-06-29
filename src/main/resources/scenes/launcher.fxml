@@ -6,14 +6,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="720.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.LauncherController">
+<AnchorPane prefHeight="720.0" prefWidth="540.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.LauncherController">
    <children>
       <ImageView fitHeight="720.0" fitWidth="540.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/launcher.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="playOnline" accessibleRole="BUTTON" fitHeight="150.0" fitWidth="200.0" layoutX="45.0" layoutY="169.0" onMouseClicked="#playOnline" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="playOnline" accessibleRole="BUTTON" fitHeight="150.0" fitWidth="200.0" layoutX="45.0" layoutY="169.0" onMouseClicked="#playOnline" pickOnBounds="true" preserveRatio="true" styleClass="play">
          <image>
             <Image url="@../img/writings/play-online.png" />
          </image>
@@ -24,7 +24,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="playLocal" accessibleRole="BUTTON" fitHeight="150.0" fitWidth="200.0" layoutX="286.0" layoutY="469.0" onMouseClicked="#playLocal" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="playLocal" accessibleRole="BUTTON" fitHeight="150.0" fitWidth="200.0" layoutX="286.0" layoutY="469.0" onMouseClicked="#playLocal" pickOnBounds="true" preserveRatio="true" styleClass="play">
          <image>
             <Image url="@../img/writings/play-local.png" />
          </image>

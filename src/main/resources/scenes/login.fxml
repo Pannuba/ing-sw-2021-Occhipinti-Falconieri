@@ -14,7 +14,7 @@
 <!-- Workflow: make xfml in SceneBuilder, set controller name (bottom left), set fx:id (under Code in top right) and for each control element (and On Action if needed), -->
 <!-- then View -> Show Sample Controller Skeleton and copy-paste it, correct the controller's path adding the project namespace, and finally write the On Action methods -->
 
-<Pane prefHeight="720.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.LoginController">
+<Pane prefHeight="720.0" prefWidth="540.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.LoginController">
    <children>
       <ImageView fitHeight="720.0" fitWidth="540.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -40,7 +40,7 @@
          <font>
             <Font name="Times New Roman Bold Italic" size="18.0" />
          </font></TextField>
-      <ImageView fx:id="startButton" accessibleRole="BUTTON" fitHeight="150.0" fitWidth="220.0" layoutX="161.0" layoutY="484.0" onMouseClicked="#connectToServerMouse" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="startButton" accessibleRole="BUTTON" fitHeight="150.0" fitWidth="220.0" layoutX="161.0" layoutY="484.0" onMouseClicked="#connectToServerMouse" pickOnBounds="true" preserveRatio="true" styleClass="play">
          <image>
             <Image url="@../img/writings/start.png" />
          </image>
@@ -56,7 +56,7 @@
             <Font name="Times New Roman Italic" size="18.0" />
          </font>
       </Label>
-      <ImageView fx:id="indicator" fitHeight="82.0" fitWidth="125.0" layoutX="26.0" layoutY="28.0" onMouseClicked="#backToLauncher" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="indicator" fitHeight="82.0" fitWidth="125.0" layoutX="26.0" layoutY="28.0" onMouseClicked="#backToLauncher" pickOnBounds="true" preserveRatio="true" styleClass="play">
          <image>
             <Image url="@../img/indicator.png" />
          </image>
