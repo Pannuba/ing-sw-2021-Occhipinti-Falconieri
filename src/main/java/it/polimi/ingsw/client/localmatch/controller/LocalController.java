@@ -30,6 +30,8 @@ public class LocalController extends Observable			/* Observes view to get comman
 	public void parseInput(List<String> command)		/* Gets name from ClientHandler to change that player's stuff */
 	{
 		System.out.println("Received " + command + " from player");
+		List<Player> playerAsList = new ArrayList<>();
+
 		switch (command.get(0))
 		{
 			case "SELECT_LEADERCARDS":
@@ -39,13 +41,14 @@ public class LocalController extends Observable			/* Observes view to get comman
 			case "INITIAL_RESOURCES":
 				isTaskFailed = new InitialResourcesCommand().run(this, command, username, model);
 				/* This way the clients can immediately see the picked cards and resources, and the GUI doesn't freeze! */
-				List<Player> playerAsList = new ArrayList<>();
 				playerAsList.add(model.getPlayer());
 				view.update(new GameState(playerAsList, model.getPlayer().getUsername(), model.getTrack(), model.getMarblesMarket(), model.getDevCardsMarket()));
 				return;
 
 			case "ACTIVATE_LEADER":
 				isTaskFailed = new ActivateLeaderCommand().run(this, command, username, model);
+				playerAsList.add(model.getPlayer());
+				view.update(new GameState(playerAsList, model.getPlayer().getUsername(), model.getTrack(), model.getMarblesMarket(), model.getDevCardsMarket()));
 				break;
 
 			case "DISCARD_LEADER":
@@ -58,6 +61,10 @@ public class LocalController extends Observable			/* Observes view to get comman
 
 			case "ACTIVATE_PRODUCTION":
 				isTaskFailed = new ActivateProductionCommand().run(this, command, username, model);
+				break;
+
+			case "STOP_PRODUCTION":
+				isTaskFailed = new StopProductionCommand().run(this, command, username, model);
 				break;
 
 			case "BUY_RESOURCES":

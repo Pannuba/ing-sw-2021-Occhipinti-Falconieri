@@ -37,7 +37,7 @@ public class ActivateLeaderCommand			/* "ACTIVATE_LEADER", "4" */
 		else
 		{
 			message = "Couldn't activate leader: requirements not satisfied";
-			isFailed = true;
+			isFailed = false;
 		}
 
 		controller.getView().update(new OperationResultMessage(message, isFailed));
