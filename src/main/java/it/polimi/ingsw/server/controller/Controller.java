@@ -50,6 +50,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 			case "ACTIVATE_LEADER":
 				isTaskFailed = new ActivateLeaderCommand(this).run(command);
+				view.send(new GameState(model.getPlayers(), model.getCurrentPlayerName(), model.getTrack(), model.getMarblesMarket(), model.getDevCardsMarket()));
 				break;
 
 			case "DISCARD_LEADER":

@@ -25,10 +25,10 @@ public class ActionGUI extends MessageExecutor
 	private final EndGameController egc;
 	private final LeaderCardsController lcc;
 	private final MainViewController mvc;						/* To update the scenes when a new gamestate is received */
-	private final MarketsController mmc;
+	private final MarketsController mc;
 
 	public ActionGUI(GUI gui, Scene gameStartScene, Scene mainViewScene, Scene endGameScene, LoginController lc,
-					 GameStartController gsc, EndGameController egc, LeaderCardsController lcc, MainViewController mvc, MarketsController mmc)
+					 GameStartController gsc, EndGameController egc, LeaderCardsController lcc, MainViewController mvc, MarketsController mc)
 	{
 		this.gui = gui;
 		mainStage = gui.getMainStage();
@@ -40,7 +40,7 @@ public class ActionGUI extends MessageExecutor
 		this.egc = egc;
 		this.lcc = lcc;
 		this.mvc = mvc;		/* Pack all loaders in a hashmap? */
-		this.mmc = mmc;
+		this.mc = mc;
 	}
 
 	public void updateView(GameState gameState)
@@ -48,7 +48,7 @@ public class ActionGUI extends MessageExecutor
 		Platform.runLater(() -> {
 			mvc.update(gameState, gui.getUsername());
 			lcc.update(gameState.getPlayerByName(gui.getUsername()).getLeaderCards(), gameState.getPlayerByName(gui.getUsername()).isMyTurn());
-			mmc.updateMarket(gameState.getCurrMarblesMarket(), gameState.getCurrDevCardsMarket(), gameState.getPlayerByName(gui.getUsername()).isMyTurn());
+			mc.updateMarket(gameState.getCurrMarblesMarket(), gameState.getCurrDevCardsMarket(), gameState.getPlayerByName(gui.getUsername()));
 		});
 	}
 

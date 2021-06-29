@@ -3,9 +3,7 @@ package it.polimi.ingsw.client.view.gui.controllers;
 import it.polimi.ingsw.client.MessageIO;
 import it.polimi.ingsw.client.view.gui.ConvertMethods;
 import it.polimi.ingsw.client.view.gui.GUI;
-import it.polimi.ingsw.model.DevCardsMarket;
-import it.polimi.ingsw.model.Marble;
-import it.polimi.ingsw.model.MarblesMarket;
+import it.polimi.ingsw.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -31,6 +29,11 @@ public class MarketsController        /* Send command directly from here? Get wh
 	private MessageIO messageHandler;
 
 	private DevCardsMarket currDevCardsMarket;
+	private List<ResourceType> whiteMarbleResources;
+
+	private String rowOrCol;
+	private String number;
+
 	private List<ImageView> devCards;
 	private List<ImageView> marbles;
 	private List<Button> buttons;
@@ -60,6 +63,10 @@ public class MarketsController        /* Send command directly from here? Get wh
 	@FXML private ImageView marble23;
 	@FXML private ImageView spareMarble;
 
+	@FXML private ImageView whiteMarblesLabel;
+	@FXML private ImageView whiteMarbleResourceOne;
+	@FXML private ImageView whiteMarbleResourceTwo;
+
 	@FXML private Button backToBoardButton;
 
 	@FXML private ImageView devCard1;
@@ -88,14 +95,16 @@ public class MarketsController        /* Send command directly from here? Get wh
 	 * Updates markets when resources are bought from the market or when a card is bought from the devCard market
 	 */
 
-	public void updateMarket(MarblesMarket market, DevCardsMarket devCardsMarket, boolean isMyTurn)
+	public void updateMarket(MarblesMarket market, DevCardsMarket devCardsMarket, Player player)
 	{
 		currDevCardsMarket = devCardsMarket;
 
 		Marble[][] marblesBoard = market.getMarblesBoard();
 		Marble spare = market.getSpareMarble();
 
-		if (isMyTurn)		/* When it's the player's turn, make buttons pressable to send the command BUY_RESOURCES */
+		whiteMarbleResources = player.getWhiteMarbleTypes();
+		System.out.println("updateMarket called. whiteMarbleResources.size = " + whiteMarbleResources.size());
+		if (player.isMyTurn())		/* When it's the player's turn, make buttons pressable to send the command BUY_RESOURCES */
 			enableButtons();
 		/* The disable checkbox in sceneBuilder disables the button permanently, meaning setDisable(false) won't work */
 		else
@@ -130,43 +139,93 @@ public class MarketsController        /* Send command directly from here? Get wh
 	@FXML
 	void selectRowOne(ActionEvent event)
 	{
-		messageHandler.send(Arrays.asList("BUY_RESOURCES", "ROW", "1"));
+		rowOrCol = "ROW";
+		number = "1";
+		buyResources(rowOrCol, number);
 	}
 
 	@FXML
 	void selectRowTwo(ActionEvent event)
 	{
-		messageHandler.send(Arrays.asList("BUY_RESOURCES", "ROW", "2"));
+		rowOrCol = "ROW";
+		number = "2";
+		buyResources(rowOrCol, number);
 	}
 
 	@FXML
 	void selectRowThree(ActionEvent event)
 	{
-		messageHandler.send(Arrays.asList("BUY_RESOURCES", "ROW", "3"));
+		rowOrCol = "ROW";
+		number = "3";
+		buyResources(rowOrCol, number);
 	}
 
 	@FXML
 	void selectColumnOne(ActionEvent event)
 	{
-		messageHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "1"));
+		rowOrCol = "COLUMN";
+		number = "1";
+		buyResources(rowOrCol, number);
 	}
 
 	@FXML
 	void selectColumnTwo(ActionEvent event)
 	{
-		messageHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "2"));
+		rowOrCol = "COLUMN";
+		number = "2";
+		buyResources(rowOrCol, number);
 	}
 
 	@FXML
 	void selectColumnThree(ActionEvent event)
 	{
-		messageHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "3"));
+		rowOrCol = "COLUMN";
+		number = "3";
+		buyResources(rowOrCol, number);
 	}
 
 	@FXML
 	void selectColumnFour(ActionEvent event)
 	{
-		messageHandler.send(Arrays.asList("BUY_RESOURCES", "COLUMN", "4"));
+		rowOrCol = "COLUMN";
+		number = "4";
+		buyResources(rowOrCol, number);
+	}
+
+	public void buyResources(String rowOrCol, String number)
+	{
+		if (whiteMarbleResources.size() < 2)
+			messageHandler.send(Arrays.asList("BUY_RESOURCES", rowOrCol, number));
+
+		else
+		{
+			whiteMarblesLabel.setVisible(true);
+			whiteMarbleResourceOne.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertResTypeToPath(whiteMarbleResources.get(0)))));
+			whiteMarbleResourceTwo.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertResTypeToPath(whiteMarbleResources.get(1)))));
+			whiteMarbleResourceOne.setVisible(true);
+			whiteMarbleResourceTwo.setVisible(true);
+		}
+
+	}
+
+	@FXML
+	void selectWhiteMarbleResourceOne(MouseEvent event)
+	{
+		String selectedWhiteMarbleRes = String.valueOf(whiteMarbleResources.get(0).toString().charAt(0));
+		messageHandler.send(Arrays.asList("BUY_RESOURCES", rowOrCol, number, selectedWhiteMarbleRes));
+		whiteMarblesLabel.setVisible(false);
+		whiteMarbleResourceOne.setVisible(false);
+		whiteMarbleResourceTwo.setVisible(false);
+	}
+
+	@FXML
+	void selectWhiteMarbleResourceTwo(MouseEvent event)
+	{
+		String selectedWhiteMarbleRes = String.valueOf(whiteMarbleResources.get(1).toString().charAt(0));
+		messageHandler.send(Arrays.asList("BUY_RESOURCES", rowOrCol, number, selectedWhiteMarbleRes));
+		whiteMarblesLabel.setVisible(false);
+		whiteMarbleResourceOne.setVisible(false);
+		whiteMarbleResourceTwo.setVisible(false);
 	}
 
 	@FXML

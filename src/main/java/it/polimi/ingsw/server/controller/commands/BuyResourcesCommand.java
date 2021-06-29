@@ -17,7 +17,7 @@ import java.util.List;
  * @author Giulio Occhipinti
  */
 
-public class BuyResourcesCommand implements Command		/* "BUY_RESOURCES", "ROW", "2" */
+public class BuyResourcesCommand implements Command		/* "BUY_RESOURCES", "ROW", "2", "G" */
 {
 	private final Model model;
 	private final Controller controller;
