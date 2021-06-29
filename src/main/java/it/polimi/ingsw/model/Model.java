@@ -328,6 +328,11 @@ public class Model extends Observable        /* Observed by the views to create 
 		/* Send MatchOverMessage to everyone (notifyObservers) including a message of who won */
 		setChanged();
 		notifyObservers(new MatchOverMessage(winnerName, players));		/* Add message for tie? */
+
+		synchronized ((Object) matchOver)
+		{
+			((Object) matchOver).notifyAll();
+		}
 	}
 
 	public Player getPlayerByUsername(String username)		/* 	NullPointerException because the usernames taken in ServerListener are discarded when a new model is created in Match */

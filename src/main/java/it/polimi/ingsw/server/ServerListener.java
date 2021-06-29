@@ -140,9 +140,7 @@ public class ServerListener
 
 			if (arePlayersReconnecting(players) != -1)
 			{
-				Match recoveredMatch = new Match(recoveredMatches.get(arePlayersReconnecting(players)), views);
-				recoveredMatches.remove(arePlayersReconnecting(players));
-				/* TODO: also delete file */
+				Match recoveredMatch = new Match(this, recoveredMatches.get(arePlayersReconnecting(players)), views);
 				new Thread(recoveredMatch).start();
 			}
 
@@ -194,6 +192,11 @@ public class ServerListener
 		}
 
 		return -1;
+	}
+
+	public void deleteRecoveredMatch(Model matchToRemove)
+	{
+		recoveredMatches.remove(matchToRemove);
 	}
 
 	private void shutdown()

@@ -48,7 +48,7 @@ public class Match implements Runnable
 		}
 	}
 
-	public Match(Model recoveredModel, List<ClientHandler> views)
+	public Match(ServerListener serverListener, Model recoveredModel, List<ClientHandler> views)
 	{
 		isRecoveredMatch = true;
 		this.numPlayers = recoveredModel.getNumPlayers();
@@ -64,6 +64,22 @@ public class Match implements Runnable
 		}
 
 		model.update();
+
+		synchronized ((Object) model.isMatchOver())
+		{
+			try
+			{
+				((Object) model.isMatchOver()).wait();
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+
+			System.out.println("Match over, removing from recovered matches list");
+			serverListener.deleteRecoveredMatch(model);
+			/* TODO: also delete match file, but how? */
+		}
 	}
 
 	/**
