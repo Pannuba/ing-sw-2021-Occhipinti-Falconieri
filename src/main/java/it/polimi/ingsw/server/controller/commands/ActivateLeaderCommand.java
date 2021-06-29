@@ -49,7 +49,7 @@ public class ActivateLeaderCommand implements Command		/* "ACTIVATE_LEADER", "4"
 		else
 		{
 			message = "Couldn't activate leader: requirements not satisfied";
-			isFailed = true;
+			isFailed = false;		/* isFailed is false because the CLI will desync otherwise when it reaches the next input, messages will queue up and mess everything up */
 		}
 
 		controller.getView().send(new OperationResultMessage(message, isFailed));

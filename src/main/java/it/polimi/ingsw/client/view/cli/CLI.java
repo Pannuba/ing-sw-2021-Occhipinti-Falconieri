@@ -70,7 +70,7 @@ public class CLI extends View
 
 	public void chooseAction()			/* Here or ActionCLI? */
 	{
-		System.out.print("What do you want to do?\nBuy from market (0), buy devcards (1), activate production (2), view cards (3), view board (4), view markets (5): ");
+		System.out.print("What do you want to do?\nBuy from market (0), buy devcards (1), activate production (2), view cards (3), view board (4), view markets (5), activate/discard a leader (6): ");
 
 		String choice = input.nextLine();
 
@@ -79,17 +79,14 @@ public class CLI extends View
 		switch (choice)
 		{
 			case "0":
-				new LeaderChoice(input, messageHandler, this);		/* Pass the messageHandler in case the user wants to activate/discard twice */
 				command = new BuyResources(input, this).run();
 				break;
 
 			case "1":
-				new LeaderChoice(input, messageHandler, this);
 				command = new BuyDevCard(input, this).run();
 				break;
 
 			case "2":
-				new LeaderChoice(input, messageHandler, this);
 				command = new ActivateProduction(input, this).run();
 				break;
 
@@ -106,6 +103,10 @@ public class CLI extends View
 			case "5":
 				PrintMethods.printDevCardsMarket(gameState.getCurrDevCardsMarket());
 				PrintMethods.printMarblesMarket(gameState.getCurrMarblesMarket());
+				break;
+
+			case "6":
+				new LeaderChoice(input, messageHandler, this);		/* Pass the messageHandler in case the user wants to activate/discard twice */
 				break;
 
 			default:

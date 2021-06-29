@@ -136,7 +136,7 @@ public class ActionGUI extends MessageExecutor
 	{
 		mvc.printToConsole(message);
 
-		if (!isFailed)		/* If the action fails the client doesn't receive a gamestate */
+		if (!isFailed)		/* If the action fails the client doesn't receive a gamestate (except for leadercard actions, but a GameState is immediately sent afterwards so it's ok) */
 			mvc.disableButtons();
 	}
 

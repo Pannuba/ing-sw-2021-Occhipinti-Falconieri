@@ -51,9 +51,12 @@ public class BuyResources		/* TODO: Action interface */
 
 		List<SkillMarble> marbleLeaders = cli.getGameState().getPlayerByName(cli.getUsername()).getMarbleLeaders();
 
-		if (marbleLeaders.size() == 2)
+		if (marbleLeaders.size() == 2)		/* TODO: check if the user has entered the resource letter or a white marble resource */
 		{
-			System.out.print("You have " + marbleLeaders.size() + " leaders with a white marble skill!\nInsert the resource type you want to convert: ");
+			System.out.print(	"You have " + marbleLeaders.size() + " leaders with a white marble skill! "				+
+								PrintMethods.convertResTypeToString(marbleLeaders.get(0).getWhiteMarble()) + " and "	+
+								PrintMethods.convertResTypeToString(marbleLeaders.get(1).getWhiteMarble())				+
+								".\nInsert the resource type you want to convert (G/Y/B/P): "							);
 			whiteMarbleRes = input.nextLine();
 		}
 
