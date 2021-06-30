@@ -87,11 +87,12 @@
 							<filters>
 								<filter>
 									<artifact>*:*</artifact>
-									<excludes>
-										<exclude>it/polimi/ingsw/client/**/*</exclude>
-										<exclude>img/**/*</exclude>
-										<exclude>scenes/*</exclude>
-									</excludes>
+									<includes>
+										<include>it/polimi/ingsw/client/view/MessageExecutor.class</include>
+										<include>it/polimi/ingsw/server/**/*</include>
+										<include>it/polimi/ingsw/model/**/*</include>
+										<include>xml/**/*</include>
+									</includes>
 								</filter>
 							</filters>
 							<artifactSet>
