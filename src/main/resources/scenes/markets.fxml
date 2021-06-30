@@ -199,12 +199,24 @@
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <Label layoutX="13.0" layoutY="583.0" prefHeight="44.0" prefWidth="540.0" text="Choose the resource to convert the white marbles to" visible="false">
+      <Label layoutX="13.0" layoutY="583.0" prefHeight="44.0" prefWidth="540.0" styleClass="login" text="Choose the resource to convert the white marbles to" visible="false">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <ImageView fx:id="whiteMarbleResourceOne" fitHeight="80.0" fitWidth="57.0" layoutX="79.0" layoutY="627.0" onMouseClicked="#selectWhiteMarbleResourceOne" pickOnBounds="true" preserveRatio="true" visible="false" />
-      <ImageView fx:id="whiteMarbleResourceTwo" fitHeight="80.0" fitWidth="57.0" layoutX="183.0" layoutY="627.0" onMouseClicked="#selectWhiteMarbleResourceTwo" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="whiteMarbleResourceOne" fitHeight="80.0" fitWidth="80.0" layoutX="79.0" layoutY="626.0" onMouseClicked="#selectWhiteMarbleResourceOne" pickOnBounds="true" preserveRatio="true" styleClass="play" visible="false">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow />
+         </effect></ImageView>
+      <ImageView fx:id="whiteMarbleResourceTwo" fitHeight="80.0" fitWidth="80.0" layoutX="183.0" layoutY="629.0" onMouseClicked="#selectWhiteMarbleResourceTwo" pickOnBounds="true" preserveRatio="true" styleClass="play" visible="false">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow />
+         </effect></ImageView>
    </children>
 </Pane>

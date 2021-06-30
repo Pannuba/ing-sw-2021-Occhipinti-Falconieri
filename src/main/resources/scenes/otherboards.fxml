@@ -25,7 +25,10 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <TextArea fx:id="console" editable="false" layoutX="1018.0" layoutY="359.0" prefHeight="350.0" prefWidth="254.0" wrapText="true" />
+      <TextArea fx:id="console" editable="false" layoutX="1018.0" layoutY="359.0" prefHeight="350.0" prefWidth="254.0" styleClass="text-area" wrapText="true">
+         <effect>
+            <DropShadow />
+         </effect></TextArea>
       <ImageView fx:id="redPawn" fitHeight="70.0" fitWidth="87.0" layoutX="26.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/red-pawn.png" />
@@ -172,7 +175,7 @@
          <effect>
             <DropShadow />
          </effect></Button>
-      <Label fx:id="usernameLabel" layoutX="1018.0" layoutY="22.0" prefHeight="59.0" prefWidth="260.0" text="Username's board" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="usernameLabel" layoutX="1018.0" layoutY="22.0" prefHeight="59.0" prefWidth="260.0" styleClass="button_leader" text="Username's board" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="36.0" />
          </font>

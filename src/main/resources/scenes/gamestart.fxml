@@ -91,12 +91,12 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Label fx:id="selectLeaderCards" layoutX="50.0" layoutY="490.0" prefHeight="82.0" prefWidth="425.0" text="Select two leader cards">
+      <Label fx:id="selectLeaderCards" layoutX="50.0" layoutY="490.0" prefHeight="82.0" prefWidth="425.0" styleClass="button_leader" text="Select two leader cards">
          <font>
             <Font size="46.0" />
          </font>
       </Label>
-      <Label fx:id="resourcesMessage" layoutX="48.0" layoutY="565.0" prefHeight="82.0" prefWidth="618.0">
+      <Label fx:id="resourcesMessage" layoutX="48.0" layoutY="565.0" prefHeight="82.0" prefWidth="618.0" styleClass="button_leader">
          <font>
             <Font size="35.0" />
          </font>

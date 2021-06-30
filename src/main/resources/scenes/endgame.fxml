@@ -19,7 +19,7 @@
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <Label fx:id="nameAndPoint" layoutX="94.0" layoutY="292.0" prefHeight="187.0" prefWidth="371.0" wrapText="true">
+      <Label fx:id="nameAndPoint" layoutX="94.0" layoutY="292.0" prefHeight="187.0" prefWidth="371.0" styleClass="button_main" wrapText="true">
          <font>
             <Font name="Times New Roman Bold Italic" size="25.0" />
          </font>

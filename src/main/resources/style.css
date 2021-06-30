@@ -18,6 +18,11 @@
     -fx-font-family: "Charpentier Renaissance Reduced Normal";
 }
 
+.choose_resources
+{
+    -fx-font-size: 40;
+}
+
 .button_leader
 {
     -fx-font-size: 35;
@@ -33,10 +38,16 @@
     -fx-font-size: 22;
 }
 
+.login
+{
+    -fx-font-size: 20;
+}
+
 .button:hover
 {
     -fx-scale-x: 1.025;
     -fx-scale-y: 1.025;
+    -fx-cursor: HAND;
 }
 
 .production:hover
@@ -57,6 +68,7 @@
 .text-area
 {
     -fx-font-family: "Charpentier Renaissance Reduced Normal";
+    -fx-font-size: 16;
 }
 
 .devCard_market:hover

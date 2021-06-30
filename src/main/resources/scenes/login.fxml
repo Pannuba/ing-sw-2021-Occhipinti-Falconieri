@@ -21,22 +21,22 @@
             <Image url="@../img/launcher-blurred.png" />
          </image>
       </ImageView>
-      <TextField fx:id="nameField" layoutX="177.0" layoutY="247.0" prefHeight="30.0" prefWidth="200.0" promptText="Name">
+      <TextField fx:id="nameField" layoutX="177.0" layoutY="247.0" prefHeight="30.0" prefWidth="200.0" promptText="Name" styleClass="login">
          <font>
             <Font name="Times New Roman Bold Italic" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="ipField" layoutX="177.0" layoutY="324.0" prefHeight="30.0" prefWidth="200.0" promptText="IP Address">
+      <TextField fx:id="ipField" layoutX="177.0" layoutY="319.0" prefHeight="30.0" prefWidth="200.0" promptText="IP Address" styleClass="login">
          <font>
             <Font name="Times New Roman Bold Italic" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="portField" layoutX="177.0" layoutY="361.0" onAction="#connectToServerEnter" prefHeight="30.0" prefWidth="200.0" promptText="Port">
+      <TextField fx:id="portField" layoutX="177.0" layoutY="361.0" onAction="#connectToServerEnter" prefHeight="30.0" prefWidth="200.0" promptText="Port" styleClass="login">
          <font>
             <Font name="Times New Roman Bold Italic" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="numPlayersField" layoutX="177.0" layoutY="417.0" onAction="#connectToServerEnter" prefHeight="30.0" prefWidth="200.0" promptText="Player number" visible="false">
+      <TextField fx:id="numPlayersField" layoutX="177.0" layoutY="417.0" onAction="#connectToServerEnter" prefHeight="30.0" prefWidth="200.0" promptText="Player number" styleClass="login" visible="false">
          <font>
             <Font name="Times New Roman Bold Italic" size="18.0" />
          </font></TextField>
@@ -51,7 +51,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Label fx:id="errorLabel" alignment="CENTER" layoutX="77.0" layoutY="178.0" prefHeight="30.0" prefWidth="400.0" textAlignment="CENTER">
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="77.0" layoutY="178.0" prefHeight="30.0" prefWidth="400.0" styleClass="login" textAlignment="CENTER">
          <font>
             <Font name="Times New Roman Italic" size="18.0" />
          </font>
