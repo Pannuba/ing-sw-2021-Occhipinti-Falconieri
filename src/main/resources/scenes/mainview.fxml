@@ -25,7 +25,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Button fx:id="marketsButton" layoutX="1053.0" layoutY="28.0" mnemonicParsing="false" onAction="#showMarkets" prefHeight="55.0" prefWidth="184.0" text="Markets">
+      <Button fx:id="marketsButton" layoutX="1053.0" layoutY="28.0" mnemonicParsing="false" onAction="#showMarkets" prefHeight="55.0" prefWidth="184.0" styleClass="button_main" text="Markets">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -33,10 +33,10 @@
             <DropShadow />
          </effect>
          <font>
-            <Font size="32.0" />
+            <Font size="22.0" />
          </font>
       </Button>
-      <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="117.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="66.0" prefWidth="184.0" text="Leader Cards">
+      <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="117.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="66.0" prefWidth="184.0" styleClass="button_main" text="Leader Cards">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -44,12 +44,12 @@
             <DropShadow />
          </effect>
          <font>
-            <Font size="26.0" />
+            <Font size="22.0" />
          </font>
       </Button>
-      <Button fx:id="otherPlayersButton" layoutX="1053.0" layoutY="206.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="66.0" prefWidth="184.0" text="Other Boards" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="otherPlayersButton" layoutX="1053.0" layoutY="206.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="66.0" prefWidth="184.0" styleClass="button_main" text="Other Boards" textAlignment="CENTER" wrapText="true">
          <font>
-            <Font size="26.0" />
+            <Font size="22.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -58,7 +58,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="stopProductionButton" layoutX="1053.0" layoutY="314.0" mnemonicParsing="false" onAction="#stopProduction" prefHeight="55.0" prefWidth="184.0" text="Stop Production" visible="false">
+      <Button fx:id="stopProductionButton" layoutX="1053.0" layoutY="314.0" mnemonicParsing="false" onAction="#stopProduction" prefHeight="55.0" prefWidth="184.0" styleClass="button_production" text="Stop Production" visible="false">
          <font>
             <Font size="22.0" />
          </font>

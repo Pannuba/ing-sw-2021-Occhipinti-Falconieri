@@ -18,19 +18,26 @@
     -fx-font-family: "Charpentier Renaissance Reduced Normal";
 }
 
-.button:hover
+.button_leader
 {
-    -fx-scale-x: 1;
-    -fx-scale-y: 1;
+    -fx-font-size: 35;
 }
 
-/*
+.button_main
+{
+    -fx-font-size: 25;
+}
+
+.button_production
+{
+    -fx-font-size: 22;
+}
+
 .button:hover
 {
-    -fx-scale-x: 1.05;
-    -fx-scale-y: 1.05;
+    -fx-scale-x: 1.025;
+    -fx-scale-y: 1.025;
 }
-*/
 
 .production:hover
 {
@@ -50,4 +57,10 @@
 .text-area
 {
     -fx-font-family: "Charpentier Renaissance Reduced Normal";
+}
+
+.devCard_market:hover
+{
+    -fx-scale-x: 1.025;
+    -fx-scale-y: 1.025;
 }

@@ -24,7 +24,7 @@
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <Button fx:id="activateLeaderOneButton" layoutX="50.0" layoutY="247.0" mnemonicParsing="false" onAction="#activateLeaderCard1" prefHeight="90.0" prefWidth="170.0" text="Activate" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="240.0">
+      <Button fx:id="activateLeaderOneButton" layoutX="50.0" layoutY="247.0" mnemonicParsing="false" onAction="#activateLeaderCard1" prefHeight="90.0" prefWidth="170.0" styleClass="button_leader" text="Activate" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="240.0">
          <font>
             <Font name="Times New Roman Bold Italic" size="30.0" />
          </font>
@@ -34,7 +34,7 @@
          <effect>
             <DropShadow />
          </effect></Button>
-      <Button fx:id="discardLeaderOneButton" layoutX="43.0" layoutY="399.0" mnemonicParsing="false" onAction="#discardLeaderCard1" prefHeight="90.0" prefWidth="170.0" text="Discard" AnchorPane.bottomAnchor="240.0" AnchorPane.leftAnchor="30.0">
+      <Button fx:id="discardLeaderOneButton" layoutX="43.0" layoutY="399.0" mnemonicParsing="false" onAction="#discardLeaderCard1" prefHeight="90.0" prefWidth="170.0" styleClass="button_leader" text="Discard" AnchorPane.bottomAnchor="240.0" AnchorPane.leftAnchor="30.0">
          <font>
             <Font name="Times New Roman Bold Italic" size="30.0" />
          </font>
@@ -44,23 +44,23 @@
          <effect>
             <DropShadow />
          </effect></Button>
-      <Button fx:id="activateLeaderTwoButton" layoutX="402.0" layoutY="283.0" mnemonicParsing="false" onAction="#activateLeaderCard2" prefHeight="90.0" prefWidth="170.0" text="Activate" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="240.0">
+      <Button fx:id="activateLeaderTwoButton" layoutX="402.0" layoutY="283.0" mnemonicParsing="false" onAction="#activateLeaderCard2" prefHeight="90.0" prefWidth="170.0" styleClass="button_leader" text="Activate" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="240.0">
          <font>
             <Font name="Times New Roman Bold Italic" size="30.0" />
          </font>
          <effect>
             <DropShadow />
          </effect></Button>
-      <Button fx:id="discardLeaderTwoButton" layoutX="1005.0" layoutY="598.0" mnemonicParsing="false" onAction="#discardLeaderCard2" prefHeight="90.0" prefWidth="170.0" text="Discard" AnchorPane.bottomAnchor="240.0" AnchorPane.rightAnchor="30.0">
+      <Button fx:id="discardLeaderTwoButton" layoutX="1005.0" layoutY="598.0" mnemonicParsing="false" onAction="#discardLeaderCard2" prefHeight="90.0" prefWidth="170.0" styleClass="button_leader" text="Discard" AnchorPane.bottomAnchor="240.0" AnchorPane.rightAnchor="30.0">
          <font>
             <Font name="Times New Roman Bold Italic" size="30.0" />
          </font>
          <effect>
             <DropShadow />
          </effect></Button>
-      <Button fx:id="backToBoardButton" layoutX="511.0" layoutY="587.0" mnemonicParsing="false" onAction="#backToBoard" prefHeight="74.0" prefWidth="280.0" text="Back to Board" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0">
+      <Button fx:id="backToBoardButton" layoutX="511.0" layoutY="587.0" mnemonicParsing="false" onAction="#backToBoard" prefHeight="74.0" prefWidth="280.0" styleClass="button_leader" text="Back to Board" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0">
          <font>
-            <Font name="Times New Roman Bold Italic" size="35.0" />
+            <Font name="Times New Roman Bold Italic" size="30.0" />
          </font>
          <effect>
             <DropShadow />

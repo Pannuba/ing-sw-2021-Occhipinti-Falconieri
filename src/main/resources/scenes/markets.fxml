@@ -104,9 +104,9 @@
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <Button fx:id="backToBoardButton" layoutX="316.0" layoutY="638.0" mnemonicParsing="false" onAction="#backToBoard" prefHeight="45.0" prefWidth="193.0" text="Back to Board">
+      <Button fx:id="backToBoardButton" layoutX="312.0" layoutY="642.0" mnemonicParsing="false" onAction="#backToBoard" prefHeight="45.0" prefWidth="193.0" styleClass="button_main" text="Back to Board">
          <font>
-            <Font size="28.0" />
+            <Font size="25.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -115,84 +115,84 @@
             <DropShadow />
          </effect>
       </Button>
-      <ImageView fx:id="devCard3" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="589.0" layoutY="1.0" onMouseClicked="#selectDevCard3" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="devCard3" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="589.0" layoutY="1.0" onMouseClicked="#selectDevCard3" pickOnBounds="true" preserveRatio="true" styleClass="devCard_market">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="devCard2" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="589.0" layoutY="243.0" onMouseClicked="#selectDevCard2" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="devCard2" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="589.0" layoutY="243.0" onMouseClicked="#selectDevCard2" pickOnBounds="true" preserveRatio="true" styleClass="devCard_market">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="devCard1" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="589.0" layoutY="484.0" onMouseClicked="#selectDevCard1" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="devCard1" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="589.0" layoutY="484.0" onMouseClicked="#selectDevCard1" pickOnBounds="true" preserveRatio="true" styleClass="devCard_market">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="devCard6" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="752.0" layoutY="1.0" onMouseClicked="#selectDevCard6" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="devCard6" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="752.0" layoutY="1.0" onMouseClicked="#selectDevCard6" pickOnBounds="true" preserveRatio="true" styleClass="devCard_market">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="devCard5" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="752.0" layoutY="243.0" onMouseClicked="#selectDevCard5" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="devCard5" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="752.0" layoutY="243.0" onMouseClicked="#selectDevCard5" pickOnBounds="true" preserveRatio="true" styleClass="devCard_market">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="devCard4" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="752.0" layoutY="484.0" onMouseClicked="#selectDevCard4" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="devCard4" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="752.0" layoutY="484.0" onMouseClicked="#selectDevCard4" pickOnBounds="true" preserveRatio="true" styleClass="devCard_market">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="devCard9" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="915.0" layoutY="1.0" onMouseClicked="#selectDevCard9" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="devCard9" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="915.0" layoutY="1.0" onMouseClicked="#selectDevCard9" pickOnBounds="true" preserveRatio="true" styleClass="devCard_market">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="devCard8" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="915.0" layoutY="243.0" onMouseClicked="#selectDevCard8" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="devCard8" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="915.0" layoutY="243.0" onMouseClicked="#selectDevCard8" pickOnBounds="true" preserveRatio="true" styleClass="devCard_market">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="devCard7" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="915.0" layoutY="484.0" onMouseClicked="#selectDevCard7" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="devCard7" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="915.0" layoutY="484.0" onMouseClicked="#selectDevCard7" pickOnBounds="true" preserveRatio="true" styleClass="devCard_market">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="devCard12" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="1078.0" layoutY="1.0" onMouseClicked="#selectDevCard12" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="devCard12" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="1078.0" layoutY="1.0" onMouseClicked="#selectDevCard12" pickOnBounds="true" preserveRatio="true" styleClass="devCard_market">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="devCard11" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="1078.0" layoutY="243.0" onMouseClicked="#selectDevCard11" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="devCard11" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="1078.0" layoutY="243.0" onMouseClicked="#selectDevCard11" pickOnBounds="true" preserveRatio="true" styleClass="devCard_market">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="devCard10" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="1078.0" layoutY="484.0" onMouseClicked="#selectDevCard10" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="devCard10" disable="true" fitHeight="235.0" fitWidth="159.0" layoutX="1078.0" layoutY="484.0" onMouseClicked="#selectDevCard10" pickOnBounds="true" preserveRatio="true" styleClass="devCard_market">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

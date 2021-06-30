@@ -158,16 +158,16 @@
             <DropShadow />
          </effect>
       </Label>
-      <Button fx:id="nextButton" layoutX="1083.0" layoutY="128.0" mnemonicParsing="false" onAction="#showNextBoard" prefHeight="60.0" prefWidth="129.0" text="Next">
+      <Button fx:id="nextButton" layoutX="1083.0" layoutY="128.0" mnemonicParsing="false" onAction="#showNextBoard" prefHeight="60.0" prefWidth="129.0" styleClass="button_main" text="Next">
          <font>
             <Font size="28.0" />
          </font>
          <effect>
             <DropShadow />
          </effect></Button>
-      <Button fx:id="backButton" layoutX="1057.0" layoutY="216.0" mnemonicParsing="false" onAction="#backToBoard" prefHeight="60.0" prefWidth="179.0" text="Back to Board" wrapText="true">
+      <Button fx:id="backButton" layoutX="1057.0" layoutY="216.0" mnemonicParsing="false" onAction="#backToBoard" prefHeight="60.0" prefWidth="179.0" styleClass="button_main" text="Back to Board" wrapText="true">
          <font>
-            <Font size="27.0" />
+            <Font size="25.0" />
          </font>
          <effect>
             <DropShadow />
