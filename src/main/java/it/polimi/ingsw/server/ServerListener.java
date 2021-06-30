@@ -23,7 +23,7 @@ public class ServerListener
 {
 	private final ServerSocket serverSocket;
 	private final List<Model> recoveredMatches;
-	private List<Model> currentMatches;
+	private List<Model> totalMatches;		/* totalMatches = recoveredMatches + new matches */
 
 	/* Static method to get name/choice from client? So Match can use them */
 
@@ -31,6 +31,7 @@ public class ServerListener
 	{
 		this.serverSocket = serverSocket;
 		recoveredMatches = new ArrayList<>();
+		totalMatches = new ArrayList<>();
 
 		new File("../savedmatches/").mkdir();
 		File xmlpath = new File("../savedmatches/");
@@ -58,6 +59,7 @@ public class ServerListener
 			}
 
 			recoveredMatches.add(matchToAdd);
+			totalMatches.add(matchToAdd);
 		}
 
 		Runtime.getRuntime().addShutdownHook(new Thread() {
@@ -76,7 +78,6 @@ public class ServerListener
 	{
 		System.out.println("Server started");
 
-		currentMatches = new ArrayList<>();
 		Socket socket;
 		ObjectInputStream ois;
 		ObjectOutputStream oos;
@@ -142,13 +143,14 @@ public class ServerListener
 			{
 				Match recoveredMatch = new Match(this, recoveredMatches.get(arePlayersReconnecting(players)), views);
 				new Thread(recoveredMatch).start();
+				totalMatches.add(recoveredMatch.getModel());
 			}
 
 			else
 			{
 				Match newMatch = new Match(players, views);        /* Start match, passes players and views */
 				new Thread(newMatch).start();
-				currentMatches.add(newMatch.getModel());
+				totalMatches.add(newMatch.getModel());
 			}
 		}
 	}
@@ -196,7 +198,15 @@ public class ServerListener
 
 	public void deleteRecoveredMatch(Model matchToRemove)
 	{
-		recoveredMatches.remove(matchToRemove);
+		System.out.println("Deleting match of player " + matchToRemove.getPlayers().get(0).getUsername());
+		int removedMatchIndex = totalMatches.indexOf(matchToRemove);
+		System.out.println("index: " + removedMatchIndex + " previous size: " + totalMatches.size());
+		totalMatches.remove(matchToRemove);
+
+		if (!new File("../savedmatches/match" + (removedMatchIndex + 1) + ".xml").delete())
+			System.out.println("Couldn't delete match file!");
+
+		System.out.println("new size: " + totalMatches.size());
 	}
 
 	private void shutdown()
@@ -205,9 +215,10 @@ public class ServerListener
 		{
 			System.out.println("Shutting down...");
 			serverSocket.close();
+			System.out.println("currentMatches.size() = " + totalMatches.size());
 
-			for (int i = 0; i < currentMatches.size(); i++)
-				XML_Serialization.serialize(currentMatches.get(i), "../savedmatches/match" + (i + 1) + ".xml");
+			for (int i = 0; i < totalMatches.size(); i++)
+				XML_Serialization.serialize(totalMatches.get(i), "../savedmatches/match" + (i + 1) + ".xml");
 		}
 		catch (IOException e)
 		{

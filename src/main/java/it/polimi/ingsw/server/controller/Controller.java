@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.board.Storage;
 import it.polimi.ingsw.model.board.Vault;
 import it.polimi.ingsw.model.cards.*;
+import it.polimi.ingsw.server.ServerListener;
 import it.polimi.ingsw.server.controller.commands.*;
 import it.polimi.ingsw.server.messages.ActionTokenMessage;
 import it.polimi.ingsw.server.messages.SinglePlayerGameOverMessage;
@@ -19,6 +20,7 @@ import java.util.*;
 public class Controller implements Observer			/* Observes view to get commands... View observes model */
 {
 	private final Model model;
+	private final ServerListener serverListener;
 	private String username;			/* Username of the player who sent the command */
 	private ClientHandler view;			/* ClientHandler instance of the view which sent the command. Used for send() method */
 	private boolean isTaskFailed;
@@ -27,6 +29,14 @@ public class Controller implements Observer			/* Observes view to get commands..
 	{
 		System.out.println("Creating controller");
 		this.model = model;
+		this.serverListener = null;
+	}
+
+	public Controller(Model model, ServerListener serverListener)
+	{
+		System.out.println("Creating controller");
+		this.model = model;
+		this.serverListener = serverListener;
 	}
 
 	/**
@@ -138,10 +148,8 @@ public class Controller implements Observer			/* Observes view to get commands..
 
 			if (model.isSinglePlayerMatchLost() != null)		/* If the singleplayer has lost the game */
 			{
-				synchronized ((Object) model.isMatchOver())
-				{
-					((Object) model.isMatchOver()).notifyAll();
-				}
+				if (serverListener != null)
+					serverListener.deleteRecoveredMatch(model);
 
 				view.send(new SinglePlayerGameOverMessage(model.isSinglePlayerMatchLost()));
 				return;		/* Don't want to execute the other functions below if the match is over */
@@ -156,7 +164,12 @@ public class Controller implements Observer			/* Observes view to get commands..
 		model.checkMatchOver();
 
 		if (model.isMatchOver() && model.getPlayerByUsername(username).getId() == (model.getNumPlayers() - 1))		/* Run endMatch when the first player has been reached */
+		{
+			if (serverListener != null)
+				serverListener.deleteRecoveredMatch(model);
+
 			model.endMatch();
+		}
 	}
 
 	/**

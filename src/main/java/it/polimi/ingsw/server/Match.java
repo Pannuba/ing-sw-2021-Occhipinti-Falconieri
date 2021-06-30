@@ -17,6 +17,7 @@ import java.util.List;
 public class Match implements Runnable
 {
 	private final boolean isRecoveredMatch;
+	private final ServerListener serverListener;
 	private final int numPlayers;
 	private final List<ClientHandler> views;
 	private final Model model;
@@ -35,6 +36,7 @@ public class Match implements Runnable
 	public Match(List<Player> players, List<ClientHandler> views)
 	{
 		isRecoveredMatch = false;
+		serverListener = null;
 		this.numPlayers = players.size();
 		this.views = views;
 
@@ -51,10 +53,11 @@ public class Match implements Runnable
 	public Match(ServerListener serverListener, Model recoveredModel, List<ClientHandler> views)
 	{
 		isRecoveredMatch = true;
+		this.serverListener = serverListener;
 		this.numPlayers = recoveredModel.getNumPlayers();
 		this.views = views;
 		model = recoveredModel;
-		Controller controller = new Controller(recoveredModel);
+		Controller controller = new Controller(recoveredModel, serverListener);
 
 		for (int i = 0; i < views.size(); i++)
 		{
@@ -64,22 +67,6 @@ public class Match implements Runnable
 		}
 
 		model.update();
-
-		synchronized ((Object) model.isMatchOver())
-		{
-			try
-			{
-				((Object) model.isMatchOver()).wait();
-			}
-			catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-
-			System.out.println("Match over, removing from recovered matches list");
-			serverListener.deleteRecoveredMatch(model);
-			/* TODO: also delete match file, but how? */
-		}
 	}
 
 	/**
