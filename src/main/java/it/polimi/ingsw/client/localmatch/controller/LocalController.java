@@ -73,7 +73,7 @@ public class LocalController extends Observable			/* Observes view to get comman
 		}
 
 		if ((command.get(0).equals("BUY_RESOURCES") || command.get(0).equals("BUY_DEVCARD")	||
-			command.get(0).equals("ACTIVATE_PRODUCTION") || command.get(0).equals("DISCARD_LEADER")) && !isTaskFailed)
+			command.get(0).equals("STOP_PRODUCTION") || command.get(0).equals("DISCARD_LEADER")) && !isTaskFailed)
 		{
 			if (!command.get(0).equals("DISCARD_LEADER"))
 				postRoundChecks();			/* Put in model as separate method, or in update()? */

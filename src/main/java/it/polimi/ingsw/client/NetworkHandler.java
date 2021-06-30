@@ -43,10 +43,7 @@ public class NetworkHandler extends MessageIO implements Runnable		/* Observed b
 				Object inputObj = ois.readObject();
 
 				if (!(inputObj instanceof Ping))		/* Don't care if it's a ping */
-				{
-					System.out.println("Received " + inputObj.getClass().getSimpleName());
 					view.update(inputObj);
-				}
 			}
 			catch (IOException | ClassNotFoundException e)
 			{
