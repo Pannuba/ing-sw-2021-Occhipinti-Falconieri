@@ -21,22 +21,22 @@
             <Image url="@../img/launcher-blurred.png" />
          </image>
       </ImageView>
-      <TextField fx:id="nameField" layoutX="177.0" layoutY="247.0" prefHeight="30.0" prefWidth="200.0" promptText="Name" styleClass="login">
+      <TextField fx:id="nameField" layoutX="177.0" layoutY="247.0" prefHeight="30.0" prefWidth="200.0" promptText="Name">
          <font>
             <Font name="Times New Roman Bold Italic" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="ipField" layoutX="177.0" layoutY="319.0" prefHeight="30.0" prefWidth="200.0" promptText="IP Address" styleClass="login">
+      <TextField fx:id="ipField" layoutX="177.0" layoutY="317.0" prefHeight="30.0" prefWidth="200.0" promptText="IP Address">
          <font>
             <Font name="Times New Roman Bold Italic" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="portField" layoutX="177.0" layoutY="361.0" onAction="#connectToServerEnter" prefHeight="30.0" prefWidth="200.0" promptText="Port" styleClass="login">
+      <TextField fx:id="portField" layoutX="177.0" layoutY="361.0" onAction="#connectToServerEnter" prefHeight="30.0" prefWidth="200.0" promptText="Port">
          <font>
             <Font name="Times New Roman Bold Italic" size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="numPlayersField" layoutX="177.0" layoutY="417.0" onAction="#connectToServerEnter" prefHeight="30.0" prefWidth="200.0" promptText="Player number" styleClass="login" visible="false">
+      <TextField fx:id="numPlayersField" layoutX="177.0" layoutY="417.0" onAction="#connectToServerEnter" prefHeight="30.0" prefWidth="200.0" promptText="Player number" visible="false">
          <font>
             <Font name="Times New Roman Bold Italic" size="18.0" />
          </font></TextField>

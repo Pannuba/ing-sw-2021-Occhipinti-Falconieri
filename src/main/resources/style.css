@@ -57,7 +57,8 @@
 
 .text-field
 {
-    -fx-font-family: "Charpentier Renaissance Reduced Normal";
+    -fx-font-family: "Charpentier Renaissance Reduced";
+    -fx-font-size: 20;
 }
 
 .text-area
