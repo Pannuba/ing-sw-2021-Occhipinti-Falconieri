@@ -199,7 +199,7 @@
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <Label layoutX="13.0" layoutY="583.0" prefHeight="44.0" prefWidth="540.0" styleClass="login" text="Choose the resource to convert the white marbles to" visible="false">
+      <Label fx:id="whiteMarblesLabel" layoutX="13.0" layoutY="583.0" prefHeight="44.0" prefWidth="540.0" styleClass="login" text="Choose the resource to convert the white marbles to" visible="false">
          <font>
             <Font size="20.0" />
          </font>
