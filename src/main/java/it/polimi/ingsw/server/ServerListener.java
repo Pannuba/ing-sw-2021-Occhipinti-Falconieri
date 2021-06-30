@@ -143,7 +143,6 @@ public class ServerListener
 			{
 				Match recoveredMatch = new Match(this, recoveredMatches.get(arePlayersReconnecting(players)), views);
 				new Thread(recoveredMatch).start();
-				totalMatches.add(recoveredMatch.getModel());
 			}
 
 			else
@@ -200,13 +199,10 @@ public class ServerListener
 	{
 		System.out.println("Deleting match of player " + matchToRemove.getPlayers().get(0).getUsername());
 		int removedMatchIndex = totalMatches.indexOf(matchToRemove);
-		System.out.println("index: " + removedMatchIndex + " previous size: " + totalMatches.size());
 		totalMatches.remove(matchToRemove);
 
 		if (!new File("../savedmatches/match" + (removedMatchIndex + 1) + ".xml").delete())
 			System.out.println("Couldn't delete match file!");
-
-		System.out.println("new size: " + totalMatches.size());
 	}
 
 	private void shutdown()
