@@ -211,7 +211,6 @@ public class ServerListener
 		{
 			System.out.println("Shutting down...");
 			serverSocket.close();
-			System.out.println("currentMatches.size() = " + totalMatches.size());
 
 			for (int i = 0; i < totalMatches.size(); i++)
 				XML_Serialization.serialize(totalMatches.get(i), "../savedmatches/match" + (i + 1) + ".xml");
