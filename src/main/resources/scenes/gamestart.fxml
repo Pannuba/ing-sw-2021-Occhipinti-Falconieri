@@ -69,7 +69,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="blueResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="977.0" layoutY="531.0" onMouseClicked="#chooseBlueResource" pickOnBounds="true" preserveRatio="true" styleClass="play">
+      <ImageView fx:id="blueResource" disable="true" fitHeight="100.0" fitWidth="200.0" layoutX="965.0" layoutY="531.0" onMouseClicked="#chooseBlueResource" pickOnBounds="true" preserveRatio="true" styleClass="play">
          <image>
             <Image url="@../img/resources/blue.png" />
          </image>

@@ -25,47 +25,6 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Button fx:id="marketsButton" layoutX="1053.0" layoutY="28.0" mnemonicParsing="false" onAction="#showMarkets" prefHeight="55.0" prefWidth="184.0" styleClass="button_main" text="Markets">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <effect>
-            <DropShadow />
-         </effect>
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Button>
-      <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="117.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="66.0" prefWidth="184.0" styleClass="button_main" text="Leader Cards">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <effect>
-            <DropShadow />
-         </effect>
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Button>
-      <Button fx:id="otherPlayersButton" layoutX="1053.0" layoutY="206.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="66.0" prefWidth="184.0" styleClass="button_main" text="Other Boards" textAlignment="CENTER" wrapText="true">
-         <font>
-            <Font size="22.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
-      <Button fx:id="stopProductionButton" layoutX="1053.0" layoutY="314.0" mnemonicParsing="false" onAction="#stopProduction" prefHeight="55.0" prefWidth="184.0" styleClass="button_production" text="Stop Production" visible="false">
-         <font>
-            <Font size="22.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
       <TextArea fx:id="console" editable="false" layoutX="1018.0" layoutY="392.0" prefHeight="317.0" prefWidth="254.0" wrapText="true">
          <effect>
             <DropShadow />
@@ -186,7 +145,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="vaultResourceBlue" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="71.0" layoutY="550.0" onMouseClicked="#selectBlueResource" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="vaultResourceBlue" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="71.0" layoutY="551.0" onMouseClicked="#selectBlueResource" pickOnBounds="true" preserveRatio="true" styleClass="production">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -208,7 +167,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="vaultResourceYellow" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="67.0" layoutY="607.0" onMouseClicked="#selectYellowResource" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="vaultResourceYellow" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="70.0" layoutY="605.0" onMouseClicked="#selectYellowResource" pickOnBounds="true" preserveRatio="true" styleClass="production">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -325,5 +284,46 @@
             <DropShadow />
          </effect>
       </ImageView>
+      <Button fx:id="otherPlayersButton" layoutX="1053.0" layoutY="206.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="66.0" prefWidth="184.0" styleClass="button_main" text="Other Boards" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="22.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <Button fx:id="marketsButton" layoutX="1053.0" layoutY="28.0" mnemonicParsing="false" onAction="#showMarkets" prefHeight="55.0" prefWidth="184.0" styleClass="button_main" text="Markets">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="117.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="66.0" prefWidth="184.0" styleClass="button_main" text="Leader Cards">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="stopProductionButton" layoutX="1053.0" layoutY="314.0" mnemonicParsing="false" onAction="#stopProduction" prefHeight="55.0" prefWidth="184.0" styleClass="button_production" text="Stop Production" visible="false">
+         <font>
+            <Font size="22.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
    </children>
 </Pane>

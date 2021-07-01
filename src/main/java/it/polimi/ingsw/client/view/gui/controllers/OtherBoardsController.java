@@ -72,6 +72,8 @@ public class OtherBoardsController
 	@FXML private ImageView devCardAreaTwo3;
 	@FXML private ImageView devCardAreaThree3;
 
+	@FXML private ImageView inkwell;
+
 	@FXML private Button nextButton;
 
 	@FXML private Button backButton;
@@ -117,6 +119,11 @@ public class OtherBoardsController
 
 		mainStage.setTitle("Masters of Renaissance - " + username + "'s Board");
 		usernameLabel.setText(username + "'s Board");
+
+		if (currentID == 0)
+			inkwell.setVisible(true);
+		else
+			inkwell.setVisible(false);
 
 		updateStorage(gameState.getPlayerByName(username).getDashboard().getStorage());
 		updateVault(gameState.getPlayerByName(username).getDashboard().getVault());
@@ -224,10 +231,13 @@ public class OtherBoardsController
 					break;
 
 				case 2:
+					devCardAreaOne1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[0].getDevCards().get(0).getCardNumber() + ".png")));
 					devCardAreaOne2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[0].getDevCards().get(1).getCardNumber() + ".png")));
 					break;
 
 				case 3:
+					devCardAreaOne1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[0].getDevCards().get(0).getCardNumber() + ".png")));
+					devCardAreaOne2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[0].getDevCards().get(1).getCardNumber() + ".png")));
 					devCardAreaOne3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[0].getDevCards().get(2).getCardNumber() + ".png")));
 					break;
 			}
@@ -241,10 +251,13 @@ public class OtherBoardsController
 					break;
 
 				case 2:
+					devCardAreaTwo1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[1].getDevCards().get(0).getCardNumber() + ".png")));
 					devCardAreaTwo2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[1].getDevCards().get(1).getCardNumber() + ".png")));
 					break;
 
 				case 3:
+					devCardAreaTwo1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[1].getDevCards().get(0).getCardNumber() + ".png")));
+					devCardAreaTwo2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[1].getDevCards().get(1).getCardNumber() + ".png")));
 					devCardAreaTwo3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[1].getDevCards().get(2).getCardNumber() + ".png")));
 					break;
 			}
@@ -258,10 +271,13 @@ public class OtherBoardsController
 					break;
 
 				case 2:
+					devCardAreaThree1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[2].getDevCards().get(0).getCardNumber() + ".png")));
 					devCardAreaThree2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[2].getDevCards().get(1).getCardNumber() + ".png")));
 					break;
 
 				case 3:
+					devCardAreaThree1.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[2].getDevCards().get(0).getCardNumber() + ".png")));
+					devCardAreaThree2.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[2].getDevCards().get(1).getCardNumber() + ".png")));
 					devCardAreaThree3.setImage(new Image(getClass().getResourceAsStream("/img/devcards/" + devCardAreas[2].getDevCards().get(2).getCardNumber() + ".png")));
 					break;
 			}

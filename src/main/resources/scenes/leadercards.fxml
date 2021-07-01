@@ -65,19 +65,19 @@
          <effect>
             <DropShadow />
          </effect></Button>
-      <ImageView fx:id="resL1" fitHeight="96.0" fitWidth="96.0" layoutX="318.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="167.0" AnchorPane.leftAnchor="318.0" AnchorPane.rightAnchor="866.0" AnchorPane.topAnchor="457.0">
+      <ImageView fx:id="resL1" fitHeight="78.0" fitWidth="78.0" layoutX="326.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="176.17613983154297" AnchorPane.topAnchor="468.0">
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="resL2" fitHeight="96.0" fitWidth="96.0" layoutX="454.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="167.0" AnchorPane.leftAnchor="454.0" AnchorPane.rightAnchor="730.0" AnchorPane.topAnchor="457.0">
+      <ImageView fx:id="resL2" fitHeight="78.0" fitWidth="78.0" layoutX="462.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="176.17613983154297" AnchorPane.topAnchor="468.0">
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="resR1" fitHeight="96.0" fitWidth="96.0" layoutX="745.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="resR1" fitHeight="78.0" fitWidth="78.0" layoutX="755.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="176.17613983154297" AnchorPane.topAnchor="468.0">
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="resR2" fitHeight="96.0" fitWidth="96.0" layoutX="881.0" layoutY="457.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="resR2" fitHeight="78.0" fitWidth="78.0" layoutX="892.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="176.17613983154297" AnchorPane.topAnchor="468.0">
          <effect>
             <DropShadow />
          </effect></ImageView>
@@ -114,7 +114,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="productionBL" disable="true" fitHeight="96.0" fitWidth="96.0" layoutX="82.0" layoutY="508.0" onMouseClicked="#selectBlueResource1" pickOnBounds="true" preserveRatio="true" styleClass="play" visible="false" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="80.0">
+      <ImageView fx:id="productionBL" disable="true" fitHeight="96.0" fitWidth="96.0" layoutX="74.0" layoutY="496.17613983154297" onMouseClicked="#selectBlueResource1" pickOnBounds="true" preserveRatio="true" styleClass="play" visible="false" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="70.0">
          <image>
             <Image url="@../img/resources/blue.png" />
          </image>
@@ -158,7 +158,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="productionBR" disable="true" fitHeight="96.0" fitWidth="96.0" layoutX="1133.0" layoutY="492.0" onMouseClicked="#selectBlueResource2" pickOnBounds="true" preserveRatio="true" styleClass="play" visible="false" AnchorPane.bottomAnchor="130.0" AnchorPane.rightAnchor="80.0">
+      <ImageView fx:id="productionBR" disable="true" fitHeight="96.0" fitWidth="96.0" layoutX="1133.0" layoutY="492.0" onMouseClicked="#selectBlueResource2" pickOnBounds="true" preserveRatio="true" styleClass="play" visible="false" AnchorPane.bottomAnchor="130.0" AnchorPane.rightAnchor="70.0">
          <image>
             <Image url="@../img/resources/blue.png" />
          </image>
@@ -169,12 +169,12 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Label fx:id="chooseResource1" layoutX="96.0" layoutY="594.0" prefHeight="59.0" prefWidth="309.0" styleClass="choose_resources" text="Choose resource" textAlignment="CENTER" visible="false" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="95.0">
+      <Label fx:id="chooseResource1" alignment="CENTER" layoutX="96.0" layoutY="594.0" prefHeight="59.0" prefWidth="309.0" styleClass="choose_resources" text="Choose resource" textAlignment="CENTER" visible="false" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="95.0">
          <font>
             <Font name="Times New Roman Bold Italic" size="41.0" />
          </font>
       </Label>
-      <Label fx:id="chooseResource2" layoutX="882.0" layoutY="605.0" prefHeight="59.0" prefWidth="309.0" styleClass="choose_resources" text="Choose resource" textAlignment="CENTER" visible="false" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="95.0">
+      <Label fx:id="chooseResource2" alignment="CENTER" layoutX="882.0" layoutY="605.0" prefHeight="59.0" prefWidth="309.0" styleClass="choose_resources" text="Choose resource" textAlignment="CENTER" visible="false" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="95.0">
          <font>
             <Font name="Times New Roman Bold Italic" size="41.0" />
          </font>
