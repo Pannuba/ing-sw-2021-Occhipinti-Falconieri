@@ -55,7 +55,10 @@ public class ActionGUI extends MessageExecutor
 	@Override
 	public void loginFailed(String message)
 	{
-		/* TODO: Show message in login controller label */
+		Platform.runLater(() -> {
+			lc.getErrorLabel().setText(message);
+			lc.getMessageHandler().stop();
+		});
 	}
 
 	@Override
@@ -83,6 +86,7 @@ public class ActionGUI extends MessageExecutor
 			mvc.printToConsole("Restored saved match!");
 			mainStage.setTitle("Masters of Renaissance");
 			mainStage.setScene(mainViewScene);
+			mainStage.centerOnScreen();
 			mainStage.show();
 		});
 	}
@@ -111,7 +115,7 @@ public class ActionGUI extends MessageExecutor
 		Platform.runLater(() -> {
 			mvc.enableButtons();
 			mvc.updateStorage(player.getDashboard().getStorage());
-			/* TODO: if (the player has SkillStorage cards) lcc.updateSkillStorageCards() */
+			lcc.update(player.getLeaderCards(), false);		/* isMyTurn = true because it's my turn when I'm doing the production */
 		});
 	}
 

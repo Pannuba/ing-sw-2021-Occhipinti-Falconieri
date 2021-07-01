@@ -84,6 +84,7 @@ public class ServerListener
 
 		while (!serverSocket.isClosed())
 		{
+			Object inputObj;
 			List<Player> players = new ArrayList<>();
 			List<ClientHandler> views = new ArrayList<>();
 			List<String> playerNames = new ArrayList<>();
@@ -104,12 +105,14 @@ public class ServerListener
 				System.out.println("Incoming connection: " + socket);
 				username = (String) ois.readObject();					/* Client sends username and starts NetworkHandler thread */
 
-				while (isDuplicateUsername(playerNames, username))
+				if (isDuplicateUsername(playerNames, username))
 				{
 					System.out.println("Duplicate username detected: " + username);
 					oos.writeObject(new LoginFailedMessage("This name has already been chosen by someone else! Enter a different name"));
 					oos.reset();
-					username = (String) ois.readObject();					/* Client sends username and starts NetworkHandler thread */
+
+					i--;
+					continue;
 				}
 
 				System.out.println("Username: " + username);
@@ -122,7 +125,7 @@ public class ServerListener
 				if (i == 0)		/* Get numPlayers from the first player who connects */
 				{
 					clientHandler.send(new FirstPlayerMessage(true));
-					Object inputObj = ois.readObject();
+					inputObj = ois.readObject();
 
 					while (inputObj instanceof Ping)		/* Ignore pings to avoid ClassCastException if client is slow */
 						inputObj = ois.readObject();

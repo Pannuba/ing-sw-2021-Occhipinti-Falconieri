@@ -39,7 +39,6 @@ public class NetworkHandler extends MessageIO implements Runnable		/* Observed b
 		{
 			try
 			{
-				//System.out.println("Waiting for new object from server");
 				Object inputObj = ois.readObject();
 
 				if (!(inputObj instanceof Ping))		/* Don't care if it's a ping */
@@ -70,7 +69,7 @@ public class NetworkHandler extends MessageIO implements Runnable		/* Observed b
 		{
 			e.printStackTrace();
 			System.out.println("Connection failed to server");
-			shutdown();
+			//shutdown();
 		}
 
 		heartbeat.scheduleAtFixedRate(sendPing, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */

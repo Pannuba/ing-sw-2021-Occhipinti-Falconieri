@@ -68,8 +68,10 @@ public class LoginController
 			numPlayersField.getText();
 
 			if (Integer.parseInt(numPlayersField.getText()) > 0 && Integer.parseInt(numPlayersField.getText()) < 5)
-				/* TODO: try/catch if connection fails? Bad IP/port? And show error label with the respective message */
+			{
+				errorLabel.setText("Waiting for other players to connect...");
 				messageHandler.send(numPlayersField.getText());
+			}
 
 			else
 				errorLabel.setText("Wrong number of players: re-enter the number");
@@ -107,6 +109,11 @@ public class LoginController
 		return portField;
 	}
 
+	public Label getErrorLabel()
+	{
+		return errorLabel;
+	}
+
 	public boolean isLocalMatch()
 	{
 		return isLocalMatch;
@@ -115,6 +122,11 @@ public class LoginController
 	public void setLocalMatch(boolean localMatch)
 	{
 		isLocalMatch = localMatch;
+	}
+
+	public MessageIO getMessageHandler()
+	{
+		return messageHandler;
 	}
 
 	public void setup(Scene launcherScene) throws IOException		/* Get GUI from launcher, set username and messageHandler in startMatch? Using getters */
