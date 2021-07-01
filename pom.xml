@@ -89,6 +89,7 @@
 									<artifact>*:*</artifact>
 									<includes>
 										<include>it/polimi/ingsw/client/view/MessageExecutor.class</include>
+										<include>it/polimi/ingsw/util/**/*</include>
 										<include>it/polimi/ingsw/server/**/*</include>
 										<include>it/polimi/ingsw/model/**/*</include>
 										<include>xml/**/*</include>

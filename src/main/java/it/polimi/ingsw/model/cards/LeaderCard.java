@@ -1,15 +1,8 @@
 package it.polimi.ingsw.model.cards;
 
 import it.polimi.ingsw.model.Player;
-import it.polimi.ingsw.model.Resource;
-import it.polimi.ingsw.model.board.Dashboard;
-import it.polimi.ingsw.model.board.Storage;
-import it.polimi.ingsw.model.board.Vault;
-import it.polimi.ingsw.util.Pair;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Abstract class for leader cards
@@ -41,8 +34,6 @@ public abstract class LeaderCard implements Serializable		/* Can't do new Leader
 	 * @param player used to take the requirements to activate the card
 	 * @return true if requirements are satisfied
 	 */
-
-	/* TODO: add checkRequirements to each Skill.... class? */
 
 	public abstract boolean checkRequirements(Player player);
 

@@ -69,7 +69,7 @@ public class EndGameController
 		if (username.equals(winnerName))
 			matchOutcome.setImage(new Image(getClass().getResourceAsStream("/img/writings/win!.png")));
 
-		if (winnerName.isEmpty())
+		else if (winnerName.isEmpty())
 			matchOutcome.setImage(new Image(getClass().getResourceAsStream("/img/writings/Tie!.png")));
 
 		else

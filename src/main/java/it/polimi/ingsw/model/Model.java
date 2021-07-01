@@ -293,7 +293,7 @@ public class Model extends Observable        /* Observed by the views to create 
 		return points;
 	}
 
-	public void endMatch()		/* Pass reason why the match is over from isMatchOver */
+	public void endMatch()
 	{
 		String winnerName = "";
 		int winnerPoints = 0;
@@ -326,6 +326,7 @@ public class Model extends Observable        /* Observed by the views to create 
 		}
 
 		/* Send MatchOverMessage to everyone (notifyObservers) including a message of who won */
+		System.out.println("endGame: winnerName = " + winnerName);
 		setChanged();
 		notifyObservers(new MatchOverMessage(winnerName, players));		/* Add message for tie? */
 	}
