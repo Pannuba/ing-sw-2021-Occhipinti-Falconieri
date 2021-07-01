@@ -23,10 +23,10 @@
       </ImageView>
       <TextField fx:id="nameField" layoutX="177.0" layoutY="247.0" prefHeight="30.0" prefWidth="200.0" promptText="Name">
          <font>
-            <Font name="Times New Roman Bold Italic" size="18.0" />
+            <Font name="BlackChancery" size="30.0" />
          </font>
       </TextField>
-      <TextField fx:id="ipField" layoutX="177.0" layoutY="317.0" prefHeight="30.0" prefWidth="200.0" promptText="IP Address">
+      <TextField fx:id="ipField" layoutX="177.0" layoutY="313.0" prefHeight="30.0" prefWidth="200.0" promptText="IP Address">
          <font>
             <Font name="Times New Roman Bold Italic" size="18.0" />
          </font>
@@ -51,7 +51,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Label fx:id="errorLabel" alignment="CENTER" layoutX="77.0" layoutY="178.0" prefHeight="30.0" prefWidth="400.0" styleClass="login" textAlignment="CENTER">
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="4.0" layoutY="176.0" prefHeight="63.0" prefWidth="533.0" styleClass="size25" textAlignment="CENTER">
          <font>
             <Font name="Times New Roman Italic" size="18.0" />
          </font>

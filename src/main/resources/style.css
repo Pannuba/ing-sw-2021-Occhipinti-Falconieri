@@ -10,30 +10,35 @@
     -fx-border-color: #DAA520;
     -fx-border-width: 4;
     -fx-text-fill: #DAA520;
-    -fx-font-family: "Charpentier Renaissance Reduced Normal";
+    -fx-font-family: "BlackChancery";
 }
 
-.choose_resources
+.size40
 {
     -fx-font-size: 40;
 }
 
-.button_leader
+.size35
 {
     -fx-font-size: 35;
 }
 
-.button_main
+.size30
+{
+    -fx-font-size: 30;
+}
+
+.size25
 {
     -fx-font-size: 25;
 }
 
-.button_production
+.size22
 {
     -fx-font-size: 22;
 }
 
-.login
+.size20
 {
     -fx-font-size: 20;
 }
@@ -52,19 +57,19 @@
 
 .label
 {
-    -fx-font-family: "Charpentier Renaissance Reduced Normal";
+    -fx-font-family: "BlackChancery";
 }
 
 .text-field
 {
-    -fx-font-family: "Charpentier Renaissance Reduced";
-    -fx-font-size: 20;
+    -fx-font-family: "BlackChancery";
+    -fx-font-size: 21;
 }
 
 .text-area
 {
-    -fx-font-family: "Charpentier Renaissance Reduced Normal";
-    -fx-font-size: 16;
+    -fx-font-family: "BlackChancery";
+    -fx-font-size: 20;
 }
 
 .devCard_market:hover

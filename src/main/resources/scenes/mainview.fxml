@@ -96,7 +96,7 @@
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <Label fx:id="vaultBlueAmount" layoutX="44.0" layoutY="548.0" prefHeight="51.0" prefWidth="20.0" text="0" textFill="WHITE">
+      <Label fx:id="vaultBlueAmount" layoutX="44.0" layoutY="540.0" prefHeight="51.0" prefWidth="20.0" styleClass="size40" text="0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -104,7 +104,7 @@
             <DropShadow />
          </effect>
       </Label>
-      <Label fx:id="vaultPurpleAmount" layoutX="131.0" layoutY="547.0" prefHeight="51.0" prefWidth="20.0" text="0" textFill="WHITE">
+      <Label fx:id="vaultPurpleAmount" layoutX="131.0" layoutY="539.0" prefHeight="51.0" prefWidth="20.0" styleClass="size40" text="0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -112,7 +112,7 @@
             <DropShadow />
          </effect>
       </Label>
-      <Label fx:id="vaultYellowAmount" layoutX="45.0" layoutY="601.0" prefHeight="51.0" prefWidth="20.0" text="0" textFill="WHITE">
+      <Label fx:id="vaultYellowAmount" layoutX="45.0" layoutY="593.0" prefHeight="51.0" prefWidth="20.0" styleClass="size40" text="0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -120,7 +120,7 @@
             <DropShadow />
          </effect>
       </Label>
-      <Label fx:id="vaultGreyAmount" layoutX="131.0" layoutY="600.0" prefHeight="51.0" prefWidth="20.0" text="0" textFill="WHITE">
+      <Label fx:id="vaultGreyAmount" layoutX="131.0" layoutY="592.0" prefHeight="51.0" prefWidth="20.0" styleClass="size40" text="0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -284,7 +284,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Button fx:id="otherPlayersButton" layoutX="1053.0" layoutY="206.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="66.0" prefWidth="184.0" styleClass="button_main" text="Other Boards" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="otherPlayersButton" layoutX="1053.0" layoutY="206.0" mnemonicParsing="false" onAction="#showOtherPlayers" prefHeight="66.0" prefWidth="184.0" styleClass="size25" text="Other Boards" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="22.0" />
          </font>
@@ -295,7 +295,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="marketsButton" layoutX="1053.0" layoutY="28.0" mnemonicParsing="false" onAction="#showMarkets" prefHeight="55.0" prefWidth="184.0" styleClass="button_main" text="Markets">
+      <Button fx:id="marketsButton" layoutX="1053.0" layoutY="28.0" mnemonicParsing="false" onAction="#showMarkets" prefHeight="66.0" prefWidth="184.0" styleClass="size25" text="Markets">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -306,7 +306,7 @@
             <Font size="22.0" />
          </font>
       </Button>
-      <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="117.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="66.0" prefWidth="184.0" styleClass="button_main" text="Leader Cards">
+      <Button fx:id="leaderCardsButton" layoutX="1053.0" layoutY="117.0" mnemonicParsing="false" onAction="#showLeaderCards" prefHeight="66.0" prefWidth="184.0" styleClass="size25" text="Leader Cards">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -317,7 +317,7 @@
             <Font size="22.0" />
          </font>
       </Button>
-      <Button fx:id="stopProductionButton" layoutX="1053.0" layoutY="314.0" mnemonicParsing="false" onAction="#stopProduction" prefHeight="55.0" prefWidth="184.0" styleClass="button_production" text="Stop Production" visible="false">
+      <Button fx:id="stopProductionButton" layoutX="1053.0" layoutY="314.0" mnemonicParsing="false" onAction="#stopProduction" prefHeight="55.0" prefWidth="184.0" styleClass="size20" text="Stop Production" visible="false">
          <font>
             <Font size="22.0" />
          </font>

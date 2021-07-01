@@ -124,7 +124,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Label fx:id="vaultBlueAmount" layoutX="44.0" layoutY="548.0" prefHeight="51.0" prefWidth="25.0" text="0" textFill="WHITE">
+      <Label fx:id="vaultBlueAmount" layoutX="44.0" layoutY="539.0" prefHeight="51.0" prefWidth="25.0" styleClass="size40" text="0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -132,7 +132,7 @@
             <DropShadow />
          </effect>
       </Label>
-      <Label fx:id="vaultPurpleAmount" layoutX="131.0" layoutY="547.0" prefHeight="51.0" prefWidth="25.0" text="0" textFill="WHITE">
+      <Label fx:id="vaultPurpleAmount" layoutX="131.0" layoutY="538.0" prefHeight="51.0" prefWidth="25.0" styleClass="size40" text="0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -140,7 +140,7 @@
             <DropShadow />
          </effect>
       </Label>
-      <Label fx:id="vaultYellowAmount" layoutX="45.0" layoutY="601.0" prefHeight="51.0" prefWidth="25.0" text="0" textFill="WHITE">
+      <Label fx:id="vaultYellowAmount" layoutX="45.0" layoutY="592.0" prefHeight="51.0" prefWidth="25.0" styleClass="size40" text="0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -148,7 +148,7 @@
             <DropShadow />
          </effect>
       </Label>
-      <Label fx:id="vaultGreyAmount" layoutX="131.0" layoutY="600.0" prefHeight="51.0" prefWidth="25.0" text="0" textFill="WHITE">
+      <Label fx:id="vaultGreyAmount" layoutX="131.0" layoutY="591.0" prefHeight="51.0" prefWidth="25.0" styleClass="size40" text="0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -156,21 +156,21 @@
             <DropShadow />
          </effect>
       </Label>
-      <Button fx:id="nextButton" layoutX="1083.0" layoutY="128.0" mnemonicParsing="false" onAction="#showNextBoard" prefHeight="60.0" prefWidth="129.0" styleClass="button_main" text="Next">
+      <Button fx:id="nextButton" alignment="CENTER" layoutX="1083.0" layoutY="128.0" mnemonicParsing="false" onAction="#showNextBoard" prefHeight="60.0" prefWidth="129.0" styleClass="size25" text="Next">
          <font>
             <Font size="28.0" />
          </font>
          <effect>
             <DropShadow />
          </effect></Button>
-      <Button fx:id="backButton" layoutX="1057.0" layoutY="216.0" mnemonicParsing="false" onAction="#backToBoard" prefHeight="60.0" prefWidth="179.0" styleClass="button_main" text="Back to Board" wrapText="true">
+      <Button fx:id="backButton" layoutX="1057.0" layoutY="216.0" mnemonicParsing="false" onAction="#backToBoard" prefHeight="60.0" prefWidth="179.0" styleClass="size22" text="Back to Board" wrapText="true">
          <font>
             <Font size="25.0" />
          </font>
          <effect>
             <DropShadow />
          </effect></Button>
-      <Label fx:id="usernameLabel" alignment="CENTER" layoutX="1018.0" layoutY="22.0" prefHeight="59.0" prefWidth="260.0" styleClass="button_leader" text="Username" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="usernameLabel" alignment="CENTER" layoutX="1018.0" layoutY="22.0" prefHeight="59.0" prefWidth="260.0" styleClass="size35" text="Username" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="36.0" />
          </font>

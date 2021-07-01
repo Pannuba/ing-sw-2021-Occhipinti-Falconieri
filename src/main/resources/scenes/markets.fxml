@@ -104,7 +104,7 @@
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <Button fx:id="backToBoardButton" layoutX="312.0" layoutY="642.0" mnemonicParsing="false" onAction="#backToBoard" prefHeight="45.0" prefWidth="193.0" styleClass="button_main" text="Back to Board">
+      <Button fx:id="backToBoardButton" layoutX="312.0" layoutY="642.0" mnemonicParsing="false" onAction="#backToBoard" prefHeight="45.0" prefWidth="193.0" styleClass="size22" text="Back to Board">
          <font>
             <Font size="25.0" />
          </font>
@@ -199,7 +199,7 @@
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <Label fx:id="whiteMarblesLabel" layoutX="13.0" layoutY="583.0" prefHeight="44.0" prefWidth="540.0" styleClass="login" text="Choose the resource to convert the white marbles to" visible="false">
+      <Label fx:id="whiteMarblesLabel" alignment="CENTER" layoutX="41.0" layoutY="583.0" prefHeight="44.0" prefWidth="512.0" styleClass="size25" text="Choose the resource to convert the white marbles to" visible="false">
          <font>
             <Font size="20.0" />
          </font>
@@ -211,7 +211,7 @@
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="whiteMarbleResourceTwo" fitHeight="80.0" fitWidth="80.0" layoutX="183.0" layoutY="629.0" onMouseClicked="#selectWhiteMarbleResourceTwo" pickOnBounds="true" preserveRatio="true" styleClass="play" visible="false">
+      <ImageView fx:id="whiteMarbleResourceTwo" fitHeight="80.0" fitWidth="80.0" layoutX="183.0" layoutY="626.0" onMouseClicked="#selectWhiteMarbleResourceTwo" pickOnBounds="true" preserveRatio="true" styleClass="play" visible="false">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
