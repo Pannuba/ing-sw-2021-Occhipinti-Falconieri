@@ -236,15 +236,15 @@ public class LocalModel extends Observable        /* Observed by the views to cr
 		/* Points if the player's pawn is on a POINTS box or after */
 		switch (track.getRedPawns().get(player.getId()))
 		{
-			case 0:  case 1:  case 2:															break;
-			case 3:  case 4:  case 5:	points += track.getFaithTrack()[3].getVictoryPoints();	break;
-			case 6:  case 7:  case 8:	points += track.getFaithTrack()[6].getVictoryPoints();	break;
-			case 9:  case 10: case 11:	points += track.getFaithTrack()[9].getVictoryPoints();	break;
-			case 12: case 13: case 14:	points += track.getFaithTrack()[12].getVictoryPoints();	break;
-			case 15: case 16: case 17:	points += track.getFaithTrack()[15].getVictoryPoints();	break;
-			case 18: case 19: case 20:	points += track.getFaithTrack()[18].getVictoryPoints();	break;
-			case 21: case 22: case 23:	points += track.getFaithTrack()[21].getVictoryPoints();	break;
-			default:					points += track.getFaithTrack()[24].getVictoryPoints();
+			case 0:  case 1:  case 2:											break;
+			case 3:  case 4:  case 5:	points += track.getFaithTrack()[3];		break;
+			case 6:  case 7:  case 8:	points += track.getFaithTrack()[6];		break;
+			case 9:  case 10: case 11:	points += track.getFaithTrack()[9];		break;
+			case 12: case 13: case 14:	points += track.getFaithTrack()[12];	break;
+			case 15: case 16: case 17:	points += track.getFaithTrack()[15];	break;
+			case 18: case 19: case 20:	points += track.getFaithTrack()[18];	break;
+			case 21: case 22: case 23:	points += track.getFaithTrack()[21];	break;
+			default:					points += track.getFaithTrack()[24];
 		}
 
 		return points;
