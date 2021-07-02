@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.view.gui;
 
 import it.polimi.ingsw.client.view.gui.controllers.LauncherController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,6 +22,11 @@ public class Launcher extends Application
 	@Override
 	public void start(Stage mainStage) throws IOException			/* Stage = window */
 	{
+		mainStage.setOnCloseRequest(t -> {
+			Platform.exit();
+			System.exit(0);
+		});
+
 		Font.loadFont(getClass().getResourceAsStream("/BLKCHCRY.TTF"), 15);
 
 		FXMLLoader loader = new FXMLLoader();

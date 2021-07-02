@@ -77,8 +77,6 @@ public class Match implements Runnable
 	{
 		System.out.println("Match thread started");
 
-
-
 		if (!isRecoveredMatch)
 		{
 			for (int i = 0; i < numPlayers; i++)
@@ -90,11 +88,8 @@ public class Match implements Runnable
 			{
 				views.get(i).send(new ChooseLeadersMessage(leaderCardsLists.get(i)));
 
-				for (int j = 0; j < numPlayers; j++)
-				{
-					if (i == model.getPlayers().get(j).getId())		/* Check if the view # is the same as the player ID to send InitialResourcesMessages in the right order */
-						views.get(i).send(new InitialResourcesMessage(i));				/* Because the player list in Model is sorted by ID. players[0] has ID 0 and so on */
-				}
+				System.out.println("player with id " + i + " is called " + model.getPlayerByID(i).getUsername());
+				views.get(i).send(new InitialResourcesMessage(i));				/* Because the player list in Model is sorted by ID. players[0] has ID 0 and so on */
 			}
 		}
 	}

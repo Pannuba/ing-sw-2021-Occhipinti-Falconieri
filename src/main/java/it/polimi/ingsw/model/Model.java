@@ -74,7 +74,7 @@ public class Model extends Observable        /* Observed by the views to create 
 	{
 		System.out.println("Creating leadercards...");
 
-		allLeaderCards = new ArrayList<>();		/* Necessary? YES */
+		allLeaderCards = new ArrayList<>();
 		LeaderCard cardToAdd = null;
 
 		for (int i = 0; i < 16; i++)
@@ -92,7 +92,7 @@ public class Model extends Observable        /* Observed by the views to create 
 		}
 	}
 
-	private void choosePlayerOrder()		/* IDs go from 0 to 3. Need to test if it's actually random */
+	private void choosePlayerOrder()		/* IDs go from 0 to 3 */
 	{
 		System.out.println("Choosing a random first player...");
 

@@ -182,7 +182,7 @@ public class ServerListener
 			List<Player> recoveredMatchPlayers = recoveredMatches.get(i).getPlayers();
 			int counter = 0;
 
-			for (int j = 0; j < recoveredMatchPlayers.size(); j++)		/* TODO: find more efficient way to compare lists */
+			for (int j = 0; j < recoveredMatchPlayers.size(); j++)
 			{
 				for (int k = 0; k < players.size(); k++)
 				{

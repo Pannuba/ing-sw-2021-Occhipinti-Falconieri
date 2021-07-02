@@ -139,13 +139,13 @@ public class MainViewController
 
 		if (gameState.getPlayerByName(username).isMyTurn())
 		{
-			printToConsole("It's your turn!");
+			console.setText("It's your turn!");
 			enableButtons();
 		}
 
 		else
 		{
-			printToConsole("It's " + gameState.getCurrPlayerName() + "'s turn!");
+			console.setText("It's " + gameState.getCurrPlayerName() + "'s turn!");
 			disableButtons();
 		}
 
