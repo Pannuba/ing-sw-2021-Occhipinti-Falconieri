@@ -169,6 +169,8 @@ public class MainViewController
 		if (!isDoingProduction)
 			startProduction();
 
+		stopProductionButton.setDisable(true);
+
 		Platform.runLater(() -> {
 			mainStage.setTitle("Masters of Renaissance - Select 2 resources");
 			printToConsole("Click the 2 resources you want to convert, then the resource you want to make\n(Vault icons)");
@@ -224,6 +226,7 @@ public class MainViewController
 				vaultResourceGrey.setDisable(true);
 			});
 
+			stopProductionButton.setDisable(false);
 			mainStage.setTitle("Masters of Renaissance");
 		}
 	}
