@@ -98,7 +98,7 @@
          </effect></ImageView>
       <Label fx:id="vaultBlueAmount" layoutX="44.0" layoutY="540.0" prefHeight="51.0" prefWidth="20.0" styleClass="size40" text="0" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="30.0" />
+            <Font name="System Italic" size="30.0" />
          </font>
          <effect>
             <DropShadow />
@@ -106,7 +106,7 @@
       </Label>
       <Label fx:id="vaultPurpleAmount" layoutX="131.0" layoutY="539.0" prefHeight="51.0" prefWidth="20.0" styleClass="size40" text="0" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="30.0" />
+            <Font name="System Italic" size="30.0" />
          </font>
          <effect>
             <DropShadow />
@@ -114,7 +114,7 @@
       </Label>
       <Label fx:id="vaultYellowAmount" layoutX="45.0" layoutY="593.0" prefHeight="51.0" prefWidth="20.0" styleClass="size40" text="0" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="30.0" />
+            <Font name="System Italic" size="30.0" />
          </font>
          <effect>
             <DropShadow />
@@ -122,7 +122,7 @@
       </Label>
       <Label fx:id="vaultGreyAmount" layoutX="131.0" layoutY="592.0" prefHeight="51.0" prefWidth="20.0" styleClass="size40" text="0" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="30.0" />
+            <Font name="System Italic" size="30.0" />
          </font>
          <effect>
             <DropShadow />
@@ -145,7 +145,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="vaultResourceBlue" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="71.0" layoutY="551.0" onMouseClicked="#selectBlueResource" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="vaultResourceBlue" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="71.0" layoutY="554.0" onMouseClicked="#selectBlueResource" pickOnBounds="true" preserveRatio="true" styleClass="production">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -156,7 +156,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="vaultResourcePurple" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="153.0" layoutY="552.0" onMouseClicked="#selectPurpleResource" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="vaultResourcePurple" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="153.0" layoutY="555.0" onMouseClicked="#selectPurpleResource" pickOnBounds="true" preserveRatio="true" styleClass="production">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -167,7 +167,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="vaultResourceYellow" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="70.0" layoutY="605.0" onMouseClicked="#selectYellowResource" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="vaultResourceYellow" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="70.0" layoutY="608.0" onMouseClicked="#selectYellowResource" pickOnBounds="true" preserveRatio="true" styleClass="production">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -178,7 +178,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="vaultResourceGrey" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="152.0" layoutY="602.0" onMouseClicked="#selectGreyResource" pickOnBounds="true" preserveRatio="true" styleClass="production">
+      <ImageView fx:id="vaultResourceGrey" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="152.0" layoutY="605.0" onMouseClicked="#selectGreyResource" pickOnBounds="true" preserveRatio="true" styleClass="production">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
