@@ -51,9 +51,9 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Label fx:id="errorLabel" alignment="CENTER" layoutX="4.0" layoutY="176.0" prefHeight="63.0" prefWidth="533.0" styleClass="size25" textAlignment="CENTER">
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="4.0" layoutY="167.0" prefHeight="63.0" prefWidth="533.0" styleClass="size25" textAlignment="CENTER">
          <font>
-            <Font name="Times New Roman Italic" size="18.0" />
+            <Font size="20.0" />
          </font>
       </Label>
       <ImageView fx:id="indicator" fitHeight="82.0" fitWidth="125.0" layoutX="26.0" layoutY="28.0" onMouseClicked="#backToLauncher" pickOnBounds="true" preserveRatio="true" styleClass="play">
