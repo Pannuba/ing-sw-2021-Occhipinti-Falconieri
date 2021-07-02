@@ -70,7 +70,6 @@ public class Player implements Serializable
 			}
 		}
 
-		System.out.println("Player getWhiteMarbleTypes: returning " + whiteMarbleResources);
 		return whiteMarbleResources;
 	}
 

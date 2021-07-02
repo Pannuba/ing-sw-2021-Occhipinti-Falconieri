@@ -49,7 +49,7 @@ public class LoginController
 
 		mainStage.setTitle("Masters of Renaissance Launcher");
 		mainStage.setScene(launcherScene);
-		mainStage.sizeToScene();		/* ? */
+		mainStage.sizeToScene();
 		mainStage.show();
 	}
 
