@@ -7,10 +7,10 @@ package it.polimi.ingsw.model.cards;
 
 public enum DevCardColor
 {
-	BLUE,
 	GREEN,
-	YELLOW,
-	PURPLE;
+	BLUE,
+	PURPLE,
+	YELLOW;
 
 	/**
 	 * Convert the received string to devCard color Type, used by the dev card serialization process

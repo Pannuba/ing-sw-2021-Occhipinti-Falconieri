@@ -49,56 +49,20 @@ public class DevCardsMarket implements Serializable
 
 		List<DevCard> tempList;				/* For each devcard color, make 3 stacks of devcards for a total of 12 stacks */
 
-		for (int j = 0; j < 3; j++)
+		for (int i = 0; i < DevCardColor.values().length; i++)
 		{
-			tempList = new ArrayList<>();
-
-			for (int i = 0; i < 48; i++)
-			{																	/* j + 1 because level 0 devcards don't exist */
-				if (allDevCards.get(i).getColor() == DevCardColor.GREEN && allDevCards.get(i).getLevel() == (j + 1))
-					tempList.add(allDevCards.get(i));
-			}
-
-			devCardStacks.add(tempList);
-		}
-
-		for (int j = 0; j < 3; j++)
-		{
-			tempList = new ArrayList<>();
-
-			for (int i = 0; i < 48; i++)
+			for (int j = 0; j < 3; j++)
 			{
-				if (allDevCards.get(i).getColor() == DevCardColor.BLUE && allDevCards.get(i).getLevel() == (j + 1))
-					tempList.add(allDevCards.get(i));
+				tempList = new ArrayList<>();
+
+				for (int k = 0; k < 48; k++)
+				{                                                                    /* j + 1 because level 0 devcards don't exist */
+					if (allDevCards.get(k).getColor() == DevCardColor.values()[i] && allDevCards.get(k).getLevel() == (j + 1))
+						tempList.add(allDevCards.get(k));
+				}
+
+				devCardStacks.add(tempList);
 			}
-
-			devCardStacks.add(tempList);
-		}
-
-		for (int j = 0; j < 3; j++)
-		{
-			tempList = new ArrayList<>();
-
-			for (int i = 0; i < 48; i++)
-			{
-				if (allDevCards.get(i).getColor() == DevCardColor.PURPLE && allDevCards.get(i).getLevel() == (j + 1))
-					tempList.add(allDevCards.get(i));
-			}
-
-			devCardStacks.add(tempList);
-		}
-
-		for (int j = 0; j < 3; j++)
-		{
-			tempList = new ArrayList<>();
-
-			for (int i = 0; i < 48; i++)
-			{
-				if (allDevCards.get(i).getColor() == DevCardColor.YELLOW && allDevCards.get(i).getLevel() == (j + 1))
-					tempList.add(allDevCards.get(i));
-			}
-
-			devCardStacks.add(tempList);
 		}
 
 		for (int i = 0; i < devCardStacks.size(); i++)			/* Shuffle each stack */
