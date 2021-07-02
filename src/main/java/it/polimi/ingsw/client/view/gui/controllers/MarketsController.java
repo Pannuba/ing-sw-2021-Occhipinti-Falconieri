@@ -104,7 +104,7 @@ public class MarketsController        /* Send command directly from here? Get wh
 		Marble spare = market.getSpareMarble();
 
 		whiteMarbleResources = player.getWhiteMarbleTypes();
-		System.out.println("updateMarket called. whiteMarbleResources.size = " + whiteMarbleResources.size());
+
 		if (player.isMyTurn())		/* When it's the player's turn, make buttons pressable to send the command BUY_RESOURCES */
 			enableButtons();
 		/* The disable checkbox in sceneBuilder disables the button permanently, meaning setDisable(false) won't work */
@@ -204,7 +204,9 @@ public class MarketsController        /* Send command directly from here? Get wh
 			whiteMarbleResourceOne.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertResTypeToPath(whiteMarbleResources.get(0)))));
 			whiteMarbleResourceTwo.setImage(new Image(getClass().getResourceAsStream(ConvertMethods.convertResTypeToPath(whiteMarbleResources.get(1)))));
 			whiteMarbleResourceOne.setVisible(true);
+			whiteMarbleResourceOne.setDisable(false);
 			whiteMarbleResourceTwo.setVisible(true);
+			whiteMarbleResourceTwo.setDisable(false);
 		}
 
 	}
@@ -216,7 +218,9 @@ public class MarketsController        /* Send command directly from here? Get wh
 		messageHandler.send(Arrays.asList("BUY_RESOURCES", rowOrCol, number, selectedWhiteMarbleRes));
 		whiteMarblesLabel.setVisible(false);
 		whiteMarbleResourceOne.setVisible(false);
+		whiteMarbleResourceOne.setDisable(true);
 		whiteMarbleResourceTwo.setVisible(false);
+		whiteMarbleResourceTwo.setDisable(true);
 	}
 
 	@FXML
@@ -226,7 +230,9 @@ public class MarketsController        /* Send command directly from here? Get wh
 		messageHandler.send(Arrays.asList("BUY_RESOURCES", rowOrCol, number, selectedWhiteMarbleRes));
 		whiteMarblesLabel.setVisible(false);
 		whiteMarbleResourceOne.setVisible(false);
+		whiteMarbleResourceOne.setDisable(true);
 		whiteMarbleResourceTwo.setVisible(false);
+		whiteMarbleResourceTwo.setDisable(true);
 	}
 
 	@FXML
