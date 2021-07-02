@@ -1,7 +1,5 @@
 package it.polimi.ingsw.server.controller.commands;
 
-import it.polimi.ingsw.server.controller.Controller;
-
 import java.util.List;
 
 /**

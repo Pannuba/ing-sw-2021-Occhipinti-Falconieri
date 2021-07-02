@@ -576,12 +576,12 @@ public class MainViewController
 
 		isBuyingDevCard = false;
 
-		Platform.runLater(() -> {	/* Necessary here? Maybe only for buttons/ImageViews */
+		Platform.runLater(() -> {
 			mainStage.setTitle("Masters of Renaissance");
 		});
 	}
 
-	public void enableButtons()		/* TODO: also add leader buttons!! */
+	public void enableButtons()
 	{
 		defaultProductionButton.setDisable(false);
 

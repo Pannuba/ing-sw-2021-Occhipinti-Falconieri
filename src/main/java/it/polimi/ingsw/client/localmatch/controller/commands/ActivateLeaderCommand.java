@@ -20,7 +20,7 @@ public class ActivateLeaderCommand			/* "ACTIVATE_LEADER", "4" */
 
 		int cardToActivateNum = Integer.parseInt(command.get(1));
 
-		LeaderCard cardToActivate = model.getPlayer().getLeaderCardByNumber(cardToActivateNum);		/* TODO: add check if this action fails */
+		LeaderCard cardToActivate = model.getPlayer().getLeaderCardByNumber(cardToActivateNum);
 
 		if (cardToActivate.checkRequirements(model.getPlayer()))
 		{

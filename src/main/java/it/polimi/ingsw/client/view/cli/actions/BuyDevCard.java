@@ -16,8 +16,6 @@ public class BuyDevCard
 	{
 		this.input = input;
 		this.cli = cli;
-	/*	Check for resources. Here or server? SERVER		LocalModel class? NO
-		If client-side check, send new vault, storage and devcard market. If server-side check, send messages. I think server side is better. YES */
 	}
 
 	public List<String> run()
@@ -56,6 +54,6 @@ public class BuyDevCard
 		command.add("BUY_DEVCARD");
 		command.add(cardToBuyNum);
 		command.add(Integer.toString(devCardAreaIndex));
-		return command;		/* TODO: use Arrays.asList or whatever */
+		return command;
 	}
 }

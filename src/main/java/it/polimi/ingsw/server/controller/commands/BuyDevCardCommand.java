@@ -29,7 +29,7 @@ public class BuyDevCardCommand implements Command		/* "BUY_DEVCARD", "card#", "d
 	@Override
 	public boolean run(List<String> command)
 	{
-		String message; boolean isFailed;		/* TODO: check if player wants to buy card # 9327082 */
+		String message; boolean isFailed;
 		int cardToBuyNum = Integer.parseInt(command.get(1));
 		int devCardAreaIndex = Integer.parseInt(command.get(2)) - 1;		/* If the client chooses the area #3, it's #2 because 0-indexed */
 		DevCard cardToBuy = model.getDevCardsMarket().getDevCardByNumber(cardToBuyNum);
@@ -42,11 +42,10 @@ public class BuyDevCardCommand implements Command		/* "BUY_DEVCARD", "card#", "d
 			if (discountLeader != null)		/* No need to worry about cards being used multiple times because of resource type in requirements */
 			{
 				System.out.println(username + " is using the active SkillDiscount card's ability!");
-				/* TODO: send OperationResultMessage to notify the client the SkillDiscount has been used? */
 				requirements.get(i).setQuantity(requirements.get(i).getQuantity() - discountLeader.getDiscountNum());
 			}
 
-			else System.out.println(username + " has no active SkillDiscount cards!");		/* TODO: add in local controller */
+			else System.out.println(username + " has no active SkillDiscount cards!");
 		}
 
 		if (model.getPlayerByUsername(username).getDashboard().getDevCardAreas()[devCardAreaIndex].getLayer() != (cardToBuy.getLevel() - 1))

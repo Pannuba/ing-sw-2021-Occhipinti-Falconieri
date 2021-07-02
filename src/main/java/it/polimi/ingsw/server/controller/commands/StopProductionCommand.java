@@ -7,8 +7,10 @@ import it.polimi.ingsw.server.controller.Controller;
 
 import java.util.List;
 
-/*	When the player has finished the production, all booleans "isDoingProduction" in the player's cards and the one for the default production
-	are set back to false. After this command is executed the controller performs the postRoundChecks and sends the new gamestate to all players
+/**
+ * When the player has finished the production, all booleans "isDoingProduction" in the player's cards and the one for the default production are set back to false
+ * After this command is executed the controller performs the postRoundChecks and sends the new game state to all players
+ * @author Giulio Occhipinti
  */
 
 public class StopProductionCommand implements Command

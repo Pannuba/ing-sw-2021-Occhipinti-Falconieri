@@ -32,7 +32,7 @@ public class ActivateLeaderCommand implements Command		/* "ACTIVATE_LEADER", "4"
 
 		int cardToActivateNum = Integer.parseInt(command.get(1));
 
-		LeaderCard cardToActivate = model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivateNum);		/* TODO: add check if this action fails */
+		LeaderCard cardToActivate = model.getPlayerByUsername(username).getLeaderCardByNumber(cardToActivateNum);
 
 		if (cardToActivate.checkRequirements(model.getPlayerByUsername(username)))
 		{

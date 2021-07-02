@@ -23,6 +23,6 @@ public class MatchOverMessage implements Message			/* Sent to client when isMatc
 	@Override
 	public void process(MessageExecutor action)
 	{
-		action.matchOver(winnerName, players);		/* TODO: find better method name(?) */
+		action.matchOver(winnerName, players);
 	}
 }

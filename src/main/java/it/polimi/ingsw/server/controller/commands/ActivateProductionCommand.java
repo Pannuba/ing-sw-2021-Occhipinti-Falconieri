@@ -18,7 +18,7 @@ import java.util.List;
  * @author Giulio Occhipinti
  */
 
-public class ActivateProductionCommand implements Command			/* TODO: update local controller to support multiple productions */
+public class ActivateProductionCommand implements Command
 {
 	private final Model model;
 	private final Controller controller;

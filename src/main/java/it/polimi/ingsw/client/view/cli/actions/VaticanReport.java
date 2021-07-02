@@ -7,9 +7,9 @@ import java.util.List;
 
 public class VaticanReport
 {
-	public VaticanReport(int popeBoxNum, List<Player> players, CLI cli)		/* TODO: add who triggered the report? */
+	public VaticanReport(int popeBoxNum, List<Player> players, CLI cli)
 	{
-		Player localPlayer = new Player("temp");		/* Otherwise IntelliJ gives an annoying warning */
+		Player localPlayer = new Player("temp");
 
 		System.out.println("Vatican report on box #" + popeBoxNum + "!");
 
