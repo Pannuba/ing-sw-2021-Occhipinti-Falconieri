@@ -33,8 +33,8 @@ public class ServerListener
 		recoveredMatches = new ArrayList<>();
 		totalMatches = new ArrayList<>();
 
-		new File("../savedmatches/").mkdir();
-		File xmlpath = new File("../savedmatches/");
+		new File("./savedmatches/").mkdir();
+		File xmlpath = new File("./savedmatches/");
 		int matchcount = 0;
 
 		for (int i = 0; i < xmlpath.list().length; i++)
@@ -51,7 +51,7 @@ public class ServerListener
 		{
 			try
 			{
-				matchToAdd = (Model) XML_Serialization.deserialize(new FileInputStream("../savedmatches/match" + (i + 1) + ".xml"));
+				matchToAdd = (Model) XML_Serialization.deserialize(new FileInputStream("./savedmatches/match" + (i + 1) + ".xml"));
 			}
 			catch (IOException e)
 			{
@@ -204,7 +204,7 @@ public class ServerListener
 		int removedMatchIndex = totalMatches.indexOf(matchToRemove);
 		totalMatches.remove(matchToRemove);
 
-		if (!new File("../savedmatches/match" + (removedMatchIndex + 1) + ".xml").delete())
+		if (!new File("./savedmatches/match" + (removedMatchIndex + 1) + ".xml").delete())
 			System.out.println("Couldn't delete match file!");
 	}
 
@@ -216,7 +216,7 @@ public class ServerListener
 			serverSocket.close();
 
 			for (int i = 0; i < totalMatches.size(); i++)
-				XML_Serialization.serialize(totalMatches.get(i), "../savedmatches/match" + (i + 1) + ".xml");
+				XML_Serialization.serialize(totalMatches.get(i), "./savedmatches/match" + (i + 1) + ".xml");
 		}
 		catch (IOException e)
 		{
