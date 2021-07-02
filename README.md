@@ -21,6 +21,10 @@ Requirements
 ------------
 OpenJDK 11: download for all platforms available at https://adoptopenjdk.net/
 
+GNU/Linux distributions that use the `apt` package manager can also use this command:
+
+`$ sudo apt install openjdk-11-jre`
+
 How to run - Client
 -------------------
 
@@ -34,11 +38,11 @@ GUI: `$ java -jar Client.jar`
 
 CLI:
 
-In order to display UTF-8 characters correctly, either run the CLI command in a PowerShell window, or follow these steps:
+In order to display UTF-8 characters correctly follow these steps:
 
-* steps on how to enable utf on windows *
+Start -> type "intl.cpl" -> enter -> in the "Administrative" menu, click "Change System Locale", and check "Use Unicode UTF-8 for worldwide language support" in the window that pops up. Then restart
 
-then run start_cli.bat inside the deliverables folder
+Then run start_cli.bat inside the deliverables/final folder
 
 GUI: simply double-click on the Client.jar icon
 
