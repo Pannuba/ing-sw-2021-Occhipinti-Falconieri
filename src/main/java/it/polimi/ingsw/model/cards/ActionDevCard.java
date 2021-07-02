@@ -5,8 +5,7 @@ import it.polimi.ingsw.model.DevCardsMarket;
 import java.util.List;
 
 /**
- * Action devCard: extends Action Token
- * Use in single game
+ * This token removes two dev cards of the specified color from the DevCardsMarket
  * @author Giulio Occhipinti
  */
 
@@ -14,6 +13,10 @@ public class ActionDevCard extends ActionToken
 {
 	private DevCardColor color;
 	private DevCardsMarket devCardsMarket;
+
+	/**
+	 * Empty constructor required by the persistence advanced functionality
+	 */
 
 	public ActionDevCard()
 	{
@@ -32,16 +35,11 @@ public class ActionDevCard extends ActionToken
 		this.devCardsMarket = devCardsMarket;		/* Pass pointer to devCardsMarket in constructor to avoid doing it when calling action(), */
 	}												/* so the abstract method action can be used correctly */
 
-	/**
-	 * Activate the action: remove two devCards of color from market starting from the lowest level
-	 * Update the devCardsMarket
-	 */
-
 	@Override
 	public void doAction()
 	{
 		System.out.println("Activating action of ActionDevCard");
-		List<List<DevCard>> devCardStacks = devCardsMarket.getDevCardStacks();		/* Put this here or outside removeDevCards? */
+		List<List<DevCard>> devCardStacks = devCardsMarket.getDevCardStacks();
 		int cardsToRemove = 2;
 
 		/* Scan all cards looking for the ones with the color we want, then delete them */
@@ -61,8 +59,6 @@ public class ActionDevCard extends ActionToken
 				}
 			}
 		}
-
-		/* TODO: if cardsToRemove != 0 error? */
 
 		devCardsMarket.setDevCardStacks(devCardStacks);
 	}

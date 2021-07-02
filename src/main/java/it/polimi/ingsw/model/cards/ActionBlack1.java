@@ -6,8 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Action black 1: extends Action Token
- * Use in single game
+ * This token increases the black pawn's position by one and shuffles the list of action tokens
  * @author Giulio Occhipinti
  */
 
@@ -16,6 +15,10 @@ public class ActionBlack1 extends ActionToken		/* I can also do an instanceof ch
 	private Track track;
 	private List<ActionToken> tokens;
 
+	/**
+	 * Empty constructor required by the persistence advanced functionality
+	 */
+
 	public ActionBlack1()
 	{
 
@@ -23,8 +26,8 @@ public class ActionBlack1 extends ActionToken		/* I can also do an instanceof ch
 
 	/**
 	 * Creates the token
-	 * @param track
-	 * @param tokens list of all Action Tokens
+	 * @param track the match's track
+	 * @param tokens list of all action tokens
 	 */
 
 	public ActionBlack1(Track track, List<ActionToken> tokens)
@@ -32,10 +35,6 @@ public class ActionBlack1 extends ActionToken		/* I can also do an instanceof ch
 		this.track = track;
 		this.tokens = tokens;
 	}
-
-	/**
-	 * Activate the action: advances the blackPawn one box and shuffles all action tokens
-	 */
 
 	@Override
 	public void doAction()

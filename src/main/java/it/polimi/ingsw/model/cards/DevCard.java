@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Development cards, the variables are taken from the xml files
+ * Development cards, the parameters are taken from the xml files
  * @author Giulio Occhipinti
  */
 
@@ -23,7 +23,7 @@ public class DevCard implements Serializable
 	private List<Resource> product;				/* Right side. faithpoints are here */
 
 	/**
-	 * Creates devCard
+	 * Constructor. Creates a dev card
 	 */
 
 	public DevCard()

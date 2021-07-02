@@ -4,13 +4,12 @@ import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.util.Pair;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Specify the skill of the leader card: production
- * Requires one devCard of level two
- * Every card gives one faith point and one product that can be chosen
+ * SkillProduction leader cards have the ability to add a source of production
+ * When used, the player spends a resource of "cost.getResourceType()" type and created one faith point and another resource of any type chosen by the player
+ * The activation requires a dev card of a specific color and level, specified in the requirements Pair
  * @author Giulio Occhipinti
  */
 
@@ -22,7 +21,11 @@ public class SkillProduction extends LeaderCard
 	private int productAmount;			/* Set in xmls */
 	private int faithPoints;			/* Set in xmls */
 
-	public SkillProduction()		/* ResourceType of cost and product is assigned by the xmls */
+	/**
+	 * Constructor
+	 */
+
+	public SkillProduction()		/* ResourceType of cost is assigned by the xmls */
 	{
 		isUsedForProduction = false;
 		cost = new Resource();

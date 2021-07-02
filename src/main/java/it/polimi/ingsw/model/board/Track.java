@@ -8,27 +8,23 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Faith track
- * One track shared among all players
+ * One track shared among all players. The players' pawns are stored in the redPawns hashmap, the faith track is an array of integers,
+ * and the popeTokens array is used to keep track of whether the first, second or third vatican report has already been called
  * @author Giulio Occhipinti
  * @author Chiara Falconieri
  */
 
 public class Track implements Serializable
 {
-	/**
-	 * @param faithTrack array of 25 boxes
-	 * @param popeTokens Track has 3 popeTokens, discarded when a player calls a vatican report for each token
-	 * @param redPawns one for each player, is HashMap <player ID, position>
-	 * @param numPlayers number of players in the game
-	 * @param blackPawn used only in single game
-	 */
-
 	private final int[] faithTrack = new int[25];
 	private final PopeToken[] popeTokens = new PopeToken[3];
 	private HashMap<Integer, Integer> redPawns;
 	private int numPlayers;
 	private int blackPawn;
+
+	/**
+	 * Empty constructor required by the persistence functionality
+	 */
 
 	public Track()
 	{
@@ -68,7 +64,8 @@ public class Track implements Serializable
 	}
 
 	/**
-	 * Returns the number of the pope box that triggered the vatican report. 0 if no vatican report
+	 * Checks whether a pope box has been reached or surpassed by a player. Called by the controller after every round
+	 * @return the pope box number that triggered the vatican report. 0 if no vatican report
 	 */
 
 	public int checkVaticanReport()
@@ -81,8 +78,6 @@ public class Track implements Serializable
 
 			if ((redPawns.get(i) >= 8  || blackPawn >= 8)  && !popeTokens[0].isDiscarded())	return 8;
 		}
-
-		/* TODO: if we want to know which player triggered the vatican report, add a boolean to Player like didVaticanReport, and check in Model */
 
 		return 0;
 	}

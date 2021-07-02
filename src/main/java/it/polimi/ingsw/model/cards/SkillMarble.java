@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Specify the skill of the leader card: marble
- * Requires three devCards: two of same color and one of different color
+ * SkillMarble cards have the ability of converting white marbles in the marbles market to a resource of type "whiteMarble".
+ * In order to be activated, they require two dev cards of any level, different colors specified in the requirements instance variable
  * @author Giulio Occhipinti
  */
 
@@ -16,6 +16,10 @@ public class SkillMarble extends LeaderCard
 {
 	private ResourceType whiteMarble;
 	private List<DevCardColor> requirements;		/* Like SkillDiscount but it's 2 + 1 cards in the base game, like [YELLOW, YELLOW, BLUE] */
+
+	/**
+	 * Constructor
+	 */
 
 	public SkillMarble()
 	{

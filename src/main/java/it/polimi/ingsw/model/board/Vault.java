@@ -15,13 +15,10 @@ import java.util.List;
 
 public class Vault implements Serializable
 {
-	/**
-	 * @param resourceAmounts contains the number of all resources in the vault divided by resource type
-	 */
 	private HashMap<ResourceType, Integer> resourceAmounts;
 
 	/**
-	 * Creates the hashMap of all resources and set the quantity to 0
+	 * Creates the hashMap of all resources and sets the quantity to 0
 	 */
 
 	public Vault()
@@ -36,6 +33,7 @@ public class Vault implements Serializable
 
 	/**
 	 * Adds a resource based on its type
+	 * @param resourceToAdd the resource to add to the vault
 	 */
 
 	public void addResource(ResourceType resourceToAdd)
@@ -44,7 +42,8 @@ public class Vault implements Serializable
 	}
 
 	/**
-	 * Adds a resource list even several by calling the addResource function for each resource to be added
+	 * Adds a list of resources by calling the addResource function for each resource to be added. Used by the production action
+	 * @param resourcesToAdd the list of resources to add to the vault
 	 */
 
 	public void addResourceList(List<Resource> resourcesToAdd)
@@ -82,8 +81,9 @@ public class Vault implements Serializable
 	}
 
 	/**
-	 * Returns the total number of resources
+	 * Gets the total amount of resources stored in the vault.
 	 * Used to calculate the final score, to activate a leaderCard or to purchase a devCard
+	 * @return the total number of resources
 	 */
 
 	public int getTotalResources()

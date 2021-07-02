@@ -7,23 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Single devCard area of the dashboard
+ * Single DevCard area of the dashboard
  * @author Giulio Occhipinti
  */
 
 public class DevCardArea implements Serializable			/* Devcards can't be removed once added */
 {
-	/**
-	 * @param isEmpty true if there is no devCard
-	 * @param devCards list of devCards of that area
-	 * @param layer 0 if there is no devCard, 1 if there is devCard of level 1, 2 if there is devCard of level 2, 3 if there is devCard of level 3
-	 */
 	private boolean isEmpty;
 	private List<DevCard> devCards = new ArrayList<>();
 	private int layer;
 
 	/**
-	 * Creates an empty area
+	 * Constructor, creates an empty area
 	 */
 
 	public DevCardArea()
@@ -33,7 +28,8 @@ public class DevCardArea implements Serializable			/* Devcards can't be removed 
 	}
 
 	/**
-	 * Check that there are no fewer than zero cards or more than three
+	 * Check that there aren't fewer than zero cards or more than three
+	 * @return false if there's a problem in the dev card area, true otherwise
 	 */
 
 	public boolean checkDevCardArea()			/* Layer is 0 if there are no devcards, 3 if there are 3 devcards */
@@ -53,6 +49,7 @@ public class DevCardArea implements Serializable			/* Devcards can't be removed 
 	 * If layer is 0 we can add a card of level 1
 	 * If layer is 1 we can add a card of level 2
 	 * If layer is 2 we can add a card of level 3
+	 * @return true if the card is added to the area, false otherwise
 	 */
 
 	public boolean addDevCard(DevCard cardToAdd)	/* changed from void to boolean for testing */
@@ -82,8 +79,8 @@ public class DevCardArea implements Serializable			/* Devcards can't be removed 
 	}
 
 	/**
-	 * Returns the highest card of the area
-	 * The devCard of highest level is the most important
+	 * The devCard of highest level is the most important because it's the one used for production
+	 * @return the card in the area with the highest level
 	 */
 
 	public DevCard getTopDevCard()

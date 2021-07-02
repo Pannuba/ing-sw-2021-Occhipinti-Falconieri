@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.cards;
 
 /**
- * Enum of all devCard color type
+ * Enumeration of all possible DevCard color types
  * @author Giulio Occhipinti
  */
 
@@ -13,10 +13,9 @@ public enum DevCardColor
 	PURPLE;
 
 	/**
-	 * Convert the received string to devCard color Type
-	 * Used in card deserialization
-	 * @param str
-	 * @return devCard color type
+	 * Convert the received string to devCard color Type, used by the dev card serialization process
+	 * @param str the string to convert to a DevCardColor
+	 * @return the devCard color type
 	 */
 
 	public static DevCardColor convertStringToDevColorType(String str)

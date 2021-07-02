@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Specify the skill of the leader card: discount
- * Requires two devCards of different color
+ * SkillDiscount leader cards have the ability of reducing the price when buying dev cards by "discountedNum", if the card's cost has resources of type "discountedResource"
+ * In order to be activated, they require two dev cards of different colors, any level, specified in the requirements instance variable
  * @author Giulio Occhipinti
  */
 
@@ -17,6 +17,10 @@ public class SkillDiscount extends LeaderCard
 	private int discountNum;
 	private List<DevCardColor> requirements;			/* Requires devcards of different color, any level. 2 in base game but List for scalability */
 	private ResourceType discountedResource;
+
+	/**
+	 * Constructor
+	 */
 
 	public SkillDiscount()
 	{

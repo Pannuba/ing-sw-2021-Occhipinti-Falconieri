@@ -7,9 +7,8 @@ import it.polimi.ingsw.model.board.Storage;
 import it.polimi.ingsw.model.board.Vault;
 
 /**
- * Specify the skill of the leader card: storage
- * Requires five resources of same type
- * Gives an additional storage for two resources of same type
+ * SkillStorage leader cards give an additional storage for two resources of same type, specified in additionalStorage.getShelfResourceType()
+ * In order to be activated, they require five resources of same type, in requirements.getResourceType()
  * @author Giulio Occhipinti
  */
 
@@ -17,6 +16,10 @@ public class SkillStorage extends LeaderCard		/* "final" keyword in instance var
 {
 	private Resource requirements;			/* Only 1 resource type */
 	private Shelf additionalStorage;
+
+	/**
+	 * Constructor
+	 */
 
 	public SkillStorage()
 	{
@@ -57,6 +60,7 @@ public class SkillStorage extends LeaderCard		/* "final" keyword in instance var
 
 	/**
 	 * Removes resources from the additional storage
+	 * @param resToRemoveNum the amount of resources to remove from the additionalStorage
 	 */
 
 	public int removeResources(int resToRemoveNum)
