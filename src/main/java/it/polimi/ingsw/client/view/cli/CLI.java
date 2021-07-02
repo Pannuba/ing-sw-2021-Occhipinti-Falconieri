@@ -17,11 +17,19 @@ import it.polimi.ingsw.server.messages.Message;
 
 import java.util.*;
 
+/**
+ * Main CLI class
+ */
+
 public class CLI extends View
 {
 	private final Scanner input;
 	private GameState gameState;
 	private String username;
+
+	/**
+	 * Constructor, creates a Scanner instance and starts the game
+	 */
 
 	public CLI()
 	{
@@ -48,7 +56,7 @@ public class CLI extends View
 			LocalModel model = new LocalModel(player, this);
 			LocalController lc = new LocalController(model, this);
 			messageHandler = new LocalMatchIO(lc);
-			LocalMatch match = new LocalMatch(model, this, lc);		/* M, V, C */
+			LocalMatch match = new LocalMatch(model, this);		/* M, V, C */
 			new Thread(match).start();
 		}
 

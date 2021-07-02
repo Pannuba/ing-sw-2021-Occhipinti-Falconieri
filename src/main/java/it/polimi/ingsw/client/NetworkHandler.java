@@ -8,6 +8,10 @@ import java.util.*;
 
 import java.net.Socket;
 
+/**
+ * Used by the client to send messages to a remote server through sockets.
+ */
+
 public class NetworkHandler extends MessageIO implements Runnable		/* Observed by CLI to send it the newest gamestate */
 {
 	private Socket clientSocket;

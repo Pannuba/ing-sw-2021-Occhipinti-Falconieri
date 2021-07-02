@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Observable;
 
 /**
- * Model main class. Contains all the information of a Match (players and their dashboard, markets, track, actiontokens...)
+ * Main model class. Contains all the information of a Match (players and their dashboard, markets, track, action tokens...)
  * Created by Match in server
  * @author Giulio Occhipinti
  * @author Chiara Falconieri

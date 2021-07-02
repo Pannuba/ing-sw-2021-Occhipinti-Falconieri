@@ -88,7 +88,7 @@ public class GUI extends View        /* Has gamestate, action instance, observes
 			LocalModel model = new LocalModel(player, this);
 			LocalController lc = new LocalController(model, this);
 			messageHandler = new LocalMatchIO(lc);
-			LocalMatch match = new LocalMatch(model, this, lc);		/* M, V, C */
+			LocalMatch match = new LocalMatch(model, this);
 			new Thread(match).start();
 		}
 

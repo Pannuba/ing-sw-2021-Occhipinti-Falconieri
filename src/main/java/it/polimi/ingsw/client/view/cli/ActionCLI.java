@@ -12,13 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-/*	Idea: make ActionExecutor an abstract class in the client package, with methods like "abstract void firstPlayer(boolean isFirstPlayer)"...
-	then make ActionCLI and ActionGUI classes that extend ActionExecutor in the cli and gui package respectively, and put the @Override methods there
-	MessageDecoder has an instance variable of ActionExecutor, it should still work.
-
-	Put everything here or only the functions called by server messages? Make MessageCLI and ActionCLI
-*/
-
 public class ActionCLI extends MessageExecutor    /* Has methods that perform actions such as buying resources, to avoid cluttering the CLI. Interface? */
 {
 	private final Scanner input;
@@ -26,7 +19,7 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 	private final MessageIO messageHandler;
 	private final List<String> command;
 
-	public ActionCLI(CLI cli)		/* TODO: tidy parameters passed from CLI and to other actions */
+	public ActionCLI(CLI cli)
 	{
 		this.cli = cli;
 		this.input = cli.getInput();
@@ -72,7 +65,7 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 	@Override
 	public void productionResult(Player player)
 	{
-		PrintMethods.printStorage(player.getDashboard().getStorage());	/* TODO: also print vault? Leadercards? No, see ActivateProductionCommand */
+		PrintMethods.printStorage(player.getDashboard().getStorage());
 		System.out.print("Choose another production: default production (0), devcard (1), SkillProduction leader card (2), stop production (4): ");
 
 		List<String> command;
@@ -152,7 +145,7 @@ public class ActionCLI extends MessageExecutor    /* Has methods that perform ac
 	{
 		System.out.println(message);
 
-		System.out.print("Do you want to play again? (Y/N) ");			/* TODO: not working if Y */
+		System.out.print("Do you want to play again? (Y/N) ");
 
 		if (input.nextLine().equalsIgnoreCase("Y"))
 		{

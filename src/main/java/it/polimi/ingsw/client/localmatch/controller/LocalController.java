@@ -12,11 +12,17 @@ import it.polimi.ingsw.server.messages.SinglePlayerGameOverMessage;
 
 import java.util.*;
 
+/**
+ * This class is a clone of Controller (in the server package) with various modifications relative to the local game.
+ * For example, the controller and all commands have a "view" instance variable that's used to directly send the messages to the view,
+ * instead of sending them to the server's ClientHandler which sends the message to the client through sockets
+ */
+
 public class LocalController extends Observable			/* Observes view to get commands... View observes model */
 {
 	private final LocalModel model;
-	private String username;			/* Username of the player who sent the command */
-	private View view;
+	private final String username;			/* Username of the player who sent the command */
+	private final View view;
 	private boolean isTaskFailed;
 
 	public LocalController(LocalModel model, View view)
