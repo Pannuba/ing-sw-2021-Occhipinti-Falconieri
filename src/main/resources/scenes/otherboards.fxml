@@ -80,7 +80,7 @@
          <effect>
             <DropShadow />
          </effect></ImageView>
-      <ImageView fx:id="vaultResourceBlue" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="71.0" layoutY="552.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="vaultResourceBlue" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="71.0" layoutY="554.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -91,7 +91,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="vaultResourcePurple" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="153.0" layoutY="551.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="vaultResourcePurple" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="153.0" layoutY="553.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -102,7 +102,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="vaultResourceYellow" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="70.0" layoutY="605.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="vaultResourceYellow" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="70.0" layoutY="607.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -113,7 +113,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="vaultResourceGrey" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="152.0" layoutY="602.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="vaultResourceGrey" disable="true" fitHeight="45.0" fitWidth="45.0" layoutX="152.0" layoutY="604.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -175,7 +175,7 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <ImageView fx:id="devCardAreaOne1" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="389.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCardAreaOne1" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="389.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -183,7 +183,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="devCardAreaTwo1" disable="true" fitHeight="267.0" fitWidth="178.0" layoutX="581.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCardAreaTwo1" disable="true" fitHeight="267.0" fitWidth="178.0" layoutX="581.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -191,7 +191,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="devCardAreaThree1" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="780.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCardAreaThree1" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="780.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -199,7 +199,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="devCardAreaOne2" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="389.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCardAreaOne2" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="389.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -207,7 +207,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="devCardAreaTwo2" disable="true" fitHeight="267.0" fitWidth="178.0" layoutX="581.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCardAreaTwo2" disable="true" fitHeight="267.0" fitWidth="178.0" layoutX="581.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -215,7 +215,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="devCardAreaThree2" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="780.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCardAreaThree2" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="780.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -223,7 +223,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="devCardAreaOne3" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="389.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCardAreaOne3" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="389.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -231,7 +231,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="devCardAreaTwo3" disable="true" fitHeight="267.0" fitWidth="178.0" layoutX="581.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCardAreaTwo3" disable="true" fitHeight="267.0" fitWidth="178.0" layoutX="581.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -239,7 +239,7 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fx:id="devCardAreaThree3" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="780.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="devCardAreaThree3" disable="true" fitHeight="267.0" fitWidth="177.0" layoutX="780.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

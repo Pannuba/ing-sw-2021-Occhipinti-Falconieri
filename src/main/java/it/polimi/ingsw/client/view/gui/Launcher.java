@@ -28,6 +28,7 @@ public class Launcher extends Application
 		});
 
 		Font.loadFont(getClass().getResourceAsStream("/BLKCHCRY.TTF"), 15);
+		Font.loadFont(getClass().getResourceAsStream("/CharpentierRenRed-Normal.ttf"), 15);
 
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/scenes/launcher.fxml"));
