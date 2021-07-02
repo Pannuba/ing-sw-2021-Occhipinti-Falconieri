@@ -7,7 +7,7 @@ import it.polimi.ingsw.client.view.gui.GUILoader;
  * Main class. If no arguments are specified, start the GUI. Otherwise if the user adds the -cli argument, start the CLI
  */
 
-public class Main		/* If no launch arguments are specified, start the GUI. Only start the CLI with the -cli arg */
+public class Main
 {
 	public static void main(String[] args)
 	{

@@ -43,7 +43,6 @@ public class ActivateLeaderCommand implements Command		/* "ACTIVATE_LEADER", "4"
 				isFailed = false;
 			}
 
-			/* Else? should never be possible I think */
 		}
 
 		else

@@ -65,7 +65,7 @@ public class NetworkHandler extends MessageIO implements Runnable		/* Observed b
 		try
 		{
 			clientSocket = new Socket(ip, port);
-			clientSocket.setSoTimeout(20000);								/* 20000 ms = 20 seconds. shutdown() after 3 failed pings? */
+			clientSocket.setSoTimeout(20000);								/* 20000 ms = 20 seconds */
 			oos = new ObjectOutputStream(clientSocket.getOutputStream());	/* Send commands (list of strings) to server */
 			ois = new ObjectInputStream(clientSocket.getInputStream());		/* Receive gamestate or messages from server */
 		}
@@ -87,7 +87,7 @@ public class NetworkHandler extends MessageIO implements Runnable		/* Observed b
 		try
 		{
 			oos.writeObject(obj);
-			oos.reset();						/* omg if this works i swear to god (it did kinda) */
+			oos.reset();
 		}
 		catch (IOException e)
 		{

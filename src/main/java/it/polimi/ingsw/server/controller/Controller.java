@@ -32,6 +32,12 @@ public class Controller implements Observer			/* Observes view to get commands..
 		this.serverListener = null;
 	}
 
+	/**
+	 * Constructor used by the ServerListener
+	 * @param model the match's model
+	 * @param serverListener the ServerListener instance used to remove the match from the server after it's finished
+	 */
+
 	public Controller(Model model, ServerListener serverListener)
 	{
 		System.out.println("Creating controller");

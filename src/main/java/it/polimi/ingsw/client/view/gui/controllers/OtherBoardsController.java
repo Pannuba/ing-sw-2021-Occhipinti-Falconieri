@@ -135,7 +135,7 @@ public class OtherBoardsController
 	{
 		movePawn(redPawn, track.getRedPawns().get(playerID));
 
-		if (players.get(playerID).getPopeTokens()[0].isActive())		/* Put popeTokens ImageView in a list and update them with a for loop? */
+		if (players.get(playerID).getPopeTokens()[0].isActive())
 			popeTokenOne.setImage(new Image(getClass().getResourceAsStream("/img/popetokens/pope-token-1-front.png")));
 
 		if (players.get(playerID).getPopeTokens()[0].isDiscarded())		/* Back tokens (not active nor discarded) are displayed by default in the scene's fxml */

@@ -155,7 +155,7 @@ public class PrintMethods			/* Static methods so we can avoid "PrintMethods prin
 	 * @param market the marbles market to print
 	 */
 
-	public static void printMarblesMarket(MarblesMarket market)		/* private? */
+	public static void printMarblesMarket(MarblesMarket market)
 	{
 		System.out.print("Marbles market:\n\n");
 		Marble[][] board = market.getMarblesBoard();

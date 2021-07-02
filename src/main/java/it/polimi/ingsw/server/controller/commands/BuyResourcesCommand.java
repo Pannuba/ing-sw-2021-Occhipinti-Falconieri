@@ -34,7 +34,7 @@ public class BuyResourcesCommand implements Command		/* "BUY_RESOURCES", "ROW", 
 	public boolean run(List<String> command)
 	{
 		String message = "";
-		boolean isFailed = false;		/* How can this action fail? When resources don't fit? */
+		boolean isFailed = false;
 
 		List<MarbleType> boughtMarbles = new ArrayList<>();
 		List<ResourceType> resourcesToAdd = new ArrayList<>();		/* Should either be a hashmap or a list of resourcetypes */
