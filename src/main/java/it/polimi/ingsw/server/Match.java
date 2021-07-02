@@ -88,8 +88,14 @@ public class Match implements Runnable
 			{
 				views.get(i).send(new ChooseLeadersMessage(leaderCardsLists.get(i)));
 
-				System.out.println("player with id " + i + " is called " + model.getPlayerByID(i).getUsername());
-				views.get(i).send(new InitialResourcesMessage(i));				/* Because the player list in Model is sorted by ID. players[0] has ID 0 and so on */
+				for (int j = 0; j < numPlayers; j++)
+				{
+					if (model.getPlayerByID(i).getUsername().equals(views.get(j).getUsername()))		/* Check if the view # is the same as the player ID to send InitialResourcesMessages in the right order */
+					{
+						views.get(j).send(new InitialResourcesMessage(i));					/* Because the player list in Model is sorted by ID. players[0] has ID 0 and so on */
+						break;
+					}
+				}
 			}
 		}
 	}
