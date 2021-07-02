@@ -15,7 +15,7 @@ public class InitialResources
 		switch (playerID)
 		{
 			case 0:
-				System.out.println("You're the first player, so you get nothing!");
+				System.out.println("You're the first player!");
 				break;
 
 			case 1:

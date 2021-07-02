@@ -203,7 +203,7 @@ public class GameStartController		/* The player selects 2 leaderCards first, the
 		{
 			case 0:
 
-				Platform.runLater(() -> {resourcesMessage.setText("You're the first player, so you get nothing!");});
+				Platform.runLater(() -> {resourcesMessage.setText("You're the first player!");});
 				resourcesToChoose = 0;
 				break;
 
