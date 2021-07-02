@@ -25,8 +25,6 @@ public class ServerListener
 	private final List<Model> recoveredMatches;
 	private List<Model> totalMatches;		/* totalMatches = recoveredMatches + new matches */
 
-	/* Static method to get name/choice from client? So Match can use them */
-
 	public ServerListener(ServerSocket serverSocket)
 	{
 		this.serverSocket = serverSocket;
@@ -150,7 +148,7 @@ public class ServerListener
 
 			else
 			{
-				Match newMatch = new Match(players, views);        /* Start match, passes players and views */
+				Match newMatch = new Match(this, players, views);        /* Start match, passes players and views */
 				new Thread(newMatch).start();
 				totalMatches.add(newMatch.getModel());
 			}
@@ -175,6 +173,11 @@ public class ServerListener
 		return false;
 	}
 
+	/**
+	 * Checks if the newly-connected players are reconnecting to a recovered match
+	 * @param players the list of new players
+	 * @return the number of players if each player's username is contained in a recovered match, -1 otherwise
+	 */
 	private int arePlayersReconnecting(List<Player> players)
 	{
 		for (int i = 0; i < recoveredMatches.size(); i++)
@@ -198,15 +201,23 @@ public class ServerListener
 		return -1;
 	}
 
-	public void deleteRecoveredMatch(Model matchToRemove)
+	/**
+	 * Removes a finished recovered match from the totalMatches list, and deletes the match's file from disk
+	 * Called by the controller when the match has finished, if it is a recovered match
+	 * @param matchToRemove the finished recovered match
+	 */
+	public void deleteMatch(Model matchToRemove)
 	{
-		System.out.println("Deleting match of player " + matchToRemove.getPlayers().get(0).getUsername());
 		int removedMatchIndex = totalMatches.indexOf(matchToRemove);
 		totalMatches.remove(matchToRemove);
 
 		if (!new File("./savedmatches/match" + (removedMatchIndex + 1) + ".xml").delete())
-			System.out.println("Couldn't delete match file!");
+			System.out.println("Couldn't delete match file, probably because it wasn't recovered");
 	}
+
+	/**
+	 * Closes the server socket and saves all ongoing matches to the disk, in a "savedmatches" folder
+	 */
 
 	private void shutdown()
 	{

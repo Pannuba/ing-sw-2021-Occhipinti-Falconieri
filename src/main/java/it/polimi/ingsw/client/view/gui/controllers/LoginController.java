@@ -43,6 +43,10 @@ public class LoginController
 	{
 		Stage mainStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
+		ipField.setVisible(true);
+		portField.setVisible(true);
+		isLocalMatch = false;
+
 		mainStage.setTitle("Masters of Renaissance Launcher");
 		mainStage.setScene(launcherScene);
 		mainStage.sizeToScene();		/* ? */
@@ -129,7 +133,7 @@ public class LoginController
 		return messageHandler;
 	}
 
-	public void setup(Scene launcherScene) throws IOException		/* Get GUI from launcher, set username and messageHandler in startMatch? Using getters */
+	public void setup(Scene launcherScene)        /* Get GUI from launcher, set username and messageHandler in startMatch? Using getters */
 	{
 		this.launcherScene = launcherScene;
 	}

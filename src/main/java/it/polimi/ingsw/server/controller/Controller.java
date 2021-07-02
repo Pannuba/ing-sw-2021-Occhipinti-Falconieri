@@ -149,7 +149,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 			if (model.isSinglePlayerMatchLost() != null)		/* If the singleplayer has lost the game */
 			{
 				if (serverListener != null)
-					serverListener.deleteRecoveredMatch(model);
+					serverListener.deleteMatch(model);
 
 				view.send(new SinglePlayerGameOverMessage(model.isSinglePlayerMatchLost()));
 				return;		/* Don't want to execute the other functions below if the match is over */
@@ -166,7 +166,7 @@ public class Controller implements Observer			/* Observes view to get commands..
 		if (model.isMatchOver() && model.getPlayerByUsername(username).getId() == (model.getNumPlayers() - 1))		/* Run endMatch when the first player has been reached */
 		{
 			if (serverListener != null)
-				serverListener.deleteRecoveredMatch(model);
+				serverListener.deleteMatch(model);
 
 			model.endMatch();
 		}

@@ -23,7 +23,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 	private final TimerTask sendPing;
 
 	/**
-	 * Constructor. Starts the heartbeat that sends pings every 20 seconds using a Timer and TimerTask
+	 * Constructor. Starts the heartbeat that sends pings every 20 (timeout/2) seconds using a Timer and TimerTask
 	 * @param clientSocket the socket created in ServerListener that sends and receives game data
 	 * @param username the username used by the socket's client. Used for debugging
 	 * @param ois the socket's input stream created in ServerListener
@@ -44,33 +44,32 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 				send(new Ping()); } };
 
 		heartbeat = new Timer();
-		heartbeat.scheduleAtFixedRate(sendPing, 5000, 10000);		/* Start heartbeat after 5 seconds, sends ping every timeout/2 seconds */
+		heartbeat.scheduleAtFixedRate(sendPing, 5000, 10000);
 	}
 
 	/**
-	 * Thread waiting for new commands from the clientSocket. Forwards the messages received to the Controller through the Observer pattern
+	 * Thread waiting for new commands from the clientSocket that activates after the setup phase has ended
+	 * Forwards the messages received to the Controller through the Observer pattern
 	 */
 
-	public void run()		/* Activates after the setup phase has ended */
+	public void run()
 	{
 		System.out.println("Started " + username + "'s clienthandler thread");
 		Object inputObj;
 
-		while (!clientSocket.isClosed())		/* Translate message, then call respective function in controller */
+		while (!clientSocket.isClosed())
 		{
 			try
 			{
-				//System.out.println(username + " waiting for message from client");
 				inputObj = ois.readObject();		/* Throws SocketException: Socket closed when shutting down server */
 
 				if (!(inputObj instanceof Ping))		/* Don't care about pings */
 				{
-					//System.out.println("Received " + inputObj + " from " + username);		/* Prints the command */
 					setChanged();
 					notifyObservers(inputObj);		/* Sends command to controller */
 				}
 			}
-			catch (IOException | ClassNotFoundException e)				/* EOFException when client disconnects. Catch it? */
+			catch (IOException | ClassNotFoundException e)				/* EOFException when client disconnects */
 			{
 				e.printStackTrace();
 				System.out.println(username + " disconnected!");
@@ -84,9 +83,9 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 	 * @param obj the object to send to the client. Either a Ping, a Message, or a GameState
 	 */
 
-	public synchronized void send(Object obj)		/* Maybe synchronized here and in pings fixes those weird "stream active" exceptions? */
+	public synchronized void send(Object obj)
 	{
-		if (!obj.getClass().getSimpleName().equals("Ping"))		/* Pings are really annoying */
+		if (!obj.getClass().getSimpleName().equals("Ping"))
 			System.out.println("Sending " + obj.getClass().getSimpleName() + " to " + username);
 		try
 		{
@@ -118,7 +117,7 @@ public class ClientHandler extends Observable implements Runnable, Observer		/* 
 			oos.close();
 
 			clientSocket.close();
-			Thread.currentThread().interrupt();		/* Order of things? */
+			Thread.currentThread().interrupt();
 		}
 		catch (IOException e)
 		{

@@ -17,15 +17,9 @@ import java.util.List;
 public class Match implements Runnable
 {
 	private final boolean isRecoveredMatch;
-	private final ServerListener serverListener;
 	private final int numPlayers;
 	private final List<ClientHandler> views;
 	private final Model model;
-
-/*	isFinished boolean, pass match ("this") to model, when the game is finished the model sets isFinished to true,
-	the match's thread checks every 60 seconds or so if the match is finished, when it is it removes the match (this) from the currentMatches list
-	in ServerListener with serverListener.setCurrentMatches(serverListener.getCurrentMatches().remove(this))
- */
 
 	/**
 	 * Constructor. Creates the match's Model and Controller
@@ -33,27 +27,33 @@ public class Match implements Runnable
 	 * @param views ClientHandler list created in ServerListener, they observe the model to get GameStates and messages, and are observed by the controller to get the clients' commands
 	 */
 
-	public Match(List<Player> players, List<ClientHandler> views)
+	public Match(ServerListener serverListener, List<Player> players, List<ClientHandler> views)
 	{
 		isRecoveredMatch = false;
-		serverListener = null;
 		this.numPlayers = players.size();
 		this.views = views;
 
 		model = new Model(players);
-		Controller controller = new Controller(model);
+		Controller controller = new Controller(model, serverListener);
 
 		for (int i = 0; i < views.size(); i++)
 		{
-			views.get(i).addObserver(controller);		/* Controller observes the views to get the command */
-			model.addObserver(views.get(i));			/* Views observe the model to send the client the new gamestate */
+			views.get(i).addObserver(controller);
+			model.addObserver(views.get(i));
 		}
 	}
+
+	/**
+	 * This constructor is used when the ServerListener detects that the players are reconnecting to a recovered match
+	 * It passes a ServerListener instance to the controller to delete the recovered match file once the match is over
+	 * @param serverListener the ServerListener instance
+	 * @param recoveredModel the recovered model deserialized by the file on the server's disk
+	 * @param views the list of views to be added to the match
+	 */
 
 	public Match(ServerListener serverListener, Model recoveredModel, List<ClientHandler> views)
 	{
 		isRecoveredMatch = true;
-		this.serverListener = serverListener;
 		this.numPlayers = recoveredModel.getNumPlayers();
 		this.views = views;
 		model = recoveredModel;
@@ -61,8 +61,8 @@ public class Match implements Runnable
 
 		for (int i = 0; i < views.size(); i++)
 		{
-			views.get(i).addObserver(controller);		/* Controller observes the views to get the command */
-			recoveredModel.addObserver(views.get(i));			/* Views observe the model to send the client the new gamestate */
+			views.get(i).addObserver(controller);
+			recoveredModel.addObserver(views.get(i));
 			views.get(i).send(new RecoveredMatchMessage());
 		}
 
@@ -98,12 +98,6 @@ public class Match implements Runnable
 				}
 			}
 		}
-	}
-
-	public void stop()		/* If I create a Match list in ServerListener and call stop() on every match on shutdown, it doesn't work */
-	{
-		for (int i = 0; i < views.size(); i++)		/* Close views in this match */
-			views.get(i).close();
 	}
 
 	public Model getModel()

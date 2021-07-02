@@ -226,7 +226,7 @@ public class XML_Serialization
 
 	/**
 	 * Called by the model when creating the 16 leader and 48 dev cards
-	 * @param filename the path and file name of the card's xml that has to be deserialized
+	 * @param toSerialize the path and file name of the card's xml that has to be deserialized
 	 * @return the deserialized object
 	 * @throws IOException if the file is not found or can't be accessed
 	 */
