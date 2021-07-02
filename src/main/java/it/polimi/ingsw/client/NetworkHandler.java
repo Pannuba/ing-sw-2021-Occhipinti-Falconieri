@@ -83,7 +83,6 @@ public class NetworkHandler extends MessageIO implements Runnable		/* Observed b
 	public synchronized void send(Object obj)
 	{
 		if (!(obj instanceof Ping))
-			System.out.println("Sending " + obj.getClass().getSimpleName() + " to server...");
 
 		try
 		{
