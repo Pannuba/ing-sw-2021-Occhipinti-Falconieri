@@ -42,6 +42,11 @@ public class Model extends Observable        /* Observed by the views to create 
 
 	}
 
+	/**
+	 * Constructor
+	 * @param players the list of player taking part in the match
+	 */
+
 	public Model(List<Player> players)
 	{
 		System.out.println("Creating model...");
@@ -63,12 +68,20 @@ public class Model extends Observable        /* Observed by the views to create 
 			createActionTokens();
 	}
 
-	public void update()			/* Creates the new gamestate and sends it to the views, which send it to the clients */
+	/**
+	 * Creates the new game state and sends it to the ClientHandlers through the observer-observable pattern, which send it to the clients through sockets
+	 */
+
+	public void update()
 	{
 		System.out.println("Updating gamestate...");
 		setChanged();
 		notifyObservers(new GameState(players, getCurrentPlayerName(), track, marblesMarket, devCardsMarket));
 	}
+
+	/**
+	 * Creates a list of 16 leadercards by deserializing the xml files
+	 */
 
 	private void createLeaderCards()
 	{
@@ -92,6 +105,10 @@ public class Model extends Observable        /* Observed by the views to create 
 		}
 	}
 
+	/**
+	 * Randomly chooses the players' round order
+	 */
+
 	private void choosePlayerOrder()		/* IDs go from 0 to 3 */
 	{
 		System.out.println("Choosing a random first player...");
@@ -107,7 +124,12 @@ public class Model extends Observable        /* Observed by the views to create 
 			System.out.println(players.get(i).getUsername() + " has ID " + players.get(i).getId() + " and isFirstTurn: " + players.get(i).isMyTurn());
 	}
 
-	public List<List<LeaderCard>> createLeaderCardsLists()				/* Returns a list of lists of leadercards, 1 for each player, each list has 4 leadercards to choose 2 from */
+	/**
+	 * Creates four lists of four leader cards each, one for each player from which they can choose two cards
+	 * @return the list of lists of leader cards
+	 */
+
+	public List<List<LeaderCard>> createLeaderCardsLists()
 	{
 		List<List<LeaderCard>> listOfLists = new ArrayList<>();
 
@@ -115,7 +137,7 @@ public class Model extends Observable        /* Observed by the views to create 
 
 		int i = 0;
 
-		for (int j = 0; j < numPlayers; j++)        /* Create numPlayer lists of 4 cards each */
+		for (int j = 0; j < numPlayers; j++)
 		{
 			listOfLists.add(new ArrayList<>());
 
@@ -129,7 +151,11 @@ public class Model extends Observable        /* Observed by the views to create 
 		return listOfLists;
 	}
 
-	public void createActionTokens()		/* Hardcoded, don't really see a use in making them serializable */
+	/**
+	 * If it's a single player game, create a list of seven action tokens
+	 */
+
+	public void createActionTokens()
 	{
 		actionTokens = new ArrayList<>();
 
@@ -144,7 +170,14 @@ public class Model extends Observable        /* Observed by the views to create 
 		Collections.shuffle(actionTokens);
 	}
 
-	public void vaticanReport(int popeBoxNumber)		/* Called when a player reaches a pope box. Put in controller? */
+	/**
+	 * Changes every player's pope token (the one close to the passed popeBoxNumber) relative to the player's pawn position (flips/discards it)
+	 * Then sends a VaticanReportMessage to every view
+	 * Called when a player reaches a pope box. The check is performed by the controller after each round, which calls checkVaticanReport in Track
+	 * @param popeBoxNumber the pope box number on which the vatican report has happened
+	 */
+
+	public void vaticanReport(int popeBoxNumber)
 	{
 		System.out.println("Calling vatican report for pope box " + popeBoxNumber);
 
@@ -197,19 +230,29 @@ public class Model extends Observable        /* Observed by the views to create 
 		notifyObservers(new VaticanReportMessage(popeBoxNumber, players));
 	}
 
+	/**
+	 * Sends a DiscardedResourcesMessage to every view containing discardedResNum and playerWhoDiscarded
+	 * @param discardedResNum the number of discarded resources
+	 * @param playerWhoDiscarded the username of the player who discarded the resources
+	 */
+
 	public void discardResources(int discardedResNum, String playerWhoDiscarded)
 	{
 		setChanged();
 		notifyObservers(new DiscardedResourcesMessage(discardedResNum, playerWhoDiscarded));
 	}
 
+	/**
+	 * If the match is currently not over, check if it is. Otherwise do nothing. Called by the controller after every round
+	 */
+
 	public void checkMatchOver()
 	{
 		String message = "";
 
-		if (!matchOver)		/* If the match is not over, check. Otherwise do nothing */
+		if (!matchOver)
 		{
-			for (int i = 0; i < numPlayers; i++)        /* Check for every player */
+			for (int i = 0; i < numPlayers; i++)
 			{
 				if (track.getRedPawns().get(i) >= 24)
 				{
@@ -233,10 +276,14 @@ public class Model extends Observable        /* Observed by the views to create 
 		}
 	}
 
-	public String isSinglePlayerMatchLost()		/* Returns a string if the player has lost, otherwise null */
+	/**
+	 * Called by the controller after each round, if it's a single player game
+	 * @return the string containing the message why the player has lost, otherwise null
+	 */
+	public String isSinglePlayerMatchLost()
 	{
 		List<List<DevCard>> devCardStacks = devCardsMarket.getDevCardStacks();
-		/* Match over if all "color" devcards are gone. wow */
+
 		if ((devCardStacks.get(0).isEmpty() && devCardStacks.get(1).isEmpty()  && devCardStacks.get(2).isEmpty()))
 			return "You lose! There are no more green dev cards in the market.";
 
@@ -255,8 +302,14 @@ public class Model extends Observable        /* Observed by the views to create 
 		return null;
 	}
 
-	public int calculatePoints(Player player)		/* Gets total points for a player at the end of the match */
-	{												/* Should this method go here? in Player? */
+	/**
+	 * Gets total points for a player at the end of the match
+	 * @param player the player for which the total points will be calculated
+	 * @return the amount of victory points of the passed player
+	 */
+
+	public int calculatePoints(Player player)
+	{
 		int points = 0;
 
 		List<LeaderCard> leaderCards = player.getLeaderCards();
@@ -293,6 +346,11 @@ public class Model extends Observable        /* Observed by the views to create 
 		return points;
 	}
 
+	/**
+	 * Calculate the victory points for all players and send a MatchOverMessage to all views including the winner's username
+	 * Called by the controller after the match has ended.
+	 */
+
 	public void endMatch()
 	{
 		String winnerName = "";
@@ -325,10 +383,45 @@ public class Model extends Observable        /* Observed by the views to create 
 			}
 		}
 
-		/* Send MatchOverMessage to everyone (notifyObservers) including a message of who won */
 		System.out.println("endGame: winnerName = " + winnerName);
 		setChanged();
-		notifyObservers(new MatchOverMessage(winnerName, players));		/* Add message for tie? */
+		notifyObservers(new MatchOverMessage(winnerName, players));
+	}
+
+	/**
+	 * Un-flips the current flipped action token, flips the next one and returns it. Called by the controller after every round, if it's a single player game
+	 * @return the next flipped action token
+	 */
+
+	public ActionToken getNextActionToken()
+	{
+		boolean noFlippedTokens = true;
+		int flippedTokenPos = 0, tokenToFlipPos;		/* Both are [0, 6] */
+
+		for (int i = 0; i < actionTokens.size(); i++)		/* Checks if there is at least 1 flipped token. yes -> return the next one, no -> return 1 random */
+		{
+			if (actionTokens.get(i).isFlipped())
+			{
+				noFlippedTokens = false;
+				flippedTokenPos = i;
+				actionTokens.get(i).setFlipped(false);		/* There can't be multiple tokens flipped at the same time */
+			}
+		}
+
+		if (noFlippedTokens)		/* If all goes well, this happens only at the first round */
+			tokenToFlipPos = 0;		/* No need to use random, tokens are already shuffled in createActionTokens() */
+
+		else
+		{
+			if (flippedTokenPos == actionTokens.size() - 1)		/* 6 ActionTokens, 0-indexed so the position of the last token is 5 = 6 - 1 */
+				tokenToFlipPos = 0;
+
+			else
+				tokenToFlipPos = flippedTokenPos + 1;
+		}
+
+		actionTokens.get(tokenToFlipPos).setFlipped(true);
+		return actionTokens.get(tokenToFlipPos);
 	}
 
 	public Player getPlayerByUsername(String username)		/* 	NullPointerException because the usernames taken in ServerListener are discarded when a new model is created in Match */
@@ -434,36 +527,5 @@ public class Model extends Observable        /* Observed by the views to create 
 	public void setActionTokens(List<ActionToken> actionTokens)
 	{
 		this.actionTokens = actionTokens;
-	}
-
-	public ActionToken getNextActionToken()		/* This method un-flips the current flipped token, flips the next one and returns it */
-	{
-		boolean noFlippedTokens = true;
-		int flippedTokenPos = 0, tokenToFlipPos;		/* Both are [0, 6] */
-
-		for (int i = 0; i < actionTokens.size(); i++)		/* Checks if there is at least 1 flipped token. yes -> return the next one, no -> return 1 random */
-		{
-			if (actionTokens.get(i).isFlipped())
-			{
-				noFlippedTokens = false;
-				flippedTokenPos = i;
-				actionTokens.get(i).setFlipped(false);		/* There can't be multiple tokens flipped at the same time */
-			}
-		}
-
-		if (noFlippedTokens)		/* If all goes well, this happens only at the first round */
-			tokenToFlipPos = 0;		/* No need to use random, tokens are already shuffled in createActionTokens() */
-
-		else
-		{
-			if (flippedTokenPos == actionTokens.size() - 1)		/* 6 ActionTokens, 0-indexed so the position of the last token is 5 = 6 - 1 */
-				tokenToFlipPos = 0;
-
-			else
-				tokenToFlipPos = flippedTokenPos + 1;
-		}
-
-		actionTokens.get(tokenToFlipPos).setFlipped(true);
-		return actionTokens.get(tokenToFlipPos);
 	}
 }

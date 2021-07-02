@@ -6,23 +6,22 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-/*	13 total marbles, 12 in matrix and 1 spare:
-	4 white, 2 blue, 2 grey, 2 yellow, 2 purple, 1 red
-
-	O O O O <		Spare marble is pushed from the end of rows and columns
-	O O O O <
-	O O O O	<		[row][col]
-	^ ^ ^ ^
-
-	[0][0]	[0][1]	[0][2]	[0][3]
-
-	[1][0]	[1][1]	[1][2]	[1][3]
-
-	[2][0]	[2][1]	[2][2]	[2][3]
-*/
-
 /**
  * The MarblesMarket created in Model
+ *
+ * 13 total marbles, 12 in matrix and 1 spare: 4 white, 2 blue, 2 grey, 2 yellow, 2 purple, 1 red
+ *
+ * O O O O <		Spare marble is pushed from the end of rows and columns
+ * O O O O <
+ * O O O O	<		[row][col]
+ * ^ ^ ^ ^
+ *
+ * [0][0]	[0][1]	[0][2]	[0][3]
+ *
+ * [1][0]	[1][1]	[1][2]	[1][3]
+ *
+ * [2][0]	[2][1]	[2][2]	[2][3]
+ *
  * @author Giulio Occhipinti
  */
 
@@ -75,7 +74,7 @@ public class MarblesMarket implements Serializable
 
 	public List<MarbleType> buyMarblesRow(int row)			/* Returns a list of marbletypes to the controller, which then acts for each marble */
 	{
-		List<MarbleType> boughtMarbles = new ArrayList<>();			/* Can be significantly simplified with a hashmap */
+		List<MarbleType> boughtMarbles = new ArrayList<>();
 
 		for (int i = 0; i < 4; i++)
 			boughtMarbles.add(marblesBoard[row][i].getMarbleType());
@@ -120,7 +119,7 @@ public class MarblesMarket implements Serializable
 		return marblesBoard;
 	}
 
-	public void setMarblesBoard(Marble[][] marblesBoard)		/* For deserialization when matches are recovered */
+	public void setMarblesBoard(Marble[][] marblesBoard)
 	{
 		this.marblesBoard = marblesBoard;
 	}

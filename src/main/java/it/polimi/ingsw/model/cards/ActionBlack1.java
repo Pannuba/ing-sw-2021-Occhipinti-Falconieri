@@ -10,13 +10,13 @@ import java.util.List;
  * @author Giulio Occhipinti
  */
 
-public class ActionBlack1 extends ActionToken		/* I can also do an instanceof check in the controller, and if it's an ActionBlack1 manually shuffle the tokens... we'll see */
-{													/* but then it doesn't really make sense to use an abstract method, either do one thing or the other, no inbetweens */
+public class ActionBlack1 extends ActionToken
+{
 	private Track track;
 	private List<ActionToken> tokens;
 
 	/**
-	 * Empty constructor required by the persistence advanced functionality
+	 * Empty constructor required by XMLEncoder for the "persistence" advanced feature
 	 */
 
 	public ActionBlack1()

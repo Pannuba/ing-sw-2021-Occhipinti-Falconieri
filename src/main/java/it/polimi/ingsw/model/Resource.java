@@ -2,10 +2,9 @@ package it.polimi.ingsw.model;
 
 import java.io.Serializable;
 
-/*	Stone --> grey ---> 0
-	Coin --> yellow --> 1
-	Shield --> blue --> 2
-	Slave --> purple -> 3
+/**
+ * Resource class
+ * @author Giulio Occhipinti
  */
 
 public class Resource implements Serializable
@@ -13,6 +12,11 @@ public class Resource implements Serializable
 	private ResourceType resourceType;				/* Can be null, see DevCard serialization */
 	private int quantity;
 
+	/**
+	 * Constructor
+	 * @param resourceType the resource type of the resource that's going to be created
+	 * @param quantity the amount of resources of the same type
+	 */
 	public Resource (ResourceType resourceType, int quantity)
 	{
 		this.resourceType = resourceType;

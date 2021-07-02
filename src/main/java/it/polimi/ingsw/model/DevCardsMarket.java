@@ -18,7 +18,7 @@ public class DevCardsMarket implements Serializable
 	private List<List<DevCard>> devCardStacks;
 
 	/**
-	 * Empty constructor required by XMLEncoder to serialize the DevCardsMarket for the "persistence" feature
+	 * Empty constructor required by XMLEncoder for the "persistence" advanced feature
 	 */
 
 	public DevCardsMarket()
@@ -81,14 +81,14 @@ public class DevCardsMarket implements Serializable
 
 		DevCard boughtCard = getDevCardByNumber(boughtCardNum);
 
-		for (int i = 0; i < devCardStacks.size(); i++)			/* So many for loops, not very efficient... */
+		for (int i = 0; i < devCardStacks.size(); i++)
 		{
 			for (int j = 0; j < devCardStacks.get(i).size(); j++)
 			{
 				if (devCardStacks.get(i).get(j) == boughtCard)
 				{
 					devCardStacks.get(i).remove(j);
-					j--;		/* Not really necessary but prevents the warning from IntelliJ */
+					j--;
 				}
 			}
 		}

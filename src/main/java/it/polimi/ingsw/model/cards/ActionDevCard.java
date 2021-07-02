@@ -15,7 +15,7 @@ public class ActionDevCard extends ActionToken
 	private DevCardsMarket devCardsMarket;
 
 	/**
-	 * Empty constructor required by the persistence advanced functionality
+	 * Empty constructor required by XMLEncoder for the "persistence" advanced feature
 	 */
 
 	public ActionDevCard()
@@ -54,7 +54,7 @@ public class ActionDevCard extends ActionToken
 					{
 						devCardStacks.get(j).remove(k);
 						cardsToRemove--;
-						k--;    /* Thanks IntelliJ I love you */
+						k--;
 					}
 				}
 			}

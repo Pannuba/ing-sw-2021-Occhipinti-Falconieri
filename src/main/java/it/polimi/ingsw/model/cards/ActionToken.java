@@ -15,7 +15,7 @@ public abstract class ActionToken implements Serializable
 	 * Perform the token's action. Called by the controller after every round, if it's a singleplayer match
 	 */
 
-	public abstract void doAction();		/* All ActionTokens only do one thing when they are flipped. Executed by server controller, not client */
+	public abstract void doAction();		/* All ActionTokens only do one thing when they are flipped */
 
 	public boolean isFlipped()
 	{

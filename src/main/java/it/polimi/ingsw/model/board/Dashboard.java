@@ -7,19 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Each player's dashboard
+ * Each player's dashboard made of a vault, a storage, and three dev card areas. The track is not in this class as it's shared among all players
  * @author Giulio Occhipinti
  */
 
 public class Dashboard implements Serializable
 {
-	/**
-	 * Creates the three devCard areas, the vault and the storage
-	 */
-
 	private Vault vault;
 	private Storage storage;
 	private DevCardArea[] devCardAreas = new DevCardArea[3];
+
+	/**
+	 * Constructor
+	 */
 
 	public Dashboard()
 	{
@@ -31,7 +31,7 @@ public class Dashboard implements Serializable
 	}
 
 	/**
-	 * Player's devCards
+	 * Returns a list of all the dev cards owned by the player
 	 * @return all devCards the player owns
 	 */
 
@@ -53,13 +53,13 @@ public class Dashboard implements Serializable
 
 	/**
 	 * Adds the purchased card to the chosen devCard area
-	 * @param cardToAdd purchased card
-	 * @param areaIndex devCard area number
+	 * @param cardToAdd the purchased card
+	 * @param areaIndex devCard area number in which the card is going to be put
 	 */
 
 	public void addDevCardToArea(DevCard cardToAdd, int areaIndex)		/* Find the devCardArea where cardToAdd can be added, then adds it */
 	{
-		devCardAreas[areaIndex].addDevCard(cardToAdd);		/* Need to trust the client that it chose a compatible area... add checks in controller? */
+		devCardAreas[areaIndex].addDevCard(cardToAdd);
 	}
 
 	/**
@@ -84,15 +84,14 @@ public class Dashboard implements Serializable
 	}
 
 	/**
-	 * Returns the number of devCards the player owns
-	 * Used to calculate the sum of layers in all areas
+	 * Used to calculate the sum of layers/cards in all areas
+	 * @return the number of devCards owned by the player
 	 */
 
-	public int getTotalDevCardsNum()		/* Used to calculate the sum of layers in all areas, but it's simply getAllDevCards().size() */
+	public int getTotalDevCardsNum()
 	{
 		return getAllDevCards().size();
 	}
-
 
 	public Vault getVault()
 	{

@@ -8,8 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Vault of each dashboard
- * Has resources obtained through production
+ * Vault of each dashboard. Has resources obtained through production
  * @author Giulio Ochhipinti
  */
 
@@ -60,6 +59,7 @@ public class Vault implements Serializable
 
 	/**
 	 * Removes multiple resources of the same type one at a time
+	 * @param resourceToRemove the resource that has to be removed from the vault
 	 * @return number of removed resources
 	 */
 

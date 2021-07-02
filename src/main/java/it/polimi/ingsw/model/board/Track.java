@@ -23,7 +23,7 @@ public class Track implements Serializable
 	private int blackPawn;
 
 	/**
-	 * Empty constructor required by the persistence functionality
+	 * Empty constructor required by XMLEncoder for the "persistence" advanced feature
 	 */
 
 	public Track()
@@ -51,8 +51,6 @@ public class Track implements Serializable
 		popeTokens[0] = new PopeToken(2);
 		popeTokens[1] = new PopeToken(3);
 		popeTokens[2] = new PopeToken(4);
-
-		/* Initialize track here, hardcoded (at least for now) because 1 xml for each box is too much */
 
 		faithTrack[0]	= 0;		faithTrack[1]	= 0;		faithTrack[2]	= 0;		faithTrack[3]	= 1;
 		faithTrack[4]	= 0;		faithTrack[5]	= 0;		faithTrack[6]	= 2;		faithTrack[7]	= 0;

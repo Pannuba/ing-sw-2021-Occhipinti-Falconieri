@@ -23,7 +23,7 @@ public class DevCard implements Serializable
 	private List<Resource> product;				/* Right side. faithpoints are here */
 
 	/**
-	 * Constructor. Creates a dev card
+	 * Constructor
 	 */
 
 	public DevCard()

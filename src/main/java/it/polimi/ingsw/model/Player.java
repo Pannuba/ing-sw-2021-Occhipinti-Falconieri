@@ -7,6 +7,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Player class. It contains all the information about each player connected to the match: the player's name, dashboard, pope tokens and dev/leader cards
+ * @author Giulio Occhipinti
+ */
+
 public class Player implements Serializable
 {
 	private int id;							/* Set randomly in model. 0, 1, 2, 3 to manage turns, pawns and so on */
@@ -18,10 +23,19 @@ public class Player implements Serializable
 	private Dashboard dashboard;
 	private PopeToken[] popeTokens = new PopeToken[3];			/* Discarded or turned/activated depending on pawn position during vatican report */
 
+	/**
+	 * Empty constructor required by XMLEncoder for the "persistence" advanced feature
+	 */
+
 	public Player()
 	{
 
 	}
+
+	/**
+	 * Constructor
+	 * @param username the player's username
+	 */
 
 	public Player(String username)
 	{
@@ -38,7 +52,12 @@ public class Player implements Serializable
 		dashboard = new Dashboard();
 	}
 
-	public List<ResourceType> getWhiteMarbleTypes()		/* Checks if the player has activated a SkillMarble leadercard. If so, returns the MarbleType(s) of the cards */
+	/**
+	 * Checks if the player has activated a SkillMarble leadercard. If so, returns the MarbleType(s) of the cards
+	 * @return the list of ResourceTypes of the active SkillMarble cards owned by the player
+	 */
+
+	public List<ResourceType> getWhiteMarbleTypes()
 	{
 		/* If there are 2 SkillMarble cards, the player has to choose which resource to convert the white marbles */
 		List<ResourceType> whiteMarbleResources = new ArrayList<>();
@@ -55,7 +74,12 @@ public class Player implements Serializable
 		return whiteMarbleResources;
 	}
 
-	public List<SkillMarble> getMarbleLeaders()		/* Used by CLI to check if the player has 2 active SkillMarbles */
+	/**
+	 * Used by the client to check if the player has two active SkillMarble leader cards
+	 * @return the list of active SkillMarble cards owned by the player
+	 */
+
+	public List<SkillMarble> getMarbleLeaders()
 	{
 		List<SkillMarble> marbleLeaders = new ArrayList<>();
 
@@ -68,11 +92,17 @@ public class Player implements Serializable
 		return marbleLeaders;
 	}
 
-	public SkillStorage getStorageLeader(ResourceType resType)		/* Returns the active SkillStorage leadercard with the passed ResourceType */
+	/**
+	 * Used by checkResourceAmounts and spendResources in the controller
+	 * @param resType the resource type of the required SkillStorage card
+	 * @return the active SkillStorage leader card with the passed ResourceType
+	 */
+
+	public SkillStorage getStorageLeader(ResourceType resType)
 	{
 		for (int i = 0; i < leaderCards.size(); i++)
 		{
-			if (leaderCards.get(i).isActive() && leaderCards.get(i) instanceof SkillStorage)		/* Check for discarded? */
+			if (leaderCards.get(i).isActive() && leaderCards.get(i) instanceof SkillStorage)
 			{
 				if (((SkillStorage) leaderCards.get(i)).getAdditionalStorage().getShelfResourceType() == resType)
 					return ((SkillStorage) leaderCards.get(i));
@@ -81,6 +111,12 @@ public class Player implements Serializable
 
 		return null;
 	}
+
+	/**
+	 * Used by the controller's "buy dev card" command
+	 * @param discountedResource the resource type of the resource that has to be discounted
+	 * @return the active SkillDiscount leader card that applies discounts to the passed resource type
+	 */
 
 	public SkillDiscount getDiscountLeader(ResourceType discountedResource)
 	{
@@ -96,7 +132,12 @@ public class Player implements Serializable
 		return null;
 	}
 
-	public int getTotalResources()		/* Used by calculatePoints in Model */
+	/**
+	 * Gets the total amount of resources owned by the player. Used by calculatePoints in Model
+	 * @return the amount of resources owned by the player
+	 */
+
+	public int getTotalResources()
 	{
 		int totalResources = 0;
 
@@ -112,11 +153,16 @@ public class Player implements Serializable
 		return totalResources;
 	}
 
+	/**
+	 * Used by calculatePoints in Model
+	 * @return the sum of victory points of the player's flipped pope tokens
+	 */
+
 	public int getPopeTokenPoints()
 	{
 		int popeTokenPoints = 0;
 
-		for (int i = 0; i < 3; i++)			/* Make pope tokens number dynamic? */
+		for (int i = 0; i < 3; i++)
 		{
 			if (popeTokens[i].isActive())
 				popeTokenPoints += popeTokens[i].getPoints();
@@ -124,6 +170,12 @@ public class Player implements Serializable
 
 		return popeTokenPoints;
 	}
+
+	/**
+	 * Returns the leader card of the passed number. Used by the "activate/discard leader" commands in the controller
+	 * @param number the number of the requested leader card
+	 * @return the LeaderCard of the passed number
+	 */
 
 	public LeaderCard getLeaderCardByNumber(int number)
 	{

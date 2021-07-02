@@ -22,6 +22,10 @@ public abstract class LeaderCard implements Serializable
 	private boolean isDiscarded;		/* When the card is discarded it can no longer be activated, gives 1 faithpoint and no victorypoints */
 	private boolean isActive;			/* When the card is activated it can no longer be discarded, giving "points" victorypoints */
 
+	/**
+	 * Constructor
+	 */
+
 	public LeaderCard()
 	{
 		isDiscarded = false;

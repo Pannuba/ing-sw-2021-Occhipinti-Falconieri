@@ -16,6 +16,7 @@ import java.util.*;
  * This class is a clone of Controller (in the server package) with various modifications relative to the local game.
  * For example, the controller and all commands have a "view" instance variable that's used to directly send the messages to the view,
  * instead of sending them to the server's ClientHandler which sends the message to the client through sockets
+ * @author Giulio Occhipinti
  */
 
 public class LocalController extends Observable			/* Observes view to get commands... View observes model */

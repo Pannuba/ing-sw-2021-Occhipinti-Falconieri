@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * Used by the client to send commands to the local controller
  * This class extends MessageIO but only uses the send() because the other methods aren't needed since the client isn't connected to any server
+ * @author Giulio Occhipinti
  */
 
 public class LocalMatchIO extends MessageIO

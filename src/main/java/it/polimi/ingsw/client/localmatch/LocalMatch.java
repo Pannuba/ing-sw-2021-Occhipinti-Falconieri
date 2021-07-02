@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Starts a local match. This class is essentially the same as Match in the server package, but tweaked to only support one player
+ * @author Giulio Occhipinti
  */
 
 public class LocalMatch implements Runnable

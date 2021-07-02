@@ -14,7 +14,7 @@ public class PopeToken implements Serializable
 	private boolean isDiscarded;
 
 	/**
-	 * Empty constructor required by the persistence advanced functionality
+	 * Empty constructor required by XMLEncoder for the "persistence" advanced feature
 	 */
 
 	public PopeToken()

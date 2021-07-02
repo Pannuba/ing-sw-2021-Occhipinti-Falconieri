@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Single DevCard area of the dashboard
+ * Single DevCard area of the dashboard. Dev cards can't be removed once added
  * @author Giulio Occhipinti
  */
 
-public class DevCardArea implements Serializable			/* Devcards can't be removed once added */
+public class DevCardArea implements Serializable
 {
 	private boolean isEmpty;
 	private List<DevCard> devCards = new ArrayList<>();
@@ -49,6 +49,7 @@ public class DevCardArea implements Serializable			/* Devcards can't be removed 
 	 * If layer is 0 we can add a card of level 1
 	 * If layer is 1 we can add a card of level 2
 	 * If layer is 2 we can add a card of level 3
+	 * @param cardToAdd the card that is going to be added to the area
 	 * @return true if the card is added to the area, false otherwise
 	 */
 

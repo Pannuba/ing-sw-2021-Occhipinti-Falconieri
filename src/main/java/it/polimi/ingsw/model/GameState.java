@@ -6,14 +6,14 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Every turn, if the client's action has not failed, the server sends a GameState object to all clients so the client view reads it and updates everything
+ * Every round, if the client's action has not failed, the server sends a GameState object to all clients so the client view reads it and updates everything
  * @author Giulio Occhipinti
  */
 
 public class GameState implements Serializable
 {
 	private final List<Player> currPlayers;
-	private final String currPlayerName;		/* Player who has the current turn (choose action). ID? */
+	private final String currPlayerName;
 	private final Track currTrack;
 	private final MarblesMarket currMarblesMarket;
 	private final DevCardsMarket currDevCardsMarket;

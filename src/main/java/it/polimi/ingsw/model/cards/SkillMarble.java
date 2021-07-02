@@ -38,13 +38,13 @@ public class SkillMarble extends LeaderCard
 			{
 				if (devCards.get(i).getColor() == colorRequirements.get(j))
 				{
-					colorRequirements.remove(j);		/* Remove a requirement for every card that satisfies it */
+					colorRequirements.remove(j);
 					j--;
 				}
 			}
 		}
 
-		if (colorRequirements.isEmpty())				/* If there are no more requirements left, it means they're all satisfied */
+		if (colorRequirements.isEmpty())
 			return true;
 
 		else

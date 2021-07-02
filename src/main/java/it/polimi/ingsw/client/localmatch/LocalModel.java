@@ -20,6 +20,7 @@ import java.util.Observable;
 /**
  * This class is a clone of Model (in the server package) with modifications to only take in account one player. For example,
  * the players list is now a single Player variable and the choosePlayerOrder method and many for loops that iterate for all players have been removed.
+ * @author Giulio Occhipinti
  */
 
 public class LocalModel extends Observable        /* Observed by the views to create the new gamestate */

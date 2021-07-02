@@ -3,6 +3,11 @@ package it.polimi.ingsw.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ResourceType enumeration, contains the six possible types resources can have
+ * @author Giulio Occhipinti
+ */
+
 public enum ResourceType
 {
 	RED,
@@ -10,6 +15,12 @@ public enum ResourceType
 	GREY,
 	YELLOW,
 	PURPLE;
+
+	/**
+	 * Converts a string to a ResourceType. Used by the controller's "activate production" command
+	 * @param str the string is to be converted
+	 * @return the converted ResourceType
+	 */
 
 	public static ResourceType convertStringToResType(String str)
 	{
@@ -38,6 +49,12 @@ public enum ResourceType
 				return null;
 		}
 	}
+
+	/**
+	 * Converts a MarbleType to a ResourceType. Used by the controller's "buy resources" command
+	 * @param marbleType the MarbleType is to be converted
+	 * @return the converted ResourceType
+	 */
 
 	public static ResourceType convertMarbleToResType(MarbleType marbleType)		/* Also check player leadercards SkillMarble, if active */
 	{
@@ -69,6 +86,12 @@ public enum ResourceType
 				return null;
 		}
 	}
+
+	/**
+	 * Converts a list of ResourceType to a list of Resource. Used by the controller's "buy resources" command
+	 * @param list list of resource types that are to be converted
+	 * @return the converted Resource list
+	 */
 
 	public static List<Resource> convertResTypeListToResList(List<ResourceType> list)
 	{

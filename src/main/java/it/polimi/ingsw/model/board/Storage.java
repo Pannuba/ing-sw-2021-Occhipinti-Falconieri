@@ -4,28 +4,24 @@ import it.polimi.ingsw.model.Resource;
 import it.polimi.ingsw.model.ResourceType;
 import it.polimi.ingsw.model.Shelf;
 
-import java.io.Serializable;			/* Has resources bought from the marbles market */
-
-/*	   Y			shelves[0]			If I get another Y, I have to swap X and Y so that I have 2 Y in the middle shelf
-	_______
-	 O   X			shelves[1]
-	_______
-	Z  Z  Z			shelves[2]
-	_______
-*/
+import java.io.Serializable;
 
 /**
- * Storage of each dashboard
+ * Storage of each dashboard. Has the resources bought from the marbles market
+ *
+ *	   Y			shelves[0]
+ *	_______
+ *	 X   0			shelves[1]
+ *	_______
+ *	Z  Z  0			shelves[2]
+ *	_______
+ *
  * @author Giulio Occhipinti
  * @author Chiara Falconieri
  */
 
 public class Storage implements Serializable
 {
-	/**
-	 * @param shelves Static array because there are always 3 shelves, no more no less
-	 */
-
 	private Shelf[] shelves = new Shelf[3];
 
 	/**
@@ -39,7 +35,8 @@ public class Storage implements Serializable
 	}
 
 	/**
-	 * Check that shelves have the right amount of resources and that one shelf hasn't the same type of resource of another shelf
+	 * Checks that all shelves have the right amount of resources and that a shelf doesn't have the same type of resource of another
+	 * @return true if the shelves pass the checks, false otherwise
 	 */
 
 	public boolean checkShelves()
@@ -71,8 +68,10 @@ public class Storage implements Serializable
 	}
 
 	/**
-	 * Add one resource to a specified shelf
-	 * Called by addResourceSmart
+	 * Add one resource to a specified shelf, called by addResourceSmart
+	 * @param resourceToAdd the single resource that has to be added to the storage
+	 * @param shelfNumber the shelf number where the resource is going to be put
+	 * @return true if the resource is added successfully, false otherwise
 	 */
 
 	public boolean addResource(ResourceType resourceToAdd, int shelfNumber)
@@ -109,10 +108,9 @@ public class Storage implements Serializable
 	}
 
 	/**
-	 * Adds a resource without having to specify the shelf number but only the type
-	 * First calls checkShelves
-	 * Make all checks to add the resource
-	 * Discards the resource only if there is no more space or the type is different from the resources that are in the three shelves
+	 * Adds a resource without having to specify the shelf number but only the type.
+	 * Discards the resource only if there is no more available space
+	 * @param resourceToAdd the resource that's going to be added
 	 * @return the resource if it cannot be added to storage, else null
 	 */
 
@@ -124,58 +122,49 @@ public class Storage implements Serializable
 
 		if	(shelves[2].isEmpty() && shelves[0].getShelfResourceType() == resourceToAdd && shelves[1].getShelfResourceType() != resourceToAdd)
 		{
-			System.out.println("A");
 			moveResources(1, 3);
 			addResource(resourceToAdd, 3);
 		}
 
 		else if (shelves[2].isEmpty() && shelves[1].getShelfResourceType() == resourceToAdd && shelves[0].getShelfResourceType() != resourceToAdd)
 		{
-			System.out.println("B");
 			moveResources(2, 3);
 			addResource(resourceToAdd, 3);
 		}
 
 		else if (shelves[2].isEmpty() && shelves[1].getShelfResourceType() != resourceToAdd && shelves[0].getShelfResourceType() != resourceToAdd)
 		{
-			System.out.println("C");
 			addResource(resourceToAdd, 3);
 		}
 
 		else if (!shelves[2].isFull() && shelves[2].getShelfResourceType() == resourceToAdd && shelves[0].getShelfResourceType() != resourceToAdd && shelves[1].getShelfResourceType() != resourceToAdd)
 		{
-			System.out.println("D");
 			addResource(resourceToAdd, 3);
 		}
 
 		else if (shelves[1].isEmpty() && shelves[0].getShelfResourceType() == resourceToAdd && shelves[2].getShelfResourceType() != resourceToAdd)
 		{
-			System.out.println("E");
 			moveResources(1, 2);		/* First check if shelves can be optimized by moving the same resource type from a smaller shelf to a bigger one */
 			addResource(resourceToAdd, 2);
 		}
 
 		else if (shelves[1].isEmpty() && shelves[2].getShelfResourceType() != resourceToAdd && shelves[0].getShelfResourceType() != resourceToAdd)
 		{
-			System.out.println("F");
 			addResource(resourceToAdd, 2);
 		}
 
 		else if (!shelves[1].isFull() && shelves[1].getShelfResourceType() == resourceToAdd && shelves[0].getShelfResourceType() != resourceToAdd && shelves[2].getShelfResourceType() != resourceToAdd)
 		{
-			System.out.println("G");
 			addResource(resourceToAdd, 2);
 		}
 
 		else if	(shelves[0].isEmpty() && shelves[1].getShelfResourceType() != resourceToAdd && shelves[2].getShelfResourceType() != resourceToAdd)
 		{
-			System.out.println("H");
 			addResource(resourceToAdd, 1);
 		}
 
 		else if (shelves[0].isEmpty() && shelves[1].getShelfResourceQuantity() == 2 && shelves[2].getShelfResourceQuantity() == 2 && shelves[1].getShelfResourceType() == resourceToAdd)
 		{
-			System.out.println("I");
 			ResourceType tempShelfResource = shelves[1].getShelfResourceType();
 			shelves[1].getShelfResource().setResourceType(shelves[2].getShelfResourceType());
 			shelves[2].getShelfResource().setResourceType(tempShelfResource);
@@ -184,7 +173,6 @@ public class Storage implements Serializable
 
 		else if (shelves[1].isEmpty() && shelves[0].getShelfResourceQuantity() == 1 && shelves[2].getShelfResourceQuantity() == 1 && shelves[0].getShelfResourceType() == resourceToAdd)
 		{
-			System.out.println("J");
 			ResourceType tempShelfResource = shelves[0].getShelfResourceType();
 			shelves[0].getShelfResource().setResourceType(shelves[2].getShelfResourceType());
 			shelves[2].getShelfResource().setResourceType(tempShelfResource);
@@ -193,7 +181,6 @@ public class Storage implements Serializable
 
 		else if (shelves[2].isEmpty() && shelves[0].getShelfResourceQuantity() == 1 && shelves[1].getShelfResourceQuantity() == 1 && shelves[0].getShelfResourceType() == resourceToAdd)
 		{
-			System.out.println("K");
 			ResourceType tempShelfResource = shelves[0].getShelfResourceType();
 			shelves[0].getShelfResource().setResourceType(shelves[1].getShelfResourceType());
 			shelves[1].getShelfResource().setResourceType(tempShelfResource);
@@ -202,7 +189,6 @@ public class Storage implements Serializable
 
 		else if (shelves[0].isEmpty() && shelves[2].getShelfResourceQuantity() == 1 && shelves[1].getShelfResourceQuantity() == 2 && shelves[1].getShelfResourceType() == resourceToAdd)
 		{
-			System.out.println("L");
 			ResourceType tempShelfResource = shelves[1].getShelfResourceType();
 			int tempQuantity = shelves[1].getShelfResourceQuantity();
 			shelves[1].getShelfResource().setResourceType(shelves[2].getShelfResourceType());
@@ -216,7 +202,6 @@ public class Storage implements Serializable
 		{
 			if (shelves[2].getShelfResourceQuantity() == 1 && shelves[0].getShelfResourceType() == resourceToAdd)
 			{
-				System.out.println("M");
 				ResourceType tempShelfResource = shelves[0].getShelfResourceType();
 				shelves[0].getShelfResource().setResourceType(shelves[2].getShelfResourceType());
 				shelves[2].getShelfResource().setResourceType(tempShelfResource);
@@ -225,7 +210,6 @@ public class Storage implements Serializable
 
 			else if (shelves[1].getShelfResourceQuantity() == 1 && shelves[0].getShelfResourceType() == resourceToAdd)
 			{
-				System.out.println("N");
 				ResourceType tempShelfResource = shelves[0].getShelfResourceType();
 				shelves[0].getShelfResource().setResourceType(shelves[1].getShelfResourceType());
 				shelves[1].getShelfResource().setResourceType(tempShelfResource);
@@ -234,7 +218,6 @@ public class Storage implements Serializable
 
 			else if (shelves[2].getShelfResourceQuantity() == 2 && shelves[1].getShelfResourceQuantity() == 2 && shelves[1].getShelfResourceType() == resourceToAdd)
 			{
-				System.out.println("O");
 				ResourceType tempShelfResource = shelves[1].getShelfResourceType();
 				shelves[1].getShelfResource().setResourceType(shelves[2].getShelfResourceType());
 				shelves[2].getShelfResource().setResourceType(tempShelfResource);
@@ -243,7 +226,6 @@ public class Storage implements Serializable
 
 			else if (shelves[2].getShelfResourceQuantity() == 1 && shelves[1].getShelfResourceQuantity() == 2 && shelves[1].getShelfResourceType() == resourceToAdd)
 			{
-				System.out.println("P");
 				ResourceType tempShelfResource = shelves[1].getShelfResourceType();
 				int tempQuantity = shelves[1].getShelfResourceQuantity();
 				shelves[1].getShelfResource().setResourceType(shelves[2].getShelfResourceType());
@@ -254,24 +236,19 @@ public class Storage implements Serializable
 			}
 
 			else
-			{
-				System.out.println("addResourceSmart: discarding " + resourceToAdd);
 				excessResource = resourceToAdd;
-			}
 		}
 
 		else
-		{
-			System.out.println("addResourceSmart: discarding " + resourceToAdd);
 			excessResource = resourceToAdd;
-		}
 
 		return excessResource;
 	}
 
 	/**
 	 * Removes multiple resources of the same type one at a time
-	 * @return number of removed resources
+	 * @param resourceToRemove the resource that is going to be removed
+	 * @return the number of removed resources
 	 */
 
 	public int removeResource(Resource resourceToRemove)
@@ -314,8 +291,10 @@ public class Storage implements Serializable
 	}
 
 	/**
-	 * Move resources to an empty shelf and the source shelf has to be empty afterwards
-	 * Can't have two shelves with the same resource according to the rules
+	 * Moves the resources contained in the source shelf to the destination shelf, if possible
+	 * @param shelfFromNum the source shelf's number
+	 * @param shelfToNum the destination shelf's number
+	 * @return true if the resources have been succesfully moved, false otherwise
 	 */
 
 	public boolean moveResources(int shelfFromNum, int shelfToNum)
@@ -352,8 +331,9 @@ public class Storage implements Serializable
 	}
 
 	/**
-	 * Returns the number of resources of passed type
-	 * Used to check cards requirements
+	 * Used to check the cards' requirements
+	 * @param resourceToFind the resource to check the presence of
+	 * @return the number of resources of passed type
 	 */
 
 	public int findResourceByType(ResourceType resourceToFind)
@@ -370,8 +350,8 @@ public class Storage implements Serializable
 	}
 
 	/**
-	 * Returns the total number of resources
 	 * Used to calculate the final score, to activate a leaderCard or to purchase a devCard
+	 * @return the total number of resources in the storage
 	 */
 
 	public int getTotalResources()
@@ -383,6 +363,12 @@ public class Storage implements Serializable
 
 		return totalResources;
 	}
+
+	/**
+	 * Returns the shelf corresponding to the passed index
+	 * @param shelfNumber the shelf's index (1-indexed, so 1, 2 or 3)
+	 * @return the shelf corresponding to the passed index
+	 */
 
 	public Shelf convertIndexToShelf(int shelfNumber)
 	{
@@ -402,6 +388,11 @@ public class Storage implements Serializable
 				return null;
 		}
 	}
+
+	/**
+	 * Replaces one shelf with a temporary one made in addResource or moveResources
+	 * @param shelf the temporary shelf that is going to replace one of the three shelves
+	 */
 
 	private void assignToLocalShelves(Shelf shelf)
 	{

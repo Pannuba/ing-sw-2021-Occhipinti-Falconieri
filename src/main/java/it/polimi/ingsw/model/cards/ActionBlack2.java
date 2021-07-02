@@ -12,7 +12,7 @@ public class ActionBlack2 extends ActionToken
 	private Track track;
 
 	/**
-	 * Empty constructor required by the persistence advanced functionality
+	 * Empty constructor required by XMLEncoder for the "persistence" advanced feature
 	 */
 
 	public ActionBlack2()
@@ -31,7 +31,7 @@ public class ActionBlack2 extends ActionToken
 	}
 
 	@Override
-	public void doAction()			/* Where is this function called? In model, probably. No, controller! */
+	public void doAction()
 	{
 		System.out.println("Activating action of ActionBlack2");
 		track.setBlackPawn(track.getBlackPawn() + 2);
