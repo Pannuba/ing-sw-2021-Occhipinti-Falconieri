@@ -82,8 +82,6 @@ public class NetworkHandler extends MessageIO implements Runnable		/* Observed b
 	@Override
 	public synchronized void send(Object obj)
 	{
-		if (!(obj instanceof Ping))
-
 		try
 		{
 			oos.writeObject(obj);
