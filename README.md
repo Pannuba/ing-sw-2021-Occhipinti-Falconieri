@@ -5,7 +5,6 @@ Authors
 -------
 - Giulio Occhipinti
 - Chiara Falconieri
-- Roberto Ferri
 
 Features
 --------
